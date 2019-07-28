@@ -11,7 +11,7 @@ using RT.Util.ExtensionMethods;
 using RT.Util.Json;
 using RT.Util.Serialization;
 
-namespace KtanePuzzles
+namespace PuzzleStuff
 {
     static class General
     {

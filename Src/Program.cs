@@ -1,12 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using RT.Util;
-using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
-using RT.Util.Text;
 
 [assembly: AssemblyTitle("PuzzleStuff")]
 [assembly: AssemblyDescription("Contains some ancillary code used in the creation of puzzle hunts.")]
@@ -21,7 +21,7 @@ using RT.Util.Text;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-namespace KtanePuzzles
+namespace PuzzleStuff
 {
     partial class Program
     {
@@ -38,7 +38,7 @@ namespace KtanePuzzles
             if (args.Length == 2 && args[0] == "--post-build-check")
                 return Ut.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
-            ZigZag.Generate();
+            
 
             Console.WriteLine("Done.");
             Console.ReadLine();

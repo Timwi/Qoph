@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using RT.Util.ExtensionMethods;
 
-namespace KtanePuzzles
+namespace PuzzleStuff
 {
     static class ZigZag
     {
@@ -42,29 +42,49 @@ namespace KtanePuzzles
 
         public static void Generate()
         {
-            var clues = @"OneOpeningLettingLiquidEscape
-FLAlternativeMusicianSinclair
+            var clues = @"GroupOrSetOfNine
+PartnerOfMortise
 
-PhysicistIsidorIsaac
-EastMontenegrinRiver
-
-CtrlYFunction
-EuropeanRiver
-
-ScreamTheTenthPixarMovie
-RopedStrengthTransmitter
-
-AbbrevForIAmEnRoute
-UNAtmosphericAgency
-
-MorallyWorseOrWronger
 ExperienceASecondTime
+MorallyWorseOrWronger
 
-MortisePartner
-AssemblyOfNine".Replace("\r", "");
+LessEnjoyableAnimalPark
+GivesOffHorizontalArray
+
+RopedStrengthTransmitter
+ScreamTheTenthPixarMovie
+
+EuropeanRiver
+CtrlYFunction
+
+SickGreenPhysicistNiels
+DensityOperaTenorAndrea
+
+DoNeedleworkOnFather
+SuitableWritingFluid".Replace("\r", "");
             foreach (var pair in clues.Split("\n\n"))
             {
                 var words = pair.ToUpperInvariant().Split("\n");
+                Console.WriteLine(words[0].Zip(words[1].Reverse(), (a, b) => $"{a}{b}").JoinString());
+            }
+        }
+
+        public static void GenerateEsperanto()
+        {
+            var clues = @"DirektenLaPatronDePatro
+HavantaLaFormonDeElipso
+
+VidiKajKompreniSkribaĵon
+ErinacoEnLaGermanaLingvo
+
+NudeloSenFinaĵo
+KunliguPerŜnuro
+
+Malforgesi
+PaŝadoSole".ToUpperInvariant().Replace("\r", "");
+            foreach (var pair in clues.Split("\n\n"))
+            {
+                var words = pair.Split("\n");
                 Console.WriteLine(words[0].Zip(words[1].Reverse(), (a, b) => $"{a}{b}").JoinString());
             }
         }

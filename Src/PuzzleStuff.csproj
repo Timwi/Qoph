@@ -7,8 +7,8 @@
     <ProjectGuid>{5BE560A8-9B71-441A-BCAC-FC55E8DA2864}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KtanePuzzles</RootNamespace>
-    <AssemblyName>KtanePuzzles</AssemblyName>
+    <RootNamespace>PuzzleStuff</RootNamespace>
+    <AssemblyName>PuzzleStuff</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -48,10 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinaryPuzzle.cs" />
+    <Compile Include="Circles.cs" />
+    <Compile Include="CodeOfConduct.cs" />
+    <Compile Include="DrainPipe.cs" />
+    <Compile Include="GridGenerator.cs" />
+    <Compile Include="MinesweeperPuzzle.cs" />
     <Compile Include="MonoRandom.cs" />
     <Compile Include="General.cs" />
     <Compile Include="MorseCode.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="DeorigineEsperanto.cs" />
+    <Compile Include="PuzzlePotlock2.cs" />
+    <Compile Include="SmogonPuzzleHunt2.cs" />
     <Compile Include="ZigZag.cs" />
   </ItemGroup>
   <ItemGroup>

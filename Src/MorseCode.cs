@@ -5,7 +5,7 @@ using System.Linq;
 using RT.Util.Drawing;
 using RT.Util.ExtensionMethods;
 
-namespace KtanePuzzles
+namespace PuzzleStuff
 {
     static class MorseCode
     {
