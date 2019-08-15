@@ -1,0 +1,62 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="501" height="177" version="1.1"
+   xmlns="http://www.w3.org/2000/svg">
+   <desc>SUMMERSUNCEL
+   </desc>
+
+   <g id="barcode" fill="#000000">
+      <rect x="0" y="0" width="501" height="177" fill="#FFFFFF" />
+      <rect x="0.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="9.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="18.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="33.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="42.00" y="0.00" width="9.00" height="150.00" />
+      <rect x="54.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="66.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="75.00" y="0.00" width="9.00" height="150.00" />
+      <rect x="87.00" y="0.00" width="9.00" height="150.00" />
+      <rect x="99.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="105.00" y="0.00" width="9.00" height="150.00" />
+      <rect x="117.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="132.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="138.00" y="0.00" width="9.00" height="150.00" />
+      <rect x="150.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="165.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="177.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="186.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="198.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="213.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="219.00" y="0.00" width="9.00" height="150.00" />
+      <rect x="231.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="240.00" y="0.00" width="9.00" height="150.00" />
+      <rect x="252.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="264.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="273.00" y="0.00" width="9.00" height="150.00" />
+      <rect x="285.00" y="0.00" width="9.00" height="150.00" />
+      <rect x="297.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="303.00" y="0.00" width="9.00" height="150.00" />
+      <rect x="321.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="330.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="342.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="354.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="363.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="375.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="384.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="396.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="408.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="417.00" y="0.00" width="9.00" height="150.00" />
+      <rect x="429.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="438.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="450.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="462.00" y="0.00" width="6.00" height="150.00" />
+      <rect x="477.00" y="0.00" width="9.00" height="150.00" />
+      <rect x="489.00" y="0.00" width="3.00" height="150.00" />
+      <rect x="495.00" y="0.00" width="6.00" height="150.00" />
+      <text x="250.50" y="177.00" text-anchor="middle"
+         font-family="Helvetica" font-size="24.0" fill="#000000" >
+         SUMMERSUNCEL
+      </text>
+   </g>
+</svg>

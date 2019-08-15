@@ -1,0 +1,15 @@
+First  letter can’t be: QUXY
+Second letter can’t be: KLQXYZ
+
+P =                             A =
+N = Nomenclature → Neonatal     I =
+C =                             A =
+V =                             E =
+R =                             T =
+E =                             D =
+
+Ideas for sorting:
+    • Matching elements:
+        2×Morse code
+        2×Airport codes
+        2×Code128 barcodes   = Pixel puzzles + Discount vouchers

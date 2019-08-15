@@ -48,19 +48,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeePuzzle.cs" />
     <Compile Include="BinaryPuzzle.cs" />
+    <Compile Include="BombDisposal.cs" />
     <Compile Include="Circles.cs" />
     <Compile Include="CodeOfConduct.cs" />
     <Compile Include="DrainPipe.cs" />
+    <Compile Include="EverythingSelfReferential.cs" />
+    <Compile Include="GalacticPuzzleHunt2019.cs" />
     <Compile Include="GridGenerator.cs" />
     <Compile Include="MinesweeperPuzzle.cs" />
     <Compile Include="MonoRandom.cs" />
     <Compile Include="General.cs" />
+    <Compile Include="MUMS_2019.cs" />
+    <Compile Include="NoU.cs" />
+    <Compile Include="Prefectures.cs" />
+    <Compile Include="TapCode.cs" />
     <Compile Include="MorseCode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="DeorigineEsperanto.cs" />
     <Compile Include="PuzzlePotlock2.cs" />
     <Compile Include="SmogonPuzzleHunt2.cs" />
+    <Compile Include="WordSearch.cs" />
     <Compile Include="ZigZag.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +80,10 @@
     <ProjectReference Include="..\..\QRCoder\QRCoder\QRCoder.csproj">
       <Project>{aece5df3-c379-46ca-bb7d-7bdbe59011fd}</Project>
       <Name>QRCoder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RT.Dijkstra\Src\RT.Dijkstra.csproj">
+      <Project>{1e53ea37-7c37-4185-82fd-d3bf9e4c878e}</Project>
+      <Name>RT.Dijkstra</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\RT.Servers\Src\RT.Servers.csproj">
       <Project>{a7333c19-56a9-4a8e-a196-7648666ef26a}</Project>

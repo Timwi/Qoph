@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id='outer'>
+            <input id='input' type='text' style='width: 100%' />
+        </div>
+        <div id='result'>
+        </div>
+        <div id='warning' style='color: red; font-size: 200%'>Warning: E or T</div>
+    </body>
+    <script>
+        document.getElementById('input').onkeyup = function() {
+            var text = document.getElementById('input').value;
+            var i = 0;
+            var k = 0;
+            var warning = false;
+            for (var j = 0; j < text.length; j++)
+            {
+                var ch = text.charCodeAt(j);
+                if (ch >= 97 && ch <= 122)
+                {
+                    i += ch - 96;
+                    k++;
+                    warning = warning || "et".indexOf(text[j]) !== -1;
+                }
+                else if (ch >= 65 && ch <= 90)
+                {
+                    i += ch - 64;
+                    k++;
+                    warning = warning || "ET".indexOf(text[j]) !== -1;
+                }
+            }
+            document.getElementById('result').innerText = `${i} (${k} letters)`;
+            document.getElementById('warning').style.display = warning ? '' : 'none';
+        };
+    </script>
+</html>

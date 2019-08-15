@@ -1,0 +1,34 @@
+Hungary     H
+Estonia     Es
+Germany     Ge
+Belgium     Be
+Netherlands N
+France      F
+Lithuania   Li
+Ireland     Ir
+Italy       I
+Luxembourg  Lu
+Russia      Ru
+Sierraleone Si
+
+1 + 99       = H + Es
+3 + 77       = Es + Ge
+7 + 9        = Ge + Be + N
+9 + 3        = N + F
+32 + 4 + 7   = F + Li
+44 + 14      = Li + Ir
+71 + 44      = Ir + I + Lu
+77 + 53 + 71 = Lu + Ru
+99 + 32      = Ru + Si
+
+
+HU  FRFRFRITITIT
+HUNEIR  HUHUHU
+HUNEIRNENENE  LU
+LINELULULU  ITLU
+LI  LILILIBESILU
+LISISI  RUBESI
+ESRURUFRRU  SIGE
+ESGEGEFRRUESESGE
+ESIRIRIRBEBEBEGE
+

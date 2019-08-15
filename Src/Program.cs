@@ -1,10 +1,8 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
 using RT.Util;
 using RT.Util.ExtensionMethods;
 
@@ -38,7 +36,7 @@ namespace PuzzleStuff
             if (args.Length == 2 && args[0] == "--post-build-check")
                 return Ut.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
-            
+            BeePuzzle.Do();
 
             Console.WriteLine("Done.");
             Console.ReadLine();

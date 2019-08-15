@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generex", "..\Generex\Src\G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCoder", "..\QRCoder\QRCoder\QRCoder.csproj", "{AECE5DF3-C379-46CA-BB7D-7BDBE59011FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RT.Dijkstra", "..\RT.Dijkstra\Src\RT.Dijkstra.csproj", "{1E53EA37-7C37-4185-82FD-D3BF9E4C878E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{AECE5DF3-C379-46CA-BB7D-7BDBE59011FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AECE5DF3-C379-46CA-BB7D-7BDBE59011FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AECE5DF3-C379-46CA-BB7D-7BDBE59011FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E53EA37-7C37-4185-82FD-D3BF9E4C878E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E53EA37-7C37-4185-82FD-D3BF9E4C878E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E53EA37-7C37-4185-82FD-D3BF9E4C878E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E53EA37-7C37-4185-82FD-D3BF9E4C878E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
