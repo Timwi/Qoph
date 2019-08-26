@@ -23,7 +23,7 @@ namespace PuzzleStuff
 {
     partial class Program
     {
-        [STAThread()]
+        [STAThread]
         static int Main(string[] args)
         {
             try
@@ -36,7 +36,7 @@ namespace PuzzleStuff
             if (args.Length == 2 && args[0] == "--post-build-check")
                 return Ut.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
-            BeePuzzle.Do();
+            BombDisposal.FortySeven();
 
             Console.WriteLine("Done.");
             Console.ReadLine();

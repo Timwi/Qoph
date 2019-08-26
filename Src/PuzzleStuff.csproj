@@ -61,8 +61,6 @@
     <Compile Include="MonoRandom.cs" />
     <Compile Include="General.cs" />
     <Compile Include="MUMS_2019.cs" />
-    <Compile Include="NoU.cs" />
-    <Compile Include="Prefectures.cs" />
     <Compile Include="TapCode.cs" />
     <Compile Include="MorseCode.cs" />
     <Compile Include="Program.cs" />
