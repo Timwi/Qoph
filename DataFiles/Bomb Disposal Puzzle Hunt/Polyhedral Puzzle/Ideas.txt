@@ -1,0 +1,10 @@
+• adjacency clues, 24 faces, alphabet with 2 letters missing
+• QWERTY mapping
+• polyhedral jigsaw
+• KenKen, 26 faces, 2 highlighted
+• Crossword, 28 faces, alphabet + 2 extra letters
+• < / >, 26 faces, 2 highlighted
+
+
+ABCDEF
+DILCUE

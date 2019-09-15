@@ -1,0 +1,267 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Work Sans';
+        }
+
+        #everything {
+            column-count: 3;
+        }
+
+        .input textarea {
+            width: 100%;
+            font-size: 18pt;
+            height: 6em;
+            line-height: 1;
+        }
+
+        .result, .warning {
+            font-size: 12pt;
+            font-weight: bold;
+        }
+
+        .result {
+            word-break: break-all;
+        }
+
+        .warning {
+            color: red;
+        }
+
+        .group {
+            padding-bottom: 1cm;
+            margin-bottom: 1cm;
+            border-bottom: 1px solid #ccf;
+            break-inside: avoid;
+        }
+
+        .heading {
+            font-size: 24pt;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id='everything'></div>
+    <script>
+        var chemicalElements = { AC: 89, AG: 47, AL: 13, AM: 95, AR: 18, AS: 33, AT: 85, AU: 79, BA: 56, BE: 4, BH: 107, BI: 83, BK: 97, BR: 35, CA: 20, CD: 48, CE: 58, CF: 98, CL: 17, CM: 96, CN: 112, CO: 27, CR: 24, CS: 55, CU: 29, DB: 105, DS: 110, DY: 66, ER: 68, ES: 99, EU: 63, FE: 26, FL: 114, FM: 100, FR: 87, GA: 31, GD: 64, GE: 32, HE: 2, HF: 72, HG: 80, HO: 67, HS: 108, IN: 49, IR: 77, KR: 36, LA: 57, LI: 3, LR: 103, LU: 71, LV: 116, MC: 115, MD: 101, MG: 12, MN: 25, MO: 42, MT: 109, NA: 11, NB: 41, ND: 60, NE: 10, NH: 113, NI: 28, NO: 102, NP: 93, OG: 118, OS: 76, PA: 91, PB: 82, PD: 46, PM: 61, PO: 84, PR: 59, PT: 78, PU: 94, RA: 88, RB: 37, RE: 75, RF: 104, RG: 111, RH: 45, RN: 86, RU: 44, SB: 51, SC: 21, SE: 34, SG: 106, SI: 14, SM: 62, SN: 50, SR: 38, TA: 73, TB: 65, TC: 43, TE: 52, TH: 90, TI: 22, TL: 81, TM: 69, TS: 117, XE: 54, YB: 70, ZN: 30, ZR: 40, B: 5, C: 6, F: 9, H: 1, I: 53, K: 19, N: 7, O: 8, P: 15, S: 16, U: 92, V: 23, W: 74, Y: 39 };
+
+        var stuff = {
+            'a1z26': {
+                name: "A1Z26",
+                transform: text =>
+                {
+                    var digits = '';
+                    for (var i = 0; i < text.length; i++)
+                        digits += text.charCodeAt(i) - 64;
+                    return ({ text: digits });
+                }
+            },
+
+            'tapcode': {
+                name: "Tap Code",
+                transform: text =>
+                {
+                    var digits = '';
+                    var ltrs = "ABCDEFGHIJLMNOPQRSTUVWXYZ";
+                    for (var i = 0; i < text.length; i++)
+                    {
+                        if (text.substr(i, 1) === 'K')
+                            digits += "13";
+                        else
+                        {
+                            var p = ltrs.indexOf(text.substr(i, 1));
+                            digits += String.fromCodePoint(49 + (p / 5) | 0);
+                            digits += String.fromCodePoint(49 + (p % 5));
+                        }
+                    }
+                    return ({ text: digits, warning: text.includes("K") ? "contains K" : '' });
+                }
+            },
+
+            'braille': {
+                name: "Braille",
+                useDigits: true,
+                useSpaces: true,
+                transform: text =>
+                {
+                    var regex = /WITH|AND|FOR|THE|\BING|OF|CH|GH|SH|TH|WH|ED|ER|OU|OW|\BEA\B|\BBB\B|\BCC\B|EN|\BFF\B|\BGG\B|IN|ST|AR|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|X|Y|Z|W|\d+| +/y;
+                    var braille = { WITH: 23456, AND: 12346, FOR: 123456, THE: 2346, ING: 346, OF: 12356, CH: 16, GH: 126, SH: 146, TH: 1456, WH: 156, ED: 1246, ER: 12456, OU: 1256, OW: 246, EA: 2, BB: 23, CC: 25, EN: 26, FF: 235, GG: 2356, IN: 35, ST: 34, AR: 345, A: 1, B: 12, C: 14, D: 145, E: 15, F: 124, G: 1245, H: 125, I: 24, J: 245, K: 13, L: 123, M: 134, N: 1345, O: 135, P: 1234, Q: 12345, R: 1235, S: 234, T: 2345, U: 136, V: 1236, X: 1346, Y: 13456, Z: 1356, W: 2456 };
+                    var digits = '';
+                    while (regex.lastIndex < text.length)
+                    {
+                        var ix = regex.lastIndex;
+                        var m = regex.exec(text);
+                        if (!m || regex.lastIndex == ix)
+                            return { text: digits, warning: `Match failed at index ${ix}` };
+                        if (/^\d+$/.test(m[0]))
+                        {
+                            digits += '3456';
+                            for (var j = 0; j < m[0].length; j++)
+                                digits += braille[m[0].charCodeAt(j) === 48 ? 'J' : String.fromCodePoint(65 + m[0].charCodeAt(j) - 49)];
+                        }
+                        else if (/^\s+$/.test(m[0]))
+                        {
+                        }
+                        else
+                            digits += braille[m[0]];
+                    }
+                    return { text: digits };
+                }
+            },
+
+            'ebcdic': {
+                name: "EBCDIC",
+                useDigits: true,
+                transform: text =>
+                {
+                    var ebcdic = {
+                        A: 193, B: 194, C: 195, D: 196, E: 197, F: 198, G: 199, H: 200, I: 201, J: 209, K: 210, L: 211, M: 212,
+                        N: 213, O: 214, P: 215, Q: 216, R: 217, S: 226, T: 227, U: 228, V: 229, W: 230, X: 231, Y: 232, Z: 233,
+                        "0": 240, "1": 241, "2": 242, "3": 243, "4": 244, "5": 245, "6": 246, "7": 247, "8": 248, "9": 249
+                    };
+                    var digits = '';
+                    for (var i = 0; i < text.length; i++)
+                        digits += ebcdic[text.substr(i, 1)];
+                    return ({ text: digits });
+                }
+            },
+
+            'chem': {
+                name: "Chemical elements",
+                transform: text =>
+                {
+                    var best = text.length;
+                    var bestStr = '';
+                    var bestResult = '';
+                    function recurse(sofar, txt)
+                    {
+                        if (txt.length < best)
+                        {
+                            best = txt.length;
+                            bestStr = sofar;
+                        }
+                        if (txt.length === 0)
+                        {
+                            if (bestResult === '' || sofar.length < bestResult.length)
+                                bestResult = sofar;
+                            return;
+                        }
+                        //var solutions = [];
+                        for (var elem in chemicalElements)
+                            if (txt.startsWith(elem))
+                            {
+                                var results = recurse(sofar + chemicalElements[elem], txt.substr(elem.length));
+                                //solutions.splice(solutions.length, 0, ...results);
+                            }
+                        return;//solutions;
+                    }
+                    recurse('', text);
+                    if (bestResult === '')
+                        return { text: bestStr, warning: `Failed at ${text.substr(text.length - best)}` };
+                    return { text: bestResult };
+                },
+                info: Object.keys(chemicalElements).join(", ")
+            },
+
+            'morse': {
+                name: "Morse in binary",
+                transform: text =>
+                {
+                    var morse = { A: "   # ###", B: "   ### # # #", C: "   ### # ### #", D: "   ### # #", E: "   #", F: "   # # ### #", G: "   ### ### #", H: "   # # # #", I: "   # #", J: "   # ### ### ###", K: "   ### # ###", L: "   # ### # #", M: "   ### ###", N: "   ### #", O: "   ### ### ###", P: "   # ### ### #", Q: "   ### ### # ###", R: "   # ### #", S: "   # # #", T: "   ###", U: "   # # ###", V: "   # # # ###", W: "   # ### ###", X: "   ### # # ###", Y: "   ### # ### ###", Z: "   ### ### # #" };
+                    var digits = '';
+                    for (var i = 0; i < text.length; i++)
+                    {
+                        var number = 0n;
+                        var m = morse[text.substr(i, 1)];
+                        for (var ix = 0; ix < m.length; ix++)
+                            number = (number * 2n) + (m.substr(ix, 1) === "#" ? 1n: 0n);
+                        digits += number;
+                    }
+                    return ({ text: digits });
+                }
+            },
+
+            'semaphore': {
+                name: "Semaphore on numpad",
+                transform: text =>
+                {
+                    var leftFlags = "14782224181111444447789973";
+                    var rightFlags = "22229631768963789638936366";
+                    var digits = '';
+                    for (var i = 0; i < text.length; i++)
+                        digits += leftFlags.substr(text.charCodeAt(i) - 65, 1) + rightFlags.substr(text.charCodeAt(i) - 65, 1);
+                    return ({ text: digits });
+                }
+            },
+
+            'pigpen': {
+                name: "Pigpen cipher",
+                transform: text =>
+                {
+                    var pigpen = { A: 210, B: 310, C: 230, D: 370, E: 410, F: 330, G: 270, H: 350, I: 250, J: 211, K: 311, L: 231, M: 371, N: 411, O: 331, P: 271, Q: 351, R: 251, S: 220, T: 200, U: 240, V: 260, W: 221, X: 201, Y: 241, Z: 261 };
+                    var digits = '';
+                    for (var i = 0; i < text.length; i++)
+                        digits += pigpen[text.substr(i, 1)];
+                    return ({ text: digits });
+                }
+            },
+
+            'primes': {
+                name: "Prime factorization",
+                transform: text =>
+                {
+                    var primes = [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n, 29n, 31n, 37n, 41n, 43n, 47n, 53n, 59n, 61n, 67n, 71n, 73n, 79n, 83n, 89n, 97n, 101n, 103n, 107n, 109n, 113n, 127n, 131n, 137n, 139n, 149n, 151n, 157n, 163n, 167n, 173n, 179n, 181n, 191n, 193n, 197n, 199n];
+                    var result = 1n;
+                    for (var i = 0; i < text.length && i < primes.length; i++)
+                        result = result * (primes[i] ** BigInt(text.charCodeAt(i) - 64));
+                    return ({ text: `${result}`, warning: text.length > primes.length ? "I ran out of primes." : '' });
+                }
+            }
+        };
+
+        var divs = '';
+        var first = true;
+        for (var key in stuff)
+        {
+            divs += `<div class='group' id='${key}'><div class='heading'>${stuff[key].name || key}</div><div class='input'><textarea ${(first ? ' accesskey=","' : '')}></textarea></div><div class='info'></div><div class='result'></div><div class='result-len'></div><div class='warning'></div></div>`;
+            first = false;
+        }
+        document.getElementById('everything').innerHTML = divs;
+
+        for (var key in stuff)
+            (function(k)
+            {
+                var inf = stuff[k];
+                document.querySelector(`div#${k}>.info`).innerText = inf.info || '';
+                var elem = document.querySelector(`div#${k}>.input>textarea`);
+                elem.value = localStorage.getItem(k);
+                elem.onkeyup = function()
+                {
+                    var text = this.value;
+                    localStorage.setItem(k, text);
+                    var textSanitized = '';
+                    for (var j = 0; j < text.length; j++)
+                    {
+                        var ch = text.charCodeAt(j);
+                        if (ch >= 97 && ch <= 122)
+                            textSanitized += text.substr(j, 1).toUpperCase();
+                        else if (ch >= 65 && ch <= 90)
+                            textSanitized += text.substr(j, 1);
+                        else if (inf.useDigits && ch >= 0x30 && ch <= 0x39)
+                            textSanitized += text.substr(j, 1);
+                        else if (inf.useSpaces && ch === 0x20)
+                            textSanitized += text.substr(j, 1);
+                    }
+                    var result = inf.transform(textSanitized);
+                    document.querySelector(`div#${k}>.result`).innerText = result.text;
+                    document.querySelector(`div#${k}>.result-len`).innerText = result.text.length;
+                    document.querySelector(`div#${k}>.warning`).innerText = result.warning || '';
+                };
+                elem.onkeyup();
+            })(key);
+    </script>
+</body>
+</html>

@@ -31,6 +31,6 @@ Fish image credits:
 !!  H2: PD
 !!  H3: PD
 
-!!  I1: PD
+?   I1: PD
 !!  I2: E. Jorgensen, Alfred Wegener Institute
     I3: Uwe kils, Wikimedia Commons

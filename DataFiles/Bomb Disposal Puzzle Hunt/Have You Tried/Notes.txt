@@ -1,0 +1,71 @@
+ENCODINGS
+═════════
+
+✓ A1Z26
+✓ Tap Code
+✓ Braille (123 = L, 1234 = P, etc.)
+✓ Chemical element symbols
+✓ Semaphores on a keypad
+✓ Morse in Binary (e.g. T = 7 (111), A = 23 (10111))
+✓ EBCDIC
+✓ Pigpen cipher encoded as follows: 1–4 (number of lines), 0–7 (number of cw 45° rotations), 0–1 (dot or no dot)
+✓ prime factorization (e.g. PUZZLE = 2^16 * 3^21 * 5^26 * 7^26 * 11^12 * 13^5)
+
+LETTER DESCRIPTIONS
+═══════════════════
+
+unused:
+• Resistor colors (e.g. “brown ohms” = 1 = A)
+• describe the Roman numeral for the A1Z26 number (e.g. “a stick between two crosses” = XIX = 19 = S)
+
+    Chem?
+1.  ✓       B   ISBN                first part is zero three seven five eight seven three six six x now try tap code
+2.  ✓       R   Maritime flag       second is a yellow cross on red now use dots invented by louis
+3.          A   PLU code            good job third is the vegetable 3390 now ebcdic
+4.          I   GPS coordinates     fourth is 66d 4m 33s N 23d 7m 36s W now chem
+5.  ✓       N   visual description  YOU SIR ARE SUPERB FIFTH IS A MONTH THAT IS ALSO NATO NOW CONVERT CHUNKS OF UP TO FOUR NUM TO BINARY
+6.          B   QWERTY keyboard     Cool sixth is between V and N now your numpad is key
+7.          O   Stock market code   awesome seventh is NYSE REALTY INCOME now try to read pigpen
+8.          W   Amino acid codes    eighth is Tryptophan now prime factors
+9.  ✓       L   unencoded           you get an L
+
+
+    Stock                   Amino acid      PLU code
+B   Barnes Group            -               4631
+R   Ryder System            Arginine
+A   Agilent Technologies    Alanine         3390
+I   Intelsat SA             Isoleucine
+N   -                       Asparagine
+B   Barnes Group            -               4631
+O   Realty Income Corp      Pyrrolysine
+W   Wayfair Inc             Tryptophan      4163
+L   Loews Corp              Leucine         3348
+
+Morse binary table:
+A = 23
+B = 469
+C = 1885
+D = 117
+E = 1
+F = 349
+G = 477
+H = 85
+I = 5
+J = 6007
+K = 471
+L = 373
+M = 119
+N = 29
+O = 1911
+P = 1501
+Q = 7639
+R = 93
+S = 21
+T = 7
+U = 87
+V = 343
+W = 375
+X = 1879
+Y = 7543
+Z = 1909
+
