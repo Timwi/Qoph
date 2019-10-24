@@ -1,9 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using RT.Util;
+using System.Text.RegularExpressions;
+using RT.PostBuild;
+using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
 
 [assembly: AssemblyTitle("PuzzleStuff")]
@@ -34,23 +37,9 @@ namespace PuzzleStuff
             catch { }
 
             if (args.Length == 2 && args[0] == "--post-build-check")
-                return Ut.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
+                return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
-            //BombDisposal.PolyhedralPuzzle_GenerateVertexClues();
-
-            var sudoku = GridGenerator.GenerateSudoku(3);
-            Console.WriteLine(sudoku.Split(9).Select(row => row.JoinString(" ")).JoinString("\n"));
-            Console.WriteLine();
-            var givenIxs = Enumerable.Range(0, 81).ToArray().Shuffle();
-            var givens = Ut.ReduceRequiredSet(givenIxs, skipConsistencyTest: true, test: set =>
-            {
-                var arr = set.SetToTest.ToArray();
-                Console.WriteLine(Enumerable.Range(0, 81).Select(c => arr.Contains(givenIxs[c]) ? "█" : "░").JoinString());
-                return !GridGenerator.GenerateSudokus(3, Enumerable.Range(0, 81).Select(ix => arr.Contains(ix) ? sudoku[ix] : (int?) null).ToArray()).Skip(1).Any();
-            });
-            Console.WriteLine();
-            Console.WriteLine(sudoku.Split(9).Select((row, rowIx) => row.Select((c, cIx) => givens.Contains(cIx + 9 * rowIx) ? c.ToString() : ".").JoinString(" ")).JoinString("\n"));
-            Console.WriteLine();
+            
 
             Console.WriteLine("Done.");
             Console.ReadLine();

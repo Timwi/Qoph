@@ -6,9 +6,9 @@ using RT.Util;
 using RT.Util.ExtensionMethods;
 using RT.Util.Geometry;
 
-namespace PuzzleStuff
+namespace PuzzleStuff.Esperanto
 {
-    static class DeorigineEsperanto
+    static class Deorigine
     {
         public static void Do()
         {

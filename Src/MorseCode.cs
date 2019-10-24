@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Collections.Generic;
 using System.Linq;
-using RT.Util.Drawing;
 using RT.Util.ExtensionMethods;
 
 namespace PuzzleStuff

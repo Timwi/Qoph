@@ -52,25 +52,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BeePuzzle.cs" />
-    <Compile Include="BinaryPuzzle.cs" />
-    <Compile Include="BombDisposal.cs" />
-    <Compile Include="CodeOfConduct.cs" />
+    <Compile Include="BombDisposal\BigBangTheoryEpisodes.cs" />
+    <Compile Include="BombDisposal\BoardState.cs" />
+    <Compile Include="BombDisposal\Circles.cs" />
+    <Compile Include="BombDisposal\FortySeven.cs" />
+    <Compile Include="BombDisposal\NatoSplit.cs" />
+    <Compile Include="BombDisposal\NoU.cs" />
+    <Compile Include="BombDisposal\OneCanHope.cs" />
+    <Compile Include="BombDisposal\RectangleMangle.cs" />
+    <Compile Include="BombDisposal\SomethingsFishy.cs" />
+    <Compile Include="Esperanto\BinaryPuzzle.cs" />
+    <Compile Include="BombDisposal\PolyhedralPuzzle.cs" />
+    <Compile Include="Esperanto\CodeOfConduct.cs" />
     <Compile Include="DrainPipe.cs" />
-    <Compile Include="EverythingSelfReferential.cs" />
-    <Compile Include="GalacticPuzzleHunt2019.cs" />
+    <Compile Include="PastHunts\EverythingSelfReferential.cs" />
+    <Compile Include="PastHunts\GalacticPuzzleHunt2019.cs" />
     <Compile Include="GridGenerator.cs" />
     <Compile Include="Md.cs" />
-    <Compile Include="MinesweeperPuzzle.cs" />
     <Compile Include="MonoRandom.cs" />
     <Compile Include="General.cs" />
-    <Compile Include="MUMS_2019.cs" />
+    <Compile Include="PastHunts\MUMS_2019.cs" />
     <Compile Include="Pt.cs" />
     <Compile Include="TapCode.cs" />
     <Compile Include="MorseCode.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="DeorigineEsperanto.cs" />
-    <Compile Include="PuzzlePotlock2.cs" />
-    <Compile Include="SmogonPuzzleHunt2.cs" />
+    <Compile Include="Esperanto\Deorigine.cs" />
+    <Compile Include="PastHunts\PuzzlePotlock2.cs" />
+    <Compile Include="PastHunts\SmogonPuzzleHunt2.cs" />
     <Compile Include="WordSearch.cs" />
     <Compile Include="ZigZag.cs" />
   </ItemGroup>
@@ -95,12 +103,32 @@
       <Project>{8f80d916-8999-45d8-acb2-ffa7e2698fd6}</Project>
       <Name>RT.TagSoup</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\RT.Util\Src\RT.KitchenSink.csproj">
-      <Project>{7edb80b5-ca44-4ad9-bf23-18a9470feb69}</Project>
-      <Name>RT.KitchenSink</Name>
+    <ProjectReference Include="..\..\RT.Util\RT.Json\RT.Json.csproj">
+      <Project>{b5d4fb48-7ba6-4f43-a320-a05dff164b30}</Project>
+      <Name>RT.Json</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\RT.Util\Src\RT.Util.csproj">
-      <Project>{8d0fe79c-ad8d-475c-9e6f-9cae85365b5d}</Project>
+    <ProjectReference Include="..\..\RT.Util\RT.PostBuild\RT.PostBuild.csproj">
+      <Project>{39f12570-5bf5-4aec-81db-dddfd213dbff}</Project>
+      <Name>RT.PostBuild</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RT.Util\RT.Serialization.Json\RT.Serialization.Json.csproj">
+      <Project>{efd268db-7d47-4368-935d-2df8e5031646}</Project>
+      <Name>RT.Serialization.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RT.Util\RT.Serialization\RT.Serialization.csproj">
+      <Project>{cc0e6169-e965-482c-a8e0-afb341ccf305}</Project>
+      <Name>RT.Serialization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RT.Util\RT.Util.Core\RT.Util.Core.csproj">
+      <Project>{e02fa510-96d9-4d44-aa45-419efe8a8f5a}</Project>
+      <Name>RT.Util.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RT.Util\RT.Util.Legacy\RT.Util.Legacy.csproj">
+      <Project>{a644b6ce-a7d1-4055-ae1a-a6d6018905dd}</Project>
+      <Name>RT.Util.Legacy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RT.Util\RT.Util\RT.Util.csproj">
+      <Project>{74af0ea9-db95-4504-b191-3d7be766a4b3}</Project>
       <Name>RT.Util</Name>
     </ProjectReference>
   </ItemGroup>

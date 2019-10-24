@@ -5,9 +5,9 @@ using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
 using RT.Util.Text;
 
-namespace PuzzleStuff
+namespace PuzzleStuff.Esperanto
 {
-    static class CodeOfConductEsperanto
+    static class CodeOfConduct
     {
         public static void Do()
         {
