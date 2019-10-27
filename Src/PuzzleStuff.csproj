@@ -72,6 +72,7 @@
     <Compile Include="MonoRandom.cs" />
     <Compile Include="General.cs" />
     <Compile Include="PastHunts\MUMS_2019.cs" />
+    <Compile Include="PastHunts\PuzzleBoat.cs" />
     <Compile Include="Pt.cs" />
     <Compile Include="TapCode.cs" />
     <Compile Include="MorseCode.cs" />
