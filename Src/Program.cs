@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using RT.PostBuild;
+using RT.Util;
 using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
 
@@ -39,7 +40,14 @@ namespace PuzzleStuff
             if (args.Length == 2 && args[0] == "--post-build-check")
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
-            
+            var start = DateTime.UtcNow;
+            foreach (var solution in GridGenerator.GenerateSudokus(3, @"8..........36......7..9.2...5...7.......457.....1...3...1....68..85...1..9....4..".Select(ch => ch == '.' ? (int?) null : ch - '0').ToArray()))
+            {
+                Console.WriteLine(solution.Split(9).Select(ch => ch.JoinString(" ")).JoinString("\n"));
+                Console.WriteLine($"Found after {(DateTime.UtcNow - start).TotalSeconds:0.0} sec");
+                Console.WriteLine();
+            }
+            Console.WriteLine($"Took {(DateTime.UtcNow - start).TotalSeconds:0.0} s total");
 
             Console.WriteLine("Done.");
             Console.ReadLine();

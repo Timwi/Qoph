@@ -19,12 +19,12 @@ unused:
 • describe the Roman numeral for the A1Z26 number (e.g. “a stick between two crosses” = XIX = 19 = S)
 
     Chem?
-1.  ✓       B   ISBN                first part is zero three seven five eight seven three six six x now try tap code
+1.  ✓       B   ISBN                first part is book oh three seven five eight seven three six six x now go tap code
 2.  ✓       R   Maritime flag       second is a yellow cross on red now use dots invented by louis
-3.          A   PLU code            good job third is the vegetable 3390 now ebcdic
-4.          I   GPS coordinates     fourth is 66d 4m 33s N 23d 7m 36s W now chem
+3.          A   PLU code            good job third is fruit 3438 now it is ebcdic
+4.          I   GPS coordinates     fourth is 3d 3m 57s N 101d 29m 0s E now chem
 5.  ✓       N   visual description  YOU SIR ARE SUPERB FIFTH IS A MONTH THAT IS ALSO NATO NOW CONVERT CHUNKS OF UP TO FOUR NUM TO BINARY
-6.          B   QWERTY keyboard     Cool sixth is between V and N now your numpad is key
+6.          B   QWERTY keyboard     Cool sixth is between CV and NM now numpad is flags
 7.          O   Stock market code   awesome seventh is NYSE REALTY INCOME now try to read pigpen
 8.          W   Amino acid codes    eighth is Tryptophan now prime factors
 9.  ✓       L   unencoded           you get an L
