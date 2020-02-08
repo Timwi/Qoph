@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BombDisposal\InsideOut.cs" />
     <Compile Include="BombDisposal\SignalLink.cs" />
     <Compile Include="SecretSolver2019.cs" />
     <Compile Include="BeePuzzle.cs" />
