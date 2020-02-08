@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -51,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binairo.cs" />
+    <Compile Include="BinairoSudoku.cs" />
     <Compile Include="BombDisposal\InsideOut.cs" />
     <Compile Include="BombDisposal\SignalLink.cs" />
     <Compile Include="SecretSolver2019.cs" />
@@ -91,6 +94,10 @@
     <ProjectReference Include="..\..\Generex\Src\Generex.csproj">
       <Project>{ad37f193-49a3-4a3d-8bf1-122d5457c7a6}</Project>
       <Name>Generex</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PuzzleSolvers\PuzzleSolvers\PuzzleSolvers.csproj">
+      <Project>{989f0797-10aa-4ba3-819a-e53a371074a1}</Project>
+      <Name>PuzzleSolvers</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\QRCoder\QRCoder\QRCoder.csproj">
       <Project>{aece5df3-c379-46ca-bb7d-7bdbe59011fd}</Project>
