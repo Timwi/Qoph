@@ -179,20 +179,18 @@ namespace PuzzleStuff
             var index = 0;
             var isFirst = true;
             T elem;
-            using (var e = source.GetEnumerator())
+            using var e = source.GetEnumerator();
+            if (!e.MoveNext())
+                yield break;
+            elem = e.Current;
+            while (e.MoveNext())
             {
-                if (!e.MoveNext())
-                    yield break;
+                yield return selector(elem, index, isFirst, false);
+                isFirst = false;
                 elem = e.Current;
-                while (e.MoveNext())
-                {
-                    yield return selector(elem, index, isFirst, false);
-                    isFirst = false;
-                    elem = e.Current;
-                    index++;
-                }
-                yield return selector(elem, index, isFirst, true);
+                index++;
             }
+            yield return selector(elem, index, isFirst, true);
         }
 
         public static IEnumerable<PointD[]> Triangulate(this IEnumerable<PointD> face)

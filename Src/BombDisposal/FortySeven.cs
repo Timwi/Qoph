@@ -217,19 +217,10 @@ namespace PuzzleStuff.BombDisposal
                 }
             }
 
-            void outputMatrix(int[] m, int size)
-            {
-                var txt = new TextTable { ColumnSpacing = 1 };
-                for (var x = 0; x < size; x++)
-                    for (var y = 0; y < size; y++)
-                        txt.SetCell(x, y, m[x + size * y].ToString(), alignment: HorizontalTextAlignment.Right);
-                txt.WriteToConsole();
-            }
-
             var wordRnd = new Random();
             var wordsStartingWith = words.Where(w => w.Length == 8 && w.All(ch => ch >= 'A' && ch <= 'Z')).GroupBy(w => w[0]).ToDictionary(gr => gr.Key, gr => gr.Distinct().Order().ToArray());
 
-            foreach (var hWord in new[] { "HIJACKED", "HECKLING", /* "HACIENDA", "HAGGLING", "HALFBACK", "HANDBALL", "HANDBELL", "HANDBILL", "HANDLING", "HANGNAIL", "HATCHING", "HEADACHE", "HEADBAND", "HEADLAND", "HEADLINE", "HEGELIAN", "HEIGHTEN", "HELLENIC", "HIGHBALL", "HIGHTAIL", "HITCHING"*/ })
+            foreach (var hWord in new[] { "HIJACKED", "HECKLING", "HACIENDA", "HAGGLING", "HALFBACK", "HANDBALL", "HANDBELL", "HANDBILL", "HANDLING", "HANGNAIL", "HATCHING", "HEADACHE", "HEADBAND", "HEADLAND", "HEADLINE", "HEGELIAN", "HEIGHTEN", "HELLENIC", "HIGHBALL", "HIGHTAIL", "HITCHING" })
             {
                 wordsStartingWith['E'].ParallelForEach(4, eWord =>
                 {

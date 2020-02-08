@@ -4,6 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using System.Xml.Linq;
 using RT.Util;
 using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
@@ -158,17 +162,17 @@ OSLOERSTRASSE,NAUENERPLATZ,LEOPOLDPLATZ,AMRUMERSTRASSE,WESTHAFEN,BIRKENSTRASSE,T
             }
         }
 
-        public static void GenerateWords()
+        public static void GenerateWords_OLD_VERSION()
         {
             // Generates sets of words where the first letter spells out one station, and another station is shuffled with an A-Z indexer column
 
-            var word1 = "SUEDSTERN";
-            var word2 = "ZITADELLE";
+            var word1 = "WESTHAFEN";
+            var word2 = "NEUKOELLN";
             var inputLen = word1.Length;
             if (word2.Length != inputLen)
                 Debugger.Break();
 
-            BigInteger b(int n) => ~(BigInteger.MinusOne << n);
+            static BigInteger b(int n) => ~(BigInteger.MinusOne << n);
 
             //*
             var allWords = File.ReadAllLines(@"D:\Daten\Wordlists\peter_broda_wordlist.txt")
@@ -301,7 +305,7 @@ OSLOERSTRASSE,NAUENERPLATZ,LEOPOLDPLATZ,AMRUMERSTRASSE,WESTHAFEN,BIRKENSTRASSE,T
                 )
                     .ToList().Shuffle();
 
-                BigInteger b(int n) => ~(BigInteger.MinusOne << n);
+                static BigInteger b(int n) => ~(BigInteger.MinusOne << n);
 
                 foreach (var (az2Ix, az3Ix, w2Ix, w3Ix) in quadruplets)
                 {
@@ -371,6 +375,263 @@ OSLOERSTRASSE,NAUENERPLATZ,LEOPOLDPLATZ,AMRUMERSTRASSE,WESTHAFEN,BIRKENSTRASSE,T
                 }
                 Console.WriteLine($"                             ");
             }
+        }
+
+        public static void GenerateWords()
+        {
+            var allWords = File.ReadAllLines(@"D:\Daten\Wordlists\peter_broda_wordlist.txt")
+                .Select(row => row.Split(';'))
+                .Select(row => (word: row[0].Where(ch => ch >= 'A' && ch <= 'Z').JoinString(), score: int.Parse(row[1])))
+                .Where(w => w.score >= 75)
+                .Concat(File.ReadAllLines(@"D:\Daten\Wordlists\English 60000.txt").Select((w, wIx) => (word: w.Where(ch => ch >= 'A' && ch <= 'Z').JoinString(), score: 60024 - wIx)))
+                .ToArray();
+
+            var word1 = "NEUWESTEND";
+            var word2 = "STADTMITTE";
+
+            var len = word1.Length;
+            if (word1.Length != word2.Length)
+                Debugger.Break();
+
+            var tt = new TextTable { ColumnSpacing = 2, RowSpacing = 1 };
+            for (var azIx = 2; azIx < 8; azIx++)
+                tt.SetCell(azIx - 1, 0, $"azIx = {azIx}".Color(ConsoleColor.White));
+            for (var w2Ix = 2; w2Ix < 8; w2Ix++)
+                tt.SetCell(0, w2Ix - 1, $"w2Ix = {w2Ix}".Color(ConsoleColor.White));
+
+            var tableData = new Dictionary<(int azIx, int w2Ix), (int score, ConsoleColoredString data)>();
+            var indexCombinations = Enumerable.Range(2, 6).SelectMany(azIx =>
+                 Enumerable.Range(2, 6).Where(w2Ix => w2Ix != azIx).Select(w2Ix => (azIx, w2Ix))).ToArray();
+
+            var lastUpdate = DateTime.UtcNow;
+            void output()
+            {
+                lock (tableData)
+                {
+                    var now = DateTime.UtcNow;
+                    if ((now - lastUpdate).TotalSeconds < 15)
+                        return;
+                    lastUpdate = now;
+                    var top5 = tableData.OrderByDescending(kvp => kvp.Value.score).Take(5).Select(kvp => kvp.Key).ToArray();
+                    foreach (var kvp in tableData)
+                        tt.SetCell(kvp.Key.azIx - 1, kvp.Key.w2Ix - 1, kvp.Value.data, noWrap: true, background: top5.IndexOf(kvp.Key).Apply(a => a == -1 ? ConsoleColor.Black : a == 0 ? ConsoleColor.DarkGreen : ConsoleColor.DarkBlue));
+                    Console.Clear();
+                    tt.WriteToConsole();
+                }
+            }
+
+            indexCombinations.ParallelForEach(tup =>
+            {
+                var (azIx, w2Ix) = tup;
+
+                lock (tableData)
+                    tt.SetCell(azIx - 1, w2Ix - 1, "Working...".Color(ConsoleColor.Yellow), noWrap: true);
+
+                var bestScore = 0;
+                ConsoleColoredString bestData = null;
+                foreach (var swapped in new[] { false })
+                {
+                    var w1 = swapped ? word2 : word1;
+                    var w2 = swapped ? word1 : word2;
+
+                    var matrix = Ut.NewArray(len, len, (a, b) => allWords
+                        .Where(tup => tup.word.Length > azIx && tup.word.Length > w2Ix && tup.word.StartsWith(w1[a]) && tup.word[azIx] - 'A' == b && tup.word[w2Ix] == w2[b])
+                        .MaxElementOrDefault(tup => tup.score));
+
+                    void recurse(int[] ixsSoFar, int ix)
+                    {
+                        if (ix == ixsSoFar.Length)
+                        {
+                            var score = Enumerable.Range(0, len).Sum(i => matrix[i][ixsSoFar[i]].score);
+                            if (score < bestScore)
+                                return;
+                            bestScore = score;
+                            var longestWord = Enumerable.Range(0, len).Max(i => matrix[i][ixsSoFar[i]].word.Length);
+
+                            bestData = Enumerable.Range(0, len).Select(i =>
+                                new ConsoleColoredString($@"{matrix[i][ixsSoFar[i]].word.PadRight(longestWord, '\u00a0')
+                                    .ColorSubstring(0, 1, ConsoleColor.White, ConsoleColor.Blue)
+                                    .ColorSubstring(azIx, 1, ConsoleColor.White, ConsoleColor.Red)
+                                    .ColorSubstring(w2Ix, 1, ConsoleColor.White, ConsoleColor.Green)}{matrix[i][ixsSoFar[i]].score.ToString().PadLeft(7, '\u00a0').Color(ConsoleColor.DarkMagenta)}")).JoinColoredString("\n") + "\n" +
+                                score.ToString().PadLeft(longestWord + 7, '\u00a0').Color(ConsoleColor.Magenta);
+                            lock (tableData)
+                                tableData[tup] = (bestScore, bestData);
+                            output();
+                            return;
+                        }
+
+                        foreach (var i in Enumerable.Range(0, len).Where(i => !ixsSoFar.Take(ix).Contains(i) && matrix[ix][i].word != null).OrderByDescending(i => matrix[ix][i].score))
+                        {
+                            ixsSoFar[ix] = i;
+                            recurse(ixsSoFar, ix + 1);
+                        }
+                    }
+                    recurse(new int[len], 0);
+                }
+
+                lock (tableData)
+                    tableData[tup] = bestData == null ? (0, "NOTHING".Color(ConsoleColor.Red)) : (bestScore, bestData);
+                output();
+            });
+            Console.Clear();
+            tt.WriteToConsole();
+        }
+
+        public static void GenerateSvg()
+        {
+            var svg = XDocument.Parse(File.ReadAllText(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\No, U\Graphics v2 template.svg"));
+            var sb = new StringBuilder();
+
+            void fillBox(int id, int x2, string s1, string s2, int azIx, int w2Ix, params (string answer, string clue)[] clues)
+            {
+                var s1t = clues.Select(c => c.answer[0]).JoinString();
+                if (s1t != s1)
+                    Debugger.Break();
+                if (!clues.OrderBy(c => c.answer[azIx]).Select(c => c.answer[azIx] - 'A').SequenceEqual(Enumerable.Range(0, clues.Length)))
+                    Debugger.Break();
+                var s2t = clues.OrderBy(c => c.answer[azIx]).Select(c => c.answer[w2Ix]).JoinString();
+                if (s2t != s2)
+                    Debugger.Break();
+
+                var box = svg.Root.ElementsI("rect").FirstOrDefault(e => e.AttributeI("id").Value == $"box{id}");
+                var x = int.Parse(box.AttributeI("x").Value);
+                var y = int.Parse(box.AttributeI("y").Value);
+
+                void el(string name, string content, params (string attr, object value)[] attrs)
+                {
+                    var e = new XElement(XName.Get(name, box.Name.NamespaceName));
+                    foreach (var (attr, value) in attrs)
+                        e.Add(new XAttribute(attr, value));
+                    if (content != null)
+                        e.Add(content);
+                    svg.Root.Add(e);
+                }
+
+                // Grey line behind the dots
+                el("line", null, ("x1", x + x2), ("y1", y + 1), ("x2", x + x2), ("y2", y + 3 + 4 * clues.Length), ("stroke", "#808080"), ("stroke-width", 1));
+
+                for (var i = 0; i < clues.Length; i++)
+                {
+                    var (answer, clue) = clues[i];
+                    var cl = clue.EndsWith(')') ? clue : $"{clue.Trim()} ({answer.Length})";
+                    el("text", cl, ("x", x + x2 - 3), ("y", y + 5 + 4 * i));
+                    el("circle", null, ("cx", x + x2), ("cy", y + 4 + 4 * i), ("r", 1), ("stroke", "#000"), ("stroke-width", ".5"), ("fill", "#fff"));
+                    for (var j = 0; j < answer.Length; j++)
+                        el("line", null, ("x1", x + x2 + 3 + 4 * j), ("y1", y + 6 + 4 * i), ("x2", x + x2 + 5 + 4 * j), ("y2", y + 6 + 4 * i), ("stroke", "#000"), ("stroke-width", ".5"), ("stroke-linecap", "square"));
+                    sb.AppendLine(cl);
+                }
+                sb.AppendLine();
+
+                var width = x2 + 3 + 4 * clues.Max(tup => tup.answer.Length);
+                box.AttributeI("width").Value = width.ToString();
+                box.AttributeI("height").Value = (clues.Length * 4 + 4).ToString();
+                //el("text", label, ("x", x + width), ("y", y - 2));
+            }
+
+            fillBox(1, 60, "WESTHAFEN", "NEUKOELLN", 6, 3,
+                ("WEEKEND", "Saturday and Sunday"),
+                ("ENGLISH", "Language or spin"),
+                ("SIGNIFICANT", "Type of figures to round to"),
+                ("TIMETABLE", "Train schedule"),
+                ("HYPOTHESIS", "Conjecture or assumption"),
+                ("ACCURACY", "Precision partner"),
+                ("FEELING", "Emotion"),
+                ("EXONERATE", "Prove innocent of a crime"),
+                ("NINETYFIVE", "Number of Martin Luther’s theses (6, 4)"));
+
+            fillBox(2, 66, "MEHRINGDAMM", "TURMSTRASSE", 4, 2,
+                ("MIRAGE", "Illusory desert sight"),
+                ("EXTRA", "Additional"),
+                ("HOSPITAL", "Building where sick people get cured"),
+                ("REACH", "Achieve (a goal) or attain (a place) "),
+                ("IMMEDIATELY", "Without delay"),
+                ("NOSEJOB", "Rhinoplasty, familiarly (4, 3)"),
+                ("GREEK", "Hellenic language"),
+                ("DRUMBEAT", "Rhythm from a percussive instrument (4, 4)"),
+                ("ARTIFICIAL", "Man-made or contrived"),
+                ("MYSTERY", "Enigma or Agatha Christie genre"),
+                ("MIRACLES", "What Hot Chocolate believes in"));
+
+            fillBox(3, 64, "RUHLEBEN", "WUHLETAL", 2, 5,
+                ("RICOCHET", "Bounce or Trevor Mann"),
+                ("UNHEALTHY", "Medically inadvisable"),
+                ("HABITUAL", "Made routine by long or frequent use"),
+                ("LOGICAL", "Consistent according to deduction"),
+                ("EFFECT", "Cause partner"),
+                ("BOARDWALK", "$400 property (not Mayfair) "),
+                ("ELDERLY", "Aged or senior (people) "),
+                ("NEEDLE", "Main indicator in a VU meter"));
+
+            fillBox(4, 60, "HALEMWEG", "KIENBERG", 5, 4,
+                ("HORRIBLE", "Hägar, according to Dik Browne"),
+                ("APPRECIATE", "Esteem or comprehend"),
+                ("LAFORGE", "Geordi from Star Trek TNG"),
+                ("ENOUGH", "Sufficiently"),
+                ("MIRANDARIGHTS", "What the police may inform you of (7, 6)"),
+                ("WESTBENGAL", "Kolkata’s state (4, 6)"),
+                ("EUREKA", "Archimedes’s exclamation"),
+                ("GRATEFULDEAD", "Touch of Grey band (8, 4)"));
+
+            fillBox(5, 76, "POTSDAMERPLATZ", "LIPSCHITZALLEE", 3, 6,
+                ("PROMOTE", "Endorse, or give a higher position to"),
+                ("OARFISH", "Regalecidae"),
+                ("TALLTALE", "Entertaining, but likely fictitious story (4, 4)"),
+                ("SANJAYA", "American Idol sixth-season finalist Malakar"),
+                ("DUTCHOPEN", "Netherlands badminton or darts tournament (5, 4)"),
+                ("ASPHALT", "Bitumen"),
+                ("MAXIMIZE", "Set a window to fill the whole screen"),
+                ("ETHANOL", "C₂H₅OH"),
+                ("RESEARCH", "Investigate scientifically"),
+                ("PROBABILITY", "Likelihood"),
+                ("LOUDNESS", "Volume of a sound"),
+                ("AMENDMENT", "The fourth prohibits searches and seizures"),
+                ("TRAGEDIES", "Plays like Romeo and Juliet"),
+                ("ZAKKWYLDE", "Ozzy Osbourne guitarist (4, 5)"));
+
+            fillBox(6, 68, "NEUWESTEND", "STADTMITTE", 2, 6,
+                ("NIGHTTIME", "Period of the curious incident of the dog (5, 4)"),
+                ("ENJOYMENT", "Pleasure, liking or fun"),
+                ("UPDATED", "Installed a newer version of"),
+                ("WEAPONS", "Crossbows, slingshots and trebuchets"),
+                ("EMIGRATE", "Leave a country permanently"),
+                ("SUBSTITUTE", "Ersatz or replacement"),
+                ("THEORETICAL", "Hypothesized, or applied partner"),
+                ("EXHAUST", "Pipe at the back of a car"),
+                ("NICOSIA", "Cyprus’s capital"),
+                ("DEFRAGMENT", "Arrange files on a hard disk contiguously"));
+
+            fillBox(7, 70, "PARADESTRASSE", "JUNGFERNHEIDE", 4, 3,
+                ("PROFESSOR", "Juniper, Layton, Moriarty, Snape, etc."),
+                ("ASUNCION", "Paraguay’s capital"),
+                ("REMEMBER", "Retain in one’s mind"),
+                ("ANNEJACKSON", "The Shining and Zig Zag actress (4, 7)"),
+                ("DOWNHILL", "Steeply declining, or type of ski competition"),
+                ("ENERGY", "Strength, liveliness or power"),
+                ("STRIKE", "Knock down all pins in bowling"),
+                ("TROJANWAR", "Conflict that is the subject of the Iliad (6, 3)"),
+                ("ROSEFINCH", "Carpodacus"),
+                ("AMYGDALA", "Almond-shaped part of the brain"),
+                ("SADDLE", "Leather between horse and rider"),
+                ("SCHUBERT", "Ave Maria and Impromptus composer Franz"),
+                ("ETCHING", "Carving into stone"));
+
+            fillBox(8, 68, "BLASCHKOALLEE", "ZWICKAUERDAMM", 2, 4,
+                ("BREAK", "Rest period or render defective"),
+                ("LUDACRIS", "Rollout and Act a Fool rapper"),
+                ("ABKHAZIA", "Sukhumi’s state"),
+                ("SWAYZE", "Dirty Dancing actor Patrick"),
+                ("COLUMN", "Pillar or newspaper section"),
+                ("HOMEMADE", "Prepared by oneself or Jake Owen song"),
+                ("KAFKA", "The Trial and Metamorphosis author Franz"),
+                ("OCHSENKNECHT", "Das Boot actor Uwe"),
+                ("ABJAD", "Writing system such as Arabic or Hebrew"),
+                ("LUCKILY", "Fortunately"),
+                ("LUGDUNUM", "Lyon, France, but when it was Gaul"),
+                ("ELBOW", "Joint connecting the humerus and radius"),
+                ("ERITREA", "Asmara’s country"));
+
+            File.WriteAllText(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\No, U\Graphics v2.svg", svg.ToString(SaveOptions.DisableFormatting));
+            Clipboard.SetText(sb.ToString());
         }
     }
 }

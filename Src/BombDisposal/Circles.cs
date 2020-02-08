@@ -11,7 +11,7 @@ namespace PuzzleStuff.BombDisposal
 {
     static class Circles
     {
-        public static void Circles_Generate()
+        public static void Generate()
         {
             var distances = @"ABCDEFGHI";   // for sorting
             var len = distances.Length;

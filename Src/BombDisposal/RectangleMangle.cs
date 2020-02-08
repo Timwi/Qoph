@@ -152,17 +152,18 @@ PLUM,ORCHID,CHRYSANTHEMUM,BAMBOO"
         }
 
         private static (string valStr, int val, bool grp1)?[] RectangleMangle_getGrid() => @" 6 6 N M M11 J11 J N
-13 512 M██ H██12 H E
-10 F 3 F 3████11 J K
- 6██ 2 F░░ 7 E 2 7 E
- 814██ 1 1██ B B H N
- 8 412 A 4 8 L██░░ A
- 9 5████ 3 C 5 G G I
-101414██ 1 710 G██ A
- 9██ 2 9 4 K B██ D K
+13 512 M?? H ?12 H E
+10 F 3 F 3 ? ?11 J K
+ 6 ? 2 F░░ 7 E 2 7 E
+ 814?? 1 1 ? B B H N
+ 8 412 A 4 8 L ?░░ A
+ 9 5 ? ? 3 C 5 G G I
+101414 ? 1 710 G ? A
+ 9 ? 2 9 4 K B ? D K
 13 D C I13 C L L D I".Replace("\r", "").Split('\n').SelectMany(row => row.Split(2).Select(str =>
-                          int.TryParse(str, out int value) ? (valStr: str.Trim(), val: value - 1, grp1: false).Nullable() :
-                          str[1] >= 'A' && str[1] <= 'Z' ? (valStr: str.Trim(), val: str[1] - 'A', grp1: true).Nullable() : null).ToArray()).ToArray();
+                        int.TryParse(str, out int value) ? (valStr: str.Trim(), val: value - 1, grp1: false).Nullable() :
+                        str[1] >= 'A' && str[1] <= 'Z' ? (valStr: str.Trim(), val: str[1] - 'A', grp1: true).Nullable() :
+                        str.Trim().All(ch => ch == '?') ? (valStr: (string) null, val: str.Trim().Length, grp1: false).Nullable() : null).ToArray()).ToArray();
 
         public static void RectangleMangle_ConstructGrid()
         {
@@ -346,6 +347,13 @@ B	COLORADO	UTAH	NEWMEXICO
         <style>
             .image {{
                 width: {targetWidth}px;
+                display: block;
+            }}
+            td {{
+                text-align: center;
+                vertical-align: middle;
+                font-size: 48pt;
+                padding: .1cm;
             }}
         </style>
     </head>
@@ -355,20 +363,20 @@ B	COLORADO	UTAH	NEWMEXICO
             {
                 if (grid[col + 10 * row] == null)
                     return "<td></td>";
-                var (valStr, names) = values.First(vd => vd.valStr == grid[col + 10 * row].Value.valStr);
+                var (valStr, val, grp1) = grid[col + 10 * row].Value;
+                if (valStr == null)
+                    return $"<td>{new string('?', val)}</td>";
+                var names = values.First(vd => vd.valStr == valStr).names;
                 var count = counts.Get(valStr, 0);
                 var name = names[count];
                 var filename = "png,jpg,jpeg,bmp".Split(',').Select(ext => $@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Rectangle Mangle\{name}.{ext}").First(f => File.Exists(f));
                 counts.IncSafe(valStr);
-                using (var bmp = new Bitmap(filename))
-                using (var mem = new MemoryStream())
-                {
-                    GraphicsUtil.DrawBitmap(targetWidth, targetHeight, g =>
-                    {
-                        g.DrawImage(bmp, GraphicsUtil.FitIntoMaintainAspectRatio(bmp.Size, new Rectangle(0, 0, targetWidth, targetHeight)));
-                    }).Save(mem, ImageFormat.Png);
-                    return $@"<td><img src='data:image/png;base64,{Convert.ToBase64String(mem.ToArray())}' class='image' /></td>";
-                }
+                using var bmp = new Bitmap(filename);
+                using var mem = new MemoryStream();
+                GraphicsUtil.DrawBitmap(targetWidth, targetHeight,
+                    g => { g.DrawImage(bmp, GraphicsUtil.FitIntoMaintainAspectRatio(bmp.Size, new Rectangle(0, 0, targetWidth, targetHeight))); })
+                    .Save(mem, ImageFormat.Png);
+                return $@"<td><img src='data:image/png;base64,{Convert.ToBase64String(mem.ToArray())}' class='image' /></td>";
             }).JoinString()}</tr>").JoinString()}
         </table>
     </body>

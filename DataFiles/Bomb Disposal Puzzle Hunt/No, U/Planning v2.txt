@@ -1,19 +1,124 @@
- 9  WESTHAFEN       11  TURMSTRASSE     BIRKENSTRAßE        8
- 8  WUHLETAL         8  KIENBERG        KAULSDORFNORD       7
-10  NEUWESTEND       8  RUHLEBEN        OLYMPIASTADION      5
-10  STADTMITTE      14  POTSDAMERPLATZ  MOHRENSTRAßE        2
-11  MEHRINGDAMM     13  PARADESTRASSE   PLATZDERLUFTBRÜCKE  9
- 8  HALEMWEG        13  JUNGFERNHEIDE   JAKOBKAISERPLATZ    4
- 9  NEUKOELLN       13  BLASCHKOALLEE   GRENZALLEE          1
-14  LIPSCHITZALLEE  13  ZWICKAUERDAMM   WUTZKYALLEE         6
+1    9  WESTHAFEN       11  TURMSTRASSE     BIRKENSTRAßE        8
+2    8  WUHLETAL         8  KIENBERG        KAULSDORFNORD       7
+3   10  NEUWESTEND       8  RUHLEBEN        OLYMPIASTADION      5
+4   10  STADTMITTE      14  POTSDAMERPLATZ  MOHRENSTRAßE        2
+5   11  MEHRINGDAMM     13  PARADESTRASSE   PLATZDERLUFTBRÜCKE  9
+6    8  HALEMWEG        13  JUNGFERNHEIDE   JAKOBKAISERPLATZ    4
+7    9  NEUKOELLN       13  BLASCHKOALLEE   GRENZALLEE          1
+8   14  LIPSCHITZALLEE  13  ZWICKAUERDAMM   WUTZKYALLEE         6
 
 
 
-LIPSCHITZALLEE [2], RATHAUSSPANDAU [5] (AZ=3, W=6)
-TURMSTRASSE [1], OTISSTRASSE [6] (AZ=6, W=4)
-HASELHORST [3], NEUWESTEND [8] (AZ=4, W=6)
-WESTHAFEN [1], BRITZSUED [2] (AZ=5, W=3)
-SUEDSTERN [7], ZITADELLE [5] (AZ=4, W=5)
-RUHLEBEN [8], KIENBERG [4] (AZ=4, W=3)
-BORSIGWERKE [6], MEHRINGDAMM [7] (AZ=3, W=5)
-ROHRDAMM [3], WUHLETAL [4] (AZ=3, W=4)
+
+1   WESTHAFEN [1] + NEUKOELLN [7]
+    █   WEEKEND
+    █   ENGLISH
+    █   SIGNIFICANT
+    █   TIMETABLE
+    █   HYPOTHESIS
+    █   ACCURACY
+    █   FEELING
+    █   EVENTUALLY
+    █   NINETYFIVE
+           |  /    [6, 3]
+
+2   MEHRINGDAMM [5] + TURMSTRASSE [1]
+    █   MORTGAGE
+    █   EXTRA
+    █   HOSPITAL
+    █   REACH
+    █   IMMEDIATE
+    █   NOSEJOB
+    █   GREEK
+    █   DRUMBEAT
+    █   ARTIFICIAL
+    █   MASTER
+    █   MIRACLE
+    █     | /        [4, 2]
+
+3   RUHLEBEN [3] + WUHLETAL [2]
+    █   RICOCHET
+    █   UNHEALTHY
+    █   HABITUAL
+    █   LOGICAL
+    █   EFFECT
+    █   BOARDWALK
+    █   ELDERLY
+    █   NEEDLE
+          \  |     [2, 5]
+
+
+4   HALEMWEG [6] + KIENBERG [2]
+    █   HORRIBLE
+    █   APPRECIATE
+    █   LITURGY
+    █   ENOUGH
+    █   MISUNDERSTANDING
+    █   WELLBEING
+    █   EUREKA
+    █   GRATEFUL
+            |/     [5, 4]
+
+5   POTSDAMERPLATZ [4] + LIPSCHITZALLEE [8]
+    █   PULL          PROMOTE
+    █   OFFHAND       OLDFASHIONED
+    █   TIME          TABLECLOTH
+    █   SEIZE         SUBJUGATE       (SANJAYA — finalist on the sixth season of American Idol)
+    █   DUBIOUS       DESCRIPTION
+    █   ASHTRAY       AUTHENTIC
+    █   MIDST         MINIMIZE
+    █   ELECTION      ELIGIBILITY
+    █   REALLY        RESEARCH
+    █   PAJAMAS       PROBABILITY
+    █   LEGISLATION   LEADERSHIP
+    █   ANKLE         AMENDMENT
+    █   TONE          TRIANGLE
+    █   ZACPOSEN      ZAKKWYLDE
+           \  |          \  |         [3, 6]
+
+6   NEUWESTEND [3] + STADTMITTE [4]
+    █   NIGHTTIME
+    █   ENJOYMENT
+    █   UNDECIDED
+    █   WEAKNESS
+    █   EVIDENT
+    █   SUBJECT
+    █   THEORETICAL
+    █   EXHIBITION
+    █   NECESSARY
+    █   DEFRAGMENT
+          \   |     [2, 6]
+        dAfAAAmA*
+
+7   PARADESTRASSE [5] + JUNGFERNHEIDE [6]
+    █   PHENOMENON                  PROFESSOR
+    █   ARRANGE                     AGENCY
+    █   REFUSE                      REMEMBER
+    █   AUDIBLE                     ANNEJACKSON
+    █   DANISH                      DOWNHILL
+    █   ENJOYABLE                   ENERGY
+    █   STUDEBAKER                  STRIKE
+    █   THINSKINNED                 TROJAN
+    █   REGARD                      REDEFINE
+    █   AVERYJOHNSON                AMYGDALA
+    █   SYNDICATE   (SANTACLARA)    SADDLE
+    █   SPECIFIC                    SHRUB
+    █   EXHIBITION                  ETCHING
+          |  /          [5, 2]         |/       [4, 3]
+
+8   BLASCHKOALLEE [7] + ZWICKAUERDAMM [8]
+    █   BREAK
+    █   LUDICROUS
+    █   AWKWARD
+    █   SWAYZE
+    █   COLUMN
+    █   HOMEMADE
+    █   KAFKA
+    █   OCHRE
+    █   ABJAD
+    █   LUCKILY
+    █   LUGDUNUM
+    █   ELBOW
+    █   EMIGRATE
+          \ |               [2, 4]
+
