@@ -1,151 +1,161 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using RT.Serialization;
 using RT.Util;
+using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
 
 namespace PuzzleStuff
 {
     static class PuzzleBoat
     {
-        // “Bob the Dinosaur”
-        public static void ThinMud()
+        sealed class ElephantClue
         {
-            var allowed = new[] { -5, -4, -3, -2, -1, 1, 2, 3, 4, 5 };
-            foreach (var cmb in makeCombinations(3, -4, allowed))
-                if (cmb[0] < 0 && cmb[2] < 0)
-                    Console.WriteLine(cmb.JoinString(", "));
-            Debugger.Break();
-
-            var dataRaw = @"
-                ##-15#-5#-7#9#15###-11#-7#2#0###-12#9#-15#
-                #3.....#-11....#-7...
-                #3.....15 9....#-4...
-                #-6...#4.....6##-12...
-                #-4...15 11......#0...
-                #-8..10 9...12 -12...9 2...
-                ##-3#3 9..#7..-15#7 12...-15#15#
-                #5....9 10......5 -3..
-                #7.....15 0....3 2...
-                #3......9 -8.......
-                #6...###9....8 11....
-                #1...15#12 11.....12 -2...
-                ####8#-11 12...11#-9#13 8..-15#8#-15#
-                ##-14 9........11 6....
-                #-3.....12 9........
-                #2....#9.....#-11...
-                #5....#13.....#-6...
-                #-12...###15.....#-4...";
-            const int w = 15;
-            const int h = 18;
-
-            var matches = Regex.Matches(dataRaw, @"\s*(#|\.|-?\d+)\s*");
-            var clues = new (int? horizClue, int? vertClue)?[w * h];
-            var arrIx = 0;
-            var mIx = 0;
-            while (mIx < matches.Count)
+            public string Id;
+            public int[] Numbers;
+            public string Answer;
+            public ElephantClue(string id, int[] numbers, string answer)
             {
-                if (matches[mIx].Value.Trim() == ".")
-                {
-                    clues[arrIx++] = null;
-                    mIx++;
-                }
-                else
-                {
-                    if (mIx == matches.Count - 1)
-                        throw new InvalidOperationException();
-                    static int? convert(string str) => str.Trim() == "#" ? (int?) null : int.TryParse(str.Trim(), out int value) ? value : throw new InvalidOperationException($"String not recognized: “{str}”.");
-                    var vert = convert(matches[mIx].Value);
-                    var horiz = convert(matches[mIx + 1].Value);
-                    clues[arrIx++] = (horiz, vert);
-                    mIx += 2;
-                }
+                Id = id;
+                Numbers = numbers;
+                Answer = answer;
             }
-            if (arrIx != w * h)
-                Debugger.Break();
+            private ElephantClue() { }  // for Classify
+        }
 
-            var lights = new List<Light>();
-            var fullBoard = Ut.NewArray(clues.Length, _ => new List<(Light light, int ix)>());
-            for (var cIx = 0; cIx < clues.Length; cIx++)
+        public static void Elephant_PrepareFile()
+        {
+            var lines = File.ReadAllLines(@"D:\Daten\Puzzles\Puzzle Boat\Elephant.txt");
+            var clues = new List<ElephantClue>();
+            foreach (var line in lines)
             {
-                if (clues[cIx] == null)
+                var m = Regex.Match(line, @"^(.*?)\.\s*(( \d+)+)(.+)?$");
+                Console.WriteLine($"{m.Groups[1].Value} = {m.Groups[2].Value.Trim().Split(' ').JoinString("/")}{(m.Groups[4].Success ? $" = {m.Groups[4].Value.Trim()}" : "")}");
+                var numbers = m.Groups[2].Value.Trim().Split(' ').Select(int.Parse).ToArray();
+                clues.Add(new ElephantClue(m.Groups[1].Value.Trim(), numbers, m.Groups[4].Success ? m.Groups[4].Value.Trim() : new string('.', numbers.Length)));
+            }
+            ClassifyJson.SerializeToFile(clues, @"D:\Daten\Puzzles\Puzzle Boat\Elephant.json");
+        }
+
+        public static void Elephant_Run()
+        {
+            var clues = ClassifyJson.DeserializeFile<List<ElephantClue>>(@"D:\Daten\Puzzles\Puzzle Boat\Elephant.json");
+            var highlighted = new List<string>();
+            var showingNumbers = false;
+            while (true)
+            {
+                static int trix(int number) => number > 206 ? number + 3 : number - 1;
+                ClassifyJson.SerializeToFile(clues, @"D:\Daten\Puzzles\Puzzle Boat\Elephant.json");
+
+                Console.Clear();
+
+                // Output grid
+                var characters = Ut.NewArray(450, _ => '_');
+                characters[206] = '1';
+                characters[207] = '9';
+                characters[208] = '7';
+                characters[209] = '5';
+                var clueIds = Ut.NewArray(450, _ => "_");
+                foreach (var cl in clues)
+                    for (var ii = 0; ii < cl.Numbers.Length; ii++)
+                    {
+                        characters[trix(cl.Numbers[ii])] = cl.Answer[ii];
+                        clueIds[trix(cl.Numbers[ii])] = cl.Id;
+                    }
+
+                string extraHighlight = null;
+                ConsoleColor bkg(int ix) => clueIds[ix] == extraHighlight ? ConsoleColor.DarkYellow : highlighted.Contains(clueIds[ix]) ? ConsoleColor.DarkCyan : characters[ix] == '.' ? ConsoleColor.DarkMagenta : ConsoleColor.DarkBlue;
+                (ConsoleColoredString[] grid1, ConsoleColoredString[] grid2, ConsoleColoredString[] grid3) getGrids()
+                {
+                    var grid1 = Enumerable.Range(0, 450).Split(18).Select(row => row.Select(ix => $" {characters[ix]} ".Color(ConsoleColor.White, bkg(ix))).JoinColoredString()).ToArray();
+                    var grid2 = Enumerable.Range(0, 450).Split(18).Select(row => row.Select(ix => $" {(ix < 206 ? (ix + 1).ToString() : ix < 210 ? "" : (ix - 3).ToString()).PadLeft(3)} ".Color(ConsoleColor.White, bkg(ix))).JoinColoredString()).ToArray();
+                    var grid3 = Enumerable.Range(0, 450).Split(18).Select(row => row.Select(ix => $" {clueIds[ix].PadLeft(2)} ".Color(ConsoleColor.White, bkg(ix))).JoinColoredString()).ToArray();
+                    return (grid1, grid2, grid3);
+                }
+                var (g1, g2, g3) = getGrids();
+                ConsoleUtil.WriteLine(g1.Zip(showingNumbers ? g2 : g3, (l1, l2) => l1 + "     " + l2).JoinColoredString("\n"));
+                var command = Console.ReadLine();
+                if (command == "exit")
+                    break;
+
+                if (command == "gr")
+                {
+                    showingNumbers = !showingNumbers;
                     continue;
-                if (clues[cIx].Value.horizClue is int hc)
-                {
-                    var len = Enumerable.Range(1, w - (cIx % w + 1)).TakeWhile(ix => clues[cIx + ix] == null).Count();
-                    var light = new Light { Clue = hc, Combinations = makeCombinations(len, hc, allowed).ToList() };
-                    lights.Add(light);
-                    for (var i = 0; i < len; i++)
-                        fullBoard[cIx + i + 1].Add((light, i));
-                }
-                if (clues[cIx].Value.vertClue is int vc)
-                {
-                    var len = Enumerable.Range(1, h - (cIx / w + 1)).TakeWhile(ix => clues[cIx + w * ix] == null).Count();
-                    var light = new Light { Clue = vc, Combinations = makeCombinations(len, vc, allowed).ToList() };
-                    lights.Add(light);
-                    for (var i = 0; i < len; i++)
-                        fullBoard[cIx + w * (i + 1)].Add((light, i));
-                }
-            }
-
-            IEnumerable<int?[]> recurse(List<(Light light, int ix)>[] board, int?[] answers, int ix)
-            {
-                while (ix < w * h && clues[ix] != null)
-                    ix++;
-
-                if (ix == w * h)
-                {
-                    yield return answers;
-                    yield break;
                 }
 
-                var origLightCombinations = board[ix].Select(tup => tup.light.Combinations).ToArray();
-                foreach (var num in allowed)
+                if (command == "list")
                 {
-                    if (!board[ix].All(tup => tup.light.Combinations.Any(c => c[tup.ix] == num)))
+                    foreach (var c in clues)
+                        Console.WriteLine($"{c.Id}. {c.Answer} ({c.Answer.Length} letters)");
+                    Console.ReadLine();
+                    continue;
+                }
+
+                var m2 = Regex.Match(command, @"^(\d+)=(.)$");
+                if (m2.Success && int.TryParse(m2.Groups[1].Value, out var i) && m2.Groups[2].Value.Length == 1)
+                {
+                    var clue2 = clues.FirstOrDefault(c => c.Numbers.Contains(i));
+                    if (clue2 == null)
                         continue;
-
-                    // Attempt to put the number “num” into the square “bestSquare”
-                    answers[ix] = num;
-
-                    // Filter the combinations in each intersecting light
-                    for (var i = 0; i < board[ix].Count; i++)
-                        board[ix][i].light.Combinations = board[ix][i].light.Combinations.Where(c => c[board[ix][i].ix] == num).ToList();
-
-                    foreach (var solution in recurse(board, answers, ix + 1))
-                        yield return solution;
-
-                    // Restore the combinations in the intersecting lights
-                    for (var i = 0; i < board[ix].Count; i++)
-                        board[ix][i].light.Combinations = origLightCombinations[i];
+                    var pos = clue2.Numbers.IndexOf(i);
+                    clue2.Answer = clue2.Answer.Remove(pos, 1).Insert(pos, m2.Groups[2].Value.ToUpperInvariant());
+                    continue;
                 }
-                answers[ix] = null;
+
+                m2 = Regex.Match(command, @"^(\d+)-(\d+)=(.+)$");
+                if (m2.Success && int.TryParse(m2.Groups[1].Value, out i) && int.TryParse(m2.Groups[2].Value, out var j) && i < j && m2.Groups[3].Value.Length == j - i + 1)
+                {
+                    for (var nm = i; nm <= j; nm++)
+                    {
+                        var clue2 = clues.FirstOrDefault(c => c.Numbers.Contains(nm));
+                        if (clue2 == null)
+                            continue;
+                        var pos = clue2.Numbers.IndexOf(nm);
+                        clue2.Answer = clue2.Answer.Remove(pos, 1).Insert(pos, m2.Groups[3].Value.ToUpperInvariant()[nm - i].ToString());
+                    }
+                    continue;
+                }
+
+                var clue = clues.FirstOrDefault(c => c.Id.EqualsNoCase(command));
+                if (clue != null)
+                {
+                    Console.Clear();
+                    extraHighlight = clue.Id;
+                    var (gr1, gr2, _) = getGrids();
+                    ConsoleUtil.WriteLine(gr1.Zip(gr2, (l1, l2) => l1 + "     " + l2).JoinColoredString("\n"));
+                    extraHighlight = null;
+                    Console.WriteLine($"Clue: {clue.Id}");
+
+                    tryAgain:
+                    ConsoleUtil.WriteLine($"{clue.Numbers.Select((n, ix) => $" {n.ToString().PadLeft(3)}".Color(ConsoleColor.White, bkg(trix(clue.Numbers[ix])))).JoinColoredString()} ({clue.Answer.Length} letters)", null);
+                    ConsoleUtil.WriteLine($"{clue.Answer.Select((ch, ix) => $" {ch.ToString().PadLeft(3)}".Color(ConsoleColor.White, bkg(trix(clue.Numbers[ix])))).JoinColoredString()} ({clue.Answer.Length} letters)", null);
+                    var newAnswer = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(newAnswer))
+                        continue;
+                    if (newAnswer.Length != clue.Answer.Length)
+                    {
+                        Console.WriteLine($"Wrong length");
+                        goto tryAgain;
+                    }
+                    clue.Answer = newAnswer.ToUpperInvariant();
+                    continue;
+                }
+
+                var m = Regex.Match(command, @"^h (.*)$");
+                if (m.Success && (clue = clues.FirstOrDefault(c => c.Id.EqualsNoCase(m.Groups[1].Value))) != null)
+                {
+                    if (highlighted.Contains(clue.Id))
+                        highlighted.Remove(clue.Id);
+                    else
+                        highlighted.Add(clue.Id);
+                    continue;
+                }
             }
-
-            foreach (var solution in recurse(fullBoard, new int?[w * h], 0))
-                Console.WriteLine(solution.JoinString(", "));
-        }
-
-        private static IEnumerable<int[]> makeCombinations(int len, int sum, int[] allowed)
-        {
-            if (len == 0)
-            {
-                if (sum == 0)
-                    yield return new int[0];
-                yield break;
-            }
-
-            for (var alIx = 0; alIx < allowed.Length; alIx++)
-                foreach (var solution in makeCombinations(len - 1, sum - allowed[alIx], allowed.Remove(alIx, 1)))
-                    yield return solution.Insert(0, allowed[alIx]);
-        }
-
-        sealed class Light
-        {
-            public int Clue;
-            public List<int[]> Combinations;
         }
     }
 }
