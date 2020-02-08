@@ -1,0 +1,128 @@
+
+AE      Edge clues
+BU      Vertex clues
+CC      Slitherlink
+DL      Gashlycrumb Tinies
+EI      Color names indexing
+FD      Crossword clues
+
+Each room contains:
+    • Edge clues (numbers on doors)
+    • Vertex clues (numbers between doors)
+    • Crossword clue(s) + crossword offset
+    • Slitherlink clues (numbers or equations on floor)
+    • A table with an item on it that hints at a Gashlycrumb Tiny
+    • A carpet in a specific color in the shape of a Morse digit
+    • Some doors are locked
+
+Answers are:
+    • Edge clues give numbers from 1–26 with two duplicates
+    • Vertex clues give numbers from 1–26 with two duplicates
+    • Two duplicated letters obtained by indexing into the carpet’s color
+    • Two duplicated letters obtained from the Gashlycrumb Tinies
+    • Crossword with its offsets gives letters A–Z with two duplicates
+    • Slitherlink equations are: a mod 5, floor(a/5), b mod 5, floor(b/5), giving two answers
+
+Rejected ideas:
+• ✓ QWERTY mapping
+• ✓ Maze jigsaw
+
+Possible crossword fills
+
+    1 SREVRESBO: observers (rev.) (9)
+    2 TSAEL: least (rev.) (5)
+    3 EDIA: aide (rev.) (4)
+    4 better (6)
+    5 deeper (6)
+    6 bee (3)
+    7 TSAOT: toast (rev.) (5)
+    8 she (3)
+    9 DERAHS: shared (rev.) (6)
+    10 LIEV: veil (rev.) (4)
+    11 pale (4)
+    12 slate (5)
+
+    1 SREVRESBO: observers (rev.) (9)
+    2 TSAEL: least (rev.) (5)
+    3 EDIA: aide (rev.) (4)
+    4 better (6)
+    5 dealer (6)
+    6 bed (3)
+    7 TSAOT: toast (rev.) (5)
+    8 she (3)
+    9 DERAHS: shared (rev.) (6)
+    10 NIAV: vain (rev.) (4)
+    11 land (4)
+    12 slate (5)
+
+    1 insistent (9)
+    2 linen (5)
+    3 TSAE: east (rev.) (4)
+    4 NOSLEN: nelson (rev.) (6)
+    5 SEVREN: nerves (rev.) (6)
+    6 not; NOT: ton (rev.) (3)
+    7 pants (5)
+    8 are; ARE: era (rev.) (3)
+    9 SESIRA: arises (rev.) (6)
+    10 NAVI: ivan (rev.) (4)
+    11 rent (4)
+    12 ENIPS: spine (rev.) (5)
+
+    1 SREVRESBO: OBSERVERS (rev.) (9)
+    2 TSAEL: LEAST (rev.) (5)
+    3 EDIA: AIDE (rev.) (4)
+    4 BETTER (6)
+    5 DEILER: RELIED (rev.) (6)
+    6 BED (3)
+    7 TSAOT: TOAST (rev.) (5)
+    8 SHE (3)
+    9 DERAHS: SHARED (rev.) (6)
+    10 IIIV: VIII (rev.) (4)
+    11 LAID (4)
+    12 SLATE (5)
+
+
+
+COLORS
+
+    Many        Few
+
+    AQUA        NAVAJOWHITE
+    AZURE       TUSCANRED
+    ONYX        BRONZE
+    WHITE       ANTIQUEONYX
+    JADE        FLAMINGOPINK
+    FUCHSIA
+    PINK
+    VIOLET
+    GAMBOGE
+
+
+A is for Amy who fell down the stairs.      piece of banister
+B is for Basil assaulted by bears.          plush toy
+C is for Clara who wasted away.             pile of trash
+D is for Desmond thrown out of a sleigh.    skeleton
+                                            rose bud
+E is for Ernest who choked on a peach.      bucket of orange paint
+F is for Fanny sucked dry by a leech.       parasite
+G is for George smothered under a rug.      toupee
+H is for Hector done in by a thug.          the album “So Much Fun”
+I is for Ida who drowned in a lake.         painting of Queen Victoria
+J is for James who took lye by mistake.     beaker of alkaline solution
+K is for Kate who was struck with an axe.   body spray
+L is for Leo who swallowed some tacks.      naughts and crosses
+                                            nail
+M is for Maud who was swept out to sea.     bottle of salty water
+N is for Neville who died of ennui.         the funnies with beginning and end torn off and the rest scrambled
+O is for Olive run through with an awl.     piercing
+P is for Prue trampled flat in a brawl.     copy of the third Super Smash Bros. game
+Q is for Quentin who sank in a mire.        pile of mud
+R is for Rhoda consumed by a fire.          box of matches
+S is for Susan who perished of fits.        bottle of anticonvulsants
+T is for Titus who flew into bits.          floppy disk
+U is for Una who slipped down a drain.      kitchen sink
+V is for Victor squashed under a train.     instruction manual
+W is for Winnie embedded in ice.            border patrol agent’s uniform
+X is for Xerxes devoured by mice.           rat
+Y is for Yorick whose head was knocked in.  joke book
+Z is for Zillah who drank too much gin.     bottle of spirits

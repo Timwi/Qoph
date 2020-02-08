@@ -63,7 +63,7 @@
     <Compile Include="BombDisposal\RectangleMangle.cs" />
     <Compile Include="BombDisposal\SomethingsFishy.cs" />
     <Compile Include="Esperanto\BinaryPuzzle.cs" />
-    <Compile Include="BombDisposal\PolyhedralPuzzle.cs" />
+    <Compile Include="BombDisposal\FaceToFace.cs" />
     <Compile Include="Esperanto\CodeOfConduct.cs" />
     <Compile Include="DrainPipe.cs" />
     <Compile Include="PastHunts\EverythingSelfReferential.cs" />

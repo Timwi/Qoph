@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using CsQuery;
 using RT.Util;
 using RT.Util.Consoles;
@@ -16,7 +17,7 @@ namespace PuzzleStuff.BombDisposal
 {
     using static Md;
 
-    static class PolyhedralPuzzle
+    static class FaceToFace
     {
         public static void DownloadFiles()
         {
@@ -77,7 +78,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                     if (href == null || href.StartsWith("http") || !href.EndsWith(".html"))
                         return;
                     var filename = href.Replace(".html", ".txt");
-                    var targetPath = $@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Polyhedral Puzzle\Txt\{filename}";
+                    var targetPath = $@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Txt\{filename}";
                     if (File.Exists(targetPath))
                         return;
                     var resp = new HClient().Get($"http://dmccooey.com/polyhedra/{filename}");
@@ -103,9 +104,9 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
             public Pt[] Vertices;
             public int[][] Faces;
 
-            public double XOffset;
-            public double YOffset;
-            public double Rotation;
+            public double XOffset = 0;
+            public double YOffset = 0;
+            public double Rotation = 0;
 
             public IEnumerable<int> FindAdjacent(int face)
             {
@@ -254,7 +255,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
         private static List<Polyhedron> getPolyhedra()
         {
             var polyhedra = new List<Polyhedron>();
-            var files = new DirectoryInfo(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Polyhedral Puzzle\Txt").EnumerateFiles("*.txt", SearchOption.TopDirectoryOnly).ToArray();
+            var files = new DirectoryInfo(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Txt").EnumerateFiles("*.txt", SearchOption.TopDirectoryOnly).ToArray();
             files.ParallelForEach(4, file =>
             {
                 var polyhedron = parse(file.FullName);
@@ -273,7 +274,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
         public static void GenerateNets()
         {
             var polyhedra = getPolyhedra();
-            File.WriteAllText(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Polyhedral Puzzle\Polyhedral Puzzle.html",
+            File.WriteAllText(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Polyhedral Puzzle.html",
                 $@"
 <html>
     <head>
@@ -298,7 +299,20 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                 }).JoinString()}</body></html>");
         }
 
-        private static (string svg, PointD[][] polygons) generateNet(Polyhedron polyhedron)
+        /// <summary>
+        /// Generates SVG showing the net of a polyhedron.
+        /// </summary>
+        /// <param name="polyhedron">Polyhedron to generate net for.</param>
+        /// <param name="edgeStrokeWidth">Determines the stroke width of an edge. Parameters are: Face 1 index, Face 2 index.</param>
+        /// <param name="edgeSvg">Extra SVG to add for each edge. Parameters are: Face 1 index, Face 2 index, X, Y.</param>
+        /// <param name="vertexSvg">Extra SVG to add for each vertex. Parameters are: Vertex index, X, Y.</param>
+        /// <param name="faceSvg">Extra SVG to add for each face. Parameters are: Face index, X, Y.</param>
+        /// <returns></returns>
+        private static (string svg, PointD[][] polygons) generateNet(Polyhedron polyhedron,
+            Func<int, int, double, double, string> edgeSvg = null,
+            Func<int, double, double, string> vertexSvg = null,
+            Func<int, int, double> edgeStrokeWidth = null,
+            Func<int, double, double, string> faceSvg = null)
         {
             // Numbers closer than this are considered equal
             const double closeness = .00001;
@@ -308,7 +322,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
             var faces = polyhedron.Faces.Select(face => face.Select(vIx => polyhedron.Vertices[vIx]).ToArray()).ToArray();
 
             var svg = new StringBuilder();
-            var svgOutlines = new StringBuilder();
+            var svgExtras = new StringBuilder();
 
             // Restricted variable scope
             {
@@ -358,6 +372,8 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                 polygons[fromFaceIx] = rotatedPolyhedron[fromFaceIx].Select(pt => p(pt.X, pt.Y)).ToArray();
 
                 //svgOutlines.Append($@"<path id='outline-{fromFaceIx}' d='M{polygons[fromFaceIx].Select(p => $"{p.X},{p.Y}").JoinString(" ")}z' fill='transparent' />");
+                if (faceSvg != null)
+                    svgExtras.Append((polygons[fromFaceIx].Aggregate(new PointD(), (p, n) => p + n) / polygons[fromFaceIx].Length).Apply(mid => faceSvg(fromFaceIx, mid.X, mid.Y)));
 
                 for (int fromEdgeIx = 0; fromEdgeIx < rotatedPolyhedron[fromFaceIx].Length; fromEdgeIx++)
                 {
@@ -394,7 +410,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                         var p1 = polygons[fromFaceIx][fromEdgeIx];
                         var p2 = polygons[fromFaceIx][(fromEdgeIx + 1) % polygons[fromFaceIx].Length];
                         IEnumerable<string> classes = new[] { $"face-{fromFaceIx}", $"face-{toFaceIx}", $"edge-{fromFaceIx}-{fromEdgeIx}", $"edge-{toFaceIx}-{toEdgeIx}" };
-                        svg.Append($@"<path id='edge-{fromFaceIx}-{fromEdgeIx}' d='M {p1.X},{p1.Y} L {p2.X},{p2.Y}' stroke='black' />");
+                        svg.Append($@"<path id='edge-{fromFaceIx}-{fromEdgeIx}' d='M {p1.X},{p1.Y} L {p2.X},{p2.Y}' stroke='black'{(edgeStrokeWidth == null ? null : $" stroke-width='{edgeStrokeWidth(fromFaceIx, toFaceIx)}'")} />");
 
                         if (polygons[toFaceIx] != null)
                         {
@@ -433,6 +449,11 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                             //        break;
                             //}
                         }
+
+                        if (edgeSvg != null)
+                            svgExtras.Append(edgeSvg(fromFaceIx, toFaceIx, (p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2));
+                        if (vertexSvg != null)
+                            svgExtras.Append(vertexSvg(polyhedron.Faces[fromFaceIx][fromEdgeIx], p1.X, p1.Y));
                     }
                 }
             }
@@ -441,12 +462,12 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
             var yMin = polygons.Min(pg => pg?.Min(p => p.Y)).Value;
             var xMax = polygons.Max(pg => pg?.Max(p => p.X)).Value;
             var yMax = polygons.Max(pg => pg?.Max(p => p.Y)).Value;
-            return (svg: $@"<svg class='polyhedron' xmlns='http://www.w3.org/2000/svg' viewBox='{xMin - .5} {yMin - .5} {xMax - xMin + 1} {yMax - yMin + 1}' stroke-width='{(xMax - xMin + 1) / 360}'>{svg}{svgOutlines}</svg>", polygons);
+            return (svg: $@"<svg class='polyhedron' xmlns='http://www.w3.org/2000/svg' viewBox='{xMin - .5} {yMin - .5} {xMax - xMin + 1} {yMax - yMin + 1}' stroke-width='{(xMax - xMin + 1) / 360}' font-family='Work Sans'>{svg}{svgExtras}</svg>", polygons);
         }
 
         public static void GenerateCrossword()
         {
-            var polyhedron = parse(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Polyhedral Puzzle\Txt\SelfDualIcosioctahedron4.txt");
+            var polyhedron = parse(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Txt\SelfDualIcosioctahedron4.txt");
             var (svg, polygons) = generateNet(polyhedron);
             var polyMidPoints = polygons.Select(poly => new PointD(poly.Average(p => p.X), poly.Average(p => p.Y))).ToArray();
             var xMin = polygons.Min(pg => pg.Min(p => p.X));
@@ -467,95 +488,55 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                     maxGridSize = gridSize;
             }
 
-
-            //// CROSSWORD STUFF
-            //var adjacents = polyhedron.Faces.Select((f, faceIx) => f.Select((v, ix) => polyhedron.Faces.IndexOf(f2 => Enumerable.Range(0, f2.Length).Any(ix2 => f2[ix2] == f[(ix + 1) % f.Length] && f2[(ix2 + 1) % f2.Length] == f[ix]))).ToArray()).ToArray();
-            //var lightFragments = adjacents.SelectMany((f, fIx) => f.SelectMany((adj, vIx) =>
-            //{
-            //    var list = new List<(int prior, int face, int next)>();
-            //    for (var i = f.Length / 2; i <= (f.Length + 1) / 2; i++)
-            //        list.Add((adj, fIx, f[(vIx + i) % f.Length]));
-            //    return list;
-            //})).ToList();
-            ////Console.WriteLine(ClassifyJson.Serialize(lightFragments).ToStringIndented());
-            //var walls = new List<(int face1, int face2)>();
-            //var lights = new List<int[]>();
-            //var rnd = new Random(47);
-
-            //while (lightFragments.Count > 0)
-            //{
-            //    var startIx = rnd.Next(0, lightFragments.Count);
-            //    var chain = new List<(int prior, int face, int next)> { lightFragments[startIx] };
-            //    var (prior, face, next) = lightFragments[startIx];
-            //    var startFace = face;
-            //    lightFragments.RemoveAt(startIx);
-
-            //    walls.Add((prior, face));
-
-            //    while (true)
-            //    {
-            //        var nextFragmentCandidates = lightFragments.Where(nf => nf.prior == face && nf.face == next).ToArray();
-            //        if (nextFragmentCandidates.Length == 0)
-            //            break;
-            //        var nextFragment = nextFragmentCandidates.PickRandom(rnd);
-            //        chain.Add(nextFragment);
-            //        (prior, face, next) = nextFragment;
-            //        if (next == startFace || walls.Any(w => (w.face1 == face && w.face2 == next) || (w.face2 == face && w.face1 == next)))
-            //            break;
-            //    }
-
-            //    lightFragments.RemoveRange(chain);
-
-            //    more:
-            //    var targetLength = Enumerable.Range(3, chain.Count).Where(l => (l >= 3 && l <= chain.Count - 3) || l == chain.Count).PickRandom(rnd);
-            //    var light = chain.Take(targetLength).Select(lf => lf.face).ToArray();
-            //    var lightReverse = light.ToArray().ReverseInplace();
-            //    if (!lights.Any(l => l.IndexOfSubarray(light) != -1 || l.IndexOfSubarray(lightReverse) != -1))
-            //        lights.Add(light);
-
-            //    if (targetLength < chain.Count)
-            //    {
-            //        walls.Add((chain[targetLength].prior, chain[targetLength].face));
-            //        chain.RemoveRange(0, targetLength);
-            //        goto more;
-            //    }
-            //}
-
             var cellW = (xMax - xMin) / maxGridSize;
             var cellH = (yMax - yMin) / maxGridSize;
 
             var facePins = coords.Select((c, ix) => $"<circle cx='{c.x * cellW + xMin}' cy='{c.y * cellH + yMin}' r='{Math.Min(cellW, cellH) * .2}' /><line stroke-width='.03' stroke='red' x1='{c.x * cellW + xMin}' y1='{c.y * cellH + yMin}' x2='{polyMidPoints[ix].X}' y2='{polyMidPoints[ix].Y}' />").JoinString();
             var faceLabels = polygons.Select((f, faceIx) => $"<text font-size='.2' text-anchor='middle' fill='#080' x='{f.Average(p => p.X)}' y='{f.Average(p => p.Y)}'>{faceIx}</text>").JoinString();
-            File.WriteAllText(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Polyhedral Puzzle\Polyhedral Puzzle Crossword.svg",
-                svg.Replace("</svg>", $"{facePins}{faceLabels}</svg>"));
 
             Console.WriteLine("Spaces:");
             Console.WriteLine(coords.Select((c, ix) => $"{ix} = {c}").JoinString("\n"));
             Console.WriteLine();
             Console.WriteLine("Lights:");
-            var path = @"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Polyhedral Puzzle\Polyhedral Puzzle Crossword (lights).txt";
-            File.WriteAllText(path, @"19 9 17 15 4 13 14 2 18,6 19 20 0 12,13 11 23 21,2 26 7 6 27 9,11 25 1 3 27 9,2 26 8,16 10 20 18 7,10 24 0,11 25 4 5 24 10,22 23 1 15,3 21 22 8,14 12 5 16 17"
+            var path = @"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Polyhedral Puzzle Crossword (lights).txt";
+            var lights = @"19 9 17 15 4 13 14 2 18,6 19 20 0 12,13 11 23 21,2 26 7 6 27 9,11 25 1 3 27 9,2 26 8,16 10 20 18 7,10 24 0,11 25 4 5 24 10,22 23 1 15,3 21 22 8,14 12 5 16 17"
                 .Split(',')
-                .Select(light => light.Split(' ').Select(i => int.Parse(i)).Select(f => coords[f]).Select(c => $"{c.x} {c.y}").JoinString("\r\n"))
+                .Select(str => str.Split(' ').Select(int.Parse).ToArray())
+                .ToArray();
+            File.WriteAllText(path, lights
+                .Select(light => light.Select(f => coords[f]).Select(c => $"{c.x} {c.y}").JoinString("\r\n"))
                 .Concat(coords.Select(c => $"{c.x} {c.y}").JoinString("\r\n"))
                 .JoinString("\r\n\r\n"));
             Console.WriteLine($"Written to {path}");
             Console.WriteLine();
 
-            //var allWords = Ut.NewArray(
-            //    @"D:\Daten\Wordlists\English 60000.txt",
-            //    @"D:\Daten\Wordlists\English words.txt",
-            //    @"D:\Daten\Wordlists\peter_broda_wordlist_unscored.txt",
-            //    @"D:\Daten\Wordlists\sowpods.txt"
-            //)
-            //    .SelectMany(file => File.ReadAllLines(file))
-            //    .Where(word => Regex.IsMatch(word, @"^[-./a-zA-Z]+$"))
-            //    .Select(word => word.ToUpperInvariant().Where(ch => ch >= 'A' && ch <= 'Z').JoinString())
-            //    .Distinct()
-            //    .ToArray();
+            var faceLetters = new char?[polyhedron.Faces.Length];
+            var words = @"SREVRESBO<,TSAEL<,EDIA<,BETTER,DEEPER,BEE,TSAOT<,SHE,DERAHS<,LIEV<,PALE,SLATE".Split(',');
+            var clues = @"Watchers,To the smallest degree,Helper,Superior,Less shallow,Hive dweller,Tribute or food,That woman,Mutual,Bride’s garment,Lose color,Roofing material".Split(',');
+            var targetLetters = @"DFAQSBWXFTRENGUZYHPVCDOMLIJK";
+            for (var w = 0; w < words.Length; w++)
+            {
+                for (var c = 0; c < words[w].Length; c++)
+                {
+                    if (c == words[w].Length - 1 && words[w][c] == '<')
+                        continue;
+                    if (faceLetters[lights[w][c]] == null)
+                        faceLetters[lights[w][c]] = words[w][c];
+                    else if (faceLetters[lights[w][c]].Value != words[w][c])
+                        Debugger.Break();
+                }
+            }
 
-            //Console.WriteLine(allWords.Where(w => Regex.IsMatch(w, @"^..Z..X$")).JoinString("\n"));
-            //Console.WriteLine(allWords.Where(w => Regex.IsMatch(w, @"^X..Z..$")).JoinString("\n"));
+            File.WriteAllText(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Polyhedral Puzzle Crossword.svg",
+                generateNet(polyhedron,
+                    edgeStrokeWidth: (f1, f2) => lights.Any(l => l.IndexOf(f1).Apply(p1 => p1 != -1 && ((p1 > 0 && l[p1 - 1] == f2) || (p1 < l.Length - 1 && l[p1 + 1] == f2)))) ? .01 : .05,
+                    faceSvg: (fx, x, y) =>
+                        //lights.Select((l, wx) => (l[0] == fx && !words[wx].EndsWith("<")) || (l.Last() == fx && words[wx].EndsWith("<")) ? clues[wx] : null).Where(clue => clue != null).ToArray().Apply(clues =>
+                        //    clues.Length > 0 ? $"<text x='{x}' y='{y + .025}' stroke='white' stroke-width='.02' paint-order='stroke' fill='{(clues.Length > 1 ? "red" : "black")}' font-size='.1' text-anchor='middle'>{clues.JoinString("/")}</text>" : null) +
+                        $"<text x='{x}' y='{y + .025}' stroke='white' stroke-width='.02' paint-order='stroke' fill='{(lights.Count(l => l[0] == fx || l.Last() == fx) > 1 ? "red" : "black")}' font-size='.25' text-anchor='middle'>{faceLetters[fx]}</text>" +
+                        (targetLetters[fx] - faceLetters[fx]).NullOr(offset => $"<text x='{x}' y='{y + .125}' stroke='white' stroke-width='.01' paint-order='stroke' fill='{(lights.Count(l => l[0] == fx || l.Last() == fx) > 1 ? "red" : "black")}' font-size='.1' text-anchor='middle'>{(offset > 0 ? "+" : offset < 0 ? "−" : "")}{Math.Abs(offset)}</text>")
+                ).svg);
+            Console.WriteLine(faceLetters.JoinString());
         }
 
         enum LtGtClue { Equal, LessThan, GreaterThan };
@@ -564,7 +545,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
         {
             // This puzzle doesn’t work because less-than/greater-than on every edge is not enough to uniquely define every face
 
-            var polyhedron = parse(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Polyhedral Puzzle\Txt\SnubSquareAntiprism.txt");
+            var polyhedron = parse(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Txt\SnubSquareAntiprism.txt");
             var n = polyhedron.Faces.Length;
             var solution = Enumerable.Range(0, n).ToArray().Shuffle();
             Console.WriteLine($"Solution: {solution.JoinString(", ")}");
@@ -713,14 +694,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
         // Self-Dual Icosioctahedron #1 (28 faces)
         public static void GenerateEdgeClues()
         {
-            //var polyhedra = GetPolyhedra();
-            //foreach (var p in polyhedra)
-            //    if (p.Faces.Length == 28)
-            //        Console.WriteLine($"{p.Name} = {p.Filename}");
-            //return;
-
-            var polyhedron = parse(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Polyhedral Puzzle\Txt\SelfDualIcosioctahedron1.txt");
-            Console.WriteLine(polyhedron.Faces.Length);
+            var polyhedron = parse(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Txt\SelfDualIcosioctahedron4.txt");
             var n = polyhedron.Faces.Length;
 
             var rnd = new Random(2);
@@ -745,8 +719,8 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                 return list;
             }
 
-            var minValue = solution.Min();
-            var maxValue = solution.Max();
+            var minValue = 1;// solution.Min();
+            var maxValue = 1000;// solution.Max();
             var maxLength = Math.Max(minValue.ToString().Length, maxValue.ToString().Length);
             ConsoleUtil.WriteLine($"SOLTN: {solution.Select(i => i.ToString().PadLeft(maxLength)).JoinString(", ").Color(ConsoleColor.Yellow)}", null);
 
@@ -819,10 +793,6 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                 used[bestFace] = false;
             }
 
-            static ConsoleColoredString colored((int face1, int face2, EdgeClueType type, int value) clue) =>
-                new ConsoleColoredString($"{clue.face1.ToString().Color(ConsoleColor.DarkCyan)},{clue.face2.ToString().Color(ConsoleColor.DarkCyan)} = {clue.type.ToString().Color(new[] { ConsoleColor.Green, ConsoleColor.Magenta, ConsoleColor.Yellow, ConsoleColor.Cyan, ConsoleColor.White }[(int) clue.type])} {clue.value.ToString().Color(ConsoleColor.Red)}")
-                    .ColorWhereNull(ConsoleColor.DarkGray);
-
             var allClues = polyhedron.Faces
                 .SelectMany((face, faceIx) => polyhedron.FindAdjacent(faceIx).Select(adjFaceIx => (face1: faceIx, face2: adjFaceIx)))
                 .Where(tup => tup.face1 < tup.face2)
@@ -830,31 +800,23 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                 .ToArray()
                 .Shuffle(rnd);
 
-            //Console.WriteLine("ALL CLUES:");
-            //ConsoleUtil.WriteLine(allClues.Select(colored).JoinColoredString("\n"));
-            //Console.WriteLine();
+            if (recurse(allClues, new int[n], new bool[n], Ut.NewArray(n, _ => Enumerable.Range(minValue, maxValue - minValue + 1).ToArray())).Skip(1).Any())
+                // Puzzle is not unique
+                Debugger.Break();
 
-            var requiredClues = Ut.ReduceRequiredSet(allClues, set =>
-            {
-                var setToTest = set.SetToTest.ToArray();
-                return !recurse(setToTest, new int[n], new bool[n], Ut.NewArray(n, _ => Enumerable.Range(minValue, maxValue - minValue + 1).ToArray())).Skip(1).Any();
-            }).ToArray();
-            Console.WriteLine($"TRIMMED CLUES ({requiredClues.Length}):");
-            ConsoleUtil.WriteLine(requiredClues.Select(colored).JoinColoredString("\n"));
-            Console.WriteLine();
-            Console.WriteLine("DUPLICATES:");
-            ConsoleUtil.WriteLine(requiredClues.UniquePairs().Where(pair => (pair.Item1.face1, pair.Item1.face2) == (pair.Item2.face1, pair.Item2.face2) || (pair.Item1.face1, pair.Item1.face2) == (pair.Item2.face2, pair.Item2.face1)).Select(tup => new ConsoleColoredString($"{colored(tup.Item1)}, {colored(tup.Item2)}")).JoinColoredString("\n"));
+            File.WriteAllText(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Edge Puzzle.svg",
+                generateNet(polyhedron, edgeSvg: (f1, f2, x, y) => $"<text x='{x}' y='{y + .06}' stroke='white' stroke-width='.05' paint-order='stroke' fill='black' font-size='.2' text-anchor='middle'>{solution[f1] + solution[f2]}</text>").svg);
         }
 
         enum VertexClueType { Sum, Product, NumberOfEvens }
 
         public static void GenerateVertexClues()
         {
-            var polyhedron = parse(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Polyhedral Puzzle\Txt\SelfDualIcosioctahedron1.txt");
+            var polyhedron = parse(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Txt\SelfDualIcosioctahedron4.txt");
             Console.WriteLine(polyhedron.Faces.Length);
             var n = polyhedron.Faces.Length;
 
-            var rnd = new Random(4);
+            var rnd = new Random(47);
             var solution = Enumerable.Range(1, 26).Concat(new[] { 2, 21 }).ToArray().Shuffle(rnd);
             if (solution.Length != n)
                 Debugger.Break();
@@ -873,8 +835,8 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                 return list;
             }
 
-            var minValue = solution.Min();
-            var maxValue = solution.Max();
+            var minValue = 1;// solution.Min();
+            var maxValue = 26; // solution.Max();
             var maxLength = Math.Max(minValue.ToString().Length, maxValue.ToString().Length);
             ConsoleUtil.WriteLine($"SOLTN: {solution.Select(i => i.ToString().PadLeft(maxLength)).JoinString(", ").Color(ConsoleColor.Yellow)}", null);
 
@@ -1005,8 +967,9 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
 
             var allClues = Enumerable.Range(0, polyhedron.Vertices.Length)
                 .SelectMany(vx => generateClues(vx))
-                .ToArray()
-                .Shuffle(rnd);
+                .ToArray();
+            var eqs = allClues.Select((clue, clueIx) => $"{clue.value}={Enumerable.Range(0, polyhedron.Faces.Length).Where(f => polyhedron.Faces[f].Contains(clue.vx)).Select(f => $"f{f}").JoinString("+")}").JoinString(", ");
+            Clipboard.SetText($"solve({{{eqs}}}, {{{Enumerable.Range(0, polyhedron.Faces.Length).Select(f => $"f{f}").JoinString(", ")}}});");
             ConsoleColoredString colored((int vx, VertexClueType type, int value) clue) =>
                 new ConsoleColoredString($"{clue.vx.ToString().Color(ConsoleColor.DarkCyan)} ({Enumerable.Range(0, n).Where(fx => polyhedron.Faces[fx].Contains(clue.vx)).JoinString(",")}) = {clue.type.ToString().Color(new[] { ConsoleColor.Green, ConsoleColor.Yellow, ConsoleColor.Magenta }[(int) clue.type])} {clue.value.ToString().Color(ConsoleColor.Red)}")
                     .ColorWhereNull(ConsoleColor.DarkGray);
@@ -1053,38 +1016,27 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                 Debugger.Break();
             }
 
-            var requiredClues = Ut.ReduceRequiredSet(allClues, skipConsistencyTest: true, test: set =>
-            {
-                var setToTest = set.SetToTest.ToArray();
-                Console.WriteLine(allClues.Select(c => setToTest.Contains(c) ? "█" : "░").JoinString());
-                return !recurse(setToTest, new int[n], new bool[n], getInitialPossibleValues(setToTest)).Skip(1).Any();
-            }).ToArray();
-            Console.WriteLine($"TRIMMED CLUES ({requiredClues.Length}):");
-            ConsoleUtil.WriteLine(requiredClues.Select(colored).JoinColoredString("\n"));
-            Console.WriteLine();
-            Console.WriteLine("DUPLICATES:");
-            ConsoleUtil.WriteLine($"{requiredClues.UniquePairs().Where(pair => pair.Item1.vx == pair.Item2.vx).Select(tup => new ConsoleColoredString($"{colored(tup.Item1)}, {colored(tup.Item2)}")).JoinColoredString("\n")}", null);
-            Console.WriteLine();
-            foreach (var sol in recurse(requiredClues, new int[n], new bool[n], getInitialPossibleValues(requiredClues)))
-                ConsoleUtil.WriteLine($"FOUND: {sol.Select(i => i.ToString().PadLeft(maxLength)).JoinString(", ").Color(ConsoleColor.Yellow)}", null);
+            if (recurse(allClues, new int[n], new bool[n], getInitialPossibleValues(allClues)).Skip(1).Any())
+                // Puzzle is not unique
+                Debugger.Break();
+
+            //foreach (var sol in recurse(requiredClues, new int[n], new bool[n], getInitialPossibleValues(requiredClues)))
+            //    ConsoleUtil.WriteLine($"FOUND: {sol.Select(i => i.ToString().PadLeft(maxLength)).JoinString(", ").Color(ConsoleColor.Yellow)}", null);
+
+            File.WriteAllText(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Vertex Puzzle.svg",
+                generateNet(polyhedron, vertexSvg: (vx, x, y) => $"<text x='{x}' y='{y + .06}' stroke='white' stroke-width='.05' paint-order='stroke' fill='black' font-size='.2' text-anchor='middle'>{Enumerable.Range(0, polyhedron.Faces.Length).Where(fx => polyhedron.Faces[fx].Contains(vx)).Sum(fx => solution[fx])}</text>").svg);
         }
 
         enum FaceClueType { Sum, Product, NumberOfEvens }
 
-        public static void GenerateFaceClues()
+        public static void GenerateFaceClues_OBSOLETE()
         {
-            //var polyhedra = GetPolyhedra();
-            //foreach (var p in polyhedra)
-            //    if (p.Faces.Length == 28)
-            //        Console.WriteLine($"{p.Name} = {p.Filename}");
-            //return;
-
-            var polyhedron = parse(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Polyhedral Puzzle\Txt\SelfDualIcosioctahedron1.txt");
+            var polyhedron = parse(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Txt\SelfDualIcosioctahedron4.txt");
             Console.WriteLine(polyhedron.Faces.Length);
             var n = polyhedron.Faces.Length;
             var adjs = Enumerable.Range(0, n).Select(fx => polyhedron.FindAdjacent(fx).ToArray()).ToArray();
 
-            var rnd = new Random(3);
+            var rnd = new Random(47);
             var solution = Enumerable.Range(1, 26).Concat(new[] { 5, 9 }).ToArray().Shuffle(rnd);
             if (solution.Length != n)
                 Debugger.Break();
@@ -1106,8 +1058,8 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
             var minValue = solution.Min();
             var maxValue = solution.Max();
             var maxLength = Math.Max(minValue.ToString().Length, maxValue.ToString().Length);
-            ConsoleUtil.WriteLine($"INDEX: {Enumerable.Range(0, n).Select(i => i.ToString().PadLeft(maxLength)).JoinString(", ").Color(ConsoleColor.Blue)}", null);
-            ConsoleUtil.WriteLine($"SOLTN: {solution.Select(i => i.ToString().PadLeft(maxLength)).JoinString(", ").Color(ConsoleColor.Yellow)}", null);
+            //ConsoleUtil.WriteLine($"INDEX: {Enumerable.Range(0, n).Select(i => i.ToString().PadLeft(maxLength)).JoinString(", ").Color(ConsoleColor.Blue)}", null);
+            //ConsoleUtil.WriteLine($"SOLTN: {solution.Select(i => i.ToString().PadLeft(maxLength)).JoinString(", ").Color(ConsoleColor.Yellow)}", null);
 
             IEnumerable<int[]> recurse((int fx, FaceClueType type, int value)[] clues, int[] sofar, bool[] used, int[][] possibleValues)
             {
@@ -1265,35 +1217,39 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                 return initialPossibleValues;
             }
 
-            var count = 0;
-            foreach (var sol in recurse(allClues, new int[n], new bool[n], getInitialPossibleValues(allClues)))
-            {
-                ConsoleUtil.WriteLine($"FOUND: {sol.Select(i => i.ToString().PadLeft(maxLength)).JoinString(", ").Color(ConsoleColor.Yellow)}", null);
-                count++;
-                if (count > 1)
-                    break;
-            }
-            if (count != 1)
-            {
-                Console.WriteLine("ALL CLUES:");
-                ConsoleUtil.WriteLine(allClues.Select(colored).JoinColoredString("\n"));
-                Console.WriteLine();
+            Console.WriteLine($"Puzzle is {(recurse(allClues, new int[n], new bool[n], getInitialPossibleValues(allClues)).Skip(1).Any() ? "ambiguous" : "UNIQUE")}");
 
-                // Clues are ambiguous or impossible
-                Debugger.Break();
+            //var eqs = allClues.Select((clue, clueIx) => $"{clue.value}={adjs[clue.fx].Select(f => $"f{f}").JoinString("+")}").JoinString(", ");
+            //Clipboard.SetText($"solve({{{eqs}}}, {{{Enumerable.Range(0, polyhedron.Faces.Length).Select(f => $"f{f}").JoinString(", ")}}});");
+            //Console.WriteLine(allClues.Length);
+        }
+
+        public static void FindColors()
+        {
+            var colors = File.ReadLines(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Color names.txt")
+                .Select(c => (color: c, letters: c.ToUpperInvariant().Where(ch => char.IsLetter(ch)).JoinString()))
+                .ToArray();
+
+            IEnumerable<string[]> recurse(string[] sofar, bool[] usedLetters, (string color, string letters)[] colors)
+            {
+                if (usedLetters.All(b => b))
+                {
+                    yield return sofar;
+                    yield break;
+                }
+                if (sofar.Length >= 5)
+                    yield break;
+
+                foreach (var (color, letters) in colors)
+                {
+                    var newUsedLetters = usedLetters.Select((b, ltr) => b || letters.Contains((char) ('A' + ltr))).ToArray();
+                    foreach (var solution in recurse(sofar.Insert(sofar.Length, color), newUsedLetters, colors.Where(clr => clr.letters.Any(ltr => !newUsedLetters[ltr - 'A'])).ToArray()))
+                        yield return solution;
+                }
             }
 
-            var requiredClues = Ut.ReduceRequiredSet(allClues, skipConsistencyTest: true, test: set =>
-            {
-                var setToTest = set.SetToTest.ToArray();
-                Console.WriteLine(allClues.Select(c => setToTest.Contains(c) ? "█" : "░").JoinString());
-                return !recurse(setToTest, new int[n], new bool[n], getInitialPossibleValues(setToTest)).Skip(1).Any();
-            }).ToArray();
-            Console.WriteLine($"TRIMMED CLUES ({requiredClues.Length}):");
-            ConsoleUtil.WriteLine(requiredClues.Select(colored).JoinColoredString("\n"));
-            Console.WriteLine();
-            Console.WriteLine("DUPLICATES:");
-            ConsoleUtil.WriteLine(requiredClues.UniquePairs().Where(pair => pair.Item1.fx == pair.Item2.fx).Select(tup => new ConsoleColoredString($"{colored(tup.Item1)}, {colored(tup.Item2)}")).JoinColoredString("\n"));
+            foreach (var solution in recurse(new string[0], new bool[26], colors))
+                Console.WriteLine(solution.JoinString(" // "));
         }
     }
 }
