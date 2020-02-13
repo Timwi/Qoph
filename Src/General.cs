@@ -31,6 +31,11 @@ namespace PuzzleStuff
 
         public static bool ContainsAll(this string str, string characters) => ContainsAll(str, out _, characters.ToCharArray());
 
+        /// <summary>
+        ///     Checks if the provided string consists entirely characters that satisfy the provided predicates, with each
+        ///     predicate only used at most once by each character.</summary>
+        /// <returns>
+        ///     The indexes of the predicates used, in the order of the characters in the string.</returns>
         public static int[] ConsistsOfAny(this string str, params Func<char, bool>[] predicates) => consistsOfAnyRecurse(str, predicates, 0)?.ToArray();
 
         private static IEnumerable<int> consistsOfAnyRecurse(string str, Func<char, bool>[] predicates, int skip)
@@ -45,18 +50,12 @@ namespace PuzzleStuff
                 {
                     var t = predicates[i];
                     if (i != skip)
-                    {
                         predicates[i] = predicates[skip];
-                        predicates[skip] = t;
-                    }
 
                     var result = consistsOfAnyRecurse(str.Substring(1), predicates, skip + 1);
 
                     if (i != skip)
-                    {
-                        predicates[skip] = predicates[i];
                         predicates[i] = t;
-                    }
 
                     if (result != null)
                         return i.Concat(result.Select(ix => ix == i ? skip : ix));
@@ -77,6 +76,19 @@ namespace PuzzleStuff
                 for (int j = 1; j <= lengthB; j++)
                     distances[i, j] = Math.Min(Math.Min(distances[i - 1, j] + 1, distances[i, j - 1] + 1), distances[i - 1, j - 1] + (b[j - 1] == a[i - 1] ? 0 : 1));
             return distances[lengthA, lengthB];
+        }
+
+        public static bool IsPartialAnagramOf(string one, string two)
+        {
+            var dic = new Dictionary<char, int>();
+            foreach (var c in two)
+                dic.IncSafe(c);
+            foreach (var c in one)
+                dic.IncSafe(c, -1);
+            foreach (var kvp in dic)
+                if (kvp.Value < 0)
+                    return false;
+            return true;
         }
     }
 }
