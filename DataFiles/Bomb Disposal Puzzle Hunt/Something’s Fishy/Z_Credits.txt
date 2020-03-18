@@ -1,36 +1,49 @@
 Fish image credits:
-    A1: PD
-?   A2: Toshihiro Gamo, no deriv
-    A3: PD
 
-    B1: PD
-?   B2: PD
-    B3: Virgil Beck, courtesy Wisconsin Department of Natural Resources
+ANGELFISH:
+    A1: “angel”                         PD
+    A2: “freshwater angelfish”          Cloudtail the Snow Leopard (https://www.flickr.com/photos/blacktigersdream/), non-commercial, no-derivs
+    A3: “angel fish”                    PD
 
-    C1: Teddy Hartanto, flickr.com
-    C2: Ritiks, Wikimedia Commons
-    C3: PD
+BASS:
+    B1: “smallmouth bass”               PD
+    B2: “largemouth bass”               PD
+    B3: “largemouth bass”               Virgil Beck, courtesy Wisconsin Department of Natural Resources
 
-    D1: Edward Donovan (1768-1837), The Natural History of British Fishes (1802), rawpixel.com
-?   D2: Peter van der Sluijs
-    D3: Hans Hillewaert, User:Biopics, Wikimedia Commons
+CARP:
+!   C1: “carpa pez”/>“common carp”      Free, no attribution
+    C2: “golden carp fish”              The Natural History of British Fishes (1802) by Edward Donovan (1768-1837), rawpixel.com
+    C3: “cyprinus mirror carp”          PD
 
-    E1: Clinton & Charles Robertson, flickr.com
-    E2: Brevoort, James Carson, 1818-1887
-    E3: PD
+DAMSELFISH:
+!   D1: “pomacentridae”/>“golden df.”   Brian Gratwicke, https://www.flickr.com/photos/briangratwicke/
+    D2: “damsel fish”                   PD
+    D3: “neon damselfish”               Rickard Zerpe, https://www.flickr.com/people/125265709@N08
 
-!!  F1: NOAA/NMFS/SEFSC Pascagoula Laboratory; Collection of Brandi Noble, NOAA/NMFS/SEFSC
-    F2: PD
-!!  F3: Peter van der Sluijs
+EEL:
+!   E1: “endangered”/>“American eel”    Clinton & Charles Robertson, flickr.com
+    E2: “Japanese eel”                  Brevoort, James Carson, 1818-1887
+    E3: “American eel”                  PD
 
-    G1: PD
-    G2: Bjwebb, English Wikipedia
-    G3: PD
+FROGFISH (can’t have flounder or flatfish)
+    F1: “does a frogfish look like”     PD
+    F2: “painted frogfish”              Bernard DUPONT, https://www.flickr.com/people/65695019@N07
+    F3: “frog fish with mouth open”     Tom Weilenmann, https://www.flickr.com/photos/tom_weilenmann/
 
-    H1: Edward Donovan (1768-1837), The Natural History of British Fishes (1802), rawpixel.com
-!!  H2: PD
-!!  H3: PD
+GOLDFISH:
+    G1: “goldfish”                      PD
+    G2: “goldfish”                      Bjwebb, English Wikipedia
+    G3: “goldfish”                      PD
 
-?   I1: PD
-!!  I2: E. Jorgensen, Alfred Wegener Institute
-    I3: Uwe kils, Wikimedia Commons
+HALIBUT:
+    H1: “halibut”                       Edward Donovan (1768-1837), The Natural History of British Fishes (1802), rawpixel.com
+    H2: “halibut”                       ep793 (pixabay.com)
+    H3: “halibut”                       PD
+
+Red herrings:
+    R1: 'No Matter' Project, flickr, CC license 2.0 Generic
+    R2: 'No Matter' Project, flickr, CC license 2.0 Generic
+    R3: PD
+    R4: PD
+    R5: PD
+    R6: PD
