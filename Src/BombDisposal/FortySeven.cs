@@ -182,8 +182,8 @@ namespace PuzzleStuff.BombDisposal
             int[] mult(int[] m1, int[] m2, int size) => Ut.NewArray(size * size, i => Enumerable.Range(0, size).Select(x => ((m1[x + size * (i / size)] * m2[(i % size) + size * x]) % 47 + 47) % 47).Sum());
             int[] mult2(int size, params int[][] ms) => ms.Aggregate((prev, next) => mult(prev, next, size));
             int[] muls(int scalar, int[] m) => m.Select(i => i * scalar).ToArray();
-            int[] add(int[] m1, int[] m2) => m1.Zip(m2, (a, b) => a + b).ToArray();
-            int[] mod47(int[] m) => m.Select(i => (i % 47 + 47) % 47).ToArray();
+            static int[] add(int[] m1, int[] m2) => m1.Zip(m2, (a, b) => a + b).ToArray();
+            static int[] mod47(int[] m) => m.Select(i => (i % 47 + 47) % 47).ToArray();
 
             // Find the inverse matrix by repeatedly subdividing
             int[] inverse(int[] matrix, int size)
@@ -220,96 +220,98 @@ namespace PuzzleStuff.BombDisposal
             var wordRnd = new Random();
             var wordsStartingWith = words.Where(w => w.Length == 8 && w.All(ch => ch >= 'A' && ch <= 'Z')).GroupBy(w => w[0]).ToDictionary(gr => gr.Key, gr => gr.Distinct().Order().ToArray());
 
-            foreach (var hWord in new[] { "HIJACKED", "HECKLING", "HACIENDA", "HAGGLING", "HALFBACK", "HANDBALL", "HANDBELL", "HANDBILL", "HANDLING", "HANGNAIL", "HATCHING", "HEADACHE", "HEADBAND", "HEADLAND", "HEADLINE", "HEGELIAN", "HEIGHTEN", "HELLENIC", "HIGHBALL", "HIGHTAIL", "HITCHING" })
+            var allTuples = (
+                from aWord in new[] { "AMPHIBIA" }//wordsStartingWith['A'].ToArray().Shuffle().Take(100)
+                from bWord in new[] { "BETATEST" }   //wordsStartingWith['B']
+                from cWord in new[] { "CHARMING" }   //wordsStartingWith['C']
+                from dWord in wordsStartingWith['D'].ToArray().Shuffle().Take(100)
+                from eWord in new[] { "ELAURIAN" }  //wordsStartingWith['E']
+                from fWord in new[] { "FEELINGS" }// wordsStartingWith['F'].ToArray().Shuffle().Take(100)
+                from gWord in new[] { "GANYMEDE" }  //wordsStartingWith['G']
+                from hWord in wordsStartingWith['H'].ToArray().Shuffle().Take(100)
+                select new[] { aWord, bWord, cWord, dWord, eWord, fWord, gWord, hWord }).ToArray();
+
+            Console.WriteLine(allTuples.Length);
+            allTuples.Shuffle();
+
+            Enumerable.Range(0, allTuples.Length).ParallelForEach(4, feedersIx =>
             {
-                wordsStartingWith['E'].ParallelForEach(4, eWord =>
+                var feeders = allTuples[feedersIx];
+                var feederMatrix = Ut.NewArray(64, i => feeders[i / 8][i % 8] - 'A' + 1);
+                int[] inv;
+                try
                 {
-                    var feeders = Ut.NewArray(
-                        "APRICOTS",
-                        "BETATEST",
-                        "CHARMING",
-                        "DIALOGUE",
-                        eWord,
-                        "FIGHTING",
-                        "GANYMEDE",
-                        hWord);
+                    inv = inverse(feederMatrix, 8);
+                }
+                catch (InvalidOperationException)
+                {
+                    goto busted;
+                }
 
-                    var feederMatrix = Ut.NewArray(64, i => feeders[i / 8][i % 8] - 'A' + 1);
-                    int[] inv;
-                    try
+                lock (wordsStartingWith)
+                    ConsoleUtil.Write($"Trying: {feeders.JoinString(", ")} ({feedersIx})   \r".Color(ConsoleColor.Yellow));
+
+                var chsPerRow = (cluephrase.Length + 7) / 8;
+                var ccOutput = new List<ConsoleColoredString>();
+
+                for (var rowUnderTest = 0; rowUnderTest < n; rowUnderTest++)
+                {
+                    ccOutput.Add($"Row {rowUnderTest + 1}:".Color(ConsoleColor.White));
+
+                    var ssLen = rowUnderTest == n - 1 ? cluephrase.Length - (n - 1) * chsPerRow : chsPerRow;
+                    var cluephraseStart = rowUnderTest * chsPerRow;
+                    foreach (var subseq in Enumerable.Range(0, n).Subsequences(minLength: ssLen, maxLength: ssLen).Select(sseq => sseq.ToArray()).ToArray().Shuffle())
                     {
-                        inv = inverse(feederMatrix, 8);
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        return;
-                    }
-
-                    lock (wordsStartingWith)
-                        ConsoleUtil.Write($"Trying: {feeders.JoinString(", ")}   \r".Color(ConsoleColor.Yellow));
-
-                    var chsPerRow = (cluephrase.Length + 7) / 8;
-                    var ccOutput = new List<ConsoleColoredString>();
-
-                    for (var rowUnderTest = 0; rowUnderTest < n; rowUnderTest++)
-                    {
-                        ccOutput.Add($"Row {rowUnderTest + 1}:".Color(ConsoleColor.White));
-
-                        var ssLen = rowUnderTest == n - 1 ? cluephrase.Length - (n - 1) * chsPerRow : chsPerRow;
-                        var cluephraseStart = rowUnderTest * chsPerRow;
-                        foreach (var subseq in Enumerable.Range(0, n).Subsequences(minLength: ssLen, maxLength: ssLen).Select(sseq => sseq.ToArray()).ToArray().Shuffle())
+                        const int maxIndex = 9;
+                        var pow = 1;
+                        var prefPosses = new List<(int i, char ch)>();
+                        for (var i = 0; i < subseq.Length; i++)
                         {
-                            const int maxIndex = 9;
-                            var pow = 1;
-                            var prefPosses = new List<(int i, char ch)>();
-                            for (var i = 0; i < subseq.Length; i++)
-                            {
-                                prefPosses.Add((subseq[i], cluephrase[chsPerRow * rowUnderTest + i]));
-                                pow *= maxIndex;
-                            }
-
-                            var orders = Enumerable.Range(0, pow).ToArray().Shuffle();
-                            foreach (var orderRaw in orders)
-                            {
-                                var order = orderRaw;
-                                var input = new (int value, char ch)[n];
-                                foreach (var (i, ch) in prefPosses)
-                                {
-                                    input[i] = (value: order % maxIndex + 1, ch);
-                                    order /= maxIndex;
-                                }
-
-                                var output = Ut.NewArray(n, x => Enumerable.Range(0, n).Select(j => inv[j + 8 * x] * input[j].value).Sum() % 47);
-                                if (Enumerable.Range(0, n).All(x => input[x].value == 0 || (input[x].value <= prefs[(output[x] + 46) % 47].Length && prefs[(output[x] + 46) % 47][input[x].value - 1] == input[x].ch)))
-                                {
-                                    ccOutput.Add(new ConsoleColoredString($"Input:  {input.Select(tup => tup.value.ToString().PadLeft(2)).JoinString(" ").Color(ConsoleColor.Green)}"));
-                                    ccOutput.Add(new ConsoleColoredString($"Output: {output.Select(i => i.ToString().PadLeft(2)).JoinString(" ").Color(ConsoleColor.Cyan)}"));
-                                    ccOutput.Add(new ConsoleColoredString($"Expect: {input.Select(tup => tup.ch == default ? "/" : tup.ch.ToString()).JoinString(" ").Color(ConsoleColor.Magenta)}"));
-                                    ccOutput.Add("");
-                                    goto next;
-                                }
-                            }
+                            prefPosses.Add((subseq[i], cluephrase[chsPerRow * rowUnderTest + i]));
+                            pow *= maxIndex;
                         }
 
-                        goto busted;
+                        var orders = Enumerable.Range(0, pow).ToArray().Shuffle();
+                        foreach (var orderRaw in orders)
+                        {
+                            var order = orderRaw;
+                            var input = new (int value, char ch)[n];
+                            foreach (var (i, ch) in prefPosses)
+                            {
+                                input[i] = (value: order % maxIndex + 1, ch);
+                                order /= maxIndex;
+                            }
 
-                        next:;
+                            var output = Ut.NewArray(n, x => Enumerable.Range(0, n).Select(j => inv[j + 8 * x] * input[j].value).Sum() % 47);
+                            if (Enumerable.Range(0, n).All(x => input[x].value == 0 || (input[x].value <= prefs[(output[x] + 46) % 47].Length && prefs[(output[x] + 46) % 47][input[x].value - 1] == input[x].ch)))
+                            {
+                                ccOutput.Add(new ConsoleColoredString($"Input:  {input.Select(tup => tup.value.ToString().PadLeft(2)).JoinString(" ").Color(ConsoleColor.Green)}"));
+                                ccOutput.Add(new ConsoleColoredString($"Output: {output.Select(i => i.ToString().PadLeft(2)).JoinString(" ").Color(ConsoleColor.Cyan)}"));
+                                ccOutput.Add(new ConsoleColoredString($"Expect: {input.Select(tup => tup.ch == default ? "/" : tup.ch.ToString()).JoinString(" ").Color(ConsoleColor.Magenta)}"));
+                                ccOutput.Add("");
+                                goto next;
+                            }
+                        }
                     }
 
-                    lock (wordsStartingWith)
-                        ConsoleUtil.WriteLine($"Found: {feeders.JoinString(", ")}        ".Color(ConsoleColor.Green));
-                    //outputMatrix(feederMatrix, 8);
-                    //Console.WriteLine();
-                    //outputMatrix(inverse(feederMatrix, 8), 8);
-                    //Console.WriteLine();
+                    goto busted;
 
-                    //foreach (var cc in ccOutput)
-                    //    ConsoleUtil.WriteLine(cc);
+                    next:;
+                }
 
-                    // We have a row with no match :(
-                    busted:;
-                });
-            }
+                lock (wordsStartingWith)
+                    ConsoleUtil.WriteLine($"Found: {feeders.JoinString(", ")}        ".Color(ConsoleColor.Green));
+                //outputMatrix(feederMatrix, 8);
+                //Console.WriteLine();
+                //outputMatrix(inverse(feederMatrix, 8), 8);
+                //Console.WriteLine();
+
+                //foreach (var cc in ccOutput)
+                //    ConsoleUtil.WriteLine(cc);
+
+                // We have a row with no match :(
+                busted:;
+            });
         }
 
         public static void Test()
