@@ -55,6 +55,7 @@
     <Compile Include="Binairo.cs" />
     <Compile Include="BinairoSudoku.cs" />
     <Compile Include="BombDisposal\GalacticRace.cs" />
+    <Compile Include="BombDisposal\HomeDepot.cs" />
     <Compile Include="BombDisposal\InsideOut.cs" />
     <Compile Include="BombDisposal\SignalLink.cs" />
     <Compile Include="NumberRow.cs" />
