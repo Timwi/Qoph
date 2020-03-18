@@ -7,6 +7,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CsQuery;
+using PuzzleSolvers;
+using RT.TagSoup;
 using RT.Util;
 using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
@@ -312,8 +314,8 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
             Func<int, int, double, double, string> edgeSvg = null,
             Func<int, double, double, string> vertexSvg = null,
             Func<int, int, double> edgeStrokeWidth = null,
-            bool drawFaces = false,
-            Func<int, double, double, string> faceSvg = null)
+            Func<int, double, double, string> faceSvg = null,
+            Func<int, string> faceColor = null)
         {
             // Numbers closer than this are considered equal
             const double closeness = .00001;
@@ -373,8 +375,8 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                 var (fromFaceIx, rotatedPolyhedron) = q.Dequeue();
                 polygons[fromFaceIx] = rotatedPolyhedron[fromFaceIx].Select(pt => p(pt.X, pt.Y)).ToArray();
 
-                if (drawFaces)
-                    svgFaces.Append($@"<path id='outline-{fromFaceIx}' d='M{polygons[fromFaceIx].Select(p => $"{p.X},{p.Y}").JoinString(" ")}z' fill='#def' />");
+                if (faceColor != null)
+                    svgFaces.Append($@"<path id='outline-{fromFaceIx}' d='M{polygons[fromFaceIx].Select(p => $"{p.X},{p.Y}").JoinString(" ")}z' fill='{faceColor(fromFaceIx)}' />");
                 if (faceSvg != null)
                     svgExtras.Append((polygons[fromFaceIx].Aggregate(new PointD(), (p, n) => p + n) / polygons[fromFaceIx].Length).Apply(mid => faceSvg(fromFaceIx, mid.X, mid.Y)));
 
@@ -1345,7 +1347,164 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
             var polyhedron = parse(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Txt\SelfDualIcosioctahedron4.txt");
             File.WriteAllText(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Template.svg",
                 //stroke='white' stroke-width='.05' paint-order='stroke' 
-                generateNet(polyhedron, drawFaces: true, faceSvg: (f, x, y) => $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{f}</text>").svg);
+                generateNet(polyhedron, faceColor: f => "#def", faceSvg: (f, x, y) => $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{f}</text>").svg);
+        }
+
+        public static void Planning()
+        {
+            var p = parse(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Txt\SelfDualIcosioctahedron4.txt");
+
+            Func<int, double, double, string> textTagger((string word, int[] faces, string color)[] data) => (face, x, y) =>
+            {
+                var (word, faces, color) = data.First(tup => tup.faces.Contains(face));
+                return $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{word[faces.IndexOf(face)]}</text>";
+            };
+            Func<int, string> faceColorer((string word, int[] faces, string color)[] data) => face => data.First(tup => tup.faces.Contains(face)).color;
+
+            object makePiece(string puzzleType, string puzzleHint, params (string word, int[] faces, string color)[] data) => new DIV { class_ = "piece" }._(
+                new H1(Enumerable.Range(0, 26).Select(i => (char) ('A' + i)).Select(ch => new string(ch, data.Sum(tup => tup.word.Count(c => c == ch)) - 1)).JoinString()),
+                new H2(puzzleType, new Func<object>(() =>
+                {
+                    var dupFaces = Enumerable.Range(0, p.Faces.Length).Where(face => data.Sum(tup => tup.faces.Count(f => f == face)) != 1).ToArray();
+                    return dupFaces.Length == 0 ? null : $" ({dupFaces.JoinString(", ")})";
+                })),
+                new H3(puzzleHint),
+                new RawTag(generateNet(p, faceSvg: textTagger(data), faceColor: faceColorer(data)).svg)
+            );
+
+            File.WriteAllText(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Planning.html",
+                new HTML(
+                    new HEAD(
+                        new TITLE("Face to Face planning page"),
+                        new META { httpEquiv = "Content-Type", content = "text/html; charset=utf-8" },
+                        new STYLELiteral($@"
+svg {{ width: 8cm; margin: 0 auto; display: block; }}
+h1, h2, h3 {{ text-align: center; }}
+h1 {{ font-size: 20pt; }}
+h2 {{ font-size: 17pt; }}
+h3 {{ font-size: 14pt; }}
+.piece {{ display: inline-block; vertical-align: top; }}")
+                    ),
+                    new BODY(
+                        new DIV { id = "all" }._(
+                            makePiece("Crossword", "GASHLYCRUMB TINIES",
+                                (word: "GASHLYCRUMB", faces: new[] { 25, 11, 8, 26, 7, 6, 27, 9, 10, 24, 5 }, color: "#afa"),
+                                (word: "TINIE", faces: new[] { 16, 17, 3, 21, 22 }, color: "#ff8"),
+                                (word: "DEFJKOPQVWXZ", faces: new[] { 19, 2, 18, 15, 0, 13, 12, 4, 14, 20, 1, 23 }, color: "#fff")),
+                            makePiece("Gashlycrumb Tinies", "CARPET INDEX",
+                                (word: "CARPET", faces: new[] { 1, 15, 16, 10, 20, 18 }, color: "#afa"),
+                                (word: "INDX", faces: new[] { 13, 12, 0, 19 }, color: "#ffa"),
+                                (word: "OLS", faces: new[] { 3, 27, 9 }, color: "#acf"),
+                                (word: "BZHUKVFQMJDWYGF", faces: new[] { 2, 4, 5, 6, 7, 8, 11, 14, 17, 21, 22, 23, 24, 25, 26 }, color: "#fff")),
+                            makePiece("Carpet colors", "BLUE CLUING SUM",
+                                (word: "BLUE", faces: new[] { 25, 11, 8, 26 }, color: "#afa"),
+                                (word: "CUING", faces: new[] { 23, 13, 12, 0, 20 }, color: "#ffa"),
+                                (word: "SM", faces: new[] { 4, 14 }, color: "#acf"),
+                                (word: "ODFHJKAPQRTVWXYZB", faces: new[] { 1, 2, 3, 5, 6, 7, 9, 10, 15, 16, 17, 18, 19, 21, 22, 24, 27 }, color: "#fff")),
+                            makePiece("Edge sums (blue)", "RED CLUE SUM",
+                                (word: "RED", faces: new[] { 2, 0, 24 }, color: "#afa"),
+                                (word: "CLU", faces: new[] { 11, 13, 12 }, color: "#ffa"),
+                                (word: "SM", faces: new[] { 14, 5 }, color: "#acf"),
+                                (word: "ABOIHGJKNFPCTVWXYZQC", faces: new[] { 1, 3, 4, 6, 7, 8, 9, 10, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27 }, color: "#fff")),
+                            makePiece("Vertex sums (red)", "SLITHERLINK",
+                                (word: "SLITHER", faces: new[] { 12, 0, 20, 19, 6, 21, 23 }, color: "#afa"),
+                                (word: "LNK", faces: new[] { 18, 10, 16 }, color: "#ffa"),
+                                (word: "ABCDFGJMVPQUOWXYZD", faces: new[] { 1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 14, 15, 17, 22, 24, 25, 26, 27 }, color: "#fff")),
+                            makePiece("Words", "?",
+                                (word: "LOCKED", faces: new[] { 4, 5, 24, 10, 9, 27 }, color: "#afa"),
+                                (word: "MEANS", faces: new[] { 12, 0, 20, 19, 6 }, color: "#ffa"),
+                                (word: "BAR", faces: new[] { 14, 2, 18 }, color: "#acf"),
+                                (word: "UGHIPJQTFVWXYZ", faces: new[] { 1, 3, 7, 8, 11, 13, 15, 16, 17, 21, 22, 23, 25, 26 }, color: "#fff")),
+                            new DIV { class_ = "piece" }._(new RawTag(generateNet(p, faceSvg: (f, x, y) => $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{f}</text>").svg)),
+                            new DIV { class_ = "piece" }._(new RawTag(generateNet(p, faceSvg: (f, x, y) => $@"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{
+                                new Dictionary<int, string>
+                                {
+                                    [0] = "BREAD"
+                                }.Get(f, f.ToString())
+                            }</text>").svg))
+                        )
+                    )
+                ).ToString()
+            );
+        }
+
+        public static void FindFiveLetterWords()
+        {
+            var rnd = new Random(47);
+            var p = parse(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Face To Face\Txt\SelfDualIcosioctahedron4.txt");
+            var adjs = p.Faces.Select((f, ix) => p.FindAdjacent(ix).ToArray()).ToArray();
+            var allFiveLetterWords = File.ReadLines(@"D:\Daten\Wordlists\English 60000.txt").Where(l => l.Length == 5 && l.All(ch => ch >= 'A' && ch <= 'Z'))
+                .OrderByDescending(w => "ETAOINSRHDLUCMFYWGPBVKXQJZ".IndexOf(w[2]))
+                .ToArray();
+            var puzzle = new Puzzle(p.Faces.Length, 0, allFiveLetterWords.Length - 1,
+                new UniquenessConstraint(Enumerable.Range(0, p.Faces.Length)),
+
+                // middle letters must be A-Z + A + E
+                new LambdaConstraint((takens, grid, ix, minV, maxV) =>
+                {
+                    if (ix == null)
+                        return null;
+                    var letterPlaced = allFiveLetterWords[grid[ix.Value].Value][2];
+                    var isNowTaken = (letterPlaced != 'A' && letterPlaced != 'E') || Enumerable.Range(0, grid.Length).Any(i => i != ix.Value && grid[i] != null && allFiveLetterWords[grid[i].Value][2] == letterPlaced);
+                    if (isNowTaken)
+                        for (var i = 0; i < takens.Length; i++)
+                            for (var v = 0; v < takens[i].Length; v++)
+                                if (allFiveLetterWords[v][2] == letterPlaced)
+                                    takens[i][v] = true;
+                    return null;
+                }),
+
+                // Words must consist of neighbouring middle letters
+                new LambdaConstraint((takens, grid, ix, minV, maxV) =>
+                {
+                    if (ix == null)
+                        return null;
+                    foreach (var face in adjs[ix.Value].Concat(ix.Value))
+                    {
+                        if (grid[face] == null)
+                        {
+                            for (var v = 0; v < takens[face].Length; v++)
+                                if (!takens[face][v])
+                                {
+                                    var word = allFiveLetterWords[v + minV].ToList();
+                                    word.RemoveAt(2);
+                                    foreach (var adj in adjs[face])
+                                        if (grid[adj] != null)
+                                            if (!word.Remove(allFiveLetterWords[grid[adj].Value][2]))
+                                            {
+                                                takens[face][v] = true;
+                                                goto doneHere;
+                                            }
+                                    doneHere:;
+                                }
+                        }
+                        else
+                        {
+                            var word = allFiveLetterWords[grid[face].Value].ToList();
+                            word.RemoveAt(2);
+                            foreach (var adj in adjs[face])
+                                if (grid[adj] != null)
+                                    if (!word.Remove(allFiveLetterWords[grid[adj].Value][2]))
+                                    {
+                                        File.WriteAllText(@"D:\temp\temp.svg",
+                                            generateNet(p, faceColor: f => f == ix ? "#ace" : "#fff", faceSvg: (f, x, y) => $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{(grid[f] == null ? "?" : allFiveLetterWords[grid[f].Value])}</text>").svg);
+                                        Debugger.Break();
+                                    }
+                            foreach (var adj in adjs[face])
+                                if (grid[adj] == null)
+                                    for (var v = 0; v < takens[adj].Length; v++)
+                                        if (!takens[adj][v] && !word.Contains(allFiveLetterWords[v + minV][2]))
+                                            takens[adj][v] = true;
+                        }
+                    }
+                    return null;
+                }));
+
+            foreach (var solution in puzzle.Solve())
+            {
+                Console.WriteLine(solution.Select(s => allFiveLetterWords[s]).JoinString(", "));
+                Console.ReadLine();
+            }
         }
     }
 }

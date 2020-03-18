@@ -8,6 +8,8 @@ Each room contains:
     • A carpet in a specific color in the shape of a Morse digit
     • Some doors are locked
 
+    • Pigpen with indirect/self-referential clues?
+
 Answers are:
     • (AE) Edge clues give numbers from 1–26 with two duplicates
     • (BU) Two duplicated letters obtained from the Gashlycrumb Tinies
@@ -16,3 +18,11 @@ Answers are:
     • (EI) Crossword with its offsets gives letters A–Z with two duplicates
     • (FD) Slitherlink equations are: a mod 5, floor(a/5), b mod 5, floor(b/5), giving two answers
 
+
+    Letters     Subpuzzle               Clue
+    EI          Crossword               GASHLYCRUMB TINIES
+    FD          Gashlycrumb Tinies      INDEX CARPET COLS
+    BU          Carpet colors           BLUE CLUING SUM
+    CC          Edge sums (blue)        RED CLUE SUM
+    DL          Vertex sums (red)       ?
+    AE          ?                       LOCKED MEANS BAR
