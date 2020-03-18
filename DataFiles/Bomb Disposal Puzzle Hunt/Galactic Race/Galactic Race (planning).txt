@@ -1,0 +1,13 @@
+SO (Humans) Aquino + Vash
+RA (Ferengi) Brunt + Quark
+NO (Romulans) Cretak + Koval
+RM (Cardassians) Dukat + Thrax
+AZ (Trill) Ezri + Renhol
+UR (Mintakans) Fento + Nuria
+
+SO  AQUINO  PE  VASH    TE
+RA  BRUNT   YC  QUARK   TE
+NO  CRETAK  YG  KOVAL   YC
+RM  DUKAT   YG  THRAX   FJ
+AZ  EZRI    FJ  RENHOL  QD
+UR  FENTO   PE  NURIA   QD
