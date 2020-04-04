@@ -43,7 +43,7 @@ namespace PuzzleStuff
             if (args.Length == 2 && args[0] == "--post-build-check")
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
-            BombDisposal.FaceToFace.GenerateTemplate();
+            BombDisposal.FortySeven.Do();
 
             Console.WriteLine("Done.");
             Console.ReadLine();

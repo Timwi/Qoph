@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using RT.Util;
 using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
@@ -161,7 +163,7 @@ namespace PuzzleStuff.BombDisposal
             }
         }
 
-        public static void ConstructMatrix_V2()
+        public static void Do()
         {
             const string cluephrase = "SATOSHINAKAMOTOCURRENCY";
             const int n = 8;
@@ -178,70 +180,78 @@ namespace PuzzleStuff.BombDisposal
                     if ((row * col) % 47 == 1)
                         mod47Inverses[row] = col;
 
-            // Matrix multiplication
-            int[] mult(int[] m1, int[] m2, int size) => Ut.NewArray(size * size, i => Enumerable.Range(0, size).Select(x => ((m1[x + size * (i / size)] * m2[(i % size) + size * x]) % 47 + 47) % 47).Sum());
-            int[] mult2(int size, params int[][] ms) => ms.Aggregate((prev, next) => mult(prev, next, size));
-            int[] muls(int scalar, int[] m) => m.Select(i => i * scalar).ToArray();
-            static int[] add(int[] m1, int[] m2) => m1.Zip(m2, (a, b) => a + b).ToArray();
-            static int[] mod47(int[] m) => m.Select(i => (i % 47 + 47) % 47).ToArray();
-
-            // Find the inverse matrix by repeatedly subdividing
-            int[] inverse(int[] matrix, int size)
-            {
-                if (size == 2)
-                {
-                    var (a, b, c, d) = (matrix[0], matrix[1], matrix[2], matrix[3]);
-                    var det = ((a * d - b * c) % 47 + 47) % 47;
-                    if (det == 0)
-                        throw new InvalidOperationException();
-                    return new[] { d, -b, -c, a }.Select(i => ((i * mod47Inverses[det]) % 47 + 47) % 47).ToArray();
-                }
-                else
-                {
-                    var ns = size / 2;
-                    var a = Ut.NewArray(ns * ns, i => matrix[i % ns + (i / ns) * size]);
-                    var b = Ut.NewArray(ns * ns, i => matrix[i % ns + ns + (i / ns) * size]);
-                    var c = Ut.NewArray(ns * ns, i => matrix[i % ns + ((i / ns) + ns) * size]);
-                    var d = Ut.NewArray(ns * ns, i => matrix[i % ns + ns + ((i / ns) + ns) * size]);
-
-                    var aI = inverse(a, ns);
-                    var dI = inverse(d, ns);
-
-                    var mD = mod47(inverse(add(d, muls(-1, mult2(ns, c, aI, b))), ns));
-                    var mA = mod47(add(aI, mult2(ns, aI, b, mD, c, aI)));
-                    var mB = mod47(muls(-1, mult2(ns, aI, b, mD)));
-                    var mC = mod47(muls(-1, mult2(ns, mD, c, aI)));
-
-                    var result = Ut.NewArray(size * size, i => ((((i % size) < ns ? (i / size) < ns ? mA : mC : (i / size) < ns ? mB : mD)[i % ns + ns * ((i / size) % ns)]) % 47 + 47) % 47);
-                    return result;
-                }
-            }
-
             var wordRnd = new Random();
             var wordsStartingWith = words.Where(w => w.Length == 8 && w.All(ch => ch >= 'A' && ch <= 'Z')).GroupBy(w => w[0]).ToDictionary(gr => gr.Key, gr => gr.Distinct().Order().ToArray());
+
+            //var debug_words = Ut.NewArray("AMPHIBIA", "BETATEST", "CAREBEAR", "DRUMHEAD", "ELAURIAN", "FEELINGS", "GANYMEDE", "HIROLLER");
+            //var debug_matrix = Ut.NewArray(64, i => debug_words[i / 8][i % 8] - 'A' + 1);
+            //var debug_inverse = newInverse(debug_matrix, 8);
+            //Console.WriteLine(debug_inverse.Split(8).Select(row => row.Select(val => $"{val,4}").JoinString("")).JoinString("\n"));
 
             var allTuples = (
                 from aWord in new[] { "AMPHIBIA" }//wordsStartingWith['A'].ToArray().Shuffle().Take(100)
                 from bWord in new[] { "BETATEST" }   //wordsStartingWith['B']
-                from cWord in new[] { "CHARMING" }   //wordsStartingWith['C']
-                from dWord in wordsStartingWith['D'].ToArray().Shuffle().Take(100)
-                from eWord in new[] { "ELAURIAN" }  //wordsStartingWith['E']
-                from fWord in new[] { "FEELINGS" }// wordsStartingWith['F'].ToArray().Shuffle().Take(100)
+                from cWord in new[] { "CAREBEAR" }   //wordsStartingWith['C']
+                from dWord in wordsStartingWith['D'].ToArray().Shuffle()
+                from eWord in new[] { "ELEPHANT" }  //wordsStartingWith['E'].ToArray().Shuffle().Take(100)
+                from fWord in new[] { "FRONTIER" }  //wordsStartingWith['F'].ToArray().Shuffle().Take(100)
                 from gWord in new[] { "GANYMEDE" }  //wordsStartingWith['G']
-                from hWord in wordsStartingWith['H'].ToArray().Shuffle().Take(100)
+                from hWord in new[] { "HIROLLER" }  //wordsStartingWith['H'].ToArray().Shuffle().Take(100)
                 select new[] { aWord, bWord, cWord, dWord, eWord, fWord, gWord, hWord }).ToArray();
 
             Console.WriteLine(allTuples.Length);
             allTuples.Shuffle();
 
-            Enumerable.Range(0, allTuples.Length).ParallelForEach(4, feedersIx =>
+            int[] matrixInverse(int[] matrix, int size)
+            {
+                var w = 2 * size;   // width of a row in the augmented matrix
+                var augmented = Ut.NewArray(w * size, ix => ix % w < size ? matrix[ix % w + ix / w * size] : ix % w - size == ix / w ? 1 : 0);
+
+                // Since we’re going kind of diagonal, ‘rc’ may refer to a row or a column, but we’re really processing one column at a time.
+                // Each iteration of this loop turns column ‘rc’ into the corresponding column of an identity matrix.
+                for (var rc = 0; rc < size; rc++)
+                {
+                    // Turn matrix[rc, rc] into 1 by multiplying the row by its inverse.
+                    // If this coefficient is currently 0, find a later row that we can swap this one with.
+                    // If there is no other such row, the matrix is not invertible.
+                    if (augmented[rc + w * rc] == 0)
+                    {
+                        var otherRowIx = Enumerable.Range(rc + 1, size - 1 - rc).FirstOrDefault(r => augmented[rc + w * r] != 0, -1);
+                        if (otherRowIx == -1)
+                            throw new InvalidOperationException(@"This matrix is not invertible.");
+                        var otherRow = augmented.Subarray(otherRowIx * w, w);
+                        Array.Copy(augmented, rc * w, augmented, otherRowIx * w, w);
+                        Array.Copy(otherRow, 0, augmented, rc * w, w);
+                    }
+
+                    var inv = mod47Inverses[augmented[rc + w * rc]];
+                    for (var i = 0; i < w; i++) // could start at ‘rc’ for efficiency, but this provides a check that the algorithm is correct
+                        augmented[i + w * rc] = (augmented[i + w * rc] * inv) % 47;
+
+                    for (var row = 0; row < size; row++)
+                    {
+                        if (row == rc)
+                            continue;
+
+                        // Need to turn this index into 0 by subtracting a multiple of row ‘rc’ (where the relevant index is now 1)
+                        var mult = augmented[rc + w * row];
+                        for (var i = 0; i < w; i++)
+                            augmented[i + w * row] = ((augmented[i + w * row] - mult * augmented[i + w * rc]) % 47 + 47) % 47;
+                    }
+                }
+
+                return Ut.NewArray(size * size, ix => augmented[size + (ix % size) + w * (ix / size)]);
+            }
+
+            Enumerable.Range(0, allTuples.Length).ParallelForEach(2, feedersIx =>
+            //foreach (var feedersIx in Enumerable.Range(0, allTuples.Length))
             {
                 var feeders = allTuples[feedersIx];
                 var feederMatrix = Ut.NewArray(64, i => feeders[i / 8][i % 8] - 'A' + 1);
                 int[] inv;
                 try
                 {
-                    inv = inverse(feederMatrix, 8);
+                    inv = matrixInverse(feederMatrix, 8);
                 }
                 catch (InvalidOperationException)
                 {
@@ -252,12 +262,12 @@ namespace PuzzleStuff.BombDisposal
                     ConsoleUtil.Write($"Trying: {feeders.JoinString(", ")} ({feedersIx})   \r".Color(ConsoleColor.Yellow));
 
                 var chsPerRow = (cluephrase.Length + 7) / 8;
-                var ccOutput = new List<ConsoleColoredString>();
+                var ccOutput = new TextTable { ColumnSpacing = 2, RowSpacing = 1 };
+                var clipboardText = new StringBuilder();
+                var outputNumbers = new int[n][];
 
                 for (var rowUnderTest = 0; rowUnderTest < n; rowUnderTest++)
                 {
-                    ccOutput.Add($"Row {rowUnderTest + 1}:".Color(ConsoleColor.White));
-
                     var ssLen = rowUnderTest == n - 1 ? cluephrase.Length - (n - 1) * chsPerRow : chsPerRow;
                     var cluephraseStart = rowUnderTest * chsPerRow;
                     foreach (var subseq in Enumerable.Range(0, n).Subsequences(minLength: ssLen, maxLength: ssLen).Select(sseq => sseq.ToArray()).ToArray().Shuffle())
@@ -282,13 +292,14 @@ namespace PuzzleStuff.BombDisposal
                                 order /= maxIndex;
                             }
 
-                            var output = Ut.NewArray(n, x => Enumerable.Range(0, n).Select(j => inv[j + 8 * x] * input[j].value).Sum() % 47);
-                            if (Enumerable.Range(0, n).All(x => input[x].value == 0 || (input[x].value <= prefs[(output[x] + 46) % 47].Length && prefs[(output[x] + 46) % 47][input[x].value - 1] == input[x].ch)))
+                            var output = Ut.NewArray(n, x => Enumerable.Range(0, n).Select(j => inv[8 * j + x] * input[j].value).Sum() % 47);
+                            if (Enumerable.Range(0, n).All(x => output[x] != 0 && (input[x].value == 0 || (input[x].value <= prefs[(output[x] + 46) % 47].Length && prefs[(output[x] + 46) % 47][input[x].value - 1] == input[x].ch))))
                             {
-                                ccOutput.Add(new ConsoleColoredString($"Input:  {input.Select(tup => tup.value.ToString().PadLeft(2)).JoinString(" ").Color(ConsoleColor.Green)}"));
-                                ccOutput.Add(new ConsoleColoredString($"Output: {output.Select(i => i.ToString().PadLeft(2)).JoinString(" ").Color(ConsoleColor.Cyan)}"));
-                                ccOutput.Add(new ConsoleColoredString($"Expect: {input.Select(tup => tup.ch == default ? "/" : tup.ch.ToString()).JoinString(" ").Color(ConsoleColor.Magenta)}"));
-                                ccOutput.Add("");
+                                for (var x = 0; x < n; x++)
+                                    ccOutput.SetCell(x, rowUnderTest, "{0/Green}\n{1/Cyan}\n{2/Magenta}\n{3/Yellow}".Color(null)
+                                        .Fmt(output[x], prefs[(output[x] + 46) % 47], input[x].value, input[x].value == 0 ? "" : prefs[(output[x] + 46) % 47][input[x].value - 1].ToString()));
+                                clipboardText.AppendLine($"{output.JoinString("\t")}\t\t{output.Select(pIx => prefs[pIx - 1]).JoinString("\t")}");
+                                outputNumbers[rowUnderTest] = output;
                                 goto next;
                             }
                         }
@@ -300,7 +311,15 @@ namespace PuzzleStuff.BombDisposal
                 }
 
                 lock (wordsStartingWith)
+                {
                     ConsoleUtil.WriteLine($"Found: {feeders.JoinString(", ")}        ".Color(ConsoleColor.Green));
+                    //for (var i = 0; i < n; i++)
+                    //    Console.WriteLine(outputNumbers[i].JoinString(" "));
+                    //Clipboard.SetText(clipboardText.ToString());
+                    //ccOutput.WriteToConsole();
+                    //Console.WriteLine();
+                    //Debugger.Break();
+                }
                 //outputMatrix(feederMatrix, 8);
                 //Console.WriteLine();
                 //outputMatrix(inverse(feederMatrix, 8), 8);
