@@ -1,0 +1,39 @@
+SP (Ba'ku) Anij + Sojef
+AC (Bajorans) Bareil + Ro
+ET (Romulans) Cretak + Koval
+HE (Cardassians) Dukat + Thrax
+FI (Vorta) Eris + Weyoun
+NA (Mintakans) Fento + Nuria
+LB (Klingons) Grilka + Worf
+LA (Humans) Hogan + Vash
+NK (Ferengi) Ishka + Quark
+
+SP      ANIJ     SOJEF
+AC      BAREIL   RO
+ET      CRETAK   KOVAL
+HE      DUKAT    THRAX
+FI      ERIS     WEYOUN
+NA      FENTO    NURIA
+LB      GRILKA   WORF
+LA      HOGAN    VASH
+NK      ISHKA    QUARK
+
+
+
+
+(OLD VERSION)
+SO (Humans) Aquino + Vash
+RA (Ferengi) Brunt + Quark
+NO (Romulans) Cretak + Koval
+RM (Cardassians) Dukat + Thrax
+AZ (Trill) Ezri + Renhol
+UR (Mintakans) Fento + Nuria
+
+SO  AQUINO  PE  VASH    TE
+RA  BRUNT   YC  QUARK   TE
+NO  CRETAK  YG  KOVAL   YC
+RM  DUKAT   YG  THRAX   FJ
+AZ  EZRI    FJ  RENHOL  QD
+UR  FENTO   PE  NURIA   QD
+
+
