@@ -186,7 +186,7 @@ James Maynard     │ The Badly Behaved Prime
                 .Select(arr => (guest: arr[0], title: arr[1]))
                 .ToArray();
 
-            static IEnumerable<(string guest, string title, int index)[]> recurse((string guest, string title)[] data, IEnumerable<(string guest, string title, int index)> sofar, string solutionRest)
+            IEnumerable<(string guest, string title, int index)[]> recurse((string guest, string title)[] dt, IEnumerable<(string guest, string title, int index)> sofar, string solutionRest)
             {
                 if (solutionRest.Length == 0)
                 {
@@ -194,16 +194,16 @@ James Maynard     │ The Badly Behaved Prime
                     yield break;
                 }
 
-                for (var i = 0; i < data.Length; i++)
+                for (var i = 0; i < dt.Length; i++)
                 {
-                    var (guest, title) = data[i];
+                    var (guest, title) = dt[i];
                     guest = guest.ToUpperInvariant().Where(c => c != ' ').JoinString();
 
                     for (var p = 0; p < guest.Length; p++)
                     {
                         if (guest[p] != solutionRest[0] || sofar.Any(tup => tup.index == p))
                             continue;
-                        foreach (var solution in recurse(data.Remove(i, 1), sofar.Append((guest, title, p)), solutionRest.Substring(1)))
+                        foreach (var solution in recurse(dt.Remove(i, 1), sofar.Append((guest, title, p)), solutionRest.Substring(1)))
                             yield return solution;
                     }
                 }
@@ -343,7 +343,7 @@ James Maynard     │ The Badly Behaved Prime
             for (var i = 0; i < data.Length; i++)
             {
                 var (clue, clueAnswer, intendedAnswer, mangling) = data[i];
-                string mangle(string str) => str.Split(' ').Select((s, i) => mangling(s, i)).JoinString();
+                string mangle(string str) => str.Split(' ').Select((s, j) => mangling(s, j)).JoinString();
 
                 string mangledClue = null;
                 try

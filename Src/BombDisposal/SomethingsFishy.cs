@@ -93,7 +93,7 @@ namespace PuzzleStuff.BombDisposal
                 bitmap.UnlockBits(data);
                 var rect = GraphicsUtil.FitIntoMaintainAspectRatio(bitmap.Size, new Rectangle(0, 0, 200, 150));
                 var s = bitmap.Width * bitmap.Height;
-                return $"<td style='background: #{(int) (r / s):X2}{(int) (g / s):X2}{(int) (b / s):X2}; border: 5px solid {(filename.EndsWith("1") ? "#4499ff" : "transparent")}'><img width='{rect.Width}' height='{rect.Height}' title='{filename}' src='data:image/jpg;base64,{Convert.ToBase64String(byteData)}' /></td>";
+                return $"<td style='background: #{(int) (r / s):X2}{(int) (g / s):X2}{(int) (b / s):X2}; border: 5px solid {(filename.EndsWith("1") && !filename.StartsWith("R") ? "#4499ff" : "transparent")}'><img width='{rect.Width}' height='{rect.Height}' title='{filename}' src='data:image/jpg;base64,{Convert.ToBase64String(byteData)}' /></td>";
             })).Split(w).Select(row => $"<tr>{row.JoinString()}</tr>").JoinString())}
     </table>
 </body>

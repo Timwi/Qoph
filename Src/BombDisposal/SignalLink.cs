@@ -533,9 +533,9 @@ namespace PuzzleStuff.BombDisposal
                         if (clues[x + w * y] != null)
                         {
                             var surroundingIxs = new[] { x + w * y, x + w * (y + 1), vs + x + (w + 1) * y, vs + x + 1 + (w + 1) * y };
-                            var trues = surroundingIxs.Count(ix => sofar[ix] == true);
-                            var falses = surroundingIxs.Count(ix => sofar[ix] == false);
-                            var nulls = surroundingIxs.Count(ix => sofar[ix] == null);
+                            var trues = surroundingIxs.Count(i => sofar[i] == true);
+                            var falses = surroundingIxs.Count(i => sofar[i] == false);
+                            var nulls = surroundingIxs.Count(i => sofar[i] == null);
                             var clue = clues[x + w * y].Value;
                             if (trues > clue || falses > 4 - clue)
                                 yield break;    // Found a contradiction between the loose-end deduction and a slither clue
