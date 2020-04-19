@@ -87,6 +87,7 @@
     <Compile Include="PastHunts\MUMS_2019.cs" />
     <Compile Include="PastHunts\PuzzleBoat.cs" />
     <Compile Include="Pt.cs" />
+    <Compile Include="StatueParkSolver.cs" />
     <Compile Include="TapCode.cs" />
     <Compile Include="MorseCode.cs" />
     <Compile Include="Program.cs" />
