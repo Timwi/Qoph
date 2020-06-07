@@ -53,7 +53,6 @@ namespace PuzzleStuff.BombDisposal
                             }
             }
 
-            var minNumAdj = int.MaxValue;
             var result = recurse(new string[w * h], 0)
                 // no adjacent blank spaces
                 .Where(arr => !Enumerable.Range(0, w * h).Any(i => (arr[i] == null && (i % w < w - 1) && arr[i + 1] == null) || (arr[i] == null && (i / w < h - 1) && arr[i + w] == null)))

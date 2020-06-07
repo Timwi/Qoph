@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using RT.Util.ExtensionMethods;
@@ -17,7 +16,6 @@ namespace PuzzleStuff.BombDisposal
                 .ToArray();
 
             string letter2braille(char letter) => braille.First(b => b.letter == letter).dots;
-            char braille2letter(string dots) => braille.First(b => b.dots == dots).letter;
             bool[] bitmap(string str)
             {
                 if (str.Length != 3)
