@@ -7,7 +7,9 @@ Each room contains:
     • A table with an item on it that hints at a Gashlycrumb Tiny
     • A carpet in a specific color in the shape of a Morse digit
     • Some doors are locked
+    • Each room has an “enter” message
 
+Unused ideas:
     • Pigpen with indirect/self-referential clues?
 
 Answers are:
@@ -16,7 +18,7 @@ Answers are:
     • (CC) Two duplicated letters obtained by indexing into the carpet’s color
     • (DL) Vertex clues give numbers from 1–26 with two duplicates
     • (EI) Crossword with its offsets gives letters A–Z with two duplicates
-    • (FD) Slitherlink equations are: a mod 5, floor(a/5), b mod 5, floor(b/5), giving two answers
+    • (FD) First letters of the “enter” message give two duplicates
 
 
     Letters     Subpuzzle               Clue
