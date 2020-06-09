@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using PuzzleSolvers;
 using RT.Util;
 using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
+using RT.Util.Text;
 
 namespace PuzzleStuff
 {
@@ -137,50 +139,103 @@ namespace PuzzleStuff
             }
         }
 
+        struct ValueCounter
+        {
+            public int Min;
+            public int Max;
+            public int Total;
+            public void Count(int value)
+            {
+                if (value < Min) Min = value;
+                if (value > Max) Max = value;
+                Total += value;
+            }
+
+            public void AddToTable(TextTable tt, int row, string label, int num)
+            {
+                tt.SetCell(0, row, label);
+                tt.SetCell(1, row, Min.ToString());
+                tt.SetCell(3, row, $"{Total / (double) num:0.#}");
+                tt.SetCell(2, row, Max.ToString());
+            }
+        }
+
+        struct DoubleValueCounter
+        {
+            public double Min;
+            public double Max;
+            public double Total;
+            public void Count(double value)
+            {
+                if (value < Min) Min = value;
+                if (value > Max) Max = value;
+                Total += value;
+            }
+
+            public void AddToTable(TextTable tt, int row, string label, int num)
+            {
+                tt.SetCell(0, row, label);
+                tt.SetCell(1, row, $"{Min:0.#}");
+                tt.SetCell(3, row, $"{Total / num:0.#}");
+                tt.SetCell(2, row, $"{Max:0.#}");
+            }
+        }
+
         public static void Do()
         {
             const int min = 1;  // inclusive
             const int max = 27; // exclusive
+            const int totalSeeds = 500;
 
             var words = File.ReadAllLines(@"D:\Daten\Wordlists\English 60000.txt").Where(w => w.Length == 7 && w.All(ch => ch >= 'A' && ch <= 'Z')).ToArray();
-            var dic = new Dictionary<char, int>();
-            TimeSpan minTime = TimeSpan.MaxValue, maxTime = TimeSpan.MinValue, totalTime = TimeSpan.Zero;
+            var dic = new Dictionary<string, int>();
+            var timeCount = new DoubleValueCounter();
+            var constraintsCount = new ValueCounter();
+            var attemptsCount = new ValueCounter();
 
-            for (var seed = 1; seed <= 100; seed++)
+            var privilegedGroups = new[] { "# < ▲ < #", "#¬|", "< #", "> #", "¬#", "¬largest", "¬prime", "¬smallest", "¬square", "¬|concat", "< ▲", "even", "odd", "prime" };
+
+            Enumerable.Range(1, totalSeeds).ParallelForEach(seed =>
             {
-                Console.WriteLine($"Seed: {seed}");
                 var startTime = DateTime.UtcNow;
                 var rnd = new Random(seed);
-                //var solution = Enumerable.Range(min, max - min).ToArray().Shuffle(rnd).Take(n).ToArray();
                 var solution = words.PickRandom(rnd).Select(ch => ch - 'A' + 1).ToArray();
-                Console.WriteLine(solution.Select(ch => (char) ('A' + ch - 1)).JoinString());
                 var n = solution.Length;
+                var numAttempts = 0;
                 tryAgain:
-                var constraints = new List<(Constraint constraint, string name)>();
+                numAttempts++;
+                var allConstraints = new List<(Constraint constraint, string group, string name)>();
 
                 Puzzle makePuzzle(IEnumerable<Constraint> cs) => new Puzzle(n, min, max - 1, cs);
 
                 static Constraint differenceConstraint(int cell1, int cell2, int diff) => new TwoCellLambdaConstraint(cell1, cell2, (a, b) => Math.Abs(a - b) == diff);
                 static Constraint quotientConstraint(int cell1, int cell2, int quotient) => new TwoCellLambdaConstraint(cell1, cell2, (a, b) => a * quotient == b || b * quotient == a);
-                static Constraint moduloConstraint(int cell1, int cell2, int modulo) => new TwoCellLambdaConstraint(cell1, cell2, (a, b) => a % modulo == b % modulo);
+                static Constraint moduloDiffConstraint(int cell1, int cell2, int modulo) => new TwoCellLambdaConstraint(cell1, cell2, (a, b) => a % modulo == b % modulo);
+                static Constraint moduloConstraint(int cell1, int cell2, int modulo) => new TwoCellLambdaConstraint(cell1, cell2, (a, b) => b != 0 && a % b == modulo);
 
                 // Relations between two numbers (symmetric)
                 for (var i = 0; i < n; i++)
-                    for (var j = i + 1; j < n; j++)
-                    {
-                        for (var m = 2; m < max / 2; m++)
-                            if (solution[i] % m == solution[j] % m)
-                                constraints.Add((moduloConstraint(i, j, m), $"A: {(char) (i + 'A')} is a multiple of {m} away from {(char) (j + 'A')}."));
+                    for (var j = 0; j < n; j++)
+                        if (j != i)
+                        {
+                            if (j > i)
+                            {
+                                for (var m = 2; m < max / 2; m++)
+                                    if (solution[i] % m == solution[j] % m)
+                                        allConstraints.Add((moduloDiffConstraint(i, j, m), "same %", $"{(char) (i + 'A')} is a multiple of {m} away from {(char) (j + 'A')}."));
 
-                        constraints.Add((new SumConstraint(solution[i] + solution[j], new[] { i, j }), $"B: The sum of {(char) (i + 'A')} and {(char) (j + 'A')} is {solution[i] + solution[j]}."));
-                        constraints.Add((new ProductConstraint(solution[i] * solution[j], new[] { i, j }), $"C: The product of {(char) (i + 'A')} and {(char) (j + 'A')} is {solution[i] * solution[j]}."));
-                        if (Math.Abs(solution[i] - solution[j]) < 6)
-                            constraints.Add((differenceConstraint(i, j, Math.Abs(solution[i] - solution[j])), $"D: The absolute difference of {(char) (i + 'A')} and {(char) (j + 'A')} is {Math.Abs(solution[i] - solution[j])}."));
-                        if (solution[j] != 0 && solution[i] % solution[j] == 0 && solution[i] / solution[j] < 4)
-                            constraints.Add((quotientConstraint(i, j, solution[i] / solution[j]), $"E: Of {(char) (i + 'A')} and {(char) (j + 'A')}, one is {solution[i] / solution[j]} times the other."));
-                        if (solution[i] != 0 && solution[j] % solution[i] == 0 && solution[j] / solution[i] < 4)
-                            constraints.Add((quotientConstraint(i, j, solution[j] / solution[i]), $"E: Of {(char) (i + 'A')} and {(char) (j + 'A')}, one is {solution[j] / solution[i]} times the other."));
-                    }
+                                allConstraints.Add((new SumConstraint(solution[i] + solution[j], new[] { i, j }), "+ #", $"The sum of {(char) (i + 'A')} and {(char) (j + 'A')} is {solution[i] + solution[j]}."));
+                                allConstraints.Add((new ProductConstraint(solution[i] * solution[j], new[] { i, j }), "× #", $"The product of {(char) (i + 'A')} and {(char) (j + 'A')} is {solution[i] * solution[j]}."));
+                                if (Math.Abs(solution[i] - solution[j]) < 6)
+                                    allConstraints.Add((differenceConstraint(i, j, Math.Abs(solution[i] - solution[j])), "− #", $"The absolute difference of {(char) (i + 'A')} and {(char) (j + 'A')} is {Math.Abs(solution[i] - solution[j])}."));
+                                if (solution[j] != 0 && solution[i] % solution[j] == 0 && solution[i] / solution[j] < 4)
+                                    allConstraints.Add((quotientConstraint(i, j, solution[i] / solution[j]), "÷ #", $"Of {(char) (i + 'A')} and {(char) (j + 'A')}, one is {solution[i] / solution[j]} times the other."));
+                                if (solution[i] != 0 && solution[j] % solution[i] == 0 && solution[j] / solution[i] < 4)
+                                    allConstraints.Add((quotientConstraint(i, j, solution[j] / solution[i]), "÷ #", $"Of {(char) (i + 'A')} and {(char) (j + 'A')}, one is {solution[j] / solution[i]} times the other."));
+                            }
+                            if (solution[j] != 0)
+                                allConstraints.Add((moduloConstraint(i, j, solution[i] % solution[j]), "% #", $"{(char) (i + 'A')} modulo {(char) (j + 'A')} is {solution[i] % solution[j]}."));
+                        }
 
                 // Relations between two numbers (asymmetric)
                 for (var i = 0; i < n; i++)
@@ -190,27 +245,30 @@ namespace PuzzleStuff
                             continue;
 
                         if (solution[i] < solution[j])
-                            constraints.Add((new TwoCellLambdaConstraint(i, j, (a, b) => a < b), $"F: {(char) (i + 'A')} is less than {(char) (j + 'A')}."));
+                            allConstraints.Add((new TwoCellLambdaConstraint(i, j, (a, b) => a < b), "< ▲", $"{(char) (i + 'A')} is less than {(char) (j + 'A')}."));
 
                         var concat = int.Parse($"{solution[i]}{solution[j]}");
                         foreach (var m in new[] { 3, 4, 6, 7, 8, 9, 11 })   // beware lambdas
                             if (concat % m == 0)
-                                constraints.Add((new TwoCellLambdaConstraint(i, j, (a, b) => int.Parse($"{a}{b}") % m == 0), $"G: The concatenation of {(char) (i + 'A')}{(char) (j + 'A')} is divisible by {m}."));
-                        //else
-                        //    constraints.Add((new TwoCellLambdaConstraint(i, j, (a, b) => int.Parse($"{a}{b}") % m != 0), $"H: The concatenation of {(char) (i + 'A')}{(char) (j + 'A')} is not divisible by {m}."));
+                                allConstraints.Add((new TwoCellLambdaConstraint(i, j, (a, b) => int.Parse($"{a}{b}") % m == 0), "|concat", $"The concatenation of {(char) (i + 'A')}{(char) (j + 'A')} is divisible by {m}."));
+                            else
+                                allConstraints.Add((new TwoCellLambdaConstraint(i, j, (a, b) => int.Parse($"{a}{b}") % m != 0), "¬|concat", $"The concatenation of {(char) (i + 'A')}{(char) (j + 'A')} is not divisible by {m}."));
                     }
 
                 // Relations between three numbers
                 for (var i = 0; i < n; i++)
-                    for (var j = i + 1; j < n; j++)
-                        for (var k = 0; k < n; k++)
-                            if (k != i && k != j)
-                            {
-                                if (solution[i] + solution[j] == solution[k])
-                                    constraints.Add((new ThreeCellLambdaConstraint(i, j, k, (a, b, c) => a + b == c), $"I: {(char) (i + 'A')} + {(char) (j + 'A')} = {(char) (k + 'A')}"));
-                                if (solution[i] * solution[j] == solution[k])
-                                    constraints.Add((new ThreeCellLambdaConstraint(i, j, k, (a, b, c) => a * b == c), $"J: {(char) (i + 'A')} × {(char) (j + 'A')} = {(char) (k + 'A')}"));
-                            }
+                    for (var j = 0; j < n; j++)
+                        if (j != i)
+                            for (var k = 0; k < n; k++)
+                                if (k != i && k != j)
+                                {
+                                    if (j > i && solution[i] + solution[j] == solution[k])
+                                        allConstraints.Add((new ThreeCellLambdaConstraint(i, j, k, (a, b, c) => a + b == c), "sum ▲", $"{(char) (i + 'A')} + {(char) (j + 'A')} = {(char) (k + 'A')}"));
+                                    if (j > i && solution[i] * solution[j] == solution[k])
+                                        allConstraints.Add((new ThreeCellLambdaConstraint(i, j, k, (a, b, c) => a * b == c), "product ▲", $"{(char) (i + 'A')} × {(char) (j + 'A')} = {(char) (k + 'A')}"));
+                                    if (solution[j] != 0 && solution[i] % solution[j] == solution[k])
+                                        allConstraints.Add((new ThreeCellLambdaConstraint(i, j, k, (a, b, c) => a % b == c), "mod ▲", $"{(char) (i + 'A')} modulo {(char) (j + 'A')} = {(char) (k + 'A')}"));
+                                }
 
                 var minVal = solution.Min();
                 var maxVal = solution.Max();
@@ -220,116 +278,163 @@ namespace PuzzleStuff
                 {
                     foreach (var v in Enumerable.Range(min, max - min)) // don’t use ‘for’ loop because the variable is captured by lambdas
                         if (solution[i] < v - 1)
-                            constraints.Add((new OneCellLambdaConstraint(i, a => a < v), $"K: {(char) (i + 'A')} is less than {v}."));
+                            allConstraints.Add((new OneCellLambdaConstraint(i, a => a < v), "< #", $"{(char) (i + 'A')} is less than {v}."));
                         else if (solution[i] > v + 1)
-                            constraints.Add((new OneCellLambdaConstraint(i, a => a > v), $"K: {(char) (i + 'A')} is greater than {v}."));
-                    constraints.Add(solution[i] == minVal
-                        ? ((Constraint) new MinMaxConstraint(i, MinMaxMode.Min), $"L: {(char) (i + 'A')} has the smallest value.")
-                        : (new NotMinMaxConstraint(i, MinMaxMode.Min), $"M: {(char) (i + 'A')} does not have the smallest value."));
-                    constraints.Add(solution[i] == maxVal
-                        ? ((Constraint) new MinMaxConstraint(i, MinMaxMode.Max), $"N: {(char) (i + 'A')} has the largest value.")
-                        : (new NotMinMaxConstraint(i, MinMaxMode.Max), $"O: {(char) (i + 'A')} does not have the largest value."));
+                            allConstraints.Add((new OneCellLambdaConstraint(i, a => a > v), "> #", $"{(char) (i + 'A')} is greater than {v}."));
+                    allConstraints.Add(solution[i] == minVal
+                        ? ((Constraint) new MinMaxConstraint(i, MinMaxMode.Min), "smallest", $"{(char) (i + 'A')} has the smallest value.")
+                        : (new NotMinMaxConstraint(i, MinMaxMode.Min), "¬smallest", $"{(char) (i + 'A')} does not have the smallest value."));
+                    allConstraints.Add(solution[i] == maxVal
+                        ? ((Constraint) new MinMaxConstraint(i, MinMaxMode.Max), "largest", $"{(char) (i + 'A')} has the largest value.")
+                        : (new NotMinMaxConstraint(i, MinMaxMode.Max), "¬largest", $"{(char) (i + 'A')} does not have the largest value."));
                 }
 
                 // Position constraints
                 for (var i = 0; i < n; i++)
                     for (var j = 0; j < n; j++)
                         if (i < j - 1)
-                            constraints.Add((new LeftOfPositionConstraint(solution[i], j), $"P: There is a {solution[i]} further left than {(char) (j + 'A')}."));
+                            allConstraints.Add((new LeftOfPositionConstraint(solution[i], j), "# ← ▲", $"There is a {solution[i]} further left than {(char) (j + 'A')}."));
                         else if (i > j + 1)
-                            constraints.Add((new RightOfPositionConstraint(solution[i], j), $"P: There is a {solution[i]} further right than {(char) (j + 'A')}."));
+                            allConstraints.Add((new RightOfPositionConstraint(solution[i], j), "▲ → #", $"There is a {solution[i]} further right than {(char) (j + 'A')}."));
 
                 // Numerical properties of a single value
                 var primes = new[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199 };
                 var squares = Enumerable.Range(0, 100).Select(i => i * i).ToArray();
                 for (var i = 0; i < n; i++)
                 {
-                    constraints.Add(primes.Contains(solution[i])
-                        ? (new OneCellLambdaConstraint(i, a => primes.Contains(a)), $"Q: {(char) (i + 'A')} is a prime number.")
-                        : (new OneCellLambdaConstraint(i, a => !primes.Contains(a)), $"R: {(char) (i + 'A')} is not a prime number."));
-                    constraints.Add(squares.Contains(solution[i])
-                        ? (new OneCellLambdaConstraint(i, a => squares.Contains(a)), $"S: {(char) (i + 'A')} is a square number.")
-                        : (new OneCellLambdaConstraint(i, a => !squares.Contains(a)), $"T: {(char) (i + 'A')} is not a square number."));
-                    constraints.Add(solution[i] % 2 == 0
-                        ? (new OneCellLambdaConstraint(i, a => a % 2 == 0), $"U: {(char) (i + 'A')} is an even number.")
-                        : (new OneCellLambdaConstraint(i, a => a % 2 != 0), $"V: {(char) (i + 'A')} is an odd number."));
-                    constraints.Add(solution[i] % 3 == 0
-                        ? (new OneCellLambdaConstraint(i, a => a % 3 == 0), $"W: {(char) (i + 'A')} is divisible by 3.")
-                        : (new OneCellLambdaConstraint(i, a => a % 3 != 0), $"X: {(char) (i + 'A')} is not divisible by 3."));
+                    allConstraints.Add(primes.Contains(solution[i])
+                        ? (new OneCellLambdaConstraint(i, a => primes.Contains(a)), "prime", $"{(char) (i + 'A')} is a prime number.")
+                        : (new OneCellLambdaConstraint(i, a => !primes.Contains(a)), "¬prime", $"{(char) (i + 'A')} is not a prime number."));
+                    allConstraints.Add(squares.Contains(solution[i])
+                        ? (new OneCellLambdaConstraint(i, a => squares.Contains(a)), "square", $"{(char) (i + 'A')} is a square number.")
+                        : (new OneCellLambdaConstraint(i, a => !squares.Contains(a)), "¬square", $"{(char) (i + 'A')} is not a square number."));
+                    allConstraints.Add(solution[i] % 2 == 0
+                        ? (new OneCellLambdaConstraint(i, a => a % 2 == 0), "even", $"{(char) (i + 'A')} is an even number.")
+                        : (new OneCellLambdaConstraint(i, a => a % 2 != 0), "odd", $"{(char) (i + 'A')} is an odd number."));
+                    foreach (var m in Enumerable.Range(3, 5))   // don’t use ‘for’ loop because the value is captured by lambdas
+                        allConstraints.Add(solution[i] % m == 0
+                            ? (new OneCellLambdaConstraint(i, a => a % m == 0), "#|", $"{(char) (i + 'A')} is divisible by {m}.")
+                            : (new OneCellLambdaConstraint(i, a => a % m != 0), "#¬|", $"{(char) (i + 'A')} is not divisible by {m}."));
                 }
 
+                // Presence and absence of values
                 foreach (var v in Enumerable.Range(min, max - min)) // don’t use ‘for’ loop because the value is captured by lambdas
                     if (!solution.Contains(v))
-                        constraints.Add((new LambdaConstraint((taken, grid, ix, mv, mxv) =>
+                        allConstraints.Add((new LambdaConstraint((taken, grid, ix, mv, mxv) =>
                         {
                             if (ix == null)
                                 foreach (var arr in taken)
                                     arr[v - mv] = true;
                             return null;
-                        }), $"Y: There is no {v}."));
+                        }), "¬#", $"There is no {v}."));
 
-                //File.WriteAllLines(@"D:\temp\temp.txt", constraints.Select(c => c.name));
-
-                //var already = new Dictionary<string, ((Constraint constraint, string name, int ix)[], bool)>();
-                var req = Ut.ReduceRequiredSet(constraints.Select((c, ix) => (c.constraint, c.name, ix)).ToArray().Shuffle(rnd), test: set =>
+                static Constraint betweenConstraint(int low, int high) => new LambdaConstraint((taken, grid, ix, mv, mxv) =>
                 {
-                    var result = !makePuzzle(set.SetToTest.Select(c => c.constraint)).Solve().Skip(1).Any();
+                    if (ix == null)
+                        return null;
+                    int remainingCell = -1, numRemaining = 0;
+                    for (var i = 0; i < grid.Length; i++)
+                        if (grid[i] == null)
+                        {
+                            numRemaining++;
+                            remainingCell = i;
+                        }
+                        else if (grid[i].Value + mv >= low && grid[i].Value + mv <= high)
+                            return Enumerable.Empty<Constraint>();
+                    if (numRemaining != 1)
+                        return null;
+                    for (var v = 0; v < taken[remainingCell].Length; v++)
+                        if (v + mv < low || v + mv > high)
+                            taken[remainingCell][v] = true;
+                    return null;
+                });
 
-                    //var arr = new bool[constraints.Count];
-                    //foreach (var (_, _, ix) in set.SetToTest)
-                    //    arr[ix] = true;
-                    //var str = arr.Select(b => b ? "█" : "░").JoinString();
-                    ////ConsoleUtil.WriteLine((str + (result ? " Y" : " N")).Color(result ? ConsoleColor.Green : ConsoleColor.Red));
-                    //if (already.ContainsKey(str) && already[str].Item2 != result)
-                    //{
-                    //    Console.WriteLine("SET 1:");
-                    //    foreach (var (constraint, name, ix) in already[str].Item1)
-                    //        Console.WriteLine($"{ix}. {name}");
-                    //    Console.WriteLine();
-                    //    Console.WriteLine("SET 2:");
-                    //    foreach (var (constraint, name, ix) in set.SetToTest)
-                    //        Console.WriteLine($"{ix}. {name}");
-                    //    System.Diagnostics.Debugger.Break();
-                    //}
-                    //already[str] = (set.SetToTest.ToArray(), result);
-                    return result;
-                }).ToArray();
+                for (var low = min; low <= max; low++)
+                    for (var high = low + 1; high <= max; high++)
+                    {
+                        if (solution.Any(v => v >= low && v <= high))
+                            allConstraints.Add((betweenConstraint(low, high), "# < ▲ < #", $"There is a value between {low} and {high}."));
+                        if (solution.Any(v => v < low && v > high))
+                            allConstraints.Add((betweenConstraint(low, high), "▲ < #–# < ▲", $"There is a value outside of {low} to {high}."));
+                    }
 
-                if (req.Length < 7)
+                // Group the constraints
+                var constraintGroups = allConstraints.GroupBy(c => c.group).Select(gr => gr.ToList()).ToList();
+
+                // Choose one constraint from each group (50% chance for deprivileged groups)
+                var constraints = new List<(Constraint constraint, string group, string name)>();
+                foreach (var gr in constraintGroups)
                 {
-                    Console.WriteLine("Trying again");
+                    var ix = rnd.Next(0, gr.Count);
+                    constraints.Add(gr[ix]);
+                    gr.RemoveAt(ix);
+                }
+                var constraintDic = constraintGroups.Where(gr => gr.Count > 0 && privilegedGroups.Contains(gr[0].group)).ToDictionary(gr => gr[0].group);
+                //Console.WriteLine($"Got {constraints.Count} constraints (one from each group).");
+
+                // Add more constraints if this is not unique
+                var addedCount = 0;
+                do
+                {
+                    foreach (var kvp in constraintDic)
+                    {
+                        if (kvp.Value.Count == 0)
+                            continue;
+                        addedCount++;
+                        var ix = rnd.Next(0, kvp.Value.Count);
+                        constraints.Add(kvp.Value[ix]);
+                        kvp.Value.RemoveAt(ix);
+                    }
+                }
+                while (makePuzzle(constraints.Select(c => c.constraint)).Solve().Skip(1).Any());
+                //Console.WriteLine($"Added {addedCount} extra constraints, now have {constraints.Count}.");
+                Console.WriteLine($"Seed: {seed,10} - extra: {addedCount}");
+
+                // Reduce the set of constraints again
+                var req = Ut.ReduceRequiredSet(
+                    constraints.Select((c, ix) => (c.constraint, c.group, c.name, ix)).ToArray().Shuffle(rnd),
+                    set => !makePuzzle(set.SetToTest.Select(c => c.constraint)).Solve().Skip(1).Any()).ToArray();
+                //Console.WriteLine($"Left with {req.Length} constraints after reduce.");
+
+                if (req.Length > 16)
+                {
+                    //Console.WriteLine("Trying again...");
                     goto tryAgain;
                 }
 
                 lock (dic)
                 {
-                    foreach (var (constraint, name, ix) in req)
-                        dic.IncSafe(name[0]);
+                    foreach (var group in req.Select(c => c.group).Distinct())
+                        dic.IncSafe(group);
 
-                    var took = DateTime.UtcNow - startTime;
-                    if (took > maxTime)
-                        maxTime = took;
-                    if (took < minTime)
-                        minTime = took;
-                    totalTime += took;
+                    timeCount.Count((DateTime.UtcNow - startTime).TotalSeconds);
+                    constraintsCount.Count(req.Length);
+                    attemptsCount.Count(numAttempts);
+
+                    //Console.WriteLine($"There are {n} positions (labeled A–{(char) ('A' + n - 1)}) containing digits {min}–{max - 1}.");
+                    //foreach (var (constraint, group, name, ix) in req.OrderBy(t => t.name))
+                    //    Console.WriteLine($"{name}");
+                    //Console.WriteLine();
+                    //Console.ReadLine();
+                    //foreach (var sol in makePuzzle(req.Select(c => c.constraint)).Solve())
+                    //    Console.WriteLine(sol.JoinString(", "));
                 }
-
-                //Console.WriteLine($"There are {n} positions (labeled A–{(char) ('A' + n - 1)}) containing digits {min}–{max - 1}.");
-                //foreach (var (_, name, ix) in req.OrderBy(t => t.name))
-                //    Console.WriteLine($"{ix}. {name}");
-                //Console.WriteLine();
-                //Console.ReadLine();
-                //foreach (var sol in makePuzzle(req.Select(c => c.constraint)).Solve())
-                //    Console.WriteLine(sol.JoinString(", "));
-            }
+            });
 
             Console.WriteLine();
-            foreach (var kvp in dic.OrderBy(p => p.Key))
-                Console.WriteLine($"{kvp.Key} = {kvp.Value,3} {new string('▒', kvp.Value)}");
+            //var groupTotal = dic.Sum(p => p.Value);
+            foreach (var kvp in dic.OrderBy(p => p.Value))
+                ConsoleUtil.WriteLine($"{kvp.Key,10} = {kvp.Value * 100 / (double) totalSeeds,4:0.0}% {new string('▒', kvp.Value * 100 / totalSeeds)}".Color(privilegedGroups.Contains(kvp.Key) ? ConsoleColor.Yellow : ConsoleColor.Gray));
             Console.WriteLine();
-            Console.WriteLine($"Min time: {minTime.TotalSeconds:0.#} sec");
-            Console.WriteLine($"Max time: {maxTime.TotalSeconds:0.#} sec");
-            Console.WriteLine($"Avg time: {totalTime.TotalSeconds / 100:0.#} sec");
+
+            var tt = new TextTable { ColumnSpacing = 2 };
+            tt.SetCell(1, 0, "Min");
+            tt.SetCell(3, 0, "Avg");
+            tt.SetCell(2, 0, "Max");
+            timeCount.AddToTable(tt, 1, "Time (sec)", totalSeeds);
+            attemptsCount.AddToTable(tt, 2, "Attempts", totalSeeds);
+            constraintsCount.AddToTable(tt, 3, "Constraints", totalSeeds);
+            tt.WriteToConsole();
         }
     }
 }
