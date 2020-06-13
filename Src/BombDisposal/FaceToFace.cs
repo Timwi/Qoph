@@ -1193,9 +1193,9 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                 .SelectMany(vx => generateClues(vx))
                 .ToArray()
                 .Shuffle(rnd);
-            ConsoleColoredString colored((int fx, FaceClueType type, int value) clue) =>
-                new ConsoleColoredString($"{clue.fx.ToString().Color(ConsoleColor.DarkCyan)} ({adjs[clue.fx].JoinString(",")}) = {clue.type.ToString().Color(new[] { ConsoleColor.Green, ConsoleColor.Yellow, ConsoleColor.Magenta }[(int) clue.type])} {clue.value.ToString().Color(ConsoleColor.Red)}")
-                    .ColorWhereNull(ConsoleColor.DarkGray);
+            //ConsoleColoredString colored((int fx, FaceClueType type, int value) clue) =>
+            //    new ConsoleColoredString($"{clue.fx.ToString().Color(ConsoleColor.DarkCyan)} ({adjs[clue.fx].JoinString(",")}) = {clue.type.ToString().Color(new[] { ConsoleColor.Green, ConsoleColor.Yellow, ConsoleColor.Magenta }[(int) clue.type])} {clue.value.ToString().Color(ConsoleColor.Red)}")
+            //        .ColorWhereNull(ConsoleColor.DarkGray);
 
             int[][] getInitialPossibleValues((int fx, FaceClueType type, int value)[] clues)
             {
