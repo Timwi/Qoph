@@ -293,6 +293,53 @@ namespace PuzzleStuff
             }
         }
 
+        sealed class HasSumOf2Constraint : Constraint
+        {
+            public int Cell1 { get; private set; }
+            public int Cell2 { get; private set; }
+            public HasSumOf2Constraint(int i, int j) : base(null) { Cell1 = i; Cell2 = j; }
+            public override IEnumerable<Constraint> MarkTakens(bool[][] takens, int?[] grid, int? ix, int minValue, int maxValue)
+            {
+                if (ix == null)
+                    return null;
+                int? expectingSum = null;
+                if (grid[Cell1] != null && grid[Cell2] != null)
+                    expectingSum = grid[Cell1].Value + minValue + grid[Cell2].Value + minValue;
+
+                int remainingCell = -1;
+                for (var i = 0; i < grid.Length; i++)
+                {
+                    if (expectingSum != null && grid[i] + minValue == expectingSum.Value)
+                        return Enumerable.Empty<Constraint>();
+
+                    if (grid[i] == null)
+                    {
+                        if (remainingCell != -1)
+                            return null;
+                        remainingCell = i;
+                    }
+                }
+
+                if (remainingCell == -1)
+                    return null;
+                else if (remainingCell == Cell1 || remainingCell == Cell2)
+                {
+                    var otherCell = remainingCell == Cell1 ? Cell2 : Cell1;
+                    var otherValue = grid[otherCell].Value + minValue;
+                    for (var v = 0; v < takens[remainingCell].Length; v++)
+                        if (!Enumerable.Range(0, grid.Length).Any(i => i != remainingCell && grid[i].Value + minValue == v + minValue + otherValue))
+                            takens[remainingCell][v] = true;
+                }
+                else
+                {
+                    for (var v = 0; v < takens[remainingCell].Length; v++)
+                        if (v + minValue != expectingSum)
+                            takens[remainingCell][v] = true;
+                }
+                return null;
+            }
+        }
+
         struct ValueCounter
         {
             public int Min;
@@ -395,6 +442,8 @@ namespace PuzzleStuff
                                 allConstraints.Add((new TwoCellLambdaConstraint(i, j, (a, b) => (a < k && k < b) || (b < k && k < a)), "▲ < # < ▲", $"{k} is between {(char) (i + 'A')} and {(char) (j + 'A')}."));
 
                         allConstraints.Add((new HasSumConstraint(solution[i] + solution[j]), "∃∑", $"There are two values that add up to {solution[i] + solution[j]}."));
+                        //if (solution.Contains(solution[i] + solution[j]))
+                        //    allConstraints.Add((new HasSumOf2Constraint(i, j), "∃∑▲", $"There is a value equal to {(char) (i + 'A')} + {(char) (j + 'A')}."));
                     }
 
                 // Relations between two numbers (asymmetric)
@@ -527,13 +576,34 @@ namespace PuzzleStuff
                     }
                 }
                 if (solutionCount == 0) // No solution: pretty bad bug
+                {
+                    Console.WriteLine($"--- NO SOLUTION! Testing... ({solutionWord})");
+                    // Reduce the set of constraints again
+                    var cnstr = Ut.ReduceRequiredSet(
+                        constraints.Select((c, ix) => (c.constraint, c.group, c.name, ix)).ToArray(),
+                        set => !makePuzzle(set.SetToTest.Select(c => c.constraint)).Solve().Any()).ToArray();
+
+                    for (var i = 0; i < cnstr.Length; i++)
+                        Console.WriteLine($"{i}. {cnstr[i].name}");
+
+                    Console.WriteLine();
+
+                    // DEBUG OUTPUT IS GENERATED HERE. Change “ExamineConstraints” to contain the offending constraint. The above code has listed the constraints in the console.
+                    var result = makePuzzle(cnstr.Select(c => c.constraint)).Solve(new SolverInstructions { ExamineConstraints = new[] { cnstr[2].constraint }, IntendedSolution = solution, UseLetters = true }).ToArray();
+                    Console.WriteLine(result.Length);
+
                     System.Diagnostics.Debugger.Break();
+                }
                 Console.WriteLine($"Seed: {seed,10} - extra: {addedCount} ({solutionCount})");
 
                 // Reduce the set of constraints again
                 var req = Ut.ReduceRequiredSet(
                     constraints.Select((c, ix) => (c.constraint, c.group, c.name, ix)).ToArray().Shuffle(rnd),
-                    set => !makePuzzle(set.SetToTest.Select(c => c.constraint)).Solve().Skip(1).Any()).ToArray();
+                    set =>
+                    {
+                        //Console.WriteLine(Enumerable.Range(0, constraints.Count).Select(ix => set.SetToTest.Any(c => c.ix == ix) ? "█".Color(ConsoleColor.Green) : "░".Color(ConsoleColor.DarkBlue)).JoinColoredString());
+                        return !makePuzzle(set.SetToTest.Select(c => c.constraint)).Solve().Skip(1).Any();
+                    }).ToArray();
                 var numTwoSymbolConstraints = req.Count(tup => new[] { "sum ▲", "product ▲", "mod ▲" }.Contains(tup.group));
 
                 if (numTwoSymbolConstraints > 2 || req.Length - numTwoSymbolConstraints > 12)
