@@ -21,7 +21,7 @@ namespace PuzzleStuff
             //Enumerable.Range(0, seeds.Length).ParallelForEach(seedIx =>
             var seedIx = 0;
             {
-                foreach (var sudokuSolution in sudoku.Solve(randomizer: new Random(seeds[seedIx]), showDebugOutput: seedIx == 0 ? 20 : (int?) null))
+                foreach (var sudokuSolution in sudoku.Solve(new SolverInstructions { Randomizer = new Random(seeds[seedIx]), ShowContinuousProgress = seedIx == 0 ? 20 : (int?) null }))
                 {
                     lock (path)
                     {

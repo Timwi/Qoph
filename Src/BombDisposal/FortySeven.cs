@@ -44,8 +44,8 @@ namespace PuzzleStuff.BombDisposal
                 from aWord in new[] { "AMPHIBIA" }//wordsStartingWith['A'].ToArray().Shuffle().Take(100)
                 from bWord in new[] { "BETATEST" }   //wordsStartingWith['B']
                 from cWord in new[] { "CAREBEAR" }   //wordsStartingWith['C']
-                from dWord in wordsStartingWith['D'].ToArray().Shuffle()
-                from eWord in new[] { "ELEPHANT" }  //wordsStartingWith['E'].ToArray().Shuffle().Take(100)
+                from dWord in new[] { "DOMINION" } //wordsStartingWith['D'].ToArray().Shuffle()
+                from eWord in wordsStartingWith['E'].ToArray().Shuffle()
                 from fWord in new[] { "FRONTIER" }  //wordsStartingWith['F'].ToArray().Shuffle().Take(100)
                 from gWord in new[] { "GANYMEDE" }  //wordsStartingWith['G']
                 from hWord in new[] { "HIROLLER" }  //wordsStartingWith['H'].ToArray().Shuffle().Take(100)
