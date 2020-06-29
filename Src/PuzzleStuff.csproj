@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Binairo.cs" />
     <Compile Include="BinairoSudoku.cs" />
+    <Compile Include="BombDisposal\Critical.cs" />
     <Compile Include="BombDisposal\EternalAwait.cs" />
     <Compile Include="BombDisposal\RaceForTheGalaxy.cs" />
     <Compile Include="BombDisposal\HomeDepot.cs" />
