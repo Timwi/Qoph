@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using RT.Util;
 using RT.Util.ExtensionMethods;
 using RT.Util.Geometry;
 
 namespace PuzzleStuff.BombDisposal
 {
-    static class RaceForTheGalaxy
+    static class SpaceRace
     {
         public static void Generate()
         {
@@ -73,7 +72,7 @@ namespace PuzzleStuff.BombDisposal
                     //(textColor != null ? $"<text x='0' y='0' font-size='2' stroke-width='.3' stroke='white' paint-order='stroke' fill='{textColor}'>{word}</text>" : null) +
                     $"</g>";
 
-                File.WriteAllText($@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Race for the Galaxy\Race for the Galaxy.svg",
+                File.WriteAllText($@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Space Race\Space Race.svg",
                     $@"<svg xmlns='http://www.w3.org/2000/svg' viewBox='{viewBox}' stroke='black' stroke-width='.1' stroke-linecap='round' text-anchor='middle' font-size='5'>" +
                     $@"<g>{Enumerable.Range(0, 26).Select(i => (char) ('A' + i)).Select(ch =>
                         $@"<circle cx='{f * getX(ch)}' cy='{f * getY(ch)}' r='1' fill='{("AEIOU".Contains(ch) ? "black" : "none")}' />" +

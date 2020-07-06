@@ -43,6 +43,7 @@ namespace PuzzleStuff
             if (args.Length == 2 && args[0] == "--post-build-check")
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
+            BombDisposal.SpaceRace.Generate();
 
             Console.WriteLine("Done.");
             Console.ReadLine();
