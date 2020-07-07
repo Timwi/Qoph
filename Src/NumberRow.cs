@@ -412,7 +412,7 @@ namespace PuzzleStuff
                 var startTimeThisAttempt = DateTime.UtcNow;
                 var allConstraints = new List<(Constraint constraint, string group, string name)>();
 
-                Puzzle makePuzzle(IEnumerable<Constraint> cs) => new Puzzle(n, min, max, cs);
+                Puzzle makePuzzle(IEnumerable<Constraint> cs) => new Puzzle(n, min, max).AddConstraints(cs);
 
                 static Constraint differenceConstraint(int cell1, int cell2, int diff) => new TwoCellLambdaConstraint(cell1, cell2, (a, b) => Math.Abs(a - b) == diff);
                 static Constraint quotientConstraint(int cell1, int cell2, int quotient) => new TwoCellLambdaConstraint(cell1, cell2, (a, b) => a * quotient == b || b * quotient == a);

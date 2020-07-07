@@ -26,7 +26,7 @@ namespace PuzzleStuff
                     lock (path)
                     {
                         Console.WriteLine($"Solution:");
-                        var solStr = sudoku.SudokuSolutionToConsoleString(sudokuSolution, 10);
+                        var solStr = sudoku.SolutionToConsole(sudokuSolution, 10);
                         ConsoleUtil.WriteLine(solStr);
                         Console.WriteLine();
                         File.AppendAllText(path, $"Solution:" + Environment.NewLine + solStr.ToString() + Environment.NewLine);
@@ -37,29 +37,26 @@ namespace PuzzleStuff
 
         private static Puzzle makeBinairoSudoku()
         {
-            var constraints = new List<Constraint>();
-            constraints.AddRange(Constraint.LatinSquare(10, 10));
-            constraints.AddRange(new[] { "A-C1-3,D1", "E-F1,D-G2-3", "H-J1-3,G1", "A-B4-7,C5-6", "D-E4-7,C4,C7", "F-G4-7,H4,H7", "I-J4-7,H5-6", "A-C8-10,D10", "D-G8-9,E-F10", "H-J8-10,G10" }
-                .Select((region, ix) => new UniquenessConstraint(Constraint.TranslateCoordinates(region, gridWidth: 10), backgroundColor: (ConsoleColor) (1 + ix % 6))));
-            constraints.Add(new BinairoOddEvenConstraintWithoutUniqueness(10));
+            var puzzle = new JigsawSudoku("A-C1-3,D1;E-F1,D-G2-3;H-J1-3,G1;A-B4-7,C5-6;D-E4-7,C4,C7;F-G4-7,H4,H7;I-J4-7,H5-6;A-C8-10,D10;D-G8-9,E-F10;H-J8-10,G10", sideLength: 10, minValue: 0);
+            puzzle.AddConstraint(new BinairoOddEvenConstraintWithoutUniqueness(10));
 
             // Unique diagonals
-            //constraints.Add(new UniquenessConstraint(Enumerable.Range(0, 10).Select(i => i * 11))); // Forward diagonal
-            //constraints.Add(new UniquenessConstraint(Enumerable.Range(0, 10).Select(i => 9 + i * 9))); // Backward diagonal
+            //puzzle.Constraints.Add(new UniquenessConstraint(Enumerable.Range(0, 10).Select(i => i * 11))); // Forward diagonal
+            //puzzle.Constraints.Add(new UniquenessConstraint(Enumerable.Range(0, 10).Select(i => 9 + i * 9))); // Backward diagonal
 
             // Thermometers
-            constraints.Add(new LessThanConstraint(Constraint.TranslateCoordinates(@"B3,C2,D2,E3,E4,E5,D6,C6,B5,B4", 10), color: ConsoleColor.Cyan));
-            constraints.Add(new LessThanConstraint(Constraint.TranslateCoordinates(@"H2,H3,G4,G5,F6,F7,E8,E9", 10), color: ConsoleColor.Green));
-            constraints.Add(new LessThanConstraint(Constraint.TranslateCoordinates(@"I5-9", 10), color: ConsoleColor.Magenta));
+            puzzle.AddConstraint(new LessThanConstraint(Constraint.TranslateCoordinates(@"B3,C2,D2,E3,E4,E5,D6,C6,B5,B4", 10)), ConsoleColor.Cyan);
+            puzzle.AddConstraint(new LessThanConstraint(Constraint.TranslateCoordinates(@"H2,H3,G4,G5,F6,F7,E8,E9", 10)), ConsoleColor.Green);
+            puzzle.AddConstraint(new LessThanConstraint(Constraint.TranslateCoordinates(@"I5-9", 10)), ConsoleColor.Magenta);
 
             // Clone region
-            //constraints.Add(new CloneConstraint(Constraint.TranslateCoordinates(@"G-H1,F-I2-3,G-H4", 10), Constraint.TranslateCoordinates(@"C-D7,B-E8-9,C-D10", 10)));
+            //puzzle.Constraints.Add(new CloneConstraint(Constraint.TranslateCoordinates(@"G-H1,F-I2-3,G-H4", 10), Constraint.TranslateCoordinates(@"C-D7,B-E8-9,C-D10", 10)));
 
             //if (givens != null)
             //    for (var i = 0; i < givens.Length; i++)
             //        if (givens[i] != null)
-            //            constraints.Add(new GivenConstraint(i, givens[i].Value));
-            return new Puzzle(100, 0, 9, constraints);
+            //            puzzle.Constraints.Add(new GivenConstraint(i, givens[i].Value));
+            return puzzle;
         }
 
         //public static void GenerateGivens()
