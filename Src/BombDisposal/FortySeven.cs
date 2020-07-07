@@ -44,7 +44,7 @@ namespace PuzzleStuff.BombDisposal
                 from aWord in new[] { "AMPHIBIA" }//wordsStartingWith['A'].ToArray().Shuffle().Take(100)
                 from bWord in new[] { "BETATEST" }   //wordsStartingWith['B']
                 from cWord in new[] { "CAREBEAR" }   //wordsStartingWith['C']
-                from dWord in new[] { "DOMINION" } //wordsStartingWith['D'].ToArray().Shuffle()
+                from dWord in new[] { "DEALINGS" } //wordsStartingWith['D'].ToArray().Shuffle()
                 from eWord in wordsStartingWith['E'].ToArray().Shuffle()
                 from fWord in new[] { "FRONTIER" }  //wordsStartingWith['F'].ToArray().Shuffle().Take(100)
                 from gWord in new[] { "GANYMEDE" }  //wordsStartingWith['G']
@@ -95,7 +95,7 @@ namespace PuzzleStuff.BombDisposal
                 return Ut.NewArray(size * size, ix => augmented[size + (ix % size) + w * (ix / size)]);
             }
 
-            Enumerable.Range(0, allTuples.Length).ParallelForEach(2, feedersIx =>
+            Enumerable.Range(0, allTuples.Length).ParallelForEach(Environment.ProcessorCount, feedersIx =>
             //foreach (var feedersIx in Enumerable.Range(0, allTuples.Length))
             {
                 var feeders = allTuples[feedersIx];
@@ -107,29 +107,28 @@ namespace PuzzleStuff.BombDisposal
                 }
                 catch (InvalidOperationException)
                 {
-                    goto busted;
+                    goto fullyBusted;
                 }
 
                 lock (wordsStartingWith)
                     ConsoleUtil.Write($"Trying: {feeders.JoinString(", ")} ({feedersIx})   \r".Color(ConsoleColor.Yellow));
 
-                var chsPerRow = (cluephrase.Length + 7) / 8;
+                var chsPerFullRow = (cluephrase.Length + 7) / 8;
+                var chsPerSmallRow = cluephrase.Length - chsPerFullRow * 7;
                 var ccOutput = new TextTable { ColumnSpacing = 2, RowSpacing = 1 };
                 var clipboardText = new StringBuilder();
                 var outputNumbers = new int[n][];
 
-                for (var rowUnderTest = 0; rowUnderTest < n; rowUnderTest++)
+                ((int value, char ch)[] input, int[] output)? testRow(int rowUnderTest, string cluephraseSubstring)
                 {
-                    var ssLen = rowUnderTest == n - 1 ? cluephrase.Length - (n - 1) * chsPerRow : chsPerRow;
-                    var cluephraseStart = rowUnderTest * chsPerRow;
-                    foreach (var subseq in Enumerable.Range(0, n).Subsequences(minLength: ssLen, maxLength: ssLen).Select(sseq => sseq.ToArray()).ToArray().Shuffle())
+                    foreach (var subseq in Enumerable.Range(0, n).Subsequences(minLength: cluephraseSubstring.Length, maxLength: cluephraseSubstring.Length).Select(sseq => sseq.ToArray()).ToArray().Shuffle())
                     {
                         const int maxIndex = 9;
                         var pow = 1;
                         var prefPosses = new List<(int i, char ch)>();
-                        for (var i = 0; i < subseq.Length; i++)
+                        for (var i = 0; i < cluephraseSubstring.Length; i++)
                         {
-                            prefPosses.Add((subseq[i], cluephrase[chsPerRow * rowUnderTest + i]));
+                            prefPosses.Add((subseq[i], cluephraseSubstring[i]));
                             pow *= maxIndex;
                         }
 
@@ -146,42 +145,56 @@ namespace PuzzleStuff.BombDisposal
 
                             var output = Ut.NewArray(n, x => Enumerable.Range(0, n).Select(j => inv[8 * j + x] * input[j].value).Sum() % 47);
                             if (Enumerable.Range(0, n).All(x => output[x] != 0 && (input[x].value == 0 || (input[x].value <= prefs[(output[x] + 46) % 47].Length && prefs[(output[x] + 46) % 47][input[x].value - 1] == input[x].ch))))
-                            {
-                                for (var x = 0; x < n; x++)
-                                    ccOutput.SetCell(x, rowUnderTest, "{0/Green}\n{1/Cyan}\n{2/Magenta}\n{3/Yellow}".Color(null)
-                                        .Fmt(output[x], prefs[(output[x] + 46) % 47], input[x].value, input[x].value == 0 ? "" : prefs[(output[x] + 46) % 47][input[x].value - 1].ToString()));
-                                clipboardText.AppendLine($"{output.JoinString("\t")}\t\t{output.Select(pIx => prefs[pIx - 1]).JoinString("\t")}");
-                                outputNumbers[rowUnderTest] = output;
-                                goto next;
-                            }
+                                return (input, output);
                         }
                     }
-
-                    goto busted;
-
-                    next:;
+                    return null;
                 }
 
-                lock (wordsStartingWith)
+                foreach (var smallRowCandidate in Enumerable.Range(0, n).ToArray().Shuffle())
                 {
-                    ConsoleUtil.WriteLine($"Found: {feeders.JoinString(", ")}        ".Color(ConsoleColor.Green));
-                    //for (var i = 0; i < n; i++)
-                    //    Console.WriteLine(outputNumbers[i].JoinString(" "));
-                    //Clipboard.SetText(clipboardText.ToString());
-                    //ccOutput.WriteToConsole();
+                    for (var rowUnderTest = 0; rowUnderTest < n; rowUnderTest++)
+                    {
+                        var cluephraseSubstring =
+                            rowUnderTest == smallRowCandidate ? cluephrase.Substring(chsPerFullRow * rowUnderTest, chsPerSmallRow) :
+                            rowUnderTest < smallRowCandidate ? cluephrase.Substring(chsPerFullRow * rowUnderTest, chsPerFullRow) :
+                            cluephrase.Substring(chsPerFullRow * (rowUnderTest - 1) + chsPerSmallRow, chsPerFullRow);
+
+                        var result = testRow(rowUnderTest, cluephraseSubstring);
+                        if (result == null)
+                            goto busted;
+                        var (input, output) = result.Value;
+                        for (var x = 0; x < n; x++)
+                            ccOutput.SetCell(x, rowUnderTest, "{0/Green}\n{1/Cyan}\n{2/Magenta}\n{3/Yellow}".Color(null)
+                                .Fmt(output[x], prefs[(output[x] + 46) % 47], input[x].value, input[x].value == 0 ? "" : prefs[(output[x] + 46) % 47][input[x].value - 1].ToString()));
+                        clipboardText.AppendLine($"{output.JoinString("\t")}"); //\t\t{output.Select(pIx => prefs[pIx - 1]).JoinString("\t")}");
+                        outputNumbers[rowUnderTest] = output;
+                    }
+
+                    lock (wordsStartingWith)
+                    {
+                        ConsoleUtil.WriteLine($"Found: {feeders.JoinString(", ")}        ".Color(ConsoleColor.Green));
+                        //for (var i = 0; i < n; i++)
+                        //    Console.WriteLine(outputNumbers[i].JoinString(" "));
+                        //Clipboard.SetText(clipboardText.ToString());
+                        //ccOutput.WriteToConsole();
+                        //Console.WriteLine();
+                        //Debugger.Break();
+                        break;
+                    }
+                    //outputMatrix(feederMatrix, 8);
                     //Console.WriteLine();
-                    //Debugger.Break();
+                    //outputMatrix(inverse(feederMatrix, 8), 8);
+                    //Console.WriteLine();
+
+                    //foreach (var cc in ccOutput)
+                    //    ConsoleUtil.WriteLine(cc);
+
+                    // We have a row with no match :(
+                    busted:;
                 }
-                //outputMatrix(feederMatrix, 8);
-                //Console.WriteLine();
-                //outputMatrix(inverse(feederMatrix, 8), 8);
-                //Console.WriteLine();
 
-                //foreach (var cc in ccOutput)
-                //    ConsoleUtil.WriteLine(cc);
-
-                // We have a row with no match :(
-                busted:;
+                fullyBusted:;
             });
         }
 
