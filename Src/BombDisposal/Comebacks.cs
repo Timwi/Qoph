@@ -68,19 +68,19 @@ namespace PuzzleStuff.BombDisposal
             "Too bad no one’s ever heard of YOU at all.");
 
         static readonly string[] _instructions = Ut.NewArray(
-            "FIRST LETTER OF FIFTH WORD",
-            "LAST LETTER OF FOURTH WORD",
+            "FIRST LETTER OF THE FIFTH WORD",
+            "LAST LETTER OF THE FOURTH WORD",
             "FOURTEENTH LETTER",
             "TWENTIETH LETTER",
             "LETTER AFTER V",
             "SEVENTH LETTER, ATBASH CIPHERED",
             "LETTER BEFORE FIRST A, ATBASH CIPHERED",
             "LETTER AFTER LAST Y",
-            "SECOND LETTER OF FIFTH WORD",
+            "SECOND LETTER OF THE FIFTH WORD",
             "TWENTY-SECOND LETTER",
-            "FIRST LETTER OF FIFTH WORD",
+            "FIRST LETTER OF THE FIFTH WORD",
             "NINTH LETTER",
-            "SECOND LETTER OF THIRD WORD, ATBASH CIPHERED",
+            "SECOND LETTER OF THE THIRD WORD, ATBASH CIPHERED",
             "FIRST LETTER",
             "LETTER AFTER K",
             "LETTER BEFORE H, ROT THIRTEEN");
@@ -207,6 +207,7 @@ namespace PuzzleStuff.BombDisposal
             const int w = 16;
             var allSvgs = new StringBuilder();
             var numBlackSquares = 0;
+            var clipb = new StringBuilder();
             for (var i = 0; i < 16; i++)
             {
                 var topChars = Ut.NewArray(w, _ => "");
@@ -230,7 +231,7 @@ namespace PuzzleStuff.BombDisposal
                     }
                     else
                     {
-                        punctuation.Add((x == 0 ? w - 1 : x, x == 0 ? y - 1 : y, fullPhrase[c]));
+                        punctuation.Add((x == 0 ? w : x, x == 0 ? y - 1 : y, fullPhrase[c]));
                     }
 
                     if (x >= w)
@@ -244,6 +245,7 @@ namespace PuzzleStuff.BombDisposal
 
                 var topRows = topChars.Max(c => c.Length);
                 var totalRows = topRows + y + 1;
+                var clip = Ut.NewArray<string>(totalRows, w);
 
                 var svg = new StringBuilder();
                 // Top letters
@@ -251,11 +253,17 @@ namespace PuzzleStuff.BombDisposal
                 {
                     var sortedChars = topChars[xx].Order().ToArray();
                     for (var yy = 0; yy < sortedChars.Length; yy++)
+                    {
                         svg.Append($@"<text x='{xx + .5}' y='{topRows - sortedChars.Length + yy + .75}'>{sortedChars[yy]}</text>");
+                        clip[topRows - sortedChars.Length + yy][xx] = sortedChars[yy].ToString();
+                    }
                 }
                 // Black squares
                 foreach (var (xx, yy) in blackSquares)
+                {
                     svg.Append($@"<rect x='{xx}' y='{yy + topRows}' width='1' height='1' />");
+                    clip[yy + topRows][xx] = "#";
+                }
 
                 // Frame
                 svg.Append($@"<rect fill='none' stroke='black' stroke-width='.1' x='0' y='{topRows}' width='{w}' height='{y + 1}' />");
@@ -274,11 +282,16 @@ namespace PuzzleStuff.BombDisposal
                 {
                     svg.Append($@"<ellipse cx='{xx}' cy='{yy + topRows + .5}' rx='.2' ry='.3' fill='#fff' stroke='black' stroke-width='.025' />");
                     svg.Append($@"<text x='{xx}' y='{yy + topRows + .675}' font-size='.5'>{ch}</text>");
+                    clip[yy + topRows][xx - 1] = ch.ToString();
                 }
 
                 allSvgs.Append($@"<svg viewBox='-.2 -.2 {w + .4} {totalRows + .4}' text-anchor='middle' font-size='.8'>{svg}</svg>");
                 numBlackSquares += blackSquares.Count;
+                //Console.WriteLine($"Dropquote {i + 1} = {totalRows} rows");
+                //Clipboard.SetText(clip.Select(row => row.JoinString("\t")).JoinString("\n"));
+                clipb.AppendLine(fullPhrase.Replace("  ", "\t"));
             }
+            Clipboard.SetText(clipb.ToString());
 
             var path = $@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Comebacks\Comebacks.html";
             General.ReplaceInFile(path, @"<!--%%-->", @"<!--%%%-->", allSvgs.ToString());
