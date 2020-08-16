@@ -13,33 +13,28 @@ namespace PuzzleStuff.BombDisposal
     {
         public static void Generate()
         {
-            var distances = @"ABCDEFGHI";   // for sorting
+            var distances = @"TSUOSIAAG";
+            var tap = @"HOTNWTSRU";
+            var radii = @"ELIIHEPAS";       // = THE SOLUTION IS WHITE ASPARAGUS
             var len = distances.Length;
-            var radii = @"SAAHTSEIE";
-            var angles = @"PRNOACFCN";
-            var angleMult = 4;
-            var tap = @"EMRSTOFIT";     // = SPEARMANRHOSTATSCOEFFICIENT (= CORRELATION)
 
-            var rnd = new Random(1);
-
-            if (tap.Length != len || angles.Length != len || distances.Length != len || radii.Length != len)
+            if (tap.Length != len || distances.Length != len || radii.Length != len)
                 Debugger.Break();
 
-            var cumulativeAngles = Enumerable.Range(0, angles.Length).Select(aIx => angles.Take(aIx).Select(a => a - 'A' + 1).Sum() * angleMult).ToArray();
-            var points = new List<(PointD pt, int th)>();
+            var points = new List<(PointD pt, double th)>();
             var centers = new List<PointD>();
 
-            var offsets = new int?[]
+            var offsets = new double?[]
             {
-                120,
-                -100,
-                30,
+                -10,
+                -5,
+                -42.5,
+                160,
+                160,
                 50,
-                10,
-                0,
-                0,
-                40,
-                -90
+                -70,
+                170,
+                -20
             };
             if (offsets.Length != len)
                 Debugger.Break();
@@ -47,10 +42,12 @@ namespace PuzzleStuff.BombDisposal
 
             for (int ix = 0; ix < len; ix++)
             {
+                var dotAngles = new List<double>();
                 var (_, row, col) = TapCode.TapFromCh[tap[ix]];
-                var dotAngles = Enumerable.Range(0, row).Select(r => 20 * r).ToList();
-                dotAngles.AddRange(Enumerable.Range(0, col).Select(c => 20 * row + 60 + 20 * c));
-                var center = (distances[ix] - 'A' + 1).Apply(d => (cumulativeAngles[ix] * Math.PI / 180).Apply(θ => new PointD(d * Math.Cos(θ), d * Math.Sin(θ))));
+                dotAngles.AddRange(Enumerable.Range(0, row).Select(r => 20.0 * r));
+                dotAngles.AddRange(Enumerable.Range(0, col).Select(c => 20.0 * row + 60.0 + 20.0 * c));
+                var θ = Math.PI * 2 / len * ix;
+                var center = (distances[ix] - 'A' + 1).Apply(d => new PointD(d * Math.Cos(θ), d * Math.Sin(θ)));
                 centers.Add(center);
                 var radius = radii[ix] - 'A' + 1;
                 var offset = offsets[ix] ?? 0;
@@ -67,7 +64,7 @@ namespace PuzzleStuff.BombDisposal
             var maxY = points.Max(p => p.pt.Y);
             for (var step = 0; step < 3; step++)
             {
-                File.WriteAllText($@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Circles\Circles{(step > 0 ? step.ToString() : "")}.html", $@"<!DOCTYPE html>
+                File.WriteAllText($@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Circles\Circles{(step > 0 ? $" (solution step {step})" : "")}.html", $@"<!DOCTYPE html>
 <html>
     <head>
         <title>Circles</title>
@@ -76,18 +73,21 @@ namespace PuzzleStuff.BombDisposal
         </style>
     </head>
     <body>
-        <h1 style='text-align: center; border-bottom: 1px solid #ccc'>Circles</h1>
-        <p style='text-align: center; font-style: italic'>Center to origin, widdershins.</p>
+        <h1 style='text-align: center'>Circles</h1>
+        <p style='text-align: center; font-style: italic'>Distance, circumference, radius, widdershins.</p>
         <svg style='width: 99vw' viewBox='{minX - 2} {minY - 2} {maxX - minX + 4} {maxY - minY + 4}'>
-            {points.Select(p => $"<rect x='{p.pt.X - .1}' y='{p.pt.Y - .1}' width='.2' height='.2' transform='rotate({-p.th} {p.pt.X} {p.pt.Y})' />").JoinString()}
-            <g fill='none' stroke='black'>
+            {
+                //points.Select(p => $"<rect x='{p.pt.X - .1}' y='{p.pt.Y - .1}' width='.2' height='.2' transform='rotate({-p.th} {p.pt.X} {p.pt.Y})' />").JoinString()
+                points.OrderBy(p => p.pt.X).Select(p => $"<circle cx='{p.pt.X}' cy='{p.pt.Y}' r='.1' />").JoinString()
+            }
+            <g fill='none' stroke='#ccc'>
                 {(step > 0 ? Enumerable.Range(0, len).Select(ix => $"<circle cx='{centers[ix].X}' cy='{-centers[ix].Y}' r='{radii[ix] - 'A' + 1}' stroke='{(ix == highlight ? "#F00" : "#248")}' stroke-width='{(ix == highlight ? ".1" : ".02")}' />").JoinString() : "")}
                 {(step > 1 ? Enumerable.Range(0, len).Select(ix => $"<line x1='{centers[ix].X}' y1='{-centers[ix].Y}' x2='0' y2='0' stroke='#822' stroke-width='.02' />").JoinString() : "")}
                 <line x1='0' y1='{minY - 1}' x2='0' y2='{maxY + 1}' stroke-width='.05' />
                 <line x1='{minX - 1}' y1='0' x2='{maxX + 1}' y2='0' stroke-width='.05' />
             </g>
-            <path d='M .4 {minY - .5} h -.8 l .4 -1 z' />
-            <path d='M {maxX + .5} .4 v -.8 l 1 .4 z' />
+            <path fill='#ccc' d='M .4 {minY - .5} h -.8 l .4 -1 z' />
+            <path fill='#ccc' d='M {maxX + .5} .4 v -.8 l 1 .4 z' />
         </svg>
     </body>
 </html>
