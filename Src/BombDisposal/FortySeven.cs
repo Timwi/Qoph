@@ -22,8 +22,7 @@ namespace PuzzleStuff.BombDisposal
 
             var prefs = File.ReadAllLines(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\47\Prefectures.txt");
             //var words = File.ReadAllLines(@"D:\Daten\Wordlists\English 60000.txt");
-            var words = File.ReadAllLines(@"D:\Daten\Wordlists\English 60000.txt");
-            //File.ReadAllLines(@"D:\Daten\Wordlists\peter_broda_wordlist_unscored.txt").Except().ToArray();
+            var words = File.ReadAllLines(@"D:\Daten\Wordlists\peter_broda_wordlist_unscored.txt").Except(File.ReadLines(@"D:\Daten\Wordlists\English 60000.txt")).ToArray();
 
             var mod47Inverses = new int[47];
             var tt = new TextTable { ColumnSpacing = 1 };
@@ -35,17 +34,12 @@ namespace PuzzleStuff.BombDisposal
             var wordRnd = new Random();
             var wordsStartingWith = words.Where(w => w.Length == 8 && w.All(ch => ch >= 'A' && ch <= 'Z')).GroupBy(w => w[0]).ToDictionary(gr => gr.Key, gr => gr.Distinct().Order().ToArray());
 
-            //var debug_words = Ut.NewArray("AMPHIBIA", "BETATEST", "CAREBEAR", "DRUMHEAD", "ELAURIAN", "FEELINGS", "GANYMEDE", "HIROLLER");
-            //var debug_matrix = Ut.NewArray(64, i => debug_words[i / 8][i % 8] - 'A' + 1);
-            //var debug_inverse = newInverse(debug_matrix, 8);
-            //Console.WriteLine(debug_inverse.Split(8).Select(row => row.Select(val => $"{val,4}").JoinString("")).JoinString("\n"));
-
             var allTuples = (
                 from aWord in new[] { "AMPHIBIA" }//wordsStartingWith['A'].ToArray().Shuffle().Take(100)
                 from bWord in new[] { "BETATEST" }   //wordsStartingWith['B']
                 from cWord in new[] { "CAREBEAR" }   //wordsStartingWith['C']
-                from dWord in new[] { "DEALINGS" } //wordsStartingWith['D'].ToArray().Shuffle()
-                from eWord in wordsStartingWith['E'].ToArray().Shuffle()
+                from dWord in new[] { "DIAGNOSE" }
+                from eWord in new[] { "EGGPLANT" }
                 from fWord in new[] { "FRONTIER" }  //wordsStartingWith['F'].ToArray().Shuffle().Take(100)
                 from gWord in new[] { "GANYMEDE" }  //wordsStartingWith['G']
                 from hWord in new[] { "HIROLLER" }  //wordsStartingWith['H'].ToArray().Shuffle().Take(100)
@@ -95,8 +89,8 @@ namespace PuzzleStuff.BombDisposal
                 return Ut.NewArray(size * size, ix => augmented[size + (ix % size) + w * (ix / size)]);
             }
 
-            Enumerable.Range(0, allTuples.Length).ParallelForEach(Environment.ProcessorCount, feedersIx =>
-            //foreach (var feedersIx in Enumerable.Range(0, allTuples.Length))
+            //Enumerable.Range(0, allTuples.Length).ParallelForEach(Environment.ProcessorCount, feedersIx =>
+            foreach (var feedersIx in Enumerable.Range(0, allTuples.Length))
             {
                 var feeders = allTuples[feedersIx];
                 var feederMatrix = Ut.NewArray(64, i => feeders[i / 8][i % 8] - 'A' + 1);
@@ -116,7 +110,6 @@ namespace PuzzleStuff.BombDisposal
                 var chsPerFullRow = (cluephrase.Length + 7) / 8;
                 var chsPerSmallRow = cluephrase.Length - chsPerFullRow * 7;
                 var ccOutput = new TextTable { ColumnSpacing = 2, RowSpacing = 1 };
-                var clipboardText = new StringBuilder();
                 var outputNumbers = new int[n][];
 
                 ((int value, char ch)[] input, int[] output)? testRow(int rowUnderTest, string cluephraseSubstring)
@@ -153,6 +146,7 @@ namespace PuzzleStuff.BombDisposal
 
                 foreach (var smallRowCandidate in Enumerable.Range(0, n).ToArray().Shuffle())
                 {
+                    var clipboardText = new StringBuilder();
                     for (var rowUnderTest = 0; rowUnderTest < n; rowUnderTest++)
                     {
                         var cluephraseSubstring =
@@ -167,7 +161,7 @@ namespace PuzzleStuff.BombDisposal
                         for (var x = 0; x < n; x++)
                             ccOutput.SetCell(x, rowUnderTest, "{0/Green}\n{1/Cyan}\n{2/Magenta}\n{3/Yellow}".Color(null)
                                 .Fmt(output[x], prefs[(output[x] + 46) % 47], input[x].value, input[x].value == 0 ? "" : prefs[(output[x] + 46) % 47][input[x].value - 1].ToString()));
-                        clipboardText.AppendLine($"{output.JoinString("\t")}"); //\t\t{output.Select(pIx => prefs[pIx - 1]).JoinString("\t")}");
+                        clipboardText.AppendLine($"{output.JoinString("\t")}\t\t{output.Select(pIx => prefs[pIx - 1]).JoinString("\t")}");
                         outputNumbers[rowUnderTest] = output;
                     }
 
@@ -195,7 +189,7 @@ namespace PuzzleStuff.BombDisposal
                 }
 
                 fullyBusted:;
-            });
+            }//);
         }
 
         public static void Test()
