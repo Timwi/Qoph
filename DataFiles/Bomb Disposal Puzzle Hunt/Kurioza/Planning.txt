@@ -1,0 +1,46 @@
+V	valve
+O	gooseberry
+R	bread
+T	adultery
+O	house
+D	dragonfly
+E	employment
+R	cricket
+I	estimate
+V	verify
+A	absence
+T	factory
+A	ask
+D	puddle
+E	effort
+P	rapier
+R	order
+O	woodpecker
+P	present
+R	remain
+A	arrow
+N	lynx
+O	soap
+M	temptation
+O	wolverine
+A	mastiff
+N	hand
+G	magpie
+L	lentil
+E	queen
+S	string
+E	stew
+S	thistle
+
+
+barque
+break
+dowry
+drop
+floor
+force
+grease
+hairy
+row
+trace
+wait

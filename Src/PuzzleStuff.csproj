@@ -59,6 +59,7 @@
     <Compile Include="BombDisposal\Comebacks.cs" />
     <Compile Include="BombDisposal\Critical.cs" />
     <Compile Include="BombDisposal\EternalAwait.cs" />
+    <Compile Include="BombDisposal\Kurioza.cs" />
     <Compile Include="BombDisposal\SpaceRace.cs" />
     <Compile Include="BombDisposal\HomeDepot.cs" />
     <Compile Include="BombDisposal\InsideOut.cs" />
