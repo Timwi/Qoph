@@ -62,6 +62,7 @@
     <Compile Include="BombDisposal\Kurioza.cs" />
     <Compile Include="BombDisposal\MultiSudokuExperiment.cs" />
     <Compile Include="BombDisposal\PngMetadataExperiment.cs" />
+    <Compile Include="BombDisposal\PowerOfTwo.cs" />
     <Compile Include="BombDisposal\SpaceRace.cs" />
     <Compile Include="BombDisposal\HomeDepot.cs" />
     <Compile Include="BombDisposal\InsideOut.cs" />
