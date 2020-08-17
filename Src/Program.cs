@@ -35,7 +35,7 @@ namespace PuzzleStuff
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            BombDisposal.Circles.Generate();
+            BombDisposal.Comebacks.GenerateDropquotes();
 
 
             Console.WriteLine("Done.");

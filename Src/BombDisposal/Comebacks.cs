@@ -219,6 +219,12 @@ namespace PuzzleStuff.BombDisposal
                 var fullPhrase = $"{_insults[0][i]}  {comebacks[i]}  {instructions[i]}".ToUpperInvariant();
                 for (var c = 0; c < fullPhrase.Length; c++)
                 {
+                    if (x >= w)
+                    {
+                        y++;
+                        x -= w;
+                    }
+
                     if (fullPhrase[c] == ' ')
                     {
                         blackSquares.Add((x, y));
@@ -226,18 +232,16 @@ namespace PuzzleStuff.BombDisposal
                     }
                     else if (fullPhrase[c] >= 'A' && fullPhrase[c] <= 'Z')
                     {
+                        // DEBUG
+                        punctuation.Add((x, y, fullPhrase[c]));
+
                         topChars[x] += fullPhrase[c];
                         x++;
                     }
                     else
                     {
-                        punctuation.Add((x == 0 ? w : x, x == 0 ? y - 1 : y, fullPhrase[c]));
-                    }
-
-                    if (x >= w)
-                    {
-                        y++;
-                        x -= w;
+                        punctuation.Add((x, y, fullPhrase[c]));
+                        x++;
                     }
                 }
                 for (; x < w; x++)
@@ -280,9 +284,8 @@ namespace PuzzleStuff.BombDisposal
                 // Punctuation
                 foreach (var (xx, yy, ch) in punctuation)
                 {
-                    svg.Append($@"<ellipse cx='{xx}' cy='{yy + topRows + .5}' rx='.2' ry='.3' fill='#fff' stroke='black' stroke-width='.025' />");
-                    svg.Append($@"<text x='{xx}' y='{yy + topRows + .675}' font-size='.5'>{ch}</text>");
-                    clip[yy + topRows][xx - 1] = ch.ToString();
+                    svg.Append($@"<text x='{xx + .5}' y='{yy + topRows + .8}'>{ch}</text>");
+                    clip[yy + topRows][xx] = ch.ToString();
                 }
 
                 allSvgs.Append($@"<svg viewBox='-.2 -.2 {w + .4} {totalRows + .4}' text-anchor='middle' font-size='.8'>{svg}</svg>");
