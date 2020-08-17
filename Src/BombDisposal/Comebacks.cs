@@ -68,19 +68,19 @@ namespace PuzzleStuff.BombDisposal
             "Too bad no one’s ever heard of YOU at all.");
 
         static readonly string[] _instructions = Ut.NewArray(
-            "FIRST LETTER OF THE FIFTH WORD",
-            "LAST LETTER OF THE FOURTH WORD",
+            "FIFTH WORD, FIRST LETTER",
+            "FOURTH WORD, LAST LETTER",
             "FOURTEENTH LETTER",
             "TWENTIETH LETTER",
             "LETTER AFTER V",
             "SEVENTH LETTER, ATBASH CIPHERED",
-            "LETTER BEFORE FIRST A, ATBASH CIPHERED",
+            "LETTER BEFORE THE FIRST A, ATBASH CIPHERED",
             "LETTER AFTER LAST Y",
-            "SECOND LETTER OF THE FIFTH WORD",
+            "FIFTH WORD, SECOND LETTER",
             "TWENTY-SECOND LETTER",
-            "FIRST LETTER OF THE FIFTH WORD",
+            "FIFTH WORD, FIRST LETTER",
             "NINTH LETTER",
-            "SECOND LETTER OF THE THIRD WORD, ATBASH CIPHERED",
+            "THIRD WORD, SECOND LETTER, ATBASH CIPHERED",
             "FIRST LETTER",
             "LETTER AFTER K",
             "LETTER BEFORE H, ROT THIRTEEN");
@@ -207,7 +207,7 @@ namespace PuzzleStuff.BombDisposal
             const int w = 16;
             var allSvgs = new StringBuilder();
             var numBlackSquares = 0;
-            var clipb = new StringBuilder();
+            var clipb = new List<string>();
             for (var i = 0; i < 16; i++)
             {
                 var topChars = Ut.NewArray(w, _ => "");
@@ -232,9 +232,6 @@ namespace PuzzleStuff.BombDisposal
                     }
                     else if (fullPhrase[c] >= 'A' && fullPhrase[c] <= 'Z')
                     {
-                        // DEBUG
-                        punctuation.Add((x, y, fullPhrase[c]));
-
                         topChars[x] += fullPhrase[c];
                         x++;
                     }
@@ -291,10 +288,10 @@ namespace PuzzleStuff.BombDisposal
                 allSvgs.Append($@"<svg viewBox='-.2 -.2 {w + .4} {totalRows + .4}' text-anchor='middle' font-size='.8'>{svg}</svg>");
                 numBlackSquares += blackSquares.Count;
                 //Console.WriteLine($"Dropquote {i + 1} = {totalRows} rows");
-                //Clipboard.SetText(clip.Select(row => row.JoinString("\t")).JoinString("\n"));
-                clipb.AppendLine(fullPhrase.Replace("  ", "\t"));
+                clipb.Add(clip.Select(row => row.JoinString("\t")).JoinString("\n"));
+                //clipb.AppendLine(fullPhrase.Replace("  ", "\t"));
             }
-            Clipboard.SetText(clipb.ToString());
+            Clipboard.SetText(clipb.JoinString("\n\n\n"));
 
             var path = $@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Comebacks\Comebacks.html";
             General.ReplaceInFile(path, @"<!--%%-->", @"<!--%%%-->", allSvgs.ToString());
