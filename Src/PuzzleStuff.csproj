@@ -60,7 +60,7 @@
     <Compile Include="BombDisposal\Comebacks.cs" />
     <Compile Include="BombDisposal\Critical.cs" />
     <Compile Include="BombDisposal\EternalAwait.cs" />
-    <Compile Include="BombDisposal\Kurioza.cs" />
+    <Compile Include="BombDisposal\OneCanHope.cs" />
     <Compile Include="BombDisposal\MultiSudokuExperiment.cs" />
     <Compile Include="BombDisposal\PngMetadataExperiment.cs" />
     <Compile Include="BombDisposal\PowerOfTwo.cs" />
@@ -78,7 +78,6 @@
     <Compile Include="BombDisposal\NatoSplit.cs" />
     <Compile Include="BombDisposal\Nonorooms.cs" />
     <Compile Include="BombDisposal\NoU.cs" />
-    <Compile Include="BombDisposal\OneCanHope.cs" />
     <Compile Include="BombDisposal\RectangleMangle.cs" />
     <Compile Include="BombDisposal\SomethingsFishy.cs" />
     <Compile Include="Esperanto\BinaryPuzzle.cs" />
