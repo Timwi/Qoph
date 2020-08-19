@@ -33,22 +33,22 @@ namespace PuzzleStuff.BombDisposal
         private static int _maxIx;
         public static void Generate()
         {
-            //*
+            /*
             var solutionStr = @"
 1	1		1	1	1
 1			1		1
 1			1		1
 1	1		1	1	1
-		1			
+0	0	0	0	0	0
 0	0	0	0	0	0
 ";
             /*/
             var solutionStr = @"
 1			1	1	
-		1		1	1
 1		1			1
 1		1			1
-1					
+1		1			1
+0	0	0	0	0	0
 0	0	0	0	0	0
 ";
             /**/
