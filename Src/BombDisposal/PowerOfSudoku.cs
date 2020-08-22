@@ -1,65 +1,37 @@
 ﻿using System;
-using RT.Util;
-using RT.Util.ExtensionMethods;
-using System.Linq;
-using PuzzleSolvers;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using PuzzleSolvers;
+using RT.Util;
 using RT.Util.Consoles;
+using RT.Util.ExtensionMethods;
 
 namespace PuzzleStuff.BombDisposal
 {
-    static class PowerOfTwo
+    static class PowerOfSudoku
     {
         public static void FindIndexingSudokus()
         {
             var words = @"acquireha,adventuri,ahoy,alternati,archer,artificia,atlantis,bakebread,beammeup,beeourgue,benchmaki,bodyguard,bullseye,buylowsel,camouflag,castaway,cheatingd,chestfulo,covermein,cowtipper,delicious,diamondst,diamonds,disenchan,dispensew,doabarrel,dryspell,echolocat,enchanter,feelingil,freediver,freetheen,freightst,fruitonth,gettingan,gettingwo,greatview,haveashea,hottopic,hottouris,iamamarin,ivegotaba,inception,intofire,ironbelly,ironman,itsasign,killthebe,leaderoft,letitgo,librarian,lionhunte,localbrew,maproom,mastertra,megold,moartools,monsterhu,moskstrau,onarail,onepickle,ooohshiny,organizat,overkill,overpower,passingth,plethorao,porkchop,potplante,rabbitsea,rainbowco,renewable,repopulat,returntos,saddleup,sailthe,sleepwith,smeltever,sniperdue,soigottha,soundthea,stayinfro,stickysit,superfuel,supersoni,takinginv,tasteofyo,thebeacon,thebeginn,thebeginn,thedeepen,theendaga,theend,thehaggle,thelie,tiedyeout,timeforst,timetofar,timetomin,timetostr,topofthew,totalbeel,trampolin,treasureh,weneedtog,werebeing,whenpigsf,wherehave,youneedam,zombiedoc,zoologist".Split(',');
-            //var cluephrase = @"americanwordforwhatthebritishcallarubber";   // exactly 40 letters
-            //var cluephrase = @"answeriseraser";
-            //var clueCells = new[] { 10, 12, 14, 16, 29, 31, 33, 46, 48, 50, 52, 65, 67, 69 };
             var cluephrase = @"theansweriseraser";
             var clueCells = "..t.h.e............a.n.s.w............e.r.i............s.e.r.a............s.e.r..".SelectIndexWhere(ch => ch != '.').ToArray();
-            //var cluephrase = @"filmarnieplayskrugerin";
-            //var clueCells = ".#.#.#.#..........#.#.#.#.#..........#.#.#.#..........#.#.#.#.#..........#.#.#.#.".SelectIndexWhere(ch => ch == '#').ToArray();
 
             if (clueCells.Length != cluephrase.Length)
                 Debugger.Break();
 
-            //var randomWords = new[] { "organizat", "sniperdue", "gettingwo", "stayinfro", "cheatingd", "haveashea", "monsterhu", "topofthew", "passingth" };
-            //var randomIndexSudoku = new Sudoku().Solve(new SolverInstructions { Randomizer = new Random(8472) }).First();
-            //var randomWordsSudoku = new Sudoku().Solve(new SolverInstructions { Randomizer = new Random(8473) }).First();
-            //var randomCluephrase = Enumerable.Range(0, 40).Select(i => randomWords[randomWordsSudoku[2 * i + 1] - 1][randomIndexSudoku[2 * i + 1] - 1]).JoinString();
-            //Console.WriteLine(randomWords.JoinString("\n"));
-            //Console.WriteLine();
-            //Console.WriteLine(new Sudoku().SolutionToConsole(randomIndexSudoku));
-            //Console.WriteLine();
-            //Console.WriteLine(new Sudoku().SolutionToConsole(randomWordsSudoku));
-            //Console.WriteLine();
-            //Console.WriteLine(randomCluephrase);
-            //Debugger.Break();
-
-            //words = new[] { "organizat", "sniperdue", "gettingwo", "stayinfro", "cheatingd", "haveashea", "monsterhu", "topofthew", "passingth" };
-            //cluephrase = @"ntneopefitntuhtiiuigiettpihigerygswuapui";
-
-
             var doubleSudoku = new Puzzle(81 * 2, 1, words.Length);
-            //var permutations = Enumerable.Range(1, 9).Permutations().Select(p => p.ToArray()).ToArray();
-            //File.WriteAllLines(@"D:\temp\permutations.txt", permutations.Select(p => p.JoinString(",")));
-            //var permutations = File.ReadLines(@"D:\temp\permutations.txt").Select(line => line.Split(',').Select(int.Parse).ToArray()).ToArray();
 
             // SUDOKU CONSTRAINTS:
             for (var pos = 0; pos < 9; pos++)
             {
                 // Rows
-                //doubleSudoku.AddConstraint(new CombinationsConstraint(Enumerable.Range(0, 9).Select(i => 9 * pos + i), permutations));
                 doubleSudoku.AddConstraint(new UniquenessConstraint(Enumerable.Range(0, 9).Select(i => 9 * pos + i)));
                 doubleSudoku.AddConstraint(new UniquenessConstraint(Enumerable.Range(0, 9).Select(i => 81 + 9 * pos + i)));
                 // Columns
-                //doubleSudoku.AddConstraint(new CombinationsConstraint(Enumerable.Range(0, 9).Select(i => 9 * i + pos), permutations));
                 doubleSudoku.AddConstraint(new UniquenessConstraint(Enumerable.Range(0, 9).Select(i => 9 * i + pos)));
                 doubleSudoku.AddConstraint(new UniquenessConstraint(Enumerable.Range(0, 9).Select(i => 81 + 9 * i + pos)));
                 // 3×3 regions
-                //doubleSudoku.AddConstraint(new CombinationsConstraint(Enumerable.Range(0, 9).Select(i => i % 3 + 3 * (pos % 3) + 9 * (i / 3 + 3 * (pos / 3))), permutations));
                 doubleSudoku.AddConstraint(new UniquenessConstraint(Enumerable.Range(0, 9).Select(i => i % 3 + 3 * (pos % 3) + 9 * (i / 3 + 3 * (pos / 3)))));
                 doubleSudoku.AddConstraint(new UniquenessConstraint(Enumerable.Range(0, 9).Select(i => 81 + i % 3 + 3 * (pos % 3) + 9 * (i / 3 + 3 * (pos / 3)))));
             }
@@ -120,11 +92,9 @@ namespace PuzzleStuff.BombDisposal
             {
                 foreach (var solution in doubleSudoku.Solve(new SolverInstructions { Randomizer = new Random((1 + pr) * 100 + 47), ShowContinuousProgress = 40, ShowContinuousProgressShortened = true }))
                 {
-                    //Console.WriteLine(solution.JoinString(","));
                     lock (lockObject)
                     {
                         ConsoleUtil.WriteLine(solution.JoinString(", "));
-                        //ConsoleUtil.WriteLine(doubleSudoku.SolutionToConsole(solution.Subarray(0, 81)));
                         ConsoleUtil.WriteLine(solution.Take(81)
                             .Select((value, cell) => value.ToString().Color(clueCells.Contains(cell) ? ConsoleColor.White : ConsoleColor.DarkGray, clueCells.Contains(cell) ? ConsoleColor.DarkGreen : ConsoleColor.Black))
                             .Split(9)

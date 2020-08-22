@@ -35,7 +35,7 @@ namespace PuzzleStuff
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            BombDisposal.OneCanHope.Generate();
+            BombDisposal.AreYouTallerThanASkyscraper.Generate();
 
 
             Console.WriteLine("Done.");
