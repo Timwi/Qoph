@@ -129,7 +129,7 @@ namespace PuzzleStuff.BombDisposal
 
                 allSubpuzzles.AppendLine($@"<table class='skyscraper{(ssqIx < 4 ? $" {markers[ssqIx]}" : "")}'>
         <tr><td class='corner'></td>{Enumerable.Range(0, 4).Select(col => $"<th>{clues.Where(c => c.side == Side.Top && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
-        {Enumerable.Range(0, 4).Select(row => $"<tr><th>{clues.Where(c => c.side == Side.Left && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>{Enumerable.Range(0, 4).Select(col => $"<td>{sq[4 * row + col]}</td>").JoinString()}<th>{clues.Where(c => c.side == Side.Right && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th></tr>").JoinString()}
+        {Enumerable.Range(0, 4).Select(row => $"<tr><th>{clues.Where(c => c.side == Side.Left && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>{Enumerable.Range(0, 4).Select(col => $"<td></td>").JoinString()}<th>{clues.Where(c => c.side == Side.Right && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th></tr>").JoinString()}
         <tr><td class='corner'></td>{Enumerable.Range(0, 4).Select(col => $"<th>{clues.Where(c => c.side == Side.Bottom && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
     </table>");
                 if (ssqIx % 4 == 3)
