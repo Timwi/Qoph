@@ -58,6 +58,7 @@
     <Compile Include="BinairoSudoku.cs" />
     <Compile Include="BombDisposal\AnExclusive.cs" />
     <Compile Include="BombDisposal\AreYouTallerThanASkyscraper.cs" />
+    <Compile Include="BombDisposal\BattleshipsAndPitfalls.cs" />
     <Compile Include="BombDisposal\Comebacks.cs" />
     <Compile Include="BombDisposal\Critical.cs" />
     <Compile Include="BombDisposal\EternalAwait.cs" />
