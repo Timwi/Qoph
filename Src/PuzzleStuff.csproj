@@ -76,7 +76,7 @@
     <Compile Include="BombDisposal\BoardState.cs" />
     <Compile Include="BombDisposal\Circles.cs" />
     <Compile Include="BombDisposal\FortySeven.cs" />
-    <Compile Include="BombDisposal\NatoSplit.cs" />
+    <Compile Include="BombDisposal\Segmented.cs" />
     <Compile Include="BombDisposal\Nonorooms.cs" />
     <Compile Include="BombDisposal\NoU.cs" />
     <Compile Include="BombDisposal\RectangleMangle.cs" />
