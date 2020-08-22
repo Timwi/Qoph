@@ -1,7 +1,7 @@
 V	valve
 O	gooseberry
 R	bread
-T	adultery
+T	wait
 O	house
 D	dragonfly
 E	employment
@@ -43,4 +43,3 @@ grease
 hairy
 row
 trace
-wait
