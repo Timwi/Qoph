@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using RT.Util;
 using RT.Util.Consoles;
@@ -39,7 +37,7 @@ namespace PuzzleStuff.BombDisposal
                 from bWord in new[] { "BETATEST" }   //wordsStartingWith['B']
                 from cWord in new[] { "CAREBEAR" }   //wordsStartingWith['C']
                 from dWord in new[] { "DIAGNOSE" }
-                from eWord in new[] { "EGGPLANT" }
+                from eWord in new[] { "EARMOLDS" }   //wordsStartingWith['E']
                 from fWord in new[] { "FRONTIER" }  //wordsStartingWith['F'].ToArray().Shuffle().Take(100)
                 from gWord in new[] { "GANYMEDE" }  //wordsStartingWith['G']
                 from hWord in new[] { "HIROLLER" }  //wordsStartingWith['H'].ToArray().Shuffle().Take(100)
@@ -168,11 +166,11 @@ namespace PuzzleStuff.BombDisposal
                     lock (wordsStartingWith)
                     {
                         ConsoleUtil.WriteLine($"Found: {feeders.JoinString(", ")}        ".Color(ConsoleColor.Green));
-                        //for (var i = 0; i < n; i++)
-                        //    Console.WriteLine(outputNumbers[i].JoinString(" "));
-                        //Clipboard.SetText(clipboardText.ToString());
-                        //ccOutput.WriteToConsole();
-                        //Console.WriteLine();
+                        for (var i = 0; i < n; i++)
+                            Console.WriteLine(outputNumbers[i].JoinString(" "));
+                        Clipboard.SetText(clipboardText.ToString());
+                        ccOutput.WriteToConsole();
+                        Console.WriteLine();
                         //Debugger.Break();
                         break;
                     }
