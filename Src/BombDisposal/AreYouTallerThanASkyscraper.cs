@@ -128,10 +128,10 @@ namespace PuzzleStuff.BombDisposal
                 st.WriteToConsole();
 
                 allSubpuzzles.AppendLine($@"<table class='skyscraper{(ssqIx < 4 ? $" {markers[ssqIx]}" : "")}'>
-        <tr><td class='corner'></td>{Enumerable.Range(0, 4).Select(col => $"<th>{clues.Where(c => c.side == Side.Top && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
-        {Enumerable.Range(0, 4).Select(row => $"<tr><th>{clues.Where(c => c.side == Side.Left && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>{Enumerable.Range(0, 4).Select(col => $"<td></td>").JoinString()}<th>{clues.Where(c => c.side == Side.Right && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th></tr>").JoinString()}
-        <tr><td class='corner'></td>{Enumerable.Range(0, 4).Select(col => $"<th>{clues.Where(c => c.side == Side.Bottom && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
-    </table>");
+    <tr><td class='corner'></td>{Enumerable.Range(0, 4).Select(col => $"<th>{clues.Where(c => c.side == Side.Top && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
+    {Enumerable.Range(0, 4).Select(row => $"<tr><th>{clues.Where(c => c.side == Side.Left && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>{Enumerable.Range(0, 4).Select(col => $"<td></td>").JoinString()}<th>{clues.Where(c => c.side == Side.Right && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th></tr>").JoinString()}
+    <tr><td class='corner'></td>{Enumerable.Range(0, 4).Select(col => $"<th>{clues.Where(c => c.side == Side.Bottom && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
+</table>");
                 if (ssqIx % 4 == 3)
                     allSubpuzzles.AppendLine("<br>");
             }
@@ -143,11 +143,11 @@ namespace PuzzleStuff.BombDisposal
                 (Side.Bottom, 1, 5), (Side.Bottom, 7, 3), (Side.Bottom, 11, 7),
                 (Side.Left, 6, 5), (Side.Left, 11, 3)
             );
-            allSubpuzzles.AppendLine($@"<table class='skyscraper big'>
-        <tr><td class='corner'></td>{Enumerable.Range(0, 16).Select(col => $"<th>{bigClues.Where(c => c.side == Side.Top && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
-        {Enumerable.Range(0, 16).Select(row => $"<tr><th>{bigClues.Where(c => c.side == Side.Left && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>{"<td></td>".Repeat(16)}<th>{bigClues.Where(c => c.side == Side.Right && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th></tr>").JoinString()}
-        <tr><td class='corner'></td>{Enumerable.Range(0, 16).Select(col => $"<th>{bigClues.Where(c => c.side == Side.Bottom && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
-    </table>");
+            allSubpuzzles.Append($@"<table class='skyscraper big'>
+    <tr><td class='corner'></td>{Enumerable.Range(0, 16).Select(col => $"<th>{bigClues.Where(c => c.side == Side.Top && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
+    {Enumerable.Range(0, 16).Select(row => $"<tr><th>{bigClues.Where(c => c.side == Side.Left && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>{"<td></td>".Repeat(16)}<th>{bigClues.Where(c => c.side == Side.Right && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th></tr>").JoinString()}
+    <tr><td class='corner'></td>{Enumerable.Range(0, 16).Select(col => $"<th>{bigClues.Where(c => c.side == Side.Bottom && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
+</table>");
             General.ReplaceInFile(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Untitled BFDI minimeta\Untitled BFDI minimeta.html", "<!--%%-->", "<!--%%%-->", allSubpuzzles.ToString());
         }
 
