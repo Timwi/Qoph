@@ -148,7 +148,7 @@ namespace PuzzleStuff.BombDisposal
     {Enumerable.Range(0, 16).Select(row => $"<tr><th>{bigClues.Where(c => c.side == Side.Left && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>{"<td></td>".Repeat(16)}<th>{bigClues.Where(c => c.side == Side.Right && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th></tr>").JoinString()}
     <tr><td class='corner'></td>{Enumerable.Range(0, 16).Select(col => $"<th>{bigClues.Where(c => c.side == Side.Bottom && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
 </table>");
-            General.ReplaceInFile(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Untitled BFDI minimeta\Untitled BFDI minimeta.html", "<!--%%-->", "<!--%%%-->", allSubpuzzles.ToString());
+            General.ReplaceInFile(@"D:\c\PuzzleStuff\DataFiles\Bomb Disposal Puzzle Hunt\Objectionable Ranking\Objectionable Ranking.html", "<!--%%-->", "<!--%%%-->", allSubpuzzles.ToString());
         }
 
         enum Side { Top, Right, Bottom, Left }
