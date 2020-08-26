@@ -2,7 +2,7 @@
 using System.Linq;
 using RT.Util.ExtensionMethods;
 
-namespace PuzzleStuff
+namespace Qoph
 {
     static class MorseCode
     {

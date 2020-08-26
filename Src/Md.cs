@@ -9,7 +9,7 @@ using RT.Util;
 using RT.Util.ExtensionMethods;
 using RT.Util.Geometry;
 
-namespace PuzzleStuff
+namespace Qoph
 {
     public static partial class Md
     {

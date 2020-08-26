@@ -4,7 +4,7 @@ using System.Linq;
 using RT.Util;
 using RT.Util.ExtensionMethods;
 
-namespace PuzzleStuff
+namespace Qoph
 {
     static class StatueParkSolver
     {

@@ -1,9 +1,0 @@
-✓ D - Franjo Tuđman         1st Croatian president
-✓ E - Michael Bublé         singer, three albums depicted
-✓ A - Agnetha Fältskog      ABBA member
-✓ L - Peter Biľak           font designer, two fonts depicted
-✓ I - Salvador Dalí         painter, one painting depicted
-✓ N - Michael Peña          actor, three movies depicted
-✓ G - Recep Tayyip Erdoğan  12th Turkish president
-✓ S - Dominik Hašek         NHL goalkeeper, four teams depicted
-

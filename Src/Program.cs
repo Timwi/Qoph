@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 using System.Text;
 using RT.PostBuild;
 
-[assembly: AssemblyTitle("PuzzleStuff")]
-[assembly: AssemblyDescription("Contains some ancillary code used in the creation of puzzle hunts.")]
+[assembly: AssemblyTitle("Qoph")]
+[assembly: AssemblyDescription("Contains code used in the creation of the Quantum Obfuscation Puzzle Hunt (QOPH).")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PuzzleStuff")]
-[assembly: AssemblyCopyright("Copyright © Timwi 2019")]
+[assembly: AssemblyProduct("Qoph")]
+[assembly: AssemblyCopyright("Copyright © Timwi 2019–2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
@@ -17,7 +17,7 @@ using RT.PostBuild;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-namespace PuzzleStuff
+namespace Qoph
 {
     partial class Program
     {
@@ -35,7 +35,7 @@ namespace PuzzleStuff
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            BombDisposal.CrossingBridges.HashiwokakeroExperiment();
+            FortySeven.Do();
 
 
             Console.WriteLine("Done.");

@@ -6,7 +6,7 @@ using RT.Util;
 using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
 
-namespace PuzzleStuff
+namespace Qoph
 {
     static class WordSearch
     {

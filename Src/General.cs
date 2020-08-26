@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using RT.Util.ExtensionMethods;
 
-namespace PuzzleStuff
+namespace Qoph
 {
     static class General
     {

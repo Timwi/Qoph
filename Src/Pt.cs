@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PuzzleStuff
+namespace Qoph
 {
     public struct Pt : IEquatable<Pt>
     {
