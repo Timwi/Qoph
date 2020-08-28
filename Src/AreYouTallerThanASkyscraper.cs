@@ -127,11 +127,17 @@ namespace Qoph
                         clue.ToString().Color(ConsoleColor.Yellow), alignment: HorizontalTextAlignment.Right);
                 st.WriteToConsole();
 
-                allSubpuzzles.AppendLine($@"<table class='skyscraper{(ssqIx < 4 ? $" {markers[ssqIx]}" : "")}'>
-    <tr><td class='corner'></td>{Enumerable.Range(0, 4).Select(col => $"<th>{clues.Where(c => c.side == Side.Top && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
-    {Enumerable.Range(0, 4).Select(row => $"<tr><th>{clues.Where(c => c.side == Side.Left && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>{Enumerable.Range(0, 4).Select(col => $"<td></td>").JoinString()}<th>{clues.Where(c => c.side == Side.Right && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th></tr>").JoinString()}
-    <tr><td class='corner'></td>{Enumerable.Range(0, 4).Select(col => $"<th>{clues.Where(c => c.side == Side.Bottom && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
-</table>");
+                //M4 0l.2 -.2M4.05 -.5a.45 .45 0 1 0 .9 0a.45 .45 0 1 0 -.9 0
+                allSubpuzzles.AppendLine($@"<svg class='skyscraper' viewBox='-1.1 -1.1 6.2 6.2' text-anchor='middle' font-size='.7'>
+    <path d='M0 0h4v4h-4z' fill='white' stroke='black' stroke-width='.075' />{(ssqIx >= 4 ? "" : $@"
+    <path d='{Ut.NewArray(
+                                                "M4 0l.2 -.2M4.05 -.5a.45 .45 0 1 0 .9 0a.45 .45 0 1 0 -.9 0",
+                                                "M0 0l-.2 -.2M-.05 -.5a.45 .45 0 1 0 -.9 0a.45 .45 0 1 0 .9 0",
+                                                "M4 4l.2 .2M4.05 4.5a.45 .45 0 1 0 .9 0a.45 .45 0 1 0 -.9 0",
+                                                "M0 4l-.2 .2M-.05 4.5a.45 .45 0 1 0 -.9 0a.45 .45 0 1 0 .9 0")[ssqIx]}' fill='none' stroke='black' stroke-width='.05' />")}
+    <path d='M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4' fill='none' stroke='black' stroke-width='.025' />
+{clues.Select(clue => $@"    <text x='{clue.side switch { Side.Left => -.5, Side.Right => 4.5, _ => clue.where + .5 }}' y='{clue.side switch { Side.Top => -.2, Side.Bottom => 4.8, _ => clue.where + .8 }}'>{clue.clue}</text>").JoinString("\r\n")}
+</svg>");
                 if (ssqIx % 4 == 3)
                     allSubpuzzles.AppendLine("<br>");
             }
@@ -143,12 +149,12 @@ namespace Qoph
                 (Side.Bottom, 1, 5), (Side.Bottom, 7, 3), (Side.Bottom, 11, 7),
                 (Side.Left, 6, 5), (Side.Left, 11, 3)
             );
-            allSubpuzzles.Append($@"<table class='skyscraper big'>
-    <tr><td class='corner'></td>{Enumerable.Range(0, 16).Select(col => $"<th>{bigClues.Where(c => c.side == Side.Top && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
-    {Enumerable.Range(0, 16).Select(row => $"<tr><th>{bigClues.Where(c => c.side == Side.Left && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>{"<td></td>".Repeat(16)}<th>{bigClues.Where(c => c.side == Side.Right && c.where == row).Select(c => c.clue.ToString()).FirstOrDefault("")}</th></tr>").JoinString()}
-    <tr><td class='corner'></td>{Enumerable.Range(0, 16).Select(col => $"<th>{bigClues.Where(c => c.side == Side.Bottom && c.where == col).Select(c => c.clue.ToString()).FirstOrDefault("")}</th>").JoinString()}<td class='corner'></td></tr>
-</table>");
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Objectionable Ranking\Objectionable Ranking.html", "<!--%%-->", "<!--%%%-->", allSubpuzzles.ToString());
+            allSubpuzzles.Append($@"<svg style='width: 18.2cm; display: inline-block' viewBox='-1.1 -1.1 18.2 18.2' text-anchor='middle' font-size='.7'>
+    <path d='M0 0h16v16h-16z' fill='white' stroke='black' stroke-width='.075' />
+    <path d='{Enumerable.Range(1, 15).Select(x => $"M{x} 0v16").JoinString()}{Enumerable.Range(1, 15).Select(y => $"M0 {y}h16").JoinString()}' fill='none' stroke='black' stroke-width='.025' />
+{bigClues.Select(clue => $@"    <text x='{clue.side switch { Side.Left => -.5, Side.Right => 16.5, _ => clue.where + .5 }}' y='{clue.side switch { Side.Top => -.2, Side.Bottom => 16.8, _ => clue.where + .8 }}'>{clue.clue}</text>").JoinString("\r\n")}
+</svg>");
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Objectionable Ranking\Objectionable Ranking.html", "<!--@@-->", "<!--@@@-->", allSubpuzzles.ToString());
         }
 
         enum Side { Top, Right, Bottom, Left }
