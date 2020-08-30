@@ -101,6 +101,8 @@ namespace Qoph
                 // Changes to the clues that I’ve decided I want
                 if (ssqIx == 1)
                     clues.Add((Side.Right, 1, 1));
+                if (ssqIx == 0)
+                    clues.Add((Side.Left, 1, 4));
                 if (ssqIx == 14)
                 {
                     if (!clues.Remove((Side.Left, 0, 2)))

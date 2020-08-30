@@ -35,7 +35,7 @@ namespace Qoph
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            TakeTheLight.GenerateSvg();
+            SomethingsFishy.Generate();
 
 
             Console.WriteLine("Done.");

@@ -17,7 +17,7 @@ namespace Qoph
         // 0 = up; going clockwise
         private static readonly (int left, int right)[] _semaphoreOrientations = new[] { (5, 4), (6, 4), (7, 4), (0, 4), (4, 1), (4, 2), (4, 3), (6, 5), (5, 7), (0, 2), (5, 0), (5, 1), (5, 2), (5, 3), (6, 7), (6, 0), (6, 1), (6, 2), (6, 3), (7, 0), (7, 1), (0, 3), (1, 2), (1, 3), (7, 2), (3, 2) };
 
-        public unsafe static void Do()
+        public unsafe static void Generate()
         {
             const string solution = @"AMPHIBIA";
             const int w = 6;
@@ -70,29 +70,15 @@ namespace Qoph
     </style>
 </head>
 <body>
-    <table>
+    <table style='border-spacing: .2cm'>
         {(result.Select(name => (name ?? $"R{redHerring++}").Apply(filename =>
             {
                 var path = $@"D:\c\Qoph\DataFiles\Something’s Fishy\{filename}.jpg";
                 var byteData = File.ReadAllBytes(path);
                 using var bitmap = new Bitmap(path);
-                var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
-                var start = data.Scan0;
-                double r = 0, g = 0, b = 0;
-                for (var y = 0; y < bitmap.Height; y++)
-                {
-                    var ptr = (byte*) (start + y * data.Stride);
-                    for (var x = 0; x < bitmap.Width; x++)
-                    {
-                        b += ptr[4 * x];
-                        g += ptr[4 * x + 1];
-                        r += ptr[4 * x + 2];
-                    }
-                }
-                bitmap.UnlockBits(data);
                 var rect = GraphicsUtil.FitIntoMaintainAspectRatio(bitmap.Size, new Rectangle(0, 0, 200, 150));
                 var s = bitmap.Width * bitmap.Height;
-                return $"<td style='background: #{(int) (r / s):X2}{(int) (g / s):X2}{(int) (b / s):X2}; border: 5px solid {(filename.EndsWith("1") && !filename.StartsWith("R") ? "#4499ff" : "transparent")}'><img width='{rect.Width}' height='{rect.Height}' title='{filename}' src='data:image/jpg;base64,{Convert.ToBase64String(byteData)}' /></td>";
+                return $"<td style='background: #acd; border: 5px solid {(filename.EndsWith("1") && !filename.StartsWith("R") ? "#4499ff" : "transparent")}'><img width='{rect.Width}' height='{rect.Height}' src='data:image/jpg;base64,{Convert.ToBase64String(byteData)}' /></td>";
             })).Split(w).Select(row => $"<tr>{row.JoinString()}</tr>").JoinString())}
     </table>
 </body>
