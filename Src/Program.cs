@@ -35,7 +35,7 @@ namespace Qoph
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            SomethingsFishy.Generate();
+            BattleshipsAndPitfalls.DoFillomino();
 
 
             Console.WriteLine("Done.");

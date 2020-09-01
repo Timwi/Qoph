@@ -236,9 +236,9 @@ namespace Qoph
             foreach (var cell in lights.SelectMany(l => l.cells).Distinct())
                 svg.Append($"<rect x='{cell % width}' y='{cell / width}' width='1' height='1' fill='white' />");
             var path = new StringBuilder();
-            for (var y = 0; y < height + 3; y++)
+            for (var y = 0; y < height + 1; y++)
                 path.Append($"M -1 {y} {width + 1} {y}");
-            for (var x = 0; x < width + 3; x++)
+            for (var x = 0; x < width + 1; x++)
                 path.Append($"M {x} -1 {x} {height + 1}");
             foreach (var (x, y) in lightsWithHeads.Select(light => light.head).Distinct())
                 path.Append($"M{x} {y} l 1 1");
