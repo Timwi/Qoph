@@ -90,39 +90,39 @@ namespace Qoph
             return ($"<path d='{svgLines}' fill='none' stroke='black' stroke-width='.1' /><path d='{svgFilled}' />", vx, vy, cornerPoints.ToArray());
         }
 
-        private static readonly (string eoLeft, string enLeft, string eoRight, string enRight, int index)[] data = @"valve	klapo	clap	aplaŭdo	1
-gooseberry	groso	gross	groco	2
-bread	pano	pan	pato	2
-wait	atendi	attend	ĉeesti	4
-house	domo	dome	kupolo	2
-dragonfly	libelo	libel	kalumnio	1
-employment	dungo	dung	sterko	1
-cricket	grilo	grill	krado	2
-estimate	taksi	tax	imposti	4
-verify	kontroli	control	regi	1
-absence	foresto	forest	arbaro	1
-factory	fabriko	fabric	teksaĵo	4
-ask	demandi	demand	postuli	1
-puddle	flako	flake	floko	3
-effort	peno	pen	skribilo	1
-rapier	spado	spade	fosilo	3
-order	mendi	mend	ripari	2
-woodpecker	pego	peg	kejlo	2
-present	nuno	nun	monakino	1
-remain	resti	rest	ripozi	1
-arrow	sago	sage	salvio	1
-lentil	lento	lent	karesmo	3
-soap	sapo	sap	suko	2
-temptation	tento	tent	tendo	3
-wolverine	gulo	gull	mevo	2
-magpie	pigo	pig	porko	2
-hand	mano	man	viro	3
-string	kordo	cord	ŝnuro	6
-lynx	linko	link	ligilo	1
-queen	damo	dam	baraĵo	3
-mastiff	dogo	dog	hundo	3
-stew	stufi	stuff	farĉi	3
-thistle	kardo	card	karto	4".Replace("\r", "").Split('\n').Select(line => line.Split('\t')).Select(arr => (eoLeft: arr[1], enLeft: arr[2], eoRight: arr[3], enRight: arr[0], index: int.Parse(arr[4]))).ToArray();
+        private static readonly (string eoLeft, string enLeft, string eoRight, string enRight, int index, bool line)[] data = @"valve	klapo	clap	aplaŭdo	1	
+gooseberry	groso	gross	groco	2	
+bread	pano	pan	pato	2	
+wait	atendi	attend	ĉeesti	4	
+house	domo	dome	kupolo	2	1
+dragonfly	libelo	libel	kalumnio	1	
+employment	dungo	dung	sterko	1	
+cricket	grilo	grill	krado	2	
+estimate	taksi	tax	imposti	4	
+verify	kontroli	control	regi	1	
+absence	foresto	forest	arbaro	1	
+factory	fabriko	fabric	teksaĵo	4	
+ask	demandi	demand	postuli	1	1
+puddle	flako	flake	floko	3	
+effort	peno	pen	skribilo	1	1
+rapier	spado	spade	fosilo	3	
+order	mendi	mend	ripari	2	
+woodpecker	pego	peg	kejlo	2	
+present	nuno	nun	monakino	1	
+remain	resti	rest	ripozi	1	
+arrow	sago	sage	salvio	1	1
+lentil	lento	lent	karesmo	3	
+soap	sapo	sap	suko	2	
+temptation	tento	tent	tendo	3	
+wolverine	gulo	gull	mevo	2	1
+magpie	pigo	pig	porko	2	
+hand	mano	man	viro	3	
+string	kordo	cord	ŝnuro	6	
+lynx	linko	link	ligilo	1	
+queen	damo	dam	baraĵo	3	1
+mastiff	dogo	dog	hundo	3	
+stew	stufi	stuff	farĉi	3	
+thistle	kardo	card	karto	4	".Replace("\r", "").Split('\n').Select(line => line.Split('\t')).Select(arr => (eoLeft: arr[1], enLeft: arr[2], eoRight: arr[3], enRight: arr[0], index: int.Parse(arr[4]), line: arr[5] == "1")).ToArray();
 
         public static void Generate_OLD()
         {
@@ -139,7 +139,7 @@ thistle	kardo	card	karto	4".Replace("\r", "").Split('\n').Select(line => line.Sp
             {
                 var prevY = y;
                 y += 2;
-                var (eoLeft, enLeft, eoRight, enRight, index) = data[i];
+                var (eoLeft, enLeft, eoRight, enRight, index, line) = data[i];
                 var (svg, dx, dy, cs) = renderWord(eoLeft);
                 if (i > 0)
                     foreach (var (cdx, cdy) in cs)
@@ -162,7 +162,7 @@ thistle	kardo	card	karto	4".Replace("\r", "").Split('\n').Select(line => line.Sp
             {
                 var prevY = y;
                 y += 2;
-                var (eoLeft, enLeft, eoRight, enRight, index) = sortedData[i];
+                var (eoLeft, enLeft, eoRight, enRight, index, line) = sortedData[i];
                 var (svg, dx, dy, cs) = renderWord(eoRight);
                 var (dx2, dy2) = eoRight[0] == 'a' ? (2, 0) : (1, -1);
                 cs = cs.Select(tup => (tup.x + dx2, tup.y + dy2)).ToArray();
@@ -290,12 +290,12 @@ thistle	kardo	card	karto	4".Replace("\r", "").Split('\n').Select(line => line.Sp
             var maxHeight = data.Max(d => Math.Max(getRect(d.eoLeft).height, getRect(d.eoRight).height));
             var padding = .5d;
 
-            foreach (var (eoLeft, enLeft, _, _, _) in data)
+            foreach (var (eoLeft, enLeft, _, _, _, line) in data)
             {
                 var (x, y, width, height, svg) = getRect(eoLeft);
-                htmlCodeTop.Append($"<div class='box'><svg viewBox='{x + width / 2d - maxWidth / 2d - padding} {y + height - maxHeight - padding} {maxWidth + 2 * padding} {maxHeight + 2 * padding}'>{svg}</svg><div>{enLeft.ToUpperInvariant()}</div></div>");
+                htmlCodeTop.Append($"<div class='box{(line ? " line" : "")}'><svg viewBox='{x + width / 2d - maxWidth / 2d - padding} {y + height - maxHeight - padding} {maxWidth + 2 * padding} {maxHeight + 2 * padding}'>{svg}</svg><div>{enLeft.ToUpperInvariant()}</div></div>");
             }
-            foreach (var (_, _, eoRight, enRight, index) in data.OrderBy(d => d.enRight))
+            foreach (var (_, _, eoRight, enRight, index, _) in data.OrderBy(d => d.enRight))
             {
                 var (x, y, width, height, svg) = getRect(eoRight);
                 htmlCodeBottom.Append($"<div class='box'><svg viewBox='{x + width / 2d - maxWidth / 2d - padding} {y + height - maxHeight - padding} {maxWidth + 2 * padding} {maxHeight + 2 * padding}'>{svg}</svg><div>{enRight.Select(ch => "_ ").JoinString().Trim()} ({index})</div></div>");
