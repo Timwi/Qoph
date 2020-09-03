@@ -36,7 +36,7 @@ namespace Qoph
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            FaceToFace.Planning();
+            FaceToFace.GenerateVertexClues();
 
             Console.WriteLine("Done.");
             Console.ReadLine();
