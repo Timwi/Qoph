@@ -294,7 +294,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
             }}
         </style>
     </head>
-    <body>{polyhedra.Where(p => p.Faces.Length < 300).OrderBy(p => p.Faces.Length).ThenBy(p => p.Name).Select(p =>
+    <body>{polyhedra.Where(p => p.Faces.Length == 24 || p.Faces.Length == 28).OrderBy(p => p.Faces.Length).ThenBy(p => p.Name).Select(p =>
                 {
                     try { return $"<div class='poly-wrap'>{generateNet(p).svg}<div class='filename'>{p.Filename}</div><div class='name'><a href='http://dmccooey.com/polyhedra/{Path.GetFileNameWithoutExtension(p.Filename)}.html'>{p.Name}</a> ({p.Faces.Length} faces)</div></div>"; }
                     catch (Exception e) { return $"<div>Error - {p.Filename} - <a href='http://dmccooey.com/polyhedra/{Path.GetFileNameWithoutExtension(p.Filename)}.html'>{p.Name}</a> - {e.Message} - {e.GetType().FullName}</div>"; }
@@ -699,118 +699,166 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
         // Self-Dual Icosioctahedron #1 (28 faces)
         public static void GenerateEdgeClues()
         {
-            var polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\SelfDualIcosioctahedron4.txt");
-            var n = polyhedron.Faces.Length;
+            var n = 24;
+            foreach (var polyhedron in getPolyhedra())
+            {
+                if (!Ut.NewArray(
+                    "Biscribed Pentagonal Icositetrahedron (dextro) with radius = 1",
+                    "Klein Map {7,3}_8 with basic shape",
+                    "Pentagonal Icositetrahedron (laevo)",
+                    "Pentagonal Icositetrahedron (dextro)").Contains(polyhedron.Name))
+                    continue;
 
-            var rnd = new Random(2);
-            var solution = Enumerable.Range(1, 26).Concat(new[] { 1, 5 }).ToArray().Shuffle(rnd);
+                var rnd = new Random(2);
+                var solution = Enumerable.Range(1, 26).Except(new[] { 1, 5 }).ToArray().Shuffle(rnd);
+                if (solution.Length != n)
+                    Debugger.Break();
+
+                IEnumerable<(int face1, int face2, EdgeClueType type, int value)> generateClues(int face1, int face2)
+                {
+                    var list = new List<(int face1, int face2, EdgeClueType type, int value)>();
+                    list.Add((face1, face2, EdgeClueType.Sum, solution[face1] + solution[face2]));
+                    //list.Add((face1, face2, EdgeClueType.Difference, Math.Abs(solution[face1] - solution[face2])));
+                    //var product = solution[face1] * solution[face2];
+                    //if (new[] { 2, 3, 5, 7 }.Count(f => product % f == 0) >= 3)
+                    //    list.Add((face1, face2, EdgeClueType.Product, product));
+                    //list.Add((face1, face2, EdgeClueType.Rel, Math.Sign(solution[face2] - solution[face1])));
+                    //if (solution[face1] != 0 && solution[face2] % solution[face1] == 0 && solution[face2] / solution[face1] <= 5)
+                    //    list.Add((face1, face2, EdgeClueType.Quotient, solution[face2] / solution[face1]));
+                    //else if (solution[face2] != 0 && solution[face1] % solution[face2] == 0 && solution[face1] / solution[face2] <= 5)
+                    //    list.Add((face1, face2, EdgeClueType.Quotient, solution[face1] / solution[face2]));
+                    //yield return list.PickRandom(rnd);
+                    return list;
+                }
+
+                var minValue = 1;// solution.Min();
+                var maxValue = 1000;// solution.Max();
+                var maxLength = Math.Max(minValue.ToString().Length, maxValue.ToString().Length);
+                ConsoleUtil.WriteLine($"SOLTN: {solution.Select(i => i.ToString().PadLeft(maxLength)).JoinString(", ").Color(ConsoleColor.Yellow)}", null);
+
+                IEnumerable<int[]> recurse((int face1, int face2, EdgeClueType type, int value)[] clues, int[] sofar, bool[] used, int[][] possibleValues)
+                {
+                    var bestFace = 0;
+                    var bestConstraint = int.MaxValue;
+                    var allUsed = true;
+                    for (var i = 0; i < n; i++)
+                    {
+                        if (!used[i])
+                        {
+                            allUsed = false;
+                            if (possibleValues[i].Length < bestConstraint)
+                            {
+                                bestConstraint = possibleValues[i].Length;
+                                bestFace = i;
+                            }
+                        }
+                    }
+                    if (allUsed)
+                    {
+                        yield return sofar;
+                        yield break;
+                    }
+
+                    used[bestFace] = true;
+                    foreach (var value in possibleValues[bestFace])
+                    {
+                        //for (var i = 0; i < n; i++)
+                        //    if (i != bestFace && used[i] && sofar[i] == value)
+                        //        goto busted;
+
+                        sofar[bestFace] = value;
+                        var newPossibleValues = (int[][]) possibleValues.Clone();
+                        foreach (var clue in clues)
+                        {
+                            var (cFace1, cFace2, cType, cValue) = clue;
+                            if (cFace1 == bestFace)
+                            {
+                            }
+                            else if (cFace2 == bestFace)
+                            {
+                                var t = cFace1;
+                                cFace1 = cFace2;
+                                cFace2 = t;
+                                if (cType == EdgeClueType.Rel)
+                                    cValue = -cValue;
+                            }
+                            else
+                                continue;
+
+                            switch (cType)
+                            {
+                                case EdgeClueType.Sum: newPossibleValues[cFace2] = newPossibleValues[cFace2].Where(i => i + value == cValue).ToArray(); break;
+                                case EdgeClueType.Difference: newPossibleValues[cFace2] = newPossibleValues[cFace2].Where(i => Math.Abs(i - value) == cValue).ToArray(); break;
+                                case EdgeClueType.Product: newPossibleValues[cFace2] = newPossibleValues[cFace2].Where(i => i * value == cValue).ToArray(); break;
+                                case EdgeClueType.Quotient: newPossibleValues[cFace2] = newPossibleValues[cFace2].Where(i => i == cValue * value || value == cValue * i).ToArray(); break;
+                                case EdgeClueType.Rel: newPossibleValues[cFace2] = newPossibleValues[cFace2].Where(i => Math.Sign(i - value) == cValue).ToArray(); break;
+                            }
+                            if (newPossibleValues[cFace2].Length == 0)
+                                goto busted;
+                        }
+
+                        foreach (var sol in recurse(clues, sofar, used, newPossibleValues))
+                            yield return sol;
+
+                        busted:;
+                    }
+                    used[bestFace] = false;
+                }
+
+                var allClues = polyhedron.Faces
+                    .SelectMany((face, faceIx) => polyhedron.FindAdjacent(faceIx).Select(adjFaceIx => (face1: faceIx, face2: adjFaceIx)))
+                    .Where(tup => tup.face1 < tup.face2)
+                    .SelectMany(edge => generateClues(edge.face1, edge.face2))
+                    .ToArray()
+                    .Shuffle(rnd);
+
+                if (recurse(allClues, new int[n], new bool[n], Ut.NewArray(n, _ => Enumerable.Range(minValue, maxValue - minValue + 1).ToArray())).Skip(1).Any())
+                    // Puzzle is not unique
+                    Debugger.Break();
+                else
+                {
+                    File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Edge Puzzle.svg",
+                        generateNet(polyhedron, edgeSvg: (f1, f2, x, y) => $"<text x='{x}' y='{y + .06}' stroke='white' stroke-width='.05' paint-order='stroke' fill='black' font-size='.2' text-anchor='middle'>{solution[f1] + solution[f2]}</text>").svg);
+                    Debugger.Break();
+                }
+            }
+        }
+
+        public static void TestVertexCluesPuzzle()
+        {
+            var n = 24;
+            var rnd = new Random(47);
+            var solution = Enumerable.Range(1, 26).Except(new[] { 2, 21 }).ToArray().Shuffle(rnd);
             if (solution.Length != n)
                 Debugger.Break();
 
-            IEnumerable<(int face1, int face2, EdgeClueType type, int value)> generateClues(int face1, int face2)
+            foreach (var polyhedron in getPolyhedra())
             {
-                var list = new List<(int face1, int face2, EdgeClueType type, int value)>();
-                list.Add((face1, face2, EdgeClueType.Sum, solution[face1] + solution[face2]));
-                //list.Add((face1, face2, EdgeClueType.Difference, Math.Abs(solution[face1] - solution[face2])));
-                //var product = solution[face1] * solution[face2];
-                //if (new[] { 2, 3, 5, 7 }.Count(f => product % f == 0) >= 3)
-                //    list.Add((face1, face2, EdgeClueType.Product, product));
-                //list.Add((face1, face2, EdgeClueType.Rel, Math.Sign(solution[face2] - solution[face1])));
-                //if (solution[face1] != 0 && solution[face2] % solution[face1] == 0 && solution[face2] / solution[face1] <= 5)
-                //    list.Add((face1, face2, EdgeClueType.Quotient, solution[face2] / solution[face1]));
-                //else if (solution[face2] != 0 && solution[face1] % solution[face2] == 0 && solution[face1] / solution[face2] <= 5)
-                //    list.Add((face1, face2, EdgeClueType.Quotient, solution[face1] / solution[face2]));
-                //yield return list.PickRandom(rnd);
-                return list;
+                IEnumerable<(int vx, VertexClueType type, int value)> generateClues(int vx)
+                {
+                    var list = new List<(int vx, VertexClueType type, int value)>();
+                    list.Add((vx, VertexClueType.Sum, Enumerable.Range(0, n).Where(fx => polyhedron.Faces[fx].Contains(vx)).Sum(fx => solution[fx])));
+
+                    //var product = Enumerable.Range(0, n).Where(fx => polyhedron.Faces[fx].Contains(vx)).Aggregate(1, (prev, fx) => prev * solution[fx]);
+                    //if (new[] { 2, 3, 5, 7 }.Count(f => product % f == 0) >= 3)
+                    //    list.Add((vx, VertexClueType.Product, product));
+
+                    //list.Add((vx, VertexClueType.NumberOfEvens, Enumerable.Range(0, n).Where(fx => polyhedron.Faces[fx].Contains(vx)).Count(fx => solution[fx] % 2 == 0)));
+                    //yield return list.PickRandom(rnd);
+                    return list;
+                }
+
+                if (polyhedron.Faces.Length != n)
+                    continue;
+                //var polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\SelfDualIcosioctahedron4.txt");
+                var allClues = Enumerable.Range(0, polyhedron.Vertices.Length)
+                    .SelectMany(vx => generateClues(vx))
+                    .ToArray();
+                var eqs = allClues.Select((clue, clueIx) => $"{clue.value}={Enumerable.Range(0, polyhedron.Faces.Length).Where(f => polyhedron.Faces[f].Contains(clue.vx)).Select(f => $"f{f}").JoinString("+")}").JoinString(", ");
+                Clipboard.SetText($"solve({{{eqs}}}, {{{Enumerable.Range(0, polyhedron.Faces.Length).Select(f => $"f{f}").JoinString(", ")}}});");
+                Console.WriteLine(polyhedron.Name);
+                Console.ReadLine();
             }
-
-            var minValue = 1;// solution.Min();
-            var maxValue = 1000;// solution.Max();
-            var maxLength = Math.Max(minValue.ToString().Length, maxValue.ToString().Length);
-            ConsoleUtil.WriteLine($"SOLTN: {solution.Select(i => i.ToString().PadLeft(maxLength)).JoinString(", ").Color(ConsoleColor.Yellow)}", null);
-
-            IEnumerable<int[]> recurse((int face1, int face2, EdgeClueType type, int value)[] clues, int[] sofar, bool[] used, int[][] possibleValues)
-            {
-                var bestFace = 0;
-                var bestConstraint = int.MaxValue;
-                var allUsed = true;
-                for (var i = 0; i < n; i++)
-                {
-                    if (!used[i])
-                    {
-                        allUsed = false;
-                        if (possibleValues[i].Length < bestConstraint)
-                        {
-                            bestConstraint = possibleValues[i].Length;
-                            bestFace = i;
-                        }
-                    }
-                }
-                if (allUsed)
-                {
-                    yield return sofar;
-                    yield break;
-                }
-
-                used[bestFace] = true;
-                foreach (var value in possibleValues[bestFace])
-                {
-                    //for (var i = 0; i < n; i++)
-                    //    if (i != bestFace && used[i] && sofar[i] == value)
-                    //        goto busted;
-
-                    sofar[bestFace] = value;
-                    var newPossibleValues = (int[][]) possibleValues.Clone();
-                    foreach (var clue in clues)
-                    {
-                        var (cFace1, cFace2, cType, cValue) = clue;
-                        if (cFace1 == bestFace)
-                        {
-                        }
-                        else if (cFace2 == bestFace)
-                        {
-                            var t = cFace1;
-                            cFace1 = cFace2;
-                            cFace2 = t;
-                            if (cType == EdgeClueType.Rel)
-                                cValue = -cValue;
-                        }
-                        else
-                            continue;
-
-                        switch (cType)
-                        {
-                            case EdgeClueType.Sum: newPossibleValues[cFace2] = newPossibleValues[cFace2].Where(i => i + value == cValue).ToArray(); break;
-                            case EdgeClueType.Difference: newPossibleValues[cFace2] = newPossibleValues[cFace2].Where(i => Math.Abs(i - value) == cValue).ToArray(); break;
-                            case EdgeClueType.Product: newPossibleValues[cFace2] = newPossibleValues[cFace2].Where(i => i * value == cValue).ToArray(); break;
-                            case EdgeClueType.Quotient: newPossibleValues[cFace2] = newPossibleValues[cFace2].Where(i => i == cValue * value || value == cValue * i).ToArray(); break;
-                            case EdgeClueType.Rel: newPossibleValues[cFace2] = newPossibleValues[cFace2].Where(i => Math.Sign(i - value) == cValue).ToArray(); break;
-                        }
-                        if (newPossibleValues[cFace2].Length == 0)
-                            goto busted;
-                    }
-
-                    foreach (var sol in recurse(clues, sofar, used, newPossibleValues))
-                        yield return sol;
-
-                    busted:;
-                }
-                used[bestFace] = false;
-            }
-
-            var allClues = polyhedron.Faces
-                .SelectMany((face, faceIx) => polyhedron.FindAdjacent(faceIx).Select(adjFaceIx => (face1: faceIx, face2: adjFaceIx)))
-                .Where(tup => tup.face1 < tup.face2)
-                .SelectMany(edge => generateClues(edge.face1, edge.face2))
-                .ToArray()
-                .Shuffle(rnd);
-
-            if (recurse(allClues, new int[n], new bool[n], Ut.NewArray(n, _ => Enumerable.Range(minValue, maxValue - minValue + 1).ToArray())).Skip(1).Any())
-                // Puzzle is not unique
-                Debugger.Break();
-
-            File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Edge Puzzle.svg",
-                generateNet(polyhedron, edgeSvg: (f1, f2, x, y) => $"<text x='{x}' y='{y + .06}' stroke='white' stroke-width='.05' paint-order='stroke' fill='black' font-size='.2' text-anchor='middle'>{solution[f1] + solution[f2]}</text>").svg);
         }
 
         enum VertexClueType { Sum, Product, NumberOfEvens }
@@ -1352,25 +1400,22 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
 
         public static void Planning()
         {
-            var p = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\SelfDualIcosioctahedron4.txt");
+            var p = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\LpentagonalIcositetrahedron.txt");
 
             Func<int, double, double, string> textTagger((string word, int[] faces, string color)[] data) => (face, x, y) =>
             {
-                var (word, faces, color) = data.First(tup => tup.faces.Contains(face));
+                var (word, faces, color) = data.Where(tup => tup.faces.Contains(face)).FirstOrDefault(("?", new[] { face }, "#fff"));
                 return $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{word[faces.IndexOf(face)]}</text>";
             };
-            Func<int, string> faceColorer((string word, int[] faces, string color)[] data) => face => data.First(tup => tup.faces.Contains(face)).color;
+            Func<int, string> faceColorer((string word, int[] faces, string color)[] data) => face => data.Where(tup => tup.faces.Contains(face)).Select(tup => tup.color).FirstOrDefault("#fff");
 
             object makePiece(string puzzleType, string puzzleHint, params (string word, int[] faces, string color)[] data) => new DIV { class_ = "piece" }._(
-                new H1(Enumerable.Range(0, 26).Select(i => (char) ('A' + i)).Select(ch => new string(ch, data.Sum(tup => tup.word.Count(c => c == ch)) - 1)).JoinString()),
-                new H2(puzzleType, new Func<object>(() =>
-                {
-                    var dupFaces = Enumerable.Range(0, p.Faces.Length).Where(face => data.Sum(tup => tup.faces.Count(f => f == face)) != 1).ToArray();
-                    return dupFaces.Length == 0 ? null : $" ({dupFaces.JoinString(", ")})";
-                })),
+                new H1(Enumerable.Range(0, 26).Select(i => (char) ('A' + i)).Where(ch => data.All(tup => !tup.word.Contains(ch))).JoinString()),
+                new H2(puzzleType),
                 new H3(puzzleHint),
-                new RawTag(generateNet(p, faceSvg: textTagger(data), faceColor: faceColorer(data)).svg)
-            );
+                Enumerable.Range(0, 24).Where(face => data.All(tup => !tup.faces.Contains(face))).ToArray().Apply(missingFaces =>
+                    missingFaces.Length == 0 ? null : new H4($"({missingFaces.JoinString(", ")})")),
+                new RawTag(generateNet(p, faceSvg: textTagger(data), faceColor: faceColorer(data)).svg));
 
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Planning.html",
                 new HTML(
@@ -1378,8 +1423,8 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                         new TITLE("Face to Face planning page"),
                         new META { httpEquiv = "Content-Type", content = "text/html; charset=utf-8" },
                         new STYLELiteral($@"
-svg {{ width: 8cm; margin: 0 auto; display: block; }}
-h1, h2, h3 {{ text-align: center; }}
+svg {{ width: 9cm; margin: 0 auto; display: block; }}
+h1, h2, h3, h4 {{ text-align: center; }}
 h1 {{ font-size: 20pt; }}
 h2 {{ font-size: 17pt; }}
 h3 {{ font-size: 14pt; }}
@@ -1387,41 +1432,44 @@ h3 {{ font-size: 14pt; }}
                     ),
                     new BODY(
                         new DIV { id = "all" }._(
-                            makePiece("Crossword", "GASHLYCRUMB TINIES",
-                                (word: "GASHLYCRUMB", faces: new[] { 25, 11, 8, 26, 7, 6, 27, 9, 10, 24, 5 }, color: "#afa"),
-                                (word: "TINIE", faces: new[] { 16, 17, 3, 21, 22 }, color: "#ff8"),
-                                (word: "DEFJKOPQVWXZ", faces: new[] { 19, 2, 18, 15, 0, 13, 12, 4, 14, 20, 1, 23 }, color: "#fff")),
-                            makePiece("Gashlycrumb Tinies", "CARPET INDEX",
-                                (word: "CARPET", faces: new[] { 1, 15, 16, 10, 20, 18 }, color: "#afa"),
-                                (word: "INDX", faces: new[] { 13, 12, 0, 19 }, color: "#ffa"),
-                                (word: "OLS", faces: new[] { 3, 27, 9 }, color: "#acf"),
-                                (word: "BZHUKVFQMJDWYGF", faces: new[] { 2, 4, 5, 6, 7, 8, 11, 14, 17, 21, 22, 23, 24, 25, 26 }, color: "#fff")),
-                            makePiece("Carpet colors", "BLUE CLUING SUM",
-                                (word: "BLUE", faces: new[] { 25, 11, 8, 26 }, color: "#afa"),
-                                (word: "CUING", faces: new[] { 23, 13, 12, 0, 20 }, color: "#ffa"),
-                                (word: "SM", faces: new[] { 4, 14 }, color: "#acf"),
-                                (word: "ODFHJKAPQRTVWXYZB", faces: new[] { 1, 2, 3, 5, 6, 7, 9, 10, 15, 16, 17, 18, 19, 21, 22, 24, 27 }, color: "#fff")),
-                            makePiece("Edge sums (blue)", "RED CLUE SUM",
-                                (word: "RED", faces: new[] { 2, 0, 24 }, color: "#afa"),
-                                (word: "CLU", faces: new[] { 11, 13, 12 }, color: "#ffa"),
-                                (word: "SM", faces: new[] { 14, 5 }, color: "#acf"),
-                                (word: "ABOIHGJKNFPCTVWXYZQC", faces: new[] { 1, 3, 4, 6, 7, 8, 9, 10, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27 }, color: "#fff")),
-                            makePiece("Vertex sums (red)", "SLITHERLINK",
-                                (word: "SLITHER", faces: new[] { 12, 0, 20, 19, 6, 21, 23 }, color: "#afa"),
-                                (word: "LNK", faces: new[] { 18, 10, 16 }, color: "#ffa"),
-                                (word: "ABCDFGJMVPQUOWXYZD", faces: new[] { 1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 14, 15, 17, 22, 24, 25, 26, 27 }, color: "#fff")),
-                            makePiece("Words", "?",
-                                (word: "LOCKED", faces: new[] { 4, 5, 24, 10, 9, 27 }, color: "#afa"),
-                                (word: "MEANS", faces: new[] { 12, 0, 20, 19, 6 }, color: "#ffa"),
-                                (word: "BAR", faces: new[] { 14, 2, 18 }, color: "#acf"),
-                                (word: "UGHIPJQTFVWXYZ", faces: new[] { 1, 3, 7, 8, 11, 13, 15, 16, 17, 21, 22, 23, 25, 26 }, color: "#fff")),
-                            new DIV { class_ = "piece" }._(new RawTag(generateNet(p, faceSvg: (f, x, y) => $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{f}</text>").svg)),
-                            new DIV { class_ = "piece" }._(new RawTag(generateNet(p, faceSvg: (f, x, y) => $@"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{
-                                new Dictionary<int, string>
-                                {
-                                    [0] = "BREAD"
-                                }.Get(f, f.ToString())
-                            }</text>").svg))
+                            makePiece("Carpet colors", "CYAN SUM",
+                                (word: "CYAN", faces: new[] { 8, 11, 0, 1 }, color: "#afa"),
+                                (word: "SUM", faces: new[] { 15, 12, 6 }, color: "#ffa"),
+                                (word: "Q", faces: new[] { 22 }, color: "#faa"),
+                                (word: "BDFGHJKLOPRTVWXZ", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 16, 17, 18, 19, 20, 21, 23 }, color: "#fff")),
+                            makePiece("Edge sums (cyan)", "PINK SUM",
+                                (word: "PINK", faces: new[] { 8, 11, 0, 1 }, color: "#afa"),
+                                (word: "SUM", faces: new[] { 15, 12, 6 }, color: "#ffa"),
+                                (word: "Q", faces: new[] { 22 }, color: "#faa"),
+                                (word: "ABDEGHJLOFRVTZYX", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 16, 17, 18, 19, 20, 21, 23 }, color: "#fff")),
+                            makePiece("Vertex sums (pink)", "LYRICS NEXT WORD",
+                                (word: "LYRICS", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: "#afa"),
+                                (word: "NEXT", faces: new[] { 14, 13, 5, 4 }, color: "#ffa"),
+                                (word: "WOD", faces: new[] { 9, 10, 3 }, color: "#adf"),
+                                (word: "Q", faces: new[] { 22 }, color: "#faa"),
+                                (word: "JGHFKMPVUZ", faces: new[] { 2, 6, 7, 16, 17, 18, 19, 20, 21, 23 }, color: "#fff")),
+                            makePiece("Lyrics", "GASHLYCRUMB TINS",
+                                (word: "GASHLYCRUMB", faces: new[] { 8, 11, 0, 1, 15, 12, 16, 19, 9, 4, 5 }, color: "#afa"),
+                                (word: "TIN", faces: new[] { 21, 20, 3 }, color: "#ffa"),
+                                (word: "Q", faces: new[] { 22 }, color: "#faa"),
+                                (word: "DJKOPVWXZ", faces: new[] { 6, 7, 10, 13, 14, 17, 18, 2, 23 }, color: "#fff")),
+                            makePiece("Gashlycrumb Tinies", "LOCK IS BAR",
+                                (word: "LOCK", faces: new[] { 8, 11, 0, 1 }, color: "#afa"),
+                                (word: "IS", faces: new[] { 15, 12 }, color: "#ffa"),
+                                (word: "BAR", faces: new[] { 16, 19, 9 }, color: "#adf"),
+                                (word: "Q", faces: new[] { 22 }, color: "#faa"),
+                                (word: "EFGHJMNPUVWXYZ", faces: new[] { 2, 3, 4, 5, 6, 7, 10, 13, 14, 17, 18, 20, 21, 23 }, color: "#fff")),
+                            makePiece("Crossword", "CARPET INDEX",
+                                (word: "CARPET", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: "#afa"),
+                                (word: "INDX", faces: new[] { 23, 3, 2, 17 }, color: "#ffa"),
+                                (word: "Q", faces: new[] { 22 }, color: "#faa"),
+                                (word: "FGHJKLMSUVWYZ", faces: new[] { 4, 5, 6, 7, 9, 10, 13, 14, 16, 18, 19, 20, 21 }, color: "#fff")),
+                            //makePiece("Words from lyrics", "LOCKED MEANS BAR",
+                            //    (word: "LOCKED", faces: new[] { 4, 5, 24, 10, 9, 27 }, color: "#afa"),
+                            //    (word: "MEANS", faces: new[] { 12, 0, 20, 19, 6 }, color: "#ffa"),
+                            //    (word: "BAR", faces: new[] { 14, 2, 18 }, color: "#acf"),
+                            //    (word: "UGHIPJQTFVWXYZ", faces: new[] { 1, 3, 7, 8, 11, 13, 15, 16, 17, 21, 22, 23, 25, 26 }, color: "#fff")),
+                            new DIV { class_ = "piece" }._(new RawTag(generateNet(p, faceSvg: (f, x, y) => $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{f}</text>").svg))
                         )
                     )
                 ).ToString()

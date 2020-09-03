@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Forms;
 using RT.PostBuild;
 
 [assembly: AssemblyTitle("Qoph")]
@@ -35,8 +36,7 @@ namespace Qoph
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            OneCanHope.Generate();
-
+            FaceToFace.Planning();
 
             Console.WriteLine("Done.");
             Console.ReadLine();
