@@ -62,7 +62,6 @@
     <Compile Include="OneCanHope.cs" />
     <Compile Include="PngMetadataExperiment.cs" />
     <Compile Include="PowerOfSudoku.cs" />
-    <Compile Include="SapphicStripes.cs" />
     <Compile Include="SpaceRace.cs" />
     <Compile Include="HomeDepot.cs" />
     <Compile Include="InsideOut.cs" />
