@@ -269,73 +269,100 @@ namespace Qoph
                 ))
             );
 
-            var counter = 0;
-            while (true)
-            {
-                var seed = 247 + 100 * counter;
-                Console.WriteLine($"Trying seed: {seed}");
-                var rnd = new Random(seed);
-                var cells = Enumerable.Range(0, w * h).ToList().Shuffle(rnd);
-                var required = Ut.ReduceRequiredSet(cells, skipConsistencyTest: true, test: set =>
-                {
-                    Console.WriteLine(Enumerable.Range(0, w * h).Select(i => set.SetToTest.Contains(i) ? "█" : "░").JoinString());
-                    var thisGrid = new int?[w * h];
-                    foreach (var cell in set.SetToTest)
-                        thisGrid[cell] = grid[cell];
+            //var counter = 0;
+            //while (true)
+            //{
+            //    var seed = 247 + 100 * counter;
+            //    Console.WriteLine($"Trying seed: {seed}");
+            //    var rnd = new Random(seed);
+            //    var cells = Enumerable.Range(0, w * h).ToList().Shuffle(rnd);
+            //    var required = Ut.ReduceRequiredSet(cells, skipConsistencyTest: true, test: set =>
+            //    {
+            //        Console.WriteLine(Enumerable.Range(0, w * h).Select(i => set.SetToTest.Contains(i) ? "█" : "░").JoinString());
+            //        var thisGrid = new int?[w * h];
+            //        foreach (var cell in set.SetToTest)
+            //            thisGrid[cell] = grid[cell];
 
-                    var applicableGrids = new List<int?[]>();
-                    var (sh3Orig, sh3Rearrangements) = possibleSwaps[0];
-                    var (sh4Orig, sh4Rearrangements) = possibleSwaps[1];
-                    foreach (var rearr3 in sh3Rearrangements)
-                        foreach (var rearr4 in sh4Rearrangements)
-                        {
-                            var newGrid = thisGrid.ToArray();
-                            for (var i = 0; i < rearr3.Length; i++)
-                                newGrid[sh3Orig[i]] = newGrid[rearr3[i]];
-                            for (var i = 0; i < rearr4.Length; i++)
-                                newGrid[sh4Orig[i]] = newGrid[rearr4[i]];
-                            if (applicableGrids.Any(gr => gr.SequenceEqual(newGrid)))
-                                continue;
-                            applicableGrids.Add(newGrid);
-                        }
-
-                    var possibleSolutions = new List<int[][]>();
-                    applicableGrids.ParallelForEach(Environment.ProcessorCount, grid =>
-                    {
-                        foreach (var solution in solveFillomino(grid).Take(2))
-                            lock (possibleSolutions)
-                            {
-                                possibleSolutions.Add(solution);
-                                if (possibleSolutions.Count > 1)
-                                    break;
-                            }
-                    });
-                    if (possibleSolutions.Count == 0)
-                        Debugger.Break();
-                    return possibleSolutions.Count == 1;
-                }).ToArray();
-
-                Console.WriteLine(required.JoinString(", "));
-                File.AppendAllLines(@"D:\temp\temp.txt", new[] { required.JoinString(", ") });
-                counter++;
-            }
-
-            //            var testGrid = @"            4		4	
-            //	3	3			4	3
-            //5		4			2	
-            //	4	2				
-            //5						
-            //1		2	1	2	6	
-            //		2			5	".Replace("\r", "").Replace("\n", "\t").Split('\t').Select(c => c == "" ? (int?) null : int.Parse(c)).ToArray();
-
-            //            var count = 0;
-            //            foreach (var solution in solveFillomino(testGrid.ToArray()))
+            //        var applicableGrids = new List<int?[]>();
+            //        var (sh3Orig, sh3Rearrangements) = possibleSwaps[0];
+            //        var (sh4Orig, sh4Rearrangements) = possibleSwaps[1];
+            //        foreach (var rearr3 in sh3Rearrangements)
+            //            foreach (var rearr4 in sh4Rearrangements)
             //            {
-            //                ConsoleUtil.WriteLine(Enumerable.Range(0, w * h).Select(cell => { var poly = solution.FirstOrDefault(p => p.Contains(cell)); return poly == null ? "??" : (testGrid[cell] != null ? "██" : "▒▒").Color((ConsoleColor) (poly.Length)); }).Split(w).Select(row => row.JoinColoredString()).JoinColoredString("\n"));
-            //                Console.WriteLine();
-            //                count++;
+            //                var newGrid = thisGrid.ToArray();
+            //                for (var i = 0; i < rearr3.Length; i++)
+            //                    newGrid[sh3Orig[i]] = thisGrid[rearr3[i]];
+            //                for (var i = 0; i < rearr4.Length; i++)
+            //                    newGrid[sh4Orig[i]] = thisGrid[rearr4[i]];
+            //                if (applicableGrids.Any(gr => gr.SequenceEqual(newGrid)))
+            //                    continue;
+            //                applicableGrids.Add(newGrid);
             //            }
-            //            Console.WriteLine($"{count} solutions found.");
+
+            //        var possibleSolutions = new List<int[][]>();
+            //        applicableGrids.ParallelForEach(Environment.ProcessorCount, grid =>
+            //        {
+            //            foreach (var solution in solveFillomino(grid).Take(2))
+            //                lock (possibleSolutions)
+            //                {
+            //                    possibleSolutions.Add(solution);
+            //                    if (possibleSolutions.Count > 1)
+            //                        break;
+            //                }
+            //        });
+            //        if (possibleSolutions.Count == 0)
+            //            Debugger.Break();
+            //        return possibleSolutions.Count == 1;
+            //    }).ToArray();
+
+            //    Console.WriteLine(required.JoinString(", "));
+            //    File.AppendAllLines(@"D:\temp\temp.txt", new[] { required.JoinString(", ") });
+            //    counter++;
+            //}
+
+            var testGrid = @"		2				
+		3		1	4	3
+			4	2		3
+			2		6	6
+	6		6	2		
+1			1	2	6	
+	6				5	5".Replace("\r", "").Replace("\n", "\t").Split('\t').Select(c => c == "" ? (int?) null : int.Parse(c)).ToArray();
+
+            var applicableGrids = new List<int?[]>();
+            var (sh3Orig, sh3Rearrangements) = possibleSwaps[0];
+            var (sh4Orig, sh4Rearrangements) = possibleSwaps[1];
+            foreach (var rearr3 in sh3Rearrangements)
+                foreach (var rearr4 in sh4Rearrangements)
+                {
+                    var newGrid = testGrid.ToArray();
+                    for (var i = 0; i < rearr3.Length; i++)
+                        newGrid[sh3Orig[i]] = testGrid[rearr3[i]];
+                    for (var i = 0; i < rearr4.Length; i++)
+                        newGrid[sh4Orig[i]] = testGrid[rearr4[i]];
+                    if (applicableGrids.Any(gr => gr.SequenceEqual(newGrid)))
+                        continue;
+                    applicableGrids.Add(newGrid);
+                }
+
+            var possibleSolutions = new List<int[][]>();
+            applicableGrids.ParallelForEach(Environment.ProcessorCount, grid =>
+            {
+                foreach (var solution in solveFillomino(grid).Take(2))
+                    lock (possibleSolutions)
+                    {
+                        possibleSolutions.Add(solution);
+                        if (possibleSolutions.Count > 1)
+                            break;
+                    }
+            });
+
+            foreach (var solution in possibleSolutions)
+            {
+                if (solution.First(s => s.Contains(6 * 7 + 1)).Length != 6)
+                    continue;
+                ConsoleUtil.WriteLine(Enumerable.Range(0, w * h).Select(cell => { var poly = solution.FirstOrDefault(p => p.Contains(cell)); return poly == null ? "??" : "██".Color((ConsoleColor) (poly.Length)); }).Split(w).Select(row => row.JoinColoredString()).JoinColoredString("\n"));
+                Console.WriteLine();
+            }
         }
     }
 }

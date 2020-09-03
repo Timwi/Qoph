@@ -16,7 +16,6 @@ namespace Qoph
         public static void RunHashiwokakeroSolver()
         {
             const int w = 15;
-            const int h = 23;
 
             var islands = new Dictionary<int, int>
             {

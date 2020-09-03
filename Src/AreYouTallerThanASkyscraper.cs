@@ -177,7 +177,7 @@ namespace Qoph
                 (Side.Top, 5, 4), (Side.Top, 14, 5),
                 (Side.Right, 6, 2), (Side.Right, 8, 6),
                 (Side.Bottom, 5, 4), (Side.Bottom, 11, 11),
-                (Side.Left, 5, 5), (Side.Left, 9, 4), (Side.Left, 13, 3)
+                (Side.Left, 4, 8), (Side.Left, 9, 4), (Side.Left, 13, 3)
             );
             allSvg.Append($@"<g transform='translate(4.5, 25)'>
     <path d='M0 0h16v16h-16z' fill='white' stroke='black' stroke-width='.075' />
