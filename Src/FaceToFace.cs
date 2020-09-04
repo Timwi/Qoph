@@ -470,80 +470,6 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
             return (svg: $@"<svg class='polyhedron' xmlns='http://www.w3.org/2000/svg' viewBox='{xMin - .5} {yMin - .5} {xMax - xMin + 1} {yMax - yMin + 1}' stroke-width='{(xMax - xMin + 1) / 360}' font-family='Work Sans'>{svgFaces}{svg}{svgExtras}</svg>", polygons);
         }
 
-        public static void GenerateCrossword()
-        {
-            var polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\SelfDualIcosioctahedron4.txt");
-            var (svg, polygons) = generateNet(polyhedron);
-            var polyMidPoints = polygons.Select(poly => new PointD(poly.Average(p => p.X), poly.Average(p => p.Y))).ToArray();
-            var xMin = polygons.Min(pg => pg.Min(p => p.X));
-            var yMin = polygons.Min(pg => pg.Min(p => p.Y));
-            var xMax = polygons.Max(pg => pg.Max(p => p.X));
-            var yMax = polygons.Max(pg => pg.Max(p => p.Y));
-
-            var minGridSize = 1;
-            var maxGridSize = 1000;
-            (double x, double y)[] coords = null;
-            while (Math.Abs(maxGridSize - minGridSize) > 1)
-            {
-                var gridSize = (maxGridSize + minGridSize) / 2;
-                coords = polyMidPoints.Select(p => (x: Math.Floor((p.X - xMin) / (xMax - xMin) * gridSize), y: Math.Floor((p.Y - yMin) / (yMax - yMin) * gridSize))).ToArray();
-                if (coords.UniquePairs().Any(tup => tup.Item1 == tup.Item2))
-                    minGridSize = gridSize;
-                else
-                    maxGridSize = gridSize;
-            }
-
-            var cellW = (xMax - xMin) / maxGridSize;
-            var cellH = (yMax - yMin) / maxGridSize;
-
-            var facePins = coords.Select((c, ix) => $"<circle cx='{c.x * cellW + xMin}' cy='{c.y * cellH + yMin}' r='{Math.Min(cellW, cellH) * .2}' /><line stroke-width='.03' stroke='red' x1='{c.x * cellW + xMin}' y1='{c.y * cellH + yMin}' x2='{polyMidPoints[ix].X}' y2='{polyMidPoints[ix].Y}' />").JoinString();
-            var faceLabels = polygons.Select((f, faceIx) => $"<text font-size='.2' text-anchor='middle' fill='#080' x='{f.Average(p => p.X)}' y='{f.Average(p => p.Y)}'>{faceIx}</text>").JoinString();
-
-            Console.WriteLine("Spaces:");
-            Console.WriteLine(coords.Select((c, ix) => $"{ix} = {c}").JoinString("\n"));
-            Console.WriteLine();
-            Console.WriteLine("Lights:");
-            var path = @"D:\c\Qoph\DataFiles\Face To Face\Polyhedral Puzzle Crossword (lights).txt";
-            var lights = @"19 9 17 15 4 13 14 2 18,6 19 20 0 12,13 11 23 21,2 26 7 6 27 9,11 25 1 3 27 9,2 26 8,16 10 20 18 7,10 24 0,11 25 4 5 24 10,22 23 1 15,3 21 22 8,14 12 5 16 17"
-                .Split(',')
-                .Select(str => str.Split(' ').Select(int.Parse).ToArray())
-                .ToArray();
-            File.WriteAllText(path, lights
-                .Select(light => light.Select(f => coords[f]).Select(c => $"{c.x} {c.y}").JoinString("\r\n"))
-                .Concat(coords.Select(c => $"{c.x} {c.y}").JoinString("\r\n"))
-                .JoinString("\r\n\r\n"));
-            Console.WriteLine($"Written to {path}");
-            Console.WriteLine();
-
-            var faceLetters = new char?[polyhedron.Faces.Length];
-            var words = @"SREVRESBO<,TSAEL<,EDIA<,BETTER,DEEPER,BEE,TSAOT<,SHE,DERAHS<,LIEV<,PALE,SLATE".Split(',');
-            var clues = @"Watchers,To the smallest degree,Helper,Superior,Less shallow,Hive dweller,Tribute or food,That woman,Mutual,Bride’s garment,Lose color,Roofing material".Split(',');
-            var targetLetters = @"DFAQSBWXFTRENGUZYHPVCDOMLIJK";
-            for (var w = 0; w < words.Length; w++)
-            {
-                for (var c = 0; c < words[w].Length; c++)
-                {
-                    if (c == words[w].Length - 1 && words[w][c] == '<')
-                        continue;
-                    if (faceLetters[lights[w][c]] == null)
-                        faceLetters[lights[w][c]] = words[w][c];
-                    else if (faceLetters[lights[w][c]].Value != words[w][c])
-                        Debugger.Break();
-                }
-            }
-
-            File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Polyhedral Puzzle Crossword.svg",
-                generateNet(polyhedron,
-                    edgeStrokeWidth: (f1, f2) => lights.Any(l => l.IndexOf(f1).Apply(p1 => p1 != -1 && ((p1 > 0 && l[p1 - 1] == f2) || (p1 < l.Length - 1 && l[p1 + 1] == f2)))) ? .01 : .05,
-                    faceSvg: (fx, x, y) =>
-                        //lights.Select((l, wx) => (l[0] == fx && !words[wx].EndsWith("<")) || (l.Last() == fx && words[wx].EndsWith("<")) ? clues[wx] : null).Where(clue => clue != null).ToArray().Apply(clues =>
-                        //    clues.Length > 0 ? $"<text x='{x}' y='{y + .025}' stroke='white' stroke-width='.02' paint-order='stroke' fill='{(clues.Length > 1 ? "red" : "black")}' font-size='.1' text-anchor='middle'>{clues.JoinString("/")}</text>" : null) +
-                        $"<text x='{x}' y='{y + .025}' stroke='white' stroke-width='.02' paint-order='stroke' fill='{(lights.Count(l => l[0] == fx || l.Last() == fx) > 1 ? "red" : "black")}' font-size='.25' text-anchor='middle'>{faceLetters[fx]}</text>" +
-                        (targetLetters[fx] - faceLetters[fx]).NullOr(offset => $"<text x='{x}' y='{y + .125}' stroke='white' stroke-width='.01' paint-order='stroke' fill='{(lights.Count(l => l[0] == fx || l.Last() == fx) > 1 ? "red" : "black")}' font-size='.1' text-anchor='middle'>{(offset > 0 ? "+" : offset < 0 ? "−" : "")}{Math.Abs(offset)}</text>")
-                ).svg);
-            Console.WriteLine(faceLetters.JoinString());
-        }
-
         enum LtGtClue { Equal, LessThan, GreaterThan };
 
         public static void GenerateLessThanGreaterThanPuzzle_OBSOLETE()
@@ -1064,92 +990,9 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                 Console.WriteLine($"{solution.Length}: {solution.JoinString(" // ")}");
         }
 
-        public static void GenerateBinairo()
-        {
-            var polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\SelfDualIcosioctahedron4.txt");
-            var faces = polyhedron.Faces;
-            var n = faces.Length;
-            if (faces.Any(f => f.Length != 3 && f.Length != 4))
-                Debugger.Break();
-            var adjs = Enumerable.Range(0, n).Select(fx => polyhedron.FindAdjacent(fx).ToArray()).ToArray();
-
-            IEnumerable<bool[]> recurse(bool?[] sofar, int ix)
-            {
-                retry:
-                bool mustRetry = false;
-                bool contradiction = false;
-                void check(int face, bool value)
-                {
-                    if (sofar[face] == null)
-                    {
-                        sofar[face] = value;
-                        mustRetry = true;
-                    }
-                    else if (sofar[face].Value == !value)
-                        contradiction = true;
-                }
-                for (var f1 = 0; f1 < n; f1++)
-                {
-                    if (sofar[f1] == null)
-                        continue;
-                    foreach (var f2 in adjs[f1])
-                    {
-                        if (sofar[f2] != sofar[f1])
-                            continue;
-
-                        if (faces[f1].Length == 3)
-                        {
-                            foreach (var f in adjs[f1])
-                                if (f != f2)
-                                    check(f, !sofar[f1].Value);
-                        }
-                        else if (faces[f1].Length == 4)
-                            check((Array.IndexOf(adjs[f1], f2) + 2) % 4, !sofar[f1].Value);
-                        else
-                            Debugger.Break();
-
-                        if (contradiction)
-                            yield break;
-                    }
-                }
-                if (mustRetry)
-                    goto retry;
-
-                while (ix < sofar.Length && sofar[ix] != null)
-                    ix++;
-                if (ix == sofar.Length)
-                {
-                    yield return sofar.Select(b => b.Value).ToArray();
-                    yield break;
-                }
-
-                foreach (var b in new[] { false, true })
-                {
-                    sofar[ix] = b;
-                    foreach (var solution in recurse((bool?[]) sofar.Clone(), ix + 1))
-                        yield return solution;
-                }
-            }
-
-            var solution = recurse(new bool?[n], 0).First();
-            var givens = Ut.ReduceRequiredSet(Enumerable.Range(0, n).ToList().Shuffle(), test: state =>
-            {
-                var sofar = new bool?[n];
-                foreach (var f in state.SetToTest)
-                    sofar[f] = solution[f];
-                Console.WriteLine(sofar.Select(b => b != null ? "█" : "░").JoinString());
-                return !recurse(sofar, 0).Skip(1).Any();
-            });
-            Console.WriteLine(givens.JoinString(", "));
-
-            File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Binairo Puzzle.svg",
-                //stroke='white' stroke-width='.05' paint-order='stroke' 
-                generateNet(polyhedron, faceSvg: (f, x, y) => givens.Contains(f) ? $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{(solution[f] ? "1" : "0")}</text>" : null).svg);
-        }
-
         public static void GenerateTemplate()
         {
-            var polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\SelfDualIcosioctahedron4.txt");
+            var polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\LpentagonalIcositetrahedron.txt");
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Template.svg",
                 //stroke='white' stroke-width='.05' paint-order='stroke' 
                 generateNet(polyhedron, faceColor: f => "#def", faceSvg: (f, x, y) => $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{f}</text>").svg);
@@ -1231,6 +1074,40 @@ h3 {{ font-size: 14pt; }}
                     )
                 ).ToString()
             );
+        }
+
+        public static void GenerateCrossword()
+        {
+            var polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\LpentagonalIcositetrahedron.txt");
+
+            var words = File.ReadAllLines(@"D:\Daten\Wordlists\VeryCommonWords.txt");
+            int[][] w(int len) => words.Where(w => w.Length == len && w != "DIE" && w != "LAD" && w != "YER").SelectMany(w => new[] { w, w.Reverse().JoinString() }).Select(w => w.Select(ch => ch - 'A' + 1).ToArray()).ToArray();
+
+            var lights = Ut.NewArray(
+                new[] { 5, 13, 14, 2 },
+                new[] { 21, 5, 4, 9, 10 },
+                new[] { 3, 23, 22, 4, 7 },
+                new[] { 22, 8, 11, 0, 1, 17, 16 },
+                new[] { 23, 20, 2 },
+                new[] { 21, 14, 15 },
+                new[] { 13, 21, 20, 3, 0 },
+                new[] { 6, 7, 9, 8 },
+                new[] { 6, 16, 19 },
+                new[] { 12, 17, 18, 10, 11 },
+                new[] { 6, 12, 15, 1, 18, 19 });
+
+            var puzzle = new Puzzle(24, 1, 26);
+            foreach (var light in lights)
+                puzzle.AddConstraint(new CombinationsConstraint(light, w(light.Length)));
+
+            foreach (var solution in puzzle.Solve(new SolverInstructions { Randomizer = new Random(547) }))
+            {
+                File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Generated Crossword.svg",
+                    generateNet(polyhedron, faceColor: f => "#def", faceSvg: (f, x, y) => $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{(char) (solution[f] - 1 + 'A')}</text>").svg);
+                foreach (var light in lights)
+                    Console.WriteLine(light.Select(cell => (char) (solution[cell] + 'A' - 1)).JoinString().Apply(w => words.Contains(w) ? w : w.Reverse().JoinString()));
+                Console.ReadLine();
+            }
         }
     }
 }
