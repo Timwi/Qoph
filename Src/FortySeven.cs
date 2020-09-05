@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,8 @@ namespace Qoph
             const int n = 8;
 
             var prefs = File.ReadAllLines(@"D:\c\Qoph\DataFiles\47\Prefectures.txt");
-            //var words = File.ReadAllLines(@"D:\Daten\Wordlists\English 60000.txt");
-            var words = File.ReadAllLines(@"D:\Daten\Wordlists\peter_broda_wordlist_unscored.txt").Except(File.ReadLines(@"D:\Daten\Wordlists\English 60000.txt")).ToArray();
+            var words = File.ReadAllLines(@"D:\Daten\Wordlists\English 60000.txt");
+            //var words = File.ReadAllLines(@"D:\Daten\Wordlists\peter_broda_wordlist_unscored.txt").Except(File.ReadLines(@"D:\Daten\Wordlists\English 60000.txt")).ToArray();
 
             var mod47Inverses = new int[47];
             var tt = new TextTable { ColumnSpacing = 1 };
@@ -29,22 +30,22 @@ namespace Qoph
                     if ((row * col) % 47 == 1)
                         mod47Inverses[row] = col;
 
-            var wordRnd = new Random();
+            var wordRnd = new Random(47);
             var wordsStartingWith = words.Where(w => w.Length == 8 && w.All(ch => ch >= 'A' && ch <= 'Z')).GroupBy(w => w[0]).ToDictionary(gr => gr.Key, gr => gr.Distinct().Order().ToArray());
 
             var allTuples = (
-                from aWord in new[] { "AMPHIBIA" }//wordsStartingWith['A'].ToArray().Shuffle().Take(100)
+                from aWord in new[] { "AMPHIBIA" }//wordsStartingWith['A'].ToArray().Shuffle(wordRnd).Take(100)
                 from bWord in new[] { "BETATEST" }   //wordsStartingWith['B']
                 from cWord in new[] { "CAREBEAR" }   //wordsStartingWith['C']
                 from dWord in new[] { "DIAGNOSE" }
                 from eWord in new[] { "EARMOLDS" }   //wordsStartingWith['E']
-                from fWord in new[] { "FRONTIER" }  //wordsStartingWith['F'].ToArray().Shuffle().Take(100)
+                from fWord in new[] { "FRONTIER" }  //wordsStartingWith['F'].ToArray().Shuffle(wordRnd).Take(100)
                 from gWord in new[] { "GANYMEDE" }  //wordsStartingWith['G']
-                from hWord in new[] { "HIROLLER" }  //wordsStartingWith['H'].ToArray().Shuffle().Take(100)
+                from hWord in new[] { "HIROLLER" }  //wordsStartingWith['H'].ToArray().Shuffle(wordRnd).Take(100)
                 select new[] { aWord, bWord, cWord, dWord, eWord, fWord, gWord, hWord }).ToArray();
 
             Console.WriteLine(allTuples.Length);
-            allTuples.Shuffle();
+            allTuples.Shuffle(wordRnd);
 
             int[] matrixInverse(int[] matrix, int size)
             {
@@ -87,7 +88,11 @@ namespace Qoph
                 return Ut.NewArray(size * size, ix => augmented[size + (ix % size) + w * (ix / size)]);
             }
 
-            //Enumerable.Range(0, allTuples.Length).ParallelForEach(Environment.ProcessorCount, feedersIx =>
+            var lockObject = new object();
+            var bestScore = 0;
+            int[][] bestOutputs = null;
+            int[][] bestInputs = null;
+
             foreach (var feedersIx in Enumerable.Range(0, allTuples.Length))
             {
                 var feeders = allTuples[feedersIx];
@@ -99,7 +104,7 @@ namespace Qoph
                 }
                 catch (InvalidOperationException)
                 {
-                    goto fullyBusted;
+                    continue;
                 }
 
                 lock (wordsStartingWith)
@@ -107,14 +112,13 @@ namespace Qoph
 
                 var chsPerFullRow = (cluephrase.Length + 7) / 8;
                 var chsPerSmallRow = cluephrase.Length - chsPerFullRow * 7;
-                var ccOutput = new TextTable { ColumnSpacing = 2, RowSpacing = 1 };
-                var outputNumbers = new int[n][];
 
-                ((int value, char ch)[] input, int[] output)? testRow(int rowUnderTest, string cluephraseSubstring)
+                IEnumerable<(int[] input, int[] output)> testRow(int rowUnderTest, string cluephraseSubstring)
                 {
-                    foreach (var subseq in Enumerable.Range(0, n).Subsequences(minLength: cluephraseSubstring.Length, maxLength: cluephraseSubstring.Length).Select(sseq => sseq.ToArray()).ToArray().Shuffle())
+                    foreach (var subseqL in Enumerable.Range(0, n).Subsequences(minLength: cluephraseSubstring.Length, maxLength: cluephraseSubstring.Length).ToArray().Shuffle())
                     {
                         const int maxIndex = 9;
+                        var subseq = subseqL.ToArray();
                         var pow = 1;
                         var prefPosses = new List<(int i, char ch)>();
                         for (var i = 0; i < cluephraseSubstring.Length; i++)
@@ -123,8 +127,7 @@ namespace Qoph
                             pow *= maxIndex;
                         }
 
-                        var orders = Enumerable.Range(0, pow).ToArray().Shuffle();
-                        foreach (var orderRaw in orders)
+                        foreach (var orderRaw in Enumerable.Range(0, pow).ToArray().Shuffle())
                         {
                             var order = orderRaw;
                             var input = new (int value, char ch)[n];
@@ -136,58 +139,63 @@ namespace Qoph
 
                             var output = Ut.NewArray(n, x => Enumerable.Range(0, n).Select(j => inv[8 * j + x] * input[j].value).Sum() % 47);
                             if (Enumerable.Range(0, n).All(x => output[x] != 0 && (input[x].value == 0 || (input[x].value <= prefs[(output[x] + 46) % 47].Length && prefs[(output[x] + 46) % 47][input[x].value - 1] == input[x].ch))))
-                                return (input, output);
+                                yield return (input.Select(tup => tup.value).ToArray(), output);
                         }
                     }
-                    return null;
                 }
 
-                foreach (var smallRowCandidate in Enumerable.Range(0, n).ToArray().Shuffle())
+                Enumerable.Range(0, n).ParallelForEach(smallRowCandidate =>
                 {
-                    var clipboardText = new StringBuilder();
-                    for (var rowUnderTest = 0; rowUnderTest < n; rowUnderTest++)
+                    IEnumerable<(int[][] inputs, int[][] outputs)> recurse(int[][] sofarInput, int[][] sofarOutput, int rowUnderTest)
                     {
+                        if (rowUnderTest == n)
+                        {
+                            yield return (sofarInput.ToArray(), sofarOutput.ToArray());
+                            yield break;
+                        }
+
                         var cluephraseSubstring =
                             rowUnderTest == smallRowCandidate ? cluephrase.Substring(chsPerFullRow * rowUnderTest, chsPerSmallRow) :
                             rowUnderTest < smallRowCandidate ? cluephrase.Substring(chsPerFullRow * rowUnderTest, chsPerFullRow) :
                             cluephrase.Substring(chsPerFullRow * (rowUnderTest - 1) + chsPerSmallRow, chsPerFullRow);
 
-                        var result = testRow(rowUnderTest, cluephraseSubstring);
-                        if (result == null)
-                            goto busted;
-                        var (input, output) = result.Value;
-                        for (var x = 0; x < n; x++)
-                            ccOutput.SetCell(x, rowUnderTest, "{0/Green}\n{1/Cyan}\n{2/Magenta}\n{3/Yellow}".Color(null)
-                                .Fmt(output[x], prefs[(output[x] + 46) % 47], input[x].value, input[x].value == 0 ? "" : prefs[(output[x] + 46) % 47][input[x].value - 1].ToString()));
-                        clipboardText.AppendLine($"{output.JoinString("\t")}\t\t{output.Select(pIx => prefs[pIx - 1]).JoinString("\t")}");
-                        outputNumbers[rowUnderTest] = output;
+                        foreach (var (input, output) in testRow(rowUnderTest, cluephraseSubstring))
+                        {
+                            sofarInput[rowUnderTest] = input;
+                            sofarOutput[rowUnderTest] = output;
+                            foreach (var result in recurse(sofarInput, sofarOutput, rowUnderTest + 1))
+                                yield return result;
+                        }
                     }
 
-                    lock (wordsStartingWith)
+                    foreach (var (inputs, outputs) in recurse(new int[n][], new int[n][], 0))
                     {
-                        ConsoleUtil.WriteLine($"Found: {feeders.JoinString(", ")}        ".Color(ConsoleColor.Green));
-                        for (var i = 0; i < n; i++)
-                            Console.WriteLine(outputNumbers[i].JoinString(" "));
-                        Clipboard.SetText(clipboardText.ToString());
-                        ccOutput.WriteToConsole();
-                        Console.WriteLine();
-                        //Debugger.Break();
-                        break;
+                        var numbersUsed = outputs.SelectMany(ar => ar).Distinct().Count();
+                        lock (lockObject)
+                            if (numbersUsed > bestScore)
+                            {
+                                var ccOutput = new TextTable { ColumnSpacing = 2, RowSpacing = 1 };
+                                for (var row = 0; row < n; row++)
+                                    for (var x = 0; x < n; x++)
+                                        ccOutput.SetCell(x, row, "{0/Green}\n{1/Cyan}\n{2/Magenta}\n{3/Yellow}".Color(null)
+                                            .Fmt(outputs[row][x], prefs[(outputs[row][x] + 46) % 47], inputs[row][x], inputs[row][x] == 0 ? "" : prefs[(outputs[row][x] + 46) % 47][inputs[row][x] - 1].ToString()));
+
+                                Console.Clear();
+                                ccOutput.WriteToConsole();
+                                Console.WriteLine();
+                                for (var row = 0; row < n; row++)
+                                    Console.WriteLine(outputs[row].JoinString(" "));
+                                Console.WriteLine();
+                                Console.WriteLine($"Numbers used: {numbersUsed}");
+                                bestScore = numbersUsed;
+                                bestOutputs = outputs;
+                                bestInputs = inputs;
+                            }
                     }
-                    //outputMatrix(feederMatrix, 8);
-                    //Console.WriteLine();
-                    //outputMatrix(inverse(feederMatrix, 8), 8);
-                    //Console.WriteLine();
+                });
+            }
 
-                    //foreach (var cc in ccOutput)
-                    //    ConsoleUtil.WriteLine(cc);
-
-                    // We have a row with no match :(
-                    busted:;
-                }
-
-                fullyBusted:;
-            }//);
+            Clipboard.SetText(bestOutputs.Select(row => row.JoinString("\t")).JoinString("\n"));
         }
 
         public static void Test()
