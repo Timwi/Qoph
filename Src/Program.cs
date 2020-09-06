@@ -1,9 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Windows.Forms;
 using RT.PostBuild;
+using RT.Util.ExtensionMethods;
 
 [assembly: AssemblyTitle("Qoph")]
 [assembly: AssemblyDescription("Contains code used in the creation of the Quantum Obfuscation Puzzle Hunt (QOPH).")]
@@ -36,7 +37,8 @@ namespace Qoph
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            BigBangTheoryEpisodes.GenerateSolutionCandidates();
+            FortySeven.GenerateHTML();
+
 
             Console.WriteLine("Done.");
             Console.ReadLine();

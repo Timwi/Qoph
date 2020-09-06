@@ -90,8 +90,7 @@ namespace Qoph
 
             var lockObject = new object();
             var bestScore = 0;
-            int[][] bestOutputs = null;
-            int[][] bestInputs = null;
+            (int[] input, int[] output)[] bestResults = null;
 
             foreach (var feedersIx in Enumerable.Range(0, allTuples.Length))
             {
@@ -146,82 +145,67 @@ namespace Qoph
 
                 Enumerable.Range(0, n).ParallelForEach(smallRowCandidate =>
                 {
-                    IEnumerable<(int[][] inputs, int[][] outputs)> recurse(int[][] sofarInput, int[][] sofarOutput, int rowUnderTest)
+                    var rowResults = Enumerable.Range(0, n).Select(rowUnderTest => testRow(rowUnderTest,
+                            rowUnderTest == smallRowCandidate ? cluephrase.Substring(chsPerFullRow * rowUnderTest, chsPerSmallRow) :
+                            rowUnderTest < smallRowCandidate ? cluephrase.Substring(chsPerFullRow * rowUnderTest, chsPerFullRow) :
+                            cluephrase.Substring(chsPerFullRow * (rowUnderTest - 1) + chsPerSmallRow, chsPerFullRow)).ToArray()).ToArray();
+                    if (rowResults.Any(ar => ar.Length == 0))
+                        return;
+                    var rowOrder = Enumerable.Range(0, n).OrderBy(row => rowResults[row].Length).ToArray();
+
+                    IEnumerable<(int[] input, int[] output)[]> recurse((int[] input, int[] output)[] sofar, int rowOrderIx)
                     {
-                        if (rowUnderTest == n)
+                        if (rowOrderIx == n)
                         {
-                            yield return (sofarInput.ToArray(), sofarOutput.ToArray());
+                            yield return sofar.ToArray();
                             yield break;
                         }
 
-                        var cluephraseSubstring =
-                            rowUnderTest == smallRowCandidate ? cluephrase.Substring(chsPerFullRow * rowUnderTest, chsPerSmallRow) :
-                            rowUnderTest < smallRowCandidate ? cluephrase.Substring(chsPerFullRow * rowUnderTest, chsPerFullRow) :
-                            cluephrase.Substring(chsPerFullRow * (rowUnderTest - 1) + chsPerSmallRow, chsPerFullRow);
-
-                        foreach (var (input, output) in testRow(rowUnderTest, cluephraseSubstring))
+                        var numbersStillLeft = Enumerable.Range(0, 47).Except(rowOrder.Take(rowOrderIx).SelectMany(row => sofar[row].output)).ToArray();
+                        foreach (var rowTuple in rowResults[rowOrder[rowOrderIx]].OrderByDescending(row => row.output.Intersect(numbersStillLeft).Count()))
                         {
-                            sofarInput[rowUnderTest] = input;
-                            sofarOutput[rowUnderTest] = output;
-                            foreach (var result in recurse(sofarInput, sofarOutput, rowUnderTest + 1))
+                            sofar[rowOrder[rowOrderIx]] = rowTuple;
+                            foreach (var result in recurse(sofar, rowOrderIx + 1))
                                 yield return result;
                         }
                     }
 
-                    foreach (var (inputs, outputs) in recurse(new int[n][], new int[n][], 0))
-                    {
-                        var numbersUsed = outputs.SelectMany(ar => ar).Distinct().Count();
-                        lock (lockObject)
-                            if (numbersUsed > bestScore)
-                            {
-                                var ccOutput = new TextTable { ColumnSpacing = 2, RowSpacing = 1 };
-                                for (var row = 0; row < n; row++)
-                                    for (var x = 0; x < n; x++)
-                                        ccOutput.SetCell(x, row, "{0/Green}\n{1/Cyan}\n{2/Magenta}\n{3/Yellow}".Color(null)
-                                            .Fmt(outputs[row][x], prefs[(outputs[row][x] + 46) % 47], inputs[row][x], inputs[row][x] == 0 ? "" : prefs[(outputs[row][x] + 46) % 47][inputs[row][x] - 1].ToString()));
+                    var arrangement = recurse(new (int[] input, int[] output)[n], 0).First();
+                    var numbersUsed = arrangement.SelectMany(ar => ar.output).Distinct().Count();
+                    lock (lockObject)
+                        if (numbersUsed > bestScore)
+                        {
+                            var ccOutput = new TextTable { ColumnSpacing = 2, RowSpacing = 1 };
+                            for (var row = 0; row < n; row++)
+                                for (var x = 0; x < n; x++)
+                                    ccOutput.SetCell(x, row, "{0/Green}\n{1/Cyan}\n{2/Magenta}\n{3/Yellow}".Color(null)
+                                        .Fmt(arrangement[row].output[x], prefs[(arrangement[row].output[x] + 46) % 47], arrangement[row].input[x], arrangement[row].input[x] == 0 ? "" : prefs[(arrangement[row].output[x] + 46) % 47][arrangement[row].input[x] - 1].ToString()));
 
-                                Console.Clear();
-                                ccOutput.WriteToConsole();
-                                Console.WriteLine();
-                                for (var row = 0; row < n; row++)
-                                    Console.WriteLine(outputs[row].JoinString(" "));
-                                Console.WriteLine();
-                                Console.WriteLine($"Numbers used: {numbersUsed}");
-                                bestScore = numbersUsed;
-                                bestOutputs = outputs;
-                                bestInputs = inputs;
-                            }
-                    }
+                            Console.Clear();
+                            ccOutput.WriteToConsole();
+                            Console.WriteLine();
+                            for (var row = 0; row < n; row++)
+                                Console.WriteLine(arrangement[row].output.JoinString(" "));
+                            Console.WriteLine();
+                            Console.WriteLine($"Numbers used: {numbersUsed}");
+                            bestScore = numbersUsed;
+                            bestResults = arrangement;
+                        }
                 });
             }
 
-            Clipboard.SetText(bestOutputs.Select(row => row.JoinString("\t")).JoinString("\n"));
+            Clipboard.SetText(bestResults.Select(row => row.output.JoinString("\t")).JoinString("\n"));
         }
 
-        public static void Test()
+        public static void GenerateHTML()
         {
-            // Vector multiplication
-            int[] vecmult(int[] m, int[] v, int size) => Ut.NewArray(size, i => (Enumerable.Range(0, size).Select(x => ((m[x + size * i] * v[x]) % 47 + 47) % 47).Sum() % 47 + 47) % 47);
+            var grid = new[] { 3, 46, 23, 37, 29, 15, 4, 28, 19, 9, 2, 29, 42, 37, 40, 38, 25, 45, 15, 11, 7, 44, 31, 22, 18, 20, 37, 24, 19, 39, 38, 28, 34, 39, 27, 36, 5, 13, 27, 33, 30, 25, 35, 12, 3, 19, 20, 43, 34, 34, 14, 32, 45, 38, 17, 30, 26, 10, 44, 10, 14, 23, 33, 6 };
+            Console.WriteLine(grid.Distinct().Order().JoinString(", "));
+            Console.WriteLine(grid.Distinct().Count());
             var prefs = File.ReadAllLines(@"D:\c\Qoph\DataFiles\47\Prefectures.txt");
-
-            // Feeder answers matrix
-            var matrix = new[] { 1, 16, 18, 9, 3, 15, 20, 19, 2, 5, 20, 1, 20, 5, 19, 20, 3, 8, 1, 18, 13, 9, 14, 7, 4, 9, 14, 15, 19, 1, 21, 18, 5, 20, 3, 5, 20, 5, 18, 1, 6, 9, 7, 8, 20, 9, 14, 7, 7, 1, 14, 25, 13, 5, 4, 5, 8, 15, 14, 5, 25, 4, 5, 23 };
-            var vectors = Ut.NewArray(
-                new[] { 23, 1, 32, 19, 3, 36, 12, 21 },
-                new[] { 35, 0, 9, 15, 32, 40, 22, 39 },
-                new[] { 46, 34, 0, 10, 16, 5, 30, 35 },
-                new[] { 28, 38, 31, 27, 42, 33, 38, 10 },
-                new[] { 31, 37, 11, 15, 13, 7, 36, 28 },
-                new[] { 39, 12, 42, 25, 35, 7, 19, 29 },
-                new[] { 46, 19, 42, 29, 24, 38, 42, 43 },
-                new[] { 46, 34, 42, 43, 35, 33, 13, 7 });
-
-            for (var vIx = 0; vIx < vectors.Length; vIx++)
-            {
-                var vector = vectors[vIx];
-                var v = vecmult(matrix, vector, 8);
-                Console.WriteLine($"{v.JoinString(", ")} = {v.Select((value, ix) => value == 0 ? null : prefs[(vector[ix] + 46) % 47][value - 1].Nullable()).JoinString()}");
-            }
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\47\The 47.html", "<!--%%-->", "<!--%%%-->",
+                Enumerable.Range(0, 8).Select(row => $@"<div class='section'>{Enumerable.Range(0, 8).Select(col =>
+                    $"<img class='flag' src='data:image/png;base64,{Convert.ToBase64String(File.ReadAllBytes($@"D:\c\Qoph\DataFiles\47\Flags\{prefs[(grid[col + 8 * row] + 46) % 47]} prefecture.png"))}'/>").JoinString()}</div>").JoinString("\n"));
         }
     }
 }
