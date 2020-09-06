@@ -41,36 +41,17 @@ namespace Qoph
             foreach (var row in epi)
             {
                 Console.WriteLine(row.Letter1);
-                Clipboard.SetText(row.LeftCandidates
+                Console.WriteLine(row.LeftCandidates
                     .OrderBy(lc => lc.PuzzleSolution[0] == lc.CandidateName[0] ? "ZZ" + lc.PuzzleSolution : lc.PuzzleSolution)
                     .Select(lc => $"{(lc.PuzzleSolution[0] == lc.CandidateName[0] ? "~" : "")}{lc.PuzzleSolution}")
                     .JoinString("\n"));
-                Console.ReadLine();
-
+                Console.WriteLine();
                 Console.WriteLine(row.Letter2);
-                Clipboard.SetText(row.RightCandidates
+                Console.WriteLine(row.RightCandidates
                     .OrderBy(lc => lc.PuzzleSolution[0] == lc.CandidateName[0] ? "ZZ" + lc.PuzzleSolution : lc.PuzzleSolution)
                     .Select(lc => $"{(lc.PuzzleSolution[0] == lc.CandidateName[0] ? "~" : "")}{lc.PuzzleSolution}")
                     .JoinString("\n"));
-                Console.ReadLine();
-            }
-        }
-
-        public static void GenerateSolutionCandidates_Unused()
-        {
-            // Unused alternative: use only the first part of the episode titles
-
-            var epi = getEpisodes();
-            const string solution = "PANICAVERTED";
-            for (int i = 0; i < solution.Length; i++)
-            {
-                var ltr = solution.Substring(i, 1);
-                ConsoleUtil.WriteLine(ltr.Color(ConsoleColor.Yellow));
-                ConsoleUtil.WriteLine(epi
-                    .Where(e => e.second.StartsWith(ltr) && epi.Count(e2 => e2.first.Equals(e.first)) == 1)
-                    .Select(e => e.first.Color(ConsoleColor.Green) + " " + e.second.Color(ConsoleColor.DarkGreen))
-                    .JoinColoredString("\n"));
-                Console.ReadLine();
+                Console.WriteLine();
             }
         }
 
