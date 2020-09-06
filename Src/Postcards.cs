@@ -28,14 +28,19 @@ namespace Qoph
                 .Select(town => (town, match: Regex.Match(allCoords[allTowns.IndexOf(town)], @"^(\d+)°(\d+)′(\d+)″N (\d+)°(\d+)′(\d+)″W$").Groups.Cast<Group>().Skip(1).Select(gr => int.Parse(gr.Value)).ToArray()))
                 .Select(tup => (tup.town, pt: new PointD(convLong(tup.match[3], tup.match[4], tup.match[5]), convLat(tup.match[0], tup.match[1], tup.match[2]))))
                 .ToArray();
+            var givens = new[] { 2, 2, 1, 4, 0, 0, 2, 2, 1, 3 };
 
             var diagram = VoronoiDiagram.GenerateVoronoiDiagram(data.Select(tup => tup.pt).ToArray(), new SizeF(7, 4), VoronoiDiagramFlags.IncludeEdgePolygons);
             var svg = new StringBuilder();
             foreach (var (site, polygon) in diagram.Polygons.ToTuples())
             {
-                svg.Append($@"<path d='M {polygon.Vertices.Select(p => $"{p.X},{p.Y}").JoinString(" ")} z' fill='none' stroke='black' stroke-width='.02' />");
+                var ix = data.IndexOf(tup => tup.pt == site);
+                foreach (var (p1, p2) in polygon.Vertices.ConsecutivePairs(true))
+                    svg.Append($@"<path d='M {p1.X},{p1.Y} {p2.X},{p2.Y}' fill='none' stroke='black' stroke-width='.02' />");
                 svg.Append($@"<circle cx='{site.X}' cy='{site.Y}' r='.025' />");
-                svg.Append($@"<text x='{site.X}' y='{site.Y - .05}'>{data.First(tup => tup.pt == site).town}</text>");
+                svg.Append($@"<text x='{site.X}' y='{site.Y - .05}'>{data[ix].town}</text>");
+                if (ix < givens.Length)
+                    svg.Append($@"<text x='{site.X}' y='{site.Y + .2}' font-size='.2'>{givens[ix]}</text>");
             }
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Postcards\Voronoi.svg", $"<svg viewBox='-.1 -.1 7.2 4.2' xmlns='http://www.w3.org/2000/svg' text-anchor='middle' font-size='.1'>{svg}</svg>");
 
