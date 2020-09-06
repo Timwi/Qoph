@@ -37,7 +37,7 @@ namespace Qoph
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            FaceToFace.GatherAllData();
+            Postcards.MakeVoronoiDiagram();
 
 
             Console.WriteLine("Done.");

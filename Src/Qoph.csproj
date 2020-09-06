@@ -61,6 +61,7 @@
     <Compile Include="Eternal.cs" />
     <Compile Include="OneCanHope.cs" />
     <Compile Include="PngMetadataExperiment.cs" />
+    <Compile Include="Postcards.cs" />
     <Compile Include="PowerOfSudoku.cs" />
     <Compile Include="SpaceRace.cs" />
     <Compile Include="HomeDepot.cs" />
