@@ -1,6 +1,7 @@
 ﻿using System;
+using RT.Util.Geometry;
 
-namespace Qoph
+namespace Qoph.Modeling
 {
     public struct Pt : IEquatable<Pt>
     {
@@ -25,6 +26,15 @@ namespace Qoph
         public static Pt operator *(double one, Pt two) => new Pt(two.X * one, two.Y * one, two.Z * one);
         public static Pt operator /(Pt one, double two) => new Pt(one.X / two, one.Y / two, one.Z / two);
         public static Pt operator -(Pt one) => new Pt(-one.X, -one.Y, -one.Z);
+
+        public VertexInfo WithNormal(Pt normal) => new VertexInfo(this, normal);
+        public VertexInfo WithNormal(double x, double y, double z) => new VertexInfo(this, new Pt(x, y, z));
+        public VertexInfo WithTexture(PointD texture) => new VertexInfo(this, null, texture);
+        public VertexInfo WithTexture(double x, double y) => new VertexInfo(this, null, new PointD(x, y));
+
+        public MeshVertexInfo WithMeshInfo(Pt normal) => new MeshVertexInfo(this, normal);
+        public MeshVertexInfo WithMeshInfo(double normalX, double normalY, double normalZ) => new MeshVertexInfo(this, new Pt(normalX, normalY, normalZ));
+        public MeshVertexInfo WithMeshInfo(Normal befX, Normal afX, Normal befY, Normal afY) => new MeshVertexInfo(this, befX, afX, befY, afY);
 
         // Vector cross product
         public static Pt operator *(Pt a, Pt b) => new Pt(a.Y * b.Z - a.Z * b.Y, a.Z * b.X - a.X * b.Z, a.X * b.Y - a.Y * b.X);

@@ -59,6 +59,14 @@
     <Compile Include="CrossingBridges.cs" />
     <Compile Include="Comebacks.cs" />
     <Compile Include="Eternal.cs" />
+    <Compile Include="Modeling\AutoNormal.cs" />
+    <Compile Include="Modeling\BevelPoint.cs" />
+    <Compile Include="Modeling\GaussianBlur.cs" />
+    <Compile Include="Modeling\Md.cs" />
+    <Compile Include="Modeling\MeshVertexInfo.cs" />
+    <Compile Include="Modeling\Normal.cs" />
+    <Compile Include="Modeling\Pt.cs" />
+    <Compile Include="Modeling\VertexInfo.cs" />
     <Compile Include="OneCanHope.cs" />
     <Compile Include="PngMetadataExperiment.cs" />
     <Compile Include="Postcards.cs" />
@@ -68,7 +76,6 @@
     <Compile Include="InsideOut.cs" />
     <Compile Include="SignalLink.cs" />
     <Compile Include="SweetNonogram.cs" />
-    <Compile Include="Md.cs" />
     <Compile Include="BigBangTheoryEpisodes.cs" />
     <Compile Include="BoardState.cs" />
     <Compile Include="Circles.cs" />
@@ -80,7 +87,6 @@
     <Compile Include="FaceToFace.cs" />
     <Compile Include="MonoRandom.cs" />
     <Compile Include="General.cs" />
-    <Compile Include="Pt.cs" />
     <Compile Include="StatueParkSolver.cs" />
     <Compile Include="MorseCode.cs" />
     <Compile Include="Program.cs" />

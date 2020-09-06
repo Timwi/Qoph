@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CsQuery;
 using PuzzleSolvers;
+using Qoph.Modeling;
+using RT.KitchenSink.Geometry;
 using RT.TagSoup;
 using RT.Util;
 using RT.Util.Consoles;
@@ -21,7 +24,7 @@ namespace Qoph
 
     static class FaceToFace
     {
-        private static Polyhedron _polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\LpentagonalIcositetrahedron.txt");
+        private static readonly Polyhedron _polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\LpentagonalIcositetrahedron.txt");
 
         private static readonly (string word, int[] cells)[] _crosswordLights = Ut.NewArray(
             ("DUCK", new[] { 2, 14, 13, 5 }),
@@ -843,6 +846,24 @@ h3 {{ font-size: 14pt; }}
             }
 
             Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{f.Edges[edge].AdjacentFace?.ToString() ?? f.Edges[edge].CrosswordInfo}\t{f.Edges[edge].AdjacentEdge}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex + 1}\t{f.MusicSnippet}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
+        }
+
+        public static void UnityExperiment()
+        {
+            var poly = generateNet(_polyhedron).polygons[0];
+            var wall = 0;
+            const double height = .6;
+
+            foreach (var (p1, p2) in poly.ConsecutivePairs(true))
+            {
+                File.WriteAllText($@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Wall{wall}.obj",
+                    GenerateObjFile(new[] { new[] { pt(p1.X, height, p1.Y).WithTexture(1, 1), pt(p2.X, height, p2.Y).WithTexture(0, 1), pt(p2.X, 0, p2.Y).WithTexture(0, 0), pt(p1.X, 0, p1.Y).WithTexture(1, 0) } }, $"Wall{wall}", AutoNormal.Flat));
+                wall++;
+            }
+            File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Floor.obj",
+                GenerateObjFile(new[] { poly.Select(p => pt(p.X, 0, p.Y).WithTexture(p.X, p.Y)).ToArray() }, "Floor", AutoNormal.Flat));
+            File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Ceiling.obj",
+                GenerateObjFile(new[] { poly.Select(p => pt(p.X, height, p.Y).WithTexture(p.X, p.Y)).Reverse().ToArray() }, "Ceiling", AutoNormal.Flat));
         }
     }
 }
