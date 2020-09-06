@@ -21,22 +21,22 @@ namespace Qoph
 
     static class FaceToFace
     {
-        public static Polyhedron _polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\LpentagonalIcositetrahedron.txt");
+        private static Polyhedron _polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\LpentagonalIcositetrahedron.txt");
 
-        public static int[][] _crosswordLights = Ut.NewArray(
-            new[] { 5, 13, 14, 2 },
-            new[] { 5, 4, 9, 10 },
-            new[] { 3, 23, 22, 4, 7 },
-            new[] { 22, 8, 11, 0, 1, 17, 16 },
-            new[] { 23, 20, 2 },
-            new[] { 21, 14, 15 },
-            new[] { 13, 21, 20, 3, 0 },
-            new[] { 6, 7, 9, 8 },
-            new[] { 6, 16, 19 },
-            new[] { 12, 17, 18, 10, 11 },
-            new[] { 12, 15, 1, 18, 19 });
+        private static readonly (string word, int[] cells)[] _crosswordLights = Ut.NewArray(
+            ("DUCK", new[] { 2, 14, 13, 5 }),
+            ("WEEK", new[] { 10, 9, 4, 5 }),
+            ("SEVEN", new[] { 3, 23, 22, 4, 7 }),
+            ("VENTURE", new[] { 22, 8, 11, 0, 1, 17, 16 }),
+            ("DUE", new[] { 2, 20, 23 }),
+            ("RUN", new[] { 21, 14, 15 }),
+            ("CRUST", new[] { 13, 21, 20, 3, 0 }),
+            ("KNEE", new[] { 6, 7, 9, 8 }),
+            ("KEY", new[] { 6, 16, 19 }),
+            ("GROWN", new[] { 12, 17, 18, 10, 11 }),
+            ("YOUNG", new[] { 19, 18, 1, 15, 12 }));
 
-        public struct DistrInfo
+        private struct DistrInfo
         {
             public string Puzzle;
             public string Clue;
@@ -49,61 +49,61 @@ namespace Qoph
             }
         }
 
-        public static readonly DistrInfo _cyanSums = new DistrInfo("Edge sums (cyan)", "PINK SUM",
+        private static readonly DistrInfo _cyanSums = new DistrInfo("Edge sums (cyan)", "PINK SUM",
                 (word: "PINK", faces: new[] { 8, 11, 0, 1 }, color: "#afa"),
                 (word: "SUM", faces: new[] { 15, 12, 6 }, color: "#ffa"),
                 (word: "Q", faces: new[] { 22 }, color: "#faa"),
                 (word: "ABDEGHJLOFRVTZYX", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 16, 17, 18, 19, 20, 21, 23 }, color: "#fff"));
-        public static readonly DistrInfo _pinkSums = new DistrInfo("Vertex sums (pink)", "LYRICS NEXT WORD",
+        private static readonly DistrInfo _pinkSums = new DistrInfo("Vertex sums (pink)", "LYRICS NEXT WORD",
                 (word: "LYRICS", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: "#afa"),
                 (word: "NEXT", faces: new[] { 14, 13, 5, 4 }, color: "#ffa"),
                 (word: "WOD", faces: new[] { 9, 10, 3 }, color: "#adf"),
                 (word: "Q", faces: new[] { 22 }, color: "#faa"),
                 (word: "JGHFKMPVUZ", faces: new[] { 2, 6, 7, 16, 17, 18, 19, 20, 21, 23 }, color: "#fff"));
-        public static readonly DistrInfo _musicSnippets = new DistrInfo("Lyrics", "GASHLYCRUMB TINS",
+        private static readonly DistrInfo _musicSnippets = new DistrInfo("Lyrics", "GASHLYCRUMB TINS",
                 (word: "GASHLYCRUMB", faces: new[] { 8, 11, 0, 1, 15, 12, 16, 19, 9, 4, 5 }, color: "#afa"),
                 (word: "TIN", faces: new[] { 21, 20, 3 }, color: "#ffa"),
                 (word: "Q", faces: new[] { 22 }, color: "#faa"),
                 (word: "DJKOPVWXZ", faces: new[] { 6, 7, 10, 13, 14, 17, 18, 2, 23 }, color: "#fff"));
-        public static readonly DistrInfo _carpetColors = new DistrInfo("Carpet colors", "CYAN SUM",
+        private static readonly DistrInfo _carpetColors = new DistrInfo("Carpet colors", "CYAN SUM",
                 (word: "CYAN", faces: new[] { 8, 11, 0, 1 }, color: "#afa"),
                 (word: "SUM", faces: new[] { 15, 12, 6 }, color: "#ffa"),
                 (word: "Q", faces: new[] { 22 }, color: "#faa"),
                 (word: "BDFGHJKLOPRTVWXZ", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 16, 17, 18, 19, 20, 21, 23 }, color: "#fff"));
-        public static readonly DistrInfo _gashlycrumbTinies = new DistrInfo("Gashlycrumb Tinies", "LOCK IS BAR",
+        private static readonly DistrInfo _gashlycrumbTinies = new DistrInfo("Gashlycrumb Tinies", "LOCK IS BAR",
                 (word: "LOCK", faces: new[] { 8, 11, 0, 1 }, color: "#afa"),
                 (word: "IS", faces: new[] { 15, 12 }, color: "#ffa"),
                 (word: "BAR", faces: new[] { 16, 19, 9 }, color: "#adf"),
                 (word: "Q", faces: new[] { 22 }, color: "#faa"),
                 (word: "EFGHJMNPUVWXYZ", faces: new[] { 2, 3, 4, 5, 6, 7, 10, 13, 14, 17, 18, 20, 21, 23 }, color: "#fff"));
-        public static readonly DistrInfo _crosswordAfterOffset = new DistrInfo("Crossword", "CARPET INDEX",
+        private static readonly DistrInfo _crosswordAfterOffset = new DistrInfo("Crossword", "CARPET INDEX",
                 (word: "CARPET", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: "#afa"),
                 (word: "INDX", faces: new[] { 23, 3, 2, 17 }, color: "#ffa"),
                 (word: "Q", faces: new[] { 22 }, color: "#faa"),
                 (word: "FGHJKLMSUVWYZ", faces: new[] { 4, 5, 6, 7, 9, 10, 13, 14, 16, 18, 19, 20, 21 }, color: "#fff"));
 
-        public static readonly DistrInfo[] _distributions = new[] { _carpetColors, _cyanSums, _pinkSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
+        private static readonly DistrInfo[] _distributions = new[] { _carpetColors, _cyanSums, _pinkSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
 
-        public static string[] _carpetColorNames = "AQUA,AZURE,FUCHSIA,GAMBOGE,JADE,ONYX,PINK,VIOLET,WHITE".Split(',');
+        private static string[] _carpetColorNames = "AQUA,AZURE,FUCHSIA,GAMBOGE,JADE,ONYX,PINK,VIOLET,WHITE".Split(',');
 
-        public static readonly string[] _songTitles = Ut.NewArray(
+        private static readonly string[] _songTitles = Ut.NewArray(
             "Lemon Tree",
             "Blinding Lights",
             "Still Alive",
             "Imagine",
-            "Rasputin",
-            "Bohemian Rhapsody",
+            null,
+            null,
             "Space Oddity",
             "Holding Out for a Hero",
             "Barbie Girl",
-            "The Animal Song",
+            "Royals",
             "Africa",
             "Saturnz Barz",
             "Shape of You",
             "Everybody Wants to Rule the World",
-            "I Can See Clearly Now",
+            "Bohemian Rhapsody",
             "I'm Still Standing",
-            "Royals",
+            "Rasputin",
             "Mr. Blue Sky",
             "Magnolia",
             "God's Plan",
@@ -116,7 +116,7 @@ namespace Qoph
 
         public static readonly string[] _gashlycrumbTiniesObjects = Ut.NewArray(
             "a piece of banister",
-            null,
+            "a plush toy",
             "a pile of trash",
             "a sled",
             "a bucket of orange paint",
@@ -129,7 +129,7 @@ namespace Qoph
             "a nail",
             "a bottle of salty water",
             "a copy of the funnies with their beginning and end torn off and the rest scrambled",
-            null,
+            "a piercing",
             "a copy of the third Super Smash Bros. game",
             "a pile of mud",
             "a box of matches",
@@ -663,12 +663,19 @@ h3 {{ font-size: 14pt; }}
                     ),
                     new BODY(
                         new DIV { id = "all" }._(
-                            _distributions.Select(d => makePiece(d)),
+                            _distributions.Select(makePiece),
                             new DIV { class_ = "piece" }._(new RawTag(generateNet(p, faceSvg: (f, x, y) => $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{f}</text>").svg))
                         )
                     )
                 ).ToString()
             );
+        }
+
+        private static int findEdgeThatLeadsTo(int fromFace, int toFace)
+        {
+            var f1 = _polyhedron.Faces[fromFace];
+            var f2 = _polyhedron.Faces[toFace];
+            return Enumerable.Range(0, 5).Single(e => f2.Contains(f1[e]) && f2.Contains(f1[(e + 1) % 5]));
         }
 
         private static (int face, int edge)[] getLocked()
@@ -678,16 +685,12 @@ h3 {{ font-size: 14pt; }}
                 for (var e = 0; e < 5; e++)
                     edges.Add((f, e));
 
-            foreach (var light in _crosswordLights)
+            foreach (var (word, light) in _crosswordLights)
             {
                 foreach (var (f1Ix, f2Ix) in light.ConsecutivePairs(false))
                 {
-                    var f1 = _polyhedron.Faces[f1Ix];
-                    var f2 = _polyhedron.Faces[f2Ix];
-                    var e1 = Enumerable.Range(0, 5).Single(e => f2.Contains(f1[e]) && f2.Contains(f1[(e + 1) % 5]));
-                    var e2 = Enumerable.Range(0, 5).Single(e => f1.Contains(f2[e]) && f1.Contains(f2[(e + 1) % 5]));
-                    edges.Remove((f1Ix, e1));
-                    edges.Remove((f2Ix, e2));
+                    edges.Remove((f1Ix, findEdgeThatLeadsTo(f1Ix, f2Ix)));
+                    edges.Remove((f2Ix, findEdgeThatLeadsTo(f2Ix, f1Ix)));
                 }
             }
 
@@ -696,28 +699,75 @@ h3 {{ font-size: 14pt; }}
 
         public static (string letters, (int[] cells, string word)[] lights) GenerateCrossword()
         {
-            var words = File.ReadAllLines(@"D:\Daten\Wordlists\VeryCommonWords.txt");
-            var filteredWords = "DIE,LAD,YER,THE,THEN,SLAVE,HIM,EGO,RAPE,DROWN,TOMB,SATIN,ETC,HMM,EERIE,WARFARE,IDIOT,ARSON,HER,RNA".Split(',').ToHashSet();
-            int[][] getWords(int len) => words.Where(w => w.Length == len && !filteredWords.Contains(w)).SelectMany(w => new[] { w, w.Reverse().JoinString() }).Select(w => w.Select(ch => ch - 'A' + 1).ToArray()).ToArray();
+            var lights = Ut.NewArray(
+                new[] { 5, 13, 14, 2 },
+                new[] { 5, 4, 9, 10 },
+                new[] { 3, 23, 22, 4, 7 },
+                new[] { 22, 8, 11, 0, 1, 17, 16 },
+                new[] { 23, 20, 2 },
+                new[] { 21, 14, 15 },
+                new[] { 13, 21, 20, 3, 0 },
+                new[] { 6, 7, 9, 8 },
+                new[] { 6, 16, 19 },
+                new[] { 12, 17, 18, 10, 11 },
+                new[] { 12, 15, 1, 18, 19 });
+
+            var words = File.ReadAllLines(@"D:\Daten\Wordlists\VeryCommonWords.txt")
+                .Except("DIE,LAD,YER,THE,THEN,SLAVE,HIM,EGO,RAPE,DROWN,TOMB,SATIN,ETC,HMM,EERIE,WARFARE,IDIOT,ARSON,HER,RNA,SHH,LOO,ARSE,ASS,NOR".Split(','))
+                .ToArray();
+
+            int[][] getWords(int len) => words.Where(w => w.Length == len).SelectMany(w => new[] { w, w.Reverse().JoinString() }).Select(w => w.Select(ch => ch - 'A' + 1).ToArray()).ToArray();
 
             var puzzle = new Puzzle(24, 1, 26);
-            foreach (var light in _crosswordLights)
+            foreach (var light in lights)
                 puzzle.AddConstraint(new CombinationsConstraint(light, getWords(light.Length)));
+            foreach (var faceIx in Enumerable.Range(0, 24))
+                puzzle.AddConstraint(new OneCellLambdaConstraint(faceIx, v => Math.Abs(v - getFaceValue(faceIx, _crosswordAfterOffset)) < 17));
 
-            var randomSolution = puzzle.Solve(new SolverInstructions { Randomizer = new Random(147) }).First();
+            var bestSolutionRating = int.MaxValue;
+            int[] bestSolution = null;
+
+            foreach (var solution in puzzle.Solve())
+            {
+                var rating = Enumerable.Range(0, 24).Sum(face => Math.Abs(solution[face] - getFaceValue(face, _crosswordAfterOffset)));
+                if (rating < bestSolutionRating)
+                {
+                    var wordsUsed = new HashSet<string>();
+                    foreach (var light in lights)
+                    {
+                        var word = light.Select(cell => (char) (solution[cell] + 'A' - 1)).JoinString();
+                        if (words.Contains(word))
+                            wordsUsed.Add(word);
+                        else
+                            wordsUsed.Add(word.Reverse().JoinString());
+                    }
+                    if (wordsUsed.Count < lights.Length)
+                        continue;
+                    Console.WriteLine(wordsUsed.JoinString("\n"));
+                    Console.WriteLine($"Rating: {rating}");
+                    Console.WriteLine();
+                    bestSolutionRating = rating;
+                    bestSolution = solution;
+                }
+            }
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Generated Crossword.svg",
-                generateNet(_polyhedron, faceColor: f => "#def", faceSvg: (f, x, y) => $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{(char) (randomSolution[f] - 1 + 'A')}</text>").svg);
+                generateNet(_polyhedron, faceColor: f => "#def", faceSvg: (f, x, y) => $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{(char) (bestSolution[f] - 1 + 'A')}</text>").svg);
 
             var results = new List<(int[] cells, string word)>();
-            foreach (var light in _crosswordLights)
+            foreach (var light in lights)
             {
-                var word = light.Select(cell => (char) (randomSolution[cell] + 'A' - 1)).JoinString();
+                var word = light.Select(cell => (char) (bestSolution[cell] + 'A' - 1)).JoinString();
                 if (words.Contains(word))
                     results.Add((light, word));
                 else
                     results.Add((light.Reverse().ToArray(), word.Reverse().JoinString()));
             }
-            return (randomSolution.Select(val => (char) (val + 'A' - 1)).JoinString(), results.ToArray());
+
+            foreach (var (cells, word) in results)
+                Console.WriteLine($@"(""{word}"", new[] {{ {cells.JoinString(", ")} }}),");
+            Console.WriteLine();
+
+            return (bestSolution.Select(val => (char) (val + 'A' - 1)).JoinString(), results.ToArray());
         }
 
         public sealed class EdgeInfo
@@ -755,7 +805,7 @@ h3 {{ font-size: 14pt; }}
                 var inf = new FaceInfo
                 {
                     MusicSnippet = _songTitles[getFaceValue(faceIx, _musicSnippets) - 1],
-                    GashlycrumbTiniesObject = _gashlycrumbTiniesObjects[getFaceValue(faceIx, _gashlycrumbTinies)],
+                    GashlycrumbTiniesObject = _gashlycrumbTiniesObjects[getFaceValue(faceIx, _gashlycrumbTinies) - 1],
                     CarpetColor = carpetColor,
                     CarpetColorIndex = carpetColor.IndexOf(carpetLetter)
                 };
@@ -767,15 +817,32 @@ h3 {{ font-size: 14pt; }}
 
                     inf.Edges[edge] = new EdgeInfo
                     {
-                        AdjacentFace = locked.Contains((adjacentFaceIx, edge)) ? null : adjacentFaceIx.Nullable(),
-                        AdjacentEdge = locked.Contains((adjacentFaceIx, edge)) ? null : adjacentFace.IndexOf(face[(edge + 1) % 5]).Nullable(),
+                        AdjacentFace = locked.Contains((faceIx, edge)) ? null : adjacentFaceIx.Nullable(),
+                        AdjacentEdge = locked.Contains((faceIx, edge)) ? null : adjacentFace.IndexOf(face[(edge + 1) % 5]).Nullable(),
                         CyanNumber = getFaceValue(faceIx, _cyanSums) + getFaceValue(adjacentFaceIx, _cyanSums),
                         PinkNumber = _polyhedron.Faces.SelectIndexWhere(f => f.Contains(face[edge])).Sum(f => getFaceValue(f, _pinkSums))
                     };
                 }
-
-                // Crossword
+                faceInfos.Add(inf);
             }
+
+            // Crossword
+            foreach (var (word, cells) in _crosswordLights)
+            {
+                var firstFace = cells[0];
+                var firstEdge = findEdgeThatLeadsTo(cells[0], cells[1]);
+                var barEdge = locked.First(tup => tup.face == firstFace && (tup.edge == (firstEdge + 2) % 5 || tup.edge == (firstEdge + 3) % 5)).edge;
+                faceInfos[firstFace].Edges[barEdge].CrosswordInfo = $"clue: {word}";
+            }
+            for (var faceIx = 0; faceIx < 24; faceIx++)
+            {
+                var letter = _crosswordLights.Select(tup => new { Tup = tup, Ix = tup.cells.IndexOf(faceIx) }).Where(inf => inf.Ix != -1).Select(inf => inf.Tup.word[inf.Ix]).First();
+                var barEdge = locked.First(tup => tup.face == faceIx && faceInfos[faceIx].Edges[tup.edge].CrosswordInfo == null).edge;
+                var offset = getFaceValue(faceIx, _crosswordAfterOffset) - (letter - 'A' + 1);
+                faceInfos[faceIx].Edges[barEdge].CrosswordInfo = $"offset: {(offset >= 0 ? "+" : "−")}{Math.Abs(offset)}";
+            }
+
+            Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{f.Edges[edge].AdjacentFace?.ToString() ?? f.Edges[edge].CrosswordInfo}\t{f.Edges[edge].AdjacentEdge}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex + 1}\t{f.MusicSnippet}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
         }
     }
 }
