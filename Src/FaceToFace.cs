@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,7 +9,6 @@ using System.Windows.Forms;
 using CsQuery;
 using PuzzleSolvers;
 using Qoph.Modeling;
-using RT.KitchenSink.Geometry;
 using RT.TagSoup;
 using RT.Util;
 using RT.Util.Consoles;
@@ -26,18 +24,18 @@ namespace Qoph
     {
         private static readonly Polyhedron _polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\LpentagonalIcositetrahedron.txt");
 
-        private static readonly (string word, int[] cells)[] _crosswordLights = Ut.NewArray(
-            ("DUCK", new[] { 2, 14, 13, 5 }),
-            ("WEEK", new[] { 10, 9, 4, 5 }),
-            ("SEVEN", new[] { 3, 23, 22, 4, 7 }),
-            ("VENTURE", new[] { 22, 8, 11, 0, 1, 17, 16 }),
-            ("DUE", new[] { 2, 20, 23 }),
-            ("RUN", new[] { 21, 14, 15 }),
-            ("CRUST", new[] { 13, 21, 20, 3, 0 }),
-            ("KNEE", new[] { 6, 7, 9, 8 }),
-            ("KEY", new[] { 6, 16, 19 }),
-            ("GROWN", new[] { 12, 17, 18, 10, 11 }),
-            ("YOUNG", new[] { 19, 18, 1, 15, 12 }));
+        private static readonly (string word, string clue, int[] cells)[] _crosswordLights = Ut.NewArray(
+            ("NEED", "Require (4)", new[] { 2, 14, 13, 5 }),
+            ("DEAL", "Agreement or dish out cards (4)", new[] { 5, 4, 9, 10 }),
+            ("ONSET", "Beginning (5)", new[] { 3, 23, 22, 4, 7 }),
+            ("SHARING", "Apportioning (7)", new[] { 22, 8, 11, 0, 1, 17, 16 }),
+            ("NUN", "Sister (3)", new[] { 23, 20, 2 }),
+            ("TEN", "X (3)", new[] { 21, 14, 15 }),
+            ("ROUTE", "Itinerary (5)", new[] { 0, 3, 20, 21, 13 }),
+            ("HATE", "Loathe (4)", new[] { 8, 9, 7, 6 }),
+            ("EGG", "Ovum (3)", new[] { 6, 16, 19 }),
+            ("ALONG", "For the length of (5)", new[] { 11, 10, 18, 17, 12 }),
+            ("GOING", "Leaving or functioning (5)", new[] { 19, 18, 1, 15, 12 }));
 
         private struct DistrInfo
         {
@@ -688,7 +686,7 @@ h3 {{ font-size: 14pt; }}
                 for (var e = 0; e < 5; e++)
                     edges.Add((f, e));
 
-            foreach (var (word, light) in _crosswordLights)
+            foreach (var (word, clue, light) in _crosswordLights)
             {
                 foreach (var (f1Ix, f2Ix) in light.ConsecutivePairs(false))
                 {
@@ -716,7 +714,7 @@ h3 {{ font-size: 14pt; }}
                 new[] { 12, 15, 1, 18, 19 });
 
             var words = File.ReadAllLines(@"D:\Daten\Wordlists\VeryCommonWords.txt")
-                .Except("DIE,LAD,YER,THE,THEN,SLAVE,HIM,EGO,RAPE,DROWN,TOMB,SATIN,ETC,HMM,EERIE,WARFARE,IDIOT,ARSON,HER,RNA,SHH,LOO,ARSE,ASS,NOR".Split(','))
+                .Except("DIE,LAD,YER,THE,THEN,SLAVE,HIM,EGO,RAPE,DROWN,TOMB,SATIN,ETC,HMM,EERIE,WARFARE,IDIOT,ARSON,HER,RNA,SHH,LOO,ARSE,ASS,HELL,WHALING".Split(','))
                 .ToArray();
 
             int[][] getWords(int len) => words.Where(w => w.Length == len).SelectMany(w => new[] { w, w.Reverse().JoinString() }).Select(w => w.Select(ch => ch - 'A' + 1).ToArray()).ToArray();
@@ -732,6 +730,9 @@ h3 {{ font-size: 14pt; }}
 
             foreach (var solution in puzzle.Solve())
             {
+                if (lights.Select(light => words.Contains(light.Select(cell => (char) (solution[cell] + 'A' - 1)).JoinString()) ? light[0] : light.Last()).Distinct().Count() < lights.Count())
+                    continue;
+
                 var rating = Enumerable.Range(0, 24).Sum(face => Math.Abs(solution[face] - getFaceValue(face, _crosswordAfterOffset)));
                 if (rating < bestSolutionRating)
                 {
@@ -753,24 +754,32 @@ h3 {{ font-size: 14pt; }}
                     bestSolution = solution;
                 }
             }
-            File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Generated Crossword.svg",
-                generateNet(_polyhedron, faceColor: f => "#def", faceSvg: (f, x, y) => $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{(char) (bestSolution[f] - 1 + 'A')}</text>").svg);
-
-            var results = new List<(int[] cells, string word)>();
-            foreach (var light in lights)
+            if (bestSolution == null)
             {
-                var word = light.Select(cell => (char) (bestSolution[cell] + 'A' - 1)).JoinString();
-                if (words.Contains(word))
-                    results.Add((light, word));
-                else
-                    results.Add((light.Reverse().ToArray(), word.Reverse().JoinString()));
+                Console.WriteLine("No solution found.");
+                return default;
             }
+            else
+            {
+                File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Generated Crossword.svg",
+                    generateNet(_polyhedron, faceColor: f => "#def", faceSvg: (f, x, y) => $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{(char) (bestSolution[f] - 1 + 'A')}</text>").svg);
 
-            foreach (var (cells, word) in results)
-                Console.WriteLine($@"(""{word}"", new[] {{ {cells.JoinString(", ")} }}),");
-            Console.WriteLine();
+                var results = new List<(int[] cells, string word)>();
+                foreach (var light in lights)
+                {
+                    var word = light.Select(cell => (char) (bestSolution[cell] + 'A' - 1)).JoinString();
+                    if (words.Contains(word))
+                        results.Add((light, word));
+                    else
+                        results.Add((light.Reverse().ToArray(), word.Reverse().JoinString()));
+                }
 
-            return (bestSolution.Select(val => (char) (val + 'A' - 1)).JoinString(), results.ToArray());
+                foreach (var (cells, word) in results)
+                    Console.WriteLine($@"(""{word}"", new[] {{ {cells.JoinString(", ")} }}),");
+                Console.WriteLine();
+
+                return (bestSolution.Select(val => (char) (val + 'A' - 1)).JoinString(), results.ToArray());
+            }
         }
 
         public sealed class EdgeInfo
@@ -830,19 +839,19 @@ h3 {{ font-size: 14pt; }}
             }
 
             // Crossword
-            foreach (var (word, cells) in _crosswordLights)
+            foreach (var (word, clue, cells) in _crosswordLights)
             {
                 var firstFace = cells[0];
                 var firstEdge = findEdgeThatLeadsTo(cells[0], cells[1]);
                 var barEdge = locked.First(tup => tup.face == firstFace && (tup.edge == (firstEdge + 2) % 5 || tup.edge == (firstEdge + 3) % 5)).edge;
-                faceInfos[firstFace].Edges[barEdge].CrosswordInfo = $"clue: {word}";
+                faceInfos[firstFace].Edges[barEdge].CrosswordInfo = clue;
             }
             for (var faceIx = 0; faceIx < 24; faceIx++)
             {
                 var letter = _crosswordLights.Select(tup => new { Tup = tup, Ix = tup.cells.IndexOf(faceIx) }).Where(inf => inf.Ix != -1).Select(inf => inf.Tup.word[inf.Ix]).First();
                 var barEdge = locked.First(tup => tup.face == faceIx && faceInfos[faceIx].Edges[tup.edge].CrosswordInfo == null).edge;
                 var offset = getFaceValue(faceIx, _crosswordAfterOffset) - (letter - 'A' + 1);
-                faceInfos[faceIx].Edges[barEdge].CrosswordInfo = $"offset: {(offset >= 0 ? "+" : "−")}{Math.Abs(offset)}";
+                faceInfos[faceIx].Edges[barEdge].CrosswordInfo = $@"‘{(offset >= 0 ? "+" : "−")}{Math.Abs(offset)}’";
             }
 
             Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{f.Edges[edge].AdjacentFace?.ToString() ?? f.Edges[edge].CrosswordInfo}\t{f.Edges[edge].AdjacentEdge}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex + 1}\t{f.MusicSnippet}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
