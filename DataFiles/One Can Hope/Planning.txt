@@ -3,7 +3,7 @@ O	gooseberry
 R	bread
 T	wait
 O	house
-D	dragonfly
+D	drop
 E	employment
 R	cricket
 I	estimate
@@ -19,27 +19,27 @@ O	woodpecker
 P	present
 R	remain
 A	arrow
-N	lynx
+N	lentil
 O	soap
 M	temptation
 O	wolverine
-A	mastiff
+A	magpie
 N	hand
-G	magpie
-L	lentil
+G	string
+L	lynx
 E	queen
-S	string
-E	stew
+S	grease
+E	force
 S	thistle
 
 
 barque
 break
 dowry
-drop
+dragonfly
 floor
-force
-grease
+stew
+mastiff
 hairy
 row
 trace

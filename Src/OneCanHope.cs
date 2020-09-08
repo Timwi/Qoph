@@ -32,7 +32,7 @@ namespace Qoph
             ['r'] = (@"", 1, 0, @"h1v2h-1z"),
             ['s'] = (@"l 2,2", 0, 0, @""),
             ['ŝ'] = (@"m 2,0 l -2,2", 0, 0, @""),
-            ['t'] = (@"m 1,0 v2 m -1,-1 h1", 0, 0, @""),
+            ['t'] = (@"m 1,0 v2 m -1,-1 h2", 0, 0, @""),
             ['ŭ'] = (@"", 0, 0, @"h2v1h-2z"),
             ['v'] = (@"", 1, 1, @"h1v1h-1z"),
             ['z'] = (@"l 2,2 m 0,-2 l -2,2", 0, 0, @"")
@@ -95,7 +95,7 @@ gooseberry	groso	gross	groco	2
 bread	pano	pan	pato	2	
 wait	atendi	attend	ĉeesti	4	
 house	domo	dome	kupolo	2	1
-dragonfly	libelo	libel	kalumnio	1	
+drop	guto	gut	intesto	1	
 employment	dungo	dung	sterko	1	
 cricket	grilo	grill	krado	2	
 estimate	taksi	tax	imposti	4	
@@ -120,8 +120,8 @@ hand	mano	man	viro	3
 string	kordo	cord	ŝnuro	6	
 lynx	linko	link	ligilo	1	
 queen	damo	dam	baraĵo	3	1
-mastiff	dogo	dog	hundo	3	
-stew	stufi	stuff	farĉi	3	
+grease	graso	grass	herbo	5	
+force	forto	fort	fuorto	5	
 thistle	kardo	card	karto	4	".Replace("\r", "").Split('\n').Select(line => line.Split('\t')).Select(arr => (eoLeft: arr[1], enLeft: arr[2], eoRight: arr[3], enRight: arr[0], index: int.Parse(arr[4]), line: arr[5] == "1")).ToArray();
 
         public static void Generate_OLD()
