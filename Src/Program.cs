@@ -35,7 +35,7 @@ namespace Qoph
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            OneCanHope.Generate();
+            Circles.Generate();
 
 
             Console.WriteLine("Done.");

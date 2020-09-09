@@ -13,10 +13,10 @@ namespace Qoph
     {
         public static void Generate()
         {
-            const int numDotsPerCircle = 5;
+            const int numDotsPerCircle = 7;
 
             var ltrDistances = @"TSUOSIAAG";
-            var ltrRadii = @"HOTNWTSRU";   // TODO: should end with RU instead of AU
+            var ltrRadii = @"HOTNWTSRU";
             var ltrCircumferences = @"ELIIHEPAS";       // = THE SOLUTION IS WHITE ASPARAGUS
             var len = ltrDistances.Length;
 
