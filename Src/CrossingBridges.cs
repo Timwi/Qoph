@@ -19,7 +19,7 @@ namespace Qoph
 
             var islands = new Dictionary<int, int>
             {
-                [8 + w * 0] = 1,
+                [9 + w * 0] = 2,
                 [6 + w * 0] = 4,
                 [4 + w * 0] = 4,
                 [6 + w * 2] = 1,
@@ -27,7 +27,7 @@ namespace Qoph
                 [0 + w * 0] = 3,
                 [0 + w * 2] = 2,
                 [14 + w * 1] = 4,
-                [9 + w * 1] = 6,
+                [9 + w * 1] = 7,
                 [14 + w * 3] = 3,
                 [7 + w * 1] = 3,
                 [9 + w * 3] = 5,
@@ -134,29 +134,32 @@ namespace Qoph
             GenerateHashiwokakeroSvg(w, null, islands, "puzzle");
 
             var count = 0;
-            foreach (var solution in SolveHashiwokakero(w, islands))
+            foreach (var (solution, deductions) in SolveHashiwokakero(w, islands))
             {
                 count++;
                 var topLeft = "M -0.5 6.5 h 2 v -3 h 1 v 2 h 4 v -1 h -3 v -1 h 3 v -4 h -3 v 1 h -3 v -1 h -1 v 2 h 4 v 1 h -3 v 3 h -1 z";
                 var topRight = "M 7.5 -.5 h 3 v 1 h 1 v -1 h 3 v 2 h -3 v 4 h 2 v 1 h -5 v -3 h 1 v -2 h -2 z";
                 var bottomLeft = "M 4.5 9.5 h 2 v 5 h -1 v -4 h -1 v 3 h -1 v -3 h -1 v 3 h -1 v -3 h -1 v 2 h -1 v -4 h 1 v 1 h 1 v -2 h 1 v 2 h 1 v -2 h 1 z";
                 var bottomRight = "M 9.5 13.5 h 4 v -1 h -3 v -1 h 4 v -4 h -1 v 3 h -3 v -1 h 2 v -2 h -2 v 1 h -3 v 1 h 2 v 1 h -2 v 3 h 1 v -2 h 1 z";
+                var bottomBottom = "M 6.5 20.5 h -2 v -2 h 2 v -1 h -3 v -1 h 4 v -1 h 1 v 2 h 2 v 1 h -3 v 1 h 3 v 3 h -4 z";
                 GenerateHashiwokakeroSvg(w, solution, islands, "solution",
-                    svgExtra: $"<path d='{topLeft}{topRight}{bottomLeft}{bottomRight}' fill='none' stroke='green' stroke-width='.1' />");
+                    svgExtra: $"<path d='{topLeft}{topRight}{bottomLeft}{bottomRight}{bottomBottom}' fill='none' stroke='green' stroke-width='.1' />");
+                Console.WriteLine(deductions.JoinString("\n"));
+                Console.WriteLine();
             }
             ConsoleUtil.WriteLine($"{count} solutions found.".Color(count == 1 ? ConsoleColor.White : ConsoleColor.Yellow, count == 1 ? ConsoleColor.DarkGreen : ConsoleColor.DarkRed));
         }
 
-        public static IEnumerable<(int fromCell, int toCell, int numBridges)[]> SolveHashiwokakero(int w, Dictionary<int, int> islands)
+        public static IEnumerable<((int fromCell, int toCell, int numBridges)[] solution, List<string> deductions)> SolveHashiwokakero(int w, Dictionary<int, int> islands)
         {
             bool validWithNoInBetween(int cell1, int cell2) => cell1 != cell2 &&
                 ((cell1 % w == cell2 % w && Enumerable.Range(Math.Min(cell1 / w, cell2 / w) + 1, Math.Abs(cell1 / w - cell2 / w) - 1).All(row => !islands.ContainsKey(cell1 % w + w * row))) ||
                 (cell1 / w == cell2 / w && Enumerable.Range(Math.Min(cell1 % w, cell2 % w) + 1, Math.Abs(cell1 % w - cell2 % w) - 1).All(col => !islands.ContainsKey(col + w * (cell1 / w)))));
             var allBridgeCandidates = islands.Keys.UniquePairs().Select(pair => (fromCell: pair.Item1, toCell: pair.Item2)).Where(pair => validWithNoInBetween(pair.fromCell, pair.toCell)).ToList();
-            return SolveHashiwokakero(w, new List<(int fromCell, int toCell, int numBridges)>(), allBridgeCandidates, islands.ToDictionary());
+            return SolveHashiwokakero(w, new List<(int fromCell, int toCell, int numBridges)>(), allBridgeCandidates, islands.ToDictionary(), new List<string>());
         }
 
-        private static IEnumerable<(int fromCell, int toCell, int numBridges)[]> SolveHashiwokakero(int w, List<(int fromCell, int toCell, int numBridges)> bridgesSoFar, List<(int fromCell, int toCell)> bridgesAvailable, Dictionary<int, int> remainingIslands)
+        private static IEnumerable<((int fromCell, int toCell, int numBridges)[] solution, List<string> deductions)> SolveHashiwokakero(int w, List<(int fromCell, int toCell, int numBridges)> bridgesSoFar, List<(int fromCell, int toCell)> bridgesAvailable, Dictionary<int, int> remainingIslands, List<string> deductions)
         {
             if (remainingIslands.Values.Sum() > 4 * bridgesAvailable.Count)
                 yield break;
@@ -205,6 +208,7 @@ namespace Qoph
                 if (av.Count == 1 && count == 1)
                 {
                     var (fromCell, toCell) = av[0];
+                    deductions.Add($"{fromCell}→{toCell} is forced");
                     bridgesSoFar.Add((fromCell, toCell, 1));
                     dec(fromCell, 1);
                     dec(toCell, 1);
@@ -225,15 +229,16 @@ namespace Qoph
             if (bridgesAvailable.Count == 0)
             {
                 if (remainingIslands.Count == 0)
-                    yield return bridgesSoFar.ToArray();
+                    yield return (bridgesSoFar.ToArray(), deductions.ToList());
                 yield break;
             }
 
             var bridge = fewestPossibilities[0];
+            deductions.Add($"Examining: {bridge.fromCell}→{bridge.toCell}");
             bridgesAvailable.Remove(bridge);
 
             // Try without this bridge
-            foreach (var result in SolveHashiwokakero(w, bridgesSoFar.ToList(), bridgesAvailable.ToList(), remainingIslands.ToDictionary()))
+            foreach (var result in SolveHashiwokakero(w, bridgesSoFar.ToList(), bridgesAvailable.ToList(), remainingIslands.ToDictionary(), deductions.ToList()))
                 yield return result;
 
             // Try with a single bridge
@@ -241,7 +246,7 @@ namespace Qoph
             dec(bridge.toCell, 1);
             bridgesSoFar.Add((bridge.fromCell, bridge.toCell, 1));
             bridgesAvailable.RemoveAll(br => wouldCross(w, br.fromCell, br.toCell, bridge.fromCell, bridge.toCell));
-            foreach (var result in SolveHashiwokakero(w, bridgesSoFar.ToList(), bridgesAvailable.ToList(), remainingIslands.ToDictionary()))
+            foreach (var result in SolveHashiwokakero(w, bridgesSoFar.ToList(), bridgesAvailable.ToList(), remainingIslands.ToDictionary(), deductions.ToList()))
                 yield return result;
 
             // Try with a double bridge
@@ -251,7 +256,7 @@ namespace Qoph
                 dec(bridge.fromCell, 1);
                 dec(bridge.toCell, 1);
                 bridgesSoFar.Add((bridge.fromCell, bridge.toCell, 2));
-                foreach (var result in SolveHashiwokakero(w, bridgesSoFar.ToList(), bridgesAvailable.ToList(), remainingIslands.ToDictionary()))
+                foreach (var result in SolveHashiwokakero(w, bridgesSoFar.ToList(), bridgesAvailable.ToList(), remainingIslands.ToDictionary(), deductions.ToList()))
                     yield return result;
             }
         }
@@ -284,14 +289,23 @@ namespace Qoph
             svg.Append($"<rect stroke='none' fill='#bdf' x='3.5' y='15.5' width='7' height='7' />");
             if (bridgesSolution != null)
             {
-                // Find cycles
-                var loops = bridgesSolution.ToList();
-                while (true)
+                // Find disjointed pieces
+                var pieces = new List<List<(int fromCell, int toCell, int numBridges)>>();
+                var remaining = bridgesSolution.ToList();
+                while (remaining.Count > 0)
                 {
-                    var cell = islands.Keys.Where(cell => loops.Count(tup => tup.fromCell == cell || tup.toCell == cell) == 1).FirstOrNull();
-                    if (cell == null)
-                        break;
-                    loops.RemoveAll(tup => tup.fromCell == cell.Value || tup.toCell == cell.Value);
+                    var start = remaining[0];
+                    var piece = new List<(int fromCell, int toCell, int numBridges)> { start };
+                    remaining.RemoveAt(0);
+                    while (remaining.Count > 0)
+                    {
+                        var other = remaining.SelectIndexWhere(tup1 => piece.Any(tup2 => tup1.fromCell == tup2.fromCell || tup1.fromCell == tup2.toCell || tup1.toCell == tup2.fromCell || tup1.toCell == tup2.toCell)).FirstOrNull();
+                        if (other == null)
+                            break;
+                        piece.Add(remaining[other.Value]);
+                        remaining.RemoveAt(other.Value);
+                    }
+                    pieces.Add(piece);
                 }
 
                 foreach (var (fromCell, toCell, numBridges) in bridgesSolution)
@@ -300,7 +314,7 @@ namespace Qoph
                     {
                         var xOffset = fromCell % w == toCell % w ? -(numBridges - 1) * .07 + b * .14 : 0;
                         var yOffset = fromCell / w == toCell / w ? -(numBridges - 1) * .07 + b * .14 : 0;
-                        svg.Append($"<line x1='{fromCell % w + xOffset}' y1='{fromCell / w + yOffset}' x2='{toCell % w + xOffset}' y2='{toCell / w + yOffset}' stroke='{(loops.Contains((fromCell, toCell, numBridges)) ? "red" : "black")}' />");
+                        svg.Append($"<line x1='{fromCell % w + xOffset}' y1='{fromCell / w + yOffset}' x2='{toCell % w + xOffset}' y2='{toCell / w + yOffset}' stroke='hsl({360 * pieces.IndexOf(p => p.Contains((fromCell, toCell, numBridges))) / pieces.Count}, 75%, 50%)' />");
                     }
                 }
             }
