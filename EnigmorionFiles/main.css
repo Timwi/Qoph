@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'Presquire';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Presquire'), url('Presquire.ttf');
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Presquire';
+}
+
+body {
+    background: hsl(220, 60%, 80%);
+    margin: 0;
+}
+
+div#top {
+    background: hsl(210, 40%, 50%);
+    height: 2cm;
+    position: relative;
+    padding-top: .6cm;
+}
+    div#top > img.logo {
+        height: 1.8cm;
+        position: absolute;
+        left: 1cm;
+        top: .1cm;
+    }
+    div#top > div.links {
+        position: absolute;
+        right: 1cm;
+        top: .2cm;
+        line-height: 1.6;
+        text-align: right;
+    }
+    div#top a {
+        color: hsl(220, 80%, 90%);
+        text-decoration: none;
+    }
+        div#top a:hover {
+            text-decoration: underline;
+            color: white;
+        }
+
+    div#top menu {
+        text-align: center;
+        font-size: 18pt;
+        margin: 0;
+    }
+        div#top menu li {
+            display: inline;
+            padding: 0 .3cm;
+        }
+
+div#main {
+    background: hsl(220, 60%, 90%);
+    max-width: 30cm;
+    min-height: calc(100vh - 2cm);
+    margin: 0 auto;
+    padding: .25cm 1cm;
+}
+
+h1 {
+    margin: 1cm -2cm;
+    padding: .5cm 0;
+    font-size: 56pt;
+    font-weight: bold;
+    text-align: center;
+    background: white;
+    box-shadow: 0 0 .2cm rgba(0, 0, 0, .3);
+}
