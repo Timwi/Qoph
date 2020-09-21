@@ -1,0 +1,168 @@
+@font-face {
+    font-family: 'Presquire';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Presquire'), url('Presquire.ttf');
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Presquire';
+}
+
+body {
+    background: hsl(220, 60%, 80%);
+    margin: 0;
+    font-size: 14pt;
+}
+
+div#top {
+    background: hsl(210, 40%, 50%);
+    height: 2cm;
+    position: relative;
+    padding-top: .6cm;
+    box-shadow: 0 0 .2cm rgba(0, 0, 0, .3);
+}
+    div#top > img.logo {
+        height: 1.8cm;
+        position: absolute;
+        left: 1cm;
+        top: .1cm;
+    }
+    div#top > div.links {
+        position: absolute;
+        right: 1cm;
+        top: .2cm;
+        line-height: 1.6;
+        text-align: right;
+    }
+        div#top > div.links > a {
+            display: block;
+        }
+        div#top > div.links > #login {
+            margin-top: .35cm;
+            background: hsl(50, 70%, 80%);
+            padding: .1cm .5cm;
+            color: black;
+        }
+            div#top > div.links > #login:hover {
+                background: white;
+                box-shadow: 0 0 .2cm rgba(0, 0, 0, .5);
+            }
+    div#top a {
+        color: hsl(220, 80%, 90%);
+        text-decoration: none;
+    }
+        div#top a:hover {
+            text-decoration: underline;
+            color: white;
+        }
+
+    div#top menu {
+        text-align: center;
+        font-size: 18pt;
+        margin: 0;
+    }
+        div#top menu li {
+            display: inline;
+            padding: 0 .3cm;
+        }
+
+div#main {
+    background: hsl(220, 60%, 90%);
+    max-width: 30cm;
+    min-height: calc(100vh - 2cm);
+    margin: 0 auto;
+    padding: .25cm 1cm;
+    box-shadow: 0 0 .2cm rgba(0, 0, 0, .1);
+}
+
+h1 {
+    margin: 2cm -3cm 1cm;
+    padding: .5cm 0;
+    font-size: 56pt;
+    font-weight: normal;
+    text-align: center;
+    background: white;
+    box-shadow: 0 0 .3cm rgba(0, 0, 0, .3);
+    border-radius: 100vw;
+}
+    h1 > bdi {
+        font-weight: bold;
+    }
+
+kbd {
+    text-decoration: underline;
+}
+
+table.bordered {
+    border-collapse: collapse;
+}
+
+    table.bordered td, table.bordered th {
+        border: 1px solid black;
+        text-align: left;
+        padding: .1cm .3cm;
+        background: hsl(220, 60%, 95%);
+    }
+    table.bordered th {
+        background: hsl(220, 60%, 80%);
+    }
+    table.bordered th.small {
+        font-size: 8pt;
+        line-height: 1;
+    }
+
+.team-controls {
+    margin: 1cm 0;
+}
+
+button {
+    font: inherit;
+    padding: .15cm .4cm;
+    margin: .2cm .3cm;
+    background: hsl(220, 50%, 100%);
+    font-weight: bold;
+    font-size: 16pt;
+    border: none;
+    box-shadow: 0 0 .2cm rgba(0, 0, 0, .3);
+    border-radius: 100vw;
+}
+    button:hover {
+        background: hsl(220, 50%, 50%);
+        color: white;
+        cursor: pointer;
+    }
+
+input[type="text"], input[type="password"], input[type="email"] {
+    font-size: 16pt;
+    padding: .2em .3cm;
+    width: 8cm;
+    border: 1px solid #ccc;
+    border-radius: 100vw;
+}
+
+form.logout {
+    float: right;
+}
+
+div.puzzles {
+    width: 521px;
+    height: 690px;
+    margin: 0 auto;
+    background-image: url(city.png);
+    background-position: 0 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+    div.puzzles > div.puzzle {
+        width: 75px;
+        height: 75px;
+        position: absolute;
+        background-image: url(bomb.png);
+        background-position: 0 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }

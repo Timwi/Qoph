@@ -1,40 +1,14 @@
-<html>
-<head>
-    <title>Quantum Online Puzzle Hunt</title>
-    <link rel='stylesheet' href='main.css' />
-</head>
-<body>
-    <div id='top'>
-        <img src='logo.svg' class='logo' />
-        <div class='links'>
-            <div id='user'><a href='/auth'>{{username}}</a></div>
-            <div id='team'><a href='/auth/team/qoph/{{teamid}}'>{{teamname}}</a></div>
-        </div>
-        <menu>
-            <li><a href='/qoph'>Home</a></li>
-            <li><a href='/qoph/puzzles'>Puzzles</a></li>
-            <li><a href='/qoph/rules'>Rules</a></li>
-            <li><a href='/qoph/faq'>FAQ</a></li>
-            <li><a href='/qoph/teams'>Teams</a></li>
-        </menu>
-    </div>
-    <div id='main'>
-        <h1>Quantum Online Puzzle Hunt</h1>
-        <div style='margin-left: -4cm; float: left; shape-outside: url("data:image/png;base64,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")'>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 1 38 30" style='width: 15cm;'>
-                <path fill="#f1dd89" d="M29.915 29.224H17.112A13.084 13.084 0 014 16.112 13.084 13.084 0 0117.112 3h18.666z"/>
-                <path d="M19.51 6.121c-2.947 0-5.356 2.399-5.356 5.34 0 2.816 2.21 5.126 4.985 5.318v9.325h1.5v-2.069h1.75v2.069h1v-5.14h-1v2.071h-1.75V16.78c2.774-.192 4.984-2.502 4.984-5.318 0-2.941-2.408-5.34-5.355-5.34h-.758zm-.371 1.537v7.604c-1.96-.187-3.485-1.8-3.485-3.801 0-2.001 1.524-3.615 3.485-3.803zm1.5 0c1.96.188 3.484 1.802 3.484 3.803 0 2-1.524 3.614-3.484 3.8V7.659z"/>
-                <path fill="#504000" fill-opacity=".314" d="M30.717 30.225L37.027 2 34.53 4l-5.416 24.225-12.001-.002c-7.792 0-14.11-5.422-14.11-12.11C3 23.905 9.317 30.224 17.111 30.224z"/>
-                <path fill="#fff" fill-opacity=".314" d="M17.112 28.222c-6.688 0-12.11-5.421-12.11-12.11A12.06 12.06 0 0117.111 4h17.417l2.498-2H17.111C9.311 2 3 8.31 3.001 16.112c.002 6.689 6.319 12.11 14.112 12.11z"/>
-            </svg>
-        </div>
-        <p style='padding-top: 1cm;'>Welcome to Quantum Online Puzzle Hunt, a puzzle hunt for intermediate-level players. Anyone can join! <a href='/auth'>Register a team now!</a></p>
-        <h2>What?</h2>
-        <p>This is a puzzle hunt — an online event involving a collection of puzzles that will be released at a predetermined time. Teams have one week to solve the puzzles and will be ranked on a leaderboard at the end.</p>
-        <h2>Where?</h2>
-        <p>This event occurs entirely online. You do not need to travel anywhere.</p>
-        <h2>When?</h2>
-        <p>The date and time for this hunt are yet to be determined.</p>
-    </div>
-</body>
-</html>
+<h1>Quantum Online Puzzle Hunt</h1>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 1 40 30" style='width: 16cm; margin-left: -4cm; float: left; shape-outside: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAO4AAADICAQAAABFEhWCAAABeUlEQVR42u3RwQ2AMAwEsHT/oWECXpFOPWSv4DPP8DvPmZk5cuUiF7kEauXKRS5X1cqVi1zkIhe5fNXKlYtc5JKplSsXuchFLstauXKRi1wytXLlIhe5yGVZK1cucpFLplauXOQiF7ksa+XKRS5yydTKlYtcrqqVKxe5yEUuctXKlYtcKmrlykUucpGLXLVy5SKXilq5cpGLXOQiV61cucilolauXOQiF7nIVStXLnKpqJUrF7nIRS7LWrlykYtc5LKslSsXuVxVK1cucpGLXOSqlSsXuVTUypWLXOQiF7lq5cpFLhW1cuUiF7nIRa5auXKRS0WtXLnIRS5ykatWrlzkUlErVy5ykYtctWty5SIXuSRq5cpFLnLJ1MqVi1zkIleuXLVy5SKXilq5cpGLXOTKlatWrlzkUlErVy5ykYtcuXLVypWLXCpq5cpFLnKRK1euWrlykUtFrVy5yEUumVq5cpGLXOSqlStXrlzkUlErVy5ykYtctWsvk8WQEERcPC4AAAAASUVORK5CYII=")'>
+    <path fill="#f1dd89" d="M29.915 29.224H17.112A13.084 13.084 0 014 16.112 13.084 13.084 0 0117.112 3h18.666z"/>
+    <path d="M19.51 6.121c-2.947 0-5.356 2.399-5.356 5.34 0 2.816 2.21 5.126 4.985 5.318v9.325h1.5v-2.069h1.75v2.069h1v-5.14h-1v2.071h-1.75V16.78c2.774-.192 4.984-2.502 4.984-5.318 0-2.941-2.408-5.34-5.355-5.34h-.758zm-.371 1.537v7.604c-1.96-.187-3.485-1.8-3.485-3.801 0-2.001 1.524-3.615 3.485-3.803zm1.5 0c1.96.188 3.484 1.802 3.484 3.803 0 2-1.524 3.614-3.484 3.8V7.659z"/>
+    <path fill="#504000" fill-opacity=".314" d="M30.717 30.225L37.027 2 34.53 4l-5.416 24.225-12.001-.002c-7.792 0-14.11-5.422-14.11-12.11C3 23.905 9.317 30.224 17.111 30.224z"/>
+    <path fill="#fff" fill-opacity=".314" d="M17.112 28.222c-6.688 0-12.11-5.421-12.11-12.11A12.06 12.06 0 0117.111 4h17.417l2.498-2H17.111C9.311 2 3 8.31 3.001 16.112c.002 6.689 6.319 12.11 14.112 12.11z"/>
+</svg>
+<p style='padding-top: 1cm;'>Welcome to Quantum Online Puzzle Hunt, a puzzle hunt for intermediate-level players. Anyone can join! <a href='/auth'>Register a team now!</a></p>
+<h2>What?</h2>
+<p>This is a puzzle hunt — an online event involving a collection of puzzles that will be released at a predetermined time. Teams have 10 days to solve the puzzles and will be ranked on a leaderboard at the end. For details, see <a href='/qoph/info'>info</a>.</p>
+<h2>Where?</h2>
+<p>This event occurs entirely online. You do not need to travel anywhere.</p>
+<h2>When?</h2>
+<p>The date and time for this hunt are yet to be determined.</p>

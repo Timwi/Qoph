@@ -1,20 +1,33 @@
-<html>
-<head>
-    <title>Puzzles — Quantum Online Puzzle Hunt</title>
-    <link rel='stylesheet' href='main.css' />
-    <style>
-    </style>
-</head>
-<body>
-    <div id='top'>
-        <img src='logo.svg' class='logo' />
-        <div class='links'>
-            <div id='user'><a href='/auth'>{{username}}</a></div>
-            <div id='team'><a href='/team/qoph/{{teamid}}'>{{teamname}}</a></div>
-        </div>
-        <h1>Puzzles</h1>
-    </div>
-    <div id='main'>
-    </div>
-</body>
-</html>
+<h1>Welcome to Puzzleton!</h1>
+<p style='text-align: center'>It looks like Puzzleton is under attack from terrorists who are planting bombs all around town!<br>Solve puzzles to defuse the bombs and save the people of Puzzleton.</p>
+<div class='puzzles'>
+    {{puzzles
+        |sapphic-synonyms           → <div class="puzzle" id="sapphic-synonyms" style="left: 197px; top: 7px;"></div>
+        |segmented                  → <div class="puzzle" id="segmented" style="left: 370px; top: 13px;"></div>
+        |objectionable-ranking      → <div class="puzzle" id="objectionable-ranking" style="left: 275px; top: 421px;"></div>
+        |home-depot                 → <div class='puzzle' id='home-depot' style='left: 10px; top: 25px'></div>
+        |somethings-fishy           → <div class='puzzle' id='somethings-fishy' style='left: 10px; top: 25px'></div>
+        |comebacks                  → <div class='puzzle' id='comebacks' style='left: 10px; top: 25px'></div>
+        |hazing                     → <div class='puzzle' id='hazing' style='left: 10px; top: 25px'></div>
+        |eternal-namesake           → <div class='puzzle' id='eternal-namesake' style='left: 10px; top: 25px'></div>
+        |totally-ordinary-crossword → <div class='puzzle' id='totally-ordinary-crossword' style='left: 10px; top: 25px'></div>
+        |board-state                → <div class='puzzle' id='board-state' style='left: 10px; top: 25px'></div>
+        |have-you-tried             → <div class='puzzle' id='have-you-tried' style='left: 10px; top: 25px'></div>
+        |special-names              → <div class='puzzle' id='special-names' style='left: 10px; top: 25px'></div>
+        |one-can-hope               → <div class='puzzle' id='one-can-hope' style='left: 10px; top: 25px'></div>
+        |borders                    → <div class='puzzle' id='borders' style='left: 10px; top: 25px'></div>
+        |swerve                     → <div class='puzzle' id='swerve' style='left: 10px; top: 25px'></div>
+        |calling-cards              → <div class='puzzle' id='calling-cards' style='left: 10px; top: 25px'></div>
+        |face-to-face               → <div class='puzzle' id='face-to-face' style='left: 10px; top: 25px'></div>
+        |inside-out                 → <div class='puzzle' id='inside-out' style='left: 10px; top: 25px'></div>
+        |rectangle-mangle           → <div class='puzzle' id='rectangle-mangle' style='left: 10px; top: 25px'></div>
+        |no-u                       → <div class='puzzle' id='no-u' style='left: 10px; top: 25px'></div>
+        |year-in-year-out           → <div class='puzzle' id='year-in-year-out' style='left: 10px; top: 25px'></div>
+        |space-race                 → <div class='puzzle' id='space-race' style='left: 10px; top: 25px'></div>
+        |circles                    → <div class='puzzle' id='circles' style='left: 10px; top: 25px'></div>
+        |the-47                     → <div class='puzzle' id='the-47' style='left: 10px; top: 25px'></div>
+        |signal-link                → <div class='puzzle' id='signal-link' style='left: 10px; top: 25px'></div>
+        |postcards                  → <div class='puzzle' id='postcards' style='left: 10px; top: 25px'></div>
+        |and-nobody-explodes        → <div class='puzzle' id='and-nobody-explodes' style='left: 10px; top: 25px'></div>
+    }}
+</div>
