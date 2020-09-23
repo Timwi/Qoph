@@ -91,6 +91,7 @@
     <Compile Include="MorseCode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="TakeTheLight.cs" />
+    <Compile Include="TheNuke.cs" />
     <Compile Include="WordSearch.cs" />
   </ItemGroup>
   <ItemGroup>

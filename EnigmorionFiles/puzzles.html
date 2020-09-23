@@ -1,33 +1,197 @@
+<style>
+    body {
+        overflow-x: hidden;
+    }
+
+    div.city-wrapper {
+        width: 0;
+        margin: 0 auto;
+        height: calc(100vw / 192 * 108);
+        position: relative;
+    }
+
+    div#city {
+        width: 99.5vw;
+        height: calc(99.5vw / 192 * 108);
+        background-image: url(city.png);
+        background-position: 0 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: -50vw;
+    }
+
+        div#city > a.puzzle {
+            width: 15%;
+            height: 27%;
+            position: absolute;
+            background-image: url(bomb.png);
+            background-position: 0 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            transition: transform .1s;
+            transform: scale(.5);
+        }
+            div#city > a.puzzle.big {
+                background-image: url(bigbomb.png);
+                width: 20%;
+                height: 36%;
+            }
+
+            div#city > a.puzzle:hover {
+                transform: none;
+                z-index: 1;
+            }
+
+            div#city > a.puzzle:hover::after {
+                content: attr(data-title);
+                white-space: nowrap;
+                position: absolute;
+                top: 90%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: hsl(0, 90%, 20%);
+                color: white;
+                padding: .1cm .3cm;
+                border: 3px solid hsl(60, 80%, 60%);
+                border-radius: 1cm;
+                font-size: 18pt;
+                box-shadow: 0 0 .3cm rgba(0, 0, 0, .5);
+            }
+
+    div.puzzles-list {
+        padding-bottom: 5cm;
+    }
+    div.puzzles-list a.puzzle {
+        display: inline-block;
+        width: 6.8cm;
+        height: 2cm;
+        background: hsl(220, 80%, 97%);
+        border-radius: .1cm;
+        margin: .1cm;
+        padding: 0.7cm .4cm 0;
+        color: black;
+        text-decoration: none;
+    }
+        div.puzzles-list a.puzzle:hover {
+            background: white;
+            text-decoration: underline;
+        }
+
+    h2 > .subtitle { font-size: 12pt; font-weight: normal; }
+</style>
 <h1>Welcome to Puzzleton!</h1>
+<div class='city-wrapper'>
+    <div id='city'>
+        {{puzzles
+            |sapphic-synonyms           → <a href="/qoph/puzzle/sapphic-synonyms" class="puzzle" data-title="Sapphic Synonyms" id="sapphic-synonyms" style="left: 58.0625%; top: 4.55556%;"></a>
+            |segmented                  → <a href="/qoph/puzzle/segmented" class="puzzle" data-title="Segmented" id="segmented" style="left: 39%; top: 4.11111%;"></a>
+            |objectionable-ranking      → <a href="/qoph/puzzle/objectionable-ranking" class="puzzle" data-title="Objectionable Ranking" id="objectionable-ranking" style="left: 6.125%; top: 47.5556%;"></a>
+            |home-depot                 → <a href="/qoph/puzzle/home-depot" class="puzzle" data-title="Home Depot" id="home-depot" style="left: 29.4375%; top: 5.22222%;"></a>
+            |somethings-fishy           → <a href="/qoph/puzzle/somethings-fishy" class="puzzle" data-title="Something’s Fishy" id="somethings-fishy" style="left: -0.5625%; top: 43.1111%;"></a>
+            |comebacks                  → <a href="/qoph/puzzle/comebacks" class="puzzle" data-title="Comebacks" id="comebacks" style="left: 85%; top: 1.44444%;"></a>
+            |hazing                     → <a href="/qoph/puzzle/hazing" class="puzzle" data-title="Hazing" id="hazing" style="left: 67.9375%; top: 5.33333%;"></a>
+            |eternal-namesake           → <a href="/qoph/puzzle/eternal-namesake" class="puzzle" data-title="Eternal Namesake" id="eternal-namesake" style="left: 0.3125%; top: 1.66667%;"></a>
+            |totally-ordinary-crossword → <a href="/qoph/puzzle/totally-ordinary-crossword" class="puzzle" data-title="Totally Ordinary Crossword" id="totally-ordinary-crossword" style="left: 19%; top: 4.11111%;"></a>
+            |board-state                → <a href="/qoph/puzzle/board-state" class="puzzle" data-title="Board State" id="board-state" style="left: 46.0625%; top: -0.888889%;"></a>
+            |have-you-tried             → <a href="/qoph/puzzle/have-you-tried" class="puzzle" data-title="Have You Tried...?" id="have-you-tried" style="left: 46%; top: 73.7778%;"></a>
+            |special-names              → <a href="/qoph/puzzle/special-names" class="puzzle" data-title="Special Names" id="special-names" style="left: 7.9375%; top: 24.8889%;"></a>
+            |one-can-hope               → <a href="/qoph/puzzle/one-can-hope" class="puzzle" data-title="One Can Hope" id="one-can-hope" style="left: 86.5%; top: 27.6667%;"></a>
+            |borders                    → <a href="/qoph/puzzle/borders" class="puzzle" data-title="Borders" id="borders" style="left: 69.75%; top: 32.8889%;"></a>
+            |swerve                     → <a href="/qoph/puzzle/swerve" class="puzzle" data-title="Swerve" id="swerve" style="left: 60.625%; top: 33.2222%;"></a>
+            |calling-cards              → <a href="/qoph/puzzle/calling-cards" class="puzzle" data-title="Calling Cards" id="calling-cards" style="left: 46.5%; top: 32%;"></a>
+            |face-to-face               → <a href="/qoph/puzzle/face-to-face" class="puzzle" data-title="Face To Face" id="face-to-face" style="left: 8.4375%; top: -0.666667%;"></a>
+            |inside-out                 → <a href="/qoph/puzzle/inside-out" class="puzzle" data-title="Inside Out" id="inside-out" style="left: 40.5625%; top: 33.3333%;"></a>
+            |rectangle-mangle           → <a href="/qoph/puzzle/rectangle-mangle" class="puzzle" data-title="Rectangle Mangle" id="rectangle-mangle" style="left: 79.5625%; top: 5.66667%;"></a>
+            |no-u                       → <a href="/qoph/puzzle/no-u" class="puzzle" data-title="No, U" id="no-u" style="left: 36.625%; top: 68.2222%;"></a>
+            |year-in-year-out           → <a href="/qoph/puzzle/year-in-year-out" class="puzzle" data-title="Year In, Year Out" id="year-in-year-out" style="left: 83.3125%; top: 35.5556%;"></a>
+            |space-race                 → <a href="/qoph/puzzle/space-race" class="puzzle" data-title="Space Race" id="space-race" style="left: 31.9375%; top: 29.5556%;"></a>
+            |circles                    → <a href="/qoph/puzzle/circles" class="puzzle" data-title="Circles" id="circles" style="left: 25.9375%; top: 27.7778%;"></a>
+            |the-47                     → <a href="/qoph/puzzle/the-47" class="puzzle" data-title="The 47" id="the-47" style="left: 73%; top: 45.2222%;"></a>
+            |signal-link                → <a href="/qoph/puzzle/signal-link" class="puzzle" data-title="Signal Link" id="signal-link" style="left: 55.125%; top: 41.1111%;"></a>
+            |postcards                  → <a href="/qoph/puzzle/postcards" class="puzzle" data-title="Postcards" id="postcards" style="left: 2.0625%; top: 26.8889%;"></a>
+            |and-nobody-explodes        → <a href="/qoph/puzzle/and-nobody-explodes" class="big puzzle" data-title="And Nobody Explodes" id="and-nobody-explodes" style="left: 65%; top: 56%; transform-origin: 50% 70%"></a>
+        }}
+    </div>
+</div>
+<script>
+    window.onresize = function() {
+        let city = document.getElementById('city');
+        city.style.width = `${document.body.offsetWidth}px`;
+        city.style.height = `${document.body.offsetWidth/192*108}px`;
+        city.style.left = `-${document.body.offsetWidth/2}px`;
+    };
+
+    Array.from(document.querySelectorAll('#city>.puzzle')).forEach(pz => {
+        pz.style.left = `${pz.offsetLeft / 1600 * 100}%`;
+        pz.style.top = `${pz.offsetTop / (1600/1920*1080) * 100}%`;
+    });
+</script>
 <p style='text-align: center'>It looks like Puzzleton is under attack from terrorists who are planting bombs all around town!<br>Solve puzzles to defuse the bombs and save the people of Puzzleton.</p>
-<div class='puzzles'>
-    {{puzzles
-        |sapphic-synonyms           → <div class="puzzle" id="sapphic-synonyms" style="left: 197px; top: 7px;"></div>
-        |segmented                  → <div class="puzzle" id="segmented" style="left: 370px; top: 13px;"></div>
-        |objectionable-ranking      → <div class="puzzle" id="objectionable-ranking" style="left: 275px; top: 421px;"></div>
-        |home-depot                 → <div class='puzzle' id='home-depot' style='left: 10px; top: 25px'></div>
-        |somethings-fishy           → <div class='puzzle' id='somethings-fishy' style='left: 10px; top: 25px'></div>
-        |comebacks                  → <div class='puzzle' id='comebacks' style='left: 10px; top: 25px'></div>
-        |hazing                     → <div class='puzzle' id='hazing' style='left: 10px; top: 25px'></div>
-        |eternal-namesake           → <div class='puzzle' id='eternal-namesake' style='left: 10px; top: 25px'></div>
-        |totally-ordinary-crossword → <div class='puzzle' id='totally-ordinary-crossword' style='left: 10px; top: 25px'></div>
-        |board-state                → <div class='puzzle' id='board-state' style='left: 10px; top: 25px'></div>
-        |have-you-tried             → <div class='puzzle' id='have-you-tried' style='left: 10px; top: 25px'></div>
-        |special-names              → <div class='puzzle' id='special-names' style='left: 10px; top: 25px'></div>
-        |one-can-hope               → <div class='puzzle' id='one-can-hope' style='left: 10px; top: 25px'></div>
-        |borders                    → <div class='puzzle' id='borders' style='left: 10px; top: 25px'></div>
-        |swerve                     → <div class='puzzle' id='swerve' style='left: 10px; top: 25px'></div>
-        |calling-cards              → <div class='puzzle' id='calling-cards' style='left: 10px; top: 25px'></div>
-        |face-to-face               → <div class='puzzle' id='face-to-face' style='left: 10px; top: 25px'></div>
-        |inside-out                 → <div class='puzzle' id='inside-out' style='left: 10px; top: 25px'></div>
-        |rectangle-mangle           → <div class='puzzle' id='rectangle-mangle' style='left: 10px; top: 25px'></div>
-        |no-u                       → <div class='puzzle' id='no-u' style='left: 10px; top: 25px'></div>
-        |year-in-year-out           → <div class='puzzle' id='year-in-year-out' style='left: 10px; top: 25px'></div>
-        |space-race                 → <div class='puzzle' id='space-race' style='left: 10px; top: 25px'></div>
-        |circles                    → <div class='puzzle' id='circles' style='left: 10px; top: 25px'></div>
-        |the-47                     → <div class='puzzle' id='the-47' style='left: 10px; top: 25px'></div>
-        |signal-link                → <div class='puzzle' id='signal-link' style='left: 10px; top: 25px'></div>
-        |postcards                  → <div class='puzzle' id='postcards' style='left: 10px; top: 25px'></div>
-        |and-nobody-explodes        → <div class='puzzle' id='and-nobody-explodes' style='left: 10px; top: 25px'></div>
-    }}
+<div class='puzzles-list'>
+    {{if-puzzles-unsolved-any|<h2>Active bombs <span class='subtitle'>(unsolved puzzles)</span></h2>}}
+    {{if-puzzles-unsolved-any|<div class='unsolved'>}}
+        {{puzzles-unsolved
+            |sapphic-synonyms           → <a href='/qoph/puzzle/sapphic-synonyms' class='puzzle'>Sapphic Synonyms</a>
+            |segmented                  → <a href='/qoph/puzzle/segmented' class='puzzle'>Segmented</a>
+            |objectionable-ranking      → <a href='/qoph/puzzle/objectionable-ranking' class='puzzle'>Objectionable Ranking</a>
+            |home-depot                 → <a href='/qoph/puzzle/home-depot' class='puzzle'>Home Depot</a>
+            |somethings-fishy           → <a href='/qoph/puzzle/somethings-fishy' class='puzzle'>Something’s Fishy</a>
+            |comebacks                  → <a href='/qoph/puzzle/comebacks' class='puzzle'>Comebacks</a>
+            |hazing                     → <a href='/qoph/puzzle/hazing' class='puzzle'>Hazing</a>
+            |eternal-namesake           → <a href='/qoph/puzzle/eternal-namesake' class='puzzle'>Eternal Namesake</a>
+            |totally-ordinary-crossword → <a href='/qoph/puzzle/totally-ordinary-crossword' class='puzzle'>Totally Ordinary Crossword</a>
+            |board-state                → <a href='/qoph/puzzle/board-state' class='puzzle'>Board State</a>
+            |have-you-tried             → <a href='/qoph/puzzle/have-you-tried' class='puzzle'>Have You Tried...?</a>
+            |special-names              → <a href='/qoph/puzzle/special-names' class='puzzle'>Special Names</a>
+            |one-can-hope               → <a href='/qoph/puzzle/one-can-hope' class='puzzle'>One Can Hope</a>
+            |borders                    → <a href='/qoph/puzzle/borders' class='puzzle'>Borders</a>
+            |swerve                     → <a href='/qoph/puzzle/swerve' class='puzzle'>Swerve</a>
+            |calling-cards              → <a href='/qoph/puzzle/calling-cards' class='puzzle'>Calling Cards</a>
+            |face-to-face               → <a href='/qoph/puzzle/face-to-face' class='puzzle'>Face To Face</a>
+            |inside-out                 → <a href='/qoph/puzzle/inside-out' class='puzzle'>Inside Out</a>
+            |rectangle-mangle           → <a href='/qoph/puzzle/rectangle-mangle' class='puzzle'>Rectangle Mangle</a>
+            |no-u                       → <a href='/qoph/puzzle/no-u' class='puzzle'>No, U</a>
+            |year-in-year-out           → <a href='/qoph/puzzle/year-in-year-out' class='puzzle'>Year In, Year Out</a>
+            |space-race                 → <a href='/qoph/puzzle/space-race' class='puzzle'>Space Race</a>
+            |circles                    → <a href='/qoph/puzzle/circles' class='puzzle'>Circles</a>
+            |the-47                     → <a href='/qoph/puzzle/the-47' class='puzzle'>The 47</a>
+            |signal-link                → <a href='/qoph/puzzle/signal-link' class='puzzle'>Signal Link</a>
+            |postcards                  → <a href='/qoph/puzzle/postcards' class='puzzle'>Postcards</a>
+            |and-nobody-explodes        → <a href='/qoph/puzzle/and-nobody-explodes' class='puzzle'>And Nobody Explodes</a>
+        }}
+    {{if-puzzles-unsolved-any|</div>}}
+    {{if-puzzles-solved-any|<h2>Defused bombs <span class='subtitle'>(solved puzzles)</span></h2>}}
+    {{if-puzzles-solved-any|<div class='solved'>}}
+        {{puzzles-solved
+            |sapphic-synonyms           → <a href='/qoph/puzzle/sapphic-synonyms' class='puzzle'>Sapphic Synonyms</a>
+            |segmented                  → <a href='/qoph/puzzle/segmented' class='puzzle'>Segmented</a>
+            |objectionable-ranking      → <a href='/qoph/puzzle/objectionable-ranking' class='puzzle'>Objectionable Ranking</a>
+            |home-depot                 → <a href='/qoph/puzzle/home-depot' class='puzzle'>Home Depot</a>
+            |somethings-fishy           → <a href='/qoph/puzzle/somethings-fishy' class='puzzle'>Something’s Fishy</a>
+            |comebacks                  → <a href='/qoph/puzzle/comebacks' class='puzzle'>Comebacks</a>
+            |hazing                     → <a href='/qoph/puzzle/hazing' class='puzzle'>Hazing</a>
+            |eternal-namesake           → <a href='/qoph/puzzle/eternal-namesake' class='puzzle'>Eternal Namesake</a>
+            |totally-ordinary-crossword → <a href='/qoph/puzzle/totally-ordinary-crossword' class='puzzle'>Totally Ordinary Crossword</a>
+            |board-state                → <a href='/qoph/puzzle/board-state' class='puzzle'>Board State</a>
+            |have-you-tried             → <a href='/qoph/puzzle/have-you-tried' class='puzzle'>Have You Tried...?</a>
+            |special-names              → <a href='/qoph/puzzle/special-names' class='puzzle'>Special Names</a>
+            |one-can-hope               → <a href='/qoph/puzzle/one-can-hope' class='puzzle'>One Can Hope</a>
+            |borders                    → <a href='/qoph/puzzle/borders' class='puzzle'>Borders</a>
+            |swerve                     → <a href='/qoph/puzzle/swerve' class='puzzle'>Swerve</a>
+            |calling-cards              → <a href='/qoph/puzzle/calling-cards' class='puzzle'>Calling Cards</a>
+            |face-to-face               → <a href='/qoph/puzzle/face-to-face' class='puzzle'>Face To Face</a>
+            |inside-out                 → <a href='/qoph/puzzle/inside-out' class='puzzle'>Inside Out</a>
+            |rectangle-mangle           → <a href='/qoph/puzzle/rectangle-mangle' class='puzzle'>Rectangle Mangle</a>
+            |no-u                       → <a href='/qoph/puzzle/no-u' class='puzzle'>No, U</a>
+            |year-in-year-out           → <a href='/qoph/puzzle/year-in-year-out' class='puzzle'>Year In, Year Out</a>
+            |space-race                 → <a href='/qoph/puzzle/space-race' class='puzzle'>Space Race</a>
+            |circles                    → <a href='/qoph/puzzle/circles' class='puzzle'>Circles</a>
+            |the-47                     → <a href='/qoph/puzzle/the-47' class='puzzle'>The 47</a>
+            |signal-link                → <a href='/qoph/puzzle/signal-link' class='puzzle'>Signal Link</a>
+            |postcards                  → <a href='/qoph/puzzle/postcards' class='puzzle'>Postcards</a>
+            |and-nobody-explodes        → <a href='/qoph/puzzle/and-nobody-explodes' class='puzzle'>And Nobody Explodes</a>
+        }}
+    {{if-puzzles-solved-any|</div>}}
 </div>

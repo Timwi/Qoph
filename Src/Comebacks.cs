@@ -259,6 +259,8 @@ namespace Qoph
                         clip[topRows - sortedChars.Length + yy][xx] = sortedChars[yy].ToString();
                     }
                 }
+                // Frame
+                svg.Append($@"<rect fill='white' stroke='black' stroke-width='.1' x='0' y='{topRows}' width='{w}' height='{y + 1}' />");
                 // Black squares
                 foreach (var (xx, yy) in blackSquares)
                 {
@@ -266,8 +268,6 @@ namespace Qoph
                     clip[yy + topRows][xx] = "#";
                 }
 
-                // Frame
-                svg.Append($@"<rect fill='none' stroke='black' stroke-width='.1' x='0' y='{topRows}' width='{w}' height='{y + 1}' />");
                 // Horizontal lines
                 for (var yy = topRows + 1; yy < totalRows; yy++)
                     svg.Append($@"<line x1='0' x2='{w}' y1='{yy}' y2='{yy}' stroke='black' stroke-width='.025' />");
@@ -293,7 +293,7 @@ namespace Qoph
             }
             Clipboard.SetText(clipb.JoinString("\n\n\n"));
 
-            var path = $@"D:\c\Qoph\DataFiles\Comebacks\Comebacks.html";
+            var path = $@"D:\c\Qoph\EnigmorionFiles\comebacks.html";
             General.ReplaceInFile(path, @"<!--%%-->", @"<!--%%%-->", allSvgs.ToString());
         }
     }
