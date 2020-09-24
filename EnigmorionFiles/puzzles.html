@@ -42,6 +42,7 @@
             div#city > a.puzzle:hover {
                 transform: none;
                 z-index: 1;
+                filter: drop-shadow(0 0 1em rgba(0, 0, 0, .7));
             }
 
             div#city > a.puzzle:hover::after {
@@ -57,7 +58,6 @@
                 border: 3px solid hsl(60, 80%, 60%);
                 border-radius: 1cm;
                 font-size: 18pt;
-                box-shadow: 0 0 .3cm rgba(0, 0, 0, .5);
             }
 
     div.puzzles-list {
@@ -95,7 +95,7 @@
             |eternal-namesake           → <a href="/qoph/puzzle/eternal-namesake" class="puzzle" data-title="Eternal Namesake" id="eternal-namesake" style="left: 0.3125%; top: 1.66667%;"></a>
             |totally-ordinary-crossword → <a href="/qoph/puzzle/totally-ordinary-crossword" class="puzzle" data-title="Totally Ordinary Crossword" id="totally-ordinary-crossword" style="left: 19%; top: 4.11111%;"></a>
             |board-state                → <a href="/qoph/puzzle/board-state" class="puzzle" data-title="Board State" id="board-state" style="left: 46.0625%; top: -0.888889%;"></a>
-            |have-you-tried             → <a href="/qoph/puzzle/have-you-tried" class="puzzle" data-title="Have You Tried...?" id="have-you-tried" style="left: 46%; top: 73.7778%;"></a>
+            |have-you-tried             → <a href="/qoph/puzzle/have-you-tried" class="puzzle" data-title="Have You Tried...?" id="have-you-tried" style="left: 45.9%; top: 73.4%;"></a>
             |special-names              → <a href="/qoph/puzzle/special-names" class="puzzle" data-title="Special Names" id="special-names" style="left: 7.9375%; top: 24.8889%;"></a>
             |one-can-hope               → <a href="/qoph/puzzle/one-can-hope" class="puzzle" data-title="One Can Hope" id="one-can-hope" style="left: 86.5%; top: 27.6667%;"></a>
             |borders                    → <a href="/qoph/puzzle/borders" class="puzzle" data-title="Borders" id="borders" style="left: 69.75%; top: 32.8889%;"></a>
@@ -111,7 +111,7 @@
             |the-47                     → <a href="/qoph/puzzle/the-47" class="puzzle" data-title="The 47" id="the-47" style="left: 73%; top: 45.2222%;"></a>
             |signal-link                → <a href="/qoph/puzzle/signal-link" class="puzzle" data-title="Signal Link" id="signal-link" style="left: 55.125%; top: 41.1111%;"></a>
             |postcards                  → <a href="/qoph/puzzle/postcards" class="puzzle" data-title="Postcards" id="postcards" style="left: 2.0625%; top: 26.8889%;"></a>
-            |and-nobody-explodes        → <a href="/qoph/puzzle/and-nobody-explodes" class="big puzzle" data-title="And Nobody Explodes" id="and-nobody-explodes" style="left: 65%; top: 56%; transform-origin: 50% 70%"></a>
+            |the-nuke                   → <a href="/qoph/puzzle/the-nuke" class="big puzzle" data-title="The Nuke" id="the-nuke" style="left: 65%; top: 56%; transform-origin: 50% 70%"></a>
         }}
     </div>
 </div>
@@ -159,7 +159,7 @@
             |the-47                     → <a href='/qoph/puzzle/the-47' class='puzzle'>The 47</a>
             |signal-link                → <a href='/qoph/puzzle/signal-link' class='puzzle'>Signal Link</a>
             |postcards                  → <a href='/qoph/puzzle/postcards' class='puzzle'>Postcards</a>
-            |and-nobody-explodes        → <a href='/qoph/puzzle/and-nobody-explodes' class='puzzle'>And Nobody Explodes</a>
+            |the-nuke                   → <a href='/qoph/puzzle/the-nuke' class='puzzle'>The Nuke</a>
         }}
     {{if-puzzles-unsolved-any|</div>}}
     {{if-puzzles-solved-any|<h2>Defused bombs <span class='subtitle'>(solved puzzles)</span></h2>}}
@@ -191,7 +191,7 @@
             |the-47                     → <a href='/qoph/puzzle/the-47' class='puzzle'>The 47</a>
             |signal-link                → <a href='/qoph/puzzle/signal-link' class='puzzle'>Signal Link</a>
             |postcards                  → <a href='/qoph/puzzle/postcards' class='puzzle'>Postcards</a>
-            |and-nobody-explodes        → <a href='/qoph/puzzle/and-nobody-explodes' class='puzzle'>And Nobody Explodes</a>
+            |the-nuke                   → <a href='/qoph/puzzle/the-nuke' class='puzzle'>The Nuke</a>
         }}
     {{if-puzzles-solved-any|</div>}}
 </div>

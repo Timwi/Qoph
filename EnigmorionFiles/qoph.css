@@ -320,6 +320,25 @@ form#answer-checker {
 
 .flavour-text {
     text-align: center;
-    font-size: smaller;
     font-style: italic;
 }
+
+#answers {
+    text-align: center;
+}
+    #answers .correct {
+        color: hsl(120, 50%, 47%);
+    }
+    #answers .wrong {
+        color: hsl(0, 50%, 47%);
+    }
+    #answers .almost {
+        color: hsl(60, 50%, 35%);
+    }
+    #answers .message {
+        font-size: 24pt;
+        font-weight: bold;
+    }
+    #answers .answer {
+        font-size: 16pt;
+    }
