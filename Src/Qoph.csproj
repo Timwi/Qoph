@@ -71,6 +71,7 @@
     <Compile Include="PngMetadataExperiment.cs" />
     <Compile Include="Postcards.cs" />
     <Compile Include="PowerOfSudoku.cs" />
+    <Compile Include="SapphicSynonyms.cs" />
     <Compile Include="SpaceRace.cs" />
     <Compile Include="HomeDepot.cs" />
     <Compile Include="InsideOut.cs" />
