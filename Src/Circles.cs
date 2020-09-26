@@ -17,22 +17,22 @@ namespace Qoph
 
             var ltrDistances = @"TSUOSIAAG";
             var ltrRadii = @"HOTNWTSRU";
-            var ltrCircumferences = @"ELIIHEPAS";       // = THE SOLUTION IS WHITE ASPARAGUS
+            var ltrArcLengths = @"ELIIHEPAS";       // = THE SOLUTION IS WHITE ASPARAGUS
             var len = ltrDistances.Length;
 
-            if (ltrCircumferences.Length != len || ltrDistances.Length != len || ltrRadii.Length != len)
+            if (ltrArcLengths.Length != len || ltrDistances.Length != len || ltrRadii.Length != len)
                 Debugger.Break();
 
             var distances = ltrDistances.Select(d => d - 'A' + 1d).ToArray();
             var radii = ltrRadii.Select(r => r - 'A' + 1d).ToArray();
-            var circumferences = ltrCircumferences.Select(c => c - 'A' + 1d).ToArray();
+            var arcLengths = ltrArcLengths.Select(c => c - 'A' + 1d).ToArray();
 
             var points = new List<PointD>();
             var centers = Enumerable.Range(0, len).Select(ix => distances[ix].Apply(d => new PointD(d * Math.Cos(Math.PI * 2 / len * ix), -d * Math.Sin(Math.PI * 2 / len * ix)))).ToArray();
 
             for (int ix = 0; ix < len; ix++)
             {
-                var dotDistance = (2 * Math.PI - circumferences[ix] / radii[ix]) / (numDotsPerCircle - 1);
+                var dotDistance = (2 * Math.PI - arcLengths[ix] / radii[ix]) / (numDotsPerCircle - 1);
                 var dotAngles = Enumerable.Range(0, numDotsPerCircle).Select(dIx => dotDistance * dIx).ToArray();
 
                 var bestOffsetDistance = 0d;
@@ -70,13 +70,13 @@ namespace Qoph
     </head>
     <body>
         <h1 style='text-align: center'>Circles</h1>
-        <p style='text-align: center; font-style: italic'>Distance, radius, circumference, widdershins.</p>
+        <p style='text-align: center; font-style: italic'>Distance, radius, arc length, widdershins.</p>
         <svg style='width: 99vw' viewBox='{minX - 2} {minY - 2} {maxX - minX + 4} {maxY - minY + 4}'>
             <g fill='none' stroke='#ccc'>
                 {(step > 0 ? Enumerable.Range(0, len).Select(ix => $"<circle cx='{centers[ix].X}' cy='{centers[ix].Y}' r='{radii[ix]}' stroke='#248' stroke-width='.02' />").JoinString() : "")}
                 {(step > 1 ? Enumerable.Range(0, len).Select(ix => $"<line x1='{centers[ix].X}' y1='{centers[ix].Y}' x2='0' y2='0' stroke='#822' stroke-width='.02' />").JoinString() : "")}
-                <line x1='0' y1='{minY - 1}' x2='0' y2='{maxY + 1}' stroke-width='.05' />
-                <line x1='{minX - 1}' y1='0' x2='{maxX + 1}' y2='0' stroke-width='.05' />
+                <path d='{Enumerable.Range((int) Math.Floor(minX), (int) Math.Floor(maxX) - (int) Math.Floor(minX) + 1).Where(i => i != 0).Select(i => $"M{i}{(i % 10 == 0 ? "-.5v1" : "-.25v.5")}").JoinString()}M0 {minY - 1} 0 {maxY + 1}' stroke-width='.05' />
+                <path d='{Enumerable.Range((int) Math.Floor(minY), (int) Math.Floor(maxY) - (int) Math.Floor(minY) + 1).Where(i => i != 0).Select(i => $"M{(i % 10 == 0 ? $"-.5 {i}h1" : $"-.25 {i}h.5")}").JoinString()}M{minX - 1} 0 {maxX + 1} 0' stroke-width='.05' />
             </g>
             <path fill='#ccc' d='M .4 {minY - .5} h -.8 l .4 -1 z' />
             <path fill='#ccc' d='M {maxX + .5} .4 v -.8 l 1 .4 z' />
