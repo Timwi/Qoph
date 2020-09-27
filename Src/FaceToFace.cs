@@ -857,22 +857,60 @@ h3 {{ font-size: 14pt; }}
             Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{f.Edges[edge].AdjacentFace?.ToString() ?? f.Edges[edge].CrosswordInfo}\t{f.Edges[edge].AdjacentEdge}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex + 1}\t{f.MusicSnippet}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
         }
 
-        public static void UnityExperiment()
+        public static void GenerateModels()
         {
             var poly = generateNet(_polyhedron).polygons[0];
-            var wall = 0;
-            const double height = .6;
+            const double ceilingHeight = .6;
+            const double doorHeight = .5;
+            const double doorWidth = .13;
+            const double frameWidth = .02;
+            const double frameDepth = .02;
 
+            var ix = 0;
             foreach (var (p1, p2) in poly.ConsecutivePairs(true))
             {
-                File.WriteAllText($@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Wall{wall}.obj",
-                    GenerateObjFile(new[] { new[] { pt(p1.X, height, p1.Y).WithTexture(1, 1), pt(p2.X, height, p2.Y).WithTexture(0, 1), pt(p2.X, 0, p2.Y).WithTexture(0, 0), pt(p1.X, 0, p1.Y).WithTexture(1, 0) } }, $"Wall{wall}", AutoNormal.Flat));
-                wall++;
+                var mid = (p1 + p2) / 2;
+                var right = mid - (p2 - p1).Unit() * doorWidth;
+                var left = mid + (p2 - p1).Unit() * doorWidth;
+
+                File.WriteAllText($@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Door{ix}.obj",
+                    GenerateObjFile(new[] { new[] { pt(right.X, doorHeight, right.Y).WithTexture(1, 1), pt(left.X, doorHeight, left.Y).WithTexture(0, 1), pt(left.X, 0, left.Y).WithTexture(0, 0), pt(right.X, 0, right.Y).WithTexture(1, 0) } }, $"Door{ix}", AutoNormal.Flat));
+                File.WriteAllText($@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Wall{ix}.obj",
+                    GenerateObjFile(Ut.NewArray(
+                        new[] { pt(p2.X, 0, p2.Y), pt(left.X, 0, left.Y), pt(left.X, ceilingHeight, left.Y), pt(p2.X, ceilingHeight, p2.Y) },
+                        new[] { pt(left.X, doorHeight, left.Y), pt(right.X, doorHeight, right.Y), pt(right.X, ceilingHeight, right.Y), pt(left.X, ceilingHeight, left.Y) },
+                        new[] { pt(right.X, 0, right.Y), pt(p1.X, 0, p1.Y), pt(p1.X, ceilingHeight, p1.Y), pt(right.X, ceilingHeight, right.Y) }
+                    )
+                        .Select(face => face.Select(p => p.WithTexture((p.X - p1.X) / (p2.X - p1.X), p.Y / ceilingHeight)).ToArray()).ToArray(), $"Wall{ix}", AutoNormal.Flat));
+
+                var nx = (p2 - p1).Unit() * frameWidth / 2;
+                var ny = (p2 - p1).Normal().Unit() * frameDepth / 2;
+                var lfm = right - nx;
+                var rfm = left - nx;
+
+                File.WriteAllText($@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Frame{ix}.obj",
+                    GenerateObjFile(Ut.NewArray<Pt[]>(
+                        // Right
+                        new[] { (lfm + ny - nx).h(doorHeight + frameWidth), (lfm + ny + nx).h(doorHeight), (lfm + ny + nx).h(0), (lfm + ny - nx).h(0) },    // front
+                        new[] { (lfm - ny - nx).h(doorHeight + frameWidth), (lfm + ny - nx).h(doorHeight + frameWidth), (lfm + ny - nx).h(0), (lfm - ny - nx).h(0) },   // right
+                        new[] { (lfm + ny + nx).h(doorHeight), (lfm - ny + nx).h(doorHeight), (lfm - ny + nx).h(0), (lfm + ny + nx).h(0) }, // left
+                        // Left
+                        new[] { (rfm + ny - nx).h(doorHeight), (rfm + ny + nx).h(doorHeight + frameWidth), (rfm + ny + nx).h(0), (rfm + ny - nx).h(0) },    // front
+                        new[] { (rfm - ny - nx).h(doorHeight), (rfm + ny - nx).h(doorHeight), (rfm + ny - nx).h(0), (rfm - ny - nx).h(0) }, // right
+                        new[] { (rfm + ny + nx).h(doorHeight + frameWidth), (rfm - ny + nx).h(doorHeight + frameWidth), (rfm - ny + nx).h(0), (rfm + ny + nx).h(0) },   // left
+                        // Top
+                        new[] { (rfm + ny + nx).h(doorHeight + frameWidth), (rfm + ny - nx).h(doorHeight), (lfm + ny + nx).h(doorHeight), (lfm + ny - nx).h(doorHeight + frameWidth) }, // front
+                        new[] { (rfm + ny + nx).h(doorHeight + frameWidth), (lfm + ny - nx).h(doorHeight + frameWidth), (lfm - ny - nx).h(doorHeight + frameWidth), (rfm - ny + nx).h(doorHeight + frameWidth) },   // top
+                        new[] { (rfm - ny - nx).h(doorHeight), (lfm - ny + nx).h(doorHeight), (lfm + ny + nx).h(doorHeight), (rfm + ny - nx).h(doorHeight) }    // bottom
+                    ), $"Frame{ix}", AutoNormal.Flat));
+                ix++;
             }
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Floor.obj",
                 GenerateObjFile(new[] { poly.Select(p => pt(p.X, 0, p.Y).WithTexture(p.X, p.Y)).ToArray() }, "Floor", AutoNormal.Flat));
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Ceiling.obj",
-                GenerateObjFile(new[] { poly.Select(p => pt(p.X, height, p.Y).WithTexture(p.X, p.Y)).Reverse().ToArray() }, "Ceiling", AutoNormal.Flat));
+                GenerateObjFile(new[] { poly.Select(p => pt(p.X, ceilingHeight, p.Y).WithTexture(p.X, p.Y)).Reverse().ToArray() }, "Ceiling", AutoNormal.Flat));
         }
+
+        private static Pt h(this PointD p, double y) => pt(p.X, y, p.Y);
     }
 }

@@ -93,6 +93,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="TakeTheLight.cs" />
     <Compile Include="TheNuke.cs" />
+    <Compile Include="Throw.cs" />
     <Compile Include="WordSearch.cs" />
   </ItemGroup>
   <ItemGroup>

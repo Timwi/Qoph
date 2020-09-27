@@ -12,6 +12,34 @@
     src: local('Montserrat'), local('Montserrat Regular'), url('Montserrat.otf');
 }
 
+@font-face {
+    font-family: 'Book Antiqua';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Book Antiqua'), url(../font/Book%20Antiqua.ttf);
+}
+
+@font-face {
+    font-family: 'Book Antiqua';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Book Antiqua Bold'), url(../font/Book%20Antiqua%20Bold.ttf);
+}
+
+@font-face {
+    font-family: 'Book Antiqua';
+    font-style: italic;
+    font-weight: normal;
+    src: local('Book Antiqua Italic'), url(../font/Book%20Antiqua%20Italics.ttf);
+}
+
+@font-face {
+    font-family: 'Book Antiqua';
+    font-style: italic;
+    font-weight: bold;
+    src: local('Book Antiqua Bold Italic'), url(../font/Book%20Antiqua%20Bold%20Italics.ttf);
+}
+
 * {
     box-sizing: border-box;
 }
