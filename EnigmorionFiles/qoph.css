@@ -124,7 +124,7 @@ div#main {
 }
 
 h1 {
-    margin: 2cm -3cm 1cm;
+    margin: 1.5cm -3cm 1cm;
     padding: .5cm 0;
     font-size: 56pt;
     font-weight: normal;
@@ -132,6 +132,7 @@ h1 {
     background: white;
     box-shadow: 0 0 .3cm rgba(0, 0, 0, .3);
     border-radius: 100vw;
+    clear: both;
 }
 
     h1 > bdi {
@@ -351,9 +352,23 @@ form#answer-checker {
     font-style: italic;
 }
 
+#answer-box {
+    overflow: auto;
+}
+
 #answers {
     text-align: center;
 }
+    #answers h3 {
+        float: left;
+        margin: 0;
+        font-size: 16pt;
+    }
+    #answers ul {
+        text-align: left;
+        float: left;
+        margin: 0;
+    }
     #answers .correct {
         color: hsl(120, 50%, 47%);
     }
@@ -369,4 +384,23 @@ form#answer-checker {
     }
     #answers .answer {
         font-size: 16pt;
+    }
+    #answers .unlocked {
+        background: white;
+        border-radius: 1cm;
+        margin: .5cm auto;
+        max-width: 15cm;
+        padding: .3cm;
+    }
+
+#ajax-message {
+    max-width: 11cm;
+    margin: 0 0 0 auto;
+}
+    #ajax-message > div {
+        text-align: center;
+        background: white;
+        padding: .1cm .25cm;
+        border-radius: 1cm;
+        font-size: 14pt;
     }

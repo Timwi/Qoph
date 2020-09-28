@@ -1,0 +1,22 @@
+<h1>Face to Face</h1>
+<script>
+    let scr = document.createElement('link');
+    scr.setAttribute('rel', 'stylesheet');
+    scr.setAttribute('href', '/qoph/Face to Face/TemplateData/style.css');
+    document.head.appendChild(scr);
+
+    scr = document.createElement('script');
+    scr.src = '/qoph/Face to Face/TemplateData/UnityProgress.js';
+    document.head.appendChild(scr);
+
+    scr = document.createElement('script');
+    scr.src = '/qoph/Face to Face/Build/UnityLoader.js';
+    document.head.appendChild(scr);
+
+    window.onload = function() {
+        UnityLoader.instantiate("gameContainer", "/qoph/Face to Face/Build/Face to Face.json", {onProgress: UnityProgress});
+    };
+</script>
+<div style="width: 600px; margin: 1cm auto">
+    <div id="gameContainer" style="width: 600px; height: 600px"></div>
+</div>
