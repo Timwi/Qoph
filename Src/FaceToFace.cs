@@ -860,16 +860,16 @@ h3 {{ font-size: 14pt; }}
         public static void GenerateModels()
         {
             var poly = generateNet(_polyhedron).polygons[0];
-            const double ceilingHeight = .6;
-            const double doorHeight = .5;
-            const double doorWidth = .13;
-            const double frameWidth = .02;
-            const double frameDepth = .02;
-            double[] cameraDistances = { .32, .3, .3, .3, .32 };
-            double[] cameraPos = { .4, .5, .5, .5, .6 };
-            const double cameraHeight = .34;
-            const double cameraHeightLook = .3;
-            const double numberHeight = .4;
+            const double ceilingHeight = .425;
+            const double doorHeight = .35;
+            const double doorWidth = .09;
+            const double frameWidth = .015;
+            const double frameDepth = .015;
+            double[] cameraDistances = { .325, .325, .325, .325, .325 };
+            double[] cameraPos = { .35, .5, .5, .5, .65 };
+            const double cameraHeight = .22;
+            const double cameraHeightLook = .2;
+            const double numberHeight = .28;
 
             var cameras = new List<(Pt from, Pt to)>();
             var cyanNumbers = new List<(Pt from, Pt to)>();
@@ -899,7 +899,7 @@ h3 {{ font-size: 14pt; }}
                 var rfm = left - nx;
 
                 File.WriteAllText($@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Frame{ix}.obj",
-                    GenerateObjFile(Ut.NewArray<Pt[]>(
+                    GenerateObjFile(Ut.NewArray(
                         // Right
                         new[] { (lfm + ny - nx).h(doorHeight + frameWidth), (lfm + ny + nx).h(doorHeight), (lfm + ny + nx).h(0), (lfm + ny - nx).h(0) },    // front
                         new[] { (lfm - ny - nx).h(doorHeight + frameWidth), (lfm + ny - nx).h(doorHeight + frameWidth), (lfm + ny - nx).h(0), (lfm - ny - nx).h(0) },   // right
@@ -914,8 +914,9 @@ h3 {{ font-size: 14pt; }}
                         new[] { (rfm - ny - nx).h(doorHeight), (lfm - ny + nx).h(doorHeight), (lfm + ny + nx).h(doorHeight), (rfm + ny - nx).h(doorHeight) }    // bottom
                     ), $"Frame{ix}", AutoNormal.Flat));
 
-                cameras.Add((((p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix])) - (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeight), ((p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix])) + (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeightLook)));
-                cyanNumbers.Add(((mid + (p2 - p1).Normal().Unit() * .0001).h(numberHeight), (mid - (p2 - p1).Normal().Unit() * .1).h(numberHeight)));
+                cameras.Add(((p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeight), ((p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix])) + (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeightLook)));
+                var cyanMid = .49 * p2 + .51 * p1;
+                cyanNumbers.Add(((cyanMid + (p2 - p1).Normal().Unit() * .0001).h(numberHeight), (cyanMid - (p2 - p1).Normal().Unit() * .1).h(numberHeight)));
                 pinkNumbers1.Add(((p1 + (p2 - p1).Normal().Unit() * .0001).h(numberHeight), (p1 - (p2 - p1).Normal().Unit() * .1).h(numberHeight)));
                 pinkNumbers2.Add(((p2 + (p2 - p1).Normal().Unit() * .0001).h(numberHeight), (p2 - (p2 - p1).Normal().Unit() * .1).h(numberHeight)));
                 ix++;
