@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using CsQuery;
 using PuzzleSolvers;
 using Qoph.Modeling;
+using RT.KitchenSink;
 using RT.TagSoup;
 using RT.Util;
 using RT.Util.Consoles;
@@ -875,6 +876,7 @@ h3 {{ font-size: 14pt; }}
             var cyanNumbers = new List<(Pt from, Pt to)>();
             var pinkNumbers1 = new List<(Pt from, Pt to)>();
             var pinkNumbers2 = new List<(Pt from, Pt to)>();
+            var doors = new List<(Pt from, Pt to)>();
 
             var ix = 0;
             foreach (var (p1, p2) in poly.ConsecutivePairs(true))
@@ -883,8 +885,6 @@ h3 {{ font-size: 14pt; }}
                 var right = mid - (p2 - p1).Unit() * doorWidth;
                 var left = mid + (p2 - p1).Unit() * doorWidth;
 
-                File.WriteAllText($@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Door{ix}.obj",
-                    GenerateObjFile(new[] { new[] { pt(right.X, doorHeight, right.Y).WithTexture(1, 1), pt(left.X, doorHeight, left.Y).WithTexture(0, 1), pt(left.X, 0, left.Y).WithTexture(0, 0), pt(right.X, 0, right.Y).WithTexture(1, 0) } }, $"Door{ix}", AutoNormal.Flat));
                 File.WriteAllText($@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Wall{ix}.obj",
                     GenerateObjFile(Ut.NewArray(
                         new[] { pt(p2.X, 0, p2.Y), pt(left.X, 0, left.Y), pt(left.X, ceilingHeight, left.Y), pt(p2.X, ceilingHeight, p2.Y) },
@@ -896,7 +896,7 @@ h3 {{ font-size: 14pt; }}
                 var nx = (p2 - p1).Unit() * frameWidth / 2;
                 var ny = (p2 - p1).Normal().Unit() * frameDepth / 2;
                 var lfm = right - nx;
-                var rfm = left - nx;
+                var rfm = left + nx;
 
                 File.WriteAllText($@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Frame{ix}.obj",
                     GenerateObjFile(Ut.NewArray(
@@ -904,11 +904,13 @@ h3 {{ font-size: 14pt; }}
                         new[] { (lfm + ny - nx).h(doorHeight + frameWidth), (lfm + ny + nx).h(doorHeight), (lfm + ny + nx).h(0), (lfm + ny - nx).h(0) },    // front
                         new[] { (lfm - ny - nx).h(doorHeight + frameWidth), (lfm + ny - nx).h(doorHeight + frameWidth), (lfm + ny - nx).h(0), (lfm - ny - nx).h(0) },   // right
                         new[] { (lfm + ny + nx).h(doorHeight), (lfm - ny + nx).h(doorHeight), (lfm - ny + nx).h(0), (lfm + ny + nx).h(0) }, // left
-                                                                                                                                            // Left
+
+                        // Left
                         new[] { (rfm + ny - nx).h(doorHeight), (rfm + ny + nx).h(doorHeight + frameWidth), (rfm + ny + nx).h(0), (rfm + ny - nx).h(0) },    // front
                         new[] { (rfm - ny - nx).h(doorHeight), (rfm + ny - nx).h(doorHeight), (rfm + ny - nx).h(0), (rfm - ny - nx).h(0) }, // right
                         new[] { (rfm + ny + nx).h(doorHeight + frameWidth), (rfm - ny + nx).h(doorHeight + frameWidth), (rfm - ny + nx).h(0), (rfm + ny + nx).h(0) },   // left
-                                                                                                                                                                        // Top
+
+                        // Top
                         new[] { (rfm + ny + nx).h(doorHeight + frameWidth), (rfm + ny - nx).h(doorHeight), (lfm + ny + nx).h(doorHeight), (lfm + ny - nx).h(doorHeight + frameWidth) }, // front
                         new[] { (rfm + ny + nx).h(doorHeight + frameWidth), (lfm + ny - nx).h(doorHeight + frameWidth), (lfm - ny - nx).h(doorHeight + frameWidth), (rfm - ny + nx).h(doorHeight + frameWidth) },   // top
                         new[] { (rfm - ny - nx).h(doorHeight), (lfm - ny + nx).h(doorHeight), (lfm + ny + nx).h(doorHeight), (rfm + ny - nx).h(doorHeight) }    // bottom
@@ -916,9 +918,10 @@ h3 {{ font-size: 14pt; }}
 
                 cameras.Add(((p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeight), ((p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix])) + (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeightLook)));
                 var cyanMid = .49 * p2 + .51 * p1;
-                cyanNumbers.Add(((cyanMid + (p2 - p1).Normal().Unit() * .0001).h(numberHeight), (cyanMid - (p2 - p1).Normal().Unit() * .1).h(numberHeight)));
+                cyanNumbers.Add(((mid + (p2 - p1).Normal().Unit() * 0.00251).h(numberHeight), (mid - (p2 - p1).Normal().Unit() * .1).h(numberHeight)));
                 pinkNumbers1.Add(((p1 + (p2 - p1).Normal().Unit() * .0001).h(numberHeight), (p1 - (p2 - p1).Normal().Unit() * .1).h(numberHeight)));
                 pinkNumbers2.Add(((p2 + (p2 - p1).Normal().Unit() * .0001).h(numberHeight), (p2 - (p2 - p1).Normal().Unit() * .1).h(numberHeight)));
+                doors.Add((mid.h(doorHeight / 2), (mid - (p2 - p1).Normal().Unit()).h(doorHeight / 2)));
                 ix++;
             }
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Floor.obj",
@@ -928,10 +931,25 @@ h3 {{ font-size: 14pt; }}
 
             static Pt invX(Pt p) => pt(-p.X, p.Y, p.Z);
             static string makeArray(List<(Pt from, Pt to)> list) => $@"new[] {{ {list.Select(tup => $@"new CameraPos {{ From = vec{invX(tup.from)}, To = vec{invX(tup.to)} }}").JoinString(", ")} }}";
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\KeyboardControl.cs", @"/\*%%\*/", @"/\*%%%\*/", makeArray(cameras));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\KeyboardControl.cs", @"/\*##\*/", @"/\*###\*/", makeArray(cyanNumbers));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\KeyboardControl.cs", @"/\*&&\*/", @"/\*&&&\*/", makeArray(pinkNumbers1));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\KeyboardControl.cs", @"/\*@@\*/", @"/\*@@@\*/", makeArray(pinkNumbers2));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*%%\*/", @"/\*%%%\*/", makeArray(cameras));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*##\*/", @"/\*###\*/", makeArray(cyanNumbers));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*&&\*/", @"/\*&&&\*/", makeArray(pinkNumbers1));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*@@\*/", @"/\*@@@\*/", makeArray(pinkNumbers2));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*::\*/", @"/\*:::\*/", makeArray(doors));
+
+            var doorKnobCurve = DecodeSvgPath.Do(@"M 100,-35 H 80 v 25 C 60,-10 60,-35 35,-35 15.670034,-35 0,-25 0,0", .1).Select(p => p.ToArray()).First();
+            const int revSteps = 36;
+            File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Doorknob.obj",
+                GenerateObjFile(CreateMesh(true, false, Enumerable.Range(0, revSteps)
+                    .Select(i => 360.0 / revSteps * i)
+                    .Select(angle => doorKnobCurve
+                        .Select((p, pIx) => pt(p.X, 0, p.Y).RotateX(angle)
+                            .Apply(point => pIx == doorKnobCurve.Length - 1
+                                ? point.WithMeshInfo(-1, 0, 0)
+                                : point.WithMeshInfo(Normal.Average, Normal.Average, pIx < 3 ? Normal.Mine : Normal.Average, pIx < 3 ? Normal.Mine : Normal.Average)))
+                        .Reverse()
+                        .ToArray())
+                    .ToArray()), "Doorknob"));
         }
 
         private static Pt h(this PointD p, double y) => pt(p.X, y, p.Y);
