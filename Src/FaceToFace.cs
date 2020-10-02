@@ -856,6 +856,8 @@ h3 {{ font-size: 14pt; }}
             }
 
             Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{f.Edges[edge].AdjacentFace?.ToString() ?? f.Edges[edge].CrosswordInfo}\t{f.Edges[edge].AdjacentEdge}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex + 1}\t{f.MusicSnippet}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceData.cs", @"/\*%\*/", @"/\*%%\*/",
+                $@"new[] {{ {faceInfos.Select(fi => $@"new FaceData {{ CarpetColor = ""{fi.CarpetColor.CLiteralEscape()}"", CarpetLength = {fi.CarpetColorIndex}, SongSnippet = ""{fi.MusicSnippet.CLiteralEscape()}"", ItemInBox = ""{fi.GashlycrumbTiniesObject.CLiteralEscape()}"", CyanNumbers = new[] {{ {fi.Edges.Select(e => e.CyanNumber).JoinString(", ")} }}, PinkNumbers = new[] {{ {fi.Edges.Select(e => e.PinkNumber).JoinString(", ")} }}, Doors = new[] {{ {fi.Edges.Select(e => $@"new Door {{ Label = {e.CrosswordInfo.NullOr(s => $@"""{s.CLiteralEscape()}""") ?? "null"}, Face = {e.AdjacentFace.NullOr(a => a.ToString()) ?? "null"}, Edge = {e.AdjacentEdge.NullOr(a => a.ToString()) ?? "null"} }}").JoinString(", ")} }} }}").JoinString(", ")} }}");
         }
 
         public static void GenerateModels()

@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\FaceToFaceControl.cs" />
+     <Compile Include="Assets\FaceToFaceData.cs" />
      <Compile Include="Assets\OldRadio\Okean\CamRotat.cs" />
      <None Include="Assets\OldRadio\Okean\ReadMe.txt" />
      <None Include="Assets\Shaders\KT_3D_Text-Diffuse.shader" />
