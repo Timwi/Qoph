@@ -124,7 +124,7 @@ namespace Qoph
             "a bucket of orange paint",
             "a worm",
             "a toupee",
-            "a copy of the album “So Much Fun”",
+            "a copy of the album \"So Much Fun\"",
             "a painting of Queen Victoria",
             "a beaker of alkaline solution",
             "a body spray",
@@ -854,9 +854,45 @@ h3 {{ font-size: 14pt; }}
                 faceInfos[faceIx].Edges[barEdge].CrosswordInfo = $@"{(offset >= 0 ? "+" : "−")}{Math.Abs(offset)}";
             }
 
-            Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{f.Edges[edge].AdjacentFace?.ToString() ?? f.Edges[edge].CrosswordInfo.Apply(ci => string.IsNullOrWhiteSpace(ci) || !"+−".Contains(ci[0]) ? ci : $"‘{ci}’")}\t{f.Edges[edge].AdjacentEdge}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex + 1}\t{f.MusicSnippet}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceData.cs", @"/\*%\*/", @"/\*%%\*/",
-                $@"new[] {{ {faceInfos.Select(fi => $@"new FaceData {{ CarpetColor = ""{fi.CarpetColor.CLiteralEscape()}"", CarpetLength = {fi.CarpetColorIndex}, SongSnippet = ""{fi.MusicSnippet.CLiteralEscape()}"", ItemInBox = ""{fi.GashlycrumbTiniesObject.CLiteralEscape()}"", CyanNumbers = new[] {{ {fi.Edges.Select(e => e.CyanNumber).JoinString(", ")} }}, PinkNumbers = new[] {{ {fi.Edges.Select(e => e.PinkNumber).JoinString(", ")} }}, Doors = new[] {{ {fi.Edges.Select(e => $@"new Door {{ Label = {e.CrosswordInfo.NullOr(s => $@"""{s.CLiteralEscape()}""") ?? "null"}, Face = {e.AdjacentFace.NullOr(a => a.ToString()) ?? "null"}, Edge = {e.AdjacentEdge.NullOr(a => a.ToString()) ?? "null"} }}").JoinString(", ")} }} }}").JoinString(", ")} }}");
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
+                $@"new[] {{ {faceInfos.Select(fi => $@"new FaceData {{ CarpetColor = ""{fi.CarpetColor.CLiteralEscape()}"", CarpetLength = {fi.CarpetColorIndex}, SongSnippet = ""{fi.MusicSnippet.CLiteralEscape()}"", ItemInBox = ""{fi.GashlycrumbTiniesObject.CLiteralEscape()}"", Edges = new[] {{ {fi.Edges.Select(e => $@"new Edge {{ CyanNumber = {e.CyanNumber}, PinkNumber = {e.PinkNumber}, Label = {e.CrosswordInfo.NullOr(s => $@"""{s.CLiteralEscape()}""") ?? "null"}, Face = {e.AdjacentFace.NullOr(a => a.ToString()) ?? "null"} }}").JoinString(", ")} }} }}").JoinString(", ")} }}");
+        }
+
+        public static void CalculateValues()
+        {
+            var net = generateNet(_polyhedron).polygons;
+
+            // Calculate the rotations to transform the current room into an adjoining room
+            var rotateAbout = new (int v1, int v2)[] { (0, 0), (2, 2), (2, 2), (3, 4), (0, 0) }.Select(tup => (net[0][tup.v1] + net[0][tup.v2]) / 2).ToArray();
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*RotateRoomAbout-start\*/", @"/\*RotateRoomAbout-end\*/",
+                rotateAbout.Select(p => $"new Vector3({-p.X}f, 0, {p.Y}f)").JoinString(", "));
+
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*RotateRoomBy-start\*/", @"/\*RotateRoomBy-end\*/",
+                new (PointD c, PointD a, PointD b)?[] { (net[0][0], net[0][1], net[1][1]), (net[0][2], net[0][1], net[18][1]), (net[0][2], net[0][3], net[10][3]), null, (net[0][0], net[0][4], net[3][4]) }
+                    .Select(tup =>
+                    {
+                        if (tup == null)
+                            return "180f";
+                        var (c, a, b) = tup.Value;
+                        var v1 = a - c;
+                        var v2 = b - c;
+                        return $"{Math.Atan2(v1.X * v2.Y - v1.Y * v2.X, v1.X * v2.X + v1.Y * v2.Y) / Math.PI * 180}f";
+                    })
+                    .JoinString(", "));
+
+            // Calculate the tilt angle
+            static Pt p(int face, int vx) => _polyhedron.Vertices[_polyhedron.Faces[face][vx]];
+            var n1 = (p(0, 1) - p(0, 0)) * (p(0, 4) - p(0, 0));
+            var n2 = (p(1, 1) - p(1, 0)) * (p(1, 4) - p(1, 0));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*TiltAngle-start\*/", @"/\*TiltAngle-end\*/", arcsin((n1 * n2).Length).ToString());
+
+            PointD pn(int face, int vx) => net[face][vx];
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*TiltRoomAbout-start\*/", @"/\*TiltRoomAbout-end\*/",
+                new[] { pn(0, 1) - pn(0, 0), pn(0, 2) - pn(0, 1), pn(0, 3) - pn(0, 2), pn(0, 4) - rotateAbout[3], pn(0, 0) - pn(0, 4) }.Select(p => $"new Vector3({-p.X}f, 0, {p.Y}f)").JoinString(", "));
+
+            // Calculate the room’s midpoint
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*Midpoint-start\*/", @"/\*Midpoint-end\*/",
+                (net[0].Aggregate(new PointD(0, 0), (p, n) => p + n) / net[0].Length).Apply(p => $"new Vector3({-p.X}f, .22f, {p.Y}f)"));
         }
 
         public static void GenerateModels()
@@ -874,7 +910,8 @@ h3 {{ font-size: 14pt; }}
             const double cyanNumberHeight = .28;
             const double pinkNumberHeight = .22;
 
-            var cameras = new List<(Pt from, Pt to)>();
+            var outCameras = new List<(Pt from, Pt to)>();
+            var inCameras = new List<(Pt from, Pt to)>();
             var cyanNumbers = new List<(Pt from, Pt to)>();
             var pinkNumbers1 = new List<(Pt from, Pt to)>();
             var pinkNumbers2 = new List<(Pt from, Pt to)>();
@@ -884,6 +921,7 @@ h3 {{ font-size: 14pt; }}
             foreach (var (p1, p2) in poly.ConsecutivePairs(true))
             {
                 var mid = (p1 + p2) / 2;
+                //var mid = p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]);
                 var right = mid - (p2 - p1).Unit() * doorWidth;
                 var left = mid + (p2 - p1).Unit() * doorWidth;
 
@@ -918,7 +956,12 @@ h3 {{ font-size: 14pt; }}
                         new[] { (rfm - ny - nx).h(doorHeight), (lfm - ny + nx).h(doorHeight), (lfm + ny + nx).h(doorHeight), (rfm + ny - nx).h(doorHeight) }    // bottom
                     ), $"Frame{ix}", AutoNormal.Flat));
 
-                cameras.Add(((p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeight), ((p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix])) + (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeightLook)));
+                outCameras.Add((
+                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeight),
+                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) + (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeightLook)));
+                inCameras.Add((
+                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) + (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeight),
+                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeightLook)));
                 var cyanMid = .49 * p2 + .51 * p1;
                 cyanNumbers.Add(((mid + (p2 - p1).Normal().Unit() * 0.00251).h(cyanNumberHeight), (mid - (p2 - p1).Normal().Unit() * .1).h(cyanNumberHeight)));
                 pinkNumbers1.Add(((p1 + (p2 - p1).Normal().Unit() * .0001).h(pinkNumberHeight), (p1 - (p2 - p1).Normal().Unit() * .1).h(pinkNumberHeight)));
@@ -933,11 +976,12 @@ h3 {{ font-size: 14pt; }}
 
             static Pt invX(Pt p) => pt(-p.X, p.Y, p.Z);
             static string makeArray(List<(Pt from, Pt to)> list) => $@"new[] {{ {list.Select(tup => $@"new PosAndDir {{ From = vec{invX(tup.from)}, To = vec{invX(tup.to)} }}").JoinString(", ")} }}";
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\RoomControl.cs", @"/\*%%\*/", @"/\*%%%\*/", makeArray(cameras));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\RoomControl.cs", @"/\*##\*/", @"/\*###\*/", makeArray(cyanNumbers));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\RoomControl.cs", @"/\*&&\*/", @"/\*&&&\*/", makeArray(pinkNumbers1));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\RoomControl.cs", @"/\*@@\*/", @"/\*@@@\*/", makeArray(pinkNumbers2));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\RoomControl.cs", @"/\*::\*/", @"/\*:::\*/", makeArray(doors));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*CameraPositions-start\*/", @"/\*CameraPositions-end\*/", makeArray(outCameras));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*InCameraPositions-start\*/", @"/\*InCameraPositions-end\*/", makeArray(inCameras));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*CyanNumbersPositions-start\*/", @"/\*CyanNumbersPositions-end\*/", makeArray(cyanNumbers));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*PinkNumbers1Positions-start\*/", @"/\*PinkNumbers1Positions-end\*/", makeArray(pinkNumbers1));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*PinkNumbers2Positions-start\*/", @"/\*PinkNumbers2Positions-end\*/", makeArray(pinkNumbers2));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*DoorPositions-start\*/", @"/\*DoorPositions-end\*/", makeArray(doors));
 
             var doorKnobCurve = DecodeSvgPath.Do(@"M 100,-35 H 80 v 25 C 60,-10 60,-35 35,-35 15.670034,-35 0,-25 0,0", .1).Select(p => p.ToArray()).First();
             const int revSteps = 36;
