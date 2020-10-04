@@ -454,7 +454,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
             // Restricted variable scope
             {
                 var vx = faces[0][0];
-                // Put first vertex at origin and apply rotation
+                // Put first vertex at origin
                 for (int i = 0; i < faces.Length; i++)
                     for (int j = 0; j < faces[i].Length; j++)
                         faces[i][j] = faces[i][j] - vx;
@@ -527,11 +527,10 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                             (toFace.Take(3).Select(p => p.Rotate(toFace[(toEdgeIx + 1) % toFace.Length], toFace[toEdgeIx], -asin)).ToArray(), -asin),
                             (toFace.Take(3).Select(p => p.Rotate(toFace[(toEdgeIx + 1) % toFace.Length], toFace[toEdgeIx], 180 + asin)).ToArray(), 180 + asin),
                             (toFace.Take(3).Select(p => p.Rotate(toFace[(toEdgeIx + 1) % toFace.Length], toFace[toEdgeIx], 180 - asin)).ToArray(), 180 - asin));
-                        var best = values.FirstOrDefault(tup => ((tup.face[2] - tup.face[1]) * (tup.face[0] - tup.face[1])).Apply(nrml => Math.Abs(nrml.X) < closeness && Math.Abs(nrml.Y) < closeness && nrml.Z < 0));
-                        if (best.face == null)
+                        var best = values.IndexOf(tup => ((tup.face[2] - tup.face[1]) * (tup.face[0] - tup.face[1])).Apply(nrml => Math.Abs(nrml.X) < closeness && Math.Abs(nrml.Y) < closeness && nrml.Z < 0));
+                        if (best == -1)
                             throw new InvalidOperationException(@"No suitable angle found.");
-
-                        q.Enqueue((toFaceIx, rotatedPolyhedron.Select(face => face.Select(p => p.Rotate(toFace[(toEdgeIx + 1) % toFace.Length], toFace[toEdgeIx], best.angle)).ToArray()).ToArray()));
+                        q.Enqueue((toFaceIx, rotatedPolyhedron.Select(face => face.Select(p => p.Rotate(toFace[(toEdgeIx + 1) % toFace.Length], toFace[toEdgeIx], values[best].angle)).ToArray()).ToArray()));
                     }
                     else
                     {
@@ -872,7 +871,8 @@ h3 {{ font-size: 14pt; }}
             double[] cameraPos = { .35, .5, .5, .5, .65 };
             const double cameraHeight = .22;
             const double cameraHeightLook = .2;
-            const double numberHeight = .28;
+            const double cyanNumberHeight = .28;
+            const double pinkNumberHeight = .22;
 
             var cameras = new List<(Pt from, Pt to)>();
             var cyanNumbers = new List<(Pt from, Pt to)>();
@@ -920,9 +920,9 @@ h3 {{ font-size: 14pt; }}
 
                 cameras.Add(((p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeight), ((p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix])) + (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeightLook)));
                 var cyanMid = .49 * p2 + .51 * p1;
-                cyanNumbers.Add(((mid + (p2 - p1).Normal().Unit() * 0.00251).h(numberHeight), (mid - (p2 - p1).Normal().Unit() * .1).h(numberHeight)));
-                pinkNumbers1.Add(((p1 + (p2 - p1).Normal().Unit() * .0001).h(numberHeight), (p1 - (p2 - p1).Normal().Unit() * .1).h(numberHeight)));
-                pinkNumbers2.Add(((p2 + (p2 - p1).Normal().Unit() * .0001).h(numberHeight), (p2 - (p2 - p1).Normal().Unit() * .1).h(numberHeight)));
+                cyanNumbers.Add(((mid + (p2 - p1).Normal().Unit() * 0.00251).h(cyanNumberHeight), (mid - (p2 - p1).Normal().Unit() * .1).h(cyanNumberHeight)));
+                pinkNumbers1.Add(((p1 + (p2 - p1).Normal().Unit() * .0001).h(pinkNumberHeight), (p1 - (p2 - p1).Normal().Unit() * .1).h(pinkNumberHeight)));
+                pinkNumbers2.Add(((p2 + (p2 - p1).Normal().Unit() * .0001).h(pinkNumberHeight), (p2 - (p2 - p1).Normal().Unit() * .1).h(pinkNumberHeight)));
                 doors.Add((mid.h(doorHeight / 2), (mid - (p2 - p1).Normal().Unit()).h(doorHeight / 2)));
                 ix++;
             }
@@ -932,12 +932,12 @@ h3 {{ font-size: 14pt; }}
                 GenerateObjFile(new[] { poly.Select(p => pt(p.X, ceilingHeight, p.Y).WithTexture(p.X, p.Y)).Reverse().ToArray() }, "Ceiling", AutoNormal.Flat));
 
             static Pt invX(Pt p) => pt(-p.X, p.Y, p.Z);
-            static string makeArray(List<(Pt from, Pt to)> list) => $@"new[] {{ {list.Select(tup => $@"new CameraPos {{ From = vec{invX(tup.from)}, To = vec{invX(tup.to)} }}").JoinString(", ")} }}";
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*%%\*/", @"/\*%%%\*/", makeArray(cameras));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*##\*/", @"/\*###\*/", makeArray(cyanNumbers));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*&&\*/", @"/\*&&&\*/", makeArray(pinkNumbers1));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*@@\*/", @"/\*@@@\*/", makeArray(pinkNumbers2));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*::\*/", @"/\*:::\*/", makeArray(doors));
+            static string makeArray(List<(Pt from, Pt to)> list) => $@"new[] {{ {list.Select(tup => $@"new PosAndDir {{ From = vec{invX(tup.from)}, To = vec{invX(tup.to)} }}").JoinString(", ")} }}";
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\RoomControl.cs", @"/\*%%\*/", @"/\*%%%\*/", makeArray(cameras));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\RoomControl.cs", @"/\*##\*/", @"/\*###\*/", makeArray(cyanNumbers));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\RoomControl.cs", @"/\*&&\*/", @"/\*&&&\*/", makeArray(pinkNumbers1));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\RoomControl.cs", @"/\*@@\*/", @"/\*@@@\*/", makeArray(pinkNumbers2));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\RoomControl.cs", @"/\*::\*/", @"/\*:::\*/", makeArray(doors));
 
             var doorKnobCurve = DecodeSvgPath.Do(@"M 100,-35 H 80 v 25 C 60,-10 60,-35 35,-35 15.670034,-35 0,-25 0,0", .1).Select(p => p.ToArray()).First();
             const int revSteps = 36;
