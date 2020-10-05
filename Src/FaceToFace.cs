@@ -858,43 +858,6 @@ h3 {{ font-size: 14pt; }}
                 $@"new[] {{ {faceInfos.Select(fi => $@"new FaceData {{ CarpetColor = ""{fi.CarpetColor.CLiteralEscape()}"", CarpetLength = {fi.CarpetColorIndex}, SongSnippet = ""{fi.MusicSnippet.CLiteralEscape()}"", ItemInBox = ""{fi.GashlycrumbTiniesObject.CLiteralEscape()}"", Edges = new[] {{ {fi.Edges.Select(e => $@"new Edge {{ CyanNumber = {e.CyanNumber}, PinkNumber = {e.PinkNumber}, Label = {e.CrosswordInfo.NullOr(s => $@"""{s.CLiteralEscape()}""") ?? "null"}, Face = {e.AdjacentFace.NullOr(a => a.ToString()) ?? "null"} }}").JoinString(", ")} }} }}").JoinString(", ")} }}");
         }
 
-        public static void CalculateValues()
-        {
-            var net = generateNet(_polyhedron).polygons;
-
-            // Calculate the rotations to transform the current room into an adjoining room
-            var rotateAbout = new (int v1, int v2)[] { (0, 0), (2, 2), (2, 2), (3, 4), (0, 0) }.Select(tup => (net[0][tup.v1] + net[0][tup.v2]) / 2).ToArray();
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*RotateRoomAbout-start\*/", @"/\*RotateRoomAbout-end\*/",
-                rotateAbout.Select(p => $"new Vector3({-p.X}f, 0, {p.Y}f)").JoinString(", "));
-
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*RotateRoomBy-start\*/", @"/\*RotateRoomBy-end\*/",
-                new (PointD c, PointD a, PointD b)?[] { (net[0][0], net[0][1], net[1][1]), (net[0][2], net[0][1], net[18][1]), (net[0][2], net[0][3], net[10][3]), null, (net[0][0], net[0][4], net[3][4]) }
-                    .Select(tup =>
-                    {
-                        if (tup == null)
-                            return "180f";
-                        var (c, a, b) = tup.Value;
-                        var v1 = a - c;
-                        var v2 = b - c;
-                        return $"{Math.Atan2(v1.X * v2.Y - v1.Y * v2.X, v1.X * v2.X + v1.Y * v2.Y) / Math.PI * 180}f";
-                    })
-                    .JoinString(", "));
-
-            // Calculate the tilt angle
-            static Pt p(int face, int vx) => _polyhedron.Vertices[_polyhedron.Faces[face][vx]];
-            var n1 = (p(0, 1) - p(0, 0)) * (p(0, 4) - p(0, 0));
-            var n2 = (p(1, 1) - p(1, 0)) * (p(1, 4) - p(1, 0));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*TiltAngle-start\*/", @"/\*TiltAngle-end\*/", arcsin((n1 * n2).Length).ToString());
-
-            PointD pn(int face, int vx) => net[face][vx];
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\FaceToFaceControl.cs", @"/\*TiltRoomAbout-start\*/", @"/\*TiltRoomAbout-end\*/",
-                new[] { pn(0, 1) - pn(0, 0), pn(0, 2) - pn(0, 1), pn(0, 3) - pn(0, 2), pn(0, 4) - rotateAbout[3], pn(0, 0) - pn(0, 4) }.Select(p => $"new Vector3({-p.X}f, 0, {p.Y}f)").JoinString(", "));
-
-            // Calculate the room’s midpoint
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*Midpoint-start\*/", @"/\*Midpoint-end\*/",
-                (net[0].Aggregate(new PointD(0, 0), (p, n) => p + n) / net[0].Length).Apply(p => $"new Vector3({-p.X}f, .22f, {p.Y}f)"));
-        }
-
         public static void GenerateModels()
         {
             var poly = generateNet(_polyhedron).polygons[0];
@@ -904,9 +867,12 @@ h3 {{ font-size: 14pt; }}
             const double frameWidth = .015;
             const double frameDepth = .015;
             double[] cameraDistances = { .325, .325, .325, .325, .325 };
+            double[] inCameraDistances = { .5, .5, .5, .5, .5 };
             double[] cameraPos = { .35, .5, .5, .5, .65 };
             const double cameraHeight = .22;
             const double cameraHeightLook = .2;
+            const double inCameraHeight = .275;
+            const double inCameraHeightLook = .13;
             const double cyanNumberHeight = .28;
             const double pinkNumberHeight = .22;
 
@@ -916,12 +882,13 @@ h3 {{ font-size: 14pt; }}
             var pinkNumbers1 = new List<(Pt from, Pt to)>();
             var pinkNumbers2 = new List<(Pt from, Pt to)>();
             var doors = new List<(Pt from, Pt to)>();
+            var wallPositions = new List<Pt>();
 
             var ix = 0;
             foreach (var (p1, p2) in poly.ConsecutivePairs(true))
             {
-                var mid = (p1 + p2) / 2;
-                //var mid = p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]);
+                //var mid = (p1 + p2) / 2;
+                var mid = p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]);
                 var right = mid - (p2 - p1).Unit() * doorWidth;
                 var left = mid + (p2 - p1).Unit() * doorWidth;
 
@@ -960,13 +927,14 @@ h3 {{ font-size: 14pt; }}
                     (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeight),
                     (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) + (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeightLook)));
                 inCameras.Add((
-                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) + (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeight),
-                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeightLook)));
+                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) + (p2 - p1).Normal().Unit() * inCameraDistances[ix]).h(inCameraHeight),
+                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * inCameraDistances[ix]).h(inCameraHeightLook)));
                 var cyanMid = .49 * p2 + .51 * p1;
-                cyanNumbers.Add(((mid + (p2 - p1).Normal().Unit() * 0.00251).h(cyanNumberHeight), (mid - (p2 - p1).Normal().Unit() * .1).h(cyanNumberHeight)));
+                cyanNumbers.Add(((mid + (p2 - p1).Normal().Unit() * 0.0026).h(cyanNumberHeight), (mid - (p2 - p1).Normal().Unit() * .1).h(cyanNumberHeight)));
                 pinkNumbers1.Add(((p1 + (p2 - p1).Normal().Unit() * .0001).h(pinkNumberHeight), (p1 - (p2 - p1).Normal().Unit() * .1).h(pinkNumberHeight)));
                 pinkNumbers2.Add(((p2 + (p2 - p1).Normal().Unit() * .0001).h(pinkNumberHeight), (p2 - (p2 - p1).Normal().Unit() * .1).h(pinkNumberHeight)));
-                doors.Add((mid.h(doorHeight / 2), (mid - (p2 - p1).Normal().Unit()).h(doorHeight / 2)));
+                doors.Add((left.h(doorHeight / 2), (left - (p2 - p1).Normal().Unit()).h(doorHeight / 2)));
+                wallPositions.Add(pt(-mid.X, 0, mid.Y));
                 ix++;
             }
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Floor.obj",
@@ -982,6 +950,7 @@ h3 {{ font-size: 14pt; }}
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*PinkNumbers1Positions-start\*/", @"/\*PinkNumbers1Positions-end\*/", makeArray(pinkNumbers1));
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*PinkNumbers2Positions-start\*/", @"/\*PinkNumbers2Positions-end\*/", makeArray(pinkNumbers2));
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*DoorPositions-start\*/", @"/\*DoorPositions-end\*/", makeArray(doors));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*WallPositions-start\*/", @"/\*WallPositions-end\*/", wallPositions.Select(p => $"vec{p}").JoinString(", "));
 
             var doorKnobCurve = DecodeSvgPath.Do(@"M 100,-35 H 80 v 25 C 60,-10 60,-35 35,-35 15.670034,-35 0,-25 0,0", .1).Select(p => p.ToArray()).First();
             const int revSteps = 36;
@@ -996,6 +965,40 @@ h3 {{ font-size: 14pt; }}
                         .Reverse()
                         .ToArray())
                     .ToArray()), "Doorknob"));
+
+            var net = generateNet(_polyhedron).polygons;
+
+            // Calculate the rotations to transform the current room into an adjoining room
+            var rotateAbout = new (int v1, int v2)[] { (0, 0), (2, 2), (2, 2), (3, 4), (0, 0) }.Select(tup => (net[0][tup.v1] + net[0][tup.v2]) / 2).ToArray();
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*RotateRoomAbout-start\*/", @"/\*RotateRoomAbout-end\*/",
+                rotateAbout.Select(p => $"new Vector3({-p.X}f, 0, {p.Y}f)").JoinString(", "));
+
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*RotateRoomBy-start\*/", @"/\*RotateRoomBy-end\*/",
+                new (PointD c, PointD a, PointD b)?[] { (net[0][0], net[0][1], net[1][1]), (net[0][2], net[0][1], net[18][1]), (net[0][2], net[0][3], net[10][3]), null, (net[0][0], net[0][4], net[3][4]) }
+                    .Select(tup =>
+                    {
+                        if (tup == null)
+                            return "180f";
+                        var (c, a, b) = tup.Value;
+                        var v1 = a - c;
+                        var v2 = b - c;
+                        return $"{Math.Atan2(v1.X * v2.Y - v1.Y * v2.X, v1.X * v2.X + v1.Y * v2.Y) / Math.PI * 180}f";
+                    })
+                    .JoinString(", "));
+
+            // Calculate the tilt angle
+            static Pt p(int face, int vx) => _polyhedron.Vertices[_polyhedron.Faces[face][vx]];
+            var n1 = (p(0, 1) - p(0, 0)) * (p(0, 4) - p(0, 0));
+            var n2 = (p(1, 1) - p(1, 0)) * (p(1, 4) - p(1, 0));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*TiltAngle-start\*/", @"/\*TiltAngle-end\*/", $"{-arcsin((n1 * n2).Length)}f");
+
+            PointD pn(int face, int vx) => net[face][vx];
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*TiltRoomAbout-start\*/", @"/\*TiltRoomAbout-end\*/",
+                new[] { pn(0, 1) - pn(0, 0), pn(0, 2) - pn(0, 1), pn(0, 3) - pn(0, 2), pn(0, 4) - rotateAbout[3], pn(0, 0) - pn(0, 4) }.Select(p => $"new Vector3({-p.X}f, 0, {p.Y}f)").JoinString(", "));
+
+            // Calculate the room’s midpoint
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*Midpoint-start\*/", @"/\*Midpoint-end\*/",
+                (net[0].Aggregate(new PointD(0, 0), (p, n) => p + n) / net[0].Length).Apply(p => $"new Vector3({-p.X}f, {inCameraHeight}f, {p.Y}f)"));
         }
 
         private static Pt h(this PointD p, double y) => pt(p.X, y, p.Y);

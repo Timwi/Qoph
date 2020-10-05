@@ -1,6 +1,6 @@
 {
-"companyName": "QOPH",
-"productName": "Face To Face",
+"companyName": "QOPH1.1",
+"productName": "Face To Face 1.1",
 "dataUrl": "Face to Face.data.unityweb",
 "asmCodeUrl": "Face to Face.asm.code.unityweb",
 "asmMemoryUrl": "Face to Face.asm.memory.unityweb",
@@ -8,6 +8,6 @@
 "TOTAL_MEMORY": 268435456,
 "graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
 "webglContextAttributes": {"preserveDrawingBuffer": false},
-"splashScreenStyle": "Light",
-"backgroundColor": "#828080"
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
 }
