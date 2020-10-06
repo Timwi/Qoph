@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using CsQuery;
 using PuzzleSolvers;
 using Qoph.Modeling;
@@ -25,18 +24,18 @@ namespace Qoph
     {
         private static readonly Polyhedron _polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\LpentagonalIcositetrahedron.txt");
 
-        private static readonly (string word, string clue, int[] cells)[] _crosswordLights = Ut.NewArray(
-            ("NEED", "Require (4)", new[] { 2, 14, 13, 5 }),
-            ("DEAL", "Agreement or dish out cards (4)", new[] { 5, 4, 9, 10 }),
-            ("ONSET", "Beginning (5)", new[] { 3, 23, 22, 4, 7 }),
-            ("SHARING", "Apportioning (7)", new[] { 22, 8, 11, 0, 1, 17, 16 }),
-            ("NUN", "Sister (3)", new[] { 23, 20, 2 }),
-            ("TEN", "X (3)", new[] { 21, 14, 15 }),
-            ("ROUTE", "Itinerary (5)", new[] { 0, 3, 20, 21, 13 }),
-            ("HATE", "Loathe (4)", new[] { 8, 9, 7, 6 }),
-            ("EGG", "Ovum (3)", new[] { 6, 16, 19 }),
-            ("ALONG", "For the length of (5)", new[] { 11, 10, 18, 17, 12 }),
-            ("GOING", "Leaving or functioning (5)", new[] { 19, 18, 1, 15, 12 }));
+        private static readonly (string word, int clueSize, string clue, int[] cells)[] _crosswordLights = Ut.NewArray(
+            ("NEED", 18, "Require\n(4)", new[] { 2, 14, 13, 5 }),
+            ("DEAL", 9, "Agreement or dish\nout cards (4)", new[] { 5, 4, 9, 10 }),
+            ("ONSET", 16, "Beginning\n(5)", new[] { 3, 23, 22, 4, 7 }),
+            ("SHARING", 14, "Apportioning\n(7)", new[] { 22, 8, 11, 0, 1, 17, 16 }),
+            ("NUN", 16, "Sister (3)", new[] { 23, 20, 2 }),
+            ("TEN", 18, "X (3)", new[] { 21, 14, 15 }),
+            ("ROUTE", 14, "Itinerary\n(5)", new[] { 0, 3, 20, 21, 13 }),
+            ("HATE", 17, "Loathe\n(4)", new[] { 8, 9, 7, 6 }),
+            ("EGG", 18, "Ovum (3)", new[] { 6, 16, 19 }),
+            ("ALONG", 11, "For the length\nof (5)", new[] { 11, 10, 18, 17, 12 }),
+            ("GOING", 11, "Leaving or\nfunctioning (5)", new[] { 19, 18, 1, 15, 12 }));
 
         private struct DistrInfo
         {
@@ -86,7 +85,7 @@ namespace Qoph
 
         private static readonly DistrInfo[] _distributions = new[] { _carpetColors, _cyanSums, _pinkSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
 
-        private static string[] _carpetColorNames = "AQUA,AZURE,FUCHSIA,GAMBOGE,JADE,ONYX,PINK,VIOLET,WHITE".Split(',');
+        private static readonly string[] _carpetColorNames = "AQUA,AZURE,FUCHSIA,GAMBOGE,JADE,ONYX,PINK,VIOLET,WHITE".Split(',');
 
         private static readonly string[] _songTitles = Ut.NewArray(
             "Lemon Tree",
@@ -100,7 +99,7 @@ namespace Qoph
             "Barbie Girl",
             "Royals",
             "Africa",
-            "Saturnz Barz",
+            "Stronger",
             "Shape of You",
             "Everybody Wants to Rule the World",
             "Bohemian Rhapsody",
@@ -686,7 +685,7 @@ h3 {{ font-size: 14pt; }}
                 for (var e = 0; e < 5; e++)
                     edges.Add((f, e));
 
-            foreach (var (word, clue, light) in _crosswordLights)
+            foreach (var (word, clueSize, clue, light) in _crosswordLights)
             {
                 foreach (var (f1Ix, f2Ix) in light.ConsecutivePairs(false))
                 {
@@ -789,6 +788,7 @@ h3 {{ font-size: 14pt; }}
             public int CyanNumber;  // on the door
             public int PinkNumber;  // in the corner widdershins from this door
             public string CrosswordInfo;    // could be crossword clue or offset
+            public int CrosswordInfoFontSize;
         }
 
         public sealed class FaceInfo
@@ -839,23 +839,25 @@ h3 {{ font-size: 14pt; }}
             }
 
             // Crossword
-            foreach (var (word, clue, cells) in _crosswordLights)
+            foreach (var (word, clueSize, clue, cells) in _crosswordLights)
             {
                 var firstFace = cells[0];
                 var firstEdge = findEdgeThatLeadsTo(cells[0], cells[1]);
                 var barEdge = locked.First(tup => tup.face == firstFace && (tup.edge == (firstEdge + 2) % 5 || tup.edge == (firstEdge + 3) % 5)).edge;
                 faceInfos[firstFace].Edges[barEdge].CrosswordInfo = clue;
+                faceInfos[firstFace].Edges[barEdge].CrosswordInfoFontSize = clueSize;
             }
             for (var faceIx = 0; faceIx < 24; faceIx++)
             {
                 var letter = _crosswordLights.Select(tup => new { Tup = tup, Ix = tup.cells.IndexOf(faceIx) }).Where(inf => inf.Ix != -1).Select(inf => inf.Tup.word[inf.Ix]).First();
                 var barEdge = locked.First(tup => tup.face == faceIx && faceInfos[faceIx].Edges[tup.edge].CrosswordInfo == null).edge;
                 var offset = getFaceValue(faceIx, _crosswordAfterOffset) - (letter - 'A' + 1);
-                faceInfos[faceIx].Edges[barEdge].CrosswordInfo = $@"{(offset >= 0 ? "+" : "−")}{Math.Abs(offset)}";
+                faceInfos[faceIx].Edges[barEdge].CrosswordInfo = $@"{(offset >= 0 ? "+" : "-")}{Math.Abs(offset)}";
+                faceInfos[faceIx].Edges[barEdge].CrosswordInfoFontSize = 32;
             }
 
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
-                $@"new[] {{ {faceInfos.Select(fi => $@"new FaceData {{ CarpetColor = ""{fi.CarpetColor.CLiteralEscape()}"", CarpetLength = {fi.CarpetColorIndex}, SongSnippet = ""{fi.MusicSnippet.CLiteralEscape()}"", ItemInBox = ""{fi.GashlycrumbTiniesObject.CLiteralEscape()}"", Edges = new[] {{ {fi.Edges.Select(e => $@"new Edge {{ CyanNumber = {e.CyanNumber}, PinkNumber = {e.PinkNumber}, Label = {e.CrosswordInfo.NullOr(s => $@"""{s.CLiteralEscape()}""") ?? "null"}, Face = {e.AdjacentFace.NullOr(a => a.ToString()) ?? "null"} }}").JoinString(", ")} }} }}").JoinString(", ")} }}");
+                $@"new[] {{ {faceInfos.Select(fi => $@"new FaceData {{ CarpetColor = ""{fi.CarpetColor.ToLowerInvariant().CLiteralEscape()}"", CarpetLength = {fi.CarpetColorIndex + 1}, SongSnippet = ""{fi.MusicSnippet.CLiteralEscape()}"", ItemInBox = ""{fi.GashlycrumbTiniesObject.CLiteralEscape()}"", Edges = new[] {{ {fi.Edges.Select(e => $@"new Edge {{ CyanNumber = {e.CyanNumber}, PinkNumber = {e.PinkNumber}{(e.AdjacentFace == null && e.CrosswordInfo == null ? "" : e.AdjacentFace == null ? $@", Label = ""{e.CrosswordInfo.CLiteralEscape()}"", LabelFontSize = {e.CrosswordInfoFontSize}" : $@", Face = {e.AdjacentFace.Value}")} }}").JoinString(", ")} }} }}").JoinString(", ")} }}");
         }
 
         public static void GenerateModels()
@@ -868,7 +870,7 @@ h3 {{ font-size: 14pt; }}
             const double frameDepth = .015;
             double[] cameraDistances = { .325, .325, .325, .325, .325 };
             double[] inCameraDistances = { .5, .5, .5, .5, .5 };
-            double[] cameraPos = { .35, .5, .5, .5, .65 };
+            double[] cameraPos = { .38, .5, .5, .5, .62 };
             const double cameraHeight = .22;
             const double cameraHeightLook = .2;
             const double inCameraHeight = .275;
@@ -965,6 +967,16 @@ h3 {{ font-size: 14pt; }}
                         .Reverse()
                         .ToArray())
                     .ToArray()), "Doorknob"));
+
+            const int revStepsRope = 6;
+            const double r = .1;
+            const double x1 = -.5;
+            const double x2 = .4;
+            var ropeCurve = new[] { pt(x1, 0, x1 + r * Math.Sqrt(2)) }
+                .Concat(Enumerable.Range(0, revStepsRope).Select(a => 135 - 90d * a / (revStepsRope - 1)).Select(angle => pt(r * cos(angle), 0, r * sin(angle))))
+                .Concat(new[] { pt(x2, 0, -x2 + r * Math.Sqrt(2)) });
+            File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Signrope.obj",
+                GenerateObjFile(TubeFromCurve(ropeCurve, .005, revSteps), "Signrope"));
 
             var net = generateNet(_polyhedron).polygons;
 

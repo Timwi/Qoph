@@ -13,18 +13,32 @@ public class FaceToFaceControl : MonoBehaviour
     public GameObject Sphere;
     public Text TalkText;
 
-    private int _faceIx;
+    public int FaceIx;
     private int _edgeIx;
     private Coroutine _talkTextCoroutine;
     private Coroutine _radioCoroutine;
     private bool _interactionDisabled = false;
 
 #if UNITY_EDITOR
-    [UnityEditor.MenuItem("Do Stuff/Set sphere")]
-    public static void DoStuff()
+    [UnityEditor.MenuItem("Do Stuff/Set camera &0")] public static void Camera0() { var t = FindObjectOfType<FaceToFaceControl>(); t.Room.SetRoom(t.FaceIx, 0, setCamera: true); }
+    [UnityEditor.MenuItem("Do Stuff/Set camera &1")] public static void Camera1() { var t = FindObjectOfType<FaceToFaceControl>(); t.Room.SetRoom(t.FaceIx, 1, setCamera: true); }
+    [UnityEditor.MenuItem("Do Stuff/Set camera &2")] public static void Camera2() { var t = FindObjectOfType<FaceToFaceControl>(); t.Room.SetRoom(t.FaceIx, 2, setCamera: true); }
+    [UnityEditor.MenuItem("Do Stuff/Set camera &3")] public static void Camera3() { var t = FindObjectOfType<FaceToFaceControl>(); t.Room.SetRoom(t.FaceIx, 3, setCamera: true); }
+    [UnityEditor.MenuItem("Do Stuff/Set camera &4")] public static void Camera4() { var t = FindObjectOfType<FaceToFaceControl>(); t.Room.SetRoom(t.FaceIx, 4, setCamera: true); }
+
+    [UnityEditor.MenuItem("Do Stuff/Set objects &5")]
+    public static void SetObjects()
     {
-        var m = FindObjectOfType<FaceToFaceControl>();
-        m.Sphere.transform.localPosition = Data.Midpoint;
+        var t = FindObjectOfType<FaceToFaceControl>();
+        for (var ix = 0; ix < 5; ix++)
+        {
+            t.Room.Doors[ix].transform.Set(Data.DoorPositions[ix], new Vector3(1, 1, 1));
+            t.Room.CyanNumbers[ix].transform.parent = t.Room.transform;
+            t.Room.CyanNumbers[ix].transform.Set(Data.CyanNumbersPositions[ix], new Vector3(.01f, .01f, .01f));
+            t.Room.CyanNumbers[ix].transform.parent = t.Room.Doors[ix].transform;
+            t.Room.PinkNumbers1[ix].transform.Set(Data.PinkNumbers1Positions[ix], new Vector3(.013f, .013f, .013f));
+            t.Room.PinkNumbers2[ix].transform.Set(Data.PinkNumbers2Positions[ix], new Vector3(.013f, .013f, .013f));
+        }
     }
 #endif
 
@@ -39,11 +53,15 @@ public class FaceToFaceControl : MonoBehaviour
         WebGLInput.captureAllKeyboardInput = false;
 #endif
 
-        _faceIx = Rnd.Range(0, Data.Faces.Length);
-        _edgeIx = Rnd.Range(0, 5);
+        do
+        {
+            FaceIx = Rnd.Range(0, Data.Faces.Length);
+            _edgeIx = Rnd.Range(0, 5);
+        }
+        while (Data.Faces[FaceIx].Edges[_edgeIx].Face == null);
 
         Room.RadioMaterial.DisableKeyword("_EMISSION");
-        Room.SetRoom(_faceIx, _edgeIx, setCamera: true);
+        Room.SetRoom(FaceIx, _edgeIx, setCamera: true);
     }
 
     void Update()
@@ -59,11 +77,11 @@ public class FaceToFaceControl : MonoBehaviour
             {
                 var edgeIx = Array.IndexOf(Room.Doors, hit.transform.gameObject);
 
-                if (Data.Faces[_faceIx].Edges[edgeIx].Face == null)
-                    Talk(Data.Faces[_faceIx].Edges[edgeIx].Label == null ? "That door is locked." : string.Format("That door is locked. The sign on the door says: {0}", Data.Faces[_faceIx].Edges[edgeIx].Label));
+                if (Data.Faces[FaceIx].Edges[edgeIx].Face == null)
+                    Talk(Data.Faces[FaceIx].Edges[edgeIx].Label == null ? "That door is locked." : string.Format("That door is locked. The sign on the door says: {0}", Data.Faces[FaceIx].Edges[edgeIx].Label.Replace("\n", " ")));
                 else
                 {
-                    var newFaceIx = Data.Faces[_faceIx].Edges[edgeIx].Face.Value;
+                    var newFaceIx = Data.Faces[FaceIx].Edges[edgeIx].Face.Value;
                     var newEdgeIx = new[] { 4, 2, 1, 3, 0 }[edgeIx];
 
                     var rotationParent = new GameObject();
@@ -101,7 +119,9 @@ public class FaceToFaceControl : MonoBehaviour
                     _radioCoroutine = StartCoroutine(Radio());
             }
             else if (hit.transform.gameObject == Room.Box)
-                Talk(string.Format("This box contains {0}.", Data.Faces[_faceIx].ItemInBox));
+                Talk(string.Format("This box contains {0}.", Data.Faces[FaceIx].ItemInBox));
+            else if (Room.Carpets.Any(c => c.gameObject == hit.transform.gameObject))
+                Talk(string.Format("What a nice {0} carpet design!", Data.Faces[FaceIx].CarpetColor));
         }
     }
 
@@ -164,7 +184,7 @@ public class FaceToFaceControl : MonoBehaviour
         Destroy(wallSizer);
         Room.gameObject.SetActive(true);
         Room.SetRoom(newFaceIx, newEdgeIx, setCamera: true);
-        _faceIx = newFaceIx;
+        FaceIx = newFaceIx;
         _edgeIx = newEdgeIx;
         _interactionDisabled = false;
     }

@@ -404,3 +404,11 @@ form#answer-checker {
         border-radius: 1cm;
         font-size: 14pt;
     }
+
+form td.label {
+    white-space: nowrap;
+}
+form td.explain {
+    font-size: 9pt;
+    padding-left: 1cm;
+}
