@@ -51,10 +51,7 @@ public partial class RoomControl : MonoBehaviour
             Carpets[i].gameObject.SetActive(false);
 
         if (setCamera)
-        {
             Camera.main.transform.Set(Data.CameraPositions[edgeIx], new Vector3(1, 1, 1));
-            Debug.Log("Entering room " + faceIx);
-        }
     }
 }
 

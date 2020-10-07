@@ -35,7 +35,7 @@ namespace Qoph
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            FaceToFace.GatherAllData();
+            FaceToFace.GenerateModels();
 
 
             Console.WriteLine("Done.");

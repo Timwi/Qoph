@@ -85,7 +85,7 @@ namespace Qoph
 
         private static readonly DistrInfo[] _distributions = new[] { _carpetColors, _cyanSums, _pinkSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
 
-        private static readonly string[] _carpetColorNames = "AQUA,AZURE,FUCHSIA,GAMBOGE,JADE,ONYX,PINK,VIOLET,WHITE".Split(',');
+        private static readonly string[] _carpetColorNames = "WHITE,AQUA,AZURE,FUCHSIA,GAMBOGE,JADE,ONYX,PINK,VIOLET".Split(',');
 
         private static readonly string[] _songTitles = Ut.NewArray(
             "Lemon Tree",
@@ -868,8 +868,8 @@ h3 {{ font-size: 14pt; }}
             const double doorWidth = .09;
             const double frameWidth = .015;
             const double frameDepth = .015;
-            double[] cameraDistances = { .325, .325, .325, .325, .325 };
-            double[] inCameraDistances = { .5, .5, .5, .5, .5 };
+            const double cameraDistance = .28;
+            const double inCameraDistance = .5;
             double[] cameraPos = { .38, .5, .5, .5, .62 };
             const double cameraHeight = .22;
             const double cameraHeightLook = .2;
@@ -926,19 +926,28 @@ h3 {{ font-size: 14pt; }}
                     ), $"Frame{ix}", AutoNormal.Flat));
 
                 outCameras.Add((
-                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeight),
-                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) + (p2 - p1).Normal().Unit() * cameraDistances[ix]).h(cameraHeightLook)));
+                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * cameraDistance).h(cameraHeight),
+                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) + (p2 - p1).Normal().Unit() * cameraDistance).h(cameraHeightLook)));
                 inCameras.Add((
-                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) + (p2 - p1).Normal().Unit() * inCameraDistances[ix]).h(inCameraHeight),
-                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * inCameraDistances[ix]).h(inCameraHeightLook)));
+                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) + (p2 - p1).Normal().Unit() * inCameraDistance).h(inCameraHeight),
+                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * inCameraDistance).h(inCameraHeightLook)));
                 var cyanMid = .49 * p2 + .51 * p1;
+
                 cyanNumbers.Add(((mid + (p2 - p1).Normal().Unit() * 0.0026).h(cyanNumberHeight), (mid - (p2 - p1).Normal().Unit() * .1).h(cyanNumberHeight)));
+                // pink number on the right side of the wall
                 pinkNumbers1.Add(((p1 + (p2 - p1).Normal().Unit() * .0001).h(pinkNumberHeight), (p1 - (p2 - p1).Normal().Unit() * .1).h(pinkNumberHeight)));
+                // pink number on the left side of the wall
                 pinkNumbers2.Add(((p2 + (p2 - p1).Normal().Unit() * .0001).h(pinkNumberHeight), (p2 - (p2 - p1).Normal().Unit() * .1).h(pinkNumberHeight)));
+
                 doors.Add((left.h(doorHeight / 2), (left - (p2 - p1).Normal().Unit()).h(doorHeight / 2)));
                 wallPositions.Add(pt(-mid.X, 0, mid.Y));
                 ix++;
             }
+
+            // Note that pinkNumbers2 are on the left side of wall x. But we want them on the vertex on the right side of the wall (because edges go widdershins), so cycle them over by one
+            pinkNumbers2.Insert(0, pinkNumbers2.Last());
+            pinkNumbers2.RemoveAt(pinkNumbers2.Count - 1);
+
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Floor.obj",
                 GenerateObjFile(new[] { poly.Select(p => pt(p.X, 0, p.Y).WithTexture(p.X, p.Y)).ToArray() }, "Floor", AutoNormal.Flat));
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Ceiling.obj",
