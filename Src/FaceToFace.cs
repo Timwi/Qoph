@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using CsQuery;
 using PuzzleSolvers;
 using Qoph.Modeling;
@@ -85,7 +86,7 @@ namespace Qoph
 
         private static readonly DistrInfo[] _distributions = new[] { _carpetColors, _cyanSums, _pinkSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
 
-        private static readonly string[] _carpetColorNames = "WHITE,AQUA,AZURE,FUCHSIA,GAMBOGE,JADE,ONYX,PINK,VIOLET".Split(',');
+        private static readonly string[] _carpetColorNames = "WHITE,AQUA,AZURE,FUCHSIA,JADE,VIOLET,ONYX,PINK,GAMBOGE".Split(',');
 
         private static readonly string[] _songTitles = Ut.NewArray(
             "Lemon Tree",
@@ -858,6 +859,7 @@ h3 {{ font-size: 14pt; }}
 
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
                 $@"new[] {{ {faceInfos.Select(fi => $@"new FaceData {{ CarpetColor = ""{fi.CarpetColor.ToLowerInvariant().CLiteralEscape()}"", CarpetLength = {fi.CarpetColorIndex + 1}, SongSnippet = ""{fi.MusicSnippet.CLiteralEscape()}"", ItemInBox = ""{fi.GashlycrumbTiniesObject.CLiteralEscape()}"", Edges = new[] {{ {fi.Edges.Select(e => $@"new Edge {{ CyanNumber = {e.CyanNumber}, PinkNumber = {e.PinkNumber}{(e.AdjacentFace == null && e.CrosswordInfo == null ? "" : e.AdjacentFace == null ? $@", Label = ""{e.CrosswordInfo.CLiteralEscape()}"", LabelFontSize = {e.CrosswordInfoFontSize}" : $@", Face = {e.AdjacentFace.Value}")} }}").JoinString(", ")} }} }}").JoinString(", ")} }}");
+            Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{f.Edges[edge].AdjacentFace?.ToString() ?? f.Edges[edge].CrosswordInfo.Apply(ci => string.IsNullOrWhiteSpace(ci) ? "" : !"+-".Contains(ci[0]) ? ci.Replace("\n", " ") : $"‘{ci}’")}\t{f.Edges[edge].AdjacentEdge}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex + 1}\t{f.MusicSnippet}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
         }
 
         public static void GenerateModels()

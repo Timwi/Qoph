@@ -15,7 +15,9 @@ public partial class RoomControl : MonoBehaviour
     public GameObject Box;
     public GameObject Radio;
     public AudioSource RadioAudio;
-    public Material RadioMaterial;
+    public MeshRenderer RadioLight;
+    public Material RadioLightOn;
+    public Material RadioLightOff;
     public Light Light;
     public float[] DoorRotationsY;
     public Material[] CarpetMaterials;
@@ -49,6 +51,8 @@ public partial class RoomControl : MonoBehaviour
         }
         for (var i = Data.Faces[faceIx].CarpetLength; i < Carpets.Length; i++)
             Carpets[i].gameObject.SetActive(false);
+
+        RadioLight.sharedMaterial = RadioLightOff;
 
         if (setCamera)
             Camera.main.transform.Set(Data.CameraPositions[edgeIx], new Vector3(1, 1, 1));

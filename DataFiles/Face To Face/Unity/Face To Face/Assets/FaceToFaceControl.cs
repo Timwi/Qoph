@@ -60,7 +60,6 @@ public class FaceToFaceControl : MonoBehaviour
         }
         while (Data.Faces[FaceIx].Edges[_edgeIx].Face == null);
 
-        Room.RadioMaterial.DisableKeyword("_EMISSION");
         Room.SetRoom(FaceIx, _edgeIx, setCamera: true);
     }
 
@@ -111,7 +110,7 @@ public class FaceToFaceControl : MonoBehaviour
                     StopCoroutine(_radioCoroutine);
                 if (Room.RadioAudio.isPlaying)
                 {
-                    Room.RadioMaterial.DisableKeyword("_EMISSION");
+                    Room.RadioLight.sharedMaterial = Room.RadioLightOff;
                     Room.RadioAudio.Stop();
                     Talk("That's enough music for today.");
                 }
@@ -275,10 +274,10 @@ public class FaceToFaceControl : MonoBehaviour
     private IEnumerator Radio()
     {
         Talk("Let's put on some music!");
-        Room.RadioMaterial.EnableKeyword("_EMISSION");
+        Room.RadioLight.sharedMaterial = Room.RadioLightOn;
         Room.RadioAudio.Play();
         yield return new WaitUntil(() => !Room.RadioAudio.isPlaying);
-        Room.RadioMaterial.DisableKeyword("_EMISSION");
+        Room.RadioLight.sharedMaterial = Room.RadioLightOff;
         _radioCoroutine = null;
     }
 }
