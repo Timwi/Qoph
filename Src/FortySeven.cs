@@ -20,8 +20,10 @@ namespace Qoph
             const int n = 8;
 
             var prefs = File.ReadAllLines(@"D:\c\Qoph\DataFiles\47\Prefectures.txt");
-            var words = File.ReadAllLines(@"D:\Daten\Wordlists\English 60000.txt");
-            //var words = File.ReadAllLines(@"D:\Daten\Wordlists\peter_broda_wordlist_unscored.txt").Except(File.ReadLines(@"D:\Daten\Wordlists\English 60000.txt")).ToArray();
+            //var words = File.ReadAllLines(@"D:\Daten\Wordlists\English 60000.txt");
+            var words = File.ReadAllLines(@"D:\Daten\Wordlists\peter_broda_wordlist_unscored.txt")
+                //.Except(File.ReadLines(@"D:\Daten\Wordlists\English 60000.txt"))
+                .ToArray();
 
             var mod47Inverses = new int[47];
             var tt = new TextTable { ColumnSpacing = 1 };
@@ -34,14 +36,14 @@ namespace Qoph
             var wordsStartingWith = words.Where(w => w.Length == 8 && w.All(ch => ch >= 'A' && ch <= 'Z')).GroupBy(w => w[0]).ToDictionary(gr => gr.Key, gr => gr.Distinct().Order().ToArray());
 
             var allTuples = (
-                from aWord in new[] { "AMPHIBIA" }//wordsStartingWith['A'].ToArray().Shuffle(wordRnd).Take(100)
-                from bWord in new[] { "BETATEST" }   //wordsStartingWith['B']
-                from cWord in new[] { "CAREBEAR" }   //wordsStartingWith['C']
+                from aWord in new[] { "ACADEMIA" }  //wordsStartingWith['A']
+                from bWord in new[] { "BUSINESS" }   //wordsStartingWith['B']
+                from cWord in new[] { "CAREBEAR" }
                 from dWord in new[] { "DIAGNOSE" }
-                from eWord in new[] { "EARMOLDS" }   //wordsStartingWith['E']
-                from fWord in new[] { "FRONTIER" }  //wordsStartingWith['F'].ToArray().Shuffle(wordRnd).Take(100)
-                from gWord in new[] { "GANYMEDE" }  //wordsStartingWith['G']
-                from hWord in new[] { "HIROLLER" }  //wordsStartingWith['H'].ToArray().Shuffle(wordRnd).Take(100)
+                from eWord in new[] { "EDUCATOR" }  //wordsStartingWith['E'].Where(w => w.Distinct().Count() == 8 && !w.Contains('N') && !w.Contains('V') && !w.Contains('W'))
+                from fWord in new[] { "FRONTIER" }
+                from gWord in new[] { "GANYMEDE" }
+                from hWord in new[] { "HIROLLER" }
                 select new[] { aWord, bWord, cWord, dWord, eWord, fWord, gWord, hWord }).ToArray();
 
             Console.WriteLine(allTuples.Length);
@@ -93,6 +95,7 @@ namespace Qoph
             (int[] input, int[] output)[] bestResults = null;
 
             foreach (var feedersIx in Enumerable.Range(0, allTuples.Length))
+            //Enumerable.Range(0, allTuples.Length).ParallelForEach(Environment.ProcessorCount, feedersIx =>
             {
                 var feeders = allTuples[feedersIx];
                 var feederMatrix = Ut.NewArray(64, i => feeders[i / 8][i % 8] - 'A' + 1);
@@ -103,10 +106,10 @@ namespace Qoph
                 }
                 catch (InvalidOperationException)
                 {
-                    continue;
+                    goto busted;
                 }
 
-                lock (wordsStartingWith)
+                lock (lockObject)
                     ConsoleUtil.Write($"Trying: {feeders.JoinString(", ")} ({feedersIx})   \r".Color(ConsoleColor.Yellow));
 
                 var chsPerFullRow = (cluephrase.Length + 7) / 8;
@@ -143,7 +146,8 @@ namespace Qoph
                     }
                 }
 
-                Enumerable.Range(0, n).ParallelForEach(smallRowCandidate =>
+                //for (var smallRowCandidate = 0; smallRowCandidate < n; smallRowCandidate++)
+                Enumerable.Range(0, n).ParallelForEach(Environment.ProcessorCount, smallRowCandidate =>
                 {
                     var rowResults = Enumerable.Range(0, n).Select(rowUnderTest => testRow(rowUnderTest,
                             rowUnderTest == smallRowCandidate ? cluephrase.Substring(chsPerFullRow * rowUnderTest, chsPerSmallRow) :
@@ -151,6 +155,14 @@ namespace Qoph
                             cluephrase.Substring(chsPerFullRow * (rowUnderTest - 1) + chsPerSmallRow, chsPerFullRow)).ToArray()).ToArray();
                     if (rowResults.Any(ar => ar.Length == 0))
                         return;
+
+                    // QUICK FIND
+                    //lock (lockObject)
+                    //{
+                    //    ConsoleUtil.WriteLine($"Found: {feeders.JoinString(", ")} ({feedersIx})   \r".Color(ConsoleColor.Green));
+                    //    goto busted;
+                    //}
+
                     var rowOrder = Enumerable.Range(0, n).OrderBy(row => rowResults[row].Length).ToArray();
 
                     IEnumerable<(int[] input, int[] output)[]> recurse((int[] input, int[] output)[] sofar, int rowOrderIx)
@@ -173,6 +185,7 @@ namespace Qoph
                     var arrangement = recurse(new (int[] input, int[] output)[n], 0).First();
                     var numbersUsed = arrangement.SelectMany(ar => ar.output).Distinct().Count();
                     lock (lockObject)
+                    {
                         if (numbersUsed > bestScore)
                         {
                             var ccOutput = new TextTable { ColumnSpacing = 2, RowSpacing = 1 };
@@ -191,7 +204,10 @@ namespace Qoph
                             bestScore = numbersUsed;
                             bestResults = arrangement;
                         }
+                    }
                 });
+
+                busted:;
             }
 
             Clipboard.SetText(bestResults.Select(row => row.output.JoinString("\t")).JoinString("\n"));
@@ -199,7 +215,7 @@ namespace Qoph
 
         public static void GenerateHTML()
         {
-            var grid = new[] { 3, 46, 23, 37, 29, 15, 4, 28, 19, 9, 2, 29, 42, 37, 40, 38, 25, 45, 15, 11, 7, 44, 31, 22, 18, 20, 37, 24, 19, 39, 38, 28, 34, 39, 27, 36, 5, 13, 27, 33, 30, 25, 35, 12, 3, 19, 20, 43, 34, 34, 14, 32, 45, 38, 17, 30, 26, 10, 44, 10, 14, 23, 33, 6 };
+            var grid = new[] { 21, 23, 12, 46, 25, 30, 6, 3, 43, 8, 34, 36, 3, 1, 10, 22, 19, 4, 7, 9, 26, 16, 11, 29, 41, 34, 39, 17, 15, 33, 45, 43, 45, 13, 20, 42, 27, 4, 43, 11, 46, 40, 15, 37, 23, 26, 7, 20, 31, 34, 30, 2, 37, 30, 45, 38, 11, 14, 19, 23, 35, 5, 6, 22 };
             Console.WriteLine(grid.Distinct().Order().JoinString(", "));
             Console.WriteLine(grid.Distinct().Count());
             var prefs = File.ReadAllLines(@"D:\c\Qoph\DataFiles\47\Prefectures.txt");

@@ -19,7 +19,7 @@ namespace Qoph
 
         public unsafe static void Generate()
         {
-            const string solution = @"AMPHIBIA";
+            const string solution = @"ACADEMIA";
             const int w = 6;
             const int h = 5;
             var directions = new (int dx, int dy)[] { (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1) }.Select(d => (dx: 2 * d.dx, dy: 2 * d.dy)).ToArray();
@@ -53,25 +53,23 @@ namespace Qoph
                             }
             }
 
-            var result = recurse(new string[w * h], 0)
-                // no adjacent blank spaces
-                .Where(arr => !Enumerable.Range(0, w * h).Any(i => (arr[i] == null && (i % w < w - 1) && arr[i + 1] == null) || (arr[i] == null && (i / w < h - 1) && arr[i + w] == null)))
+            var results = recurse(new string[w * h], 0)
                 .ToArray()
                 .Shuffle(new Random(47))
-                .First();
+                // fewest adjacent blank spaces
+                .OrderBy(arr => Enumerable.Range(0, w * h).Count(i => (arr[i] == null && (i % w < w - 1) && arr[i + 1] == null) || (arr[i] == null && (i / w < h - 1) && arr[i + w] == null)))
+                .ToArray();
+            var result = results[7];        // manual pick for ACADEMIA
+            //foreach (var rst in results)
+            //{
+            //    ConsoleUtil.WriteLine(rst.Split(w).Select(row => row.Select(v => (v ?? "").PadLeft(3).Color(ConsoleColor.White, (ConsoleColor) " ABCDEFGH".IndexOf((v ?? " ")[0]))).JoinColoredString(" ")).JoinColoredString("\n"));
+            //    Console.WriteLine();
+            //}
+            Console.WriteLine(new string('─', 70));
             ConsoleUtil.WriteLine(result.Split(w).Select(row => row.Select(v => (v ?? "").PadLeft(3).Color(ConsoleColor.White, (ConsoleColor) " ABCDEFGH".IndexOf((v ?? " ")[0]))).JoinColoredString(" ")).JoinColoredString("\n"));
             Console.WriteLine($"Red herrings needed: {w * h - 3 * solution.Length}");
             var redHerring = 1;
-            File.WriteAllText(@"D:\c\Qoph\DataFiles\Something’s Fishy\Something’s Fishy.html", $@"
-<html>
-<head>
-    <style>
-        td {{ text-align: center; vertical-align: center; padding: 0; }}
-    </style>
-</head>
-<body>
-    <table style='border-spacing: .2cm'>
-        {(result.Select(name => (name ?? $"R{redHerring++}").Apply(filename =>
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\somethings-fishy.html", "<!--%%-->", "<!--%%%-->", result.Select(name => (name ?? $"R{redHerring++}").Apply(filename =>
             {
                 var path = $@"D:\c\Qoph\DataFiles\Something’s Fishy\{filename}.jpg";
                 var byteData = File.ReadAllBytes(path);
@@ -79,11 +77,7 @@ namespace Qoph
                 var rect = GraphicsUtil.FitIntoMaintainAspectRatio(bitmap.Size, new Rectangle(0, 0, 200, 150));
                 var s = bitmap.Width * bitmap.Height;
                 return $"<td style='background: #acd; border: 5px solid {(filename.EndsWith("1") && !filename.StartsWith("R") ? "#4499ff" : "transparent")}'><img width='{rect.Width}' height='{rect.Height}' src='data:image/jpg;base64,{Convert.ToBase64String(byteData)}' /></td>";
-            })).Split(w).Select(row => $"<tr>{row.JoinString()}</tr>").JoinString())}
-    </table>
-</body>
-</html>
-");
+            })).Split(w).Select(row => $"<tr>{row.JoinString()}</tr>").JoinString());
         }
 
         public static void ExamineGraphics()

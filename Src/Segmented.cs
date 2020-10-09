@@ -11,7 +11,7 @@ namespace Qoph
 {
     static class Segmented
     {
-        public static void Do()
+        public static void FindWords()
         {
             var words = File.ReadAllLines(@"D:\Daten\Wordlists\peter_broda_wordlist.txt")
                 .Select(line => Regex.Match(line, @"^(.*);(\d+)$"))
@@ -78,12 +78,12 @@ namespace Qoph
 
         public static void GenerateHtml()
         {
-            var files = new[] { "PURSE", "LOCKER", "HEWING", "RAIN", "SING", "SLICE", "MONK", "CROW" };
+            var files = new[] { "PURSE", "MONK", "MAT", "SIGHT", "LOCKER", "CAVERN", "SING", "HEWING" };
             for (var i = 1; i <= 8; i++)
-                General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Segmented\Segmented.html",
+                General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\segmented.html",
                     $"<!--%{i}-->",
                     $"<!--%%{i}-->",
-                    $"<img src='data:image/jpeg;base64,{Convert.ToBase64String(File.ReadAllBytes($@"D:\c\Qoph\DataFiles\Segmented\{files[i - 1]}.jpg"))}' class='photo' />");
+                    $"<img class='segmented' src='data:image/jpeg;base64,{Convert.ToBase64String(File.ReadAllBytes($@"D:\c\Qoph\DataFiles\Segmented\{files[i - 1]}.jpg"))}' class='photo' />");
         }
     }
 }
