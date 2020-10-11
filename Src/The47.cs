@@ -12,14 +12,14 @@ using RT.Util.Text;
 
 namespace Qoph
 {
-    static class FortySeven
+    static class The47
     {
         public static void Do()
         {
             const string cluephrase = "SATOSHINAKAMOTOCURRENCY";
             const int n = 8;
 
-            var prefs = File.ReadAllLines(@"D:\c\Qoph\DataFiles\47\Prefectures.txt");
+            var prefs = File.ReadAllLines(@"D:\c\Qoph\DataFiles\The 47\Prefectures.txt");
             //var words = File.ReadAllLines(@"D:\Daten\Wordlists\English 60000.txt");
             var words = File.ReadAllLines(@"D:\Daten\Wordlists\peter_broda_wordlist_unscored.txt")
                 //.Except(File.ReadLines(@"D:\Daten\Wordlists\English 60000.txt"))
@@ -36,11 +36,11 @@ namespace Qoph
             var wordsStartingWith = words.Where(w => w.Length == 8 && w.All(ch => ch >= 'A' && ch <= 'Z')).GroupBy(w => w[0]).ToDictionary(gr => gr.Key, gr => gr.Distinct().Order().ToArray());
 
             var allTuples = (
-                from aWord in new[] { "ACADEMIA" }  //wordsStartingWith['A']
+                from aWord in new[] { "ANTERIOR" }  //wordsStartingWith['A']
                 from bWord in new[] { "BUSINESS" }   //wordsStartingWith['B']
                 from cWord in new[] { "CAREBEAR" }
                 from dWord in new[] { "DIAGNOSE" }
-                from eWord in new[] { "EDUCATOR" }  //wordsStartingWith['E'].Where(w => w.Distinct().Count() == 8 && !w.Contains('N') && !w.Contains('V') && !w.Contains('W'))
+                from eWord in new[] { "EMPHATIC" }  //wordsStartingWith['E'].Where(w => w.Distinct().Count() == 8 && !w.Contains('N') && !w.Contains('V') && !w.Contains('W'))
                 from fWord in new[] { "FRONTIER" }
                 from gWord in new[] { "GANYMEDE" }
                 from hWord in new[] { "HIROLLER" }
@@ -213,15 +213,40 @@ namespace Qoph
             Clipboard.SetText(bestResults.Select(row => row.output.JoinString("\t")).JoinString("\n"));
         }
 
-        public static void GenerateHTML()
+        public static void FindHillCipher()
         {
-            var grid = new[] { 21, 23, 12, 46, 25, 30, 6, 3, 43, 8, 34, 36, 3, 1, 10, 22, 19, 4, 7, 9, 26, 16, 11, 29, 41, 34, 39, 17, 15, 33, 45, 43, 45, 13, 20, 42, 27, 4, 43, 11, 46, 40, 15, 37, 23, 26, 7, 20, 31, 34, 30, 2, 37, 30, 45, 38, 11, 14, 19, 23, 35, 5, 6, 22 };
+            // This code requires a list of A/E combinations from The47.Do
+
+            //var list = File.ReadAllLines(@"D:\temp\temp.txt");
+            //foreach (var line in list)
+            //{
+            //    var str = line + "BUSINESS CAREBEAR DIAGNOSE FRONTIER GANYMEDE HIROLLER";
+
+            //    var chs = "HILLCIPHER";
+            //    for (var i = 0; i < chs.Length; i++)
+            //    {
+            //        var p = str.IndexOf(chs[i]);
+            //        if (p == -1)
+            //            goto busted;
+            //        str = str.Substring(0, p) + str.Substring(p + 1);
+            //    }
+
+            //    if (SomethingsFishy.CanFit(line.Substring(11, 8)))
+            //        Console.WriteLine(line);
+
+            //    busted:;
+            //}
+        }
+
+        public static void GenerateHtml()
+        {
+            var grid = new[] { 5, 36, 13, 19, 14, 42, 37, 15, 10, 29, 6, 20, 43, 44, 27, 25, 12, 7, 46, 17, 31, 20, 45, 15, 34, 30, 20, 24, 21, 7, 43, 42, 28, 11, 22, 1, 22, 33, 36, 9, 27, 37, 2, 28, 23, 12, 29, 18, 22, 41, 45, 40, 34, 8, 3, 26, 32, 9, 43, 39, 1, 6, 16, 22 };
             Console.WriteLine(grid.Distinct().Order().JoinString(", "));
             Console.WriteLine(grid.Distinct().Count());
-            var prefs = File.ReadAllLines(@"D:\c\Qoph\DataFiles\47\Prefectures.txt");
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\47\The 47.html", "<!--%%-->", "<!--%%%-->",
+            var prefs = File.ReadAllLines(@"D:\c\Qoph\DataFiles\The 47\Prefectures.txt");
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\the-47.html", "<!--%%-->", "<!--%%%-->",
                 Enumerable.Range(0, 8).Select(row => $@"<div class='section'>{Enumerable.Range(0, 8).Select(col =>
-                    $"<img class='flag' src='data:image/png;base64,{Convert.ToBase64String(File.ReadAllBytes($@"D:\c\Qoph\DataFiles\47\Flags\{prefs[(grid[col + 8 * row] + 46) % 47]} prefecture.png"))}'/>").JoinString()}</div>").JoinString("\n"));
+                    $"<img class='flag' src='data:image/png;base64,{Convert.ToBase64String(File.ReadAllBytes($@"D:\c\Qoph\DataFiles\The 47\Flags\{prefs[(grid[col + 8 * row] + 46) % 47]} prefecture.png"))}'/>").JoinString()}</div>").JoinString("\n"));
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Qoph
                 .GroupBy(m => m.word)
                 .ToDictionary(gr => gr.Key, gr => gr.Max(t => t.score));
 
-            var shard = "ALFA";
+            var shard = "HOTEL";
             var lockObject = new object();
             File.WriteAllText(@"D:\temp\temp.txt", "");
             for (var i = 1; i <= shard.Length - 1; i++)
@@ -78,7 +78,7 @@ namespace Qoph
 
         public static void GenerateHtml()
         {
-            var files = new[] { "PURSE", "MONK", "MAT", "SIGHT", "LOCKER", "CAVERN", "SING", "HEWING" };
+            var files = new[] { "PURSE", "RAIN", "QUICHE", "SEVEN", "LOCKER", "CAVERN", "FRY", "SIGHT" };
             for (var i = 1; i <= 8; i++)
                 General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\segmented.html",
                     $"<!--%{i}-->",

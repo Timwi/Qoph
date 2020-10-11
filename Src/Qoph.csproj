@@ -80,7 +80,7 @@
     <Compile Include="BigBangTheoryEpisodes.cs" />
     <Compile Include="BoardState.cs" />
     <Compile Include="Circles.cs" />
-    <Compile Include="FortySeven.cs" />
+    <Compile Include="The47.cs" />
     <Compile Include="Segmented.cs" />
     <Compile Include="NoU.cs" />
     <Compile Include="RectangleMangle.cs" />
