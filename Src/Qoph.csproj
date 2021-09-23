@@ -101,7 +101,7 @@
       <Project>{ad37f193-49a3-4a3d-8bf1-122d5457c7a6}</Project>
       <Name>Generex</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\PuzzleSolvers\PuzzleSolvers\PuzzleSolvers.csproj">
+    <ProjectReference Include="..\..\PuzzleSolvers\Src\PuzzleSolvers.csproj">
       <Project>{989f0797-10aa-4ba3-819a-e53a371074a1}</Project>
       <Name>PuzzleSolvers</Name>
     </ProjectReference>

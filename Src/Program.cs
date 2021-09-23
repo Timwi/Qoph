@@ -1,9 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
 using RT.PostBuild;
 
 [assembly: AssemblyTitle("Qoph")]
@@ -37,7 +35,7 @@ namespace Qoph
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            The47.GenerateHtml();
+            //
 
 
             Console.WriteLine("Done.");

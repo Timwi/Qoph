@@ -413,12 +413,35 @@ form td.explain {
     padding-left: 1cm;
 }
 
-.hints {
+#hints {
     margin-top: 5cm;
     border-top: 1px solid hsl(220, 40%, 80%);
 }
 
-    .hints textarea {
+    #hints textarea {
         width: 100%;
         height: 8em;
+    }
+
+    #hints table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #hints td, #hints th {
+        border: 1px solid black;
+        padding: .25cm .4cm;
+        vertical-align: top;
+    }
+
+    #hints th {
+        background: hsl(220, 60%, 85%);
+    }
+
+    #hints .datetime {
+        font-weight: bold;
+    }
+
+    #hints .text {
+        padding: .25cm 1cm;
     }

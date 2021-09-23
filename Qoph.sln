@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29306.81
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31606.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qoph", "Src\Qoph.csproj", "{5BE560A8-9B71-441A-BCAC-FC55E8DA2864}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RT.TagSoup", "..\RT.TagSoup\Src\RT.TagSoup.csproj", "{8F80D916-8999-45D8-ACB2-FFA7E2698FD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RT.Servers", "..\RT.Servers\Src\RT.Servers.csproj", "{A7333C19-56A9-4A8E-A196-7648666EF26A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RT.Servers", "..\RT.Servers\Src\RT.Servers.csproj", "{A7333C19-56A9-4A8E-A196-7648666EF26A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generex", "..\Generex\Src\Generex.csproj", "{AD37F193-49A3-4A3D-8BF1-122D5457C7A6}"
 EndProject
@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RT.Util", "..\RT.Util\RT.Ut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RT.Serialization.Xml", "..\RT.Util\RT.Serialization.Xml\RT.Serialization.Xml.csproj", "{482BF845-12F0-413E-B45E-27080E25D415}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PuzzleSolvers", "..\PuzzleSolvers\PuzzleSolvers\PuzzleSolvers.csproj", "{989F0797-10AA-4BA3-819A-E53A371074A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PuzzleSolvers", "..\PuzzleSolvers\Src\PuzzleSolvers.csproj", "{989F0797-10AA-4BA3-819A-E53A371074A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,8 +87,8 @@ Global
 		{A644B6CE-A7D1-4055-AE1A-A6D6018905DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A644B6CE-A7D1-4055-AE1A-A6D6018905DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A644B6CE-A7D1-4055-AE1A-A6D6018905DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74AF0EA9-DB95-4504-B191-3D7BE766A4B3}.Debug|Any CPU.ActiveCfg = DebugUnsafe|Any CPU
-		{74AF0EA9-DB95-4504-B191-3D7BE766A4B3}.Debug|Any CPU.Build.0 = DebugUnsafe|Any CPU
+		{74AF0EA9-DB95-4504-B191-3D7BE766A4B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74AF0EA9-DB95-4504-B191-3D7BE766A4B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74AF0EA9-DB95-4504-B191-3D7BE766A4B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74AF0EA9-DB95-4504-B191-3D7BE766A4B3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{482BF845-12F0-413E-B45E-27080E25D415}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
