@@ -2,9 +2,9 @@
 <html>
 <head>
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/qoph/qoph.css' />
+    <link rel='stylesheet' href='/qoph/files/qoph.css' />
 </head>
-<body>
+<body class='{{bodycss}}'>
     {{auth|top-loggedin.html|top-loggedin-noteam.html|top-loggedout.html}}
     <div id='main'>
         {{body}}

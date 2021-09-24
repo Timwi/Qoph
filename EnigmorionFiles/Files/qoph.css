@@ -13,31 +13,38 @@
 }
 
 @font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Lato Black'), local('Lato'), url('Lato-black.ttf');
+}
+
+@font-face {
     font-family: 'Book Antiqua';
     font-style: normal;
     font-weight: normal;
-    src: local('Book Antiqua'), url(../font/Book%20Antiqua.ttf);
+    src: local('Book Antiqua'), url(Book%20Antiqua.ttf);
 }
 
 @font-face {
     font-family: 'Book Antiqua';
     font-style: normal;
     font-weight: bold;
-    src: local('Book Antiqua Bold'), url(../font/Book%20Antiqua%20Bold.ttf);
+    src: local('Book Antiqua Bold'), url(Book%20Antiqua%20Bold.ttf);
 }
 
 @font-face {
     font-family: 'Book Antiqua';
     font-style: italic;
     font-weight: normal;
-    src: local('Book Antiqua Italic'), url(../font/Book%20Antiqua%20Italics.ttf);
+    src: local('Book Antiqua Italic'), url(Book%20Antiqua%20Italics.ttf);
 }
 
 @font-face {
     font-family: 'Book Antiqua';
     font-style: italic;
     font-weight: bold;
-    src: local('Book Antiqua Bold Italic'), url(../font/Book%20Antiqua%20Bold%20Italics.ttf);
+    src: local('Book Antiqua Bold Italic'), url(Book%20Antiqua%20Bold%20Italics.ttf);
 }
 
 * {
@@ -124,7 +131,7 @@ div#main {
 }
 
 h1 {
-    margin: 1.5cm -3cm 1cm;
+    margin: 1cm -3cm 1cm;
     padding: .5cm 0;
     font-size: 56pt;
     font-weight: normal;
@@ -191,7 +198,7 @@ table.bordered {
     margin: 1cm 0;
 }
 
-button {
+button, a.button {
     font: inherit;
     padding: .15cm .4cm;
     margin: .2cm .3cm;
@@ -201,9 +208,12 @@ button {
     border: none;
     box-shadow: 0 0 .2cm rgba(0, 0, 0, .3);
     border-radius: .5cm;
+    display: inline-block;
+    text-decoration: none;
+    color: black;
 }
 
-    button:hover {
+    button:hover, a.button:hover {
         background: hsl(220, 50%, 50%);
         color: white;
         cursor: pointer;
@@ -340,13 +350,6 @@ a#puzzles-link {
         background: hsl(270, 80%, 25%);
     }
 
-form#answer-checker {
-    text-align: right;
-}
-    form#answer-checker #answer {
-        width: 5cm;
-    }
-
 .flavour-text {
     text-align: center;
     font-style: italic;
@@ -354,7 +357,19 @@ form#answer-checker {
 
 #answer-box {
     overflow: auto;
+    margin-top: .5cm;
 }
+
+    #answer-box .left {
+        float: left;
+    }
+    #answer-box .right {
+        float: right;
+        text-align: right;
+    }
+    form#answer-checker #answer {
+        width: 5cm;
+    }
 
 #answers {
     text-align: center;
@@ -400,7 +415,7 @@ form#answer-checker {
     #ajax-message > div {
         text-align: center;
         background: white;
-        padding: .1cm .25cm;
+        padding: .1cm .3cm;
         border-radius: 1cm;
         font-size: 14pt;
     }
@@ -444,4 +459,109 @@ form td.explain {
 
     #hints .text {
         padding: .25cm 1cm;
+    }
+
+/* Solution pages */
+.w {
+    font-family: 'Montserrat';
+}
+
+h1.solution {
+    position: relative;
+    background: hsl(100, 50%, 40%);
+    color: white;
+}
+
+    h1.solution::after {
+        content: 'SOLUTION';
+        position: absolute;
+        right: 3cm;
+        top: 100%;
+        background: inherit;
+        border-bottom-left-radius: .6cm;
+        border-bottom-right-radius: .6cm;
+        padding: .1cm .5cm;
+        font-size: 18pt;
+        box-shadow: 0 .1cm .1cm rgba(0, 0, 0, .2);
+    }
+
+button.reveal {
+    padding: 0 .2cm 0 .8cm;
+    margin: 0 .2cm;
+    background: black;
+    color: white;
+    display: inline;
+    font-weight: normal;
+    font-size: 12pt;
+    position: relative;
+}
+    button.reveal::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: -.1cm;
+        bottom: -.1cm;
+        width: 1cm;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: left 50%;
+    }
+
+    button.reveal.c::after { content: '(convention)'; }
+    button.reveal.c::before {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23fff" stroke="%23989898" stroke-opacity=".5" stroke-width="5" d="M56.68 68.53c-2.74-.25-8.03-2.58-8.03-2.58s-3.37 2.15-4.9 2.88a21.32 21.32 0 0 1-8.47 1.97c-4.6.1-9.87-1.32-12.56-5.29-1.05-1.56-1.27-6.62-1.27-6.62s-4.03.42-5.35.15a13.27 13.27 0 0 1-7.04-3.72c-6.4-6.9 2.1-15.23 9.27-16.3-.09-2.13-.45-4.1.27-6.18 1.88-5.41 9.3-8.45 13.55-8.75 4.26-.3 8.92 1.24 8.92 1.24s3.08-3.97 4.9-5.09a19.93 19.93 0 0 1 15.61-1.95c1.94.57 3.78 1.47 5.27 2.84 1.16 1.05 2.76 3.76 2.76 3.76s4.25-.88 5.8-.88c4.33 0 9.12 1.3 11.85 4.86a8.2 8.2 0 0 1 1.35 6.62c-.2.95-1.16 2.65-1.16 2.65s2.23 2.35 3.07 3.17a8.6 8.6 0 0 1 2.63 5.22c.9 8.96-11.9 13.6-19.08 11.92-2.84 6.7-10.02 10.75-17.4 10.08Zm19.17-.22c1.78-.34 4.21-.28 5.6 1.02 2.53 2.37-.34 5.58-2.92 6.16-1.76.4-4.23.3-5.6-1-2.62-2.45.21-5.66 2.92-6.18m9.82 9.3c4.08-.81 5.1 4.17.88 4.84-4.03.65-4.93-4.03-.88-4.84z"/></svg>');
+    }
+
+    button.reveal.d::after { content: '(deduction)'; }
+    button.reveal.d::before {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="a" color-interpolation-filters="sRGB"><feGaussianBlur result="blur" stdDeviation="2 2"/></filter><filter id="b" color-interpolation-filters="sRGB"><feGaussianBlur result="blur" stdDeviation="2 2"/></filter></defs><path fill="%235b5b5b" d="M55.78 94.32a4.14 4.14 0 0 1-3.85 3.86h-3.86a4.14 4.14 0 0 1-3.85-3.86z"/><path fill="gray" d="M40.36 75.05h19.28V92.4a4.14 4.14 0 0 1-3.86 3.85H44.22a4.14 4.14 0 0 1-3.86-3.85z"/><path fill="%23f6c900" stroke="%23000" stroke-width=".08" d="M49.83 23.06c-11.4-.04-22.95 9.6-22.92 23.09-.03 19.27 11.53 11.56 11.53 30.83h23.12c0-19.27 11.57-11.56 11.53-30.83.03-13.5-11.53-23.13-23.09-23.09h-.17z"/><path fill="none" stroke="%23b4b4b4" stroke-linecap="round" stroke-width="3.85" d="M40.36 80.83h19.28m-19.28 5.78h19.28M40.36 92.4h19.28"/><path fill="%23fff" d="M52.5 5C32.5 5 25 15 25 35 27.5 22.5 40 7.5 52.5 5Z" filter="url(%23a)" transform="translate(11.46 23.02) scale(.77083)"/><path fill="none" stroke="%23fff" stroke-width="1.54" d="M46.15 76.98v-28.9a3.85 3.85 0 1 0-7.71 0c0 3.85 1.72 5.77 3.85 5.77h15.42c2.13 0 3.85-1.92 3.85-5.78a3.85 3.85 0 1 0-7.7 0v28.9"/><path fill-opacity=".5" d="M69.49 7.5a31.98 31.98 0 0 1 8.01 21.25c0 17.26-14.26 31.44-30.83 31.44-7.14 0-13.23-2.85-18.66-7.68 5.68 6.37 15.1 7.68 23.45 7.68C68.03 60.2 80 48.51 80 31.25A31.8 31.8 0 0 0 69.49 7.49Z" filter="url(%23b)" transform="matrix(.80495 0 0 .76811 10.5 23.03)"/><path fill="none" stroke="%23f6c900" stroke-linecap="round" stroke-width="3.85" d="m28.2 69.88-9.54 9.53m.51-31.34H5.67m22.53-21.8-9.54-9.54m31.34.51V3.75m21.8 22.52 9.54-9.54m-.51 31.34h13.5M71.8 69.88l9.54 9.53"/></svg>');
+    }
+
+    button.reveal.o::after { content: '(observation)'; }
+    button.reveal.o::before {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M 39.023438 31.804688 C 23.283441 36.721175 10 50 10 50 C 10 50 23.283441 63.278825 39.023438 68.195312 A 21.25 21.25 0 0 1 28.75 50 A 21.25 21.25 0 0 1 39.023438 31.804688 z M 60.976562 31.804688 A 21.25 21.25 0 0 1 71.25 50 A 21.25 21.25 0 0 1 60.972656 68.197266 C 76.714449 63.281806 90 50 90 50 C 90 50 76.71656 36.721175 60.976562 31.804688 z M 50 33 A 17 17 0 0 0 33 50 A 17 17 0 0 0 50 67 A 17 17 0 0 0 67 50 A 17 17 0 0 0 50 33 A 17 17 0 0 0 50 33 z M 50 40 A 10 10 0 0 1 50 40 A 10 10 0 0 1 55.287109 41.511719 A 3.5 3.5 0 0 0 55 41.5 A 3.5 3.5 0 0 0 51.5 45 A 3.5 3.5 0 0 0 55 48.5 A 3.5 3.5 0 0 0 58.5 45 A 3.5 3.5 0 0 0 58.488281 44.712891 A 10 10 0 0 1 60 50 A 10 10 0 0 1 50 60 A 10 10 0 0 1 40 50 A 10 10 0 0 1 50 40 z" fill="white" /></svg>');
+    }
+
+    button.reveal.r::after { content: '(reveal)'; }
+    button.reveal.r::before {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100"><defs><linearGradient id="a"><stop offset="0" stop-color="%2374f978"/><stop offset="1" stop-color="%231c9722"/></linearGradient><linearGradient xlink:href="%23a" id="b" x1="60" x2="30" y1="100" y2="50" gradientTransform="matrix(.9 0 0 .9 9.5 5)" gradientUnits="userSpaceOnUse"/></defs><path fill="url(%23b)" d="M32 95h31.5s-27-22.5-27-54c0-13.5 3.6-22.5 11.7-22.5 9 0 15.3 4.5 24.3 13.5l-9 9L95 45.5 90.5 14l-9 9c-9-9-18-18-36-18s-27 13.5-27 40.5S32 95 32 95Z"/></svg>');
+    }
+
+    button.reveal.s::after { content: '(strategy)'; }
+
+#sol-controls {
+    margin-top: -.7cm;
+}
+
+div.answer {
+    margin: 2cm auto .5cm;
+    padding: .4cm 1.2cm;
+    font-family: 'Lato';
+    font-size: 32pt;
+    font-weight: bold;
+    text-align: center;
+    background: hsl(100, 40%, 50%);
+    box-shadow: 0 0 .3cm rgba(0, 0, 0, .3);
+    border: 5px solid hsl(100, 40%, 20%);
+    border-radius: 100vw;
+    clear: both;
+    white-space: nowrap;
+    width: min-content;
+    position: relative;
+    color: white;
+}
+
+    div.answer::after {
+        content: 'ANSWER';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: calc(100% + 5px);
+        border-top-left-radius: .6cm;
+        border-top-right-radius: .6cm;
+        padding: .1cm .5cm;
+        font-size: 12pt;
+        font-weight: normal;
+        box-shadow: 0 -.1cm .1cm rgba(0, 0, 0, .2);
+        background: hsl(100, 40%, 20%);
     }
