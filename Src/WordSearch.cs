@@ -70,7 +70,7 @@ namespace Qoph
                     yield break;
                 }
 
-                var (word, wordPlacements) = dic.MinElement(kvp => kvp.Value.Count).ToTuple();
+                var (word, wordPlacements) = dic.MinElement(kvp => kvp.Value.Count);
                 wordPlacements.Shuffle();
                 foreach (var (x, y, dx, dy) in wordPlacements)
                 {
@@ -78,7 +78,7 @@ namespace Qoph
                     for (var i = 0; i < word.Length; i++)
                         newChs[x + dx * i + width * (y + dy * i)] = word[i];
                     var newDic = new Dictionary<string, List<(int x, int y, int dx, int dy)>>();
-                    foreach (var (otherWord, otherPlacements) in dic.ToTuples())
+                    foreach (var (otherWord, otherPlacements) in dic)
                         if (otherWord != word)
                         {
                             var newList = new List<(int x, int y, int dx, int dy)>();

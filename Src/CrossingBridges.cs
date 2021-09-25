@@ -181,7 +181,7 @@ namespace Qoph
             keepGoing:
             List<(int fromCell, int toCell)> fewestPossibilities = null;
             var fewestPossibilitiesCell = -1;
-            foreach (var (cell, count) in remainingIslands.ToTuples())
+            foreach (var (cell, count) in remainingIslands)
             {
                 // Find bridges that are forced
                 var av = bridgesAvailable.Where(tup => tup.fromCell == cell || tup.toCell == cell).ToList();

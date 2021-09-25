@@ -42,27 +42,24 @@ namespace Qoph
 
             // Top sudoku: a number placed in a clue cell means the corresponding bottom cell must have a word with the correct letter in the correct place
             // Bottom sudoku: a word placed in a clue cell means the corresponding top cell must have a suitable index
-            doubleSudoku.AddConstraint(new LambdaConstraint(affectedCells: clueCells.SelectMany(i => new[] { i, 81 + i }), lambda: (takens, grid, ix, minV, maxV) =>
+            doubleSudoku.AddConstraint(new LambdaConstraint(affectedCells: clueCells.SelectMany(i => new[] { i, 81 + i }), lambda: state =>
             {
-                if (ix == null)
+                if (state.LastPlacedCell == null)
                     return null;
+                var ix = state.LastPlacedCell;
                 if (ix.Value < 81)
                 {
                     var otherCell = ix.Value + 81;
                     var index = clueCells.IndexOf(ix.Value);
-                    var val = grid[ix.Value].Value;
-                    for (var v = 0; v < takens[otherCell].Length; v++)
-                        if (words[v].Length < val + 1 || words[v][val] != cluephrase[index])
-                            takens[otherCell][v] = true;
+                    var val = state.LastPlacedValue;
+                    state.MarkImpossible(otherCell, v => words[v - 1].Length < val || words[v - 1][val - 1] != cluephrase[index]);
                 }
                 else
                 {
                     var otherCell = ix.Value - 81;
                     var index = clueCells.IndexOf(otherCell);
-                    var word = words[grid[ix.Value].Value];
-                    for (var v = 0; v < takens[otherCell].Length; v++)
-                        if (word.Length <= v || word[v] != cluephrase[index])
-                            takens[otherCell][v] = true;
+                    var word = words[state.LastPlacedValue - 1];
+                    state.MarkImpossible(otherCell, v => word.Length < v || word[v - 1] != cluephrase[index]);
                 }
                 return null;
             }));
@@ -71,20 +68,18 @@ namespace Qoph
             doubleSudoku.AddConstraints(clueCells.Select((cel, ix) => new OneCellLambdaConstraint(cel + 81, v => words[v - 1].Contains(cluephrase[ix]))));
 
             // Bottom sudoku: as soon as 9 different words have been placed, the remaining cells must be constrained to those 9 words only
-            doubleSudoku.AddConstraint(new LambdaConstraint(affectedCells: Enumerable.Range(81, 81), lambda: (takens, grid, ix, minV, maxV) =>
+            doubleSudoku.AddConstraint(new LambdaConstraint(affectedCells: Enumerable.Range(81, 81), lambda: state =>
             {
-                if (ix == null)
+                if (state.LastPlacedCell == null)
                     return null;
-                var valuesUsed = grid.Skip(81).WhereNotNull().ToHashSet();
+                var valuesUsed = Enumerable.Range(0, 81).Select(ix => state[81 + ix]).WhereNotNull().ToHashSet();
                 if (valuesUsed.Count > 9)
                     Debugger.Break();
-                if (valuesUsed.Count != 9)
+                if (valuesUsed.Count < 9)
                     return null;
                 for (var i = 81; i < 2 * 81; i++)
-                    for (var v = 0; v < takens[i].Length; v++)
-                        if (!valuesUsed.Contains(v))
-                            takens[i][v] = true;
-                return Enumerable.Empty<Constraint>();
+                    state.MarkImpossible(i, v => !valuesUsed.Contains(v));
+                return ConstraintResult.Remove;
             }));
 
             var lockObject = new object();

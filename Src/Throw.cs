@@ -34,7 +34,7 @@ GLEDURRANT
 8. A: 1/SingleInner; 1/SingleOuter
 9. N: 14/SingleOuter; 7/Double; 14/SingleInner
 10. T: 10/Double; 20/SingleOuter; 20/SingleInner
-
+#
 KYLANDERSON
 1. K: 11/SingleOuter; 11/SingleInner
 2. Y: 25/Bullring
@@ -47,7 +47,7 @@ KYLANDERSON
 9. S: 19/SingleInner; 19/SingleOuter
 10. O: 5/Treble; 15/SingleInner; 15/SingleOuter
 11. N: 14/SingleInner; 14/SingleOuter
-
+#
 ARKFROST
 1. A: 1/SingleOuter; 1/SingleInner
 2. R: 18/SingleInner; 6/Treble; 18/SingleOuter; 9/Double
@@ -57,7 +57,7 @@ ARKFROST
 6. O: 15/SingleOuter; 15/SingleInner; 5/Treble
 7. S: 19/SingleOuter; 19/SingleInner
 8. T: 20/SingleInner; 20/SingleOuter; 10/Double
-
+#
 RBCROSS
 1. R: 6/Treble; 9/Double; 18/SingleInner; 18/SingleOuter
 2. B: 2/SingleInner; 2/SingleOuter; 1/Double
@@ -66,7 +66,7 @@ RBCROSS
 5. O: 5/Treble; 15/SingleInner; 15/SingleOuter
 6. S: 19/SingleInner
 7. S: 19/SingleOuter
-
+#
 STEHENBUNTING
 1. S: 19/SingleOuter; 19/SingleInner
 2. T: 20/SingleOuter; 10/Double
@@ -81,7 +81,7 @@ STEHENBUNTING
 11. I: 3/Treble; 9/SingleInner; 9/SingleOuter
 12. N: 14/SingleInner
 13. G: 7/SingleInner; 7/SingleOuter
-
+#
 TONECCLES
 1. T: 10/Double; 20/SingleOuter; 20/SingleInner
 2. O: 15/SingleInner; 15/SingleOuter; 5/Treble
@@ -92,11 +92,12 @@ TONECCLES
 7. L: 4/Treble; 12/SingleInner; 12/SingleOuter; 6/Double
 8. E: 5/SingleInner
 9. S: 19/SingleInner; 19/SingleOuter
-".Replace("'\r", "").Split('\n')
-                .Select(str => new { Line = str, Match = Regex.Match(str.Trim(), @"^\d+\. .: (\d+)/([A-Za-z]+)(;|$)") })
-                .GroupConsecutiveBy(inf => inf.Match.Success)
-                .Where(gr => gr.Key)
-                .Select(gr => gr.Select(inf => (segment: Array.IndexOf(segmentValues, int.Parse(inf.Match.Groups[1].Value)), bed: EnumStrong.Parse<Bed>(inf.Match.Groups[2].Value))).ToArray())
+"
+                .Replace("'\r", "")
+                .Split('#')
+                .Select(board => board.Trim().Split('\n'))
+                .Select(board => new { Name = board[0].Trim(), Lines = board.Skip(1).Select(str => Regex.Match(str.Trim(), @"^\d+\. .: (\d+)/([A-Za-z]+)(;|$)")).ToArray() })
+                .Select(gr => new { gr.Name, Info = gr.Lines.Select(inf => new { Segment = Array.IndexOf(segmentValues, int.Parse(inf.Groups[1].Value)), Bed = EnumStrong.Parse<Bed>(inf.Groups[2].Value) }).ToArray() })
                 .ToArray();
 
             var segments = Ut.NewArray(
@@ -108,35 +109,29 @@ TONECCLES
                 @"m 0,-67 a 67,67 0 0 0 -10.46875,0.90625 l 0.541016,3.41211 A 63.5,63.5 0 0 1 0,-63.5 a 63.5,63.5 0 0 1 9.921875,0.85742 l 0.552734,-3.49414 A 67,67 0 0 0 0,-67 Z" // trebles
             );
 
-            var rnd = new Random(47);
-            var svgs = new StringBuilder();
+            var puzzleSvgs = new StringBuilder();
+            var solutionSvgs = new StringBuilder();
+            var bedRadii = new double[] { 0, 0, 25, 40, 53, 65 };
 
             foreach (var player in players)
             {
-                var svg = new StringBuilder();
-                for (var ix = 0; ix < player.Length; ix++)
+                var puzzleSvg = new StringBuilder();
+                var solutionTexts = new StringBuilder();
+                for (var ix = 0; ix < player.Info.Length; ix++)
                 {
-                    var (segment, bed) = player[ix];
-                    //var num = player[ix] - 'A' + 1;
-                    //var representations = new List<(int? segment, Bed bed)>();
-                    //if (num >= 1 && num <= 20)
-                    //{
-                    //    representations.Add((segment: segmentValues.IndexOf(num), bed: Bed.SingleInner));
-                    //    representations.Add((segment: segmentValues.IndexOf(num), bed: Bed.SingleOuter));
-                    //}
-                    //if (num % 2 == 0 && num / 2 <= 20)
-                    //    representations.Add((segment: segmentValues.IndexOf(num / 2), bed: Bed.Double));
-                    //if (num % 3 == 0 && num / 3 <= 20)
-                    //    representations.Add((segment: segmentValues.IndexOf(num / 3), bed: Bed.Treble));
-                    //if (num == 25)
-                    //    representations.Add((segment: null, bed: Bed.Bullring));
-                    //representations.RemoveAll(rep => elements.Contains(rep));
-
-                    svg.Append($"<path fill='#{"{0}0{0}0{0}0".Fmt("123456789ABCDEF"[ix])}' d='{segments[(int) bed]}'{(segment != -1 ? $" transform='rotate({18 * segment})'" : "")} />");
+                    var segment = player.Info[ix].Segment;
+                    var bed = player.Info[ix].Bed;
+                    puzzleSvg.Append($"<path fill='#{"{0}0{0}0{0}0".Fmt("123456789ABCDEF"[ix])}' d='{segments[(int) bed]}'{(segment != -1 ? $" transform='rotate({18 * segment})'" : "")} />");
+                    var x = segment == -1 ? 0 : bedRadii[(int) bed] * Math.Cos((segment * 18 - 90) * Math.PI / 180);
+                    var y = (segment == -1 ? 0 : bedRadii[(int) bed] * Math.Sin((segment * 18 - 90) * Math.PI / 180)) + 3.5;
+                    solutionTexts.Append($"<text class='num r-a' data-rem_a='b' x='{x}' y='{y}'>{player.Name[ix] - 'A' + 1}</text>");
+                    solutionTexts.Append($"<text class='ltr r-b' x='{x}' y='{y}'>{player.Name[ix]}</text>");
                 }
-                svgs.AppendLine($@"<svg viewBox='-68 -68 136 136'>{svg}</svg>");
+                puzzleSvgs.AppendLine($@"<svg viewBox='-68 -68 136 136'>{puzzleSvg}</svg>");
+                solutionSvgs.AppendLine($@"<svg text-anchor='middle' font-size='10' font-family='Montserrat' viewBox='-68 -68 136 136'>{puzzleSvg}{solutionTexts}</svg>");
             }
-            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\throw.html", "<!--%%-->", "<!--%%%-->", svgs.ToString());
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\throw.html", "<!--%%-->", "<!--%%%-->", puzzleSvgs.ToString());
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\throw.html", "<!--%%-->", "<!--%%%-->", solutionSvgs.ToString());
         }
     }
 }
