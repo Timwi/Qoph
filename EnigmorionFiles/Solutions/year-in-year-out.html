@@ -1,0 +1,61 @@
+<style>
+    .re-a .h, .re-f .h, .re-g .h, .re-h .h {
+        color: #800;
+        text-decoration: underline;
+        font-weight: bold;
+    }
+    .ih:not(.re) {
+        display: none;
+    }
+	td.game {
+		font-style: italic;
+	}
+	table.bordered td.ltr {
+		text-align: center;
+	}
+</style>
+<script src='../../files/solutions.js'></script>
+<h1 class='solution'>Year In, Year Out</h1>
+<div id='solution'></div>
+<script>
+makeSolutionPage('year-in-year-out', `
+<p class='flavour-text r-a' data-rem_a='c'>These clues may ‹initially› seem unconnected, but you’ll find it ‹in the end›.</p>
+<p>The flavour text [oa contains a subtle clue that suggests that [d we should look at the first and last letters of the clues. [rb]]]</p>
+{-b
+<ul>
+	<li>The first letters spell out «<a href='https://en.wikipedia.org/wiki/Spiel_des_Jahres'>SPIEL DES JAHRES</a> AWARD».</li>
+	<li>The last letters spell out «MATCH LETTERS FROM END».</li>
+	<li>This suggests that [dc we need to find board games that won <cite>Spiel des Jahres</cite> whose names end with similar letters as the answers to the clues.]</li>
+</ul>
+}
+{-c <p>Let’s start by solving some of the clues. [rd We quickly notice that the answers [oe are in alphabetical order, which helps to disambiguate a few more.]]</p>}
+{-e <p>We can now start associating these with board games based on the letters at the ends of words. At least three of them match pretty well: [rf «CRESS», «HIDE» and «Y-AXIS».]}
+{-f <p>Since the others, even the longish clues, don’t seem to have perfect fits like these, we need to widen our search. [s Let’s allow the letters to be reordered (but still overall at the end of the name of the board game). This allows a lot more of them to fit. [rg]]</p>}
+{-g <p>As you search the list of past winners, you may begin to notice that the games we found [o are all fairly recent. [d Since we still need a way to reorder the clues (as they’re alphabetical), it stands to reason that the games are going to be from a contiguous range of years. We’ve already allocated <cite>Ticket to Ride</cite> (2004) and <cite>Just One</cite> (2019), so we can help fill the rest by [s using an anagram solver like <a href='https://nutrimatic.org/'>Nutrimatic</a> or <a href='https://www.quinapalus.com/cgi-bin/qat'>Qat</a> on the 2005−2018 award winners, and then expand until we have all 19. [rh Even the short answers, like «SIT», which previously fit multiple game titles (<cite>Dixit</cite>, <cite>Keltis</cite>, <cite>Villa Paletti</cite>), can now be uniquely allocated (for example, <cite>Keltis</cite> is required for «LISTEN»).]]]]</p>}
+{-h <p>All that’s left to do now is to [si extract the leftover letters from the answers and sort by year.]</p>}
+<table class='bordered centered'>
+	<tr><th>Clue</th>	<th class='ih r-d'>Answer</th>	<th class='ih r-f'>Board game</th>	<th class='ih r-h'>Year</th><th class='ih r-i'>Letter</th></tr>
+	<tr class='sort-i' data-sort_i='5'><td>Sculptures and other stuff in a museum (3)</td>	<td class='ih r-d r-h'>«‹AR›T»</td>	<td class='ih r-f game'><span class='ih r-h'>Niaga‹ra›</span></td>	<td class='ih r-h'>2005</td><td class='ltr ih r-i'>T</td></tr>
+	<tr class='sort-i' data-sort_i='13'><td>Piped sink, watershed, et cetera (5)</td>	<td class='ih r-d r-g'>«{/e ?}{e ‹BA›S‹IN›}»</td>	<td class='ih r-f game'><span class='ih r-g'>Ha‹nabi›</span></td>	<td class='ih r-h'>2013</td><td class='ltr ih r-i'>S</td></tr>
+	<tr class='sort-i' data-sort_i='15'><td>Ingredient Lepidium sativum or sequel to Scarlet (5)</td>	<td class='ih r-d r-f'>«C‹RESS›»</td>	<td class='ih r-f game'>Colt Exp‹ress›</td>	<td class='ih r-h'>2015</td><td class='ltr ih r-i'>C</td></tr>
+	<tr class='sort-i' data-sort_i='3'><td>Excite, slangily, or act like a kleptomaniac (4)</td>	<td class='ih r-d r-h'>{/h «?»}{h «G‹RAB›»}</td>	<td class='ih r-f game'>Alham‹bra›</td>	<td class='ih r-h'>2003</td><td class='ltr ih r-i'>G</td></tr>
+	<tr class='sort-i' data-sort_i='4'><td>Lie low to evade detection during a search (4)</td>	<td class='ih r-d r-f'>«H‹IDE›»</td>	<td class='ih r-f game'>Ticket to R‹ide›</td>	<td class='ih r-h'>2004</td><td class='ltr ih r-i'>H</td></tr>
+	<tr class='sort-i' data-sort_i='11'><td>Dig or equal (4)</td>	<td class='ih r-d r-h'>{/h «?»}{h «‹L›I‹KE›»}</td>	<td class='ih r-f game'><span class='ih r-h'>Qwir‹kle›</span></td>	<td class='ih r-h'>2011</td><td class='ltr ih r-i'>I</td></tr>
+	<tr class='sort-i' data-sort_i='8'><td>Eavesdrop or perceive (6)</td>	<td class='ih r-d r-h'>{/h «?»}{h «‹LISTE›N»}</td>	<td class='ih r-f game'><span class='ih r-h'>K‹eltis›</span></td>	<td class='ih r-h'>2008</td><td class='ltr ih r-i'>N</td></tr>
+	<tr class='sort-i' data-sort_i='18'><td>Sportsman Gehrig with bat (3)</td>	<td class='ih r-d r-h'>«‹L›O‹U›»</td>	<td class='ih r-f game'><span class='ih r-h'>Az‹ul›</span></td>	<td class='ih r-h'>2018</td><td class='ltr ih r-i'>O</td></tr>
+	<tr class='sort-i' data-sort_i='16'><td>Jeep and Rolls Royce, for example, or brings about (5)</td>	<td class='ih r-d r-h'>{/h «?»}{h «‹MA›K‹ES›»}</td>	<td class='ih r-f game'><span class='ih r-h'>Coden‹ames›</span></td>	<td class='ih r-h'>2016</td><td class='ltr ih r-i'>K</td></tr>
+	<tr class='sort-i' data-sort_i='9'><td>Agent Smith calls this Mr. Anderson’s hacker name (3)</td>	<td class='ih r-d r-h'>«‹N›E‹O›»</td>	<td class='ih r-f game'><span class='ih r-h'>Domini‹on›</span></td>	<td class='ih r-h'>2009</td><td class='ltr ih r-i'>E</td></tr>
+	<tr class='sort-i' data-sort_i='14'><td>Horseback rider Revere or Beatles singer (4)</td>	<td class='ih r-d r-g'>«‹P›A‹UL›»</td>	<td class='ih r-f game'><span class='ih r-g'>Came‹l Up›</span></td>	<td class='ih r-h'>2014</td><td class='ltr ih r-i'>A</td></tr>
+	<tr class='sort-i' data-sort_i='1'><td>Reverberations or audience’s reactions (10)</td>	<td class='ih r-d r-h'>{/h «?»}{h «‹RESONANC›E‹S›»}</td>	<td class='ih r-f game'><span class='ih r-h'>Ca‹rcassonne›</span></td>	<td class='ih r-h'>2001</td><td class='ltr ih r-i'>E</td></tr>
+	<tr class='sort-i' data-sort_i='12'><td>Enigma that the Sphinx thinks highly of (6)</td>	<td class='ih r-d r-g'>«‹RID›D‹LE›»</td>	<td class='ih r-f game'><span class='ih r-g'>Kingdom Bu‹ilder›</span></td>	<td class='ih r-h'>2012</td><td class='ltr ih r-i'>D</td></tr>
+	<tr class='sort-i' data-sort_i='17'><td>Sound of Silence singer (5)</td>	<td class='ih r-d r-g'>«S‹IMON›»</td>	<td class='ih r-f game'><span class='ih r-g'>Kingdo‹mino›</span></td>	<td class='ih r-h'>2017</td><td class='ltr ih r-i'>S</td></tr>
+	<tr class='sort-i' data-sort_i='10'><td>Allow one’s behind to rest or trick taught to Fido (3)</td>	<td class='ih r-d r-h'>«S‹IT›»</td>	<td class='ih r-f game'><span class='ih r-h'>Dix‹it›</span></td>	<td class='ih r-h'>2010</td><td class='ltr ih r-i'>S</td></tr>
+	<tr class='sort-i' data-sort_i='19'><td>William Shakespeare poem (6)</td>	<td class='ih r-d r-g'>«‹SON›N‹ET›»</td>	<td class='ih r-f game'><span class='ih r-g'>Ju‹st One›</span></td>	<td class='ih r-h'>2019</td><td class='ltr ih r-i'>N</td></tr>
+	<tr class='sort-i' data-sort_i='2'><td>Animal in the family Pitheciidae (4)</td>	<td class='ih r-d r-h'>«‹TIT›I{/e ? SAKI?}»</td>	<td class='ih r-f game'><span class='ih r-h'>Villa Pale‹tti›</span></td>	<td class='ih r-h'>2002</td><td class='ltr ih r-i'>I</td></tr>
+	<tr class='sort-i' data-sort_i='7'><td>Ruby slippers girl’s dog or blessers of rain (4)</td>	<td class='ih r-d r-h'>{/h «?»}{h «‹TOT›O»}</td>	<td class='ih r-f game'><span class='ih r-h'>Zoolore‹tto›</span></td>	<td class='ih r-h'>2007</td><td class='ltr ih r-i'>O</td></tr>
+	<tr class='sort-i' data-sort_i='6'><td>Directly up-pointing line that has no end (1-4)</td>	<td class='ih r-d r-f'>«Y-‹AXIS›»</td>	<td class='ih r-f game'>Thurn and T‹axis›</td>	<td class='ih r-h'>2006</td><td class='ltr ih r-i'>Y</td></tr>
+</table>
+{-i <p>A clue phrase appears, which can be solved by [sj either searching the <cite>Spiel des Jahres</cite> page for “Sid Sackson” or “1981”, or googling their name to find which game of theirs won <cite>Spiel des Jahres</cite> in 1981.]</p>}
+{-j <div class='answer'>FOCUS</div>}
+`);
+</script>

@@ -194,6 +194,11 @@ table.bordered {
             line-height: 1;
         }
 
+table.centered {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .team-controls {
     margin: 1cm 0;
 }
@@ -568,3 +573,7 @@ div.answer {
         box-shadow: 0 -.1cm .1cm rgba(0, 0, 0, .2);
         background: hsl(100, 40%, 20%);
     }
+
+#solution {
+	margin-bottom: 5cm;
+}
