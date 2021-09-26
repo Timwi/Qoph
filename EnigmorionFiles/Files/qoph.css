@@ -47,6 +47,18 @@
     src: local('Book Antiqua Bold Italic'), url(Book%20Antiqua%20Bold%20Italics.ttf);
 }
 
+@font-face {
+    font-family: 'Work Sans';
+    font-weight: normal;
+    src: local('Work Sans Regular'), url(WorkSans-Regular.otf);
+}
+
+@font-face {
+    font-family: 'Work Sans';
+    font-weight: bold;
+    src: local('Work Sans Bold'), url(WorkSans-Bold.otf);
+}
+
 * {
     box-sizing: border-box;
 }
@@ -471,13 +483,13 @@ form td.explain {
     font-family: 'Montserrat';
 }
 
-h1.solution {
+body.solution h1 {
     position: relative;
     background: hsl(100, 50%, 40%);
     color: white;
 }
 
-    h1.solution::after {
+    body.solution h1::after {
         content: 'SOLUTION';
         position: absolute;
         right: 3cm;
@@ -574,6 +586,83 @@ div.answer {
         background: hsl(100, 40%, 20%);
     }
 
-#solution {
-	margin-bottom: 5cm;
+body.solution #main {
+	padding-bottom: 5cm;
 }
+
+.deduction-tracker {
+	position: relative;
+	background: hsl(220, 60%, 80%);
+	padding: .1cm .25cm;
+	margin: 0 auto .5cm;
+	text-align: center;
+	min-height: 2cm;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-top-left-radius: .7cm;
+	border-top-right-radius: .7cm;
+}
+
+	.deduction-tracker button {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 1cm;
+		height: 1cm;
+		text-align: center;
+		padding: 0;
+		margin: 0;
+	}
+
+	.deduction-tracker button.far-left {
+		left: .2cm;
+		background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1.4 -2 10 10"><path d="M6 0 3 3 6 6zM3 0 0 3 3 6z" /></svg>');
+		width: .7cm;
+		height: .7cm;
+	}
+	.deduction-tracker button.left {
+		left: 1.1cm;
+		background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1.4 -2 10 10"><path d="M6 0 0 3 6 6z" /></svg>');
+	}
+	.deduction-tracker button.right {
+		right: 1.1cm;
+		background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2.6 -2 10 10"><path d="M0 0 6 3 0 6z" /></svg>');
+	}
+	.deduction-tracker button.far-right {
+		right: .2cm;
+		background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2.6 -2 10 10"><path d="M0 0 3 3 0 6zM3 0 6 3 3 6z" /></svg>');
+		width: .7cm;
+		height: .7cm;
+	}
+		.deduction-tracker button.far-left:hover {
+			background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1.4 -2 10 10"><path d="M6 0 3 3 6 6zM3 0 0 3 3 6z" fill="white" /></svg>');
+		}
+		.deduction-tracker button.left:hover {
+			background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1.4 -2 10 10"><path d="M6 0 0 3 6 6z" fill="white" /></svg>');
+		}
+		.deduction-tracker button.right:hover {
+			background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2.6 -2 10 10"><path d="M0 0 6 3 0 6z" fill="white" /></svg>');
+		}
+		.deduction-tracker button.far-right:hover {
+			background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2.6 -2 10 10"><path d="M0 0 3 3 0 6zM3 0 6 3 3 6z" fill="white" /></svg>');
+		}
+
+	.deduction-tracker .info {
+		margin: 0 2.5cm;
+	}
+	.deduction-tracker .progressbg {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: .075cm;
+		background: hsl(220, 70%, 70%);
+	}
+	.deduction-tracker .progress {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		height: .075cm;
+		background: hsl(220, 70%, 40%);
+	}

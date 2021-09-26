@@ -4,16 +4,20 @@
 // r = reveal
 // s = strategy
 
-function makeSolutionPage(pageId, hpsml)
+let deductionTrackers = [];
+
+function makeSolutionPage(pageId, hpsml, triggers)
 {
 	hpsml = hpsml
 		.replace(/«([^»]*?)»/g, (_, m) => `<span class='w'>${m}</span>`)
 		.replace(/‹([^›]*?)›/g, (_, m) => `<span class='h'>${m}</span>`);
 
 	let idAlloc = 1;
-	let alloc = {};
+	let alloc;
 	let revealed = [];
 	let revealing = false;
+	let solutionDiv = document.createElement('div');
+	document.getElementById('main').appendChild(solutionDiv);
 
 	function addAlloc(id, fnc)
 	{
@@ -43,7 +47,7 @@ function makeSolutionPage(pageId, hpsml)
 				case '[':
 					nid = idAlloc++;
 					let sid = m.groups.sid;
-					html.push(`<button type='button' class='reveal ${m.groups.type}' id='b-${nid}' accesskey='.'></button>`);
+					html.push(`<button type='button' class='reveal ${m.groups.type}' id='b-${nid}'></button>`);
 					let sTag = m.groups.sblock ? 'div' : 'span';
 					html.push(`<${sTag} id='s-${nid}'></${sTag}>`);
 					let sResult = makeSolutionPageImpl(hpsml, ']');
@@ -62,7 +66,12 @@ function makeSolutionPage(pageId, hpsml)
 								re.classList.add(`re-${sid}`);
 								re.classList.add(`re`);
 								if (`rem_${sid}` in re.dataset)
-									addAlloc(re.dataset[`rem_${sid}`], function() { re.classList.remove(`re-${sid}`); });
+									addAlloc(re.dataset[`rem_${sid}`], function()
+									{
+										re.classList.remove(`re-${sid}`);
+										if (Array.from(re.classList).every(cls => !cls.startsWith('re-')))
+											re.classList.remove('re');
+									});
 							});
 							let sort = Array.from(document.getElementsByClassName(`sort-${sid}`));
 							if (sort.length > 0)
@@ -111,20 +120,39 @@ function makeSolutionPage(pageId, hpsml)
 	function initialSetup()
 	{
 		alloc = {};
+
+		if (triggers)
+			for (let key of Object.keys(triggers))
+				if (Array.isArray(triggers[key]))
+					for (let func of triggers[key])
+						addAlloc(key, func);
+				else
+					addAlloc(key, triggers[key]);
+
 		idAlloc = 1;
 		let result = makeSolutionPageImpl(hpsml);
 		if (result.rest.length > 0)
 			console.error('unmatched brackets in HPSML — please check');
 
-		document.getElementById('solution').innerHTML = `
+		solutionDiv.innerHTML = `
 			<div id='sol-controls'>
-				<button id='sol-back' accesskey='w'>◀◀</button>
-				<button id='sol-reset' accesskey='r'>Reset</button>
-				<button id='sol-expand' accesskey='a'>Expand all</button>
+				<button id='sol-reset' accesskey='r'>◀◀</button>
+				<button id='sol-back' accesskey='w'>◀</button>
+				<button id='sol-forward' accesskey='.'>▶</button>
+				<button id='sol-expand' accesskey='a'>▶▶</button>
 			</div>
 			${result.html}`;
 		result.fncs();
 
+		document.getElementById('sol-reset').onclick = function()
+		{
+			for (let tracker of deductionTrackers)
+				localStorage.removeItem(tracker);
+			localStorage.removeItem(`sol-${pageId}`);
+			revealed = [];
+			initialSetup();
+			return false;
+		};
 		document.getElementById('sol-back').onclick = function()
 		{
 			if (revealed.length < 1)
@@ -133,20 +161,19 @@ function makeSolutionPage(pageId, hpsml)
 			localStorage.setItem(`sol-${pageId}`, JSON.stringify(revealed));
 			initialSetup();
 			return false;
-		}
-		document.getElementById('sol-reset').onclick = function()
+		};
+		document.getElementById('sol-forward').onclick = function()
 		{
-			localStorage.removeItem(`sol-${pageId}`);
-			revealed = [];
-			initialSetup();
+			let btn = document.querySelector('button.reveal');
+			if (btn)
+				btn.onclick();
 			return false;
 		};
-
 		document.getElementById('sol-expand').onclick = function()
 		{
-			let elem;
-			while (elem = document.querySelector('button.reveal'))
-				elem.onclick();
+			let btn;
+			while (btn = document.querySelector('button.reveal'))
+				btn.onclick();
 			return false;
 		};
 
@@ -168,4 +195,63 @@ function makeSolutionPage(pageId, hpsml)
 		}
 	}
 	initialSetup();
+}
+
+function createDeductionTracker(id, pages, fnc)
+{
+	let lsid = `${id}-deduction`;
+	deductionTrackers.push(lsid);
+
+	return () => window.requestAnimationFrame(() =>
+	{
+		let elem = document.getElementById(id);
+		elem.classList.add('deduction-tracker');
+		elem.innerHTML = `
+			<button type='button' class='far-left'></button>
+			<button type='button' class='far-right'></button>
+			<button type='button' class='left' accesskey=','></button>
+			<button type='button' class='right' accesskey='/'></button>
+			<div class='info'></div>
+			<div class='progressbg'></div>
+			<div class='progress'></div>
+		`;
+
+		let curPage = 0;
+
+		if (localStorage)
+			curPage = localStorage.getItem(lsid) | 0;
+
+		elem.querySelector('button.far-left').onclick = function()
+		{
+			curPage = 0;
+			showPage();
+		}
+		elem.querySelector('button.left').onclick = function()
+		{
+			if (curPage > 0)
+				curPage--;
+			showPage();
+		}
+		elem.querySelector('button.right').onclick = function()
+		{
+			if (curPage < pages.length - 1)
+				curPage++;
+			showPage();
+		}
+		elem.querySelector('button.far-right').onclick = function()
+		{
+			curPage = pages.length - 1;
+			showPage();
+		}
+
+		function showPage()
+		{
+			let page = pages[curPage];
+			elem.querySelector('.info').innerHTML = page.label || '';
+			elem.querySelector('.progress').style.width = `${100*curPage/(pages.length-1)}%`;
+			fnc(page, curPage, pages);
+			localStorage.setItem(lsid, curPage);
+		}
+		showPage();
+	});
 }
