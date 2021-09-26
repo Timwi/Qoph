@@ -1,0 +1,260 @@
+<style>
+	.ihs:not(.re) { visibility: hidden; }
+	.ih:not(.re) { display: none; }
+
+	path.marking {
+		fill: rgba(0, 0, 0, .1);
+		stroke: none;
+	}
+	rect.box:hover {
+		fill: hsla(0, 80%, 60%, .5);
+		stroke: black;
+		stroke-width: .03;
+	}
+	rect.box:hover + path.marking {
+		fill: hsla(0, 80%, 60%, .4);
+		stroke: black;
+		stroke-width: .05;
+	}
+	text.w {
+		pointer-events: none;
+	}
+	.big-table {
+		font-size: 12pt;
+	}
+	.sub {
+		font-size: 8pt;
+	}
+</style>
+<script src='../../files/solutions.js'></script>
+<h1>Special Names</h1>
+<script>
+makeSolutionPage('special-names', `
+<p>Let’s start with the grid, which is a [o word search containing [o names of some well-known fictional characters and real people with some letters replaced with “X”. Some of the less hard-to-find ones are: [ra]]]</p>
+<svg id="word-search" viewBox="-.7 -.6 35 18.2" font-size=".7">
+	<path d="M-.5 -.5h16v18H-.5z" fill="white" stroke="black" stroke-width=".05"></path>
+	<g text-anchor="middle">
+		<text x="0.5" y="0.75">H</text><text x="1.5" y="0.75">U</text><text x="2.5" y="0.75">X</text><text x="3.5" y="0.75">K</text><text x="4.5" y="0.75">H</text><text x="5.5" y="0.75">O</text><text x="6.5" y="0.75">G</text><text x="7.5" y="0.75">A</text><text x="8.5" y="0.75">N</text><text x="9.5" y="0.75">D</text><text x="10.5" y="0.75">X</text><text x="11.5" y="0.75">L</text><text x="12.5" y="0.75">F</text><text x="13.5" y="0.75">U</text><text x="14.5" y="0.75">S</text><text x="0.5" y="1.75">J</text><text x="1.5" y="1.75">K</text><text x="2.5" y="1.75">R</text><text x="3.5" y="1.75">I</text><text x="4.5" y="1.75">K</text><text x="5.5" y="1.75">N</text><text x="6.5" y="1.75">I</text><text x="7.5" y="1.75">A</text><text x="8.5" y="1.75">T</text><text x="9.5" y="1.75">X</text><text x="10.5" y="1.75">A</text><text x="11.5" y="1.75">C</text><text x="12.5" y="1.75">S</text><text x="13.5" y="1.75">S</text><text x="14.5" y="1.75">P</text><text x="0.5" y="2.75">A</text><text x="1.5" y="2.75">E</text><text x="2.5" y="2.75">X</text><text x="3.5" y="2.75">R</text><text x="4.5" y="2.75">X</text><text x="5.5" y="2.75">A</text><text x="6.5" y="2.75">P</text><text x="7.5" y="2.75">O</text><text x="8.5" y="2.75">L</text><text x="9.5" y="2.75">X</text><text x="10.5" y="2.75">S</text><text x="11.5" y="2.75">D</text><text x="12.5" y="2.75">I</text><text x="13.5" y="2.75">A</text><text x="14.5" y="2.75">O</text><text x="0.5" y="3.75">M</text><text x="1.5" y="3.75">B</text><text x="2.5" y="3.75">P</text><text x="3.5" y="3.75">O</text><text x="4.5" y="3.75">X</text><text x="5.5" y="3.75">E</text><text x="6.5" y="3.75">R</text><text x="7.5" y="3.75">R</text><text x="8.5" y="3.75">A</text><text x="9.5" y="3.75">N</text><text x="10.5" y="3.75">G</text><text x="11.5" y="3.75">E</text><text x="12.5" y="3.75">R</text><text x="13.5" y="3.75">S</text><text x="14.5" y="3.75">C</text><text x="0.5" y="4.75">X</text><text x="1.5" y="4.75">O</text><text x="2.5" y="4.75">R</text><text x="3.5" y="4.75">T</text><text x="4.5" y="4.75">N</text><text x="5.5" y="4.75">R</text><text x="6.5" y="4.75">E</text><text x="7.5" y="4.75">X</text><text x="8.5" y="4.75">E</text><text x="9.5" y="4.75">D</text><text x="10.5" y="4.75">X</text><text x="11.5" y="4.75">T</text><text x="12.5" y="4.75">R</text><text x="13.5" y="4.75">T</text><text x="14.5" y="4.75">X</text><text x="0.5" y="5.75">I</text><text x="1.5" y="5.75">P</text><text x="2.5" y="5.75">E</text><text x="3.5" y="5.75">A</text><text x="4.5" y="5.75">A</text><text x="5.5" y="5.75">E</text><text x="6.5" y="5.75">T</text><text x="7.5" y="5.75">O</text><text x="8.5" y="5.75">N</text><text x="9.5" y="5.75">I</text><text x="10.5" y="5.75">C</text><text x="11.5" y="5.75">D</text><text x="12.5" y="5.75">O</text><text x="13.5" y="5.75">H</text><text x="14.5" y="5.75">C</text><text x="0.5" y="6.75">T</text><text x="1.5" y="6.75">T</text><text x="2.5" y="6.75">I</text><text x="3.5" y="6.75">N</text><text x="4.5" y="6.75">H</text><text x="5.5" y="6.75">D</text><text x="6.5" y="6.75">R</text><text x="7.5" y="6.75">D</text><text x="8.5" y="6.75">O</text><text x="9.5" y="6.75">A</text><text x="10.5" y="6.75">O</text><text x="11.5" y="6.75">N</text><text x="12.5" y="6.75">N</text><text x="13.5" y="6.75">G</text><text x="14.5" y="6.75">O</text><text x="0.5" y="7.75">H</text><text x="1.5" y="7.75">I</text><text x="2.5" y="7.75">N</text><text x="3.5" y="7.75">I</text><text x="4.5" y="7.75">C</text><text x="5.5" y="7.75">A</text><text x="6.5" y="7.75">A</text><text x="7.5" y="7.75">Z</text><text x="8.5" y="7.75">E</text><text x="9.5" y="7.75">N</text><text x="10.5" y="7.75">C</text><text x="11.5" y="7.75">X</text><text x="12.5" y="7.75">X</text><text x="13.5" y="7.75">I</text><text x="14.5" y="7.75">W</text><text x="0.5" y="8.75">E</text><text x="1.5" y="8.75">M</text><text x="2.5" y="8.75">X</text><text x="3.5" y="8.75">M</text><text x="4.5" y="8.75">E</text><text x="5.5" y="8.75">V</text><text x="6.5" y="8.75">X</text><text x="7.5" y="8.75">I</text><text x="8.5" y="8.75">L</text><text x="9.5" y="8.75">A</text><text x="10.5" y="8.75">O</text><text x="11.5" y="8.75">L</text><text x="12.5" y="8.75">C</text><text x="13.5" y="8.75">N</text><text x="14.5" y="8.75">X</text><text x="0.5" y="9.75">G</text><text x="1.5" y="9.75">U</text><text x="2.5" y="9.75">E</text><text x="3.5" y="9.75">R</text><text x="4.5" y="9.75">I</text><text x="5.5" y="9.75">H</text><text x="6.5" y="9.75">N</text><text x="7.5" y="9.75">L</text><text x="8.5" y="9.75">L</text><text x="9.5" y="9.75">J</text><text x="10.5" y="9.75">D</text><text x="11.5" y="9.75">L</text><text x="12.5" y="9.75">U</text><text x="13.5" y="9.75">K</text><text x="14.5" y="9.75">O</text><text x="0.5" y="10.75">E</text><text x="1.5" y="10.75">X</text><text x="2.5" y="10.75">M</text><text x="3.5" y="10.75">E</text><text x="4.5" y="10.75">K</text><text x="5.5" y="10.75">T</text><text x="6.5" y="10.75">O</text><text x="7.5" y="10.75">L</text><text x="8.5" y="10.75">I</text><text x="9.5" y="10.75">O</text><text x="10.5" y="10.75">P</text><text x="11.5" y="10.75">I</text><text x="12.5" y="10.75">H</text><text x="13.5" y="10.75">K</text><text x="14.5" y="10.75">Y</text><text x="0.5" y="11.75">N</text><text x="1.5" y="11.75">P</text><text x="2.5" y="11.75">E</text><text x="3.5" y="11.75">T</text><text x="4.5" y="11.75">X</text><text x="5.5" y="11.75">R</text><text x="6.5" y="11.75">R</text><text x="7.5" y="11.75">A</text><text x="8.5" y="11.75">X</text><text x="9.5" y="11.75">N</text><text x="10.5" y="11.75">X</text><text x="11.5" y="11.75">B</text><text x="12.5" y="11.75">C</text><text x="13.5" y="11.75">C</text><text x="14.5" y="11.75">C</text><text x="0.5" y="12.75">I</text><text x="1.5" y="12.75">R</text><text x="2.5" y="12.75">U</text><text x="3.5" y="12.75">E</text><text x="4.5" y="12.75">A</text><text x="5.5" y="12.75">A</text><text x="6.5" y="12.75">A</text><text x="7.5" y="12.75">S</text><text x="8.5" y="12.75">Q</text><text x="9.5" y="12.75">E</text><text x="10.5" y="12.75">C</text><text x="11.5" y="12.75">I</text><text x="12.5" y="12.75">N</text><text x="13.5" y="12.75">X</text><text x="14.5" y="12.75">U</text><text x="0.5" y="13.75">E</text><text x="1.5" y="13.75">I</text><text x="2.5" y="13.75">L</text><text x="3.5" y="13.75">H</text><text x="4.5" y="13.75">J</text><text x="5.5" y="13.75">X</text><text x="6.5" y="13.75">A</text><text x="7.5" y="13.75">D</text><text x="8.5" y="13.75">A</text><text x="9.5" y="13.75">S</text><text x="10.5" y="13.75">O</text><text x="11.5" y="13.75">O</text><text x="12.5" y="13.75">I</text><text x="13.5" y="13.75">L</text><text x="14.5" y="13.75">R</text><text x="0.5" y="14.75">C</text><text x="1.5" y="14.75">M</text><text x="2.5" y="14.75">B</text><text x="3.5" y="14.75">X</text><text x="4.5" y="14.75">T</text><text x="5.5" y="14.75">M</text><text x="6.5" y="14.75">A</text><text x="7.5" y="14.75">N</text><text x="8.5" y="14.75">H</text><text x="9.5" y="14.75">E</text><text x="10.5" y="14.75">B</text><text x="11.5" y="14.75">S</text><text x="12.5" y="14.75">L</text><text x="13.5" y="14.75">B</text><text x="14.5" y="14.75">T</text><text x="0.5" y="15.75">B</text><text x="1.5" y="15.75">E</text><text x="2.5" y="15.75">N</text><text x="3.5" y="15.75">I</text><text x="4.5" y="15.75">T</text><text x="5.5" y="15.75">O</text><text x="6.5" y="15.75">M</text><text x="7.5" y="15.75">U</text><text x="8.5" y="15.75">S</text><text x="9.5" y="15.75">X</text><text x="10.5" y="15.75">O</text><text x="11.5" y="15.75">L</text><text x="12.5" y="15.75">I</text><text x="13.5" y="15.75">N</text><text x="14.5" y="15.75">I</text><text x="0.5" y="16.75">T</text><text x="1.5" y="16.75">H</text><text x="2.5" y="16.75">X</text><text x="3.5" y="16.75">R</text><text x="4.5" y="16.75">O</text><text x="5.5" y="16.75">C</text><text x="6.5" y="16.75">K</text><text x="7.5" y="16.75">N</text><text x="8.5" y="16.75">X</text><text x="9.5" y="16.75">M</text><text x="10.5" y="16.75">R</text><text x="11.5" y="16.75">E</text><text x="12.5" y="16.75">P</text><text x="13.5" y="16.75">U</text><text x="14.5" y="16.75">S</text>
+	</g>
+	<g id="entries" text-anchor="start">
+		<g class="ihs r-a">
+			<rect class="box" x="16" y="1" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -5 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(2.5 14.5) rotate(90)"></path>
+			<text class="w" x="16.5" y="1.7">B(A)TMAN</text>
+		</g>
+		<g class="ihs r-a">
+			<rect class="box" x="16" y="2" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -14 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(0.5 15.5) rotate(90)"></path>
+			<text class="w" x="16.5" y="2.7">BENITO MUS(S)OLINI</text>
+		</g>
+		<g class="ihs r-a">
+			<rect class="box" x="16" y="3" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -10 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(13.5 14.5) rotate(0)"></path>
+			<text class="w" x="16.5" y="3.7">BL(A)CK KNIGHT</text>
+		</g>
+		<g class="ihs r-a">
+			<rect class="box" x="16" y="4" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -10 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(11.5 1.5) rotate(270)"></path>
+			<text class="w" x="16.5" y="4.7">CA(P)TAIN KIRK</text>
+		</g>
+		<g class="ihs r-a">
+			<rect class="box" x="16" y="5" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -10 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(12.5 11.5) rotate(0)"></path>
+			<text class="w" x="16.5" y="5.7">CHUC(K) NORRIS</text>
+		</g>
+		<g class="ihs r-a">
+			<rect class="box" x="16" y="6" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -9 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(5.5 13.5) rotate(0)"></path>
+			<text class="w" x="16.5" y="6.7">(D)ARTH VADER</text>
+		</g>
+		<g class="ihs r-a">
+			<rect class="box" x="16" y="7" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -7 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(7.5 4.5) rotate(180)"></path>
+			<text class="w" x="16.5" y="7.7">(G)ODZILLA</text>
+		</g>
+		<g class="ihs r-a">
+			<rect class="box" x="16" y="8" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -11 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(9.5 2.5) rotate(180)"></path>
+			<text class="w" x="16.5" y="8.7">(I)NDIANA JONES</text>
+		</g>
+		<g class="ihs r-a">
+			<rect class="box" x="16" y="9" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -9 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(4.5 13.5) rotate(0)"></path>
+			<text class="w" x="16.5" y="9.7">JA(C)KIE CHAN</text>
+		</g>
+		<g class="ihs r-a">
+			<rect class="box" x="16" y="10" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -11 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(1.5 4.5) rotate(180)"></path>
+			<text class="w" x="16.5" y="10.7">OPTIMU(S) PRIME</text>
+		</g>
+		<g class="ihs r-a">
+			<rect class="box" x="16" y="11" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -11 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(2.5 3.5) rotate(90)"></path>
+			<text class="w" x="16.5" y="11.7">PO(W)ER RANGERS</text>
+		</g>
+		<g class="ihs r-a">
+			<rect class="box" x="16" y="12" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -7 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(14.5 16.5) rotate(270)"></path>
+			<text class="w" x="16.5" y="12.7">SUPERM(A)N</text>
+		</g>
+		<g class="ihs r-a">
+			<rect class="box" x="16" y="13" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -6 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(0.5 16.5) rotate(90)"></path>
+			<text class="w" x="16.5" y="13.7">TH(E) ROCK</text>
+		</g>
+		<g class="ihs r-a">
+			<rect class="box" x="16" y="14" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -12 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(3.5 14.5) rotate(0)"></path>
+			<text class="w" x="16.5" y="14.7">(T)HE TERMINATOR</text>
+		</g>
+		<g class="ihs r-b">
+			<rect class="box" x="25" y="1" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -10 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(6.5 13.5) rotate(0)"></path>
+			<text class="w" x="25.5" y="1.7">AARON (C)ARTER</text>
+		</g>
+		<g class="ihs r-b">
+			<rect class="box" x="25" y="2" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -18.38477631085024 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(0.5 2.5) rotate(135)"></path>
+			<text class="w" x="25.5" y="2.7">ABRAHA(M) LINCOLN</text>
+		</g>
+		<g class="ihs r-b">
+			<rect class="box" x="25" y="3" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -9 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(11.5 11.5) rotate(0)"></path>
+			<text class="w" x="25.5" y="3.7">BILL (A)ND TED</text>
+		</g>
+		<g class="ihs r-b">
+			<rect class="box" x="25" y="4" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -9 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(2.5 14.5) rotate(0)"></path>
+			<text class="w" x="25.5" y="4.7">BLUE ME(A)NIE</text>
+		</g>
+		<g class="ihs r-b">
+			<rect class="box" x="25" y="5" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -11 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(14.5 5.5) rotate(180)"></path>
+			<text class="w" x="25.5" y="5.7">COW(B)OY CURTIS</text>
+		</g>
+		<g class="ihs r-b">
+			<rect class="box" x="25" y="6" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -5 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(10.5 9.5) rotate(0)"></path>
+			<text class="w" x="25.5" y="6.7">DOC OC(K)</text>
+		</g>
+		<g class="ihs r-b">
+			<rect class="box" x="25" y="7" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -6 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(6.5 0.5) rotate(90)"></path>
+			<text class="w" x="25.5" y="7.7">GAND(A)LF</text>
+		</g>
+		<g class="ihs r-b">
+			<rect class="box" x="25" y="8" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -8 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(0.5 0.5) rotate(90)"></path>
+			<text class="w" x="25.5" y="8.7">HU(L)K HOGAN</text>
+		</g>
+		<g class="ihs r-b">
+			<rect class="box" x="25" y="9" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -12 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(0.5 1.5) rotate(180)"></path>
+			<text class="w" x="25.5" y="9.7">JAM(B)I THE GENIE</text>
+		</g>
+		<g class="ihs r-b">
+			<rect class="box" x="25" y="10" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -4 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(8.5 2.5) rotate(270)"></path>
+			<text class="w" x="25.5" y="10.7">LO PA(N)</text>
+		</g>
+		<g class="ihs r-b">
+			<rect class="box" x="25" y="11" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -6 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(10.5 16.5) rotate(0)"></path>
+			<text class="w" x="25.5" y="11.7">ROBOC(O)P</text>
+		</g>
+		<g class="ihs r-b">
+			<rect class="box" x="25" y="12" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -13 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(8.5 15.5) rotate(0)"></path>
+			<text class="w" x="25.5" y="12.7">SHAQ(U)ILLE O’NEAL</text>
+		</g>
+		<g class="ihs r-b">
+			<rect class="box" x="25" y="13" width='8.7' height=".9" fill="hsl(220, 60%, 95%)"></rect>
+			<path class="marking" d="M-.45 -4 a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z" transform="translate(14.5 0.5) rotate(180)"></path>
+			<text class="w" x="25.5" y="13.7">SPOC(K)</text>
+		</g>
+	</g>
+	<text x='16.5' y='.4' font-size='.6' class='ihs r-a'>(Hover over a name to see where it is in the grid.)</text>
+</svg>
+{-a <p>What connects these names? It’s not obvious or well-known, so [s googling the names together might help. This reveals they are all [d mentioned in a meme song/animation called <a href='https://en.wikipedia.org/wiki/The_Ultimate_Showdown_of_Ultimate_Destiny'><cite>The Ultimate Showdown of Ultimate Destiny</cite></a>. [s We can use the list in this Wikipedia article to find the rest of the names. [rb]]]]</p>}
+{-b <p>[s The unused letters [o spell out «USE X’S AS INDICES». This suggests [dz we don’t care about the letters replaced by X’s, only their position in the word. We will use the position to index into something else later.]]]</p>}
+{-z <p>Now let’s shift our attention to the clues. Some of them are guessable or googlable. [rc Noticing that they are [o in alphabetical order helps us fill in more of them. For example, the first clue must have an answer beginning with A or B, so [s try Google auto-complete. “Hey A”/“Hey B” gives only one answer with 6 letters. [rd]]]]</p>
+{-d <p>Now we need to [s associate the 27 names from the word search with the 27 answers to the clues and then use the positions of the X’s to index into the answers. Some of these seem ambiguous at first (several of the names are wrestlers, so which one would go with «WRESTLING»?) but if you do the unambiguous ones first, [re the rest fall into place through process of elimination. [rf]]]</p>}
+
+<table class='bordered centered big-table'>
+	<tr>	<th>Clue</th>	<th>Answer</th>	<th class='ih r-e'>Association</th>	<th class='ih r-e'>Indexed<br>letter</th>	</tr>
+	<tr class='r-e sort-g' data-sort_g='17'>	<td>Hey ___! (6)</td>	<td>«{/d ?}{d ARNOLD}»</td>	<td class='ih r-e'>«(T)HE TERMINATOR»‚played by Arnold Schwarzenegger„</td>	<td class='ih r-e'>«A»</td>	</tr>
+	<tr class='r-f sort-g' data-sort_g='3'>	<td>Kobe sport (10)</td>	<td>«{/c ?}{c BASKETBALL}»</td>	<td class='ih r-e'>«SHAQ(U)ILLE O’NEAL»‚basketball player„</td>	<td class='ih r-e'>«E»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='20'>	<td>Type of porcelain, described as fine (5)</td>	<td>«{/c ?}{c CHINA}»</td>	<td class='ih r-e'>«LO PA(N)»‚<cite>Big Trouble in Little China</cite>„</td>	<td class='ih r-e'>«A»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='12'>	<td>Government with absolute authority (12)</td>	<td>«{/d ?}{d DICTATORSHIP}»</td>	<td class='ih r-e'>«BENITO MUS(S)OLINI»‚dictator„</td>	<td class='ih r-e'>«H»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='10'>	<td>Friendly association (10)</td>	<td>«{/d ?}{d FELLOWSHIP}»</td>	<td class='ih r-e'>«GAND(A)LF»‚<cite>Lord of the Rings: The Fellowship of the Ring</cite>„</td>	<td class='ih r-e'>«O»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='5'>	<td>Theodore Streeter town (10)</td>	<td>«{/c ?}{c GETTYSBURG}»</td>	<td class='ih r-e'>«ABRAHA(M) LINCOLN»‚known for the Gettysburg Address„</td>	<td class='ih r-e'>«B»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='9'>	<td>Ted Post 1978 film (4 4 4 5)</td>	<td>«{/c ?}{c GOOD GUYS WEAR BLACK}»</td>	<td class='ih r-e'>«CHUC(K) NORRIS»‚starring actor„</td>	<td class='ih r-e'>«G»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='25'>	<td>Aggregation of pebbles (6)</td>	<td>«{/d ?}{d GRAVEL}»</td>	<td class='ih r-e'>«TH(E) ROCK»‚gravel consists of rock„</td>	<td class='ih r-e'>«A»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='8'>	<td>Unit of inductance (5)</td>	<td>«{/c ?}{c HENRY}»</td>	<td class='ih r-e'>«(I)NDIANA JONES»‚birth name Henry Jones„</td>	<td class='ih r-e'>«H»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='4'>	<td>Lizzie McGuire star (6 4)</td>	<td>«{/c ?}{c HILARY DUFF}»</td>	<td class='ih r-e'>«AARON (C)ARTER»‚they were in a relationship„</td>	<td class='ih r-e'>«Y»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='21'>	<td>Element 36 (7)</td>	<td>«{/c ?}{c KRYPTON}»</td>	<td class='ih r-e'>«SUPERM(A)N»‚fictional substance that hurts Superman„</td>	<td class='ih r-e'>«N»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='19'>	<td>Winged ox writer (4)</td>	<td>«{/c ?}{c LUKE}»</td>	<td class='ih r-e'>«(D)ARTH VADER»‚Luke Skywalker from <cite>Star Wars</cite>„</td>	<td class='ih r-e'>«L»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='16'>	<td>Governor Phil (6)</td>	<td>«{/c ?}{c MURPHY}»</td>	<td class='ih r-e'>«ROBOC(O)P»‚birth name Alex James Murphy„</td>	<td class='ih r-e'>«Y»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='7'>	<td>Traditional legend (4)</td>	<td>«{/d ?}{d MYTH}»</td>	<td class='ih r-e'>«JA(C)KIE CHAN»‚starring actor in <cite>The Myth</cite>„</td>	<td class='ih r-e'>{f «T»}</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='11'>	<td>Guido van Rossum creation (6)</td>	<td>«{/c ?}{c PYTHON}»</td>	<td class='ih r-e'>«BL(A)CK KNIGHT»‚<cite>Monty Python and the Holy Grail</cite>„</td>	<td class='ih r-e'>«T»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='23'>	<td>Dark City star Sewell (5)</td>	<td>«{/c ?}{c RUFUS}»</td>	<td class='ih r-e'>«BILL (A)ND TED»‚Character from <cite>Bill &amp; Ted’s Excellent Adventure</cite>„</td>	<td class='ih r-e'>«S»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='24'>	<td>Hand gesture denoting allegiance (6)</td>	<td>«{/d ?}{d SALUTE}»</td>	<td class='ih r-e'>«SPOC(K)»‚known for the Vulcan salute„</td>	<td class='ih r-e'>«T»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='26'>	<td>Peter Parker (6-3)</td>	<td>«{/c ?}{c SPIDER-MAN}»</td>	<td class='ih r-e'>«DOC OC(K)»‚notable antagonist„</td>	<td class='ih r-e'>«R»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='13'>	<td>Watercraft, possibly nuclear (9)</td>	<td>«{/c ?}{c SUBMARINE}»</td>	<td class='ih r-e'>«BLUE ME(A)NIE»‚<cite>Yellow Submarine</cite> (The Beatles)„</td>	<td class='ih r-e'>«I»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='15'>	<td>“Ee er” song (3 3)</td>	<td>«{/c ?}{c THE BOX}»</td>	<td class='ih r-e'>«JAM(B)I THE GENIE»‚lives in a box„</td>	<td class='ih r-e'>«B»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='2'>	<td>Playing card not in any suits (3 5)</td>	<td>«{/c ?}{c THE JOKER}»</td>	<td class='ih r-e'>«B(A)TMAN»‚notable antagonist„</td>	<td class='ih r-e'>«H»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='18'>	<td>Second Roman emperor, first name (8)</td>	<td>«{/c ?}{c TIBERIUS}»</td>	<td class='ih r-e'>«CA(P)TAIN KIRK»‚middle name„</td>	<td class='ih r-e'>«B»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='22'>	<td>Japanese genre with many special effects (9)</td>	<td>«{/c ?}{c TOKUSATSU}»</td>	<td class='ih r-e'>{f «PO(W)ER RANGERS»‚remaining work of this genre after Godzilla is allocated elsewhere„}</td>	<td class='ih r-e'>{f «K»}</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='1'>	<td>Japanese capital (5)</td>	<td>«{/c ?}{c TOKYO}»</td>	<td class='ih r-e'>«(G)ODZILLA»‚famous for attacking New York and Tokyo„</td>	<td class='ih r-e'>«T»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='6'>	<td>Device for converting voltages (11)</td>	<td>«{/c ?}{c TRANSFORMER}»</td>	<td class='ih r-e'>«OPTIMU(S) PRIME»‚<cite>Transformers</cite> franchise„</td>	<td class='ih r-e'>«O»</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='14'>	<td>E.g., Magnificent Seven or Hostiles (7)</td>	<td>«{/d ?}{d WESTERN}»</td>	<td class='ih r-e'>{f «COW(B)OY CURTIS»‚cowboys famously appear in westerns„}</td>	<td class='ih r-e'>{f «T»}</td>	</tr>
+	<tr class='r-e sort-g' data-sort_g='27'>	<td>Theatrical fighting sport (9)</td>	<td>«{/d ?}{d WRESTLING}»</td>	<td class='ih r-e'>{f «HU(L)K HOGAN»‚remaining wrestler after all others are allocated elsewhere„}</td>	<td class='ih r-e'>{f «E»}</td>	</tr>
+</table>
+}
+
+{-f <p>As mentioned, the answers are in alphabetical order, so [c we need to reorder them. Since we’ve associated them with [o characters that are listed in a song, we should [d use the order they appear in that song. [rg]]]</p>}
+{-g <p>The clue phrase «THEY BOTH GOT HIT BY A BLANK STARE» appears. [c “Blank” in a clue phrase means to find the word or phrase that goes there. [dh The line in the lyrics of the song goes, “they both got hit by a Care Bear stare.”]]</p>}
+{-h <div class='answer'>CARE BEAR</div>}
+`.replace(/‚([^„]*)„/g, (_, m) => `<div class='sub'>${m}</div>`));
+</script>
+<script>
+	//let words = [
+	//	// well-known or recognizable
+	//	{ name: 'BATMAN',	x: 2,	y: 14,	len: 5,	dir: 2, r: 'a' },
+	//	{ name: 'BENITO MUSSOLINI',	x: 0,	y: 15,	len: 14,	dir: 2, r: 'a' },
+	//	{ name: 'BLACK KNIGHT',	x: 13,	y: 14,	len: 10,	dir: 0, r: 'a' },
+	//	{ name: 'CAPTAIN KIRK',	x: 11,	y: 1,	len: 10,	dir: 6, r: 'a' },
+	//	{ name: 'CHUCK NORRIS',	x: 12,	y: 11,	len: 10,	dir: 0, r: 'a' },
+	//	{ name: 'DARTH VADER',	x: 5,	y: 13,	len: 9,	dir: 0, r: 'a' },
+	//	{ name: 'GODZILLA',	x: 7,	y: 4,	len: 7,	dir: 4, r: 'a' },
+	//	{ name: 'INDIANA JONES',	x: 9,	y: 2,	len: 11,	dir: 4, r: 'a' },
+	//	{ name: 'JACKIE CHAN',	x: 4,	y: 13,	len: 9,	dir: 0, r: 'a' },
+	//	{ name: 'OPTIMUS PRIME',	x: 1,	y: 4,	len: 11,	dir: 4, r: 'a' },
+	//	{ name: 'POWER RANGERS',	x: 2,	y: 3,	len: 11,	dir: 2, r: 'a' },
+	//	{ name: 'SUPERMAN',	x: 14,	y: 16,	len: 7,	dir: 6, r: 'a' },
+	//	{ name: 'THE ROCK',	x: 0,	y: 16,	len: 6,	dir: 2, r: 'a' },
+	//	{ name: 'THE TERMINATOR',	x: 3,	y: 14,	len: 12,	dir: 0, r: 'a' },
+	//
+	//	// slightly obscure
+	//	{ name: 'AARON CARTER',	x: 6,	y: 13,	len: 10,	dir: 0,	r: 'b' },
+	//	{ name: 'ABRAHAM LINCOLN',	x: 0,	y: 2,	len: 13,	dir: 3,	r: 'b' },
+	//	{ name: 'BILL AND TED',	x: 11,	y: 11,	len: 9,	dir: 0,	r: 'b' },
+	//	{ name: 'BLUE MEANIE',	x: 2,	y: 14,	len: 9,	dir: 0,	r: 'b' },
+	//	{ name: 'COWBOY CURTIS',	x: 14,	y: 5,	len: 11,	dir: 4,	r: 'b' },
+	//	{ name: 'DOC OCK',	x: 10,	y: 9,	len: 5,	dir: 0,	r: 'b' },
+	//	{ name: 'GANDALF',	x: 6,	y: 0,	len: 6,	dir: 2,	r: 'b' },
+	//	{ name: 'HULK HOGAN',	x: 0,	y: 0,	len: 8,	dir: 2,	r: 'b' },
+	//	{ name: 'JAMBI THE GENIE',	x: 0,	y: 1,	len: 12,	dir: 4,	r: 'b' },
+	//	{ name: 'LO PAN',	x: 8,	y: 2,	len: 4,	dir: 6,	r: 'b' },
+	//	{ name: 'ROBOCOP',	x: 10,	y: 16,	len: 6,	dir: 0,	r: 'b' },
+	//	{ name: 'SHAQUILLE O’NEAL',	x: 8,	y: 15,	len: 13,	dir: 0,	r: 'b' },
+	//	{ name: 'SPOCK',	x: 14,	y: 0,	len: 4,	dir: 4,	r: 'b' },
+	//];
+	//document.getElementById('entries').innerHTML = words.map((word, ix) => `
+	//	<g class='ihs r-${word.r}'>
+	//		<rect class='box' x='${16 + 8.5*((ix / 14) | 0)}' y='${(ix % 14)+1}' width='8.2' height='.9' fill='hsl(220, 60%, 95%)' />
+	//		<path class='marking' d='M-.45 ${-word.len * (word.dir % 2 != 0 ? Math.SQRT2 : 1)} a .45 .45 0 0 1 .9 0 V 0 a .45 .45 0 0 1 -.9 0z' transform='translate(${word.x+.5} ${word.y+.5}) rotate(${45*word.dir})' />
+	//		<text class='w' x='${16.5 + 8.5*((ix / 14) | 0)}' y='${(ix % 14)+1.7}'>${word.name}</text>
+	//	</g>
+	//`).join('');
+</script>

@@ -47,7 +47,7 @@ function makeSolutionPage(pageId, hpsml, triggers)
 				case '[':
 					nid = idAlloc++;
 					let sid = m.groups.sid;
-					html.push(`<button type='button' class='reveal ${m.groups.type}' id='b-${nid}'></button>`);
+					html.push(`<button type='button' class='reveal ${m.groups.type}' id='b-${nid}' accesskey='.'></button>`);
 					let sTag = m.groups.sblock ? 'div' : 'span';
 					html.push(`<${sTag} id='s-${nid}'></${sTag}>`);
 					let sResult = makeSolutionPageImpl(hpsml, ']');
@@ -138,7 +138,7 @@ function makeSolutionPage(pageId, hpsml, triggers)
 			<div id='sol-controls'>
 				<button id='sol-reset' accesskey='r'>◀◀</button>
 				<button id='sol-back' accesskey='w'>◀</button>
-				<button id='sol-forward' accesskey='.'>▶</button>
+				<button id='sol-forward'>▶</button>
 				<button id='sol-expand' accesskey='a'>▶▶</button>
 			</div>
 			${result.html}`;
