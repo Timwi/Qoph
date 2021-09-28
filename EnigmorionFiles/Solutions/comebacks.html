@@ -1,0 +1,62 @@
+<style>
+	.ih:not(.re) { display: none; }
+	table.insults {
+		font-family: 'Agency FB';
+	}
+	table.insults td.c, table.insults th.c {
+		text-align: center;
+	}
+</style>
+<script src='../../files/solutions.js'></script>
+<h1>Comebacks</h1>
+<script>
+makeSolutionPage('throw', `
+<p>These are “Dropquote” puzzles, which require the solver to reconstruct a phrase or sentence by “dropping” the letters from the top of the grid into each column. The letters may not be in the order given, but they will remain in their column.</p>
+<p>Pick any dropquote puzzle to start. Once solved, [s it is worth googling for the sentence that comes out. You are likely to find out that [d they are <a href='https://monkeyisland.fandom.com/wiki/Insult_Sword_Fighting'>sword-fighting insults from <cite>The Secret of Monkey Island</cite></a>. With that, the rest of the dropquote puzzles are a breeze. [ra]]]</p>
+{-a <p>It appears [o the comebacks are in alphabetical order while the insults are not. Therefore, [c we must reorder the comebacks to fit with the insults. Do we leave the instructions where they are, or do we move them with the comebacks? [s If we leave them where they are, then we would be expected to apply them to the new comeback. In this case, the instruction «LETTER AFTER K» would end up with the comeback «You run THAT fast?», which doesn’t contain a «K». Therefore, [d we must move the instructions with the comebacks and apply the instruction to the insult where they land. [rb]]]]]</p>}
+{-a
+<table class='bordered centered insults'>
+<tr><th>First phrase (insult)</th>	<th>Second phrase (comeback)</th>	<th>Instruction</th>	<th class='ih r-b c'>Ltr</th></tr>
+<tr><td>Have you stopped wearing diapers yet?</td>	<td>{/b And I’ve got a little TIP for you. Get the POINT?}{b Why, did you want to borrow one?}</td>	<td>{/b FIRST LETTER}{b FIFTH WORD, FIRST LETTER}</td>	<td class='ih r-b c'>«D»</td></tr>
+<tr><td>I’m not going to take your insolence sitting down!</td>	<td>{/b Even BEFORE they smell your breath?}{b Your hemorrhoids are flaring up again, eh?}</td>	<td>{/b TWENTIETH LETTER}{b FOURTH WORD, LAST LETTER}</td>	<td class='ih r-b c'>«O»</td></tr>
+<tr><td>You make me want to puke.</td>	<td>{/b First you’d better stop waving it like a feather-duster.}{b You make me think somebody already did.}</td>	<td>{/b FIFTH WORD, FIRST LETTER}{b FOURTEENTH LETTER}</td>	<td class='ih r-b c'>«T»</td></tr>
+<tr><td>People fall at my feet when they see me coming.</td>	<td>{/b He must have taught you everything you know.}{b Even BEFORE they smell your breath?}</td>	<td>{/b LETTER BEFORE THE FIRST A, ATBASH CIPHERED}{b TWENTIETH LETTER}</td>	<td class='ih r-b c'>«H»</td></tr>
+<tr><td>You have the manners of a beggar.</td>	<td>{/b How appropriate. You fight like a cow.}{b I wanted to make sure you’d feel comfortable with me.}</td>	<td>{/b SEVENTH LETTER, ATBASH CIPHERED}{b LETTER AFTER V}</td>	<td class='ih r-b c'>«E»</td></tr>
+<tr><td>You fight like a dairy farmer.</td>	<td>{/b I hope now you’ve learned to stop picking your nose.}{b How appropriate. You fight like a cow.}</td>	<td>{/b THIRD WORD, SECOND LETTER, ATBASH CIPHERED}{b SEVENTH LETTER, ATBASH CIPHERED}</td>	<td class='ih r-b c'>«S»</td></tr>
+<tr><td>I once owned a dog that was smarter than you.</td>	<td>{/b I wanted to make sure you’d feel comfortable with me.}{b He must have taught you everything you know.}</td>	<td>{/b LETTER AFTER V}{b LETTER BEFORE THE FIRST A, ATBASH CIPHERED}</td>	<td class='ih r-b c'>«W»</td></tr>
+<tr><td>My handkerchief will wipe up your blood!</td>	<td>{/b I’d be in real trouble if you ever used them.}{b So you got that job as janitor, after all.}</td>	<td>{/b NINTH LETTER}{b LETTER AFTER LAST Y}</td>	<td class='ih r-b c'>«O»</td></tr>
+<tr><td>Nobody’s ever drawn blood from me and nobody ever will!</td>	<td>{/b I’m glad to hear you attended your family reunion.}{b You run THAT fast?}</td>	<td>{/b LETTER AFTER K}{b FIFTH WORD, SECOND LETTER}</td>	<td class='ih r-b c'>«R»</td></tr>
+<tr><td>There are no words for how disgusting you are.</td>	<td>{/b So you got that job as janitor, after all.}{b Yes, there are. You just never learned them.}</td>	<td>{/b LETTER AFTER LAST Y}{b TWENTY-SECOND LETTER}</td>	<td class='ih r-b c'>«D»</td></tr>
+<tr><td>Soon you’ll be wearing my sword like a shish kebab!</td>	<td>{/b Too bad no one’s ever heard of YOU at all.}{b First you’d better stop waving it like a feather-duster.}</td>	<td>{/b LETTER BEFORE H, ROT THIRTEEN}{b FIFTH WORD, FIRST LETTER}</td>	<td class='ih r-b c'>«M»</td></tr>
+<tr><td>You’re no match for my brains, you poor fool.</td>	<td>{/b Why, did you want to borrow one?}{b I’d be in real trouble if you ever used them.}</td>	<td>{/b FIFTH WORD, FIRST LETTER}{b NINTH LETTER}</td>	<td class='ih r-b c'>«A»</td></tr>
+<tr><td>I got this scar on my face during a mighty struggle!</td>	<td>{/b Yes, there are. You just never learned them.}{b I hope now you’ve learned to stop picking your nose.}</td>	<td>{/b TWENTY-SECOND LETTER}{b THIRD WORD, SECOND LETTER, ATBASH CIPHERED}</td>	<td class='ih r-b c'>«S»</td></tr>
+<tr><td>This is the END for you, you gutter-crawling cur!</td>	<td>{/b You make me think somebody already did.}{b And I’ve got a little TIP for you. Get the POINT?}</td>	<td>{/b FOURTEENTH LETTER}{b FIRST LETTER}</td>	<td class='ih r-b c'>«T»</td></tr>
+<tr><td>I’ve spoken with apes more polite than you.</td>	<td>{/b You run THAT fast?}{b I’m glad to hear you attended your family reunion.}</td>	<td>{/b FIFTH WORD, SECOND LETTER}{b LETTER AFTER K}</td>	<td class='ih r-b c'>«E»</td></tr>
+<tr><td>I’ve heard you are a contemptible sneak.</td>	<td>{/b Your hemorrhoids are flaring up again, eh?}{b Too bad no one’s ever heard of YOU at all.}</td>	<td>{/b FOURTH WORD, LAST LETTER}{b LETTER BEFORE H, ROT THIRTEEN}</td>	<td class='ih r-b c'>«R»</td></tr>
+</table>
+}
+{-b <p>We get «DO THE SWORD MASTER». If you’ve played <cite>Monkey Island</cite>, or have seen the fandom wiki page mentioned above, you already know [o that the Sword Master of Mêlée Island uses different insults that must be answered with the same comebacks. We can then [s apply the same instructions to the new insults. [rc]]]</p>}
+{-c
+<table class='bordered centered insults'>
+<tr><th>Sword Master insult</th>	<th>Instruction</th>	<th class='c'>Ltr</th></tr>
+<tr><td>I hope you have a boat ready for a quick escape.</td>	<td>FIFTH WORD, FIRST LETTER</td>	<td class='c'>«A»</td></tr>
+<tr><td>You are a pain in the backside, sir!</td>	<td>FOURTH WORD, LAST LETTER</td>	<td class='c'>«N»</td></tr>
+<tr><td>If your brother’s like you, better to marry a pig.</td>	<td>FOURTEENTH LETTER</td>	<td class='c'>«S»</td></tr>
+<tr><td>My wisest enemies run away at the first sight of me!</td>	<td>TWENTIETH LETTER</td>	<td class='c'>«W»</td></tr>
+<tr><td>Every word you say to me is stupid.</td>	<td>LETTER AFTER V</td>	<td class='c'>«E»</td></tr>
+<tr><td>I will milk every drop of blood from your body!</td>	<td>SEVENTH LETTER, ATBASH CIPHERED</td>	<td class='c'>«R»</td></tr>
+<tr><td>Only once have I met such a coward!</td>	<td>LETTER BEFORE THE FIRST A, ATBASH CIPHERED</td>	<td class='c'>«S»</td></tr>
+<tr><td>My name is feared in every dirty corner of this island!</td>	<td>LETTER AFTER LAST Y</td>	<td class='c'>«C»</td></tr>
+<tr><td>No one will ever catch ME fighting as badly as you do.</td>	<td>FIFTH WORD, SECOND LETTER</td>	<td class='c'>«A»</td></tr>
+<tr><td>There are no clever moves that can help you now.</td>	<td>TWENTY-SECOND LETTER</td>	<td class='c'>«T»</td></tr>
+<tr><td>My tongue is sharper than any sword.</td>	<td>FIFTH WORD, FIRST LETTER</td>	<td class='c'>«T»</td></tr>
+<tr><td>I’ve got the courage and skill of a master swordsman!</td>	<td>NINTH LETTER</td>	<td class='c'>«E»</td></tr>
+<tr><td>My last fight ended with my hands covered with blood.</td>	<td>THIRD WORD, SECOND LETTER, ATBASH CIPHERED</td>	<td class='c'>«R»</td></tr>
+<tr><td>I’ve got a long, sharp lesson for you to learn today.</td>	<td>FIRST LETTER</td>	<td class='c'>«I»</td></tr>
+<tr><td>Now I know what filth and stupidity really are.</td>	<td>LETTER AFTER K</td>	<td class='c'>«N»</td></tr>
+<tr><td>My sword is famous all over the Caribbean!</td>	<td>LETTER BEFORE H, ROT THIRTEEN</td>	<td class='c'>«G»</td></tr>
+</table>
+<div class='answer'>SCATTERING</div>
+}
+`);
+</script>
