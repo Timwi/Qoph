@@ -88,33 +88,33 @@ namespace Qoph
 
         private static readonly string[] _carpetColorNames = "WHITE,AQUA,AZURE,FUCHSIA,JADE,VIOLET,ONYX,PINK,GAMBOGE".Split(',');
 
-        private static readonly string[] _songTitles = Ut.NewArray(
-            "Lemon Tree",
-            "Blinding Lights",
-            "Still Alive",
-            "Imagine",
+        private static readonly (string title, string author, string givenLyrics, string nextWord)?[] _songTitles = Ut.NewArray<(string title, string author, string givenLyrics, string nextWord)?>(
+            ("Fools Garden", "Lemon Tree", "I’m sitting here in a boring room, it’s just another rainy Sunday...", "Afternoon"),
+            ("The Weekend", "Blinding Lights", "So I hit the road in overdrive...", "Baby"),
+            ("Jonathan Coulton", "Still Alive", "... there's no sense crying over every mistake. You just keep on trying till you run out of...", "Cake"),
+            ("John Lennon", "Imagine", "... sharing all the world, yoo-hoo... You may say I’m a...", "Dreamer"),
             null,
             null,
-            "Space Oddity",
-            "Holding Out for a Hero",
-            "Barbie Girl",
-            "Royals",
-            "Africa",
-            "Stronger",
-            "Shape of You",
-            "Everybody Wants to Rule the World",
-            "Bohemian Rhapsody",
-            "I'm Still Standing",
-            "Rasputin",
-            "Mr. Blue Sky",
-            "Magnolia",
-            "God's Plan",
-            "Eternal Flame",
-            "Take Me Home, Country Roads",
-            "Angels",
-            "The Elements",
-            "Yellow Submarine",
-            "Wannabe");
+            ("David Bowie", "Space Oddity", "Take your protein pills and put your helmet on...", "Ground"),
+            ("Bonnie Tyler", "Holding Out for a Hero", "And where are all the Gods? Where’s the streetwise...", "Hercules"),
+            ("Aqua", "Barbie Girl", "You can brush my hair, undress me everywhere...", "Imagination"),
+            ("Lorde", "Royals", "We’re driving Cadillacs in our dreams, but everybody's like Cristal, Maybach, diamonds on your timepiece...", "Jet planes"),
+            ("Toto", "Africa", "I know that I must do what’s right, as sure as...", "Kilimanjaro"),
+            ("Kanye West", "Stronger", "Bow in the presence of greatness, 'cause right now thou hast forsaken us. You should be honored by my...", "Lateness"),
+            ("Ed Sheeran", "Shape of You", "I’m in love with the shape of you. We push and pull like a...", "Magnet"),
+            ("Tears for Fears", "Everybody Wants to Rule the World", "Acting on your best behaviour, turn your back on mother...", "Nature"),
+            ("Queen", "Bohemian Rhapsody", "... caught in a landslide, no escape from reality...", "Open"),
+            ("Elton John", "I'm Still Standing", "After all this time, picking up the...", "Pieces"),
+            ("Boney M.", "Rasputin", "Ra-Ra-Rasputin, lover of the Russian...", "Queen"),
+            ("Electric Light Orchestra", "Mr. Blue Sky", "Hey you with the pretty face, welcome to the human...", "Race"),
+            ("Playboi Carti", "Magnolia", "In New York I Milly Rock, hide it in my...", "Sock"),
+            ("Drake", "God's Plan", "She say, “Do you love me?” I...", "Tell"),
+            ("The Bangles", "Eternal Flame", "Can you feel my heart beating? Do you...", "Understand"),
+            ("John Denver", "Take Me Home, Country Roads", "... I belong, West...", "Virginia"),
+            ("Robbie Williams", "Angels", "... whether I’m right or wrong. And down the...", "Waterfall"),
+            ("Tom Lehrer", "The Elements", "... also mendelevium, einsteinium, nobelium, and argon, krypton, neon, radon, ...", "Xenon"),
+            ("The Beatles", "Yellow Submarine", "And we lived beneath the waves in our...", "Yellow"),
+            ("Spice Girls", "Wannabe", "... wanna (ha), I wanna (ha), I wanna (ha), I wanna (ha), I wanna really really really wanna...", "Zigazig"));
 
         public static readonly string[] _gashlycrumbTiniesObjects = Ut.NewArray(
             "a piece of banister",
@@ -527,7 +527,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
         {
             var polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\LpentagonalIcositetrahedron.txt");
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Template.svg",
-                //stroke='white' stroke-width='.05' paint-order='stroke' 
+                //stroke='white' stroke-width='.05' paint-order='stroke'
                 generateNet(polyhedron, faceColor: f => "#def", faceSvg: (f, x, y) => $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{f}</text>").svg);
         }
 
@@ -690,7 +690,7 @@ h3 {{ font-size: 14pt; }}
             public int AdjacentEdge;
             public bool Locked;
             public int? CyanNumber;  // on the door
-            public int? PinkNumber;  // in the corner widdershins from this door
+            public int? PinkNumber;  // in the corner where this edge starts (clockwise from the door)
             public string CrosswordInfo;    // could be crossword clue or offset
             public int CrosswordInfoFontSize;
         }
@@ -721,7 +721,6 @@ h3 {{ font-size: 14pt; }}
                 return null;
             });
 
-            // Maple solve code
             var maplePieces = new List<string>();
             var pinkCorners = new List<((int faceIx, int vertexIx)[] adj, int pinkNumber)>();
             for (var faceIx = 0; faceIx < faceInfos.Length; faceIx++)
@@ -770,15 +769,22 @@ h3 {{ font-size: 14pt; }}
                         e.Locked && e.CrosswordInfo != null ? $@"label: ""{e.CrosswordInfo.CLiteralEscape()}""" : null,
                         $"face: {e.AdjacentFace}").Where(str => str != null).JoinString(", ")} }}").JoinString(", ")} ] }}").JoinString(", ")} ]");
 
-            //General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"<!--CyanEdges-start-->", @"<!--CyanEdges-end-->",
-            //    edges.Select(tup => $"<text transform='translate({Math.Round((tup.p1.X + tup.p2.X) / 2, 2)} {Math.Round((tup.p1.Y + tup.p2.Y) / 2, 2)}) rotate({Math.Round(Math.Atan2(tup.p2.Y - tup.p1.Y, tup.p2.X - tup.p1.X) * 180 / Math.PI, 2)})' y='-.03'>{tup.cyanNumber}</text>").JoinString());
-
             General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"<!--PinkCorners-start-->", @"<!--PinkCorners-end-->",
                 pinkCorners.SelectMany(corner => corner.adj
                     .Select(inf => (p: vertices[(inf.faceIx, inf.vertexIx)], prevP: vertices[(inf.faceIx, (inf.vertexIx + 4) % 5)], nextP: vertices[(inf.faceIx, (inf.vertexIx + 1) % 5)]))
                     .Select(inf => (inf.p, vector: (inf.prevP - inf.p).Unit() + (inf.nextP - inf.p).Unit()))
                     .Select(inf => (p: inf.p + .1 * inf.vector.Unit(), angle: inf.vector.Theta() * 180 / Math.PI))
                     .Select(inf => $"<text transform='translate({inf.p.X:.00} {inf.p.Y:.00}) rotate({inf.angle - 90:.00})' y='.06'>{corner.pinkNumber}</text>")).JoinString());
+
+            for (var subset = 0; subset < 1 << 24; subset++)
+            {
+                if (subset % 1000 == 0)
+                    Console.Write($"{(double) subset * 100 / (1 << 24):.0}%\r");
+                var faces = Enumerable.Range(0, 24).Where(bit => (subset & (1 << bit)) != 0).ToArray();
+                var clues = pinkCorners.Count(p => p.adj.All(tup => faces.Contains(tup.faceIx)));
+                if (clues == faces.Length)
+                    ConsoleUtil.WriteLine((faces.JoinString(", ") + "      ").Color(ConsoleColor.Green));
+            }
 
             // Google Sheets
             Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{(f.Edges[edge].Locked ? f.Edges[edge].CrosswordInfo.Apply(ci => string.IsNullOrWhiteSpace(ci) ? "" : !"+-".Contains(ci[0]) ? ci.Replace("\n", " ") : $"‘{ci}’") : f.Edges[edge].AdjacentFace.ToString())}\t{(f.Edges[edge].Locked ? "" : f.Edges[edge].AdjacentEdge.ToString())}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex + 1}\t{f.MusicSnippet}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
@@ -798,7 +804,7 @@ h3 {{ font-size: 14pt; }}
                 var carpetColor = _carpetColorNames.First(cn => cn.Contains(carpetLetter));
                 var inf = new FaceInfo
                 {
-                    MusicSnippet = _songTitles[getFaceValue(faceIx, _musicSnippets) - 1],
+                    MusicSnippet = _songTitles[getFaceValue(faceIx, _musicSnippets) - 1]?.title,
                     GashlycrumbTiniesObject = _gashlycrumbTiniesObjects[getFaceValue(faceIx, _gashlycrumbTinies) - 1],
                     CarpetColor = carpetColor,
                     CarpetColorIndex = carpetColor.IndexOf(carpetLetter)
