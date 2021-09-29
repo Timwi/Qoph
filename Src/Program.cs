@@ -36,6 +36,7 @@ namespace Qoph
 
 
             FaceToFace.GatherAllData();
+            FaceToFace.Planning();
 
 
             Console.WriteLine("Done.");

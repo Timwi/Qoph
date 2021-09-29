@@ -293,90 +293,6 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
             return new Polyhedron { Filename = Path.GetFileName(path), Name = name, Vertices = vertices, Faces = faces };
         }
 
-        public static void Test()
-        {
-            const int extraFaces = 1;
-
-            var polyhedra = getPolyhedra();
-
-            foreach (var p in polyhedra)
-                if (p.Faces.Length == 24)
-                    Console.WriteLine(p.Name);
-            Console.WriteLine();
-
-            polyhedra = polyhedra.Where(p => p.Faces.Length <= 25 && !"{}".Any(ch => p.Name.Contains(ch))).ToList();
-
-            var loopLen = 6;
-            IEnumerable<int[]> recurse(int[] sofar)
-            {
-                if (sofar.Length == loopLen)
-                {
-                    yield return sofar;
-                    yield break;
-                }
-
-                for (var i = 0; i < polyhedra.Count; i++)
-                {
-                    if (sofar.Contains(i))
-                        continue;
-                    var polyhedron = polyhedra[i];
-                    var nameLen1 = polyhedron.Name.ToUpperInvariant().Count(ch => ch >= 'A' && ch <= 'Z');
-                    var nameLen2 = Regex.Replace(polyhedron.Name, @"\s*\(.*\)\s*$", "").ToUpperInvariant().Count(ch => ch >= 'A' && ch <= 'Z');
-                    var joinsUp = true;
-                    if (sofar.Length == loopLen - 1)
-                    {
-                        var oNameLen1 = polyhedra[sofar[0]].Name.ToUpperInvariant().Count(ch => ch >= 'A' && ch <= 'Z');
-                        var oNameLen2 = Regex.Replace(polyhedra[sofar[0]].Name, @"\s*\(.*\)\s*$", "").ToUpperInvariant().Count(ch => ch >= 'A' && ch <= 'Z');
-                        joinsUp = polyhedra[i].Faces.Length - extraFaces == oNameLen1 || polyhedra[i].Faces.Length - extraFaces == oNameLen2;
-                    }
-                    if (joinsUp && (sofar.Length == 0 || polyhedra[sofar[sofar.Length - 1]].Faces.Length - extraFaces == nameLen1 || polyhedra[sofar[sofar.Length - 1]].Faces.Length - extraFaces == nameLen2))
-                        foreach (var solution in recurse(sofar.Insert(sofar.Length, i)))
-                            yield return solution;
-                }
-            }
-
-            var count = 0;
-            var best = int.MaxValue;
-            var bestCount = 0;
-            foreach (var solution in recurse(new int[0]))
-            {
-                count++;
-
-                var totalFaces = solution.Sum(ix => polyhedra[ix].Faces.Length);
-                if (totalFaces < best)
-                {
-                    best = totalFaces;
-                    var tt = new TextTable { ColumnSpacing = 2 };
-
-                    tt.SetCell(4, 0, "V".Color(ConsoleColor.Green));
-                    tt.SetCell(5, 0, "F".Color(ConsoleColor.Cyan));
-
-                    var row = 1;
-                    for (var i = 0; i < solution.Length; i++)
-                    {
-                        var polyhedron = polyhedra[solution[i]];
-                        var nameLen1 = polyhedron.Name.ToUpperInvariant().Count(ch => ch >= 'A' && ch <= 'Z');
-                        var nameLen2 = Regex.Replace(polyhedron.Name, @"\s*\(.*\)\s*$", "").ToUpperInvariant().Count(ch => ch >= 'A' && ch <= 'Z');
-                        tt.SetCell(0, row, polyhedron.Filename.Color(ConsoleColor.DarkYellow));
-                        tt.SetCell(1, row, polyhedron.Name.Color(ConsoleColor.Yellow));
-                        tt.SetCell(2, row, nameLen1.ToString().Color(ConsoleColor.Magenta));
-                        tt.SetCell(3, row, nameLen2.ToString().Color(ConsoleColor.Magenta));
-                        tt.SetCell(4, row, polyhedron.Vertices.Length.ToString().Color(ConsoleColor.Green));
-                        tt.SetCell(5, row, polyhedron.Faces.Length.ToString().Color(ConsoleColor.Cyan));
-                        row++;
-                    }
-                    tt.SetCell(5, row, totalFaces.ToString().Color(ConsoleColor.White));
-                    tt.WriteToConsole();
-                    Console.WriteLine();
-                    bestCount = 0;
-                }
-                else if (totalFaces == best)
-                    bestCount++;
-            }
-            Console.WriteLine(count);
-            Console.WriteLine(bestCount);
-        }
-
         private static List<Polyhedron> getPolyhedra()
         {
             var polyhedra = new List<Polyhedron>();
@@ -785,10 +701,11 @@ h3 {{ font-size: 14pt; }}
 
         public sealed class EdgeInfo
         {
-            public int? AdjacentFace;   // null if door is locked
-            public int? AdjacentEdge;
-            public int CyanNumber;  // on the door
-            public int PinkNumber;  // in the corner widdershins from this door
+            public int AdjacentFace;
+            public int AdjacentEdge;
+            public bool Locked;
+            public int? CyanNumber;  // on the door
+            public int? PinkNumber;  // in the corner widdershins from this door
             public string CrosswordInfo;    // could be crossword clue or offset
             public int CrosswordInfoFontSize;
         }
@@ -805,6 +722,22 @@ h3 {{ font-size: 14pt; }}
         private static int getFaceValue(int face, DistrInfo distr) => distr.Distribution.Select(d => new { Data = d, Ix = d.faces.IndexOf(face) }).Where(inf => inf.Ix != -1).Single().Apply(inf => inf.Data.word[inf.Ix] - 'A' + 1);
 
         public static void GatherAllData()
+        {
+            var faceInfos = GetFaceData();
+
+            // C# declaration for Unity project
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
+                $@"new[] {{ {faceInfos.Select(fi => $@"new FaceData {{ CarpetColor = ""{fi.CarpetColor.ToLowerInvariant().CLiteralEscape()}"", CarpetLength = {fi.CarpetColorIndex + 1}, SongSnippet = ""{fi.MusicSnippet.CLiteralEscape()}"", ItemInBox = ""{fi.GashlycrumbTiniesObject.CLiteralEscape()}"", Edges = new[] {{ {fi.Edges.Select(e => $@"new Edge {{ {new[] { e.CyanNumber.NullOr(c => $"CyanNumber = {c}"), e.PinkNumber.NullOr(p => $"PinkNumber = {p}"), e.Locked && e.CrosswordInfo != null ? $@"Label = ""{e.CrosswordInfo.CLiteralEscape()}"", LabelFontSize = {e.CrosswordInfoFontSize}" : null, e.Locked ? null : $"Face = {e.AdjacentFace}" }.Where(str => str != null).JoinString(", ")} }}").JoinString(", ")} }} }}").JoinString(", ")} }}");
+
+            // JS declaration for solution page
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
+                $@"[ {faceInfos.Select((fi, fIx) => $@"{{ c: [ {_distributions.Select(dist => dist.Distribution.First(d => d.faces.Contains(fIx)).Apply(tup => tup.color == null ? "null" : tup.color.ToString())).JoinString(", ")} ], cc: ""{fi.CarpetColor.ToUpperInvariant().CLiteralEscape()}"", ci: {fi.CarpetColorIndex + 1}, song: ""{fi.MusicSnippet.CLiteralEscape()}"", item: ""{Regex.Replace(fi.GashlycrumbTiniesObject, @"""(.*?)""", m => $"“{m.Groups[1].Value}”").CLiteralEscape()}"", e: [ {fi.Edges.Select(e => $@"{{ cn: {e.CyanNumber}, pn: {e.PinkNumber}{(e.Locked && e.CrosswordInfo == null ? "" : e.Locked ? $@", label: ""{e.CrosswordInfo.CLiteralEscape()}""" : $@", face: {e.AdjacentFace}")} }}").JoinString(", ")} ] }}").JoinString(", ")} ]");
+
+            // Google Sheets
+            Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{(f.Edges[edge].Locked ? f.Edges[edge].CrosswordInfo.Apply(ci => string.IsNullOrWhiteSpace(ci) ? "" : !"+-".Contains(ci[0]) ? ci.Replace("\n", " ") : $"‘{ci}’") : f.Edges[edge].AdjacentFace.ToString())}\t{(f.Edges[edge].Locked ? "" : f.Edges[edge].AdjacentEdge.ToString())}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex + 1}\t{f.MusicSnippet}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
+        }
+
+        public static FaceInfo[] GetFaceData()
         {
             var locked = getLocked();
             var faceInfos = new List<FaceInfo>();
@@ -831,10 +764,9 @@ h3 {{ font-size: 14pt; }}
 
                     inf.Edges[edge] = new EdgeInfo
                     {
-                        AdjacentFace = locked.Contains((faceIx, edge)) ? null : adjacentFaceIx.Nullable(),
-                        AdjacentEdge = locked.Contains((faceIx, edge)) ? null : adjacentFace.IndexOf(face[(edge + 1) % 5]).Nullable(),
-                        CyanNumber = getFaceValue(faceIx, _cyanSums) + getFaceValue(adjacentFaceIx, _cyanSums),
-                        PinkNumber = _polyhedron.Faces.SelectIndexWhere(f => f.Contains(face[edge])).Sum(f => getFaceValue(f, _pinkSums))
+                        Locked = locked.Contains((faceIx, edge)),
+                        AdjacentFace = adjacentFaceIx,
+                        AdjacentEdge = adjacentFace.IndexOf(face[(edge + 1) % 5])
                     };
                 }
                 faceInfos.Add(inf);
@@ -858,16 +790,58 @@ h3 {{ font-size: 14pt; }}
                 faceInfos[faceIx].Edges[barEdge].CrosswordInfoFontSize = 32;
             }
 
-            // C# declaration for Unity project
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
-                $@"new[] {{ {faceInfos.Select(fi => $@"new FaceData {{ CarpetColor = ""{fi.CarpetColor.ToLowerInvariant().CLiteralEscape()}"", CarpetLength = {fi.CarpetColorIndex + 1}, SongSnippet = ""{fi.MusicSnippet.CLiteralEscape()}"", ItemInBox = ""{fi.GashlycrumbTiniesObject.CLiteralEscape()}"", Edges = new[] {{ {fi.Edges.Select(e => $@"new Edge {{ CyanNumber = {e.CyanNumber}, PinkNumber = {e.PinkNumber}{(e.AdjacentFace == null && e.CrosswordInfo == null ? "" : e.AdjacentFace == null ? $@", Label = ""{e.CrosswordInfo.CLiteralEscape()}"", LabelFontSize = {e.CrosswordInfoFontSize}" : $@", Face = {e.AdjacentFace.Value}")} }}").JoinString(", ")} }} }}").JoinString(", ")} }}");
+            // Cyan numbers (edge sums)
+            var rnd = new Random(47);
 
-            // JS declaration for solution page
-            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
-                $@"[ {faceInfos.Select((fi, fIx) => $@"{{ c: [ {_distributions.Select(dist => dist.Distribution.First(d => d.faces.Contains(fIx)).Apply(tup => tup.color == null ? "null" : tup.color.ToString())).JoinString(", ")} ], cc: ""{fi.CarpetColor.ToUpperInvariant().CLiteralEscape()}"", ci: {fi.CarpetColorIndex + 1}, song: ""{fi.MusicSnippet.CLiteralEscape()}"", item: ""{Regex.Replace(fi.GashlycrumbTiniesObject, @"""(.*?)""", m => $"“{m.Groups[1].Value}”").CLiteralEscape()}"", e: [ {fi.Edges.Select(e => $@"{{ cn: {e.CyanNumber}, pn: {e.PinkNumber}{(e.AdjacentFace == null && e.CrosswordInfo == null ? "" : e.AdjacentFace == null ? $@", label: ""{e.CrosswordInfo.CLiteralEscape()}""" : $@", face: {e.AdjacentFace.Value}")} }}").JoinString(", ")} ] }}").JoinString(", ")} ]");
+            var cyanClues = faceInfos
+                .SelectMany((face, faceIx) => face.Edges.Select(edge => (face1: faceIx, face2: edge.AdjacentFace, sum: getFaceValue(faceIx, _cyanSums) + getFaceValue(edge.AdjacentFace, _cyanSums))))
+                .ToArray()
+                .Shuffle(rnd);
 
-            // Google Sheets
-            Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{f.Edges[edge].AdjacentFace?.ToString() ?? f.Edges[edge].CrosswordInfo.Apply(ci => string.IsNullOrWhiteSpace(ci) ? "" : !"+-".Contains(ci[0]) ? ci.Replace("\n", " ") : $"‘{ci}’")}\t{f.Edges[edge].AdjacentEdge}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex + 1}\t{f.MusicSnippet}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
+            var requiredCyanClues = Ut.ReduceRequiredSet(cyanClues, test: state =>
+            {
+                var puzzle = new Puzzle(_polyhedron.Faces.Length, 1, 26);
+                foreach (var (face1, face2, sum) in state.SetToTest)
+                    puzzle.AddConstraint(new SumConstraint(sum, new[] { face1, face2 }));
+                return !puzzle.Solve().Skip(1).Any();
+            })
+                .ToArray();
+
+            foreach (var (face1, face2, sum) in requiredCyanClues)
+            {
+                faceInfos[face1].Edges[faceInfos[face1].Edges.IndexOf(e => e.AdjacentFace == face2)].CyanNumber = sum;
+                faceInfos[face2].Edges[faceInfos[face2].Edges.IndexOf(e => e.AdjacentFace == face1)].CyanNumber = sum;
+            }
+
+            // Pink numbers (vertex sums)
+            var pinkCluesRaw =
+                from faceIx in Enumerable.Range(0, _polyhedron.Faces.Length)
+                from edgeIx in Enumerable.Range(0, 5)
+                let vertex = _polyhedron.Faces[faceIx][edgeIx]
+                let adjoiningFaces = _polyhedron.Faces.SelectIndexWhere(f => f.Contains(vertex))
+                select (faces: adjoiningFaces.ToArray(), sum: adjoiningFaces.Sum(f => getFaceValue(f, _pinkSums)));
+            var pinkClues = pinkCluesRaw.Where(cl => cl.faces[0] == cl.faces.Min()).ToArray();
+
+            var requiredPinkClues = Ut.ReduceRequiredSet(Enumerable.Range(0, pinkClues.Length).ToArray().Shuffle(rnd), test: state =>
+            {
+                Console.WriteLine(Enumerable.Range(0, pinkClues.Length).Select(i => state.SetToTest.Contains(i) ? "█" : "░").JoinString());
+                var puzzle = new Puzzle(_polyhedron.Faces.Length, 1, 26);
+                foreach (var i in state.SetToTest)
+                    puzzle.AddConstraint(new SumConstraint(pinkClues[i].sum, pinkClues[i].faces));
+                return !puzzle.Solve().Skip(1).Any();
+            })
+                .Select(ix => pinkClues[ix])
+                .ToArray();
+
+            foreach (var (faces, sum) in requiredPinkClues)
+            {
+                var commonVertex = Enumerable.Range(0, _polyhedron.Vertices.Length).Single(vIx => faces.All(f => _polyhedron.Faces[f].Contains(vIx)));
+                for (int faceIx = 0; faceIx < _polyhedron.Faces.Length; faceIx++)
+                    if (_polyhedron.Faces[faceIx].Contains(commonVertex))
+                        faceInfos[faceIx].Edges[_polyhedron.Faces[faceIx].IndexOf(commonVertex)].PinkNumber = sum;
+            }
+
+            return faceInfos.ToArray();
         }
 
         public static void GenerateModels()

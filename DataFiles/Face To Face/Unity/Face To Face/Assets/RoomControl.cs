@@ -31,8 +31,11 @@ public partial class RoomControl : MonoBehaviour
 
         for (var i = 0; i < 5; i++)
         {
+            CyanNumbers[i].gameObject.SetActive(Data.Faces[faceIx].Edges[i].CyanNumber != null);
             CyanNumbers[i].text = Data.Faces[faceIx].Edges[i].CyanNumber.ToString();
+            PinkNumbers1[i].gameObject.SetActive(Data.Faces[faceIx].Edges[i].PinkNumber != null);
             PinkNumbers1[i].text = Data.Faces[faceIx].Edges[i].PinkNumber.ToString();
+            PinkNumbers2[i].gameObject.SetActive(Data.Faces[faceIx].Edges[i].PinkNumber != null);
             PinkNumbers2[i].text = Data.Faces[faceIx].Edges[i].PinkNumber.ToString();
             Doors[i].transform.localEulerAngles = new Vector3(0, DoorRotationsY[i], 0);
             DoorSigns[i].SetActive(Data.Faces[faceIx].Edges[i].Label != null);
