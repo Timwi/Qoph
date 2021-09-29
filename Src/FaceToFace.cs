@@ -51,37 +51,38 @@ namespace Qoph
             }
         }
 
-        private static readonly DistrInfo _cyanSums = new DistrInfo("Edge sums (cyan)", "PINK SUM",
-                (word: "PINK", faces: new[] { 8, 11, 0, 1 }, color: 1),
-                (word: "SUM", faces: new[] { 15, 12, 6 }, color: 2),
+        private static readonly DistrInfo _carpetColors = new DistrInfo("Carpet colors", "CYAN SUM",
                 (word: "Q", faces: new[] { 22 }, color: 0),
-                (word: "ABDEGHJLOFRVTZYX", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 16, 17, 18, 19, 20, 21, 23 }, color: null));
+                (word: "LAMP", faces: new[] { 8, 11, 0, 1 }, color: 1),
+                (word: "BROS", faces: new[] { 15, 12, 16, 19 }, color: 2),
+                (word: "WDFGHJKNCYTVUXZ", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 17, 18, 6, 20, 21, 23 }, color: null));
+        private static readonly DistrInfo _cyanSums = new DistrInfo("Edge sums (cyan)", "PINK SUM",
+                (word: "Q", faces: new[] { 22 }, color: 0),
+                (word: "GET", faces: new[] { 8, 11, 0 }, color: 1),
+                (word: "PINK", faces: new[] { 1, 15, 12, 16 }, color: 2),
+                (word: "SUM", faces: new[] { 19, 9, 4 }, color: 3),
+                (word: "ABHDJLOFRVZYX", faces: new[] { 2, 3, 5, 7, 10, 13, 14, 6, 17, 18, 20, 21, 23 }, color: null));
         private static readonly DistrInfo _pinkSums = new DistrInfo("Vertex sums (pink)", "LYRICS NEXT WORD",
+                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "LYRICS", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: 1),
                 (word: "NEXT", faces: new[] { 14, 13, 5, 4 }, color: 2),
                 (word: "WOD", faces: new[] { 9, 10, 3 }, color: 3),
-                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "JGHFKMPVUZ", faces: new[] { 2, 6, 7, 16, 17, 18, 19, 20, 21, 23 }, color: null));
-        private static readonly DistrInfo _musicSnippets = new DistrInfo("Lyrics", "GASHLYCRUMB TIN",
+        private static readonly DistrInfo _musicSnippets = new DistrInfo("Lyrics", "GASHLYCRUMB TINS",
+                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "GASHLYCRUMB", faces: new[] { 8, 11, 0, 1, 15, 12, 16, 19, 9, 4, 5 }, color: 1),
                 (word: "TIN", faces: new[] { 21, 20, 3 }, color: 2),
-                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "DJKOPVWXZ", faces: new[] { 6, 7, 10, 13, 14, 17, 18, 2, 23 }, color: null));
-        private static readonly DistrInfo _carpetColors = new DistrInfo("Carpet colors", "CYAN SUM",
-                (word: "CYAN", faces: new[] { 8, 11, 0, 1 }, color: 1),
-                (word: "SUM", faces: new[] { 15, 12, 6 }, color: 2),
-                (word: "Q", faces: new[] { 22 }, color: 0),
-                (word: "BDFGHJKLOPRTVWXZ", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 16, 17, 18, 19, 20, 21, 23 }, color: null));
         private static readonly DistrInfo _gashlycrumbTinies = new DistrInfo("Gashlycrumb Tinies", "LOCK IS BAR",
+                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "LOCK", faces: new[] { 8, 11, 0, 1 }, color: 1),
                 (word: "IS", faces: new[] { 15, 12 }, color: 2),
                 (word: "BAR", faces: new[] { 16, 19, 9 }, color: 3),
-                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "EFGHJMNPUVWXYZ", faces: new[] { 2, 3, 4, 5, 6, 7, 10, 13, 14, 17, 18, 20, 21, 23 }, color: null));
         private static readonly DistrInfo _crosswordAfterOffset = new DistrInfo("Crossword", "CARPET INDEX",
+                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "CARPET", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: 1),
                 (word: "INDX", faces: new[] { 23, 3, 2, 17 }, color: 2),
-                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "FGHJKLMSUVWYZ", faces: new[] { 4, 5, 6, 7, 9, 10, 13, 14, 16, 18, 19, 20, 21 }, color: null));
 
         private static readonly DistrInfo[] _distributions = new[] { _carpetColors, _cyanSums, _pinkSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
