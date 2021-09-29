@@ -350,8 +350,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
         /// <param name="faceSvg">Extra SVG to add for each face. Parameters are: Face index, X, Y.</param>
         /// <returns></returns>
         private static (string svg, PointD[][] polygons) generateNet(Polyhedron polyhedron,
-            Func<int, int, double, double, string> edgeSvg = null,
-            Func<int, double, double, string> vertexSvg = null,
+            Func<int, int, PointD, string> vertexSvg = null,
             Func<int, int, double> edgeStrokeWidth = null,
             Func<int, double, double, string> faceSvg = null,
             Func<int, string> faceColor = null)
@@ -452,7 +451,6 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                     {
                         var p1 = polygons[fromFaceIx][fromEdgeIx];
                         var p2 = polygons[fromFaceIx][(fromEdgeIx + 1) % polygons[fromFaceIx].Length];
-                        IEnumerable<string> classes = new[] { $"face-{fromFaceIx}", $"face-{toFaceIx}", $"edge-{fromFaceIx}-{fromEdgeIx}", $"edge-{toFaceIx}-{toEdgeIx}" };
                         svg.Append($@"<path id='edge-{fromFaceIx}-{fromEdgeIx}' d='M {p1.X},{p1.Y} L {p2.X},{p2.Y}' stroke='black'{(edgeStrokeWidth == null ? null : $" stroke-width='{edgeStrokeWidth(fromFaceIx, toFaceIx)}'")} />");
 
                         if (polygons[toFaceIx] != null)
@@ -473,30 +471,17 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                             Intersect.LineWithLine(ref edge1, ref edge2, out var l1, out var l2);
                             var intersect = edge1.Start + l1 * (edge1.End - edge1.Start);
 
-                            classes = classes.Concat("decor");
-                            //switch (adj & Adjacency.ConnectionMask)
-                            //{
-                            //    case Adjacency.Portaled:
-                            //        var ch = polyhedron.GetPortalLetter(fromFaceIx, fromEdgeIx);
-                            //        sendText($"portal-letter-{fromFaceIx}-{fromEdgeIx}", classes, .5, p1c.X, p1c.Y, ch.ToString(), "#000", edgeData);
-                            //        sendText($"portal-letter-{toFaceIx}-{toEdgeIx}", classes, .5, p2c.X, p2c.Y, ch.ToString(), "#000", edgeData);
-                            //        sendPath($"portal-marker-{fromFaceIx}-{fromEdgeIx}", classes, edgeData, $"M {(p11.X + p1m.X) / 2},{(p11.Y + p1m.Y) / 2} {(p1c.X + p1m.X) / 2},{(p1c.Y + p1m.Y) / 2} {(p12.X + p1m.X) / 2},{(p12.Y + p1m.Y) / 2} z", fill: "#888");
-                            //        sendPath($"portal-marker-{toFaceIx}-{toEdgeIx}", classes, edgeData, $"M {(p21.X + p2m.X) / 2},{(p21.Y + p2m.Y) / 2} {(p2c.X + p2m.X) / 2},{(p2c.Y + p2m.Y) / 2} {(p22.X + p2m.X) / 2},{(p22.Y + p2m.Y) / 2} z", fill: "#888");
-                            //        break;
-
-                            //    case Adjacency.Curved:
                             svg.Append($@"<path stroke='cornflowerblue' fill='none' id='curve-{fromFaceIx}-{fromEdgeIx}' d='{(
                                 (p2m - p1m).Distance() < .5 ? $"M {p1m.X},{p1m.Y} L {p2m.X},{p2m.Y}" :
                                 l1 >= 0 && l1 <= 1 && l2 >= 0 && l2 <= 1 ? $"M {p1m.X},{p1m.Y} C {intersect.X},{intersect.Y} {intersect.X},{intersect.Y} {p2m.X},{p2m.Y}" :
                                 $"M {p1m.X},{p1m.Y} C {p1c.X},{p1c.Y} {p2c.X},{p2c.Y} {p2m.X},{p2m.Y}")}' />");
-                            //        break;
-                            //}
                         }
 
-                        if (edgeSvg != null)
-                            svgExtras.Append(edgeSvg(fromFaceIx, toFaceIx, (p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2));
                         if (vertexSvg != null)
-                            svgExtras.Append(vertexSvg(polyhedron.Faces[fromFaceIx][fromEdgeIx], p1.X, p1.Y));
+                        {
+                            svgExtras.Append(vertexSvg(fromFaceIx, fromEdgeIx, p1));
+                            svgExtras.Append(vertexSvg(fromFaceIx, (fromEdgeIx + 1) % polygons[fromFaceIx].Length, p2));
+                        }
                     }
                 }
             }
@@ -725,13 +710,75 @@ h3 {{ font-size: 14pt; }}
         {
             var faceInfos = GetFaceData();
 
+            var vertices = new Dictionary<(int face, int vertex), PointD>();
+            generateNet(_polyhedron, vertexSvg: (faceIx, edgeIx, p) =>
+            {
+                vertices[(faceIx, edgeIx)] = p;
+                for (int fIx = 0; fIx < _polyhedron.Faces.Length; fIx++)
+                    for (int eIx = 0; eIx < _polyhedron.Faces[fIx].Length; eIx++)
+                        if (_polyhedron.Faces[fIx][eIx] == _polyhedron.Faces[faceIx][edgeIx] && !vertices.ContainsKey((fIx, eIx)))
+                            vertices[(fIx, eIx)] = p;
+                return null;
+            });
+
+            // Maple solve code
+            var maplePieces = new List<string>();
+            var pinkCorners = new List<((int faceIx, int vertexIx)[] adj, int pinkNumber)>();
+            for (var faceIx = 0; faceIx < faceInfos.Length; faceIx++)
+            {
+                var face = faceInfos[faceIx];
+                for (var vertexIx = 0; vertexIx < face.Edges.Length; vertexIx++)
+                {
+                    var edge = face.Edges[vertexIx];
+                    if (edge.PinkNumber == null)
+                        continue;
+                    var vertex = _polyhedron.Faces[faceIx][vertexIx];
+                    var adjoiningFaces = _polyhedron.Faces.SelectIndexWhere(f => f.Contains(vertex)).ToArray();
+                    if (faceIx != adjoiningFaces.Min())
+                        continue;
+                    maplePieces.Add($"{adjoiningFaces.Select(ix => $"f{ix}").JoinString("+")}={edge.PinkNumber.Value}");
+                    pinkCorners.Add((adjoiningFaces.Select(f => (f, _polyhedron.Faces[f].IndexOf(vertex))).ToArray(), edge.PinkNumber.Value));
+                }
+            }
+            //Clipboard.SetText($"solve({{{maplePieces.JoinString(", ")}}}, {{{Enumerable.Range(0, 24).Select(i => $"f{i}").JoinString(", ")}}});");
+            //Debugger.Break();
+
             // C# declaration for Unity project
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
-                $@"new[] {{ {faceInfos.Select(fi => $@"new FaceData {{ CarpetColor = ""{fi.CarpetColor.ToLowerInvariant().CLiteralEscape()}"", CarpetLength = {fi.CarpetColorIndex + 1}, SongSnippet = ""{fi.MusicSnippet.CLiteralEscape()}"", ItemInBox = ""{fi.GashlycrumbTiniesObject.CLiteralEscape()}"", Edges = new[] {{ {fi.Edges.Select(e => $@"new Edge {{ {new[] { e.CyanNumber.NullOr(c => $"CyanNumber = {c}"), e.PinkNumber.NullOr(p => $"PinkNumber = {p}"), e.Locked && e.CrosswordInfo != null ? $@"Label = ""{e.CrosswordInfo.CLiteralEscape()}"", LabelFontSize = {e.CrosswordInfoFontSize}" : null, e.Locked ? null : $"Face = {e.AdjacentFace}" }.Where(str => str != null).JoinString(", ")} }}").JoinString(", ")} }} }}").JoinString(", ")} }}");
+                $@"new[] {{ {faceInfos.Select(fi => $@"new FaceData {{ " +
+                    $@"CarpetColor = ""{fi.CarpetColor.ToLowerInvariant().CLiteralEscape()}"", " +
+                    $@"CarpetLength = {fi.CarpetColorIndex + 1}, " +
+                    $@"SongSnippet = ""{fi.MusicSnippet.CLiteralEscape()}"", " +
+                    $@"ItemInBox = ""{fi.GashlycrumbTiniesObject.CLiteralEscape()}"", " +
+                    $@"Edges = new[] {{ {fi.Edges.Select(e => $@"new Edge {{ {Ut.NewArray(
+                        e.CyanNumber.NullOr(c => $"CyanNumber = {c}"),
+                        e.PinkNumber.NullOr(p => $"PinkNumber = {p}"),
+                        e.Locked && e.CrosswordInfo != null ? $@"Label = ""{e.CrosswordInfo.CLiteralEscape()}"", LabelFontSize = {e.CrosswordInfoFontSize}" : null,
+                        e.Locked ? null : $"Face = {e.AdjacentFace}").Where(str => str != null).JoinString(", ")} }}").JoinString(", ")} }} }}").JoinString(", ")} }}");
 
             // JS declaration for solution page
             General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
-                $@"[ {faceInfos.Select((fi, fIx) => $@"{{ c: [ {_distributions.Select(dist => dist.Distribution.First(d => d.faces.Contains(fIx)).Apply(tup => tup.color == null ? "null" : tup.color.ToString())).JoinString(", ")} ], cc: ""{fi.CarpetColor.ToUpperInvariant().CLiteralEscape()}"", ci: {fi.CarpetColorIndex + 1}, song: ""{fi.MusicSnippet.CLiteralEscape()}"", item: ""{Regex.Replace(fi.GashlycrumbTiniesObject, @"""(.*?)""", m => $"“{m.Groups[1].Value}”").CLiteralEscape()}"", e: [ {fi.Edges.Select(e => $@"{{ cn: {e.CyanNumber}, pn: {e.PinkNumber}{(e.Locked && e.CrosswordInfo == null ? "" : e.Locked ? $@", label: ""{e.CrosswordInfo.CLiteralEscape()}""" : $@", face: {e.AdjacentFace}")} }}").JoinString(", ")} ] }}").JoinString(", ")} ]");
+                $@"[ {faceInfos.Select((fi, fIx) => $@"{{ " +
+                    $@"c: [ {_distributions.Select(dist => dist.Distribution.First(d => d.faces.Contains(fIx)).Apply(tup => tup.color == null ? "null" : tup.color.ToString())).JoinString(", ")} ], " +
+                    $@"v: [ {_distributions.Select(dist => getFaceValue(fIx, dist)).JoinString(", ")} ], " +
+                    $@"cc: ""{fi.CarpetColor.ToUpperInvariant().CLiteralEscape()}"", " +
+                    $@"ci: {fi.CarpetColorIndex + 1}, song: ""{fi.MusicSnippet.CLiteralEscape()}"", " +
+                    $@"item: ""{Regex.Replace(fi.GashlycrumbTiniesObject, @"""(.*?)""", m => $"“{m.Groups[1].Value}”").CLiteralEscape()}"", " +
+                    $@"e: [ {fi.Edges.Select(e => $@"{{ {Ut.NewArray(
+                        e.CyanNumber.NullOr(c => $"cn: {c}"),
+                        e.PinkNumber.NullOr(p => $"pn: {p}"),
+                        e.Locked && e.CrosswordInfo != null ? $@"label: ""{e.CrosswordInfo.CLiteralEscape()}""" : null,
+                        $"face: {e.AdjacentFace}").Where(str => str != null).JoinString(", ")} }}").JoinString(", ")} ] }}").JoinString(", ")} ]");
+
+            //General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"<!--CyanEdges-start-->", @"<!--CyanEdges-end-->",
+            //    edges.Select(tup => $"<text transform='translate({Math.Round((tup.p1.X + tup.p2.X) / 2, 2)} {Math.Round((tup.p1.Y + tup.p2.Y) / 2, 2)}) rotate({Math.Round(Math.Atan2(tup.p2.Y - tup.p1.Y, tup.p2.X - tup.p1.X) * 180 / Math.PI, 2)})' y='-.03'>{tup.cyanNumber}</text>").JoinString());
+
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"<!--PinkCorners-start-->", @"<!--PinkCorners-end-->",
+                pinkCorners.SelectMany(corner => corner.adj
+                    .Select(inf => (p: vertices[(inf.faceIx, inf.vertexIx)], prevP: vertices[(inf.faceIx, (inf.vertexIx + 4) % 5)], nextP: vertices[(inf.faceIx, (inf.vertexIx + 1) % 5)]))
+                    .Select(inf => (inf.p, vector: (inf.prevP - inf.p).Unit() + (inf.nextP - inf.p).Unit()))
+                    .Select(inf => (p: inf.p + .1 * inf.vector.Unit(), angle: inf.vector.Theta() * 180 / Math.PI))
+                    .Select(inf => $"<text transform='translate({inf.p.X:.00} {inf.p.Y:.00}) rotate({inf.angle - 90:.00})' y='.06'>{corner.pinkNumber}</text>")).JoinString());
 
             // Google Sheets
             Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{(f.Edges[edge].Locked ? f.Edges[edge].CrosswordInfo.Apply(ci => string.IsNullOrWhiteSpace(ci) ? "" : !"+-".Contains(ci[0]) ? ci.Replace("\n", " ") : $"‘{ci}’") : f.Edges[edge].AdjacentFace.ToString())}\t{(f.Edges[edge].Locked ? "" : f.Edges[edge].AdjacentEdge.ToString())}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex + 1}\t{f.MusicSnippet}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
@@ -798,9 +845,9 @@ h3 {{ font-size: 14pt; }}
                 .ToArray()
                 .Shuffle(rnd);
 
-            var requiredCyanClues = Ut.ReduceRequiredSet(cyanClues, test: state =>
+            var requiredCyanClues = Ut.ReduceRequiredSet(cyanClues, skipConsistencyTest: true, test: state =>
             {
-                var puzzle = new Puzzle(_polyhedron.Faces.Length, 1, 26);
+                var puzzle = new Puzzle(_polyhedron.Faces.Length, 0, 26);
                 foreach (var (face1, face2, sum) in state.SetToTest)
                     puzzle.AddConstraint(new SumConstraint(sum, new[] { face1, face2 }));
                 return !puzzle.Solve().Skip(1).Any();
@@ -822,10 +869,10 @@ h3 {{ font-size: 14pt; }}
                 select (faces: adjoiningFaces.ToArray(), sum: adjoiningFaces.Sum(f => getFaceValue(f, _pinkSums)));
             var pinkClues = pinkCluesRaw.Where(cl => cl.faces[0] == cl.faces.Min()).ToArray();
 
-            var requiredPinkClues = Ut.ReduceRequiredSet(Enumerable.Range(0, pinkClues.Length).ToArray().Shuffle(rnd), test: state =>
+            var requiredPinkClues = Ut.ReduceRequiredSet(Enumerable.Range(0, pinkClues.Length).ToArray().Shuffle(rnd), skipConsistencyTest: true, test: state =>
             {
                 Console.WriteLine(Enumerable.Range(0, pinkClues.Length).Select(i => state.SetToTest.Contains(i) ? "█" : "░").JoinString());
-                var puzzle = new Puzzle(_polyhedron.Faces.Length, 1, 26);
+                var puzzle = new Puzzle(_polyhedron.Faces.Length, 0, 50);
                 foreach (var i in state.SetToTest)
                     puzzle.AddConstraint(new SumConstraint(pinkClues[i].sum, pinkClues[i].faces));
                 return !puzzle.Solve().Skip(1).Any();
@@ -860,7 +907,7 @@ h3 {{ font-size: 14pt; }}
             const double inCameraHeight = .275;
             const double inCameraHeightLook = .13;
             const double cyanNumberHeight = .28;
-            const double pinkNumberHeight = .22;
+            const double pinkNumberHeight = .25;
 
             var outCameras = new List<(Pt from, Pt to)>();
             var inCameras = new List<(Pt from, Pt to)>();
