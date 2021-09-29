@@ -564,7 +564,7 @@ button.reveal {
     margin-top: -.7cm;
 }
 
-div.answer {
+body.solution div.answer {
     margin: 2cm auto .5cm;
     padding: .4cm 1.2cm;
     font-family: 'Lato';
@@ -580,9 +580,10 @@ div.answer {
     width: min-content;
     position: relative;
     color: white;
+	letter-spacing: 0.05em;
 }
 
-    div.answer::after {
+    body.solution div.answer::after {
         content: 'ANSWER';
         position: absolute;
         left: 50%;
