@@ -678,3 +678,32 @@ body.solution #main {
 		height: .075cm;
 		background: hsl(220, 70%, 40%);
 	}
+
+.subpuzzles {
+	padding-bottom: 1px;
+}
+	.subpuzzles > .menu {
+		background: hsl(220, 80%, 75%);
+		border-top-left-radius: .7cm;
+		border-top-right-radius: .7cm;
+	}
+		.subpuzzles > .menu > button {
+			background: hsl(220, 50%, 20%);
+			color: white;
+		}
+			.subpuzzles > .menu > button.selected {
+				background: white;
+				color: black;
+				border-bottom-left-radius: 0;
+				border-bottom-right-radius: 0;
+				top: .2cm;
+				position: relative;
+			}
+	.subpuzzles > .content {
+		background: hsl(220, 60%, 85%);
+		padding: 1px 1cm;
+		display: none;
+	}
+		.subpuzzles > .content.selected {
+			display: block;
+		}

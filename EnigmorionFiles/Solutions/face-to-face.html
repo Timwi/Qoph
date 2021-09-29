@@ -1,0 +1,270 @@
+<style>
+	path.face {
+		fill: hsl(220, 60%, 95%);
+	}
+		path.face.c0 { fill: hsl(  0, 80%, 80%); }
+		path.face.c1 { fill: hsl( 90, 80%, 80%); }
+		path.face.c2 { fill: hsl(180, 80%, 80%); }
+		path.face.c3 { fill: hsl(270, 80%, 80%); }
+	path.edge {
+		fill: none;
+		stroke: hsl(220, 30%, 60%);
+		stroke-width: .02;
+		stroke-linecap: round;
+	}
+		path.edge.locked {
+			stroke: black;
+			stroke-width: .04;
+		}
+	path.connection {
+		fill: none;
+		stroke: hsl(220, 30%, 70%);
+		stroke-width: .01;
+	}
+</style>
+<script src='../../files/solutions.js'></script>
+<h1>Face to Face</h1>
+<script>
+let reveals = {}, hintReveals = {};
+let faceData = /*Faces-start*/[ { c: [ 1, 1, 1, 1, 1, 1 ], cc: "AQUA", ci: 1, song: "Magnolia", item: "a pile of trash", e: [ { cn: 25, pn: 41, face: 1 }, { cn: 36, pn: 40, label: "Itinerary\n(5)" }, { cn: 24, pn: 46, label: "+0" }, { cn: 23, pn: 58, face: 11 }, { cn: 16, pn: 47, face: 3 } ] }, { c: [ 1, 1, 1, 1, 1, 1 ], cc: "ONYX", ci: 2, song: "Holding Out for a Hero", item: "a body spray", e: [ { cn: 12, pn: 41, label: "+7" }, { cn: 30, pn: 22, face: 15 }, { cn: 29, pn: 23, face: 17 }, { cn: 33, pn: 33, face: 18 }, { cn: 25, pn: 40, face: 0 } ] }, { c: [ null, null, null, null, null, 2 ], cc: "GAMBOGE", ci: 4, song: "The Elements", item: "a bucket of orange paint", e: [ { cn: 3, pn: 41, label: "Require\n(4)" }, { cn: 27, pn: 36, face: 20 }, { cn: 16, pn: 46, face: 14 }, { cn: 20, pn: 27, label: "-10" }, { cn: 12, pn: 22 } ] }, { c: [ null, null, 3, 2, null, 2 ], cc: "JADE", ci: 3, song: "Everybody Wants to Rule the World", item: "a worm", e: [ { cn: 16, pn: 41, face: 0 }, { cn: 11, pn: 47, label: "-1" }, { cn: 26, pn: 55, face: 23 }, { cn: 28, pn: 52, face: 20 }, { cn: 3, pn: 36, label: "Beginning\n(5)" } ] }, { c: [ null, null, 2, 1, null, null ], cc: "FUCHSIA", ci: 1, song: "Shape of You", item: "a toupee", e: [ { cn: 9, pn: 59, face: 5 }, { cn: 21, pn: 61, face: 22 }, { cn: 20, pn: 49, label: "+1" }, { cn: 12, pn: 55, face: 9 }, { cn: 11, pn: 51, face: 7 } ] }, { c: [ null, null, 2, 1, null, null ], cc: "GAMBOGE", ci: 1, song: "Blinding Lights", item: "a copy of the album “So Much Fun”", e: [ { cn: 18, pn: 59, label: "+3" }, { cn: 17, pn: 36, face: 13 }, { cn: 30, pn: 50, label: "Agreement or dish\nout cards (4)" }, { cn: 22, pn: 62 }, { cn: 9, pn: 61, face: 4 } ] }, { c: [ 2, 2, null, null, null, null ], cc: "GAMBOGE", ci: 3, song: "Imagine", item: "a beaker of alkaline solution", e: [ { cn: 20, pn: 59, face: 7 }, { cn: 19, pn: 21, face: 16 }, { cn: 34, pn: 32, label: "+3" }, { cn: 25, pn: 31, label: "Ovum (3)" }, { cn: 18, pn: 36 } ] }, { c: [ null, null, null, null, null, null ], cc: "WHITE", ci: 2, song: "Royals", item: "a bottle of salty water", e: [ { cn: 11, pn: 59, face: 4 }, { cn: 15, pn: 51, face: 9 }, { cn: 27, pn: 47, label: "-10" }, { cn: 13, pn: 30 }, { cn: 20, pn: 21, face: 6 } ] }, { c: [ 1, 1, 1, 1, 1, 1 ], cc: "FUCHSIA", ci: 3, song: "Space Oddity", item: "a nail", e: [ { cn: 24, pn: 75, face: 9 }, { cn: 20, pn: 55, label: "-5" }, { cn: 33, pn: 49, face: 22 }, { cn: 40, pn: 55, label: "Loathe\n(4)" }, { cn: 25, pn: 63, face: 11 } ] }, { c: [ null, null, 3, 1, 3, null ], cc: "JADE", ci: 1, song: "Eternal Flame", item: "a box of matches", e: [ { cn: 18, pn: 75, face: 10 }, { cn: 28, pn: 54, label: "+10" }, { cn: 15, pn: 47, face: 7 }, { cn: 12, pn: 51, face: 4 }, { cn: 24, pn: 55, face: 8 } ] }, { c: [ null, null, 3, null, null, null ], cc: "PINK", ci: 4, song: "Africa", item: "a copy of the funnies with their beginning and end torn off and the rest scrambled", e: [ { cn: 19, pn: 75, face: 11 }, { cn: 24, pn: 58, label: "+0" }, { cn: 32, pn: 46, face: 18 }, { cn: 30, pn: 44 }, { cn: 18, pn: 54, face: 9 } ] }, { c: [ 1, 1, 1, 1, 1, 1 ], cc: "ONYX", ci: 3, song: "Lemon Tree", item: "a piercing", e: [ { cn: 25, pn: 75, face: 8 }, { cn: 33, pn: 63, label: "For the length\nof (5)" }, { cn: 11, pn: 55, label: "+0" }, { cn: 23, pn: 47, face: 0 }, { cn: 19, pn: 58, face: 10 } ] }, { c: [ 2, 2, 1, 1, 2, 1 ], cc: "AQUA", ci: 3, song: "Yellow Submarine", item: "a bottle of anticonvulsants", e: [ { cn: 33, pn: 41, label: "+13" }, { cn: 34, pn: 31 }, { cn: 27, pn: 32 }, { cn: 39, pn: 36, face: 17 }, { cn: 40, pn: 33, face: 15 } ] }, { c: [ null, null, 2, null, null, null ], cc: "VIOLET", ci: 4, song: "Bohemian Rhapsody", item: "a copy of the third Super Smash Bros. game", e: [ { cn: 27, pn: 41, face: 14 }, { cn: 37, pn: 40, face: 21 }, { cn: 17, pn: 50, face: 5 }, { cn: 25, pn: 36, label: "+8" }, { cn: 33, pn: 31 } ] }, { c: [ null, null, 2, null, null, null ], cc: "VIOLET", ci: 3, song: "I'm Still Standing", item: "a kitchen sink", e: [ { cn: 34, pn: 41, face: 15 }, { cn: 16, pn: 27, face: 2 }, { cn: 41, pn: 46, label: "+14" }, { cn: 40, pn: 57, face: 21 }, { cn: 27, pn: 40, face: 13 } ] }, { c: [ 2, 2, 1, 1, 2, 1 ], cc: "FUCHSIA", ci: 5, song: "Stronger", item: "a painting of Queen Victoria", e: [ { cn: 40, pn: 41, face: 12 }, { cn: 37, pn: 33, label: "-9" }, { cn: 30, pn: 23, face: 1 }, { cn: 20, pn: 22 }, { cn: 34, pn: 27, face: 14 } ] }, { c: [ null, null, null, 1, 3, null ], cc: "PINK", ci: 1, song: "Still Alive", item: "a plush toy", e: [ { cn: 24, pn: 46, face: 17 }, { cn: 27, pn: 36, label: "+14" }, { cn: 19, pn: 32, face: 6 }, { cn: 13, pn: 21 }, { cn: 26, pn: 30, face: 19 } ] }, { c: [ null, null, null, null, null, 2 ], cc: "AZURE", ci: 4, song: "Take Me Home, Country Roads", item: "a toy railway car", e: [ { cn: 40, pn: 46, face: 18 }, { cn: 29, pn: 33, face: 1 }, { cn: 37, pn: 23, label: "+10" }, { cn: 39, pn: 33, face: 12 }, { cn: 24, pn: 36, face: 16 } ] }, { c: [ null, null, null, null, null, null ], cc: "WHITE", ci: 4, song: "Angels", item: "a frozen cube", e: [ { cn: 42, pn: 46, face: 19 }, { cn: 32, pn: 44, face: 10 }, { cn: 36, pn: 46, label: "+7" }, { cn: 33, pn: 40, face: 1 }, { cn: 40, pn: 33, face: 17 } ] }, { c: [ null, null, null, 1, 3, null ], cc: "VIOLET", ci: 1, song: "Mr. Blue Sky", item: "a piece of banister", e: [ { cn: 26, pn: 46, face: 16 }, { cn: 27, pn: 30, label: "Leaving or\nfunctioning (5)" }, { cn: 28, pn: 47, label: "+16" }, { cn: 30, pn: 54 }, { cn: 42, pn: 44, face: 18 } ] }, { c: [ null, null, null, 2, null, null ], cc: "WHITE", ci: 1, song: "Barbie Girl", item: "a rat", e: [ { cn: 51, pn: 86, face: 21 }, { cn: 41, pn: 57, label: "+4" }, { cn: 27, pn: 46, face: 2 }, { cn: 28, pn: 36, face: 3 }, { cn: 50, pn: 52, face: 23 } ] }, { c: [ null, null, null, 2, null, null ], cc: "ONYX", ci: 4, song: "God's Plan", item: "a book of jokes", e: [ { cn: 42, pn: 86, label: "X (3)" }, { cn: 30, pn: 62, label: "+6" }, { cn: 37, pn: 50, face: 13 }, { cn: 40, pn: 40, face: 14 }, { cn: 51, pn: 57, face: 20 } ] }, { c: [ 0, 0, 0, 0, 0, 0 ], cc: "AQUA", ci: 2, song: "Rasputin", item: "a pile of mud", e: [ { cn: 41, pn: 86, face: 23 }, { cn: 33, pn: 55, face: 8 }, { cn: 21, pn: 49, face: 4 }, { cn: 22, pn: 61, label: "Apportioning\n(7)" }, { cn: 42, pn: 62, label: "-2" } ] }, { c: [ null, null, null, null, null, 2 ], cc: "AZURE", ci: 2, song: "Wannabe", item: "a bottle of spirits", e: [ { cn: 50, pn: 86, face: 20 }, { cn: 26, pn: 52, face: 3 }, { cn: 33, pn: 55, label: "Sister (3)" }, { cn: 40, pn: 63, label: "-5" }, { cn: 41, pn: 55, face: 22 } ] } ]/*Faces-end*/;
+makeSolutionPage('face-to-face', `
+<p>The first thing to do is [s to map out the world. [ra We’ve marked locked doors with a thicker line. This, coupled with the tilt you experience as you walk between rooms, implies that [d we’re on the surface of a polyhedron. (Specifically, it’s a pentagonal icositetrahedron.)]]]</p>
+{-a
+<p>Every room has [o six different types of clues in it, which form [db six individual subpuzzles. They can be attempted in any order.]]</p>
+{-b
+▲subpuzzles
+•carpet Carpets
+	<p>Each room has a carpet. [o Each carpet has a specific size (number of repetitions of the pattern), and clicking on the carpet tells us its color. Many colors have rare letters in them — “onyx”, “jade” and “aqua” for instance. This suggests [d we should extract a letter from the color name, and the carpet’s size provides the index. [rcarpetR]]]</p>
+	{-carpetR <p>This also contains a hint for the next subpuzzle: [rcarpetH «CYAN SUM»]</p>}
+
+•cyan Cyan numbers
+	<p>Sol.</p>
+
+•pink Pink numbers
+	<p>Sol.</p>
+
+•radio Radio
+	<p>Sol.</p>
+
+•box Boxes
+	<p>Sol.</p>
+
+•door Door signs
+	<p>Sol.</p>
+
+▼
+}
+<svg xmlns="http://www.w3.org/2000/svg" stroke-width=".02" viewBox="-5.23 -3.83 8.81 7.11" text-anchor="middle">
+	<path class="connection" d="M-.16-1.05-.1-1"/>
+	<path class="connection" d="M-.3 2.35c-.4.15-2.18-.04-2.15-.46"/>
+	<path class="connection" d="M-.47 1.54c-.42.01-.42.3-.72.01"/>
+	<path class="connection" d="M-.9.46-.96.43"/>
+	<path class="connection" d="M-1.07-1.06-1-1.1"/>
+	<path class="connection" d="M-1.24-2.76c.3-.03 1.69-.46 1.75-.17"/>
+	<path class="connection" d="M-1.6-.22v-.11"/>
+	<path class="connection" d="M-1.97-2.33c-.17.24-.73.66-.6.92"/>
+	<path class="connection" d="M-2.07-1.36c.19-.24.08-.48.37-.51"/>
+	<path class="connection" d="M-2.37.08c-.17-.29-.17-.29-.04-.6"/>
+	<path class="connection" d="M-2.88 1.1C-3.09.9-3.74-.35-3.56-.6"/>
+	<path class="connection" d="M-3.06-.54c.13.26.06 1.16.36 1.13"/>
+	<path class="connection" d="M-3.22-1.43c.16-.39.67-1.56 1.08-1.49"/>
+	<path class="connection" d="M-4.03-1.62c.01-.1.1-.82.74-1.28a5.41 5.41 0 0 1 2.67-.7c.89-.05 2.63.28 3.3.66.69.38.53.8.2.78"/>
+	<path class="connection" d="M-4.09-.7c.07.28.83 2.4 1.11 2.29"/>
+	<path class="connection" d="M-4.55-.88c-.12.09.4 1.9 1.6 2.83 1.2.92 3.09.96 3.1.81"/>
+	<path class="connection" d="M-4.59-1.38c-.23-.14-.79.31-.3 1.32.5 1.01 2.22 2.68 3.18 2.94.97.26 2.8.2 3.72-.43.92-.65 1.03-1.71.87-1.93"/>
+	<path class="connection" d="M.12-2.46c-.4-.1-.75-.11-.99.24"/>
+	<path class="connection" d="M.27 1.02C.45.8.9.86.82.57"/>
+	<path class="connection" d="M.55 2.02C.8 1.84 2 .94 1.85.7"/>
+	<path class="connection" d="M1.01-2.26c.26.14.49 0 .56.28"/>
+	<path class="connection" d="M1.35.67c-.17.24-.62.9-.9.82"/>
+	<path class="connection" d="M1.99-2.32c-.27-.13-.78-.61-1.01-.44"/>
+	<path class="connection" d="M2.39.64C2.29.92.85 2.66.59 2.52"/>
+	<path class="connection" d="M2.45-.27c.03-.42-.01-.76-.4-.94"/>
+	<path class="connection" d="M2.52-1.67c.08.29.73 1.6.46 1.7"/>
+	<path class="connection" d="M2.54-2.58c0-.42-4.07-1.01-4.2-.61"/>
+	<path class="connection" d="m-1 .97.28-.04"/>
+	<path class="connection" d="m-1.39-1.48-.15.24"/>
+	<path class="connection" d="m-1.84.92-.07-.05"/>
+	<path class="connection" d="m-2.07 1.5.34.02"/>
+	<path class="connection" d="m.07-1.63-.34-.02"/>
+	<path class="connection" d="m.27.32-.25.1"/>
+	<path class="connection" d="m.88-1.23.05.06"/>
+	<path class="connection" d="m1-.33-.03.07"/>
+	<path class="connection" d="m1.23-1.6-.25-.12"/>
+	<path class="connection" d="m1.62-.2-.04-.33"/>
+
+	<path class="face" id="face-0" d="m0 0-.3-.79-.6-.03-.28.52.36.47z"/>
+	<path class="face" id="face-1" d="m0 0 .73-.43-.06-.59-.56-.2-.41.43z"/>
+	<path class="face" id="face-2" d="M0 0l.54.65L1.1.5l.1-.59-.48-.34z"/>
+	<path class="face" id="face-3" d="M0 0l-.82.17-.14.58.47.36.53-.27z"/>
+	<path class="face" id="face-4" d="M-3.6-1.59l-.2.82.47.37.53-.28-.03-.59z"/>
+	<path class="face" id="face-5" d="M-3.6-1.59l-.85-.05-.28.52.35.47.58-.12z"/>
+	<path class="face" id="face-6" d="M2.96-2.58l-.84-.01l-.26.53.38.46.57-.16z"/>
+	<path class="face" id="face-7" d="M-2.07-3.33l-.14.83.48.34.52-.3-.06-.6z"/>
+	<path class="face" id="face-8" d="M-2-.13l-.73.43.06.59.56.2.41-.43z"/>
+	<path class="face" id="face-9" d="M-2.02-.36l.19-.82-.47-.36-.53.27.03.6z"/>
+	<path class="face" id="face-10" d="M-2.02-.36l.84.06.28-.52-.35-.48-.58.12z"/>
+	<path class="face" id="face-11" d="M-2-.13l.3.79.6.03.28-.52-.36-.47z"/>
+	<path class="face" id="face-12" d="M1.87-.83l.37-.76-.38-.46-.57.15-.1.58z"/>
+	<path class="face" id="face-13" d="M2.03-.3l.08.84.56.2.41-.43-.21-.56z"/>
+	<path class="face" id="face-14" d="M2.03-.3 1.2-.1l-.1.59.49.34.51-.3z"/>
+	<path class="face" id="face-15" d="m1.87-.83-.69-.49-.51.3.06.6.56.19z"/>
+	<path class="face" id="face-16" d="M.04-2.05.87-2l.28-.52-.35-.47-.58.12z"/>
+	<path class="face" id="face-17" d="m.03-2.05.08.84.56.2.41-.43L.87-2z"/>
+	<path class="face" id="face-18" d="m-.52-1.98-.59.6.21.56.6.03.28-.52z"/>
+	<path class="face" id="face-19" d="M-.52-1.98l-.7-.48-.5.3.05.59.56.2z"/>
+	<path class="face" id="face-20" d="M-.45 1.96l.82-.18.14-.57L.04.84l-.53.27z"/>
+	<path class="face" id="face-21" d="M-.45 1.96l.3.78.6.04.28-.52-.36-.48z"/>
+	<path class="face" id="face-22" d="M-2.03 1.92l-.08-.84-.56-.2-.42.43.22.56z"/>
+	<path class="face" id="face-23" d="m-1.48 1.85.58-.6-.22-.56-.59-.03-.28.52z"/>
+
+	<path class="edge" d="m2.67.73.41-.42"/>
+	<path class="edge" d="m2.12-2.59-.26.54"/>
+	<path class="edge" d="m2.11.54.55.2"/>
+	<path class="edge" d="m2.03-.3.08.84"/>
+	<path class="edge" d="m1.6.84.51-.3"/>
+	<path class="edge" d="m1.29-.23.58-.6"/>
+	<path class="edge" d="m1.21-.09-.1.59"/>
+	<path class="edge" d="m1.18-1.32.7.49"/>
+	<path class="edge" d="m0 0-.82.17"/>
+	<path class="edge" d="m.37 1.78-.82.18"/>
+	<path class="edge" d="m.11-1.21.56.2"/>
+	<path class="edge" d="m.04.84-.53.27"/>
+	<path class="edge" d="m-4.45-1.64-.28.52"/>
+	<path class="edge" d="m-3.8-.77.2-.82"/>
+	<path class="edge" d="m-2.83-1.27-.78-.32"/>
+	<path class="edge" d="m-2.8-.68-.03-.59"/>
+	<path class="edge" d="m-2.67.89-.42.42"/>
+	<path class="edge" d="m-2.3-1.54-.53.27"/>
+	<path class="edge" d="m-2.11 1.08-.56-.2"/>
+	<path class="edge" d="m-2.07-3.33-.14.83"/>
+	<path class="edge" d="m-2.03 1.92-.08-.84"/>
+	<path class="edge" d="m-2.02-.36.19-.82"/>
+	<path class="edge" d="m-1.98 1.18.5.67"/>
+	<path class="edge" d="m-1.48 1.85.58-.6"/>
+	<path class="edge" d="m-1.27-3.06-.8-.27"/>
+	<path class="edge" d="m-1.1-1.38.58-.6"/>
+	<path class="edge" d="m-1.1-1.38.2.56"/>
+	<path class="edge" d="m-.96.75.47.36"/>
+	<path class="edge" d="m-.9-.82-.35-.48"/>
+	<path class="edge" d="m-.49 1.11.04.85"/>
+	<path class="edge" d="m-.3-.79.28-.51"/>
+	<path class="edge" d="m-.02-1.3-.5-.68"/>
+	<path class="edge" d="M2.96-2.58l-.84-.01"/>
+	<path class="edge" d="M2.03-.3 1.2-.1"/>
+	<path class="edge" d="M1.29-1.9l-.1.58"/>
+	<path class="edge" d="M1.15-2.52.8-2.99"/>
+	<path class="edge" d="M1.08-1.44.87-2"/>
+	<path class="edge" d="M.73 2.26l-.36-.48"/>
+	<path class="edge" d="M.67-1.02l.06.6"/>
+	<path class="edge" d="M.54.65 1.1.5"/>
+	<path class="edge" d="M.5 1.2.05.85"/>
+	<path class="edge" d="M.44 2.78l.29-.52"/>
+	<path class="edge" d="M.22-2.87l-.19.82"/>
+	<path class="edge" d="M.11-1.21-.3-.8"/>
+	<path class="edge" d="M.04-2.05.87-2"/>
+	<path class="edge" d="M.03-2.05l.08.84"/>
+	<path class="edge" d="M-3.8-.77l.47.37"/>
+	<path class="edge" d="M-2.8-.68l.78.32"/>
+	<path class="edge" d="M-2.21-2.5l.48.34"/>
+	<path class="edge" d="M-2.02-.36l.84.06"/>
+	<path class="edge" d="M-2-.13l-.73.43"/>
+	<path class="edge" d="M-1.7.66-2-.13"/>
+	<path class="edge" d="M-1.18-.3-2-.13"/>
+	<path class="edge" d="M-.9 1.25l-.2-.56"/>
+	<path class="edge" d="M-.82.17l-.36-.47"/>
+	<path class="edge" d="M-.52-1.98l-.7-.48"/>
+	<path class="edge" d="M-.3-.79 0 0"/>
+	<path class="edge locked" d="m2.81-1.75.15-.83"/>
+	<path class="edge locked" d="m2.24-1.6.57-.15"/>
+	<path class="edge locked" d="m1.86-2.05.38.46"/>
+	<path class="edge locked" d="m1.18-1.32-.51.3"/>
+	<path class="edge locked" d="m1.11.5.49.34"/>
+	<path class="edge locked" d="m.87-2 .28-.52"/>
+	<path class="edge locked" d="m.73-.43.56.2"/>
+	<path class="edge locked" d="m.67-1.02.41-.42"/>
+	<path class="edge locked" d="m-4.73-1.12.35.47"/>
+	<path class="edge locked" d="m-4.38-.65.58-.12"/>
+	<path class="edge locked" d="m-3.09 1.31.22.56"/>
+	<path class="edge locked" d="m-2.73.3.06.59"/>
+	<path class="edge locked" d="m-1.83-1.18-.47-.36"/>
+	<path class="edge locked" d="m-1.73-2.16.52-.3"/>
+	<path class="edge locked" d="m-1.7.66-.28.52"/>
+	<path class="edge locked" d="m-1.25-1.3-.58.12"/>
+	<path class="edge locked" d="m-1.21-2.46-.06-.6"/>
+	<path class="edge locked" d="m-1.1.7-.6-.04"/>
+	<path class="edge locked" d="m-.82.17-.14.58"/>
+	<path class="edge locked" d="m-.15 2.74.6.04"/>
+	<path class="edge locked" d="M3.08.3l-.21-.55"/>
+	<path class="edge locked" d="M2.87-.25 2.03-.3"/>
+	<path class="edge locked" d="M1.87-.83l.37-.76"/>
+	<path class="edge locked" d="M1.86-2.05l-.57.15"/>
+	<path class="edge locked" d="M1.21-.09.73-.43"/>
+	<path class="edge locked" d="M0 0l.54.65"/>
+	<path class="edge locked" d="M.8-3l-.58.13"/>
+	<path class="edge locked" d="M.73-.43 0 0"/>
+	<path class="edge locked" d="M.37 1.78l.14-.57"/>
+	<path class="edge locked" d="M.04.84 0 0"/>
+	<path class="edge locked" d="M-3.6-1.59l-.85-.05"/>
+	<path class="edge locked" d="M-3.33-.4l.53-.28"/>
+	<path class="edge locked" d="M-2.87 1.87l.84.05"/>
+	<path class="edge locked" d="M-2.11 1.08l.41-.42"/>
+	<path class="edge locked" d="M-1.73-2.16l.06.59"/>
+	<path class="edge locked" d="M-1.67-1.57l.56.2"/>
+	<path class="edge locked" d="M-1.18-.3l.28-.52"/>
+	<path class="edge locked" d="M-1.1.7l.28-.53"/>
+	<path class="edge locked" d="M-.9-.82l.6.03"/>
+	<path class="edge locked" d="M-.45 1.96l.3.78"/>
+
+	<g id='svg-extra'></g>
+</svg>
+
+<div class='answer'>BOWTIE</div>
+}
+`, {
+	subpuzzles	: setupSvg,
+	carpetR	: function() { reveals.carpet	= true;	setupSvg('carpet');	},
+	cyanR	: function() { reveals.cyan	= true;	setupSvg('cyan');	},
+	pinkR	: function() { reveals.pink	= true;	setupSvg('pink');	},
+	radioR	: function() { reveals.radio	= true;	setupSvg('radio');	},
+	boxR	: function() { reveals.box	= true;	setupSvg('box');	},
+	doorR	: function() { reveals.door	= true;	setupSvg('door');	},
+
+	carpetH	: function() { hintReveals.carpet	= true;	setupSvg('carpet');	},
+	cyanH	: function() { hintReveals.cyan	= true;	setupSvg('cyan');	},
+	pinkH	: function() { hintReveals.pink	= true;	setupSvg('pink');	},
+	radioH	: function() { hintReveals.radio	= true;	setupSvg('radio');	},
+	boxH	: function() { hintReveals.box	= true;	setupSvg('box');	},
+	doorH	: function() { hintReveals.door	= true;	setupSvg('door');	},
+
+	reset: function() { reveals = {}; hintReveals = {}; }
+});
+
+function setupSvg(tab)
+{
+	let xs = [ -.64, .24, .72, -.45, -3.27, -4.19, 2.4, -1.7, -2.24, -2.36, -1.43, -1.36, 1.69, 2.55, 1.61, 1.15, .61, .55, -.57, -1.25, 0, .19, -2.56, -1.43 ];
+	let ys = [ -.29, -.63, .19, .64, -.88, -1.09, -2.05, -2.64, .62, -.94, -.73, .28, -1.48, .27, .36, -.7, -2.43, -1.48, -1.2, -1.85, 1.44, 2.36, 1.47, 1.19 ];
+	document.getElementById('svg-extra').innerHTML = '';
+
+	let faces = Array.from(document.querySelectorAll('path.face'));
+	faces.forEach(face => { face.className = 'face'; });
+
+	switch (tab)
+	{
+		case 'carpet':
+			if (reveals.carpet)
+				document.getElementById('svg-extra').innerHTML = `
+					<g font-size='.1'>${Array(24).fill(null).map((_, i) => `<text x='${xs[i]}' y='${ys[i]-.3}'>${faceData[i].cc}</text>`).join('')}</g>
+					<g font-size='.1'>${Array(24).fill(null).map((_, i) => `<text x='${xs[i]}' y='${ys[i]-.17}'>${faceData[i].ci}</text>`).join('')}</g>
+					<g font-size='.4'>${Array(24).fill(null).map((_, i) => `<text x='${xs[i]}' y='${ys[i]+.2}'>${faceData[i].cc[faceData[i].ci-1]}</text>`).join('')}</g>
+				`;
+			break;
+	}
+
+	let tabIx = [ 'carpet', 'cyan', 'pink', 'radio', 'box', 'door' ].indexOf(tab);
+	if (hintReveals[tab])
+		for (let fIx = 0; fIx < faces.length; fIx++)
+			if (faceData[fIx].c[tabIx] !== null)
+				faces[fIx].classList.add(`c${faceData[fIx].c[tabIx]}`);
+}
+</script>

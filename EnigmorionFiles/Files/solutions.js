@@ -29,7 +29,17 @@ function makeSolutionPage(pageId, hpsml, triggers)
 	function makeSolutionPageImpl(hpsml, eof)
 	{
 		let html = [], fncs = [], m;
-		while (m = /^(?<pre>.*?)(?<c>\[(?<sblock>-?)(?<type>[cdors])(?<sid>\w*)(?:\s|(?=\]))|\]|\{(?<cblock>-?)(?<cid>\w*)(?:\/(?<crid>\w+))?(?:\s|(?=\}))|\}|$)/s.exec(hpsml))
+		let tokens = [
+			/\[(?<sblock>-?)(?<type>[cdors])(?<sid>\w*)(?:\s|(?=\]))/,
+			/\]/,
+			/\{(?<cblock>-?)(?<cid>\w*)(?:\/(?<crid>\w+))?(?:\s|(?=\}))/,
+			/\}/,
+			/▲(?<spid>\w+)/,
+			/▼/,
+			/$/
+		];
+
+		while (m = new RegExp(`^(?<pre>.*?)(?<c>${tokens.map(s => s.source).join('|')})`, 's').exec(hpsml))
 		{
 			html.push(m.groups.pre);
 			hpsml = hpsml.substr(m[0].length);
@@ -39,6 +49,7 @@ function makeSolutionPage(pageId, hpsml, triggers)
 			{
 				case ']':
 				case '}':
+				case '▼':
 				case undefined:
 					if (eof !== m.groups.c[0])
 						console.error(`Unexpected ${m.groups.c[0] || 'EOF'} (expected ${eof || 'EOF'})`, m[0]);
@@ -85,6 +96,8 @@ function makeSolutionPage(pageId, hpsml, triggers)
 								revealed.push(nid);
 								localStorage.setItem(`sol-${pageId}`, JSON.stringify(revealed));
 							}
+							if (triggers && sid in triggers)
+								triggers[sid]();
 							return false;
 						};
 					});
@@ -113,6 +126,59 @@ function makeSolutionPage(pageId, hpsml, triggers)
 						fncs.push(fillIn);
 					hpsml = cResult.rest;
 					break;
+
+				case '▲':
+					let tabs = [], spid = m.groups.spid, m2, ls, lsBtn;
+					let spResult = makeSolutionPageImpl(hpsml, '▼');
+					let lsid = `sol-${pageId}-${spid}`;
+					while (m2 = /^\s*•(?<tabid>\w+) (?<title>[^\r\n]+)[\r\n](?<html>[^•]*)/s.exec(spResult.html))
+					{
+						tabs.push(m2.groups);
+						spResult.html = spResult.html.substr(m2[0].length);
+					}
+
+					html.push(`
+						<div class='subpuzzles' id='sp-${spid}'>
+							<div class='menu'>${tabs.map(tab => `<button id='sp-${spid}-t-${tab.tabid}'>${tab.title}</button>`).join('')}</div>
+							${tabs.map(tab => `<div class='content' id='sp-${spid}-c-${tab.tabid}'>${tab.html}</div>`).join('')}
+						</div>`);
+
+					// This function MUST NOT capture m
+					fncs.push(function()
+					{
+						spResult.fncs();
+						for (let tab of tabs)
+							document.getElementById(`sp-${spid}-t-${tab.tabid}`).onclick = function()
+							{
+								let wasSelected = document.querySelector(`#sp-${spid}-t-${tab.tabid}.selected`);
+								Array.from(document.querySelectorAll(`#sp-${spid} > .menu > button`)).forEach(btn => { btn.classList.remove('selected'); });
+								Array.from(document.querySelectorAll(`#sp-${spid} > .content`)).forEach(cnt => { cnt.classList.remove('selected'); });
+								if (!wasSelected)
+								{
+									document.getElementById(`sp-${spid}-t-${tab.tabid}`).classList.add('selected');
+									document.getElementById(`sp-${spid}-c-${tab.tabid}`).classList.add('selected');
+									if (triggers && triggers[tab.tabid])
+										triggers[tab.tabid]();
+									if (triggers && triggers[spid])
+										triggers[spid](tab.tabid);
+									if (localStorage)
+										localStorage.setItem(lsid, tab.tabid);
+								}
+								else
+								{
+									if (triggers && triggers[`${tab.tabid}-off`])
+										triggers[`${tab.tabid}-off`]();
+									if (triggers && triggers[spid])
+										triggers[spid](null);
+									if (localStorage)
+										localStorage.removeItem(lsid);
+								}
+							};
+						if (localStorage && (ls = localStorage.getItem(lsid)) && (lsBtn = document.getElementById(`sp-${spid}-t-${ls}`)))
+							lsBtn.onclick();
+					});
+					hpsml = spResult.rest;
+					break;
 			}
 		}
 	}
@@ -120,14 +186,8 @@ function makeSolutionPage(pageId, hpsml, triggers)
 	function initialSetup()
 	{
 		alloc = {};
-
-		if (triggers)
-			for (let key of Object.keys(triggers))
-				if (Array.isArray(triggers[key]))
-					for (let func of triggers[key])
-						addAlloc(key, func);
-				else
-					addAlloc(key, triggers[key]);
+		if (triggers && triggers.reset)
+			triggers.reset();
 
 		idAlloc = 1;
 		let result = makeSolutionPageImpl(hpsml);
@@ -199,10 +259,10 @@ function makeSolutionPage(pageId, hpsml, triggers)
 
 function createDeductionTracker(id, pages, fnc)
 {
-	let lsid = `${id}-deduction`;
+	let lsid = `sol-${id}-deduction`;
 	deductionTrackers.push(lsid);
 
-	return () => window.requestAnimationFrame(() =>
+	return function()
 	{
 		let elem = document.getElementById(id);
 		elem.classList.add('deduction-tracker');
@@ -253,5 +313,5 @@ function createDeductionTracker(id, pages, fnc)
 			localStorage.setItem(lsid, curPage);
 		}
 		showPage();
-	});
+	};
 }

@@ -42,8 +42,8 @@ namespace Qoph
         {
             public string Puzzle;
             public string Clue;
-            public (string word, int[] faces, string color)[] Distribution;
-            public DistrInfo(string puzzle, string clue, params (string word, int[] faces, string color)[] distribution)
+            public (string word, int[] faces, int? color)[] Distribution;
+            public DistrInfo(string puzzle, string clue, params (string word, int[] faces, int? color)[] distribution)
             {
                 Puzzle = puzzle;
                 Clue = clue;
@@ -52,37 +52,37 @@ namespace Qoph
         }
 
         private static readonly DistrInfo _cyanSums = new DistrInfo("Edge sums (cyan)", "PINK SUM",
-                (word: "PINK", faces: new[] { 8, 11, 0, 1 }, color: "#afa"),
-                (word: "SUM", faces: new[] { 15, 12, 6 }, color: "#ffa"),
-                (word: "Q", faces: new[] { 22 }, color: "#faa"),
-                (word: "ABDEGHJLOFRVTZYX", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 16, 17, 18, 19, 20, 21, 23 }, color: "#fff"));
+                (word: "PINK", faces: new[] { 8, 11, 0, 1 }, color: 1),
+                (word: "SUM", faces: new[] { 15, 12, 6 }, color: 2),
+                (word: "Q", faces: new[] { 22 }, color: 0),
+                (word: "ABDEGHJLOFRVTZYX", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 16, 17, 18, 19, 20, 21, 23 }, color: null));
         private static readonly DistrInfo _pinkSums = new DistrInfo("Vertex sums (pink)", "LYRICS NEXT WORD",
-                (word: "LYRICS", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: "#afa"),
-                (word: "NEXT", faces: new[] { 14, 13, 5, 4 }, color: "#ffa"),
-                (word: "WOD", faces: new[] { 9, 10, 3 }, color: "#adf"),
-                (word: "Q", faces: new[] { 22 }, color: "#faa"),
-                (word: "JGHFKMPVUZ", faces: new[] { 2, 6, 7, 16, 17, 18, 19, 20, 21, 23 }, color: "#fff"));
+                (word: "LYRICS", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: 1),
+                (word: "NEXT", faces: new[] { 14, 13, 5, 4 }, color: 2),
+                (word: "WOD", faces: new[] { 9, 10, 3 }, color: 3),
+                (word: "Q", faces: new[] { 22 }, color: 0),
+                (word: "JGHFKMPVUZ", faces: new[] { 2, 6, 7, 16, 17, 18, 19, 20, 21, 23 }, color: null));
         private static readonly DistrInfo _musicSnippets = new DistrInfo("Lyrics", "GASHLYCRUMB TINS",
-                (word: "GASHLYCRUMB", faces: new[] { 8, 11, 0, 1, 15, 12, 16, 19, 9, 4, 5 }, color: "#afa"),
-                (word: "TIN", faces: new[] { 21, 20, 3 }, color: "#ffa"),
-                (word: "Q", faces: new[] { 22 }, color: "#faa"),
-                (word: "DJKOPVWXZ", faces: new[] { 6, 7, 10, 13, 14, 17, 18, 2, 23 }, color: "#fff"));
+                (word: "GASHLYCRUMB", faces: new[] { 8, 11, 0, 1, 15, 12, 16, 19, 9, 4, 5 }, color: 1),
+                (word: "TIN", faces: new[] { 21, 20, 3 }, color: 2),
+                (word: "Q", faces: new[] { 22 }, color: 0),
+                (word: "DJKOPVWXZ", faces: new[] { 6, 7, 10, 13, 14, 17, 18, 2, 23 }, color: null));
         private static readonly DistrInfo _carpetColors = new DistrInfo("Carpet colors", "CYAN SUM",
-                (word: "CYAN", faces: new[] { 8, 11, 0, 1 }, color: "#afa"),
-                (word: "SUM", faces: new[] { 15, 12, 6 }, color: "#ffa"),
-                (word: "Q", faces: new[] { 22 }, color: "#faa"),
-                (word: "BDFGHJKLOPRTVWXZ", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 16, 17, 18, 19, 20, 21, 23 }, color: "#fff"));
+                (word: "CYAN", faces: new[] { 8, 11, 0, 1 }, color: 1),
+                (word: "SUM", faces: new[] { 15, 12, 6 }, color: 2),
+                (word: "Q", faces: new[] { 22 }, color: 0),
+                (word: "BDFGHJKLOPRTVWXZ", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 16, 17, 18, 19, 20, 21, 23 }, color: null));
         private static readonly DistrInfo _gashlycrumbTinies = new DistrInfo("Gashlycrumb Tinies", "LOCK IS BAR",
-                (word: "LOCK", faces: new[] { 8, 11, 0, 1 }, color: "#afa"),
-                (word: "IS", faces: new[] { 15, 12 }, color: "#ffa"),
-                (word: "BAR", faces: new[] { 16, 19, 9 }, color: "#adf"),
-                (word: "Q", faces: new[] { 22 }, color: "#faa"),
-                (word: "EFGHJMNPUVWXYZ", faces: new[] { 2, 3, 4, 5, 6, 7, 10, 13, 14, 17, 18, 20, 21, 23 }, color: "#fff"));
+                (word: "LOCK", faces: new[] { 8, 11, 0, 1 }, color: 1),
+                (word: "IS", faces: new[] { 15, 12 }, color: 2),
+                (word: "BAR", faces: new[] { 16, 19, 9 }, color: 3),
+                (word: "Q", faces: new[] { 22 }, color: 0),
+                (word: "EFGHJMNPUVWXYZ", faces: new[] { 2, 3, 4, 5, 6, 7, 10, 13, 14, 17, 18, 20, 21, 23 }, color: null));
         private static readonly DistrInfo _crosswordAfterOffset = new DistrInfo("Crossword", "CARPET INDEX",
-                (word: "CARPET", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: "#afa"),
-                (word: "INDX", faces: new[] { 23, 3, 2, 17 }, color: "#ffa"),
-                (word: "Q", faces: new[] { 22 }, color: "#faa"),
-                (word: "FGHJKLMSUVWYZ", faces: new[] { 4, 5, 6, 7, 9, 10, 13, 14, 16, 18, 19, 20, 21 }, color: "#fff"));
+                (word: "CARPET", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: 1),
+                (word: "INDX", faces: new[] { 23, 3, 2, 17 }, color: 2),
+                (word: "Q", faces: new[] { 22 }, color: 0),
+                (word: "FGHJKLMSUVWYZ", faces: new[] { 4, 5, 6, 7, 9, 10, 13, 14, 16, 18, 19, 20, 21 }, color: null));
 
         private static readonly DistrInfo[] _distributions = new[] { _carpetColors, _cyanSums, _pinkSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
 
@@ -634,12 +634,13 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
         {
             var p = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\LpentagonalIcositetrahedron.txt");
 
-            Func<int, double, double, string> textTagger((string word, int[] faces, string color)[] data) => (face, x, y) =>
+            Func<int, double, double, string> textTagger((string word, int[] faces, int? color)[] data) => (face, x, y) =>
             {
-                var (word, faces, color) = data.Where(tup => tup.faces.Contains(face)).FirstOrDefault(("?", new[] { face }, "#fff"));
+                var (word, faces, color) = data.Where(tup => tup.faces.Contains(face)).FirstOrDefault(("?", new[] { face }, null));
                 return $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{word[faces.IndexOf(face)]}</text>";
             };
-            Func<int, string> faceColorer((string word, int[] faces, string color)[] data) => face => data.Where(tup => tup.faces.Contains(face)).Select(tup => tup.color).FirstOrDefault("#fff");
+            var markingColors = new[] { "#faa", "#afa", "#ffa", "#adf" };
+            Func<int, string> faceColorer((string word, int[] faces, int? color)[] data) => face => data.Where(tup => tup.faces.Contains(face)).Select(tup => tup.color == null ? "#fff" : markingColors[tup.color.Value]).FirstOrDefault("#fff");
 
             object makePiece(DistrInfo distrInfo) => new DIV { class_ = "piece" }._(
                 new H1(Enumerable.Range(0, 26).Select(i => (char) ('A' + i)).Where(ch => distrInfo.Distribution.All(tup => !tup.word.Contains(ch))).JoinString()),
@@ -857,8 +858,15 @@ h3 {{ font-size: 14pt; }}
                 faceInfos[faceIx].Edges[barEdge].CrosswordInfoFontSize = 32;
             }
 
+            // C# declaration for Unity project
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
                 $@"new[] {{ {faceInfos.Select(fi => $@"new FaceData {{ CarpetColor = ""{fi.CarpetColor.ToLowerInvariant().CLiteralEscape()}"", CarpetLength = {fi.CarpetColorIndex + 1}, SongSnippet = ""{fi.MusicSnippet.CLiteralEscape()}"", ItemInBox = ""{fi.GashlycrumbTiniesObject.CLiteralEscape()}"", Edges = new[] {{ {fi.Edges.Select(e => $@"new Edge {{ CyanNumber = {e.CyanNumber}, PinkNumber = {e.PinkNumber}{(e.AdjacentFace == null && e.CrosswordInfo == null ? "" : e.AdjacentFace == null ? $@", Label = ""{e.CrosswordInfo.CLiteralEscape()}"", LabelFontSize = {e.CrosswordInfoFontSize}" : $@", Face = {e.AdjacentFace.Value}")} }}").JoinString(", ")} }} }}").JoinString(", ")} }}");
+
+            // JS declaration for solution page
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
+                $@"[ {faceInfos.Select((fi, fIx) => $@"{{ c: [ {_distributions.Select(dist => dist.Distribution.First(d => d.faces.Contains(fIx)).Apply(tup => tup.color == null ? "null" : tup.color.ToString())).JoinString(", ")} ], cc: ""{fi.CarpetColor.ToUpperInvariant().CLiteralEscape()}"", ci: {fi.CarpetColorIndex + 1}, song: ""{fi.MusicSnippet.CLiteralEscape()}"", item: ""{Regex.Replace(fi.GashlycrumbTiniesObject, @"""(.*?)""", m => $"“{m.Groups[1].Value}”").CLiteralEscape()}"", e: [ {fi.Edges.Select(e => $@"{{ cn: {e.CyanNumber}, pn: {e.PinkNumber}{(e.AdjacentFace == null && e.CrosswordInfo == null ? "" : e.AdjacentFace == null ? $@", label: ""{e.CrosswordInfo.CLiteralEscape()}""" : $@", face: {e.AdjacentFace.Value}")} }}").JoinString(", ")} ] }}").JoinString(", ")} ]");
+
+            // Google Sheets
             Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{f.Edges[edge].AdjacentFace?.ToString() ?? f.Edges[edge].CrosswordInfo.Apply(ci => string.IsNullOrWhiteSpace(ci) ? "" : !"+-".Contains(ci[0]) ? ci.Replace("\n", " ") : $"‘{ci}’")}\t{f.Edges[edge].AdjacentEdge}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex + 1}\t{f.MusicSnippet}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
         }
 
