@@ -1,6 +1,6 @@
 <style>
 	.ihs { visibility: hidden; }
-	.ihs.shown, .ihs.cwp-1, .ihs.cwp-2 { visibility: visible; }
+	.ihs.shown, .ihs.cwp, .ihs.cwp-1, .ihs.cwp-2 { visibility: visible; }
 	svg * { pointer-events: none; }
 
 	path.face {
@@ -94,15 +94,15 @@ makeSolutionPage('face-to-face', `
 	{-pink2 <p>This also contains a hint for the next subpuzzle: [rpinkH «LYRICS NEXT WORD».]</p>}
 
 •radio Radio
-	<p>The radio in every room, [o when clicked, plays a fragment of music that stops at a seemingly specific point. This suggests (and it is confirmed by the hint from the previous subpuzzle) that [s we should find the next word in the lyrics of these songs. [rradio1 (Hover over the diagram to see the lyrics, songs and authors.) We find that these words [dradio2 all start with different letters.]]]]</p>
+	<p>The radio in every room, [o when clicked, plays a fragment of music that stops at a seemingly specific point. This suggests (and it is confirmed by the hint from the previous subpuzzle) that [s we should find the next word in the lyrics of these songs. [rradio1 (Hover over the diagram to see the lyrics, songs and authors.) We find that these words [dradio2 all start with different letters, so those first letters are likely relevant.]]]]</p>
 	{-radio2 <p>This also contains a hint for the next subpuzzle: [rradioH «GASHLYCRUMB TIN».]</p>}
 
 •box Boxes
-	<p>Each room has a box. [o When clicked, the voice in your head tells you what’s in the box. What these things are is virtually unguessable without the hint from the previous subpuzzle. [r The hint is «GASHLYCRUMB TIN», which [s Google will happily auto-complete to <a href='https://www.brainpickings.org/2011/01/19/edward-gorey-the-gashlycrumb-tinies/'><cite>Gashlycrumb Tinies</cite></a>, an illustrated poem by Edward Gorey in which 26 children with names starting A–Z meet every variety of gruesome death. The items in the boxes can be uniquely associated with lines from the poem. [rboxR]]]]</p>
+	<p>Each room has a box. [o When clicked, the voice in your head tells you what’s in the box. What these things are is virtually unguessable without the hint from the previous subpuzzle. [r The hint is «GASHLYCRUMB TIN», which [s Google will happily auto-complete to <a href='http://holyjoe.org/poetry/gorey.htm'><cite>Gashlycrumb Tinies</cite></a>, an illustrated poem by Edward Gorey in which 26 children with names starting A–Z meet every variety of gruesome death. The items in the boxes can be uniquely associated with lines from the poem. [rboxR]]]]</p>
 	{-boxR <p>This also contains a hint for the next subpuzzle: [rboxH «LOCK IS BAR».]</p>}
 
 •door Door signs
-	<p>Some doors have signs hanging off the doorknobs with either a crossword clue on them, or a number with a plus or minus sign. It stands to reason that we should [s fill the map with the answers to the clues, one letter per room, like it’s a wonky crossword. Coupled with the hint from the previous subpuzzle, [d the locked doors tell us where words start and end (like a barred crossword). Other things that help (but aren’t hinted) is that the words never make a sharp angle (so there are only two directions to choose from after every letter, not four) and the clue is similarly placed at the “start” of the word (not at a sharp angle). The solution to the crossword is [rdoor1 below. However, if you’ve already solved any of the other subpuzzles, you expect that all letters should be unique. Well, this is where [d the plus/minus numbers come in. After applying these Caesar offsets, we get [rdoor2 the actual solution.]]]]]</p>
+	<p>Some doors have signs hanging off the doorknobs with either a crossword clue on them, or a number with a plus or minus sign. It stands to reason that we should [s fill the map with the answers to the clues, one letter per room, like it’s a wonky crossword. Coupled with the hint from the previous subpuzzle, [d the locked doors tell us where words start and end (like a barred crossword). Another thing that helps (but isn’t hinted) is that the words never make a sharp angle (so there are only two directions to choose from after every letter, not four) and the clue is similarly placed at the “start” of the word (not at a sharp angle). The solution to the crossword is [rdoor1 below. However, if you’ve already solved any of the other subpuzzles, you expect that all letters should be unique. Well, this is where [d the plus/minus numbers come in. After applying these Caesar offsets, we get the actual solution. [rdoor2]]]]]</p>
 	{-door2 <p>This also contains a hint for the next subpuzzle: [rdoorH «CARPET INDEX».]</p>}
 
 ▼
@@ -272,7 +272,9 @@ makeSolutionPage('face-to-face', `
 	<g id='svg-extra'></g>
 </svg>
 
-<div class='answer'>BOWTIE</div>
+{-b <p>To help confirm the answers to the subpuzzles, [o they all have the letter «Q» in the same place, and the hint for the next subpuzzle starts in the same place (next to the «Q»).]</p>}
+{-b <p>To bring it all together, we note that [o each subpuzzle solution has 24 different letters of the alphabet. The missing letters are [r «EI»&nbsp;(carpets), «CW»&nbsp;(cyan numbers), «AB»&nbsp;(pink numbers), «EF»&nbsp;(radio), «DT»&nbsp;(boxes) and «BO»&nbsp;(door signs). [o These pairs contain the letters «A», «B», «C», «D», «E», «F», which means [s we can reorder them and extract the other letter. [rc]]]]]</p>}
+{-c <div class='answer'>BOW TIE</div>}
 }
 `, {
 	subpuzzles	: setupSvg,
@@ -354,8 +356,8 @@ function setupSvg(tab)
 			for (let faceIx = 0; faceIx < 24; faceIx++)
 			{
 				let popup = document.getElementById(`radio-popup-${faceIx}`);
-				document.getElementById(`face-${faceIx}`).onmouseover	= function() { popup.classList.add('shown'); };
-				document.getElementById(`face-${faceIx}`).onmouseout	= function() { popup.classList.remove('shown'); };
+				document.getElementById(`face-${faceIx}`).onmouseover	= function() { popup.classList.add('shown');	};
+				document.getElementById(`face-${faceIx}`).onmouseout	= function() { popup.classList.remove('shown');	};
 			}
 			break;
 
@@ -416,7 +418,7 @@ function setupSvg(tab)
 					<g font-size='.4'>${Array(24).fill(null).map((_, i) => `<text x='${xs[i]}' y='${ys[i]+.16}'>${String.fromCharCode(64 + faceData[i].v[5])}</text>`).join('')}</g>
 				`: ''}
 				${faceData.map(fd => fd.e.map(e => e.cm ? `<text transform='translate(${e.cmx} ${e.cmy}) rotate(${180 + e.cma})' y='.13'>${e.cm}</text>` : '').join('')).join('')}
-				${doorInfo.map((di, ix) => `<g id='cw-popup-${ix}' class='ihs' transform='translate(${faceData[di.c[0]].e[di.e].cmx} ${faceData[di.c[0]].e[di.e].cmy}) rotate(${180+faceData[di.c[0]].e[di.e].cma})'><path fill='#fff' stroke='black' stroke-width='.01' d='M ${-dws[ix]/2-(di.o||0)} -.04 V -.3 H ${dws[ix]/2-(di.o||0)} V -.04 L .1 -.04 0 .06 -.1 -.04 z' /><text font-size='.2' x='${-(di.o||0)}' y='-.1'>${di.l}</text></g>`).join('')}
+				${doorInfo.map((di, ix) => `<g id='cw-popup-${ix}' class='ihs' transform='translate(${faceData[di.c[0]].e[di.e].cmx} ${faceData[di.c[0]].e[di.e].cmy}) rotate(${180+faceData[di.c[0]].e[di.e].cma})'><path fill='#fff' stroke='black' stroke-width='.01' d='M ${-dws[ix]/2-(di.o||0)} -.04 V -.3 H ${dws[ix]/2-(di.o||0)} V -.04 L .1 -.04 0 .06 -.1 -.04 z' /><text font-size='.2' x='${-(di.o||0)}' y='-.11'>${di.l}</text></g>`).join('')}
 			</g>`;
 			if (reveals.door)
 			{
@@ -442,6 +444,15 @@ function setupSvg(tab)
 						document.getElementById(`cw-popup-${two}`).classList.remove('cwp-2');
 						document.getElementById('main-svg').classList.remove('nc');
 					};
+				});
+			}
+			else
+			{
+				doorInfo.forEach((di, diIx) =>
+				{
+					let face = document.getElementById(`face-${di.c[0]}`);
+					face.onmouseover	= function() { document.getElementById(`cw-popup-${diIx}`).classList.add('cwp');	};
+					face.onmouseout	= function() { document.getElementById(`cw-popup-${diIx}`).classList.remove('cwp');	};
 				});
 			}
 			break;
