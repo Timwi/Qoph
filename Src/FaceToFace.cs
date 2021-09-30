@@ -123,7 +123,7 @@ namespace Qoph
             "a sled",
             "a bucket of orange paint",
             "a worm",
-            "a toupee",
+            "a doormat",
             "a copy of the album \"So Much Fun\"",
             "a painting of Queen Victoria",
             "a beaker of alkaline solution",
@@ -787,7 +787,7 @@ h3 {{ font-size: 14pt; }}
         }
 
         // Cached here because generating this takes several seconds. Generated from rule seed 47, git commit 4ebc757c65e5165e2dac6ba5440ed8d24f98fa3f
-        private static int?[][] _pinkNumbers = new int?[][]
+        private static readonly int?[][] _pinkNumbers = new int?[][]
         {
             new int?[] { 41, 40, null, null, 47 },
             new int?[] { 41, 22, null, 33, 40 },
@@ -906,13 +906,20 @@ h3 {{ font-size: 14pt; }}
                     select (faces: adjoiningFaces.ToArray(), sum: adjoiningFaces.Sum(f => getFaceValue(f, _pinkSums)));
                 var pinkClues = pinkCluesRaw.Where(cl => cl.faces[0] == cl.faces.Min()).ToArray();
 
+                Puzzle makePuzzle(IEnumerable<int> clues)
+                {
+                    var puzzle = new Puzzle(_polyhedron.Faces.Length, 0, 50);
+                    foreach (var i in clues)
+                        puzzle.AddConstraint(new SumConstraint(pinkClues[i].sum, pinkClues[i].faces));
+                    return puzzle;
+                }
+                if (makePuzzle(Enumerable.Range(0, pinkClues.Length)).Solve().Skip(1).Any())
+                    Debugger.Break();
+
                 var requiredPinkClues = Ut.ReduceRequiredSet(Enumerable.Range(0, pinkClues.Length).ToArray().Shuffle(rnd), skipConsistencyTest: true, test: state =>
                 {
                     Console.WriteLine(Enumerable.Range(0, pinkClues.Length).Select(i => state.SetToTest.Contains(i) ? "█" : "░").JoinString());
-                    var puzzle = new Puzzle(_polyhedron.Faces.Length, 0, 50);
-                    foreach (var i in state.SetToTest)
-                        puzzle.AddConstraint(new SumConstraint(pinkClues[i].sum, pinkClues[i].faces));
-                    return !puzzle.Solve().Skip(1).Any();
+                    return !makePuzzle(state.SetToTest).Solve().Skip(1).Any();
                 })
                     .Select(ix => pinkClues[ix])
                     .ToArray();
