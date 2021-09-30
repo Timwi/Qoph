@@ -350,6 +350,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
         /// <param name="faceSvg">Extra SVG to add for each face. Parameters are: Face index, X, Y.</param>
         /// <returns></returns>
         private static (string svg, PointD[][] polygons) generateNet(Polyhedron polyhedron,
+            Func<int, int, int, int, EdgeD, string> edgeSvg = null,
             Func<int, int, PointD, string> vertexSvg = null,
             Func<int, int, double> edgeStrokeWidth = null,
             Func<int, double, double, string> faceSvg = null,
@@ -477,6 +478,8 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                                 $"M {p1m.X},{p1m.Y} C {p1c.X},{p1c.Y} {p2c.X},{p2c.Y} {p2m.X},{p2m.Y}")}' />");
                         }
 
+                        if (edgeSvg != null)
+                            svgExtras.Append(edgeSvg(fromFaceIx, fromEdgeIx, toFaceIx, toEdgeIx, new EdgeD(p1, p2)));
                         if (vertexSvg != null)
                         {
                             svgExtras.Append(vertexSvg(fromFaceIx, fromEdgeIx, p1));
@@ -693,6 +696,7 @@ h3 {{ font-size: 14pt; }}
             public int? PinkNumber;  // in the corner where this edge starts (clockwise from the door)
             public string CrosswordInfo;    // could be crossword clue or offset
             public int CrosswordInfoFontSize;
+            public EdgeD Edge;
         }
 
         public sealed class FaceInfo
@@ -712,17 +716,6 @@ h3 {{ font-size: 14pt; }}
         public static void GatherAllData()
         {
             var faceInfos = GetFaceData();
-
-            var vertices = new Dictionary<(int face, int vertex), PointD>();
-            generateNet(_polyhedron, vertexSvg: (faceIx, edgeIx, p) =>
-            {
-                vertices[(faceIx, edgeIx)] = p;
-                for (int fIx = 0; fIx < _polyhedron.Faces.Length; fIx++)
-                    for (int eIx = 0; eIx < _polyhedron.Faces[fIx].Length; eIx++)
-                        if (_polyhedron.Faces[fIx][eIx] == _polyhedron.Faces[faceIx][edgeIx] && !vertices.ContainsKey((fIx, eIx)))
-                            vertices[(fIx, eIx)] = p;
-                return null;
-            });
 
             var maplePieces = new List<string>();
             var pinkCorners = new List<((int faceIx, int vertexIx)[] adj, int pinkNumber)>();
@@ -769,16 +762,23 @@ h3 {{ font-size: 14pt; }}
                     $@"e: [ {fi.Edges.Select(e => $@"{{ {Ut.NewArray(
                         e.CyanNumber.NullOr(c => $"cn: {c}"),
                         e.PinkNumber.NullOr(p => $"pn: {p}"),
-                        e.Locked && e.CrosswordInfo != null ? $@"label: ""{e.CrosswordInfo.CLiteralEscape()}""" : null,
+                        e.CrosswordInfo.NullOr(c => $@"cm: ""{("+-".Contains(e.CrosswordInfo[0]) ? e.CrosswordInfo.Replace("-", "−") : "(clue)").CLiteralEscape()}"""),
+                        e.CrosswordInfo.NullOr(c => $"cmx: {e.Edge.Midpoint.X:.00}"),
+                        e.CrosswordInfo.NullOr(c => $"cmy: {e.Edge.Midpoint.Y:.00}"),
+                        e.CrosswordInfo.NullOr(c => $"cma: {e.Edge.AngleDeg:.00}"),
                         $"face: {e.AdjacentFace}").Where(str => str != null).JoinString(", ")} }}").JoinString(", ")} ] }}").JoinString(",\n\t")}]");
 
             General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"<!--PinkCorners-start-->", @"<!--PinkCorners-end-->",
                 pinkCorners.SelectMany(corner => corner.adj
-                    .Select(inf => (p: vertices[(inf.faceIx, inf.vertexIx)], prevP: vertices[(inf.faceIx, (inf.vertexIx + 4) % 5)], nextP: vertices[(inf.faceIx, (inf.vertexIx + 1) % 5)]))
+                    .Select(inf => (p: faceInfos[inf.faceIx].Edges[inf.vertexIx].Edge.Start, prevP: faceInfos[inf.faceIx].Edges[(inf.vertexIx + 4) % 5].Edge.Start, nextP: faceInfos[inf.faceIx].Edges[inf.vertexIx].Edge.End))
                     .Select(inf => (inf.p, vector: (inf.prevP - inf.p).Unit() + (inf.nextP - inf.p).Unit()))
                     .Select(inf => (p: inf.p + .1 * inf.vector.Unit(), angle: inf.vector.Theta() * 180 / Math.PI))
                     .Select(inf => $"<text transform='translate({inf.p.X:.00} {inf.p.Y:.00}) rotate({inf.angle - 90:.00})' y='.06'>{corner.pinkNumber}</text>")).JoinString());
 
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"/\*DoorInfo-start\*/", @"/\*DoorInfo-end\*/",
+                $@"[ {_crosswordLights.Select(cl => $@"{{ w: ""{cl.word}"", l: ""{cl.clue.Replace("\n", " ").CLiteralEscape()}"", c: [ {cl.cells.JoinString(", ")} ], e: {faceInfos[cl.cells[0]].Edges.IndexOf(e => e.CrosswordInfo == cl.clue)} }}").JoinString(", ")} ]");
+
+            // Song files in Unity project
             for (var i = 0; i < faceInfos.Length; i++)
                 File.Copy($@"D:\c\Qoph\DataFiles\Face To Face\SongRadiofied\{faceInfos[i].SongFilename}.mp3", $@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\RadioSongs\radio{i}.mp3", overwrite: true);
 
@@ -786,7 +786,7 @@ h3 {{ font-size: 14pt; }}
             Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{(f.Edges[edge].Locked ? f.Edges[edge].CrosswordInfo.Apply(ci => string.IsNullOrWhiteSpace(ci) ? "" : !"+-".Contains(ci[0]) ? ci.Replace("\n", " ") : $"‘{ci}’") : f.Edges[edge].AdjacentFace.ToString())}\t{(f.Edges[edge].Locked ? "" : f.Edges[edge].AdjacentEdge.ToString())}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex}\t{f.SongTitle}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
         }
 
-        // Cached here because generating this takes several seconds. Generated from rule seed 47, git commit 4ebc757c65e5165e2dac6ba5440ed8d24f98fa3f
+        // Cached here because generating this takes several seconds. Generated from random seed 47, git commit 4ebc757c65e5165e2dac6ba5440ed8d24f98fa3f
         private static readonly int?[][] _pinkNumbers = new int?[][]
         {
             new int?[] { 41, 40, null, null, 47 },
@@ -817,6 +817,16 @@ h3 {{ font-size: 14pt; }}
 
         public static FaceInfo[] GetFaceData()
         {
+            var edges = new Dictionary<(int face, int vertex), EdgeD>();
+            generateNet(_polyhedron,
+                edgeSvg: (f1Ix, e1Ix, f2Ix, e2Ix, e) =>
+                {
+                    edges[(f1Ix, e1Ix)] = e;
+                    if (!edges.ContainsKey((f2Ix, e2Ix)))
+                        edges[(f2Ix, e2Ix)] = new EdgeD(e.End, e.Start);
+                    return null;
+                });
+
             var locked = getLocked();
             var faceInfos = new List<FaceInfo>();
             for (var faceIx = 0; faceIx < _polyhedron.Faces.Length; faceIx++)
@@ -839,16 +849,17 @@ h3 {{ font-size: 14pt; }}
                     CarpetColorIndex = carpetColor.IndexOf(carpetLetter) + 1
                 };
 
-                for (var edge = 0; edge < 5; edge++)
+                for (var edgeIx = 0; edgeIx < 5; edgeIx++)
                 {
-                    var adjacentFace = _polyhedron.Faces.Single(f => f != face && f.Contains(face[edge]) && f.Contains(face[(edge + 1) % 5]));
+                    var adjacentFace = _polyhedron.Faces.Single(f => f != face && f.Contains(face[edgeIx]) && f.Contains(face[(edgeIx + 1) % 5]));
                     var adjacentFaceIx = _polyhedron.Faces.IndexOf(adjacentFace);
 
-                    inf.Edges[edge] = new EdgeInfo
+                    inf.Edges[edgeIx] = new EdgeInfo
                     {
-                        Locked = locked.Contains((faceIx, edge)),
+                        Locked = locked.Contains((faceIx, edgeIx)),
                         AdjacentFace = adjacentFaceIx,
-                        AdjacentEdge = adjacentFace.IndexOf(face[(edge + 1) % 5])
+                        AdjacentEdge = adjacentFace.IndexOf(face[(edgeIx + 1) % 5]),
+                        Edge = edges[(faceIx, edgeIx)]
                     };
                 }
                 faceInfos.Add(inf);

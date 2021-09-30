@@ -1,15 +1,24 @@
 <style>
-	.ihs:not(.shown) { visibility: hidden; }
+	.ihs { visibility: hidden; }
+	.ihs.shown, .ihs.cwp-1, .ihs.cwp-2 { visibility: visible; }
 	svg * { pointer-events: none; }
 
 	path.face {
 		fill: hsl(220, 60%, 95%);
 		pointer-events: fill;
 	}
-		path.face.c0 { fill: hsl(  0, 80%, 80%); }
-		path.face.c1 { fill: hsl( 90, 80%, 80%); }
-		path.face.c2 { fill: hsl(180, 80%, 80%); }
-		path.face.c3 { fill: hsl(270, 80%, 80%); }
+		#main-svg:not(.nc) path.face.c0 { fill: hsl(  0, 80%, 80%); }
+		#main-svg:not(.nc) path.face.c1 { fill: hsl( 90, 80%, 80%); }
+		#main-svg:not(.nc) path.face.c2 { fill: hsl(180, 80%, 80%); }
+		#main-svg:not(.nc) path.face.c3 { fill: hsl(270, 80%, 80%); }
+
+		path.face.cwh-1 { fill: hsl(0, 80%, 80%); }
+		path.face.cwh-2 { fill: hsl(120, 80%, 80%); }
+		path.face.cwh-1.cwh-2 { fill: hsl(60, 80%, 60%); }
+
+		.ihs.cwp-1 > path { fill: hsl(0, 80%, 80%); }
+		.ihs.cwp-2 > path { fill: hsl(120, 80%, 80%); }
+
 	path.edge {
 		fill: none;
 		stroke: hsl(220, 30%, 60%);
@@ -42,30 +51,30 @@
 <script>
 let reveals = {}, hintReveals = {}, curTab = null;
 let faceData = /*Faces-start*/[
-	{ c: [ 1, 1, 1, 1, 1, 1 ], v: [ 1, 14, 18, 19, 3, 18 ], cc: "AQUA", ci: 1, s: { t: "Magnolia (Playboi Carti)", l: "In New York I Milly Rock, hide it in my...", n: "Sock" }, item: "a pile of trash", e: [ { cn: 25, pn: 41, face: 1 }, { cn: 36, pn: 40, label: "Itinerary\n(5)", face: 18 }, { label: "+0", face: 10 }, { cn: 23, face: 11 }, { pn: 47, face: 3 } ] },
-	{ c: [ 1, 1, 1, 1, 1, 1 ], v: [ 14, 11, 9, 8, 11, 16 ], cc: "ONYX", ci: 2, s: { t: "Holding Out for a Hero (Bonnie Tyler)", l: "And where are all the Gods? Where’s the streetwise...", n: "Hercules" }, item: "a body spray", e: [ { pn: 41, label: "+7", face: 2 }, { pn: 22, face: 15 }, { face: 17 }, { pn: 33, face: 18 }, { cn: 25, pn: 40, face: 0 } ] },
-	{ c: [ null, null, null, null, null, 2 ], v: [ 2, 1, 10, 24, 5, 4 ], cc: "GAMBOGE", ci: 4, s: { t: "The Elements (Tom Lehrer)", l: "... also mendelevium, einsteinium, nobelium, and argon, krypton, neon, radon, ...", n: "Xenon" }, item: "a bucket of orange paint", e: [ { pn: 41, label: "Require\n(4)", face: 3 }, { pn: 36, face: 20 }, { pn: 46, face: 14 }, { cn: 20, label: "-10", face: 15 }, { pn: 22, face: 1 } ] },
-	{ c: [ null, null, 3, 2, null, 2 ], v: [ 4, 2, 4, 14, 6, 14 ], cc: "JADE", ci: 3, s: { t: "Everybody Wants to Rule the World (Tears for Fears)", l: "Acting on your best behaviour, turn your back on mother...", n: "Nature" }, item: "a worm", e: [ { pn: 41, face: 0 }, { cn: 11, pn: 47, label: "-1", face: 11 }, { cn: 26, face: 23 }, { face: 20 }, { pn: 36, label: "Beginning\n(5)", face: 2 } ] },
-	{ c: [ null, null, 2, 1, null, null ], v: [ 6, 4, 20, 13, 7, 6 ], cc: "FUCHSIA", ci: 1, s: { t: "Shape of You (Ed Sheeran)", l: "I’m in love with the shape of you. We push and pull like a...", n: "Magnet" }, item: "a doormat", e: [ { pn: 59, face: 5 }, { cn: 21, face: 22 }, { cn: 20, pn: 49, label: "+1", face: 8 }, { pn: 55, face: 9 }, { cn: 11, face: 7 } ] },
-	{ c: [ null, null, 2, 1, null, null ], v: [ 7, 5, 24, 2, 8, 7 ], cc: "GAMBOGE", ci: 1, s: { t: "Blinding Lights (The Weekend)", l: "So I hit the road in overdrive...", n: "Baby" }, item: "a copy of the album “So Much Fun”", e: [ { pn: 59, label: "+3", face: 6 }, { pn: 36, face: 13 }, { pn: 50, label: "Agreement or dish\nout cards (4)", face: 21 }, { cn: 22, face: 22 }, { face: 4 } ] },
-	{ c: [ 2, 2, null, null, null, null ], v: [ 13, 13, 7, 4, 10, 8 ], cc: "GAMBOGE", ci: 3, s: { t: "Imagine (John Lennon)", l: "... sharing all the world, yoo-hoo... You may say I’m a...", n: "Dreamer" }, item: "a beaker of alkaline solution", e: [ { pn: 59, face: 7 }, { pn: 21, face: 16 }, { pn: 32, label: "+3", face: 12 }, { cn: 25, pn: 31, label: "Ovum (3)", face: 13 }, { pn: 36, face: 5 } ] },
-	{ c: [ null, null, null, null, null, null ], v: [ 8, 7, 8, 10, 13, 10 ], cc: "WHITE", ci: 2, s: { t: "Royals (Lorde)", l: "We’re driving Cadillacs in our dreams, but everybody’s like Cristal, Maybach, diamonds on your timepiece...", n: "Jet" }, item: "a bottle of salty water", e: [ { cn: 11, pn: 59, face: 4 }, { face: 9 }, { label: "-10", face: 19 }, { pn: 30, face: 16 }, { pn: 21, face: 6 } ] },
-	{ c: [ 1, 1, 1, 1, 1, 1 ], v: [ 3, 16, 12, 7, 12, 3 ], cc: "FUCHSIA", ci: 3, s: { t: "Space Oddity (David Bowie)", l: "Take your protein pills and put your helmet on...", n: "Ground" }, item: "a nail", e: [ { face: 9 }, { cn: 20, pn: 55, label: "-5", face: 4 }, { cn: 33, pn: 49, face: 22 }, { pn: 55, label: "Loathe\n(4)", face: 23 }, { cn: 25, face: 11 } ] },
-	{ c: [ null, null, 3, 1, 3, null ], v: [ 10, 8, 23, 21, 18, 11 ], cc: "JADE", ci: 1, s: { t: "Eternal Flame (The Bangles)", l: "Can you feel my heart beating? Do you...", n: "Understand" }, item: "a box of matches", e: [ { cn: 18, face: 10 }, { label: "+10", face: 19 }, { face: 7 }, { face: 4 }, { pn: 55, face: 8 } ] },
-	{ c: [ null, null, 3, null, null, null ], v: [ 11, 10, 15, 11, 14, 12 ], cc: "PINK", ci: 4, s: { t: "Africa (Toto)", l: "I know that I must do what’s right, as sure as...", n: "Kilimanjaro" }, item: "a copy of the funnies with their beginning and end torn off and the rest scrambled", e: [ { cn: 19, face: 11 }, { label: "+0", face: 0 }, { face: 18 }, { pn: 44, face: 19 }, { cn: 18, face: 9 } ] },
-	{ c: [ 1, 1, 1, 1, 1, 1 ], v: [ 25, 9, 25, 1, 15, 1 ], cc: "ONYX", ci: 3, s: { t: "Lemon Tree (Fools Garden)", l: "I’m sitting here in a boring room, it’s just another rainy Sunday...", n: "Afternoon" }, item: "a piercing", e: [ { cn: 25, face: 8 }, { label: "For the length\nof (5)", face: 23 }, { cn: 11, label: "+0", face: 3 }, { cn: 23, pn: 47, face: 0 }, { cn: 19, face: 10 } ] },
-	{ c: [ 2, 2, 1, 1, 2, 1 ], v: [ 21, 21, 19, 25, 19, 20 ], cc: "AQUA", ci: 3, s: { t: "Yellow Submarine (The Beatles)", l: "And we lived beneath the waves in our...", n: "Yellow" }, item: "a bottle of anticonvulsants", e: [ { pn: 41, label: "+13", face: 13 }, { pn: 31, face: 6 }, { cn: 27, pn: 32, face: 16 }, { pn: 36, face: 17 }, { face: 15 } ] },
-	{ c: [ null, null, 2, null, null, null ], v: [ 12, 12, 5, 15, 16, 13 ], cc: "VIOLET", ci: 4, s: { t: "Bohemian Rhapsody (Queen)", l: "... caught in a landslide, no escape from reality...", n: "Open" }, item: "a copy of the third Super Smash Bros. game", e: [ { cn: 27, pn: 41, face: 14 }, { cn: 37, pn: 40, face: 21 }, { pn: 50, face: 5 }, { cn: 25, pn: 36, label: "+8", face: 6 }, { pn: 31, face: 12 } ] },
-	{ c: [ null, null, 2, null, null, null ], v: [ 15, 15, 14, 16, 21, 19 ], cc: "VIOLET", ci: 3, s: { t: "I’m Still Standing (Elton John)", l: "After all this time, picking up the...", n: "Pieces" }, item: "a kitchen sink", e: [ { pn: 41, face: 15 }, { face: 2 }, { pn: 46, label: "+14", face: 20 }, { pn: 57, face: 21 }, { cn: 27, pn: 40, face: 13 } ] },
-	{ c: [ 2, 2, 1, 1, 2, 1 ], v: [ 19, 19, 3, 12, 9, 5 ], cc: "FUCHSIA", ci: 5, s: { t: "Stronger (Kanye West)", l: "Bow in the presence of greatness, ’cause right now thou hast forsaken us. You should be honored by my...", n: "Lateness" }, item: "a painting of Queen Victoria", e: [ { pn: 41, face: 12 }, { cn: 37, label: "-9", face: 17 }, { face: 1 }, { cn: 20, pn: 22, face: 2 }, { face: 14 } ] },
-	{ c: [ null, null, null, 1, 3, null ], v: [ 16, 6, 6, 3, 2, 21 ], cc: "PINK", ci: 1, s: { t: "Still Alive (Jonathan Coulton)", l: "... there’s no sense crying over every mistake. You just keep on trying till you run out of...", n: "Cake" }, item: "a plush toy", e: [ { cn: 24, pn: 46, face: 17 }, { cn: 27, pn: 36, label: "+14", face: 12 }, { pn: 32, face: 6 }, { pn: 21, face: 7 }, { pn: 30, face: 19 } ] },
-	{ c: [ null, null, null, null, null, 2 ], v: [ 18, 18, 11, 22, 22, 24 ], cc: "AZURE", ci: 4, s: { t: "Take Me Home, Country Roads (John Denver)", l: "... I belong, West...", n: "Virginia" }, item: "a toy railway car", e: [ { cn: 40, pn: 46, face: 18 }, { pn: 33, face: 1 }, { cn: 37, label: "+10", face: 15 }, { face: 12 }, { cn: 24, pn: 36, face: 16 } ] },
-	{ c: [ null, null, null, null, null, null ], v: [ 20, 22, 13, 23, 23, 22 ], cc: "WHITE", ci: 4, s: { t: "Angels (Robbie Williams)", l: "... whether I’m right or wrong. And down the...", n: "Waterfall" }, item: "a frozen cube", e: [ { cn: 42, pn: 46, face: 19 }, { pn: 44, face: 10 }, { cn: 36, label: "+7", face: 0 }, { pn: 40, face: 1 }, { cn: 40, pn: 33, face: 17 } ] },
-	{ c: [ null, null, null, 1, 3, null ], v: [ 22, 20, 16, 18, 1, 23 ], cc: "VIOLET", ci: 1, s: { t: "Mr. Blue Sky (Electric Light Orchestra)", l: "Hey you with the pretty face, welcome to the human...", n: "Race" }, item: "a piece of banister", e: [ { pn: 46, face: 16 }, { pn: 30, label: "Leaving or\nfunctioning (5)", face: 7 }, { label: "+16", face: 9 }, { face: 10 }, { cn: 42, pn: 44, face: 18 } ] },
-	{ c: [ null, null, null, 2, null, null ], v: [ 23, 26, 22, 9, 24, 25 ], cc: "WHITE", ci: 1, s: { t: "Barbie Girl (Aqua)", l: "You can brush my hair, undress me everywhere...", n: "Imagination" }, item: "a rat", e: [ { cn: 51, pn: 86, face: 21 }, { pn: 57, label: "+4", face: 14 }, { pn: 46, face: 2 }, { pn: 36, face: 3 }, { face: 23 } ] },
-	{ c: [ null, null, null, 2, null, null ], v: [ 24, 25, 21, 20, 25, 26 ], cc: "ONYX", ci: 4, s: { t: "God’s Plan (Drake)", l: "She say, “Do you love me?” I...", n: "Tell" }, item: "a book of jokes", e: [ { cn: 42, pn: 86, label: "X (3)", face: 22 }, { label: "+6", face: 5 }, { cn: 37, pn: 50, face: 13 }, { pn: 40, face: 14 }, { cn: 51, pn: 57, face: 20 } ] },
-	{ c: [ 0, 0, 0, 0, 0, 0 ], v: [ 17, 17, 17, 17, 17, 17 ], cc: "AQUA", ci: 2, s: { t: "Rasputin (Boney M.)", l: "Ra-Ra-Rasputin, lover of the Russian...", n: "Queen" }, item: "a pile of mud", e: [ { pn: 86, face: 23 }, { cn: 33, pn: 55, face: 8 }, { cn: 21, pn: 49, face: 4 }, { cn: 22, label: "Apportioning\n(7)", face: 5 }, { cn: 42, label: "-2", face: 21 } ] },
-	{ c: [ null, null, null, null, null, 2 ], v: [ 26, 24, 26, 26, 26, 9 ], cc: "AZURE", ci: 2, s: { t: "Wannabe (Spice Girls)", l: "... wanna (ha), I wanna (ha), I wanna (ha), I wanna (ha), I wanna really really really wanna...", n: "Zigazig" }, item: "a bottle of spirits", e: [ { pn: 86, face: 20 }, { cn: 26, face: 3 }, { label: "Sister (3)", face: 11 }, { label: "-5", face: 8 }, { pn: 55, face: 22 } ] }]/*Faces-end*/;
+	{ c: [ 1, 1, 1, 1, 1, 1 ], v: [ 1, 14, 18, 19, 3, 18 ], cc: "AQUA", ci: 1, s: { t: "Magnolia (Playboi Carti)", l: "In New York I Milly Rock, hide it in my...", n: "Sock" }, item: "a pile of trash", e: [ { cn: 25, pn: 41, face: 1 }, { cn: 36, pn: 40, cm: "(clue)", cmx: -.60, cmy: -.81, cma: -176.28, face: 18 }, { cm: "+0", cmx: -1.04, cmy: -.56, cma: 118.53, face: 10 }, { cn: 23, face: 11 }, { pn: 47, face: 3 } ] },
+	{ c: [ 1, 1, 1, 1, 1, 1 ], v: [ 14, 11, 9, 8, 11, 16 ], cc: "ONYX", ci: 2, s: { t: "Holding Out for a Hero (Bonnie Tyler)", l: "And where are all the Gods? Where’s the streetwise...", n: "Hercules" }, item: "a body spray", e: [ { pn: 41, cm: "+7", cmx: .36, cmy: -.21, cma: -30.34, face: 2 }, { pn: 22, face: 15 }, { face: 17 }, { pn: 33, face: 18 }, { cn: 25, pn: 40, face: 0 } ] },
+	{ c: [ null, null, null, null, null, 2 ], v: [ 2, 1, 10, 24, 5, 4 ], cc: "GAMBOGE", ci: 4, s: { t: "The Elements (Tom Lehrer)", l: "... also mendelevium, einsteinium, nobelium, and argon, krypton, neon, radon, ...", n: "Xenon" }, item: "a bucket of orange paint", e: [ { pn: 41, cm: "(clue)", cmx: .27, cmy: .32, cma: 50.41, face: 3 }, { pn: 36, face: 20 }, { pn: 46, face: 14 }, { cn: 20, cm: "−10", cmx: .97, cmy: -.26, cma: -145.15, face: 15 }, { pn: 22, face: 1 } ] },
+	{ c: [ null, null, 3, 2, null, 2 ], v: [ 4, 2, 4, 14, 6, 14 ], cc: "JADE", ci: 3, s: { t: "Everybody Wants to Rule the World (Tears for Fears)", l: "Acting on your best behaviour, turn your back on mother...", n: "Nature" }, item: "a worm", e: [ { pn: 41, face: 0 }, { cn: 11, pn: 47, cm: "−1", cmx: -.89, cmy: .46, cma: 102.97, face: 11 }, { cn: 26, face: 23 }, { face: 20 }, { pn: 36, cm: "(clue)", cmx: .02, cmy: .42, cma: -92.60, face: 2 } ] },
+	{ c: [ null, null, 2, 1, null, null ], v: [ 6, 4, 20, 13, 7, 6 ], cc: "FUCHSIA", ci: 1, s: { t: "Shape of You (Ed Sheeran)", l: "I’m in love with the shape of you. We push and pull like a...", n: "Magnet" }, item: "a doormat", e: [ { pn: 59, face: 5 }, { cn: 21, face: 22 }, { cn: 20, pn: 49, cm: "+1", cmx: -3.06, cmy: -.54, cma: -27.41, face: 8 }, { pn: 55, face: 9 }, { cn: 11, face: 7 } ] },
+	{ c: [ null, null, 2, 1, null, null ], v: [ 7, 5, 24, 2, 8, 7 ], cc: "GAMBOGE", ci: 1, s: { t: "Blinding Lights (The Weekend)", l: "So I hit the road in overdrive...", n: "Baby" }, item: "a copy of the album “So Much Fun”", e: [ { pn: 59, cm: "+3", cmx: -4.03, cmy: -1.62, cma: -176.28, face: 6 }, { pn: 36, face: 13 }, { pn: 50, cm: "(clue)", cmx: -4.55, cmy: -.88, cma: 53.34, face: 21 }, { cn: 22, face: 22 }, { face: 4 } ] },
+	{ c: [ 2, 2, null, null, null, null ], v: [ 13, 13, 7, 4, 10, 8 ], cc: "GAMBOGE", ci: 3, s: { t: "Imagine (John Lennon)", l: "... sharing all the world, yoo-hoo... You may say I’m a...", n: "Dreamer" }, item: "a beaker of alkaline solution", e: [ { pn: 59, face: 7 }, { pn: 21, face: 16 }, { pn: 32, cm: "+3", cmx: 2.05, cmy: -1.82, cma: 50.41, face: 12 }, { cn: 25, pn: 31, cm: "(clue)", cmx: 2.52, cmy: -1.67, cma: -14.78, face: 13 }, { pn: 36, face: 5 } ] },
+	{ c: [ null, null, null, null, null, null ], v: [ 8, 7, 8, 10, 13, 10 ], cc: "WHITE", ci: 2, s: { t: "Royals (Lorde)", l: "We’re driving Cadillacs in our dreams, but everybody’s like Cristal, Maybach, diamonds on your timepiece...", n: "Jet" }, item: "a bottle of salty water", e: [ { cn: 11, pn: 59, face: 4 }, { face: 9 }, { cm: "−10", cmx: -1.47, cmy: -2.31, cma: -30.34, face: 19 }, { pn: 30, face: 16 }, { pn: 21, face: 6 } ] },
+	{ c: [ 1, 1, 1, 1, 1, 1 ], v: [ 3, 16, 12, 7, 12, 3 ], cc: "FUCHSIA", ci: 3, s: { t: "Space Oddity (David Bowie)", l: "Take your protein pills and put your helmet on...", n: "Ground" }, item: "a nail", e: [ { face: 9 }, { cn: 20, pn: 55, cm: "−5", cmx: -2.70, cmy: .59, cma: 84.47, face: 4 }, { cn: 33, pn: 49, face: 22 }, { pn: 55, cm: "(clue)", cmx: -1.91, cmy: .87, cma: -45.90, face: 23 }, { cn: 25, face: 11 } ] },
+	{ c: [ null, null, 3, 1, 3, null ], v: [ 10, 8, 23, 21, 18, 11 ], cc: "JADE", ci: 1, s: { t: "Eternal Flame (The Bangles)", l: "Can you feel my heart beating? Do you...", n: "Understand" }, item: "a box of matches", e: [ { cn: 18, face: 10 }, { cm: "+10", cmx: -2.07, cmy: -1.36, cma: -142.22, face: 19 }, { face: 7 }, { face: 4 }, { pn: 55, face: 8 } ] },
+	{ c: [ null, null, 3, null, null, null ], v: [ 11, 10, 15, 11, 14, 12 ], cc: "PINK", ci: 4, s: { t: "Africa (Toto)", l: "I know that I must do what’s right, as sure as...", n: "Kilimanjaro" }, item: "a copy of the funnies with their beginning and end torn off and the rest scrambled", e: [ { cn: 19, face: 11 }, { cm: "+0", cmx: -1.04, cmy: -.56, cma: -61.47, face: 0 }, { face: 18 }, { pn: 44, face: 19 }, { cn: 18, face: 9 } ] },
+	{ c: [ 1, 1, 1, 1, 1, 1 ], v: [ 25, 9, 25, 1, 15, 1 ], cc: "ONYX", ci: 3, s: { t: "Lemon Tree (Fools Garden)", l: "I’m sitting here in a boring room, it’s just another rainy Sunday...", n: "Afternoon" }, item: "a piercing", e: [ { cn: 25, face: 8 }, { cm: "(clue)", cmx: -1.40, cmy: .68, cma: 3.72, face: 23 }, { cn: 11, cm: "+0", cmx: -.97, cmy: .43, cma: -61.47, face: 3 }, { cn: 23, pn: 47, face: 0 }, { cn: 19, face: 10 } ] },
+	{ c: [ 2, 2, 1, 1, 2, 1 ], v: [ 21, 21, 19, 25, 19, 20 ], cc: "AQUA", ci: 3, s: { t: "Yellow Submarine (The Beatles)", l: "And we lived beneath the waves in our...", n: "Yellow" }, item: "a bottle of anticonvulsants", e: [ { pn: 41, cm: "+13", cmx: 2.06, cmy: -1.21, cma: -64.40, face: 13 }, { pn: 31, face: 6 }, { cn: 27, pn: 32, face: 16 }, { pn: 36, face: 17 }, { face: 15 } ] },
+	{ c: [ null, null, 2, null, null, null ], v: [ 12, 12, 5, 15, 16, 13 ], cc: "VIOLET", ci: 4, s: { t: "Bohemian Rhapsody (Queen)", l: "... caught in a landslide, no escape from reality...", n: "Open" }, item: "a copy of the third Super Smash Bros. game", e: [ { cn: 27, pn: 41, face: 14 }, { cn: 37, pn: 40, face: 21 }, { pn: 50, face: 5 }, { cn: 25, pn: 36, cm: "+8", cmx: 2.98, cmy: .03, cma: -111.09, face: 6 }, { pn: 31, face: 12 } ] },
+	{ c: [ null, null, 2, null, null, null ], v: [ 15, 15, 14, 16, 21, 19 ], cc: "VIOLET", ci: 3, s: { t: "I’m Still Standing (Elton John)", l: "After all this time, picking up the...", n: "Pieces" }, item: "a kitchen sink", e: [ { pn: 41, face: 15 }, { face: 2 }, { pn: 46, cm: "+14", cmx: 1.35, cmy: .67, cma: 34.85, face: 20 }, { pn: 57, face: 21 }, { cn: 27, pn: 40, face: 13 } ] },
+	{ c: [ 2, 2, 1, 1, 2, 1 ], v: [ 19, 19, 3, 12, 9, 5 ], cc: "FUCHSIA", ci: 5, s: { t: "Stronger (Kanye West)", l: "Bow in the presence of greatness, ’cause right now thou hast forsaken us. You should be honored by my...", n: "Lateness" }, item: "a painting of Queen Victoria", e: [ { pn: 41, face: 12 }, { cn: 37, cm: "−9", cmx: .93, cmy: -1.17, cma: 149.66, face: 17 }, { face: 1 }, { cn: 20, pn: 22, face: 2 }, { face: 14 } ] },
+	{ c: [ null, null, null, 1, 3, null ], v: [ 16, 6, 6, 3, 2, 21 ], cc: "PINK", ci: 1, s: { t: "Still Alive (Jonathan Coulton)", l: "... there’s no sense crying over every mistake. You just keep on trying till you run out of...", n: "Cake" }, item: "a plush toy", e: [ { cn: 24, pn: 46, face: 17 }, { cn: 27, pn: 36, cm: "+14", cmx: 1.01, cmy: -2.26, cma: -61.47, face: 12 }, { pn: 32, face: 6 }, { pn: 21, face: 7 }, { pn: 30, face: 19 } ] },
+	{ c: [ null, null, null, null, null, 2 ], v: [ 18, 18, 11, 22, 22, 24 ], cc: "AZURE", ci: 4, s: { t: "Take Me Home, Country Roads (John Denver)", l: "... I belong, West...", n: "Virginia" }, item: "a toy railway car", e: [ { cn: 40, pn: 46, face: 18 }, { pn: 33, face: 1 }, { cn: 37, cm: "+10", cmx: .88, cmy: -1.23, cma: -45.90, face: 15 }, { face: 12 }, { cn: 24, pn: 36, face: 16 } ] },
+	{ c: [ null, null, null, null, null, null ], v: [ 20, 22, 13, 23, 23, 22 ], cc: "WHITE", ci: 4, s: { t: "Angels (Robbie Williams)", l: "... whether I’m right or wrong. And down the...", n: "Waterfall" }, item: "a frozen cube", e: [ { cn: 42, pn: 46, face: 19 }, { pn: 44, face: 10 }, { cn: 36, cm: "+7", cmx: -.60, cmy: -.81, cma: 3.72, face: 0 }, { pn: 40, face: 1 }, { cn: 40, pn: 33, face: 17 } ] },
+	{ c: [ null, null, null, 1, 3, null ], v: [ 22, 20, 16, 18, 1, 23 ], cc: "VIOLET", ci: 1, s: { t: "Mr. Blue Sky (Electric Light Orchestra)", l: "Hey you with the pretty face, welcome to the human...", n: "Race" }, item: "a piece of banister", e: [ { pn: 46, face: 16 }, { pn: 30, cm: "(clue)", cmx: -1.47, cmy: -2.31, cma: 149.66, face: 7 }, { cm: "+16", cmx: -1.70, cmy: -1.87, cma: 84.47, face: 9 }, { face: 10 }, { cn: 42, pn: 44, face: 18 } ] },
+	{ c: [ null, null, null, 2, null, null ], v: [ 23, 26, 22, 9, 24, 25 ], cc: "WHITE", ci: 1, s: { t: "Barbie Girl (Aqua)", l: "You can brush my hair, undress me everywhere...", n: "Imagination" }, item: "a rat", e: [ { cn: 51, pn: 86, face: 21 }, { pn: 57, cm: "+4", cmx: .44, cmy: 1.49, cma: -77.03, face: 14 }, { pn: 46, face: 2 }, { pn: 36, face: 3 }, { face: 23 } ] },
+	{ c: [ null, null, null, 2, null, null ], v: [ 24, 25, 21, 20, 25, 26 ], cc: "ONYX", ci: 4, s: { t: "God’s Plan (Drake)", l: "She say, “Do you love me?” I...", n: "Tell" }, item: "a book of jokes", e: [ { cn: 42, pn: 86, cm: "(clue)", cmx: -.30, cmy: 2.35, cma: 68.91, face: 22 }, { cm: "+6", cmx: .15, cmy: 2.76, cma: 3.72, face: 5 }, { cn: 37, pn: 50, face: 13 }, { pn: 40, face: 14 }, { cn: 51, pn: 57, face: 20 } ] },
+	{ c: [ 0, 0, 0, 0, 0, 0 ], v: [ 17, 17, 17, 17, 17, 17 ], cc: "AQUA", ci: 2, s: { t: "Rasputin (Boney M.)", l: "Ra-Ra-Rasputin, lover of the Russian...", n: "Queen" }, item: "a pile of mud", e: [ { pn: 86, face: 23 }, { cn: 33, pn: 55, face: 8 }, { cn: 21, pn: 49, face: 4 }, { cn: 22, cm: "(clue)", cmx: -2.98, cmy: 1.59, cma: 68.91, face: 5 }, { cn: 42, cm: "−2", cmx: -2.45, cmy: 1.89, cma: 3.72, face: 21 } ] },
+	{ c: [ null, null, null, null, null, 2 ], v: [ 26, 24, 26, 26, 26, 9 ], cc: "AZURE", ci: 2, s: { t: "Wannabe (Spice Girls)", l: "... wanna (ha), I wanna (ha), I wanna (ha), I wanna (ha), I wanna really really really wanna...", n: "Zigazig" }, item: "a bottle of spirits", e: [ { pn: 86, face: 20 }, { cn: 26, face: 3 }, { cm: "(clue)", cmx: -1.40, cmy: .68, cma: -176.28, face: 11 }, { cm: "−5", cmx: -1.84, cmy: .92, cma: 118.53, face: 8 }, { pn: 55, face: 22 } ] }]/*Faces-end*/;
 makeSolutionPage('face-to-face', `
 <p>The first thing to do is [s to map out the world. [ra We’ve marked locked doors with a thicker line. This, coupled with the tilt you experience as you walk between rooms, implies that [d we’re on the surface of a polyhedron. (Specifically, it’s a pentagonal icositetrahedron.)]]]</p>
 {-a
@@ -73,7 +82,7 @@ makeSolutionPage('face-to-face', `
 {-b
 ▲subpuzzles
 •carpet Carpets
-	<p>Each room has a carpet. [o Each carpet has a specific size (number of repetitions of the pattern), and clicking on the carpet tells us its color. Many colors have rare letters in them — “onyx”, “jade” and “aqua” for instance. This suggests [d we should extract a letter from the color name, and the carpet’s size provides the index. [rcarpetR]]]</p>
+	<p>Each room has a carpet. [o Each carpet has a specific size (number of repetitions of the pattern), and clicking on the carpet tells us its color. Many colors have rare letters in them — “onyx”, “jade” and “aqua” for instance. This suggests (and it is confirmed by the hint from the previous subpuzzle) [d that we should extract a letter from the color name, and the carpet’s size provides the index. [rcarpetR]]]</p>
 	{-carpetR <p>This also contains a hint for the next subpuzzle: [rcarpetH «CYAN SUM».]</p>}
 
 •cyan Cyan numbers
@@ -93,11 +102,12 @@ makeSolutionPage('face-to-face', `
 	{-boxR <p>This also contains a hint for the next subpuzzle: [rboxH «LOCK IS BAR».]</p>}
 
 •door Door signs
-	<p>Sol.</p>
+	<p>Some doors have signs hanging off the doorknobs with either a crossword clue on them, or a number with a plus or minus sign. It stands to reason that we should [s fill the map with the answers to the clues, one letter per room, like it’s a wonky crossword. Coupled with the hint from the previous subpuzzle, [d the locked doors tell us where words start and end (like a barred crossword). Other things that help (but aren’t hinted) is that the words never make a sharp angle (so there are only two directions to choose from after every letter, not four) and the clue is similarly placed at the “start” of the word (not at a sharp angle). The solution to the crossword is [rdoor1 below. However, if you’ve already solved any of the other subpuzzles, you expect that all letters should be unique. Well, this is where [d the plus/minus numbers come in. After applying these Caesar offsets, we get [rdoor2 the actual solution.]]]]]</p>
+	{-door2 <p>This also contains a hint for the next subpuzzle: [rdoorH «CARPET INDEX».]</p>}
 
 ▼
 }
-<svg xmlns="http://www.w3.org/2000/svg" stroke-width=".02" viewBox="-5.33 -3.83 9 7.11" text-anchor="middle">
+<svg xmlns="http://www.w3.org/2000/svg" stroke-width=".02" viewBox="-5.33 -3.83 9 7.11" text-anchor="middle" id='main-svg'>
 	<path class="connection" d="M-.16-1.05-.1-1"/>
 	<path class="connection" d="M-.3 2.35c-.4.15-2.18-.04-2.15-.46"/>
 	<path class="connection" d="M-.47 1.54c-.42.01-.42.3-.72.01"/>
@@ -275,7 +285,8 @@ makeSolutionPage('face-to-face', `
 	radio1	: function() { reveals.radio	= 1;	setupSvg(curTab); },
 	radio2	: function() { reveals.radio	= 2;	setupSvg(curTab); },
 	boxR	: function() { reveals.box	= true;	setupSvg(curTab); },
-	doorR	: function() { reveals.door	= true;	setupSvg(curTab); },
+	door1	: function() { reveals.door	= 1;	setupSvg(curTab); },
+	door2	: function() { reveals.door	= 2;	setupSvg(curTab); },
 
 	carpetH	: function() { hintReveals.carpet	= true;	setupSvg(curTab); },
 	cyanH	: function() { hintReveals.cyan	= true;	setupSvg(curTab); },
@@ -328,12 +339,13 @@ function setupSvg(tab)
 			break;
 
 		case 'radio':
-			let ws = [ 1.74, 2.67, 2.72, 3.58, 2.05, 2.18, 1.95, 3.6, 2, 2.02, 1.72, 2.29, 2.24, 2.1, 2.12, 3.58, 3.05, 3.22, 1.79, 2.67, 1.81, 1.41, 1.51, 3.09 ];
+			let rws = [ 1.74, 2.67, 2.72, 3.58, 2.05, 2.18, 1.95, 3.6, 2, 2.02, 1.72, 2.29, 2.24, 2.1, 2.12, 3.58, 3.05, 3.22, 1.79, 2.67, 1.81, 1.41, 1.51, 3.09 ];
 			document.getElementById('svg-extra').innerHTML = `<g class='radio-reveal-${reveals.radio || '0'}'>
 				<g class='ihs radio-clue-1' font-size='.15'>${Array(24).fill(null).map((_, i) => `<text x='${xs[i]}' y='${ys[i]}'>${faceData[i].s.n}</text>`).join('')}</g>
 				<g class='ihs radio-clue-2' font-size='.4'>${Array(24).fill(null).map((_, i) => `<text x='${xs[i]}' y='${ys[i]+.1}'>${faceData[i].s.n[0]}</text>`).join('')}</g>
 				${Array(24).fill(null).map((_, i) => `<g id='radio-popup-${i}' class='ihs' transform='translate(${xs[i]} ${ys[i]-.5})'>
-					<rect x='${-ws[i]/2}' y='-.6' width='${ws[i]}' height='.58' fill='#fff' stroke='black' stroke-width='.01'/>
+					<rect x='${-rws[i]/2}' y='-.6' width='${rws[i]}' height='.58' fill='#fff' stroke='black' stroke-width='.01'/>
+					<path fill='#fff' stroke='black' stroke-width='.01' d='M${-rws[i]/2} -.02 V -.6 h ${rws[i]} V -.02 L .1 -.02 0 .08 -.1 -.02 z' />
 					<text font-size='.15' y='-.4'>${faceData[i].s.t}</text>
 					<text font-size='.10' y='-.25' font-family='Agency FB'>“${faceData[i].s.l}”</text>
 					<text font-size='.12' y='-.1' font-family='Montserrat'>${faceData[i].s.n.toUpperCase()}</text>
@@ -341,8 +353,9 @@ function setupSvg(tab)
 			</g>`;
 			for (let faceIx = 0; faceIx < 24; faceIx++)
 			{
-				document.getElementById(`face-${faceIx}`).onmouseover	= function(f) { return function() { f.classList.add('shown'); }; }	(document.getElementById(`radio-popup-${faceIx}`));
-				document.getElementById(`face-${faceIx}`).onmouseout	= function(f) { return function() { f.classList.remove('shown'); }; }	(document.getElementById(`radio-popup-${faceIx}`));
+				let popup = document.getElementById(`radio-popup-${faceIx}`);
+				document.getElementById(`face-${faceIx}`).onmouseover	= function() { popup.classList.add('shown'); };
+				document.getElementById(`face-${faceIx}`).onmouseout	= function() { popup.classList.remove('shown'); };
 			}
 			break;
 
@@ -357,7 +370,7 @@ function setupSvg(tab)
 					{ verse: 'E is for Ernest who choked on a peach.',	w: 2.01	},
 					{ verse: 'F is for Fanny sucked dry by a leech.',	w: 1.9	},
 					{ verse: 'G is for George smothered under a rug.',	w: 2.06	},
-					{ verse: 'H is for Hector done in by a thug.',	w: 2.53, o: .2	},
+					{ verse: 'H is for Hector done in by a thug.',	w: 2.53, o: -.2	},
 					{ verse: 'I is for Ida who drowned in a lake.',	w: 2.06	},
 					{ verse: 'J is for James who took lye by mistake.',	w: 2.05	},
 					{ verse: 'K is for Kate who was struck with an axe.',	w: 2.12	},
@@ -365,7 +378,7 @@ function setupSvg(tab)
 					{ verse: 'M is for Maud who was swept out to sea.',	w: 2.09	},
 					{ verse: 'N is for Neville who died of ennui.',	w: 5.59	},
 					{ verse: 'O is for Olive run through with an awl.',	w: 1.98	},
-					{ verse: 'P is for Prue trampled flat in a brawl.',	w: 3.08, o: -.5	},
+					{ verse: 'P is for Prue trampled flat in a brawl.',	w: 3.08, o: .5	},
 					{ verse: 'Q is for Quentin who sank in a mire.',	w: 1.87	},
 					{ verse: 'R is for Rhoda consumed by a fire.',	w: 1.82	},
 					{ verse: 'S is for Susan who perished of fits.',	w: 1.94	},
@@ -379,16 +392,57 @@ function setupSvg(tab)
 				];
 				document.getElementById('svg-extra').innerHTML = `
 					<g font-size='.4'>${Array(24).fill(null).map((_, i) => `<text x='${xs[i]}' y='${ys[i]+.1}'>${String.fromCharCode(64 + faceData[i].v[4])}</text>`).join('')}</g>
-					${Array(24).fill(null).map((_, i) => `<g id='box-popup-${i}' class='ihs' transform='translate(${xs[i] + (bs[faceData[i].v[4]-1].o || 0)} ${ys[i]-.5})'>
-						<rect x='${-bs[faceData[i].v[4]-1].w/2}' y='-.5' width='${bs[faceData[i].v[4]-1].w}' height='.58' fill='#fff' stroke='black' stroke-width='.01'/>
-						<text font-size='.15' y='-.27'>${faceData[i].item}</text>
-						<text font-size='.15' y='-.07' font-family='Agency FB'>${bs[faceData[i].v[4]-1].verse}</text>
+					${Array(24).fill(null).map((_, i) => ({ i: i, w: bs[faceData[i].v[4]-1].w, o: bs[faceData[i].v[4]-1].o || 0 })).map(inf => `<g id='box-popup-${inf.i}' class='ihs' transform='translate(${xs[inf.i] - inf.o} ${ys[inf.i]-.5})'>
+						<path fill='#fff' stroke='black' stroke-width='.01' d='M${-inf.w/2} .08 V -.5 h ${inf.w} V .08 L ${inf.o + .1} .08 ${inf.o} .18 ${inf.o - .1} .08 z' />
+						<text font-size='.15' y='-.27'>${faceData[inf.i].item}</text>
+						<text font-size='.15' y='-.07' font-family='Agency FB'>${bs[faceData[inf.i].v[4]-1].verse}</text>
 					</g>`).join('')}`;
 				for (let faceIx = 0; faceIx < 24; faceIx++)
 				{
-					document.getElementById(`face-${faceIx}`).onmouseover	= function(f) { return function() { f.classList.add('shown');	}; }	(document.getElementById(`box-popup-${faceIx}`));
-					document.getElementById(`face-${faceIx}`).onmouseout	= function(f) { return function() { f.classList.remove('shown');	}; }	(document.getElementById(`box-popup-${faceIx}`));
+					let popup = document.getElementById(`box-popup-${faceIx}`);
+					document.getElementById(`face-${faceIx}`).onmouseover	= function() { popup.classList.add('shown');	};
+					document.getElementById(`face-${faceIx}`).onmouseout	= function() { popup.classList.remove('shown');	};
 				}
+			}
+			break;
+
+		case 'door':
+			let doorInfo = [ { w: "NEED", l: "Require (4)", c: [ 2, 14, 13, 5 ], e: 0 }, { w: "DEAL", l: "Agreement or dish out cards (4)", c: [ 5, 4, 9, 10 ], e: 2, o: .6 }, { w: "ONSET", l: "Beginning (5)", c: [ 3, 23, 22, 4, 7 ], e: 4 }, { w: "SHARING", l: "Apportioning (7)", c: [ 22, 8, 11, 0, 1, 17, 16 ], e: 3 }, { w: "NUN", l: "Sister (3)", c: [ 23, 20, 2 ], e: 2 }, { w: "TEN", l: "X (3)", c: [ 21, 14, 15 ], e: 0 }, { w: "ROUTE", l: "Itinerary (5)", c: [ 0, 3, 20, 21, 13 ], e: 1 }, { w: "HATE", l: "Loathe (4)", c: [ 8, 9, 7, 6 ], e: 3 }, { w: "EGG", l: "Ovum (3)", c: [ 6, 16, 19 ], e: 3 }, { w: "ALONG", l: "For the length of (5)", c: [ 11, 10, 18, 17, 12 ], e: 1 }, { w: "GOING", l: "Leaving or functioning (5)", c: [ 19, 18, 1, 15, 12 ], e: 1 } ];
+			let dws = [ 1.13, 2.92, 1.35, 1.63, 0.95, 0.61, 1.18, 1.07, 1, 1.92, 2.41 ];
+			document.getElementById('svg-extra').innerHTML = `<g font-size='.12' class='door-reveal-${reveals.door || '0'}'>
+				${reveals.door === 1 ? `<g font-size='.4'>${Array(24).fill(null).map((_, i) => `<text x='${xs[i]}' y='${ys[i]+.1}'>${"RINOEDETHALAGEENGNOGUTSN"[i]}</text>`).join('')}</g>`: ''}
+				${reveals.door === 2 ? `
+					<g font-size='.15'>${Array(24).fill(null).map((_, i) => `<text x='${xs[i]}' y='${ys[i]-.21}'>${"RINOEDETHALAGEENGNOGUTSN"[i]}${faceData[i].e.filter(ed => ed.cm && /^[\+−]/.test(ed.cm))[0].cm}</text>`).join('')}</g>
+					<g font-size='.4'>${Array(24).fill(null).map((_, i) => `<text x='${xs[i]}' y='${ys[i]+.16}'>${String.fromCharCode(64 + faceData[i].v[5])}</text>`).join('')}</g>
+				`: ''}
+				${faceData.map(fd => fd.e.map(e => e.cm ? `<text transform='translate(${e.cmx} ${e.cmy}) rotate(${180 + e.cma})' y='.13'>${e.cm}</text>` : '').join('')).join('')}
+				${doorInfo.map((di, ix) => `<g id='cw-popup-${ix}' class='ihs' transform='translate(${faceData[di.c[0]].e[di.e].cmx} ${faceData[di.c[0]].e[di.e].cmy}) rotate(${180+faceData[di.c[0]].e[di.e].cma})'><path fill='#fff' stroke='black' stroke-width='.01' d='M ${-dws[ix]/2-(di.o||0)} -.04 V -.3 H ${dws[ix]/2-(di.o||0)} V -.04 L .1 -.04 0 .06 -.1 -.04 z' /><text font-size='.2' x='${-(di.o||0)}' y='-.1'>${di.l}</text></g>`).join('')}
+			</g>`;
+			if (reveals.door)
+			{
+				Array(24).fill(null).forEach((_, faceIx) =>
+				{
+					let face = document.getElementById(`face-${faceIx}`);
+					let one = doorInfo.findIndex(inf => inf.c.includes(faceIx));
+					let two = doorInfo.findIndex((inf, ix) => ix > one && inf.c.includes(faceIx));
+					face.onmouseover = function()
+					{
+						doorInfo[one].c.forEach(c => { document.getElementById(`face-${c}`).classList.add('cwh-1'); });
+						doorInfo[two].c.forEach(c => { document.getElementById(`face-${c}`).classList.add('cwh-2'); });
+						document.getElementById(`cw-popup-${one}`).classList.add('cwp-1');
+						document.getElementById(`cw-popup-${two}`).classList.add('cwp-2');
+						document.getElementById('main-svg').classList.add('nc');
+
+					};
+					face.onmouseout = function()
+					{
+						doorInfo[one].c.forEach(c => { document.getElementById(`face-${c}`).classList.remove('cwh-1'); });
+						doorInfo[two].c.forEach(c => { document.getElementById(`face-${c}`).classList.remove('cwh-2'); });
+						document.getElementById(`cw-popup-${one}`).classList.remove('cwp-1');
+						document.getElementById(`cw-popup-${two}`).classList.remove('cwp-2');
+						document.getElementById('main-svg').classList.remove('nc');
+					};
+				});
 			}
 			break;
 
