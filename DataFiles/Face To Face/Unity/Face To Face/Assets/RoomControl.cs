@@ -43,7 +43,7 @@ public partial class RoomControl : MonoBehaviour
             DoorSignTexts[i].fontSize = Data.Faces[faceIx].Edges[i].LabelFontSize ?? 18;
         }
 
-        RadioAudio.clip = AudioClips.FirstOrDefault(ac => ac.name == Data.Faces[faceIx].SongSnippet);
+        RadioAudio.clip = AudioClips[faceIx];
         Light.intensity = Data.LightIntensity;
 
         for (var i = 0; i < Data.Faces[faceIx].CarpetLength; i++)

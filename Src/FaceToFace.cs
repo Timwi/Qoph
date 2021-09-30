@@ -62,7 +62,7 @@ namespace Qoph
                 (word: "WOD", faces: new[] { 9, 10, 3 }, color: 3),
                 (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "JGHFKMPVUZ", faces: new[] { 2, 6, 7, 16, 17, 18, 19, 20, 21, 23 }, color: null));
-        private static readonly DistrInfo _musicSnippets = new DistrInfo("Lyrics", "GASHLYCRUMB TINS",
+        private static readonly DistrInfo _musicSnippets = new DistrInfo("Lyrics", "GASHLYCRUMB TIN",
                 (word: "GASHLYCRUMB", faces: new[] { 8, 11, 0, 1, 15, 12, 16, 19, 9, 4, 5 }, color: 1),
                 (word: "TIN", faces: new[] { 21, 20, 3 }, color: 2),
                 (word: "Q", faces: new[] { 22 }, color: 0),
@@ -88,19 +88,19 @@ namespace Qoph
 
         private static readonly string[] _carpetColorNames = "WHITE,AQUA,AZURE,FUCHSIA,JADE,VIOLET,ONYX,PINK,GAMBOGE".Split(',');
 
-        private static readonly (string title, string author, string givenLyrics, string nextWord)?[] _songTitles = Ut.NewArray<(string title, string author, string givenLyrics, string nextWord)?>(
+        private static readonly (string author, string title, string givenLyrics, string nextWord)?[] _songTitles = Ut.NewArray<(string title, string author, string givenLyrics, string nextWord)?>(
             ("Fools Garden", "Lemon Tree", "I’m sitting here in a boring room, it’s just another rainy Sunday...", "Afternoon"),
             ("The Weekend", "Blinding Lights", "So I hit the road in overdrive...", "Baby"),
-            ("Jonathan Coulton", "Still Alive", "... there's no sense crying over every mistake. You just keep on trying till you run out of...", "Cake"),
+            ("Jonathan Coulton", "Still Alive", "... there’s no sense crying over every mistake. You just keep on trying till you run out of...", "Cake"),
             ("John Lennon", "Imagine", "... sharing all the world, yoo-hoo... You may say I’m a...", "Dreamer"),
             null,
             null,
             ("David Bowie", "Space Oddity", "Take your protein pills and put your helmet on...", "Ground"),
             ("Bonnie Tyler", "Holding Out for a Hero", "And where are all the Gods? Where’s the streetwise...", "Hercules"),
             ("Aqua", "Barbie Girl", "You can brush my hair, undress me everywhere...", "Imagination"),
-            ("Lorde", "Royals", "We’re driving Cadillacs in our dreams, but everybody's like Cristal, Maybach, diamonds on your timepiece...", "Jet planes"),
+            ("Lorde", "Royals", "We’re driving Cadillacs in our dreams, but everybody’s like Cristal, Maybach, diamonds on your timepiece...", "Jet"),
             ("Toto", "Africa", "I know that I must do what’s right, as sure as...", "Kilimanjaro"),
-            ("Kanye West", "Stronger", "Bow in the presence of greatness, 'cause right now thou hast forsaken us. You should be honored by my...", "Lateness"),
+            ("Kanye West", "Stronger", "Bow in the presence of greatness, ’cause right now thou hast forsaken us. You should be honored by my...", "Lateness"),
             ("Ed Sheeran", "Shape of You", "I’m in love with the shape of you. We push and pull like a...", "Magnet"),
             ("Tears for Fears", "Everybody Wants to Rule the World", "Acting on your best behaviour, turn your back on mother...", "Nature"),
             ("Queen", "Bohemian Rhapsody", "... caught in a landslide, no escape from reality...", "Open"),
@@ -701,7 +701,10 @@ h3 {{ font-size: 14pt; }}
             public string CarpetColor;
             public int CarpetColorIndex;
             public string GashlycrumbTiniesObject;
-            public string MusicSnippet;
+            public string SongFilename;
+            public string SongTitle;
+            public string SongLyrics;
+            public string SongNextWord;
         }
 
         private static int getFaceValue(int face, DistrInfo distr) => distr.Distribution.Select(d => new { Data = d, Ix = d.faces.IndexOf(face) }).Where(inf => inf.Ix != -1).Single().Apply(inf => inf.Data.word[inf.Ix] - 'A' + 1);
@@ -746,8 +749,7 @@ h3 {{ font-size: 14pt; }}
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
                 $@"new[] {{ {faceInfos.Select(fi => $@"new FaceData {{ " +
                     $@"CarpetColor = ""{fi.CarpetColor.ToLowerInvariant().CLiteralEscape()}"", " +
-                    $@"CarpetLength = {fi.CarpetColorIndex + 1}, " +
-                    $@"SongSnippet = ""{fi.MusicSnippet.CLiteralEscape()}"", " +
+                    $@"CarpetLength = {fi.CarpetColorIndex}, " +
                     $@"ItemInBox = ""{fi.GashlycrumbTiniesObject.CLiteralEscape()}"", " +
                     $@"Edges = new[] {{ {fi.Edges.Select(e => $@"new Edge {{ {Ut.NewArray(
                         e.CyanNumber.NullOr(c => $"CyanNumber = {c}"),
@@ -757,17 +759,18 @@ h3 {{ font-size: 14pt; }}
 
             // JS declaration for solution page
             General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
-                $@"[ {faceInfos.Select((fi, fIx) => $@"{{ " +
+                $@"[{"\n\t"}{faceInfos.Select((fi, fIx) => $@"{{ " +
                     $@"c: [ {_distributions.Select(dist => dist.Distribution.First(d => d.faces.Contains(fIx)).Apply(tup => tup.color == null ? "null" : tup.color.ToString())).JoinString(", ")} ], " +
                     $@"v: [ {_distributions.Select(dist => getFaceValue(fIx, dist)).JoinString(", ")} ], " +
                     $@"cc: ""{fi.CarpetColor.ToUpperInvariant().CLiteralEscape()}"", " +
-                    $@"ci: {fi.CarpetColorIndex + 1}, song: ""{fi.MusicSnippet.CLiteralEscape()}"", " +
+                    $@"ci: {fi.CarpetColorIndex}, " +
+                    $@"s: {{ t: ""{fi.SongTitle.CLiteralEscape()}"", l: ""{fi.SongLyrics}"", n: ""{fi.SongNextWord}"" }}, " +
                     $@"item: ""{Regex.Replace(fi.GashlycrumbTiniesObject, @"""(.*?)""", m => $"“{m.Groups[1].Value}”").CLiteralEscape()}"", " +
                     $@"e: [ {fi.Edges.Select(e => $@"{{ {Ut.NewArray(
                         e.CyanNumber.NullOr(c => $"cn: {c}"),
                         e.PinkNumber.NullOr(p => $"pn: {p}"),
                         e.Locked && e.CrosswordInfo != null ? $@"label: ""{e.CrosswordInfo.CLiteralEscape()}""" : null,
-                        $"face: {e.AdjacentFace}").Where(str => str != null).JoinString(", ")} }}").JoinString(", ")} ] }}").JoinString(", ")} ]");
+                        $"face: {e.AdjacentFace}").Where(str => str != null).JoinString(", ")} }}").JoinString(", ")} ] }}").JoinString(",\n\t")}]");
 
             General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"<!--PinkCorners-start-->", @"<!--PinkCorners-end-->",
                 pinkCorners.SelectMany(corner => corner.adj
@@ -776,19 +779,41 @@ h3 {{ font-size: 14pt; }}
                     .Select(inf => (p: inf.p + .1 * inf.vector.Unit(), angle: inf.vector.Theta() * 180 / Math.PI))
                     .Select(inf => $"<text transform='translate({inf.p.X:.00} {inf.p.Y:.00}) rotate({inf.angle - 90:.00})' y='.06'>{corner.pinkNumber}</text>")).JoinString());
 
-            for (var subset = 0; subset < 1 << 24; subset++)
-            {
-                if (subset % 1000 == 0)
-                    Console.Write($"{(double) subset * 100 / (1 << 24):.0}%\r");
-                var faces = Enumerable.Range(0, 24).Where(bit => (subset & (1 << bit)) != 0).ToArray();
-                var clues = pinkCorners.Count(p => p.adj.All(tup => faces.Contains(tup.faceIx)));
-                if (clues == faces.Length)
-                    ConsoleUtil.WriteLine((faces.JoinString(", ") + "      ").Color(ConsoleColor.Green));
-            }
+            for (var i = 0; i < faceInfos.Length; i++)
+                File.Copy($@"D:\c\Qoph\DataFiles\Face To Face\SongRadiofied\{faceInfos[i].SongFilename}.mp3", $@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\RadioSongs\radio{i}.mp3", overwrite: true);
 
             // Google Sheets
-            Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{(f.Edges[edge].Locked ? f.Edges[edge].CrosswordInfo.Apply(ci => string.IsNullOrWhiteSpace(ci) ? "" : !"+-".Contains(ci[0]) ? ci.Replace("\n", " ") : $"‘{ci}’") : f.Edges[edge].AdjacentFace.ToString())}\t{(f.Edges[edge].Locked ? "" : f.Edges[edge].AdjacentEdge.ToString())}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex + 1}\t{f.MusicSnippet}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
+            Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{(f.Edges[edge].Locked ? f.Edges[edge].CrosswordInfo.Apply(ci => string.IsNullOrWhiteSpace(ci) ? "" : !"+-".Contains(ci[0]) ? ci.Replace("\n", " ") : $"‘{ci}’") : f.Edges[edge].AdjacentFace.ToString())}\t{(f.Edges[edge].Locked ? "" : f.Edges[edge].AdjacentEdge.ToString())}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex}\t{f.SongTitle}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
         }
+
+        // Cached here because generating this takes several seconds. Generated from rule seed 47, git commit 4ebc757c65e5165e2dac6ba5440ed8d24f98fa3f
+        private static int?[][] _pinkNumbers = new int?[][]
+        {
+            new int?[] { 41, 40, null, null, 47 },
+            new int?[] { 41, 22, null, 33, 40 },
+            new int?[] { 41, 36, 46, null, 22 },
+            new int?[] { 41, 47, null, null, 36 },
+            new int?[] { 59, null, 49, 55, null },
+            new int?[] { 59, 36, 50, null, null },
+            new int?[] { 59, 21, 32, 31, 36 },
+            new int?[] { 59, null, null, 30, 21 },
+            new int?[] { null, 55, 49, 55, null },
+            new int?[] { null, null, null, null, 55 },
+            new int?[] { null, null, null, 44, null },
+            new int?[] { null, null, null, 47, null },
+            new int?[] { 41, 31, 32, 36, null },
+            new int?[] { 41, 40, 50, 36, 31 },
+            new int?[] { 41, null, 46, 57, 40 },
+            new int?[] { 41, null, null, 22, null },
+            new int?[] { 46, 36, 32, 21, 30 },
+            new int?[] { 46, 33, null, null, 36 },
+            new int?[] { 46, 44, null, 40, 33 },
+            new int?[] { 46, 30, null, null, 44 },
+            new int?[] { 86, 57, 46, 36, null },
+            new int?[] { 86, null, 50, 40, 57 },
+            new int?[] { 86, 55, 49, null, null },
+            new int?[] { 86, null, null, null, 55 }
+        };
 
         public static FaceInfo[] GetFaceData()
         {
@@ -802,12 +827,16 @@ h3 {{ font-size: 14pt; }}
 
                 var carpetLetter = (char) ('A' + getFaceValue(faceIx, _carpetColors) - 1);
                 var carpetColor = _carpetColorNames.First(cn => cn.Contains(carpetLetter));
+                var (songAuthor, songTitle, songGivenLyrics, songNextWord) = _songTitles[getFaceValue(faceIx, _musicSnippets) - 1].Value;
                 var inf = new FaceInfo
                 {
-                    MusicSnippet = _songTitles[getFaceValue(faceIx, _musicSnippets) - 1]?.title,
+                    SongFilename = songTitle,
+                    SongTitle = $"{songTitle.Replace("'", "’")} ({songAuthor})",
+                    SongLyrics = songGivenLyrics,
+                    SongNextWord = songNextWord,
                     GashlycrumbTiniesObject = _gashlycrumbTiniesObjects[getFaceValue(faceIx, _gashlycrumbTinies) - 1],
                     CarpetColor = carpetColor,
-                    CarpetColorIndex = carpetColor.IndexOf(carpetLetter)
+                    CarpetColorIndex = carpetColor.IndexOf(carpetLetter) + 1
                 };
 
                 for (var edge = 0; edge < 5; edge++)
@@ -867,32 +896,39 @@ h3 {{ font-size: 14pt; }}
             }
 
             // Pink numbers (vertex sums)
-            var pinkCluesRaw =
-                from faceIx in Enumerable.Range(0, _polyhedron.Faces.Length)
-                from edgeIx in Enumerable.Range(0, 5)
-                let vertex = _polyhedron.Faces[faceIx][edgeIx]
-                let adjoiningFaces = _polyhedron.Faces.SelectIndexWhere(f => f.Contains(vertex))
-                select (faces: adjoiningFaces.ToArray(), sum: adjoiningFaces.Sum(f => getFaceValue(f, _pinkSums)));
-            var pinkClues = pinkCluesRaw.Where(cl => cl.faces[0] == cl.faces.Min()).ToArray();
-
-            var requiredPinkClues = Ut.ReduceRequiredSet(Enumerable.Range(0, pinkClues.Length).ToArray().Shuffle(rnd), skipConsistencyTest: true, test: state =>
+            if (_pinkNumbers == null)
             {
-                Console.WriteLine(Enumerable.Range(0, pinkClues.Length).Select(i => state.SetToTest.Contains(i) ? "█" : "░").JoinString());
-                var puzzle = new Puzzle(_polyhedron.Faces.Length, 0, 50);
-                foreach (var i in state.SetToTest)
-                    puzzle.AddConstraint(new SumConstraint(pinkClues[i].sum, pinkClues[i].faces));
-                return !puzzle.Solve().Skip(1).Any();
-            })
-                .Select(ix => pinkClues[ix])
-                .ToArray();
+                var pinkCluesRaw =
+                    from faceIx in Enumerable.Range(0, _polyhedron.Faces.Length)
+                    from edgeIx in Enumerable.Range(0, 5)
+                    let vertex = _polyhedron.Faces[faceIx][edgeIx]
+                    let adjoiningFaces = _polyhedron.Faces.SelectIndexWhere(f => f.Contains(vertex))
+                    select (faces: adjoiningFaces.ToArray(), sum: adjoiningFaces.Sum(f => getFaceValue(f, _pinkSums)));
+                var pinkClues = pinkCluesRaw.Where(cl => cl.faces[0] == cl.faces.Min()).ToArray();
 
-            foreach (var (faces, sum) in requiredPinkClues)
-            {
-                var commonVertex = Enumerable.Range(0, _polyhedron.Vertices.Length).Single(vIx => faces.All(f => _polyhedron.Faces[f].Contains(vIx)));
-                for (int faceIx = 0; faceIx < _polyhedron.Faces.Length; faceIx++)
-                    if (_polyhedron.Faces[faceIx].Contains(commonVertex))
-                        faceInfos[faceIx].Edges[_polyhedron.Faces[faceIx].IndexOf(commonVertex)].PinkNumber = sum;
+                var requiredPinkClues = Ut.ReduceRequiredSet(Enumerable.Range(0, pinkClues.Length).ToArray().Shuffle(rnd), skipConsistencyTest: true, test: state =>
+                {
+                    Console.WriteLine(Enumerable.Range(0, pinkClues.Length).Select(i => state.SetToTest.Contains(i) ? "█" : "░").JoinString());
+                    var puzzle = new Puzzle(_polyhedron.Faces.Length, 0, 50);
+                    foreach (var i in state.SetToTest)
+                        puzzle.AddConstraint(new SumConstraint(pinkClues[i].sum, pinkClues[i].faces));
+                    return !puzzle.Solve().Skip(1).Any();
+                })
+                    .Select(ix => pinkClues[ix])
+                    .ToArray();
+
+                foreach (var (faces, sum) in requiredPinkClues)
+                {
+                    var commonVertex = Enumerable.Range(0, _polyhedron.Vertices.Length).Single(vIx => faces.All(f => _polyhedron.Faces[f].Contains(vIx)));
+                    for (var faceIx = 0; faceIx < _polyhedron.Faces.Length; faceIx++)
+                        if (_polyhedron.Faces[faceIx].Contains(commonVertex))
+                            faceInfos[faceIx].Edges[_polyhedron.Faces[faceIx].IndexOf(commonVertex)].PinkNumber = sum;
+                }
             }
+            else
+                for (var fIx = 0; fIx < faceInfos.Count; fIx++)
+                    for (var eIx = 0; eIx < faceInfos[fIx].Edges.Length; eIx++)
+                        faceInfos[fIx].Edges[eIx].PinkNumber = _pinkNumbers[fIx][eIx];
 
             return faceInfos.ToArray();
         }
