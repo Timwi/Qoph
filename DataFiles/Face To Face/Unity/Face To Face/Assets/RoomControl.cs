@@ -23,11 +23,12 @@ public partial class RoomControl : MonoBehaviour
     public Material[] CarpetMaterials;
     public MeshRenderer[] Carpets;
 
-    public void SetRoom(int faceIx, int edgeIx, bool setCamera)
+    public void SetRoom(int faceIx, int edgeIx, bool setCamera, bool setAllWalls = false)
     {
         foreach (var wall in Walls)
             wall.SetActive(true);
-        Walls[edgeIx].SetActive(false);
+        if (!setAllWalls)
+            Walls[edgeIx].SetActive(false);
 
         for (var i = 0; i < 5; i++)
         {

@@ -1,0 +1,26 @@
+01	MARIO	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/11423/
+02	DONKEY KONG	- https://www.models-resource.com/nintendo_switch/supersmashbrosultimate/model/29320/
+03	LINK	- https://www.models-resource.com/3ds/supersmashbrosfornintendo3ds/model/36853/
+04	SAMUS	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/11428/
+05	YOSHI	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/9063/
+06	KIRBY	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/9062/
+07	FOX	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/11420/
+08	PIKACHU	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/11557/
+09	LUIGI	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/10825/
+10	NESS	- https://www.models-resource.com/3ds/supersmashbrosfornintendo3ds/model/39851/
+11	CAPTAIN FALCON	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/10768/
+12	JIGGLYPUFF	- https://www.models-resource.com/3ds/supersmashbrosfornintendo3ds/model/39864/
+13	PEACH	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/11425/
+14	BOWSER	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/10532/
+15	ICE CLIMBERS	- https://www.models-resource.com/nintendo_switch/supersmashbrosultimate/model/27887/
+16	SHEIK	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/11595/
+17	ZELDA	- https://www.models-resource.com/3ds/supersmashbrosfornintendo3ds/model/36782/
+18	DR. MARIO	- https://www.models-resource.com/nintendo_switch/supersmashbrosultimate/model/31653/
+19	PICHU	- https://www.models-resource.com/gamecube/ssbm/model/5386/
+20	FALCO	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/11555/
+21	MARTH	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/11421/
+22	YOUNG LINK	- https://www.models-resource.com/nintendo_switch/supersmashbrosultimate/model/27882/
+23	GANONDORF	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/11849/
+24	MEWTWO	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/11418/
+25	ROY	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/11422/
+26	MR. GAME & WATCH	- https://www.models-resource.com/3ds/supersmashbrosfornintendo3ds/model/14481/

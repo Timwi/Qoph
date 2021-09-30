@@ -20,13 +20,14 @@ public class FaceToFaceControl : MonoBehaviour
     private bool _interactionDisabled = false;
 
 #if UNITY_EDITOR
-    [UnityEditor.MenuItem("Do Stuff/Set camera &0")] public static void Camera0() { var t = FindObjectOfType<FaceToFaceControl>(); t.Room.SetRoom(t.FaceIx, 0, setCamera: true); }
+    [UnityEditor.MenuItem("Do Stuff/Set camera &5")] public static void Camera0() { var t = FindObjectOfType<FaceToFaceControl>(); t.Room.SetRoom(t.FaceIx, 0, setCamera: true); }
     [UnityEditor.MenuItem("Do Stuff/Set camera &1")] public static void Camera1() { var t = FindObjectOfType<FaceToFaceControl>(); t.Room.SetRoom(t.FaceIx, 1, setCamera: true); }
     [UnityEditor.MenuItem("Do Stuff/Set camera &2")] public static void Camera2() { var t = FindObjectOfType<FaceToFaceControl>(); t.Room.SetRoom(t.FaceIx, 2, setCamera: true); }
     [UnityEditor.MenuItem("Do Stuff/Set camera &3")] public static void Camera3() { var t = FindObjectOfType<FaceToFaceControl>(); t.Room.SetRoom(t.FaceIx, 3, setCamera: true); }
     [UnityEditor.MenuItem("Do Stuff/Set camera &4")] public static void Camera4() { var t = FindObjectOfType<FaceToFaceControl>(); t.Room.SetRoom(t.FaceIx, 4, setCamera: true); }
+    [UnityEditor.MenuItem("Do Stuff/Set all walls &6")] public static void SetAllWalls() { var t = FindObjectOfType<FaceToFaceControl>(); t.Room.SetRoom(t.FaceIx, 4, setCamera: true, setAllWalls: true); }
 
-    [UnityEditor.MenuItem("Do Stuff/Set objects &5")]
+    [UnityEditor.MenuItem("Do Stuff/Set objects &0")]
     public static void SetObjects()
     {
         var t = FindObjectOfType<FaceToFaceControl>();

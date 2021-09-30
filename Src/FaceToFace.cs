@@ -968,7 +968,7 @@ h3 {{ font-size: 14pt; }}
             const double inCameraHeight = .275;
             const double inCameraHeightLook = .13;
             const double cyanNumberHeight = .28;
-            const double pinkNumberHeight = .25;
+            const double pinkNumberHeight = .365;
 
             var outCameras = new List<(Pt from, Pt to)>();
             var inCameras = new List<(Pt from, Pt to)>();
