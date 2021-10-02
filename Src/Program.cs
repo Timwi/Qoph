@@ -35,7 +35,8 @@ namespace Qoph
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            FaceToFace.GatherAllData();
+            SpaceRace.Generate();
+            //FaceToFace.GatherAllData();
             //FaceToFace.GenerateModels();
             //FaceToFace.Planning();
 
