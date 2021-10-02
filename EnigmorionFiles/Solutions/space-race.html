@@ -1,0 +1,150 @@
+<style>
+	.ihs:not(.re) { visibility: hidden; }
+	.ih:not(.re) { display: none; }
+	table svg {
+		width: 5cm;
+	}
+	table.formations td > div {
+		text-align: center;
+	}
+	svg.main-svg {
+		display: block;
+		width: 80%;
+		margin: 0 auto;
+	}
+		svg.main-svg.re-d {
+			width: 15cm;
+			margin: 0;
+		}
+		svg.main-svg.re-b #star, svg.main-svg.re-b #alphabet {
+			visibility: hidden;
+		}
+	.layout {
+		display: flex;
+		align-items: start;
+		justify-content: space-around;
+	}
+		.layout:not(.re-d) > div {
+			display: none;
+		}
+		.layout.re-d > div {
+			width: 10cm;
+		}
+	table.names-list {
+		margin-top: 1cm;
+	}
+	text.name {
+		visibility: hidden;
+	}
+	svg.re-d text.name {
+		visibility: visible;
+		stroke: hsl(220, 80%, 95%);
+		stroke-width: .5;
+		paint-order: stroke;
+	}
+	svg.re-d .scribble {
+		visibility: hidden;
+	}
+	table td.r-f {
+		text-align: center;
+	}
+</style>
+<script src='../../files/solutions.js'></script>
+<h1>Space Race</h1>
+<script>
+makeSolutionPage('space-race', `
+<p>The outer circle of dots, and the spikes on the star in the top-right, [o number 26, which suggests [d they represent the alphabet. Furthermore, the star [o is actually a zig-zagging line that starts and ends somewhere, so [sa let’s write the alphabet around it in this order. The lump could be the start or end point, but if we use the lump as the start point, the five vowels land on the five black dots, which provides confirmation that this is the correct order.]]]]</p>
+{-a <p>The star and the formations inside the main area have [o a highlighted center dot, suggesting [s we should place the star on top of them and then read the letters off the formations. [rb]]]</p>}
+{-b
+<table class="bordered centered formations"><tbody>
+<tr>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-14.849 -34.405 16 16"><use href="#formation-2"></use><use href="#star" opacity=".2" transform="translate(-34.8494 1.5959)"></use><use href="#alphabet" transform="translate(-34.8494 1.5959)"></use></svg><div>«BAREIL»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-6.47 -30.75 16 16"><use href="#formation-5"></use><use href="#star" opacity=".2" transform="translate(-26.47 5.25)"></use><use href="#alphabet" transform="translate(-26.47 5.25)"></use></svg><div>«KOVAL»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-26.702 -28.185 16 16"><use href="#formation-3"></use><use href="#star" opacity=".2" transform="translate(-46.702 7.815)"></use><use href="#alphabet" transform="translate(-46.702 7.815)"></use></svg><div>«RO»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="11.894 -26.224 16 16"><use href="#formation-8"></use><use href="#star" opacity=".2" transform="translate(-8.106 9.776)"></use><use href="#alphabet" transform="translate(-8.106 9.776)"></use></svg><div>«ERIS»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-14.32 -25.96 16 16"><use href="#formation-15"></use><use href="#star" opacity=".2" transform="translate(-34.32 10.04)"></use><use href="#alphabet" transform="translate(-34.32 10.04)"></use></svg><div>«VASH»</div></td>
+</tr>
+<tr>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-25.067 -18.289 16 16"><use href="#formation-6"></use><use href="#star" opacity=".2" transform="translate(-45.067 17.711)"></use><use href="#alphabet" transform="translate(-45.067 17.711)"></use></svg><div>«DUKAT»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-8 -15.678 16 16"><use href="#formation-11"></use><use href="#star" opacity=".2" transform="translate(-28 20.322)"></use><use href="#alphabet" transform="translate(-28 20.322)"></use></svg><div>«NURIA»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="11.894 -15.545 16 16"><use href="#formation-9"></use><use href="#star" opacity=".2" transform="translate(-8.106 20.455)"></use><use href="#alphabet" transform="translate(-8.106 20.455)"></use></svg><div>«WEYOUN»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-24.817 -10.042 16 16"><use href="#formation-4"></use><use href="#star" opacity=".2" transform="translate(-44.817 25.958)"></use><use href="#alphabet" transform="translate(-44.817 25.958)"></use></svg><div>«CRETAK»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-31.019 -6.948 16 16"><use href="#formation-7"></use><use href="#star" opacity=".2" transform="translate(-51.019 29.052)"></use><use href="#alphabet" transform="translate(-51.019 29.052)"></use></svg><div>«THRAX»</div></td>
+</tr>
+<tr>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="15.996 -5.086 16 16"><use href="#formation-17"></use><use href="#star" opacity=".2" transform="translate(-4.004 30.914)"></use><use href="#alphabet" transform="translate(-4.004 30.914)"></use></svg><div>«QUARK»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-8 -3.1696 16 16"><use href="#formation-10"></use><use href="#star" opacity=".2" transform="translate(-28 32.831)"></use><use href="#alphabet" transform="translate(-28 32.831)"></use></svg><div>«FENTO»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-27.658 -0.545 16 16"><use href="#formation-14"></use><use href="#star" opacity=".2" transform="translate(-47.658 35.455)"></use><use href="#alphabet" transform="translate(-47.658 35.455)"></use></svg><div>«HOGAN»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="10.085 1.5877 16 16"><use href="#formation-16"></use><use href="#star" opacity=".2" transform="translate(-9.915 37.587)"></use><use href="#alphabet" transform="translate(-9.915 37.587)"></use></svg><div>«ISHKA»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="7.098 10.207 16 16"><use href="#formation-1"></use><use href="#star" opacity=".2" transform="translate(-12.902 46.207)"></use><use href="#alphabet" transform="translate(-12.902 46.207)"></use></svg><div>«SOJEF»</div></td>
+</tr>
+<tr>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-24.157 11.145 16 16"><use href="#formation-12"></use><use href="#star" opacity=".2" transform="translate(-44.157 47.1456)"></use><use href="#alphabet" transform="translate(-44.157 47.1456)"></use></svg><div>«GRILKA»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-9.192 12.185 16 16"><use href="#formation-0"></use><use href="#star" opacity=".2" transform="translate(-29.192 48.185)"></use><use href="#alphabet" transform="translate(-29.192 48.185)"></use></svg><div>«ANIJ»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-3.3714 16.268 16 16"><use href="#formation-13"></use><use href="#star" opacity=".2" transform="translate(-23.371 52.268)"></use><use href="#alphabet" transform="translate(-23.371 52.268)"></use></svg><div>«WORF»</div></td>
+</tr></tbody></table>
+<p>If these names don’t ring a bell, [s googling for some subsets of them quickly reveals [dc that they are names of characters from <cite style='white-space: nowrap'>Star Trek</cite>. Google will happily take you to <a href='https://memory-alpha.fandom.com/wiki/Portal:Main'>Memory Alpha</a>, the <cite style='white-space: nowrap'>Star Trek</cite> fan wiki, where you can look them all up.]]</p>
+}
+{-c <p>The puzzle name hints that [d we might be interested in the races (i.e., species) of the characters. When we look them up, we find two things: [o there are exactly two characters of each race, and [o each pair has a character starting with unique letters A–I, so [s we should use that to order them. [rd]]]]]</p>}
+
+{-d <p>Two pieces of information we still haven’t used yet are [o the big circle of dots around the puzzle, and [o the positioning of the formations. Since the formations come with dots, and we can group them in pairs, we might be tempted to [s draw straight lines through them and see if that hits the dots on the outside. [rf]]]]</p>}
+
+<div class='layout r-d'>
+{-d
+<table class='bordered centered names-list'>
+<tr><th colspan='2'>Names		</th><th>Race	</th><th class='ih r-f'>Letters	</th></tr>
+<tr><td>«ANIJ»	</td><td>«SOJEF»	</td><td>Ba’ku	</td><td class='ih r-f'>«SP»	</td></tr>
+<tr><td>«BAREIL»	</td><td>«RO»	</td><td>Bajoran	</td><td class='ih r-f'>«AC»	</td></tr>
+<tr><td>«CRETAK»	</td><td>«THRAX»	</td><td>Romulan	</td><td class='ih r-f'>«ET»	</td></tr>
+<tr><td>«DUKAT»	</td><td>«KOVAL»	</td><td>Cardassian	</td><td class='ih r-f'>«HE»	</td></tr>
+<tr><td>«ERIS»	</td><td>«WEYOUN»	</td><td>Vorta	</td><td class='ih r-f'>«FI»	</td></tr>
+<tr><td>«FENTO»	</td><td>«NURIA»	</td><td>Mintakan	</td><td class='ih r-f'>«NA»	</td></tr>
+<tr><td>«GRILKA»	</td><td>«WORF»	</td><td>Klingon	</td><td class='ih r-f'>«LB»	</td></tr>
+<tr><td>«HOGAN»	</td><td>«VASH»	</td><td>Human	</td><td class='ih r-f'>«LA»	</td></tr>
+<tr><td>«ISHKA»	</td><td>«QUARK»	</td><td>Ferengi	</td><td class='ih r-f'>«NK»	</td></tr>
+</table>
+
+{-f <p>The clue phrase «SPACE THE FINAL BLANK» appears. [c “Blank” in a clue phrase means to find the word or phrase that goes there. [sh Google auto-complete reveals the iconic phrase from <cite>Star Trek: The Next Generation</cite>: “Space. The final frontier.”]]</p>}
+}
+
+<svg class='main-svg r-b r-d' xmlns="http://www.w3.org/2000/svg" stroke="#000" stroke-linecap="round" stroke-width=".1" font-size='2' viewBox="-35 -36 71 71">
+
+<defs><marker id="arw" orient="auto" overflow="visible" refX="0" refY="0"><path transform='scale(4)' stroke="#000" stroke-width=".19" d="m-1.93-1.21 3.28 1.2-3.28 1.21c.53-.71.53-1.68 0-2.41z" /></marker></defs>
+
+<g id='star' transform="translate(28 -28)">
+<path fill="none" d="M0-6L2.788 5.313l-7.726-8.721L5.956.723-5.61 2.128l9.589-6.62-5.415 10.318V-5.826L3.98 4.491l-9.59-6.619L5.957-.723-4.938 3.408l7.726-8.72L0 6-2.788-5.313l7.726 8.721L-5.956-.723 5.61-2.128l-9.589 6.62L1.436-5.827V5.826L-3.98-4.491l9.59 6.619L-5.957.723 4.938-3.408l-7.726 8.72"/><circle cy="-6" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/>
+</g>
+
+<g id="alphabet" class='ihs r-a' font-size="1" stroke="none" text-anchor="middle" transform='translate(28 -28)'><text x="0" y="-6.6">A</text><text x="3.25" y="6.59">B</text><text x="-5.76" y="-3.57">C</text><text x="6.94" y="1.24">D</text><text x="-6.54" y="2.88">E</text><text x="4.64" y="-4.83">F</text><text x="-1.67" y="7.19">G</text><text x="-1.67" y="-6.39">H</text><text x="4.64" y="5.63">I</text><text x="-6.54" y="-2.08">J</text><text x="6.94" y="-0.44">K</text><text x="-5.76" y="4.37">L</text><text x="3.25" y="-5.79">M</text><text x="0" y="7.4">N</text><text x="-3.25" y="-5.79">O</text><text x="5.76" y="4.37">P</text><text x="-6.94" y="-0.44">Q</text><text x="6.54" y="-2.08">R</text><text x="-4.64" y="5.63">S</text><text x="1.67" y="-6.39">T</text><text x="1.67" y="7.19">U</text><text x="-4.64" y="-4.83">V</text><text x="6.54" y="2.88">W</text><text x="-6.94" y="1.24">X</text><text x="5.76" y="-3.57">Y</text><text x="-3.25" y="6.59">Z</text></g>
+
+<g id='outer-dots'>
+<circle cy="-30" r="1"/><circle cx="13.94" cy="26.56" r="1" fill="none"/><circle cx="-24.69" cy="-17.04" r="1" fill="none"/><circle cx="29.78" cy="3.61" r="1" fill="none"/><circle cx="-28.05" cy="10.63" r="1"/><circle cx="19.89" cy="-22.45" r="1" fill="none"/><circle cx="-7.17" cy="29.12" r="1" fill="none"/><circle cx="-7.17" cy="-29.12" r="1" fill="none"/><circle cx="19.89" cy="22.45" r="1"/><circle cx="-28.05" cy="-10.63" r="1" fill="none"/><circle cx="29.78" cy="-3.61" r="1" fill="none"/><circle cx="-24.69" cy="17.04" r="1" fill="none"/><circle cx="13.94" cy="-26.56" r="1" fill="none"/><circle cy="30" r="1" fill="none"/><circle cx="-13.94" cy="-26.56" r="1"/><circle cx="24.69" cy="17.04" r="1" fill="none"/><circle cx="-29.78" cy="-3.61" r="1" fill="none"/><circle cx="28.05" cy="-10.63" r="1" fill="none"/><circle cx="-19.89" cy="22.45" r="1" fill="none"/><circle cx="7.17" cy="-29.12" r="1" fill="none"/><circle cx="7.17" cy="29.12" r="1"/><circle cx="-19.89" cy="-22.45" r="1" fill="none"/><circle cx="28.05" cy="10.63" r="1" fill="none"/><circle cx="-29.78" cy="3.61" r="1" fill="none"/><circle cx="24.69" cy="-17.04" r="1" fill="none"/><circle cx="-13.94" cy="26.56" r="1" fill="none"/>
+<g id="alphabet-big" class='ihs r-a' font-size="1.5" stroke="none" text-anchor="middle"><text x="1.83e-15" y="-29.45" fill="white">A</text><text x="13.94" y="27.11">B</text><text x="-24.68" y="-16.49">C</text><text x="29.78" y="4.16">D</text><text x="-28.05" y="11.18" fill="white">E</text><text x="19.89" y="-21.90">F</text><text x="-7.17" y="29.67">G</text><text x="-7.17" y="-28.57">H</text><text x="19.89" y="23.00" fill="white">I</text><text x="-28.05" y="-10.08">J</text><text x="29.78" y="-3.06">K</text><text x="-24.68" y="17.59">L</text><text x="13.94" y="-26.01">M</text><text x="1.98e-13" y="30.55">N</text><text x="-13.94" y="-26.01" fill="white">O</text><text x="24.68" y="17.59">P</text><text x="-29.78" y="-3.06">Q</text><text x="28.05" y="-10.08">R</text><text x="-19.89" y="23.00">S</text><text x="7.17" y="-28.57">T</text><text x="7.17" y="29.67" fill="white">U</text><text x="-19.89" y="-21.90">V</text><text x="28.05" y="11.18">W</text><text x="-29.78" y="4.16">X</text><text x="24.68" y="-16.49">Y</text><text x="-13.94" y="27.11">Z</text></g>
+</g>
+
+<g id='solution-lines' class='ihs r-f'><path d='M-18.89 22.32 23.2 17.22' marker-end="url(#arw)" /><path d='M-0.88 -29.53 -23.36 -17.73' marker-end="url(#arw)" /><path d='M-27.38 9.88 6.17 -27.99' marker-end="url(#arw)" /><path d='M-7.63 -28.23 -27.35 9.3' marker-end="url(#arw)" /><path d='M19.89 -21.45 19.89 20.95' marker-end="url(#arw)" /><path d='M0 29 0 -28.5' marker-end="url(#arw)" /><path d='M-23.71 17.27 12.48 26.2' marker-end="url(#arw)" /><path d='M-24.22 16.15 -0.69 -28.67' marker-end="url(#arw)" /><path d='M0.66 29.25 28.78 -2.48' marker-end="url(#arw)" /></g>
+
+<g id='formation-0' transform="translate(-1.192 20.185)"><text x='1' y='.6' class='name'>ANIJ</text><path class='scribble' fill="none" d="M0-6V6c0-1.2 3.183-2.407 3.979-1.509-.796-.898-8.467-6.193-9.59-6.619"/><circle class='scribble' cy="-6" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-1' transform="translate(15.098 18.207)"><text x='1' y='.6' class='name'>SOJEF</text><path class='scribble' fill="none" d="M-3.979 4.491c.796-.898 1.748-8.741 1.19-9.804.558 1.063-1.7 3.61-2.821 3.185 1.122.426 1.122 3.83 0 4.256 1.122-.426 8.793-5.72 9.589-6.62"/><circle class='scribble' cx="-3.979" cy="4.491" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-2' transform="translate(-6.849 -26.405)"><text x='1' y='.6' class='name'>BAREIL</text><path class='scribble' fill="none" d="M2.788 5.313C2.231 4.25 0-4.8 0-6c0 1.2 4.488 4.298 5.61 3.872L-5.61 2.128c1.122-.426 8.793 1.465 9.589 2.363-.796-.898-7.93-1.764-8.917-1.083"/><circle class='scribble' cx="2.788" cy="5.313" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-3' transform="translate(-18.702 -20.185)"><text x='1' y='.6' class='name'>RO</text><path class='scribble' fill="none" d="M5.61-2.128c-1.122.426-7.84-2.122-8.398-3.185"/><circle class='scribble' cx="5.61" cy="-2.128" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-4' transform="translate(-16.817 -2.042)"><text x='1' y='.6' class='name'>CRETAK</text><path class='scribble' fill="none" d="M-4.938-3.408c.988.681 9.426 1.706 10.548 1.28L-5.61 2.128c1.122-.426 6.759-6.789 7.046-7.954C1.149-4.66 0-4.8 0-6 0-4.8 4.765-.579 5.956-.723"/><circle class='scribble' cx="-4.938" cy="-3.408" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-5' transform="translate(1.53 -22.75)"><text x='1' y='.6' class='name'>THRAX</text><path class='scribble' fill="none" d="M5.956-.723C4.765-.58-2.23-4.25-2.788-5.313c.557 1.063-.395 1.72-1.19.822C-3.184-3.593 0-4.8 0-6c0 1.2-3.95 8.727-4.938 9.408"/><circle class='scribble' cx="5.956" cy="-.723" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-6' transform="translate(-17.067 -10.289)"><text x='-1' y='.6' class='name' text-anchor='end'>DUKAT</text><path class='scribble' fill="none" d="M5.956.723C4.765.58 1.15 4.661 1.436 5.826 1.149 4.66 4.765-.58 5.956-.724 4.765-.578 0-4.8 0-6c0 1.2 1.149 1.34 1.436.174"/><circle class='scribble' cx="5.956" cy=".723" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-7' transform="translate(-23.019 1.052)"><text x='-1' y='.6' class='name' text-anchor='end'>KOVAL</text><path class='scribble' fill="none" d="M1.436-5.826c-.287 1.165-2.585 1.165-2.872 0 .287 1.165 5.924 4.124 7.046 3.698C4.488-1.702 0-4.8 0-6 0-4.8-4.765.579-5.956.723"/><circle class='scribble' cx="1.436" cy="-5.826" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-8' transform="translate(19.894 -18.224)"><text x='-1' y='.6' class='name' text-anchor='end'>ERIS</text><path class='scribble' fill="none" d="M-5.61 2.128L5.61-2.128c-1.122.426-2.427 5.72-1.631 6.62-.796-.9-7.162-.9-7.958 0"/><circle class='scribble' cx="-5.61" cy="2.128" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-9' transform="translate(19.894 -7.545)"><text x='1' y='.6' class='name'>WEYOUN</text><path class='scribble' fill="none" d="M5.61 2.128c-1.122-.426-10.098-.426-11.22 0 1.122-.426 9.56-4.855 10.548-5.536-.988.681-7.169-.842-7.726-1.905.557 1.063 3.937 9.974 4.224 11.139C1.149 4.66 0 4.8 0 6"/><circle class='scribble' cx="5.61" cy="2.128" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-10' transform="translate(0 4.831)"><text x='1' y='.6' class='name'>FENTO</text><path class='scribble' fill="none" d="M3.979-4.491c-.796.898-8.467 6.193-9.59 6.619C-4.487 1.702 0 4.8 0 6 0 4.8 1.149-4.66 1.436-5.826c-.287 1.165-3.667 1.576-4.224.513"/><circle class='scribble' cx="3.979" cy="-4.491" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-11' transform="translate(0 -7.678)"><text x='1' y='.6' class='name'>NURIA</text><path class='scribble' fill="none" d="M0 6c0-1.2 1.149-1.34 1.436-.174C1.149 4.66 4.488-1.702 5.61-2.128c-1.122.426-2.427 5.72-1.631 6.62C3.183 3.591 0-4.8 0-6"/><circle class='scribble' cy="6" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-12' transform="translate(-16.157 19.145)"><text x='1' y='.6' class='name'>GRILKA</text><path class='scribble' fill="none" d="M-1.436 5.826c.287-1.165 5.924-7.528 7.046-7.954-1.122.426-2.427 5.72-1.631 6.62-.796-.9-7.93-1.765-8.917-1.084.988-.681 9.703-3.987 10.894-4.131C4.765-.58 0-4.8 0-6"/><circle class='scribble' cx="-1.436" cy="5.826" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-13' transform="translate(4.629 24.268)"><text x='1' y='.6' class='name'>WORF</text><path class='scribble' fill="none" d="M5.61 2.128c-1.122-.426-7.84-6.378-8.398-7.44.557 1.062 7.276 3.61 8.398 3.184-1.122.426-2.427-1.465-1.631-2.363"/><circle class='scribble' cx="5.61" cy="2.128" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-14' transform="translate(-19.658 7.455)"><text x='1' y='.6' class='name'>HOGAN</text><path class='scribble' fill="none" d="M-1.436-5.826c.287 1.165-.795 1.576-1.352.513.557 1.063 1.64 9.974 1.352 11.139C-1.149 4.66 0-4.8 0-6V6"/><circle class='scribble' cx="-1.436" cy="-5.826" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-15' transform="translate(-6.32 -17.96)"><text x='-1' y='.6' class='name' text-anchor='end'>VASH</text><path class='scribble' fill="none" d="M-3.979-4.491C-3.183-3.593 0-4.8 0-6 0-4.8-3.183 3.593-3.979 4.491c.796-.898 2.83-9.152 2.543-10.317"/><circle class='scribble' cx="-3.979" cy="-4.491" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-16' transform="translate(18.085 9.587)"><text x='-1' y='.6' class='name' text-anchor='end'>ISHKA</text><path class='scribble' fill="none" d="M3.979 4.491c-.796-.898-7.162-.898-7.958 0 .796-.898 2.83-9.152 2.543-10.317.287 1.165 6.201 5.247 7.392 5.103C4.765-.58 0-4.8 0-6"/><circle class='scribble' cx="3.979" cy="4.491" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+<g id='formation-17' transform="translate(23.996 2.914)"><text x='-1' y='.6' class='name' text-anchor='end'>QUARK</text><path class='scribble' fill="none" d="M-5.956-.723c1.191.144 7.105 5.384 7.392 6.549C1.149 4.66 0-4.8 0-6c0 1.2 4.488 4.298 5.61 3.872-1.122.426-.845 1.55.346 1.405"/><circle class='scribble' cx="-5.956" cy="-.723" r=".1"/><circle r=".5" fill="#fff" fill-opacity=".7"/></g>
+
+</svg>
+</div>
+{-h <div class='answer'>FRONTIER</div>}
+`);
+</script>
