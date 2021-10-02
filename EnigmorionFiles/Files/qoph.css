@@ -144,6 +144,10 @@ div#top {
             padding: 0 .3cm;
         }
 
+		div#top menu li.staff > a {
+			color: white;
+		}
+
 div#main {
     background: hsl(220, 60%, 90%);
     max-width: 30cm;
@@ -388,21 +392,24 @@ a#puzzles-link {
     margin-top: .5cm;
 }
 
-    #answer-box .left {
-        float: left;
-    }
-    #answer-box .right {
+    #answer-box .checker {
         float: right;
         text-align: right;
     }
-    form#answer-checker #answer {
-        width: 5cm;
+	#answer-box .response {
+		float: right;
+		clear: right;
+		width: 12cm;
+		text-align: center;
+	}
+	#answer-box #answer-checker input[type='text'] {
+		width: 5cm;
+	}
+    #answers .guess-log {
+		display: flex;
     }
-
-#answers {
-    text-align: center;
-}
     #answers h3 {
+		text-align: left;
         float: left;
         margin: 0;
         font-size: 16pt;
@@ -461,33 +468,37 @@ form td.explain {
     border-top: 1px solid hsl(220, 40%, 80%);
 }
 
-    #hints textarea {
+    .hints textarea {
         width: 100%;
         height: 8em;
     }
 
-    #hints table {
+    .hints table {
         border-collapse: collapse;
         width: 100%;
     }
 
-    #hints td, #hints th {
+    .hints td, .hints th {
         border: 1px solid black;
         padding: .25cm .4cm;
         vertical-align: top;
     }
 
-    #hints th {
+    .hints th {
         background: hsl(220, 60%, 85%);
     }
 
-    #hints .datetime {
+    .hints .datetime {
         font-weight: bold;
     }
 
-    #hints .text {
-        padding: .25cm 1cm;
+    .hints .text {
+        padding-left: 1cm;
     }
+
+	.hints .controls {
+		float: right;
+	}
 
 /* Solution pages */
 .w {
