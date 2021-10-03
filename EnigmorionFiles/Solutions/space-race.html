@@ -2,11 +2,14 @@
 	.ihs:not(.re) { visibility: hidden; }
 	.ih:not(.re) { display: none; }
 	table svg {
-		width: 5cm;
+		width: 4.9cm;
 	}
-	table.formations td > div {
-		text-align: center;
+	table.formations {
+		width: 100%;
 	}
+		table.formations td > div {
+			text-align: center;
+		}
 	svg.main-svg {
 		display: block;
 		width: 80%;
@@ -54,35 +57,35 @@
 <script>
 makeSolutionPage('space-race', `
 <p>The outer circle of dots, and the spikes on the star in the top-right, [o number 26, which suggests [d they represent the alphabet. Furthermore, the star [o is actually a zig-zagging line that starts and ends somewhere, so [sa let’s write the alphabet around it in this order. The lump could be the start or end point, but if we use the lump as the start point, the five vowels land on the five black dots, which provides confirmation that this is the correct order.]]]]</p>
-{-a <p>The star and the formations inside the main area have [o a highlighted center dot, suggesting [s we should place the star on top of them and then read the letters off the formations. [rb]]]</p>}
+{-a <p>The star and the formations inside the main area have [o a highlighted center dot, suggesting [s we should place the star on top of them and then read the letters off the formations. [s Since the image is an SVG, this is easiest by using InkScape (or any other SVG editor). [rb]]]]</p>}
 {-b
-<table class="bordered centered formations"><tbody>
+<table class="bordered centered formations">
 <tr>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-14.849 -34.405 16 16"><use href="#formation-2"></use><use href="#star" opacity=".2" transform="translate(-34.8494 1.5959)"></use><use href="#alphabet" transform="translate(-34.8494 1.5959)"></use></svg><div>«BAREIL»</div></td>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-6.47 -30.75 16 16"><use href="#formation-5"></use><use href="#star" opacity=".2" transform="translate(-26.47 5.25)"></use><use href="#alphabet" transform="translate(-26.47 5.25)"></use></svg><div>«KOVAL»</div></td>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-26.702 -28.185 16 16"><use href="#formation-3"></use><use href="#star" opacity=".2" transform="translate(-46.702 7.815)"></use><use href="#alphabet" transform="translate(-46.702 7.815)"></use></svg><div>«RO»</div></td>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="11.894 -26.224 16 16"><use href="#formation-8"></use><use href="#star" opacity=".2" transform="translate(-8.106 9.776)"></use><use href="#alphabet" transform="translate(-8.106 9.776)"></use></svg><div>«ERIS»</div></td>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-14.32 -25.96 16 16"><use href="#formation-15"></use><use href="#star" opacity=".2" transform="translate(-34.32 10.04)"></use><use href="#alphabet" transform="translate(-34.32 10.04)"></use></svg><div>«VASH»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-14.349 -34.405 15 16"><use href="#formation-2"></use><use href="#star" opacity=".2" transform="translate(-34.8494 1.5959)"></use><use href="#alphabet" transform="translate(-34.8494 1.5959)"></use></svg><div><span class="w">BAREIL</span></div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-5.97 -30.75 15 16"><use href="#formation-5"></use><use href="#star" opacity=".2" transform="translate(-26.47 5.25)"></use><use href="#alphabet" transform="translate(-26.47 5.25)"></use></svg><div><span class="w">KOVAL</span></div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-26.202 -28.185 15 16"><use href="#formation-3"></use><use href="#star" opacity=".2" transform="translate(-46.702 7.815)"></use><use href="#alphabet" transform="translate(-46.702 7.815)"></use></svg><div><span class="w">RO</span></div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="12.394 -26.224 15 16"><use href="#formation-8"></use><use href="#star" opacity=".2" transform="translate(-8.106 9.776)"></use><use href="#alphabet" transform="translate(-8.106 9.776)"></use></svg><div><span class="w">ERIS</span></div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-13.82 -25.96 15 16"><use href="#formation-15"></use><use href="#star" opacity=".2" transform="translate(-34.32 10.04)"></use><use href="#alphabet" transform="translate(-34.32 10.04)"></use></svg><div><span class="w">VASH</span></div></td>
 </tr>
 <tr>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-25.067 -18.289 16 16"><use href="#formation-6"></use><use href="#star" opacity=".2" transform="translate(-45.067 17.711)"></use><use href="#alphabet" transform="translate(-45.067 17.711)"></use></svg><div>«DUKAT»</div></td>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-8 -15.678 16 16"><use href="#formation-11"></use><use href="#star" opacity=".2" transform="translate(-28 20.322)"></use><use href="#alphabet" transform="translate(-28 20.322)"></use></svg><div>«NURIA»</div></td>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="11.894 -15.545 16 16"><use href="#formation-9"></use><use href="#star" opacity=".2" transform="translate(-8.106 20.455)"></use><use href="#alphabet" transform="translate(-8.106 20.455)"></use></svg><div>«WEYOUN»</div></td>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-24.817 -10.042 16 16"><use href="#formation-4"></use><use href="#star" opacity=".2" transform="translate(-44.817 25.958)"></use><use href="#alphabet" transform="translate(-44.817 25.958)"></use></svg><div>«CRETAK»</div></td>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-31.019 -6.948 16 16"><use href="#formation-7"></use><use href="#star" opacity=".2" transform="translate(-51.019 29.052)"></use><use href="#alphabet" transform="translate(-51.019 29.052)"></use></svg><div>«THRAX»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-24.567 -18.289 15 16"><use href="#formation-6"></use><use href="#star" opacity=".2" transform="translate(-45.067 17.711)"></use><use href="#alphabet" transform="translate(-45.067 17.711)"></use></svg><div><span class="w">DUKAT</span></div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-7.5 -15.678 15 16"><use href="#formation-11"></use><use href="#star" opacity=".2" transform="translate(-28 20.322)"></use><use href="#alphabet" transform="translate(-28 20.322)"></use></svg><div><span class="w">NURIA</span></div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="12.394 -15.545 15 16"><use href="#formation-9"></use><use href="#star" opacity=".2" transform="translate(-8.106 20.455)"></use><use href="#alphabet" transform="translate(-8.106 20.455)"></use></svg><div><span class="w">WEYOUN</span></div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-24.317 -10.042 15 16"><use href="#formation-4"></use><use href="#star" opacity=".2" transform="translate(-44.817 25.958)"></use><use href="#alphabet" transform="translate(-44.817 25.958)"></use></svg><div><span class="w">CRETAK</span></div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-30.519 -6.948 15 16"><use href="#formation-7"></use><use href="#star" opacity=".2" transform="translate(-51.019 29.052)"></use><use href="#alphabet" transform="translate(-51.019 29.052)"></use></svg><div><span class="w">THRAX</span></div></td>
 </tr>
 <tr>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="15.996 -5.086 16 16"><use href="#formation-17"></use><use href="#star" opacity=".2" transform="translate(-4.004 30.914)"></use><use href="#alphabet" transform="translate(-4.004 30.914)"></use></svg><div>«QUARK»</div></td>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-8 -3.1696 16 16"><use href="#formation-10"></use><use href="#star" opacity=".2" transform="translate(-28 32.831)"></use><use href="#alphabet" transform="translate(-28 32.831)"></use></svg><div>«FENTO»</div></td>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-27.658 -0.545 16 16"><use href="#formation-14"></use><use href="#star" opacity=".2" transform="translate(-47.658 35.455)"></use><use href="#alphabet" transform="translate(-47.658 35.455)"></use></svg><div>«HOGAN»</div></td>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="10.085 1.5877 16 16"><use href="#formation-16"></use><use href="#star" opacity=".2" transform="translate(-9.915 37.587)"></use><use href="#alphabet" transform="translate(-9.915 37.587)"></use></svg><div>«ISHKA»</div></td>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="7.098 10.207 16 16"><use href="#formation-1"></use><use href="#star" opacity=".2" transform="translate(-12.902 46.207)"></use><use href="#alphabet" transform="translate(-12.902 46.207)"></use></svg><div>«SOJEF»</div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="16.496 -5.086 15 16"><use href="#formation-17"></use><use href="#star" opacity=".2" transform="translate(-4.004 30.914)"></use><use href="#alphabet" transform="translate(-4.004 30.914)"></use></svg><div><span class="w">QUARK</span></div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-7.5 -3.1696 15 16"><use href="#formation-10"></use><use href="#star" opacity=".2" transform="translate(-28 32.831)"></use><use href="#alphabet" transform="translate(-28 32.831)"></use></svg><div><span class="w">FENTO</span></div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-27.158 -0.545 15 16"><use href="#formation-14"></use><use href="#star" opacity=".2" transform="translate(-47.658 35.455)"></use><use href="#alphabet" transform="translate(-47.658 35.455)"></use></svg><div><span class="w">HOGAN</span></div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="10.585 1.5877 15 16"><use href="#formation-16"></use><use href="#star" opacity=".2" transform="translate(-9.915 37.587)"></use><use href="#alphabet" transform="translate(-9.915 37.587)"></use></svg><div><span class="w">ISHKA</span></div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="7.598 10.207 15 16"><use href="#formation-1"></use><use href="#star" opacity=".2" transform="translate(-12.902 46.207)"></use><use href="#alphabet" transform="translate(-12.902 46.207)"></use></svg><div><span class="w">SOJEF</span></div></td>
 </tr>
 <tr>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-24.157 11.145 16 16"><use href="#formation-12"></use><use href="#star" opacity=".2" transform="translate(-44.157 47.1456)"></use><use href="#alphabet" transform="translate(-44.157 47.1456)"></use></svg><div>«GRILKA»</div></td>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-9.192 12.185 16 16"><use href="#formation-0"></use><use href="#star" opacity=".2" transform="translate(-29.192 48.185)"></use><use href="#alphabet" transform="translate(-29.192 48.185)"></use></svg><div>«ANIJ»</div></td>
-	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-3.3714 16.268 16 16"><use href="#formation-13"></use><use href="#star" opacity=".2" transform="translate(-23.371 52.268)"></use><use href="#alphabet" transform="translate(-23.371 52.268)"></use></svg><div>«WORF»</div></td>
-</tr></tbody></table>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-23.657 11.145 15 16"><use href="#formation-12"></use><use href="#star" opacity=".2" transform="translate(-44.157 47.1456)"></use><use href="#alphabet" transform="translate(-44.157 47.1456)"></use></svg><div><span class="w">GRILKA</span></div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-8.692 12.185 15 16"><use href="#formation-0"></use><use href="#star" opacity=".2" transform="translate(-29.192 48.185)"></use><use href="#alphabet" transform="translate(-29.192 48.185)"></use></svg><div><span class="w">ANIJ</span></div></td>
+	<td><svg stroke="#000" stroke-linecap="round" stroke-width=".1" viewBox="-2.8714 16.268 15 16"><use href="#formation-13"></use><use href="#star" opacity=".2" transform="translate(-23.371 52.268)"></use><use href="#alphabet" transform="translate(-23.371 52.268)"></use></svg><div><span class="w">WORF</span></div></td>
+</tr></table>
 <p>If these names don’t ring a bell, [s googling for some subsets of them quickly reveals [dc that they are names of characters from <cite style='white-space: nowrap'>Star Trek</cite>. Google will happily take you to <a href='https://memory-alpha.fandom.com/wiki/Portal:Main'>Memory Alpha</a>, the <cite style='white-space: nowrap'>Star Trek</cite> fan wiki, where you can look them all up.]]</p>
 }
 {-c <p>The puzzle name hints that [d we might be interested in the races (i.e., species) of the characters. When we look them up, we find two things: [o there are exactly two characters of each race, and [o each pair has a character starting with unique letters A–I, so [s we should use that to order them. [rd]]]]]</p>}
