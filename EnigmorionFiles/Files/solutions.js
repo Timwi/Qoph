@@ -231,9 +231,12 @@ function makeSolutionPage(pageId, hpsml, triggers)
 		};
 		document.getElementById('sol-expand').onclick = function()
 		{
-			let btn;
-			while (btn = document.querySelector('button.reveal'))
+			let btn, prev;
+			while ((btn = document.querySelector('button.reveal')) && btn !== prev)
+			{
 				btn.onclick();
+				prev = btn;
+			}
 			return false;
 		};
 
