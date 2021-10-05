@@ -597,10 +597,13 @@ button.reveal {
 
 #sol-controls {
     margin-top: -.7cm;
+	position: sticky;
+	top: 0;
+	z-index: 1;
 }
 
 body.solution div.answer {
-    margin: 2cm auto .5cm;
+    margin: 2cm auto 1cm;
     padding: .4cm 1.2cm;
     font-family: 'Lato';
     font-size: 32pt;

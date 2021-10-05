@@ -565,7 +565,7 @@ OSLOERSTRASSE,NAUENERPLATZ,LEOPOLDPLATZ,AMRUMERSTRASSE,WESTHAFEN,BIRKENSTRASSE,T
             fillBox(4, 60, "HALEMWEG", "KIENBERG", 5, 4,
                 ("HORRIBLE", "Hägar, according to Dik Browne"),
                 ("APPRECIATE", "Esteem or comprehend"),
-                ("LAFORGE", "Geordi from Star Trek TNG"),
+                ("LAFORGE", "Geordi from Star Trek TNG (2, 5)"),
                 ("ENOUGH", "Sufficiently"),
                 ("MIRANDARIGHTS", "What the police may inform you of (7, 6)"),
                 ("WESTBENGAL", "Kolkata’s state (4, 6)"),

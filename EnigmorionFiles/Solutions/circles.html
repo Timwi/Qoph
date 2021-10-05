@@ -1,0 +1,173 @@
+<style>
+	.ih:not(.re) { display: none; }
+	.ihs:not(.re) { visibility: hidden; }
+	.clr.re-c1, table.bordered .r-c1 circle { stroke: hsl(  0, 80%, 50%); }
+	.clr.re-c2, table.bordered .r-c2 circle { stroke: hsl( 35, 80%, 50%); }
+	.clr.re-c3, table.bordered .r-c3 circle { stroke: hsl( 60, 80%, 50%); }
+	.clr.re-c4, table.bordered .r-c4 circle { stroke: hsl(120, 80%, 50%); }
+	.clr.re-c5, table.bordered .r-c5 circle { stroke: hsl(180, 80%, 50%); }
+	.clr.re-c6, table.bordered .r-c6 circle { stroke: hsl(240, 80%, 50%); }
+	.clr.re-c7, table.bordered .r-c7 circle { stroke: hsl(280, 80%, 50%); }
+	.clr.re-c8, table.bordered .r-c8 circle { stroke: hsl(320, 60%, 70%); }
+	.clr.re-c9, table.bordered .r-c9 circle { stroke: hsl(  0,  0%, 60%); }
+	.layout { display: flex; }
+	.layout > table.bordered { width: 25cm; }
+	table.bordered td, table.bordered th { text-align: center; }
+	table.bordered td > svg { display: inline-block; width: .4cm; }
+	table.bordered tr:hover td { background: hsl(220, 50%, 90%); }
+	.circles circle {
+		stroke: black;
+		stroke-width: .05;
+		opacity: .5;
+	}
+	.circles circle.highlight {
+		stroke-width: .2;
+		opacity: 1;
+	}
+	.sm {
+		font-size: 10pt;
+		font-weight: normal;
+	}
+</style>
+<script src='../../files/solutions.js'></script>
+<h1>Circles</h1>
+<script>
+makeSolutionPage('circles', `
+<p class='flavour-text'>Distance, radius, arc length, widdershins.</p>
+<p>The title implies [d that we need to find circles that go through these points. There are many ways we can approach this: [sl]]
+{-l
+<ul>
+	<li>We can open the SVG in InkScape and attempt to draw circles there. The spiro mode of the draw tool (B) can easily create circles from points, especially if you enable snapping to centers of objects, so you can snap to the existing dots.</li>
+	<li>We can take the SVG and use some search/replace to extract the coordinates. Then we can put them in a Python script and use pyplot to draw some circles on them.</li>
+	<li>We can use an online tool such as <a href='http://www.ambrsoft.com/trigocalc/circle3d.htm'>Circle defined by 3 points</a> to calculate midpoints and radii of circles.</li>
+	<li>We can also put them all in a spreadsheet and author some formulas there, or use a scatter plot.</li>
+</ul>
+<p>Since there are [o 63 dots, we may be looking at [sg 7 circles with 9 dots each or 9 circles with 7 dots each.]]</p>
+}
+{-g <p>We only need 3 points to define a circle, so a good place to start is [sa to try triplets of dots around the perimeter. Turns out the triplet that’s conspicuously off the left of the main bulk already yields a circle that goes through 7 points (Circle 1 below). The same is true of three of the four topmost dots (Circle 2). Continuing similarly with the rest of the points allows us to determine all of the circles.]</p>}
+
+{-a <p>Once we have the circles, [ob the flavor text tells us to:]</p>
+{-b
+<ul>
+	<li>Determine a “distance”. [dc There are only three things this could mean: distance of the points along the circle; distances between the circles’ centers; or distances of the circles’ centers from the origin. The first of these is better described as “arc length”, which already comes up later in the flavor text. The distances between the circles’ centers don’t give us nice round numbers, but the distances from the origin do, so we’ll use those. (The spreadsheet formula for this is «SQRT(cx^2 + cy^2)», where <var>cx</var> and <var>cy</var> are the coordinates of the circle’s center.)]</li>
+	<li class='ih r-c'>Determine a “radius”. Well, we already have the radii of the circles.</li>
+	<li class='ih r-c'>Determine an “arc length”, [d referring to the arc lengths between consecutive points along each circle’s circumference. We can do this by [s finding the angle of each point relative to the circle center («ATAN2(x-cx, y-cy)»), sorting the points by that (now they are in counter-clockwise order), then taking the difference between each and the previous, and between the first and last plus 2π. Finally, we multiply these angles with the radius to get the arc lengths. This reveals that [dd they are all equidistant — except for one pair, which also gives us nice round numbers, so we’ll use that.]]]</li>
+	<li class='ih r-d'>“Widdershins”, [de or “counter-clockwise”, tells us how to sort the circles. Since one of them lies exactly on the positive <var>x</var>-axis, which is where angle measurements usually start in geometry, this is the one that should be first.]</li>
+</ul>
+{-e
+<p>Finally, we notice that the numbers [o are all in the range 1–26, so [df we convert them to letters.]]</p>
+}}
+<div class='layout'>
+<table class='bordered'>
+	<tr><th>Circle	</th><th>Center<div class='sm'>(approximate)</div>	</th><th class='ih r-c'>Dist	</th><th>Radius	</th><th class='ih r-d'>Arc	</th><th class='ih r-f'>Letters	</th></tr>
+	<tr class='r-c1 sort-e' data-sort_e='5'><td><svg viewBox='-1 -1 2 2'><circle r='.2' stroke-width='1' /></svg> 1	</td><td>[rc1 (-17.85, 6.5)]	</td><td class='ih r-c'>‹19›	</td><td>{c1 23}	</td><td class='ih r-d'>‹8›	</td><td class='ih r-f'>«SWH»	</td></tr>
+	<tr class='r-c2 sort-e' data-sort_e='3'><td><svg viewBox='-1 -1 2 2'><circle r='.2' stroke-width='1' /></svg> 2	</td><td>[rc2 (3.65, 20.68)]	</td><td class='ih r-c'>‹21›	</td><td>{c2 20}	</td><td class='ih r-d'>‹9›	</td><td class='ih r-f'>«UTI»	</td></tr>
+	<tr class='r-c3 sort-e' data-sort_e='6'><td><svg viewBox='-1 -1 2 2'><circle r='.2' stroke-width='1' /></svg> 3	</td><td>[rc3 (-8.46, -3.08)]	</td><td class='ih r-c'>‹9›	</td><td>{c3 20}	</td><td class='ih r-d'>‹5›	</td><td class='ih r-f'>«ITE»	</td></tr>
+	<tr class='r-c4 sort-e' data-sort_e='4'><td><svg viewBox='-1 -1 2 2'><circle r='.2' stroke-width='1' /></svg> 4	</td><td>[rc4 (-7.5, 12.99)]	</td><td class='ih r-c'>‹15›	</td><td>{c4 14}	</td><td class='ih r-d'>‹9›	</td><td class='ih r-f'>«ONI»	</td></tr>
+	<tr class='r-c5 sort-e' data-sort_e='9'><td><svg viewBox='-1 -1 2 2'><circle r='.2' stroke-width='1' /></svg> 5	</td><td>[rc5 (5.36, -4.5)]	</td><td class='ih r-c'>‹7›	</td><td>{c5 21}	</td><td class='ih r-d'>‹19›	</td><td class='ih r-f'>«GUS»	</td></tr>
+	<tr class='r-c6 sort-e' data-sort_e='2'><td><svg viewBox='-1 -1 2 2'><circle r='.2' stroke-width='1' /></svg> 6	</td><td>[rc6 (14.55, 12.21)]	</td><td class='ih r-c'>‹19›	</td><td>{c6 15}	</td><td class='ih r-d'>‹12›	</td><td class='ih r-f'>«SOL»	</td></tr>
+	<tr class='r-c7 sort-e' data-sort_e='7'><td><svg viewBox='-1 -1 2 2'><circle r='.2' stroke-width='1' /></svg> 7	</td><td>[rc7 (-0.5, -0.87)]	</td><td class='ih r-c'>‹1›	</td><td>{c7 19}	</td><td class='ih r-d'>‹16›	</td><td class='ih r-f'>«ASP»	</td></tr>
+	<tr class='r-c8 sort-e' data-sort_e='8'><td><svg viewBox='-1 -1 2 2'><circle r='.2' stroke-width='1' /></svg> 8	</td><td>[rc8 (0.17, -0.98)]	</td><td class='ih r-c'>‹1›	</td><td>{c8 18}	</td><td class='ih r-d'>‹1›	</td><td class='ih r-f'>«ARA»	</td></tr>
+	<tr class='r-c9 sort-e' data-sort_e='1'><td><svg viewBox='-1 -1 2 2'><circle r='.2' stroke-width='1' /></svg> 9	</td><td>[rc9 (20, 0)]	</td><td class='ih r-c'>‹20›	</td><td>{c9 8}	</td><td class='ih r-d'>‹5›	</td><td class='ih r-f'>«THE»	</td></tr>
+</table>
+
+<svg style='width: 100%' viewBox='-40.6202447114242 -42.3625569229796 72.11563747766 69.6308325017673'>
+    <g fill='none' stroke='#abb3c4'>
+        <path d='M-39-.25v.5M-38-.25v.5M-37-.25v.5M-36-.25v.5M-35-.25v.5M-34-.25v.5M-33-.25v.5M-32-.25v.5M-31-.25v.5M-30-.5v1M-29-.25v.5M-28-.25v.5M-27-.25v.5M-26-.25v.5M-25-.25v.5M-24-.25v.5M-23-.25v.5M-22-.25v.5M-21-.25v.5M-20-.5v1M-19-.25v.5M-18-.25v.5M-17-.25v.5M-16-.25v.5M-15-.25v.5M-14-.25v.5M-13-.25v.5M-12-.25v.5M-11-.25v.5M-10-.5v1M-9-.25v.5M-8-.25v.5M-7-.25v.5M-6-.25v.5M-5-.25v.5M-4-.25v.5M-3-.25v.5M-2-.25v.5M-1-.25v.5M1-.25v.5M2-.25v.5M3-.25v.5M4-.25v.5M5-.25v.5M6-.25v.5M7-.25v.5M8-.25v.5M9-.25v.5M10-.5v1M11-.25v.5M12-.25v.5M13-.25v.5M14-.25v.5M15-.25v.5M16-.25v.5M17-.25v.5M18-.25v.5M19-.25v.5M20-.5v1M21-.25v.5M22-.25v.5M23-.25v.5M24-.25v.5M25-.25v.5M26-.25v.5M27-.25v.5M28-.25v.5M29-.25v.5M0 -41.3625569229796 0 26.2682755787877' stroke-width='.05' />
+        <path d='M-.25 -41h.5M-.5 -40h1M-.25 -39h.5M-.25 -38h.5M-.25 -37h.5M-.25 -36h.5M-.25 -35h.5M-.25 -34h.5M-.25 -33h.5M-.25 -32h.5M-.25 -31h.5M-.5 -30h1M-.25 -29h.5M-.25 -28h.5M-.25 -27h.5M-.25 -26h.5M-.25 -25h.5M-.25 -24h.5M-.25 -23h.5M-.25 -22h.5M-.25 -21h.5M-.5 -20h1M-.25 -19h.5M-.25 -18h.5M-.25 -17h.5M-.25 -16h.5M-.25 -15h.5M-.25 -14h.5M-.25 -13h.5M-.25 -12h.5M-.25 -11h.5M-.5 -10h1M-.25 -9h.5M-.25 -8h.5M-.25 -7h.5M-.25 -6h.5M-.25 -5h.5M-.25 -4h.5M-.25 -3h.5M-.25 -2h.5M-.25 -1h.5M-.25 1h.5M-.25 2h.5M-.25 3h.5M-.25 4h.5M-.25 5h.5M-.25 6h.5M-.25 7h.5M-.25 8h.5M-.25 9h.5M-.5 10h1M-.25 11h.5M-.25 12h.5M-.25 13h.5M-.25 14h.5M-.25 15h.5M-.25 16h.5M-.25 17h.5M-.25 18h.5M-.25 19h.5M-.5 20h1M-.25 21h.5M-.25 22h.5M-.25 23h.5M-.25 24h.5M-.25 25h.5M-39.6202447114242 0 30.4953927662358 0' stroke-width='.05' />
+    </g>
+    <g fill='#abb3c4'>
+        <path d='M .4 -41 h -.8 l .4 -1 z' />
+        <path d='M 30 .4 v -.8 l 1 .4 z' />
+    </g>
+	<g fill='none' class='circles'>
+		<circle class='ihs r-c1'	cx='-17.85'	cy='-6.5'	r='23'	/>
+		<circle class='ihs r-c2'	cx='3.65'	cy='-20.68'	r='20'	/>
+		<circle class='ihs r-c3'	cx='-8.46'	cy='3.08'	r='20'	/>
+		<circle class='ihs r-c4'	cx='-7.5'	cy='-12.99'	r='14'	/>
+		<circle class='ihs r-c5'	cx='5.36'	cy='4.5'	r='21'	/>
+		<circle class='ihs r-c6'	cx='14.55'	cy='-12.21'	r='15'	/>
+		<circle class='ihs r-c7'	cx='-.5'	cy='.87'	r='19'	/>
+		<circle class='ihs r-c8'	cx='.17'	cy='.98'	r='18'	/>
+		<circle class='ihs r-c9'	cx='20'	cy='0'	r='8'	/>
+	</g>
+	<g stroke-width='1'>
+		<circle class='clr r-c1' cx='-38.6202447114242' cy='-16.3862397832915' r='.2' />
+		<circle class='clr r-c1' cx='-37.5240312892973' cy='5.42202647260617' r='.2' />
+		<circle class='clr r-c1' cx='-20.9994181283378' cy='-29.2823101725135' r='.2' />
+		<circle class='clr r-c1' cx='-18.6988249858472' cy='16.4861020592749' r='.2' />
+		<circle class='clr r-c1' cx='-0.543684229316728' cy='-21.6426039211308' r='.2' />
+		<circle class='clr r-c1' cx='0.887701144279038' cy='6.83363319846742' r='.2' />
+		<circle class='clr r-c1' cx='3.58167567490885' cy='-14.8353460618322' r='.2' />
+		<circle class='clr r-c2' cx='-10.609925435538' cy='-34.7077638747587' r='.2' />
+		<circle class='clr r-c2' cx='-15.9746443603182' cy='-16.8071650128166' r='.2' />
+		<circle class='clr r-c2' cx='-4.20943530921034' cy='-2.28850444299179' r='.2' />
+		<circle class='clr r-c2' cx='14.4143315909841' cy='-3.82699565365196' r='.2' />
+		<circle class='clr r-c2' cx='21.9090276072284' cy='-28.8347451480923' r='.2' />
+		<circle class='clr r-c2' cx='23.6375654770086' cy='-20.0794910141111' r='.2' />
+		<circle class='clr r-c2' cx='7.20116561301509' cy='-40.3625569229796' r='.2' />
+		<circle class='clr r-c3' cx='-26.3028746641547' cy='-5.95138650415421' r='.2' />
+		<circle class='clr r-c3' cx='-25.6410589923487' cy='13.3112719492093' r='.2' />
+		<circle class='clr r-c3' cx='-10.3910860786255' cy='-16.8281045148322' r='.2' />
+		<circle class='clr r-c3' cx='-9.02028053158834' cy='23.070254172408' r='.2' />
+		<circle class='clr r-c3' cx='7.31671004446488' cy='-9.21745624169214' r='.2' />
+		<circle class='clr r-c3' cx='8.12341090250758' cy='14.2621979346851' r='.2' />
+		<circle class='clr r-c3' cx='9.86832574376965' cy='-4.93267853981008' r='.2' />
+		<circle class='clr r-c4' cx='-20.199536649462' cy='-7.09786301360613' r='.2' />
+		<circle class='clr r-c4' cx='-19.7482144576727' cy='-19.7713280849374' r='.2' />
+		<circle class='clr r-c4' cx='-10.2307329563415' cy='0.740718590426667' r='.2' />
+		<circle class='clr r-c4' cx='-9.24708178561447' cy='-26.8809427889059' r='.2' />
+		<circle class='clr r-c4' cx='1.97867068530988' cy='-2.68723580691946' r='.2' />
+		<circle class='clr r-c4' cx='2.68755296134873' cy='-22.593180891175' r='.2' />
+		<circle class='clr r-c4' cx='6.41070854671306' cy='-14.5690474966469' r='.2' />
+		<circle class='clr r-c5' cx='-15.5810298098622' cy='2.95793243745006' r='.2' />
+		<circle class='clr r-c5' cx='-8.91929776353535' cy='19.8954753428642' r='.2' />
+		<circle class='clr r-c5' cx='-6.51108188046734' cy='-12.8216454430849' r='.2' />
+		<circle class='clr r-c5' cx='8.4701257793732' cy='25.2682755787877' r='.2' />
+		<circle class='clr r-c5' cx='11.47761589935' cy='-15.590360978527' r='.2' />
+		<circle class='clr r-c5' cx='23.5251010536383' cy='15.0405313005479' r='.2' />
+		<circle class='clr r-c5' cx='24.8727763617848' cy='-3.26848166912673' r='.2' />
+		<circle class='clr r-c6' cx='0.274137035010456' cy='-7.62369485941224' r='.2' />
+		<circle class='clr r-c6' cx='2.19965142007821' cy='-20.7187982264896' r='.2' />
+		<circle class='clr r-c6' cx='9.467856741301' cy='1.89811462217834' r='.2' />
+		<circle class='clr r-c6' cx='13.7451572737292' cy='-27.1910955330766' r='.2' />
+		<circle class='clr r-c6' cx='22.6224031271908' cy='0.432765782134682' r='.2' />
+		<circle class='clr r-c6' cx='25.9211011490889' cy='-22.0011313149307' r='.2' />
+		<circle class='clr r-c6' cx='29.4953927662358' cy='-10.8787925217916' r='.2' />
+		<circle class='clr r-c7' cx='-19.3443608856808' cy='-1.56091975633402' r='.2' />
+		<circle class='clr r-c7' cx='-14.023878830154' cy='14.211612741452' r='.2' />
+		<circle class='clr r-c7' cx='-10.2011272373602' cy='-15.4706857194664' r='.2' />
+		<circle class='clr r-c7' cx='1.67666014527937' cy='19.7409333667906' r='.2' />
+		<circle class='clr r-c7' cx='6.38806582657785' cy='-16.8414461596187' r='.2' />
+		<circle class='clr r-c7' cx='15.7065352167361' cy='10.7830923224198' r='.2' />
+		<circle class='clr r-c7' cx='17.6904239339263' cy='-4.62109379521635' r='.2' />
+		<circle class='clr r-c8' cx='-15.9668640972204' cy='8.95248392013977' r='.2' />
+		<circle class='clr r-c8' cx='-14.8887142773331' cy='-8.87040595721267' r='.2' />
+		<circle class='clr r-c8' cx='-1.16265964033694' cy='18.9351359231472' r='.2' />
+		<circle class='clr r-c8' cx='1.01088437151392' cy='-16.9957104696563' r='.2' />
+		<circle class='clr r-c8' cx='14.9564791771725' cy='11.2545646946373' r='.2' />
+		<circle class='clr r-c8' cx='16.0866379268752' cy='-7.428084570178' r='.2' />
+		<circle class='clr r-c8' cx='16.5292296800388' cy='-6.53150475507782' r='.2' />
+		<circle class='clr r-c9' cx='12.0461134676106' cy='0.857723166222437' r='.2' />
+		<circle class='clr r-c9' cx='14.6341911873585' cy='-5.93364102269247' r='.2' />
+		<circle class='clr r-c9' cx='16.0225738978045' cy='6.94118733370409' r='.2' />
+		<circle class='clr r-c9' cx='21.6508028712812' cy='-7.82782536086298' r='.2' />
+		<circle class='clr r-c9' cx='23.2817018993943' cy='7.29591890329875' r='.2' />
+		<circle class='clr r-c9' cx='27.3049663504892' cy='-3.26151293393436' r='.2' />
+		<circle class='clr r-c9' cx='27.8323606227784' cy='1.62914918738303' r='.2' />
+	</g>
+</svg>
+</div>
+{-f <p>The phrase «THE SOLUTION IS WHITE ASPARAGUS» appears.</p><div class='answer'>WHITE ASPARAGUS</div>}}
+`, {
+	a: function()
+	{
+		Array.from(document.querySelectorAll('tr.sort-e')).forEach((tr, ix) =>
+		{
+			let circle = document.querySelector(`circle.ihs.r-c${ix + 1}`);
+			tr.onmouseover	= function() { circle.classList.add('highlight');	};
+			tr.onmouseout	= function() { circle.classList.remove('highlight');	};
+		});
+	}
+});
+</script>

@@ -52,7 +52,7 @@ function makeSolutionPage(pageId, hpsml, triggers)
 				case '▼':
 				case undefined:
 					if (eof !== m.groups.c[0])
-						console.error(`Unexpected ${m.groups.c[0] || 'EOF'} (expected ${eof || 'EOF'})`, m[0]);
+						console.error(`Unexpected ${m.groups.c[0] || 'EOF'} (expected ${eof || 'EOF'})`);
 					return { html: html.join(''), fncs: function() { fncs.forEach(f => { f(); }); }, rest: hpsml };
 
 				case '[':
@@ -271,9 +271,9 @@ function createDeductionTracker(id, pages, fnc)
 		elem.classList.add('deduction-tracker');
 		elem.innerHTML = `
 			<button type='button' class='far-left'></button>
-			<button type='button' class='far-right'></button>
 			<button type='button' class='left' accesskey=','></button>
 			<button type='button' class='right' accesskey='/'></button>
+			<button type='button' class='far-right'></button>
 			<div class='info'></div>
 			<div class='progressbg'></div>
 			<div class='progress'></div>

@@ -1,10 +1,8 @@
-﻿using System.Drawing;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using RT.KitchenSink.Geometry;
-using RT.Util;
 using RT.Util.ExtensionMethods;
 using RT.Util.Geometry;
 
