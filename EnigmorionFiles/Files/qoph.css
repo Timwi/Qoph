@@ -745,3 +745,6 @@ body.solution #main {
 		.subpuzzles > .content.selected {
 			display: block;
 		}
+
+body.solution .ih:not(.re) { display: none; }
+body.solution .ihs:not(.re) { visibility: hidden; }
