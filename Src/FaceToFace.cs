@@ -51,40 +51,39 @@ namespace Qoph
             }
         }
 
-        private static readonly DistrInfo _cyanSums = new DistrInfo("Edge sums (cyan)", "PINK SUM",
-                (word: "PINK", faces: new[] { 8, 11, 0, 1 }, color: 1),
-                (word: "SUM", faces: new[] { 15, 12, 6 }, color: 2),
+        private static readonly DistrInfo _carpetColors = new DistrInfo("Carpet colors", "BINARY",
                 (word: "Q", faces: new[] { 22 }, color: 0),
-                (word: "ABDEGHJLOFRVTZYX", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 16, 17, 18, 19, 20, 21, 23 }, color: null));
-        private static readonly DistrInfo _pinkSums = new DistrInfo("Vertex sums (pink)", "LYRICS NEXT WORD",
+                (word: "BINARY", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: 1),
+                (word: "EDFGHJKLOPSTVUXZM", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 16, 17, 18, 19, 20, 21, 23, 6 }, color: null));
+        private static readonly DistrInfo _binaryKnobs = new DistrInfo("Binary (door knobs)", "CYAN SUM",
+                (word: "Q", faces: new[] { 22 }, color: 0),
+                (word: "CYAN", faces: new[] { 8, 11, 0, 1 }, color: 1),
+                (word: "SUM", faces: new[] { 15, 12, 16 }, color: 2),
+                (word: "KBDWGHJLOFRVTZPX", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 6, 17, 18, 19, 20, 21, 23 }, color: null));
+        private static readonly DistrInfo _pinkSums = new DistrInfo("Vertex sums (cyan)", "LYRICS NEXT WORD",
+                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "LYRICS", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: 1),
                 (word: "NEXT", faces: new[] { 14, 13, 5, 4 }, color: 2),
                 (word: "WOD", faces: new[] { 9, 10, 3 }, color: 3),
-                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "JGHFKMPVUZ", faces: new[] { 2, 6, 7, 16, 17, 18, 19, 20, 21, 23 }, color: null));
         private static readonly DistrInfo _musicSnippets = new DistrInfo("Lyrics", "GASHLYCRUMB TIN",
+                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "GASHLYCRUMB", faces: new[] { 8, 11, 0, 1, 15, 12, 16, 19, 9, 4, 5 }, color: 1),
                 (word: "TIN", faces: new[] { 21, 20, 3 }, color: 2),
-                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "DJKOPVWXZ", faces: new[] { 6, 7, 10, 13, 14, 17, 18, 2, 23 }, color: null));
-        private static readonly DistrInfo _carpetColors = new DistrInfo("Carpet colors", "CYAN SUM",
-                (word: "CYAN", faces: new[] { 8, 11, 0, 1 }, color: 1),
-                (word: "SUM", faces: new[] { 15, 12, 6 }, color: 2),
-                (word: "Q", faces: new[] { 22 }, color: 0),
-                (word: "BDFGHJKLOPRTVWXZ", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 16, 17, 18, 19, 20, 21, 23 }, color: null));
         private static readonly DistrInfo _gashlycrumbTinies = new DistrInfo("Gashlycrumb Tinies", "LOCK IS BAR",
+                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "LOCK", faces: new[] { 8, 11, 0, 1 }, color: 1),
                 (word: "IS", faces: new[] { 15, 12 }, color: 2),
                 (word: "BAR", faces: new[] { 16, 19, 9 }, color: 3),
-                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "EFGHJMNPUVWXYZ", faces: new[] { 2, 3, 4, 5, 6, 7, 10, 13, 14, 17, 18, 20, 21, 23 }, color: null));
         private static readonly DistrInfo _crosswordAfterOffset = new DistrInfo("Crossword", "CARPET INDEX",
+                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "CARPET", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: 1),
                 (word: "INDX", faces: new[] { 23, 3, 2, 17 }, color: 2),
-                (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "FGHJKLMSUVWYZ", faces: new[] { 4, 5, 6, 7, 9, 10, 13, 14, 16, 18, 19, 20, 21 }, color: null));
 
-        private static readonly DistrInfo[] _distributions = new[] { _carpetColors, _cyanSums, _pinkSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
+        private static readonly DistrInfo[] _distributions = new[] { _carpetColors, _binaryKnobs, _pinkSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
 
         private static readonly string[] _carpetColorNames = "WHITE,AQUA,AZURE,FUCHSIA,JADE,VIOLET,ONYX,PINK,GAMBOGE".Split(',');
 
@@ -887,7 +886,7 @@ h3 {{ font-size: 14pt; }}
             var rnd = new Random(47);
 
             var cyanClues = faceInfos
-                .SelectMany((face, faceIx) => face.Edges.Select(edge => (face1: faceIx, face2: edge.AdjacentFace, sum: getFaceValue(faceIx, _cyanSums) + getFaceValue(edge.AdjacentFace, _cyanSums))))
+                .SelectMany((face, faceIx) => face.Edges.Select(edge => (face1: faceIx, face2: edge.AdjacentFace, sum: getFaceValue(faceIx, _binaryKnobs) + getFaceValue(edge.AdjacentFace, _binaryKnobs))))
                 .ToArray()
                 .Shuffle(rnd);
 
@@ -1114,5 +1113,74 @@ h3 {{ font-size: 14pt; }}
         }
 
         private static Pt h(this PointD p, double y) => pt(p.X, y, p.Y);
+
+        public static void BinaryExperiment()
+        {
+            var info = GetFaceData();
+            var allPossibilities = Enumerable.Range(1, 26)
+                .SelectMany(val =>
+                {
+                    var binaryFull = Enumerable.Range(0, 5).Select(bit => (val & (1 << bit)) != 0).ToArray();
+                    var binary = binaryFull.Subarray(0, binaryFull.LastIndexOf(b => b) + 1);
+                    var extraBits = 5 - binary.Length;
+                    return Enumerable.Range(0, 1 << extraBits).Select(extra => (val, len: binary.Length, digits: binary.Concat(Enumerable.Range(0, extraBits).Select(bit => (extra & (1 << bit)) != 0).ToArray())));
+                })
+                .SelectMany(tup => Enumerable.Range(0, 5).Select(offset => (tup.val, offset, tup.len, digits: tup.digits.Subarray(5 - offset).Concat(tup.digits.Subarray(0, 5 - offset)))))
+                .ToArray();
+
+            var allOptionsPerFace = info.Select((inf, fIx) =>
+            {
+                var x = _binaryKnobs.Distribution.FirstOrNull(tup => tup.color != null && tup.faces.Contains(fIx));
+                if (x == null)
+                    return allPossibilities.Where(p => _binaryKnobs.Distribution.First(tup => tup.color == null).word.Contains((char) ('A' + p.val - 1))).ToArray();
+                return allPossibilities.Where(p => p.val == x.Value.word[x.Value.faces.IndexOf(fIx)] - 'A' + 1).ToArray();
+            }).ToArray();
+
+            var rnd = new Random(47);
+
+            IEnumerable<(int val, int offset, int len, bool[] binary)[]> recurse((int val, int offset, int len, bool[] binary)?[] sofar, (int val, int offset, int len, bool[] digits)[][] optionsPerFace)
+            {
+                var ix = -1;
+                for (var i = 0; i < sofar.Length; i++)
+                {
+                    if (sofar[i] != null)
+                        continue;
+                    if (ix == -1 || optionsPerFace[i].Length < optionsPerFace[ix].Length)
+                    {
+                        if (optionsPerFace[i].Length == 0)
+                            yield break;
+                        ix = i;
+                        if (optionsPerFace[i].Length == 1)
+                            goto shortcut;
+                    }
+                }
+
+                if (ix == -1)
+                {
+                    yield return sofar.Select(tup => tup.Value).ToArray();
+                    yield break;
+                }
+
+                shortcut:
+                var rndOffset = rnd.Next(0, optionsPerFace[ix].Length);
+                foreach (var tup in optionsPerFace[ix].Skip(rndOffset).Concat(optionsPerFace[ix].Take(rndOffset)))
+                {
+                    sofar[ix] = tup;
+                    var newOptionsPerFace = optionsPerFace.Select((opt, fIx) =>
+                    {
+                        if (opt == null || fIx == ix)
+                            return null;
+                        return opt.Where(t => t.val != tup.val && Enumerable.Range(0, 5).All(door => info[fIx].Edges[door].AdjacentFace != ix || t.digits[door] == !tup.digits[info[fIx].Edges[door].AdjacentEdge])).ToArray();
+                    }).ToArray();
+                    foreach (var solution in recurse(sofar, newOptionsPerFace))
+                        yield return solution;
+                }
+                sofar[ix] = null;
+            }
+
+            var randomSolution = recurse(new (int val, int offset, int len, bool[] binary)?[info.Length], allOptionsPerFace).First();
+            Console.WriteLine(randomSolution);
+            Debugger.Break();
+        }
     }
 }
