@@ -1,0 +1,100 @@
+<style>
+	.flavour-text cite { font-style: normal; }
+
+    table.home-depot {
+        border-collapse: collapse;
+        border: 2px solid black;
+        background: white;
+        font-size: 18pt;
+		margin-top: .5cm;
+    }
+        table.home-depot td {
+            padding: .1cm;
+            border: 1px solid black;
+            text-align: center;
+            width: 3cm;
+            height: 3cm;
+        }
+
+		table.home-depot .lw {
+			font-family: 'Agency FB';
+			font-size: 12pt;
+		}
+
+    .arrow > .unicode { opacity: 0; }
+    .arrow {
+        display: inline-block;
+        width: .6cm;
+        height: .6cm;
+        vertical-align: middle;
+        background-position: 50% 50%;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    .arrow.r { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M 1,7 V 3 H 5 V 1 L 9,5 5,9 V 7 Z" /></svg>'); }
+    .arrow.l { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M 9,7 V 3 H 5 V 1 L 1,5 5,9 V 7 Z" /></svg>'); }
+    .arrow.d { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M 7,1 H 3 V 5 H 1 L 5,9 9,5 H 7 Z" /></svg>'); }
+    .arrow.u { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M 7,9 H 3 V 5 H 1 L 5,1 9,5 H 7 Z" /></svg>'); }
+
+	.flavour-text.re-b .h, .flavour-text.re-e .h2 {
+        color: #800;
+        text-decoration: underline;
+        font-weight: bold;
+	}
+
+	.layout {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+	}
+</style>
+<script src='../../files/solutions.js'></script>
+<h1>Home Depot</h1>
+<script>
+makeSolutionPage('home depot', `
+<p class='flavour-text r-b r-e' data-rem_b='c' data-rem_e='f'>So this ‹weird› guy came up to me and started telling me about this one time he ‹lost on <cite>Jeopardy!</cite>›, and how he once bought something ‹from some guy he never met in Norway›. Then he outlined in detail his journey through this ‹store› where they sell things you can ‹hardly› believe. At least he <span class="h2">skipped over things he’d already seen before</span>. He bought:</p>
+<p>Some of the clues are just about guessable. [ra Once we have just a few of them, we can [s google them together, which will reveal that [db they are mentioned in the song <a href='https://www.azlyrics.com/lyrics/weirdalyankovic/hardwarestore.html'><cite>Hardware Store</cite> by Weird Al Yankovic</a>. The flavor text contains multiple confirmations (“weird” and “hardly”, and quotes from two other songs by the same artist). This allows us to fill in the rest of the clues. [rc]]]]</p>
+{-c <p>Since the answers to the clues are [o in alphabetical order, this means [c that we should reorder them in some way. Since they are [sd from a song, the natural ordering is the order in which they are mentioned in the song. Confirmation is provided by the fact that there’s exactly one item from each line in the relevant part of the song.</p>]]]}
+<table class='bordered centered'>
+	<tr><th>Clue	</th><th>Answer	</th></tr>
+	<tr class='sort-d' data-sort_d='1'><td>A spanner for Woody (5 6) ▷	</td><td>{/a «?»}{a «ALLEN WRENCH»}	</td></tr>
+	<tr class='sort-d' data-sort_d='16'><td>A dynamo (9)	</td><td>{/c «?»}{c «GENERATOR»}	</td></tr>
+	<tr class='sort-d' data-sort_d='9'><td>Oil for giving a presentation while on drugs (4-11 11) ◁	</td><td>{/c «?»}{c «HIGH-PERFORMANCE LUBRICATION»}	</td></tr>
+	<tr class='sort-d' data-sort_d='6'><td>A tool for deleting graphics software (5 7) △	</td><td>{/a «?»}{a «PAINT REMOVER»}	</td></tr>
+	<tr class='sort-d' data-sort_d='8'><td>An especially mighty machine for creating mist (5 6) ▽	</td><td>{/c «?»}{c «POWER FOGGER»}	</td></tr>
+	<tr class='sort-d' data-sort_d='4'><td>A hammer specifically for masseuses, say (6 6) ▽	</td><td>{/c «?»}{c «RUBBER MALLET»}	</td></tr>
+	<tr class='sort-d' data-sort_d='3'><td>Spectacles for defensive backs (6 7) ◁	</td><td>{/c «?»}{c «SAFETY GOGGLES»}	</td></tr>
+	<tr class='sort-d' data-sort_d='11'><td>A fumes finder (5 8) ▷	</td><td>{/a «?»}{a «SMOKE DETECTOR»}	</td></tr>
+	<tr class='sort-d' data-sort_d='14'><td>A recording of a fuss made by Serena Williams (6 6) △	</td><td>{/c «?»}{c «TENNIS RACKET»}	</td></tr>
+	<tr class='sort-d' data-sort_d='12'><td>A scale to tell how much something wears someone out (4 5) ▽	</td><td>{/c «?»}{c «TIRE GAUGE»}	</td></tr>
+	<tr class='sort-d' data-sort_d='13'><td>Something that makes glitches in previews unattractive (7 5 12) ◁	</td><td>{/c «?»}{c «TRAILER-HITCH DEMAGNETIZER»}	</td></tr>
+	<tr class='sort-d' data-sort_d='2'><td>A device for summarizing nonsense (5 9) △	</td><td>{/c «?»}{c «TRASH COMPACTOR»}	</td></tr>
+	<tr class='sort-d' data-sort_d='15'><td>A broom for outer space (6 7) ▷	</td><td>{/c «?»}{c «VACUUM CLEANER»}	</td></tr>
+	<tr class='sort-d' data-sort_d='10'><td>A liquid-repelling coating (5 8) ▽	</td><td>{/a «?»}{a «WATER PROOFING»}	</td></tr>
+	<tr class='sort-d' data-sort_d='7'><td>Something to undress the climate (7 9) ▷	</td><td>{/c «?»}{c «WEATHER STRIPPING»}	</td></tr>
+	<tr class='sort-d' data-sort_d='5'><td>An X button for a browser, say (6 7) ▷	</td><td>{/a «?»}{a «WINDOW SHUTTER»}	</td></tr>
+</table>
+{-d <p>We can now turn our attention to [o the arrows, and the hint in the flavor text that says [de that we should skip over items we’ve seen before. This allows us to [sp0 arrange the items on a path.]]]</p>}
+<div class='layout'>
+<table class='home-depot'>
+	<tr><td>2</td><td>3</td><td>8</td><td>3</td></tr>
+	<tr><td>4</td><td>1</td><td>1</td><td>2</td></tr>
+	<tr><td>6</td><td>8</td><td>8</td><td>2</td></tr>
+	<tr><td>7</td><td>13</td><td>9</td><td>7</td></tr>
+</table>
+<table class='home-depot ih r-p0'>
+	<tr class='ih r-p6'>	<td class='ih r-p9'>@A14VACUUM CLEANER▷</td>	<td class='ih r-p6'>{-p15 <span class='lw'>GENERATOR</span>}{-f «N»}</td>	<td class='ih r-p6'>@S6WEATHER STRIPPING▷</td>	<td class='ih r-p7'>@W7POWER FOGGER▽</td></tr>
+	<tr class='ih r-p2'>	<td class='ih r-p9'>@E9WATER PROOFING▽</td>	<td class='ih r-p2'>@R3RUBBER MALLET▽</td>	<td class='ih r-p2'>@S2SAFETY GOGGLES◁</td>	<td class='ih r-p7'>@I8HIGH-PERFORMANCE LUBRICATION◁</td></tr>
+	<tr class='ih r-p0'>	<td class='ih r-p9'>@D10SMOKE DETECTOR▷</td>	<td class='ih r-p0'>@E0ALLEN WRENCH▷</td>	<td class='ih r-p1'>@M1TRASH COMPACTOR△</td>	<td class='ih r-p7'>@I11TIRE GAUGE▽</td></tr>
+	<tr class='ih r-p4'>	<td class='ih r-p9'>@R13TENNIS RACKET△</td>	<td class='ih r-p4'>@R4WINDOW SHUTTER▷</td>	<td class='ih r-p4'>@O5PAINT REMOVER△</td>	<td class='ih r-p7'>@R12TRAILER-HITCH DEMAGNETIZER◁</td></tr>
+</table>
+</div>
+{-p15 <p>The path ends up forming a perfect 4×4 square, just like the one given in the puzzle. The one in the puzzle has [o numbers in it, which [c indicates that we should count that many letters into each word and take the letter at that position. [rf]]]</p>}
+{-f <div class='answer'>SIDE MIRROR</div>}
+`
+	.replace(/@([A-Z])(\d+)([^△▷▽◁]*)([△▷▽◁])/g, (_, r, c, o, t) => `{-p${c} <div class='lw'>${o}</div><div class='dir'>${t} [rp${(c|0)+1}]</div>}{-f «${r}»}`)
+	.replace(/△/g, "<span class='arrow u'><span class='unicode'>↑</span></span>")
+	.replace(/▷/g, "<span class='arrow r'><span class='unicode'>→</span></span>")
+	.replace(/▽/g, "<span class='arrow d'><span class='unicode'>↓</span></span>")
+	.replace(/◁/g, "<span class='arrow l'><span class='unicode'>←</span></span>"));
+</script>
