@@ -1,0 +1,562 @@
+fileFormatVersion: 2
+guid: 1c8e09891944ef542badd45d46337257
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: ArmL
+    100002: ArmR
+    100004: Brow_group
+    100006: BrowL1
+    100008: BrowL1_offset
+    100010: BrowL2
+    100012: BrowL2_offset
+    100014: BrowL3
+    100016: BrowL3_offset
+    100018: BrowR1
+    100020: BrowR1_offset
+    100022: BrowR2
+    100024: BrowR2_offset
+    100026: BrowR3
+    100028: BrowR3_offset
+    100030: Bust
+    100032: ClavicleL
+    100034: ClavicleR
+    100036: donkey_Attack2_VIS_O_OBJShape
+    100038: donkey_Attack2_VIS_O_OBJShape 1
+    100040: donkey_Attack3_VIS_O_OBJShape
+    100042: donkey_Attack3_VIS_O_OBJShape 1
+    100044: donkey_Attack_VIS_O_OBJShape
+    100046: donkey_Attack_VIS_O_OBJShape 1
+    100048: donkey_Blink_VIS_O_OBJShape
+    100050: donkey_bodyL_O_OBJ_O_SORTEACHNODEShape
+    100052: donkey_bodyR_O_OBJ_O_SORTEACHNODEShape
+    100054: donkey_Capture_VIS_O_OBJShape
+    100056: donkey_Capture_VIS_O_OBJShape 1
+    100058: donkey_Catch_VIS_O_OBJShape
+    100060: donkey_Catch_VIS_O_OBJShape 1
+    100062: donkey_Cliff_VIS_O_OBJShape
+    100064: donkey_Cliff_VIS_O_OBJShape 1
+    100066: donkey_Down_VIS_O_OBJShape
+    100068: donkey_Escape_VIS_O_OBJShape
+    100070: donkey_Eye_VIS_O_OBJShape
+    100072: donkey_Eye_VIS_O_OBJShape 1
+    100074: donkey_FaceN_VIS_O_OBJShape
+    100076: donkey_FaceUP1_VIS_O_OBJShape
+    100078: donkey_FaceUP2_VIS_O_OBJShape
+    100080: donkey_FaceUP3_VIS_O_OBJShape
+    100082: donkey_FaceUP4_VIS_O_OBJShape
+    100084: donkey_FaceUP5_VIS_O_OBJShape
+    100086: donkey_FaceUP6_VIS_O_OBJShape
+    100088: donkey_FaceUP7_VIS_O_OBJShape
+    100090: donkey_FaceUP8_VIS_O_OBJShape
+    100092: donkey_FaceUP8_VIS_O_OBJShape 1
+    100094: donkey_Fall_VIS_O_OBJShape
+    100096: donkey_Furafura_VIS_O_OBJShape
+    100098: donkey_Halfblink1_VIS_O_OBJShape
+    100100: donkey_Halfblink2_VIS_O_OBJShape
+    100102: donkey_Halfblink3_VIS_O_OBJShape
+    100104: donkey_HeavyAttack_VIS_O_OBJShape
+    100106: donkey_HeavyOuch_VIS_O_OBJShape
+    100108: donkey_Larm_O_OBJ_O_SORTEACHNODEShape
+    100110: donkey_Lleg_O_OBJ_O_SORTEACHNODEShape
+    100112: donkey_Ottotto_VIS_O_OBJShape
+    100114: donkey_Ouch_VIS_O_OBJShape
+    100116: donkey_PatternA_VIS_O_OBJShape
+    100118: donkey_PatternA_VIS_O_OBJShape 1
+    100120: donkey_Rarm_O_OBJ_O_SORTEACHNODEShape1
+    100122: donkey_Result_FaceUp_VIS_O_OBJShape
+    100124: donkey_Result_Mouth_VIS_O_OBJShape
+    100126: donkey_Result_Mouth_VIS_O_OBJShape 1
+    100128: donkey_Rleg_O_OBJ_O_SORTEACHNODEShape
+    100130: donkey_Stuckouteye1_VIS_O_OBJShape
+    100132: donkey_Stuckouteye1_VIS_O_OBJShape 1
+    100134: donkey_Stuckouteye2_VIS_O_OBJShape
+    100136: donkey_Stuckouteye2_VIS_O_OBJShape 1
+    100138: donkey_Talk_VIS_O_OBJShape
+    100140: DownlipC
+    100142: DownlipC_offset
+    100144: DownlipL
+    100146: DownlipL_offset
+    100148: DownlipR
+    100150: DownlipR_offset
+    100152: EnvironmentAmbientLight
+    100154: Face
+    100156: FingerL10
+    100158: FingerL11
+    100160: FingerL12
+    100162: FingerL13
+    100164: FingerL20
+    100166: FingerL21
+    100168: FingerL22
+    100170: FingerL23
+    100172: FingerL30
+    100174: FingerL31
+    100176: FingerL32
+    100178: FingerL33
+    100180: FingerL40
+    100182: FingerL41
+    100184: FingerL42
+    100186: FingerL43
+    100188: FingerL51
+    100190: FingerL52
+    100192: FingerL53
+    100194: FingerR10
+    100196: FingerR11
+    100198: FingerR12
+    100200: FingerR13
+    100202: FingerR20
+    100204: FingerR21
+    100206: FingerR22
+    100208: FingerR23
+    100210: FingerR30
+    100212: FingerR31
+    100214: FingerR32
+    100216: FingerR33
+    100218: FingerR40
+    100220: FingerR41
+    100222: FingerR42
+    100224: FingerR43
+    100226: FingerR51
+    100228: FingerR52
+    100230: FingerR53
+    100232: FootL
+    100234: FootR
+    100236: GamemodelShape
+    100238: GamemodelShape 1
+    100240: GamemodelShape 2
+    100242: H_ClavicleL
+    100244: H_ClavicleR
+    100246: HandL
+    100248: HandR
+    100250: HaveL
+    100252: HaveR
+    100254: Head
+    100256: head_O_OBJShape
+    100258: Hip
+    100260: Jaw
+    100262: Jaw_offset
+    100264: KneeL
+    100266: KneeR
+    100268: //RootNode
+    100270: LegL
+    100272: LegR
+    100274: Mouth
+    100276: Mouth_group
+    100278: Neck
+    100280: Necktie
+    100282: NoseC
+    100284: NoseC_offset
+    100286: Rot
+    100288: S_Hair1
+    100290: S_Hair2
+    100292: S_Hair3
+    100294: S_Necktie1
+    100296: S_Necktie2
+    100298: S_Necktie3
+    100300: S_Necktie4
+    100302: S_Necktie5_null
+    100304: senaka_O_OBJShape
+    100306: ShoulderL
+    100308: ShoulderR
+    100310: Throw
+    100312: ToeL
+    100314: ToeL2
+    100316: ToeR
+    100318: ToeR2
+    100320: Tongue
+    100322: Tongue_offset
+    100324: Tooth
+    100326: Tooth_offset
+    100328: Trans
+    100330: UplipC
+    100332: UplipC_offset
+    100334: UplipL1
+    100336: UplipL1_offset
+    100338: UplipL2
+    100340: UplipL2_offset
+    100342: UplipR1
+    100344: UplipR1_offset
+    100346: UplipR2
+    100348: UplipR2_offset
+    100350: ura_O_OBJShape
+    100352: Waist
+    400000: ArmL
+    400002: ArmR
+    400004: Brow_group
+    400006: BrowL1
+    400008: BrowL1_offset
+    400010: BrowL2
+    400012: BrowL2_offset
+    400014: BrowL3
+    400016: BrowL3_offset
+    400018: BrowR1
+    400020: BrowR1_offset
+    400022: BrowR2
+    400024: BrowR2_offset
+    400026: BrowR3
+    400028: BrowR3_offset
+    400030: Bust
+    400032: ClavicleL
+    400034: ClavicleR
+    400036: donkey_Attack2_VIS_O_OBJShape
+    400038: donkey_Attack2_VIS_O_OBJShape 1
+    400040: donkey_Attack3_VIS_O_OBJShape
+    400042: donkey_Attack3_VIS_O_OBJShape 1
+    400044: donkey_Attack_VIS_O_OBJShape
+    400046: donkey_Attack_VIS_O_OBJShape 1
+    400048: donkey_Blink_VIS_O_OBJShape
+    400050: donkey_bodyL_O_OBJ_O_SORTEACHNODEShape
+    400052: donkey_bodyR_O_OBJ_O_SORTEACHNODEShape
+    400054: donkey_Capture_VIS_O_OBJShape
+    400056: donkey_Capture_VIS_O_OBJShape 1
+    400058: donkey_Catch_VIS_O_OBJShape
+    400060: donkey_Catch_VIS_O_OBJShape 1
+    400062: donkey_Cliff_VIS_O_OBJShape
+    400064: donkey_Cliff_VIS_O_OBJShape 1
+    400066: donkey_Down_VIS_O_OBJShape
+    400068: donkey_Escape_VIS_O_OBJShape
+    400070: donkey_Eye_VIS_O_OBJShape
+    400072: donkey_Eye_VIS_O_OBJShape 1
+    400074: donkey_FaceN_VIS_O_OBJShape
+    400076: donkey_FaceUP1_VIS_O_OBJShape
+    400078: donkey_FaceUP2_VIS_O_OBJShape
+    400080: donkey_FaceUP3_VIS_O_OBJShape
+    400082: donkey_FaceUP4_VIS_O_OBJShape
+    400084: donkey_FaceUP5_VIS_O_OBJShape
+    400086: donkey_FaceUP6_VIS_O_OBJShape
+    400088: donkey_FaceUP7_VIS_O_OBJShape
+    400090: donkey_FaceUP8_VIS_O_OBJShape
+    400092: donkey_FaceUP8_VIS_O_OBJShape 1
+    400094: donkey_Fall_VIS_O_OBJShape
+    400096: donkey_Furafura_VIS_O_OBJShape
+    400098: donkey_Halfblink1_VIS_O_OBJShape
+    400100: donkey_Halfblink2_VIS_O_OBJShape
+    400102: donkey_Halfblink3_VIS_O_OBJShape
+    400104: donkey_HeavyAttack_VIS_O_OBJShape
+    400106: donkey_HeavyOuch_VIS_O_OBJShape
+    400108: donkey_Larm_O_OBJ_O_SORTEACHNODEShape
+    400110: donkey_Lleg_O_OBJ_O_SORTEACHNODEShape
+    400112: donkey_Ottotto_VIS_O_OBJShape
+    400114: donkey_Ouch_VIS_O_OBJShape
+    400116: donkey_PatternA_VIS_O_OBJShape
+    400118: donkey_PatternA_VIS_O_OBJShape 1
+    400120: donkey_Rarm_O_OBJ_O_SORTEACHNODEShape1
+    400122: donkey_Result_FaceUp_VIS_O_OBJShape
+    400124: donkey_Result_Mouth_VIS_O_OBJShape
+    400126: donkey_Result_Mouth_VIS_O_OBJShape 1
+    400128: donkey_Rleg_O_OBJ_O_SORTEACHNODEShape
+    400130: donkey_Stuckouteye1_VIS_O_OBJShape
+    400132: donkey_Stuckouteye1_VIS_O_OBJShape 1
+    400134: donkey_Stuckouteye2_VIS_O_OBJShape
+    400136: donkey_Stuckouteye2_VIS_O_OBJShape 1
+    400138: donkey_Talk_VIS_O_OBJShape
+    400140: DownlipC
+    400142: DownlipC_offset
+    400144: DownlipL
+    400146: DownlipL_offset
+    400148: DownlipR
+    400150: DownlipR_offset
+    400152: EnvironmentAmbientLight
+    400154: Face
+    400156: FingerL10
+    400158: FingerL11
+    400160: FingerL12
+    400162: FingerL13
+    400164: FingerL20
+    400166: FingerL21
+    400168: FingerL22
+    400170: FingerL23
+    400172: FingerL30
+    400174: FingerL31
+    400176: FingerL32
+    400178: FingerL33
+    400180: FingerL40
+    400182: FingerL41
+    400184: FingerL42
+    400186: FingerL43
+    400188: FingerL51
+    400190: FingerL52
+    400192: FingerL53
+    400194: FingerR10
+    400196: FingerR11
+    400198: FingerR12
+    400200: FingerR13
+    400202: FingerR20
+    400204: FingerR21
+    400206: FingerR22
+    400208: FingerR23
+    400210: FingerR30
+    400212: FingerR31
+    400214: FingerR32
+    400216: FingerR33
+    400218: FingerR40
+    400220: FingerR41
+    400222: FingerR42
+    400224: FingerR43
+    400226: FingerR51
+    400228: FingerR52
+    400230: FingerR53
+    400232: FootL
+    400234: FootR
+    400236: GamemodelShape
+    400238: GamemodelShape 1
+    400240: GamemodelShape 2
+    400242: H_ClavicleL
+    400244: H_ClavicleR
+    400246: HandL
+    400248: HandR
+    400250: HaveL
+    400252: HaveR
+    400254: Head
+    400256: head_O_OBJShape
+    400258: Hip
+    400260: Jaw
+    400262: Jaw_offset
+    400264: KneeL
+    400266: KneeR
+    400268: //RootNode
+    400270: LegL
+    400272: LegR
+    400274: Mouth
+    400276: Mouth_group
+    400278: Neck
+    400280: Necktie
+    400282: NoseC
+    400284: NoseC_offset
+    400286: Rot
+    400288: S_Hair1
+    400290: S_Hair2
+    400292: S_Hair3
+    400294: S_Necktie1
+    400296: S_Necktie2
+    400298: S_Necktie3
+    400300: S_Necktie4
+    400302: S_Necktie5_null
+    400304: senaka_O_OBJShape
+    400306: ShoulderL
+    400308: ShoulderR
+    400310: Throw
+    400312: ToeL
+    400314: ToeL2
+    400316: ToeR
+    400318: ToeR2
+    400320: Tongue
+    400322: Tongue_offset
+    400324: Tooth
+    400326: Tooth_offset
+    400328: Trans
+    400330: UplipC
+    400332: UplipC_offset
+    400334: UplipL1
+    400336: UplipL1_offset
+    400338: UplipL2
+    400340: UplipL2_offset
+    400342: UplipR1
+    400344: UplipR1_offset
+    400346: UplipR2
+    400348: UplipR2_offset
+    400350: ura_O_OBJShape
+    400352: Waist
+    2100000: alp
+    2100002: alp1
+    2100004: body
+    2100006: EyeL
+    2100008: EyeR
+    2100010: ShaderfxShader7
+    4300000: GamemodelShape
+    4300002: GamemodelShape
+    4300004: GamemodelShape
+    4300006: donkey_Eye_VIS_O_OBJShape
+    4300008: donkey_Eye_VIS_O_OBJShape
+    4300010: donkey_Stuckouteye1_VIS_O_OBJShape
+    4300012: donkey_Stuckouteye1_VIS_O_OBJShape
+    4300014: donkey_Stuckouteye2_VIS_O_OBJShape
+    4300016: donkey_Stuckouteye2_VIS_O_OBJShape
+    4300018: donkey_Halfblink1_VIS_O_OBJShape
+    4300020: donkey_Halfblink2_VIS_O_OBJShape
+    4300022: donkey_Halfblink3_VIS_O_OBJShape
+    4300024: donkey_Blink_VIS_O_OBJShape
+    4300026: donkey_FaceUP1_VIS_O_OBJShape
+    4300028: donkey_FaceUP2_VIS_O_OBJShape
+    4300030: donkey_FaceUP3_VIS_O_OBJShape
+    4300032: donkey_FaceUP4_VIS_O_OBJShape
+    4300034: donkey_FaceUP5_VIS_O_OBJShape
+    4300036: donkey_FaceUP6_VIS_O_OBJShape
+    4300038: donkey_FaceUP7_VIS_O_OBJShape
+    4300040: donkey_FaceUP8_VIS_O_OBJShape
+    4300042: donkey_FaceUP8_VIS_O_OBJShape
+    4300044: donkey_FaceN_VIS_O_OBJShape
+    4300046: donkey_Talk_VIS_O_OBJShape
+    4300048: donkey_Ouch_VIS_O_OBJShape
+    4300050: donkey_Down_VIS_O_OBJShape
+    4300052: donkey_PatternA_VIS_O_OBJShape
+    4300054: donkey_PatternA_VIS_O_OBJShape
+    4300056: donkey_HeavyAttack_VIS_O_OBJShape
+    4300058: donkey_Fall_VIS_O_OBJShape
+    4300060: donkey_Capture_VIS_O_OBJShape
+    4300062: donkey_Capture_VIS_O_OBJShape
+    4300064: donkey_HeavyOuch_VIS_O_OBJShape
+    4300066: donkey_Ottotto_VIS_O_OBJShape
+    4300068: donkey_Furafura_VIS_O_OBJShape
+    4300070: donkey_Cliff_VIS_O_OBJShape
+    4300072: donkey_Cliff_VIS_O_OBJShape
+    4300074: donkey_Catch_VIS_O_OBJShape
+    4300076: donkey_Catch_VIS_O_OBJShape
+    4300078: donkey_Result_FaceUp_VIS_O_OBJShape
+    4300080: donkey_Attack_VIS_O_OBJShape
+    4300082: donkey_Attack_VIS_O_OBJShape
+    4300084: donkey_Result_Mouth_VIS_O_OBJShape
+    4300086: donkey_Result_Mouth_VIS_O_OBJShape
+    4300088: donkey_Attack2_VIS_O_OBJShape
+    4300090: donkey_Attack2_VIS_O_OBJShape
+    4300092: donkey_Escape_VIS_O_OBJShape
+    4300094: donkey_Attack3_VIS_O_OBJShape
+    4300096: donkey_Attack3_VIS_O_OBJShape
+    4300098: donkey_Lleg_O_OBJ_O_SORTEACHNODEShape
+    4300100: donkey_Rleg_O_OBJ_O_SORTEACHNODEShape
+    4300102: senaka_O_OBJShape
+    4300104: head_O_OBJShape
+    4300106: ura_O_OBJShape
+    4300108: donkey_bodyL_O_OBJ_O_SORTEACHNODEShape
+    4300110: donkey_bodyR_O_OBJ_O_SORTEACHNODEShape
+    4300112: donkey_Larm_O_OBJ_O_SORTEACHNODEShape
+    4300114: donkey_Rarm_O_OBJ_O_SORTEACHNODEShape1
+    9500000: //RootNode
+    13700000: donkey_Attack2_VIS_O_OBJShape
+    13700002: donkey_Attack2_VIS_O_OBJShape 1
+    13700004: donkey_Attack3_VIS_O_OBJShape
+    13700006: donkey_Attack3_VIS_O_OBJShape 1
+    13700008: donkey_Attack_VIS_O_OBJShape
+    13700010: donkey_Attack_VIS_O_OBJShape 1
+    13700012: donkey_Blink_VIS_O_OBJShape
+    13700014: donkey_bodyL_O_OBJ_O_SORTEACHNODEShape
+    13700016: donkey_bodyR_O_OBJ_O_SORTEACHNODEShape
+    13700018: donkey_Capture_VIS_O_OBJShape
+    13700020: donkey_Capture_VIS_O_OBJShape 1
+    13700022: donkey_Catch_VIS_O_OBJShape
+    13700024: donkey_Catch_VIS_O_OBJShape 1
+    13700026: donkey_Cliff_VIS_O_OBJShape
+    13700028: donkey_Cliff_VIS_O_OBJShape 1
+    13700030: donkey_Down_VIS_O_OBJShape
+    13700032: donkey_Escape_VIS_O_OBJShape
+    13700034: donkey_Eye_VIS_O_OBJShape
+    13700036: donkey_Eye_VIS_O_OBJShape 1
+    13700038: donkey_FaceN_VIS_O_OBJShape
+    13700040: donkey_FaceUP1_VIS_O_OBJShape
+    13700042: donkey_FaceUP2_VIS_O_OBJShape
+    13700044: donkey_FaceUP3_VIS_O_OBJShape
+    13700046: donkey_FaceUP4_VIS_O_OBJShape
+    13700048: donkey_FaceUP5_VIS_O_OBJShape
+    13700050: donkey_FaceUP6_VIS_O_OBJShape
+    13700052: donkey_FaceUP7_VIS_O_OBJShape
+    13700054: donkey_FaceUP8_VIS_O_OBJShape
+    13700056: donkey_FaceUP8_VIS_O_OBJShape 1
+    13700058: donkey_Fall_VIS_O_OBJShape
+    13700060: donkey_Furafura_VIS_O_OBJShape
+    13700062: donkey_Halfblink1_VIS_O_OBJShape
+    13700064: donkey_Halfblink2_VIS_O_OBJShape
+    13700066: donkey_Halfblink3_VIS_O_OBJShape
+    13700068: donkey_HeavyAttack_VIS_O_OBJShape
+    13700070: donkey_HeavyOuch_VIS_O_OBJShape
+    13700072: donkey_Larm_O_OBJ_O_SORTEACHNODEShape
+    13700074: donkey_Lleg_O_OBJ_O_SORTEACHNODEShape
+    13700076: donkey_Ottotto_VIS_O_OBJShape
+    13700078: donkey_Ouch_VIS_O_OBJShape
+    13700080: donkey_PatternA_VIS_O_OBJShape
+    13700082: donkey_PatternA_VIS_O_OBJShape 1
+    13700084: donkey_Rarm_O_OBJ_O_SORTEACHNODEShape1
+    13700086: donkey_Result_FaceUp_VIS_O_OBJShape
+    13700088: donkey_Result_Mouth_VIS_O_OBJShape
+    13700090: donkey_Result_Mouth_VIS_O_OBJShape 1
+    13700092: donkey_Rleg_O_OBJ_O_SORTEACHNODEShape
+    13700094: donkey_Stuckouteye1_VIS_O_OBJShape
+    13700096: donkey_Stuckouteye1_VIS_O_OBJShape 1
+    13700098: donkey_Stuckouteye2_VIS_O_OBJShape
+    13700100: donkey_Stuckouteye2_VIS_O_OBJShape 1
+    13700102: donkey_Talk_VIS_O_OBJShape
+    13700104: GamemodelShape
+    13700106: GamemodelShape 1
+    13700108: GamemodelShape 2
+    13700110: head_O_OBJShape
+    13700112: senaka_O_OBJShape
+    13700114: ura_O_OBJShape
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

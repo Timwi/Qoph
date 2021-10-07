@@ -11,8 +11,8 @@ Each room contains:
 Letters     Subpuzzle               Clue
 EF          Crossword               GASHLYCRUMB TIN
 BO          Gashlycrumb Tinies      CARPET INDEX
-EI          Carpet colors indexing  CYAN SUM
-CW          Edge sums (cyan)        PINK SUM
+EI          Carpet colors indexing  LAMP BROS
+CW          Smash bros characters   GET PINK SUM
 AB          Vertex sums (pink)      LYRICS NEXT WORD
 DT          Lyrics next word        LOCK IS BAR
 

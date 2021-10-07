@@ -1,0 +1,521 @@
+fileFormatVersion: 2
+guid: ab1b045f7f72d3f4ab74ed41f04a0774
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: _01_-_TransN
+    100002: _02_-_RotN
+    100004: _03_-_HipN
+    100006: _04_-_LLegJ
+    100008: _05_-_LKneeJ
+    100010: _06_-_LFootJ
+    100012: _07_-_LToeN
+    100014: _08_-_RLegJ
+    100016: _09_-_RKneeJ
+    100018: _10_-_RFootJ
+    100020: _11_-_RToeN
+    100022: _12_-_WaistN
+    100024: _13_-_BustN
+    100026: _14_-_LShoulderN
+    100028: _15_-_LShoulderJ
+    100030: _16_-_LArmJ
+    100032: _17_-_LHandN
+    100034: _18_-_RShoulderN
+    100036: _19_-_RShoulderJ
+    100038: _20_-_RArmJ
+    100040: _21_-_RHandN
+    100042: _22_-_NeckN
+    100044: _23_-_HeadN
+    100046: _24_-_RHaveN
+    100048: _25_-_LHaveN
+    100050: _26_-_ThrowN
+    100052: _27_-_LFingerBaseN
+    100054: _28_-_LThumb1N
+    100056: _29_-_LThumb2N
+    100058: _30_-_LThumb3N
+    100060: _31_-_LIndex1N
+    100062: _32_-_LIndex2N
+    100064: _33_-_LIndex3N
+    100066: _34_-_LMiddleN
+    100068: _35_-_LMiddle1N
+    100070: _36_-_LMiddle2N
+    100072: _37_-_LMiddle3N
+    100074: _38_-_LRingN
+    100076: _39_-_LRing1N
+    100078: _40_-_LRing2N
+    100080: _41_-_LRing3N
+    100082: _42_-_LPinkyN
+    100084: _43_-_LPinky1N
+    100086: _44_-_LPinky2N
+    100088: _45_-_LPinky3N
+    100090: _46_-_RFingerBaseN
+    100092: _47_-_RThumb1N
+    100094: _48_-_RThumb2N
+    100096: _49_-_RThumb3N
+    100098: _50_-_RIndex1N
+    100100: _51_-_RIndex2N
+    100102: _52_-_RIndex3N
+    100104: _53_-_RMiddleN
+    100106: _54_-_RMiddle1N
+    100108: _55_-_RMiddle2N
+    100110: _56_-_RMiddle3N
+    100112: _57_-_RRingN
+    100114: _58_-_RRing1N
+    100116: _59_-_RRing2N
+    100118: _60_-_RRing3N
+    100120: _61_-_RPinkyN
+    100122: _62_-_RPinky1N
+    100124: _63_-_RPinky2N
+    100126: _64_-_RPinky3N
+    100128: _65_-_ReflectorN
+    100130: _66_-_TailNa
+    100132: _67_-_TailNb
+    100134: _68_-_TailNc
+    100136: _69_-_FaceN
+    100138: _70_-_FaceMouthN
+    100140: _71_-_HLP_LArmTwistjb
+    100142: _72_-_HLP_LSholJ
+    100144: _73_-_HLP_LTekubiJb
+    100146: _74_-_HLP_RArmTwistJb
+    100148: _75_-_HLP_RSholJ
+    100150: _76_-_HLP_RTekubiJb
+    100152: EnvironmentAmbientLight
+    100154: Fox_Attack_VIS_O_OBJ_
+    100156: Fox_Attack_VIS_O_OBJ_ 1
+    100158: fox_blaster_VIS_O_OBJ_
+    100160: Fox_Blink_VIS_O_OBJ_O_NOSORT_FAR_
+    100162: Fox_Blink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100164: Fox_Capture_VIS_O_OBJ_
+    100166: Fox_Capture_VIS_O_OBJ_ 1
+    100168: Fox_Capture_VIS_O_OBJ_ 2
+    100170: Fox_Capture_VIS_O_OBJ__Layer_2
+    100172: fox_eye_VIS_O_OBJ_
+    100174: fox_eye_VIS_O_OBJ_ 1
+    100176: fox_eye_VIS_O_OBJ__Layer_2
+    100178: fox_eye_VIS_O_OBJ__Layer_2 1
+    100180: fox_FaceDownM_VIS_O_OBJ_
+    100182: fox_FaceDownM_VIS_O_OBJ_ 1
+    100184: Fox_FaceM2_VIS_O_OBJ_O_NOSORT_FAR_
+    100186: Fox_FaceN_VIS_O_OBJ_
+    100188: Fox_FaceN_VIS_O_OBJ_ 1
+    100190: Fox_FaceNMClose_VIS_O_OBJ_
+    100192: Fox_FaceNMClose_VIS_O_OBJ_ 1
+    100194: Fox_FaceNMHalf_VIS_O_OBJ_
+    100196: Fox_FaceNMHalf_VIS_O_OBJ_ 1
+    100198: Fox_FaceNMOpen_VIS_O_OBJ_
+    100200: Fox_FaceNMOpen_VIS_O_OBJ_ 1
+    100202: Fox_Furafura_VIS_O_OBJ_
+    100204: Fox_Furafura_VIS_O_OBJ_ 1
+    100206: Fox_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    100208: Fox_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100210: Fox_HeavyOuch_VIS_O_OBJ_
+    100212: Fox_HeavyOuch_VIS_O_OBJ_ 1
+    100214: Fox_HeavyOuch_VIS_O_OBJ_ 2
+    100216: Fox_HeavyOuch_VIS_O_OBJ_ 3
+    100218: Fox_HeavyOuch_VIS_O_OBJ__Layer_2
+    100220: Fox_HeavyOuch_VIS_O_OBJ__Layer_2 1
+    100222: Fox_Hot_VIS_O_OBJ_
+    100224: Fox_Hot_VIS_O_OBJ_ 1
+    100226: Fox_Hot_VIS_O_OBJ_ 2
+    100228: Fox_Hot_VIS_O_OBJ_ 3
+    100230: Fox_Hot_VIS_O_OBJ_ 4
+    100232: Fox_Hot_VIS_O_OBJ__Layer_2
+    100234: Fox_Hot_VIS_O_OBJ__Layer_2 1
+    100236: Fox_Ottotto_VIS_O_OBJ_
+    100238: Fox_Ottotto_VIS_O_OBJ_ 1
+    100240: Fox_Ottotto_VIS_O_OBJ_ 2
+    100242: Fox_Ottotto_VIS_O_OBJ_ 3
+    100244: Fox_Ottotto_VIS_O_OBJ__Layer_2
+    100246: Fox_Ottotto_VIS_O_OBJ__Layer_2 1
+    100248: Fox_Ouch_VIS_O_OBJ_
+    100250: Fox_Ouch_VIS_O_OBJ_ 1
+    100252: Fox_Result_VIS_O_OBJ_
+    100254: Fox_Result_VIS_O_OBJ_ 1
+    100256: Fox_StepPose_VIS_O_OBJ_
+    100258: Fox_StepPose_VIS_O_OBJ_ 1
+    100260: Fox_Talk_VIS_O_OBJ_
+    100262: Fox_Talk_VIS_O_OBJ_ 1
+    100264: Fox_TalkMClose_VIS_O_OBJ_
+    100266: Fox_TalkMClose_VIS_O_OBJ_ 1
+    100268: Fox_TalkMHalf_VIS_O_OBJ_
+    100270: Fox_TalkMHalf_VIS_O_OBJ_ 1
+    100272: Fox_TalkMOpen_VIS_O_OBJ_
+    100274: Fox_TalkMOpen_VIS_O_OBJ_ 1
+    100276: Gamemodel_
+    100278: Gamemodel_ 1
+    100280: Gamemodel_ 2
+    100282: Gamemodel_ 3
+    100284: Gamemodel_ 4
+    100286: //RootNode
+    100288: scope_O_OBJ_O_HIR_O_SORTBIAS4__
+    100290: scope_O_OBJ_O_HIR_O_SORTBIAS4__ 1
+    100292: tail2_O_OBJ_O_SORTEACHNODE_
+    400000: _01_-_TransN
+    400002: _02_-_RotN
+    400004: _03_-_HipN
+    400006: _04_-_LLegJ
+    400008: _05_-_LKneeJ
+    400010: _06_-_LFootJ
+    400012: _07_-_LToeN
+    400014: _08_-_RLegJ
+    400016: _09_-_RKneeJ
+    400018: _10_-_RFootJ
+    400020: _11_-_RToeN
+    400022: _12_-_WaistN
+    400024: _13_-_BustN
+    400026: _14_-_LShoulderN
+    400028: _15_-_LShoulderJ
+    400030: _16_-_LArmJ
+    400032: _17_-_LHandN
+    400034: _18_-_RShoulderN
+    400036: _19_-_RShoulderJ
+    400038: _20_-_RArmJ
+    400040: _21_-_RHandN
+    400042: _22_-_NeckN
+    400044: _23_-_HeadN
+    400046: _24_-_RHaveN
+    400048: _25_-_LHaveN
+    400050: _26_-_ThrowN
+    400052: _27_-_LFingerBaseN
+    400054: _28_-_LThumb1N
+    400056: _29_-_LThumb2N
+    400058: _30_-_LThumb3N
+    400060: _31_-_LIndex1N
+    400062: _32_-_LIndex2N
+    400064: _33_-_LIndex3N
+    400066: _34_-_LMiddleN
+    400068: _35_-_LMiddle1N
+    400070: _36_-_LMiddle2N
+    400072: _37_-_LMiddle3N
+    400074: _38_-_LRingN
+    400076: _39_-_LRing1N
+    400078: _40_-_LRing2N
+    400080: _41_-_LRing3N
+    400082: _42_-_LPinkyN
+    400084: _43_-_LPinky1N
+    400086: _44_-_LPinky2N
+    400088: _45_-_LPinky3N
+    400090: _46_-_RFingerBaseN
+    400092: _47_-_RThumb1N
+    400094: _48_-_RThumb2N
+    400096: _49_-_RThumb3N
+    400098: _50_-_RIndex1N
+    400100: _51_-_RIndex2N
+    400102: _52_-_RIndex3N
+    400104: _53_-_RMiddleN
+    400106: _54_-_RMiddle1N
+    400108: _55_-_RMiddle2N
+    400110: _56_-_RMiddle3N
+    400112: _57_-_RRingN
+    400114: _58_-_RRing1N
+    400116: _59_-_RRing2N
+    400118: _60_-_RRing3N
+    400120: _61_-_RPinkyN
+    400122: _62_-_RPinky1N
+    400124: _63_-_RPinky2N
+    400126: _64_-_RPinky3N
+    400128: _65_-_ReflectorN
+    400130: _66_-_TailNa
+    400132: _67_-_TailNb
+    400134: _68_-_TailNc
+    400136: _69_-_FaceN
+    400138: _70_-_FaceMouthN
+    400140: _71_-_HLP_LArmTwistjb
+    400142: _72_-_HLP_LSholJ
+    400144: _73_-_HLP_LTekubiJb
+    400146: _74_-_HLP_RArmTwistJb
+    400148: _75_-_HLP_RSholJ
+    400150: _76_-_HLP_RTekubiJb
+    400152: EnvironmentAmbientLight
+    400154: Fox_Attack_VIS_O_OBJ_
+    400156: Fox_Attack_VIS_O_OBJ_ 1
+    400158: fox_blaster_VIS_O_OBJ_
+    400160: Fox_Blink_VIS_O_OBJ_O_NOSORT_FAR_
+    400162: Fox_Blink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400164: Fox_Capture_VIS_O_OBJ_
+    400166: Fox_Capture_VIS_O_OBJ_ 1
+    400168: Fox_Capture_VIS_O_OBJ_ 2
+    400170: Fox_Capture_VIS_O_OBJ__Layer_2
+    400172: fox_eye_VIS_O_OBJ_
+    400174: fox_eye_VIS_O_OBJ_ 1
+    400176: fox_eye_VIS_O_OBJ__Layer_2
+    400178: fox_eye_VIS_O_OBJ__Layer_2 1
+    400180: fox_FaceDownM_VIS_O_OBJ_
+    400182: fox_FaceDownM_VIS_O_OBJ_ 1
+    400184: Fox_FaceM2_VIS_O_OBJ_O_NOSORT_FAR_
+    400186: Fox_FaceN_VIS_O_OBJ_
+    400188: Fox_FaceN_VIS_O_OBJ_ 1
+    400190: Fox_FaceNMClose_VIS_O_OBJ_
+    400192: Fox_FaceNMClose_VIS_O_OBJ_ 1
+    400194: Fox_FaceNMHalf_VIS_O_OBJ_
+    400196: Fox_FaceNMHalf_VIS_O_OBJ_ 1
+    400198: Fox_FaceNMOpen_VIS_O_OBJ_
+    400200: Fox_FaceNMOpen_VIS_O_OBJ_ 1
+    400202: Fox_Furafura_VIS_O_OBJ_
+    400204: Fox_Furafura_VIS_O_OBJ_ 1
+    400206: Fox_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    400208: Fox_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400210: Fox_HeavyOuch_VIS_O_OBJ_
+    400212: Fox_HeavyOuch_VIS_O_OBJ_ 1
+    400214: Fox_HeavyOuch_VIS_O_OBJ_ 2
+    400216: Fox_HeavyOuch_VIS_O_OBJ_ 3
+    400218: Fox_HeavyOuch_VIS_O_OBJ__Layer_2
+    400220: Fox_HeavyOuch_VIS_O_OBJ__Layer_2 1
+    400222: Fox_Hot_VIS_O_OBJ_
+    400224: Fox_Hot_VIS_O_OBJ_ 1
+    400226: Fox_Hot_VIS_O_OBJ_ 2
+    400228: Fox_Hot_VIS_O_OBJ_ 3
+    400230: Fox_Hot_VIS_O_OBJ_ 4
+    400232: Fox_Hot_VIS_O_OBJ__Layer_2
+    400234: Fox_Hot_VIS_O_OBJ__Layer_2 1
+    400236: Fox_Ottotto_VIS_O_OBJ_
+    400238: Fox_Ottotto_VIS_O_OBJ_ 1
+    400240: Fox_Ottotto_VIS_O_OBJ_ 2
+    400242: Fox_Ottotto_VIS_O_OBJ_ 3
+    400244: Fox_Ottotto_VIS_O_OBJ__Layer_2
+    400246: Fox_Ottotto_VIS_O_OBJ__Layer_2 1
+    400248: Fox_Ouch_VIS_O_OBJ_
+    400250: Fox_Ouch_VIS_O_OBJ_ 1
+    400252: Fox_Result_VIS_O_OBJ_
+    400254: Fox_Result_VIS_O_OBJ_ 1
+    400256: Fox_StepPose_VIS_O_OBJ_
+    400258: Fox_StepPose_VIS_O_OBJ_ 1
+    400260: Fox_Talk_VIS_O_OBJ_
+    400262: Fox_Talk_VIS_O_OBJ_ 1
+    400264: Fox_TalkMClose_VIS_O_OBJ_
+    400266: Fox_TalkMClose_VIS_O_OBJ_ 1
+    400268: Fox_TalkMHalf_VIS_O_OBJ_
+    400270: Fox_TalkMHalf_VIS_O_OBJ_ 1
+    400272: Fox_TalkMOpen_VIS_O_OBJ_
+    400274: Fox_TalkMOpen_VIS_O_OBJ_ 1
+    400276: Gamemodel_
+    400278: Gamemodel_ 1
+    400280: Gamemodel_ 2
+    400282: Gamemodel_ 3
+    400284: Gamemodel_ 4
+    400286: //RootNode
+    400288: scope_O_OBJ_O_HIR_O_SORTBIAS4__
+    400290: scope_O_OBJ_O_HIR_O_SORTBIAS4__ 1
+    400292: tail2_O_OBJ_O_SORTEACHNODE_
+    2100000: _
+    2100002: _2
+    2100004: _4
+    4300000: scope_O_OBJ_O_HIR_O_SORTBIAS4__
+    4300002: scope_O_OBJ_O_HIR_O_SORTBIAS4__
+    4300004: tail2_O_OBJ_O_SORTEACHNODE_
+    4300006: fox_blaster_VIS_O_OBJ_
+    4300008: Fox_FaceN_VIS_O_OBJ_
+    4300010: Fox_FaceN_VIS_O_OBJ_
+    4300012: Fox_Talk_VIS_O_OBJ_
+    4300014: Fox_Talk_VIS_O_OBJ_
+    4300016: Fox_Ouch_VIS_O_OBJ_
+    4300018: Fox_Ouch_VIS_O_OBJ_
+    4300020: fox_FaceDownM_VIS_O_OBJ_
+    4300022: fox_FaceDownM_VIS_O_OBJ_
+    4300024: fox_eye_VIS_O_OBJ_
+    4300026: fox_eye_VIS_O_OBJ__Layer_2
+    4300028: fox_eye_VIS_O_OBJ_
+    4300030: fox_eye_VIS_O_OBJ__Layer_2
+    4300032: Fox_FaceM2_VIS_O_OBJ_O_NOSORT_FAR_
+    4300034: Fox_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300036: Fox_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300038: Fox_Blink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300040: Fox_Blink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300042: Fox_Attack_VIS_O_OBJ_
+    4300044: Fox_Attack_VIS_O_OBJ_
+    4300046: Fox_Capture_VIS_O_OBJ_
+    4300048: Fox_Capture_VIS_O_OBJ_
+    4300050: Fox_Capture_VIS_O_OBJ_
+    4300052: Fox_Capture_VIS_O_OBJ__Layer_2
+    4300054: Fox_HeavyOuch_VIS_O_OBJ_
+    4300056: Fox_HeavyOuch_VIS_O_OBJ_
+    4300058: Fox_HeavyOuch_VIS_O_OBJ_
+    4300060: Fox_HeavyOuch_VIS_O_OBJ__Layer_2
+    4300062: Fox_HeavyOuch_VIS_O_OBJ_
+    4300064: Fox_HeavyOuch_VIS_O_OBJ__Layer_2
+    4300066: Fox_Furafura_VIS_O_OBJ_
+    4300068: Fox_Furafura_VIS_O_OBJ_
+    4300070: Fox_Ottotto_VIS_O_OBJ_
+    4300072: Fox_Ottotto_VIS_O_OBJ_
+    4300074: Fox_Ottotto_VIS_O_OBJ_
+    4300076: Fox_Ottotto_VIS_O_OBJ__Layer_2
+    4300078: Fox_Ottotto_VIS_O_OBJ_
+    4300080: Fox_Ottotto_VIS_O_OBJ__Layer_2
+    4300082: Fox_Hot_VIS_O_OBJ_
+    4300084: Fox_Hot_VIS_O_OBJ_
+    4300086: Fox_Hot_VIS_O_OBJ__Layer_2
+    4300088: Fox_Hot_VIS_O_OBJ_
+    4300090: Fox_Hot_VIS_O_OBJ__Layer_2
+    4300092: Fox_Hot_VIS_O_OBJ_
+    4300094: Fox_Hot_VIS_O_OBJ_
+    4300096: Fox_StepPose_VIS_O_OBJ_
+    4300098: Fox_StepPose_VIS_O_OBJ_
+    4300100: Fox_Result_VIS_O_OBJ_
+    4300102: Fox_Result_VIS_O_OBJ_
+    4300104: Fox_FaceNMOpen_VIS_O_OBJ_
+    4300106: Fox_FaceNMOpen_VIS_O_OBJ_
+    4300108: Fox_FaceNMHalf_VIS_O_OBJ_
+    4300110: Fox_FaceNMHalf_VIS_O_OBJ_
+    4300112: Fox_FaceNMClose_VIS_O_OBJ_
+    4300114: Fox_FaceNMClose_VIS_O_OBJ_
+    4300116: Fox_TalkMOpen_VIS_O_OBJ_
+    4300118: Fox_TalkMOpen_VIS_O_OBJ_
+    4300120: Fox_TalkMHalf_VIS_O_OBJ_
+    4300122: Fox_TalkMHalf_VIS_O_OBJ_
+    4300124: Fox_TalkMClose_VIS_O_OBJ_
+    4300126: Fox_TalkMClose_VIS_O_OBJ_
+    4300128: Gamemodel_
+    4300130: Gamemodel_
+    4300132: Gamemodel_
+    4300134: Gamemodel_
+    4300136: Gamemodel_
+    9500000: //RootNode
+    13700000: Fox_Attack_VIS_O_OBJ_
+    13700002: Fox_Attack_VIS_O_OBJ_ 1
+    13700004: fox_blaster_VIS_O_OBJ_
+    13700006: Fox_Blink_VIS_O_OBJ_O_NOSORT_FAR_
+    13700008: Fox_Blink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700010: Fox_Capture_VIS_O_OBJ_
+    13700012: Fox_Capture_VIS_O_OBJ_ 1
+    13700014: Fox_Capture_VIS_O_OBJ_ 2
+    13700016: Fox_Capture_VIS_O_OBJ__Layer_2
+    13700018: fox_eye_VIS_O_OBJ_
+    13700020: fox_eye_VIS_O_OBJ_ 1
+    13700022: fox_eye_VIS_O_OBJ__Layer_2
+    13700024: fox_eye_VIS_O_OBJ__Layer_2 1
+    13700026: fox_FaceDownM_VIS_O_OBJ_
+    13700028: fox_FaceDownM_VIS_O_OBJ_ 1
+    13700030: Fox_FaceM2_VIS_O_OBJ_O_NOSORT_FAR_
+    13700032: Fox_FaceN_VIS_O_OBJ_
+    13700034: Fox_FaceN_VIS_O_OBJ_ 1
+    13700036: Fox_FaceNMClose_VIS_O_OBJ_
+    13700038: Fox_FaceNMClose_VIS_O_OBJ_ 1
+    13700040: Fox_FaceNMHalf_VIS_O_OBJ_
+    13700042: Fox_FaceNMHalf_VIS_O_OBJ_ 1
+    13700044: Fox_FaceNMOpen_VIS_O_OBJ_
+    13700046: Fox_FaceNMOpen_VIS_O_OBJ_ 1
+    13700048: Fox_Furafura_VIS_O_OBJ_
+    13700050: Fox_Furafura_VIS_O_OBJ_ 1
+    13700052: Fox_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    13700054: Fox_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700056: Fox_HeavyOuch_VIS_O_OBJ_
+    13700058: Fox_HeavyOuch_VIS_O_OBJ_ 1
+    13700060: Fox_HeavyOuch_VIS_O_OBJ_ 2
+    13700062: Fox_HeavyOuch_VIS_O_OBJ_ 3
+    13700064: Fox_HeavyOuch_VIS_O_OBJ__Layer_2
+    13700066: Fox_HeavyOuch_VIS_O_OBJ__Layer_2 1
+    13700068: Fox_Hot_VIS_O_OBJ_
+    13700070: Fox_Hot_VIS_O_OBJ_ 1
+    13700072: Fox_Hot_VIS_O_OBJ_ 2
+    13700074: Fox_Hot_VIS_O_OBJ_ 3
+    13700076: Fox_Hot_VIS_O_OBJ_ 4
+    13700078: Fox_Hot_VIS_O_OBJ__Layer_2
+    13700080: Fox_Hot_VIS_O_OBJ__Layer_2 1
+    13700082: Fox_Ottotto_VIS_O_OBJ_
+    13700084: Fox_Ottotto_VIS_O_OBJ_ 1
+    13700086: Fox_Ottotto_VIS_O_OBJ_ 2
+    13700088: Fox_Ottotto_VIS_O_OBJ_ 3
+    13700090: Fox_Ottotto_VIS_O_OBJ__Layer_2
+    13700092: Fox_Ottotto_VIS_O_OBJ__Layer_2 1
+    13700094: Fox_Ouch_VIS_O_OBJ_
+    13700096: Fox_Ouch_VIS_O_OBJ_ 1
+    13700098: Fox_Result_VIS_O_OBJ_
+    13700100: Fox_Result_VIS_O_OBJ_ 1
+    13700102: Fox_StepPose_VIS_O_OBJ_
+    13700104: Fox_StepPose_VIS_O_OBJ_ 1
+    13700106: Fox_Talk_VIS_O_OBJ_
+    13700108: Fox_Talk_VIS_O_OBJ_ 1
+    13700110: Fox_TalkMClose_VIS_O_OBJ_
+    13700112: Fox_TalkMClose_VIS_O_OBJ_ 1
+    13700114: Fox_TalkMHalf_VIS_O_OBJ_
+    13700116: Fox_TalkMHalf_VIS_O_OBJ_ 1
+    13700118: Fox_TalkMOpen_VIS_O_OBJ_
+    13700120: Fox_TalkMOpen_VIS_O_OBJ_ 1
+    13700122: Gamemodel_
+    13700124: Gamemodel_ 1
+    13700126: Gamemodel_ 2
+    13700128: Gamemodel_ 3
+    13700130: Gamemodel_ 4
+    13700132: scope_O_OBJ_O_HIR_O_SORTBIAS4__
+    13700134: scope_O_OBJ_O_HIR_O_SORTBIAS4__ 1
+    13700136: tail2_O_OBJ_O_SORTEACHNODE_
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -51,18 +51,18 @@ namespace Qoph
             }
         }
 
-        private static readonly DistrInfo _carpetColors = new DistrInfo("Carpet colors", "CYAN SUM",
+        private static readonly DistrInfo _carpetColors = new DistrInfo("Carpet colors", "LAMP BROS",
                 (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "LAMP", faces: new[] { 8, 11, 0, 1 }, color: 1),
                 (word: "BROS", faces: new[] { 15, 12, 16, 19 }, color: 2),
                 (word: "WDFGHJKNCYTVUXZ", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 17, 18, 6, 20, 21, 23 }, color: null));
-        private static readonly DistrInfo _cyanSums = new DistrInfo("Edge sums (cyan)", "PINK SUM",
+        private static readonly DistrInfo _smashChars = new DistrInfo("Smash Bros characters", "PINK SUM",
                 (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "GET", faces: new[] { 8, 11, 0 }, color: 1),
                 (word: "PINK", faces: new[] { 1, 15, 12, 16 }, color: 2),
                 (word: "SUM", faces: new[] { 19, 9, 4 }, color: 3),
                 (word: "ABHDJLOFRVZYX", faces: new[] { 2, 3, 5, 7, 10, 13, 14, 6, 17, 18, 20, 21, 23 }, color: null));
-        private static readonly DistrInfo _pinkSums = new DistrInfo("Vertex sums (pink)", "LYRICS NEXT WORD",
+        private static readonly DistrInfo _pinkSums = new DistrInfo("Vertex sums (pink numbers)", "LYRICS NEXT WORD",
                 (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "LYRICS", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: 1),
                 (word: "NEXT", faces: new[] { 14, 13, 5, 4 }, color: 2),
@@ -85,7 +85,7 @@ namespace Qoph
                 (word: "INDX", faces: new[] { 23, 3, 2, 17 }, color: 2),
                 (word: "FGHJKLMSUVWYZ", faces: new[] { 4, 5, 6, 7, 9, 10, 13, 14, 16, 18, 19, 20, 21 }, color: null));
 
-        private static readonly DistrInfo[] _distributions = new[] { _carpetColors, _cyanSums, _pinkSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
+        private static readonly DistrInfo[] _distributions = new[] { _carpetColors, _smashChars, _pinkSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
 
         private static readonly string[] _carpetColorNames = "WHITE,AQUA,AZURE,FUCHSIA,JADE,VIOLET,ONYX,PINK,GAMBOGE".Split(',');
 
@@ -888,7 +888,7 @@ h3 {{ font-size: 14pt; }}
             var rnd = new Random(47);
 
             var cyanClues = faceInfos
-                .SelectMany((face, faceIx) => face.Edges.Select(edge => (face1: faceIx, face2: edge.AdjacentFace, sum: getFaceValue(faceIx, _cyanSums) + getFaceValue(edge.AdjacentFace, _cyanSums))))
+                .SelectMany((face, faceIx) => face.Edges.Select(edge => (face1: faceIx, face2: edge.AdjacentFace, sum: getFaceValue(faceIx, _smashChars) + getFaceValue(edge.AdjacentFace, _smashChars))))
                 .ToArray()
                 .Shuffle(rnd);
 
