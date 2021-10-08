@@ -85,11 +85,21 @@ function makeSolutionPage(pageId, hpsml, triggers)
 									});
 							});
 							let sort = Array.from(document.getElementsByClassName(`sort-${sid}`));
+							let sortInf = sort.map(elem => [elem, elem.parentNode, elem.nextSibling]);
 							if (sort.length > 0)
 							{
+								while (true)
+								{
+									let ix = sortInf.findIndex(ar => sortInf.some(ar2 => ar2[2] !== null && ar2[0] === ar[2]));
+									if (ix === -1)
+										break;
+									sortInf[ix][2] = sortInf[sortInf.findIndex(ar2 => ar2[2] !== null && ar2[0] === sortInf[ix][2])][2];
+								}
 								sort.sort((a, b) => (a.dataset[`sort_${sid}`] | 0) - (b.dataset[`sort_${sid}`] | 0));
-								let parentNode = sort[0].parentNode;
-								parentNode.append(...sort);
+								for (let i = 0; i < sort.length; i++)
+									sort[i].parentNode.removeChild(sort[i]);
+								for (let i = 0; i < sort.length; i++)
+									sortInf[i][1].insertBefore(sort[i], sortInf[i][2]);
 							}
 							if (!revealing)
 							{

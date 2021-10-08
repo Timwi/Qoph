@@ -114,13 +114,13 @@
 		.cr:hover > .e {
 			display: block;
 		}
-		.cr.g { background: rgba(0, 0, 0, .2); padding: 1px .1cm; }
-		.cr.l { --hue:   0; }	.cr.l > .e::before { content: 'Literal: ';	}
-		.cr.a { --hue:  60; }	.cr.a > .e::before { content: 'Abbreviation: ';	}
-		.cr.s { --hue: 120; }	.cr.s > .e::before { content: 'Synonym: ';	}
+		.cr.g { background: rgba(0, 0, 0, .15); padding: 1px .1cm; }
+		.cr.l { --hue: 120; }	.cr.l > .e::before { content: 'Literal: ';	}
+		.cr.a { --hue:   0; }	.cr.a > .e::before { content: 'Abbreviation: ';	}
+		.cr.s { --hue: 240; }	.cr.s > .e::before { content: 'Synonym: ';	}
 		.cr.c { --hue: 180; }	.cr.c > .e::before { content: 'Clue for: ';	}
-		.cr.f { --hue: 240; }	.cr.f > .e::before { content: 'Fodder';	}
-		.cr.ƒ { --hue: 240; }	.cr.ƒ > .e::before { content: 'Fodder; anagram to ';	}
+		.cr.f { --hue:  60; }	.cr.f > .e::before { content: 'Fodder';	}
+		.cr.ƒ { --hue:  60; }	.cr.ƒ > .e::before { content: 'Fodder; anagram to ';	}
 		.cr.i { background: none; }	.cr.i > .e::before { content: 'Indicator: ';	}	.cr.i > .e { background: hsl(220, 20%, 50%); }
 		.cr.d { background: white; }	.cr.d > .e::before { content: 'Definition ';	}	.cr.d > .e { background: black; }
 </style>
@@ -224,7 +224,7 @@ let hpsml = `
 	<tr><th>61</th><td>[rd61 «GROCER» — @dMerchant;’s @agood=«G»; with @g@iupturned=reverse;, @g@itrimmed=remove last letter; @sarchive=«RECORD»;;;]{/d61 Merchant’s good with upturned, trimmed archive}</td></tr>
 	<tr><th>62</th><td>[rd62 «STALIN» — @dSoviet premier; @g@idealt=anagram; @ƒin salt=«STALIN»;;]{/d62 Soviet premier dealt in salt}</td></tr>
 	<tr><th>63</th><td>[rd63 «ACHED» — @g@iHalf of=take half of the word; @fappro‹ached›;; @dsuffered;]{/d63 Half of approached suffered}</td></tr>
-	<tr><th>64</th><td>[rd64 «WHALE» — @g@f‹Wha›t's; @i60%=use 3 out of 5 letters;; @g@f‹le›mur;, @i40%=use 2 out of 5 letters;; @dcetacean;]{/d64 What's 60% lemur, 40% cetacean}</td></tr>
+	<tr><th>64</th><td>[rd64 «WHALE» — @g@f‹Wha›t's; @i60%=use 3 out of 5 letters;; @g@f‹le›mur;, @i40%=use 2 out of 5 letters;; @dcetacean;]{/d64 What’s 60% lemur, 40% cetacean}</td></tr>
 	<tr><th>65</th><td>[rd65 «LOVER» — @dFan; @aleft=«L»; @lover;]{/d65 Fan left over}</td></tr>
 	<tr><th>67</th><td>[rd67 «TRACK» — @dChase; @atownship=«T»; @ssupport=«RACK»;]{/d67 Chase township support}</td></tr>
 	<tr><th>68</th><td>[rd68 «INNER» — @dCerebral; @g@schampion=«WINNER»; @ineeding no introduction=remove first letter;;]{/d68 Cerebral champion needing no introduction}</td></tr>

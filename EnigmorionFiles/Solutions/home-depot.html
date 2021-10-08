@@ -89,7 +89,7 @@ makeSolutionPage('home depot', `
 	<tr class='ih r-p4'>	<td class='ih r-p9'>@R13TENNIS RACKET△</td>	<td class='ih r-p4'>@R4WINDOW SHUTTER▷</td>	<td class='ih r-p4'>@O5PAINT REMOVER△</td>	<td class='ih r-p7'>@R12TRAILER-HITCH DEMAGNETIZER◁</td></tr>
 </table>
 </div>
-{-p15 <p>The path ends up forming a perfect 4×4 square, just like the one given in the puzzle. The one in the puzzle has [o numbers in it, which [c indicates that we should count that many letters into each word and take the letter at that position. [rf]]]</p>}
+{-p15 <p>The path ends up forming a perfect 4×4 square, just like the one given in the puzzle. The one in the puzzle has [o numbers in it, which indicates [c that we should count that many letters into each word and take the letter at that position. [rf]]]</p>}
 {-f <div class='answer'>SIDE MIRROR</div>}
 `
 	.replace(/@([A-Z])(\d+)([^△▷▽◁]*)([△▷▽◁])/g, (_, r, c, o, t) => `{-p${c} <div class='lw'>${o}</div><div class='dir'>${t} [rp${(c|0)+1}]</div>}{-f «${r}»}`)

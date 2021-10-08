@@ -1,0 +1,138 @@
+<style>
+	table.clues {
+		width: 100%;
+	}
+	table.clues td.full {
+		font-family: 'Agency FB';
+		font-size: 12pt;
+	}
+	table.clues td:not(.full) {
+		white-space: nowrap;
+	}
+
+    em.first {
+        text-decoration: underline;
+        font-style: normal;
+    }
+
+	.cr {
+		font-family: 'Book Antiqua', serif;
+		font-size: 12pt;
+		display: inline-block;
+		position: relative;
+		background: hsl(var(--hue), 80%, 90%);
+		padding: 0 .1cm;
+		cursor: default;
+	}
+		.cr > .e {
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			bottom: 120%;
+			display: none;
+			white-space: nowrap;
+			background: hsl(var(--hue), 80%, 30%);
+			padding: .05cm .15cm;
+			font-size: 10pt;
+			box-shadow: 0 0 .1cm rgba(0, 0, 0, .5);
+			color: white;
+			z-index: 1;
+		}
+		.cr:hover > .e:not(:hover) {
+			display: block;
+		}
+		.cr.g { background: rgba(0, 0, 0, .15); padding: 1px .1cm; }
+		.cr.l { --hue: 120; }	.cr.l > .e::before { content: 'Literal: ';	}
+		.cr.a { --hue:   0; }	.cr.a > .e::before { content: 'Abbreviation: ';	}
+		.cr.s { --hue: 240; }	.cr.s > .e::before { content: 'Synonym: ';	}
+		.cr.c { --hue: 180; }	.cr.c > .e::before { content: 'Clue for: ';	}
+		.cr.f { --hue:  60; }	.cr.f > .e::before { content: 'Fodder';	}
+		.cr.ƒ { --hue:  60; }	.cr.ƒ > .e::before { content: 'Fodder; anagram to ';	}
+		.cr.i { background: none; }	.cr.i > .e::before { content: 'Indicator: ';	}	.cr.i > .e { background: hsl(220, 20%, 50%); }
+		.cr.d { background: white; }	.cr.d > .e::before { content: 'Definition ';	}	.cr.d > .e { background: black; }
+
+	th.r-e {
+		font-size: 10pt;
+		white-space: nowrap;
+	}
+
+	.nutri {
+		font-family: 'Agency FB';
+		font-size: 10pt;
+	}
+	.hint {
+		margin-left: 2cm;
+		margin-right: 2cm;
+	}
+	.sort-g.re-i .h {
+		background: #ff0;
+		padding: 0 .05cm;
+	}
+</style>
+<script src='../../files/solutions.js'></script>
+<h1>Calling Cards</h1>
+<script>
+let hpsml = `
+<p class='flavour-text'>(Please don’t actually call any of the phone numbers in this puzzle.)</p>
+<p>Each of the 10 cards contains [oa some italicized text which looks like clues. [sb Some of them are guessable or googlable (or thesaurusable?).]]</p>
+{-a
+{-b <p>With some clues filled in, we notice that [d they all have 7 letters, which is confirmed by the number of question marks in the phone numbers, and that [d they are in alphabetical order. With this restriction, [sc we can fill in a few more.]]]</p>}
+{-c <p>But there’s more! [o The strange clues at the bottom of the puzzle (which look like tear-off slips) sound like [d wordplay parts of cryptic clues, and there are [o 10 of them, which suggests [c that they go with the clues (of which there are also 10). This insight allows us to deduce all of the words. [rd]]]]]</p>}
+{-d <p>We now turn our attention to this text:</p>
+<p class='hint'>Are you getting calls that are meant for someone else? Has <em>your phone number</em> been linked to another business? Call 561-555-2321 now to have the business number that should have been yours reassigned to you.</p>
+<p>This, along with the fact that our 7-letter answers correspond to phone numbers with question marks, clues the key recipe in this puzzle. [d We need to spell the words on a phone keypad, and then find other 7-letter words that would spell the same phone numbers as our answers. [se <a href='https://nutrimatic.org/'>Nutrimatic</a> is perfect for finding these words. If you’re unsure how letters map to phone numbers, you can search for <cite>phone keypad</cite> or <cite>phone letters</cite> on Google Images. [rf]]]</p>
+}
+{-f <p>Each of the new words we found [o relates to one of the other businesses described on the other cards. [d These are likely the phone numbers that the hint says “should have been yours”. [sg Let’s reassign them.]]]</p>}
+{-g <p>Since our original answers are still in alphabetical order, [c we need to reorder them. Luckily, [o one of the cards has the word “first” underlined, so we know what comes first. Furthermore, the matching phone numbers [s allow us to form a chain. There are actually several ways to form a chain, but the hint tells us which is correct: [dh The next link in the chain is based on the phone number that came from the <em>italicized clues</em>.]]]]}
+{-h <p>Finally, the hint contains [o a 10-digit number, which indicates [c that we should count that many letters into each word and take the letter at that position. The hint implies [d that we should use the reassigned word. [ri]]]]</p>}
+
+<table class='bordered clues'>
+ 	<tr><th>Full text	</th><th>Clue<br>Answer{d  + cryptic wordplay}		</th><th class='ih r-e'>Phone number<br>Nutrimatic query{f <br>Other word}	</th><th class='ih r-i'>Letter	</th></tr>
+ 	<tr class='sort-h' data-sort_h='4'>△A	<td><div>Thick wiring	</div>{/d «?»}{d «CABLING»}{d  = ▽A}{-e «2225464»}	</td><td class='ih r-e r-i sort-g' data-sort_g='3'>«2225464»▲[abc][abc][abc][jkl][ghi][mno][ghi]▼{-f «BACK‹I›NG»}	</td><td class='ih r-i'>5 = «T»	</td></tr>
+ 	<tr class='sort-h' data-sort_h='1'>△B	<td><div>Room	</div>{/b «?»}{b «CHAMBER»}{d  = ▽B}{-e «2426237»}	</td><td class='ih r-e r-i sort-g' data-sort_g='2'>«2426237»▲[abc][ghi][abc][mno][abc][def][pqrs]▼{-f «‹C›HANCES»}	</td><td class='ih r-i'>6 = «O»	</td></tr>
+ 	<tr class='sort-h' data-sort_h='2'>△C	<td><div>Mendable	</div>{/c «?»}{c «CURABLE»}{d  = ▽C}{-e «2872253»}	</td><td class='ih r-e r-i sort-g' data-sort_g='9'>«2872253»▲[abc][tuv][pqrs][abc][abc][jkl][def]▼{-f «CUPC‹A›KE»}	</td><td class='ih r-i'>1 = «C»	</td></tr>
+ 	<tr class='sort-h' data-sort_h='5'>△J	<td><div>Trespasser	</div>{/d «?»}{d «INVADER»}{d  = ▽D}{-e «4682337»}	</td><td class='ih r-e r-i sort-g' data-sort_g='8'>«4682337»▲[ghi][mno][tuv][abc][def][def][pqrs]▼{-f «H‹O›TBEDS»}	</td><td class='ih r-i'>5 = «I»	</td></tr>
+ 	<tr class='sort-h' data-sort_h='8'>△D	<td><div>Out of work	</div>{/c «?»}{c «JOBLESS»}{d  = ▽E}{-e «5625377»}	</td><td class='ih r-e r-i sort-g' data-sort_g='6'>«5625377»▲[jkl][mno][abc][jkl][def][pqrs][pqrs]▼{-f «‹L›OCKERS»}	</td><td class='ih r-i'>2 = «A»	</td></tr>
+ 	<tr class='sort-h' data-sort_h='0'>△E	<td><div>Ingredients such as Iceland moss	</div>{/b «?»}{b «LICHENS»}{d  = ▽F}{-e «5424367»}	</td><td class='ih r-e r-i sort-g' data-sort_g='1'>«5424367»▲[jkl][ghi][abc][ghi][def][mno][pqrs]▼{-f «LIBID‹O›S»}	</td><td class='ih r-i'>5 = «V»	</td></tr>
+ 	<tr class='sort-h' data-sort_h='9'>△F	<td><div>25%	</div>{/b «?»}{b «QUARTER»}{d  = ▽G}{-e «7827837»}	</td><td class='ih r-e r-i sort-g' data-sort_g='5'>«7827837»▲[pqrs][tuv][abc][pqrs][tuv][def][pqrs]▼{-f «STAR‹V›ES»}	</td><td class='ih r-i'>1 = «L»	</td></tr>
+ 	<tr class='sort-h' data-sort_h='7'>△G	<td><div>Ascent to heaven	</div>{/d «?»}{d «RAPTURE»}{d  = ▽H}{-e «7278873»}	</td><td class='ih r-e r-i sort-g' data-sort_g='4'>«7278873»▲[pqrs][abc][pqrs][tuv][tuv][pqrs][def]▼{-f «P‹A›STURE»}	</td><td class='ih r-i'>3 = «N»	</td></tr>
+ 	<tr class='sort-h' data-sort_h='6'>△H	<td><div>Calmed and relaxed	</div>{/b «?»}{b «SOOTHED»}{d  = ▽I}{-e «7668433»}	</td><td class='ih r-e r-i sort-g' data-sort_g='7'>«7668433»▲[pqrs][mno][mno][tuv][ghi][def][def]▼{-f «PO‹N›TIFF»}	</td><td class='ih r-i'>2 = «O»	</td></tr>
+ 	<tr class='sort-h' data-sort_h='3'>△I	<td><div>Given nice candy and desserts	</div>{/d «?»}{d «TREATED»}{d  = ▽J}{-e «8732833»}	</td><td class='ih r-e r-i sort-g' data-sort_g='0'>«8732833»▲[tuv][pqrs][def][abc][tuv][def][def]▼{-f «UPDA‹T›ED»}	</td><td class='ih r-i'>5 = «A»	</td></tr>
+</table>
+{-i <div class='answer'>VOCATIONAL</div>}
+}
+`
+	.replace('△A', '<td class="full">If you need help fixing old versions of software, putting in new electronic devices, or reconnecting <em>thick wiring</em>, our technicians will be right over: call us at 1-800-???-????.</td>')
+	.replace('△B', '<td class="full">Feeling “lonely”? Call 1-800-???-???? to book a “session” with one of our ladies in a private <em>room</em>.</td>')
+	.replace('△C', '<td class="full">Having trouble with gambling addiction? Feel like the odds are stacked against you? This situation is <em>mendable</em>! Just call 1-800-???-????.</td>')
+	.replace('△D', '<td class="full">Join the team on our dairy farm and make a difference! There is always something to do, so you will never find yourself <em>out of work</em>. Call 1-800-???-???? to arrange an interview.</td>')
+	.replace('△E', '<td class="full">Our charity works in Africa to provide for the most unfortunate on our planet. Our <em class="first">first</em> priority is to use healthy but cheap <em>ingredients such as Iceland moss</em> to help alleviate malnourishment. Call us now at 1-800-???-???? and donate generously.</td>')
+	.replace('△F', '<td class="full">Did you know that <em>25%</em> of storage compartments can be picked even by amateurs? Don’t rely on insecure equipment and call 1-800-???-???? for our range of quality safes and strongboxes.</td>')
+	.replace('△G', '<td class="full">Papal absolution can now be granted over the phone, for a small fee! If you’re worried about your <em>ascent to heaven</em>, call 1-800-???-???? and have your credit card ready: you’ll be sinless in no time!</td>')
+	.replace('△H', '<td class="full">Are the weeds in your greenhouse growing out of control? Call us at 1-800-???-???? and have your flora naturally <em>calmed and relaxed</em>.</td>')
+	.replace('△I', '<td class="full">Stop by Pinkie’s Pastries whenever you want to be <em>given nice candy and desserts</em>! To order, just call 1-800-???-????.</td>')
+	.replace('△J', '<td class="full">Is your wall damaged from a home break-in by a <em>trespasser</em>? If your house needs stronger construction support, call 1-800-???-????.	</td>')
+	.replace('▽A', '@sTaxi=«CAB»; @g@srow=«LINE»; @inearly=remove last letter;; @g@fgone; @ifirst=take first letter;;')
+	.replace('▽B', '@aSwiss=«CH»; @cfossil resin=«AMBER»;')
+	.replace('▽C', '@g@iWeird=anagram; @ƒblue car=«CURABLE»;;')
+	.replace('▽D', '@sHeld by=«IN»; @cStar Wars character=«VADER»;')
+	.replace('▽E', '@g@iNearly=remove last letter;-@srun=«JOG»;; @spraise=«BLESS»;')
+	.replace('▽F', '@g@g@iArranged=anagram; @ƒclients’=«LICTENS»;; @g@atime=«T»; @iis=replace «T» with «H»; @ahigh=«H»;;;')
+	.replace('▽G', '@g@g@cMineral=«QUARTZ»; @itrimmed=remove last letter;; @iwith=place «ER» after «QUART»; @aerbium=«ER» (periodic table symbol);;')
+	.replace('▽H', '@g@iStrange=anagram; @ƒPeru art=«RAPTURE»;;')
+	.replace('▽I', '@g@g@sAlso=«TOO»; @ibacked=reverse;; @iwithin=insert «OOT» into «SHED»; @stoolhouse=«SHED»;;')
+	.replace('▽J', '@aTroy=«T» (weight units); @g@sresponded=«REACTED»; @iwithout=remove; @acharm=«C» (in physics);;')
+	.replace(/▲(.*?)▼/g, (_, m) => `<div class='nutri'>${m.replace(/\[/g, '&#x5B;').replace(/\]/g, '&#x5D;')}</div>`);
+
+let any = true;
+while (any)
+{
+	any = false;
+	hpsml = hpsml.replace(/@(.)((?:[^@;=]|=')*)(?:=(?!')([^@;]*))?;/g, (_, type, frag, expl) => {
+		any = true;
+		return `<span class='cr ${type}'>${frag}${type !== 'g' ? `<span class='e'>${expl || (type === 'l' ? `«${frag.toUpperCase().replace(/[^A-Z]/g, '')}»` : '')}</span>` : ''}</span>`;
+	});
+}
+
+makeSolutionPage('calling-cards', hpsml);
+</script>
