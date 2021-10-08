@@ -1,0 +1,297 @@
+<style>
+    table.t-o-c {
+        border-collapse: collapse;
+        margin: 1cm auto;
+        background: white;
+        border: 5px solid black;
+    }
+        table.t-o-c td {
+            width: 1cm;
+            height: 1cm;
+            border: 1px solid black;
+            vertical-align: top;
+            font-size: 11pt;
+            font-family: 'Book Antiqua', serif;
+            padding: .05cm .1cm;
+        }
+        table.t-o-c td.l { border-left: 5px solid black; }
+        table.t-o-c td.t { border-top:  5px solid black; }
+
+		table.t-o-c td > div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+			position: relative;
+		}
+		table.t-o-c td .ltr {
+			font-size: 18pt;
+			position: relative;
+			top: 2px;
+		}
+			table.t-o-c td.re .ltr {
+				visibility: visible;
+			}
+		table.t-o-c td .num {
+			font-size: 8pt;
+			position: absolute;
+			top: -2px;
+			left: -2px;
+		}
+
+		table.t-o-c.re-k td.re-d1,
+		table.t-o-c.re-k td.re-d24,
+		table.t-o-c.re-k td.re-d30,
+		table.t-o-c.re-k td.re-d31,
+		table.t-o-c.re-k td.re-d26,
+		table.t-o-c.re-k td.re-d40,
+		table.t-o-c.re-k td.re-d34,
+		table.t-o-c.re-k td.re-d54,
+		table.t-o-c.re-k td.re-d55,
+		table.t-o-c.re-k td.re-d63,
+		table.t-o-c.re-k td.re-d59,
+		table.t-o-c.re-k td.re-d70,
+		table.t-o-c.re-k td.re-d65,
+		table.t-o-c.re-k td.re-d78,
+		table.t-o-c.re-k td.re-a23,
+		table.t-o-c.re-k td.re-a35,
+		table.t-o-c.re-k td.re-a51,
+		table.t-o-c.re-k td.re-a26,
+		table.t-o-c.re-k td.re-a39,
+		table.t-o-c.re-k td.re-a47,
+		table.t-o-c.re-k td.re-a54,
+		table.t-o-c.re-k td.re-a63,
+		table.t-o-c.re-k td.re-a73,
+		table.t-o-c.re-k td.re-a88,
+		table.t-o-c.re-k td.re-a59,
+		table.t-o-c.re-k td.re-a69,
+		table.t-o-c.re-k td.re-a82,
+		table.t-o-c.re-k td.re-a65,
+		table.t-o-c.re-k td.re-a76,
+		table.t-o-c.re-k td.re-a91
+		{
+			background: hsl(220, 80%, 85%);
+		}
+		.re-h table.clues tr.re-d1 td,
+		.re-h table.clues tr.re-d24 td,
+		.re-h table.clues tr.re-d30 td,
+		.re-h table.clues tr.re-d31 td,
+		.re-h table.clues tr.re-d26 td,
+		.re-h table.clues tr.re-d40 td,
+		.re-h table.clues tr.re-d34 td,
+		.re-h table.clues tr.re-d54 td,
+		.re-h table.clues tr.re-d55 td,
+		.re-h table.clues tr.re-d63 td,
+		.re-h table.clues tr.re-d59 td,
+		.re-h table.clues tr.re-d70 td,
+		.re-h table.clues tr.re-d65 td,
+		.re-h table.clues tr.re-d78 td,
+		.re-h table.clues tr.re-a23 td,
+		.re-h table.clues tr.re-a35 td,
+		.re-h table.clues tr.re-a51 td,
+		.re-h table.clues tr.re-a26 td,
+		.re-h table.clues tr.re-a39 td,
+		.re-h table.clues tr.re-a47 td,
+		.re-h table.clues tr.re-a54 td,
+		.re-h table.clues tr.re-a63 td,
+		.re-h table.clues tr.re-a73 td,
+		.re-h table.clues tr.re-a88 td,
+		.re-h table.clues tr.re-a59 td,
+		.re-h table.clues tr.re-a69 td,
+		.re-h table.clues tr.re-a82 td,
+		.re-h table.clues tr.re-a65 td,
+		.re-h table.clues tr.re-a76 td,
+		.re-h table.clues tr.re-a91 td
+		{
+			background: hsl(220, 60%, 80%);
+		}
+
+	.clue-lists {
+		display: flex;
+	}
+
+    .clues {
+        border-collapse: collapse;
+        font-family: 'Book Antiqua', serif;
+    }
+        .clues th {
+            text-align: right;
+            padding-right: .25cm;
+        }
+        .clues caption {
+            text-align: left;
+            font-size: 24pt;
+            margin: .5cm 0;
+        }
+</style>
+<script src='../../files/solutions.js'></script>
+<h1><em>Totally</em> Ordinary Crossword</h1>
+<script>
+makeSolutionPage('totally-ordinary-crossword', `
+<p>This crossword can <em>totally</em> be filled in just like any other, except that [rh every once in a while, a clue is just factually wrong or clues the opposite of what’s in the grid.]</p>
+{-h <p>The false clues, when [sk highlighted in the grid, spell out the answer.]</p>}
+<table class="t-o-c r-k"><tbody><tr><td class="r-a1 r-d1"><div><div class="num">1</div><div class="ltr">R</div></div></td><td class="r-a1 r-d2"><div><div class="num">2</div><div class="ltr">E</div></div></td><td class="r-a1 r-d3"><div><div class="num">3</div><div class="ltr">B</div></div></td><td class="r-a1 r-d4"><div><div class="num">4</div><div class="ltr">I</div></div></td><td class="r-a1 r-d5"><div><div class="num">5</div><div class="ltr">R</div></div></td><td class="r-a1 r-d6"><div><div class="num">6</div><div class="ltr">T</div></div></td><td class="r-a1 r-d7"><div><div class="num">7</div><div class="ltr">H</div></div></td><td class="l r-a8 r-d8"><div><div class="num">8</div><div class="ltr">R</div></div></td><td class="r-a8 r-d9"><div><div class="num">9</div><div class="ltr">E</div></div></td><td class="r-a8 r-d10"><div><div class="num">10</div><div class="ltr">H</div></div></td><td class="r-a8 r-d11"><div><div class="num">11</div><div class="ltr">A</div></div></td><td class="r-a8 r-d12"><div><div class="num">12</div><div class="ltr">B</div></div></td><td class="l r-a13 r-d13"><div><div class="num">13</div><div class="ltr">I</div></div></td><td class="r-a13 r-d14"><div><div class="num">14</div><div class="ltr">T</div></div></td><td class="r-a13 r-d15"><div><div class="num">15</div><div class="ltr">V</div></div></td></tr><tr><td class="r-a16 r-d1"><div><div class="num">16</div><div class="ltr">E</div></div></td><td class="r-a16 r-d2"><div><div class="ltr">V</div></div></td><td class="r-a16 r-d3"><div><div class="ltr">A</div></div></td><td class="r-a16 r-d4"><div><div class="ltr">D</div></div></td><td class="r-a16 r-d5"><div><div class="ltr">E</div></div></td><td class="l r-a17 r-d6"><div><div class="num">17</div><div class="ltr">H</div></div></td><td class="r-a17 r-d7"><div><div class="ltr">I</div></div></td><td class="r-a17 r-d8"><div><div class="ltr">A</div></div></td><td class="l r-a18 r-d9"><div><div class="num">18</div><div class="ltr">G</div></div></td><td class="r-a18 r-d10"><div><div class="ltr">E</div></div></td><td class="r-a18 r-d11"><div><div class="ltr">R</div></div></td><td class="r-a18 r-d12"><div><div class="ltr">E</div></div></td><td class="l r-a19 r-d13"><div><div class="num">19</div><div class="ltr">P</div></div></td><td class="r-a19 r-d14"><div><div class="ltr">O</div></div></td><td class="r-a19 r-d15"><div><div class="ltr">E</div></div></td></tr><tr><td class="r-a20 r-d1"><div><div class="num">20</div><div class="ltr">V</div></div></td><td class="r-a20 r-d2"><div><div class="ltr">E</div></div></td><td class="r-a20 r-d3"><div><div class="ltr">A</div></div></td><td class="r-a20 r-d4"><div><div class="ltr">L</div></div></td><td class="l r-a21 r-d5"><div><div class="num">21</div><div class="ltr">C</div></div></td><td class="r-a21 r-d6"><div><div class="ltr">O</div></div></td><td class="r-a21 r-d7"><div><div class="ltr">N</div></div></td><td class="r-a21 r-d8"><div><div class="ltr">T</div></div></td><td class="l r-a22 r-d9"><div><div class="num">22</div><div class="ltr">O</div></div></td><td class="r-a22 r-d10"><div><div class="ltr">R</div></div></td><td class="r-a22 r-d11"><div><div class="ltr">I</div></div></td><td class="r-a22 r-d12"><div><div class="ltr">G</div></div></td><td class="r-a22 r-d13"><div><div class="ltr">A</div></div></td><td class="r-a22 r-d14"><div><div class="ltr">M</div></div></td><td class="r-a22 r-d15"><div><div class="ltr">I</div></div></td></tr><tr><td class="r-a23 r-d1"><div><div class="num">23</div><div class="ltr">A</div></div></td><td class="r-a23 r-d2"><div><div class="ltr">S</div></div></td><td class="t r-a23 r-d24"><div><div class="num">24</div><div class="ltr">S</div></div></td><td class="l r-a25 r-d4"><div><div class="num">25</div><div class="ltr">E</div></div></td><td class="r-a25 r-d5"><div><div class="ltr">T</div></div></td><td class="r-a25 r-d6"><div><div class="ltr">U</div></div></td><td class="r-a25 r-d7"><div><div class="ltr">D</div></div></td><td class="r-a25 r-d8"><div><div class="ltr">E</div></div></td><td class="r-a25 r-d9"><div><div class="ltr">S</div></div></td><td class="t l r-a26 r-d26"><div><div class="num">26</div><div class="ltr">T</div></div></td><td class="r-a26 r-d11"><div><div class="ltr">A</div></div></td><td class="r-a26 r-d12"><div><div class="ltr">U</div></div></td><td class="l t r-a27 r-d27"><div><div class="num">27</div><div class="ltr">T</div></div></td><td class="r-a27 r-d14"><div><div class="ltr">E</div></div></td><td class="r-a27 r-d15"><div><div class="ltr">L</div></div></td></tr><tr><td class="r-a28 r-d1"><div><div class="num">28</div><div class="ltr">M</div></div></td><td class="t r-a28 r-d29"><div><div class="num">29</div><div class="ltr">A</div></div></td><td class="r-a28 r-d24"><div><div class="ltr">N</div></div></td><td class="r-a28 r-d4"><div><div class="ltr">D</div></div></td><td class="r-a28 r-d5"><div><div class="ltr">A</div></div></td><td class="t r-a28 r-d30"><div><div class="num">30</div><div class="ltr">R</div></div></td><td class="r-a28 r-d7"><div><div class="ltr">I</div></div></td><td class="t r-a28 r-d31"><div><div class="num">31</div><div class="ltr">N</div></div></td><td class="t r-a28 r-d32"><div><div class="num">32</div><div class="ltr">C</div></div></td><td class="r-a28 r-d26"><div><div class="ltr">H</div></div></td><td class="t r-a28 r-d33"><div><div class="num">33</div><div class="ltr">I</div></div></td><td class="r-a28 r-d12"><div><div class="ltr">N</div></div></td><td class="r-a28 r-d27"><div><div class="ltr">E</div></div></td><td class="t r-a28 r-d34"><div><div class="num">34</div><div class="ltr">S</div></div></td><td class="r-a28 r-d15"><div><div class="ltr">E</div></div></td></tr><tr><td class="r-a35 r-d1"><div><div class="num">35</div><div class="ltr">P</div></div></td><td class="r-a35 r-d29"><div><div class="ltr">U</div></div></td><td class="r-a35 r-d24"><div><div class="ltr">P</div></div></td><td class="l t r-a36 r-d36"><div><div class="num">36</div><div class="ltr">C</div></div></td><td class="t r-a36 r-d37"><div><div class="num">37</div><div class="ltr">R</div></div></td><td class="r-a36 r-d30"><div><div class="ltr">I</div></div></td><td class="t r-a36 r-d38"><div><div class="num">38</div><div class="ltr">M</div></div></td><td class="r-a36 r-d31"><div><div class="ltr">E</div></div></td><td class="r-a36 r-d32"><div><div class="ltr">A</div></div></td><td class="l r-a39 r-d26"><div><div class="num">39</div><div class="ltr">E</div></div></td><td class="r-a39 r-d33"><div><div class="ltr">N</div></div></td><td class="t r-a39 r-d40"><div><div class="num">40</div><div class="ltr">D</div></div></td><td class="l r-a41 r-d27"><div><div class="num">41</div><div class="ltr">Q</div></div></td><td class="r-a41 r-d34"><div><div class="ltr">E</div></div></td><td class="r-a41 r-d15"><div><div class="ltr">D</div></div></td></tr><tr><td class="t r-a42 r-d42"><div><div class="num">42</div><div class="ltr">A</div></div></td><td class="r-a42 r-d29"><div><div class="ltr">D</div></div></td><td class="t r-a42 r-d43"><div><div class="num">43</div><div class="ltr">I</div></div></td><td class="r-a42 r-d36"><div><div class="ltr">E</div></div></td><td class="r-a42 r-d37"><div><div class="ltr">U</div></div></td><td class="l r-a44 r-d30"><div><div class="num">44</div><div class="ltr">G</div></div></td><td class="r-a44 r-d38"><div><div class="ltr">R</div></div></td><td class="r-a44 r-d31"><div><div class="ltr">A</div></div></td><td class="r-a44 r-d32"><div><div class="ltr">P</div></div></td><td class="t r-a44 r-d45"><div><div class="num">45</div><div class="ltr">E</div></div></td><td class="r-a44 r-d33"><div><div class="ltr">F</div></div></td><td class="r-a44 r-d40"><div><div class="ltr">R</div></div></td><td class="r-a44 r-d27"><div><div class="ltr">U</div></div></td><td class="r-a44 r-d34"><div><div class="ltr">I</div></div></td><td class="r-a44 r-d15"><div><div class="ltr">T</div></div></td></tr><tr><td class="r-a46 r-d42"><div><div class="num">46</div><div class="ltr">K</div></div></td><td class="r-a46 r-d29"><div><div class="ltr">I</div></div></td><td class="r-a46 r-d43"><div><div class="ltr">L</div></div></td><td class="r-a46 r-d36"><div><div class="ltr">O</div></div></td><td class="r-a46 r-d37"><div><div class="ltr">M</div></div></td><td class="r-a46 r-d30"><div><div class="ltr">E</div></div></td><td class="r-a46 r-d38"><div><div class="ltr">T</div></div></td><td class="r-a46 r-d31"><div><div class="ltr">R</div></div></td><td class="r-a46 r-d32"><div><div class="ltr">E</div></div></td><td class="l r-a47 r-d45"><div><div class="num">47</div><div class="ltr">D</div></div></td><td class="r-a47 r-d33"><div><div class="ltr">I</div></div></td><td class="r-a47 r-d40"><div><div class="ltr">Y</div></div></td><td class="l r-a48 r-d27"><div><div class="num">48</div><div class="ltr">I</div></div></td><td class="r-a48 r-d34"><div><div class="ltr">N</div></div></td><td class="r-a48 r-d15"><div><div class="ltr">H</div></div></td></tr><tr><td class="r-a49 r-d42"><div><div class="num">49</div><div class="ltr">A</div></div></td><td class="r-a49 r-d29"><div><div class="ltr">B</div></div></td><td class="r-a49 r-d43"><div><div class="ltr">E</div></div></td><td class="t r-a49 r-d50"><div><div class="num">50</div><div class="ltr">A</div></div></td><td class="r-a49 r-d37"><div><div class="ltr">M</div></div></td><td class="l r-a51 r-d30"><div><div class="num">51</div><div class="ltr">L</div></div></td><td class="r-a51 r-d38"><div><div class="ltr">E</div></div></td><td class="r-a51 r-d31"><div><div class="ltr">S</div></div></td><td class="l r-a52 r-d32"><div><div class="num">52</div><div class="ltr">R</div></div></td><td class="r-a52 r-d45"><div><div class="ltr">I</div></div></td><td class="r-a52 r-d33"><div><div class="ltr">D</div></div></td><td class="t r-a52 r-d53"><div><div class="num">53</div><div class="ltr">D</div></div></td><td class="r-a52 r-d27"><div><div class="ltr">L</div></div></td><td class="r-a52 r-d34"><div><div class="ltr">E</div></div></td><td class="r-a52 r-d15"><div><div class="ltr">R</div></div></td></tr><tr><td class="t r-a54 r-d54"><div><div class="num">54</div><div class="ltr">E</div></div></td><td class="r-a54 r-d29"><div><div class="ltr">L</div></div></td><td class="t r-a54 r-d55"><div><div class="num">55</div><div class="ltr">S</div></div></td><td class="l r-a56 r-d50"><div><div class="num">56</div><div class="ltr">H</div></div></td><td class="r-a56 r-d37"><div><div class="ltr">Y</div></div></td><td class="t r-a56 r-d57"><div><div class="num">57</div><div class="ltr">D</div></div></td><td class="r-a56 r-d38"><div><div class="ltr">R</div></div></td><td class="t r-a56 r-d58"><div><div class="num">58</div><div class="ltr">A</div></div></td><td class="l t r-a59 r-d59"><div><div class="num">59</div><div class="ltr">O</div></div></td><td class="r-a59 r-d45"><div><div class="ltr">N</div></div></td><td class="r-a59 r-d33"><div><div class="ltr">E</div></div></td><td class="l r-a60 r-d53"><div><div class="num">60</div><div class="ltr">E</div></div></td><td class="r-a60 r-d27"><div><div class="ltr">A</div></div></td><td class="t r-a60 r-d61"><div><div class="num">61</div><div class="ltr">S</div></div></td><td class="r-a60 r-d15"><div><div class="ltr">E</div></div></td></tr><tr><td class="r-a62 r-d54"><div><div class="num">62</div><div class="ltr">M</div></div></td><td class="r-a62 r-d29"><div><div class="ltr">E</div></div></td><td class="r-a62 r-d55"><div><div class="ltr">T</div></div></td><td class="r-a62 r-d50"><div><div class="ltr">A</div></div></td><td class="l t r-a63 r-d63"><div><div class="num">63</div><div class="ltr">E</div></div></td><td class="r-a63 r-d57"><div><div class="ltr">R</div></div></td><td class="r-a63 r-d38"><div><div class="ltr">R</div></div></td><td class="l r-a64 r-d58"><div><div class="num">64</div><div class="ltr">C</div></div></td><td class="r-a64 r-d59"><div><div class="ltr">A</div></div></td><td class="r-a64 r-d45"><div><div class="ltr">B</div></div></td><td class="r-a64 r-d33"><div><div class="ltr">L</div></div></td><td class="r-a64 r-d53"><div><div class="ltr">E</div></div></td><td class="l t r-a65 r-d65"><div><div class="num">65</div><div class="ltr">T</div></div></td><td class="r-a65 r-d61"><div><div class="ltr">E</div></div></td><td class="r-a65 r-d15"><div><div class="ltr">A</div></div></td></tr><tr><td class="r-a66 r-d54"><div><div class="num">66</div><div class="ltr">P</div></div></td><td class="t r-a66 r-d67"><div><div class="num">67</div><div class="ltr">O</div></div></td><td class="r-a66 r-d55"><div><div class="ltr">R</div></div></td><td class="t r-a66 r-d68"><div><div class="num">68</div><div class="ltr">T</div></div></td><td class="r-a66 r-d63"><div><div class="ltr">R</div></div></td><td class="r-a66 r-d57"><div><div class="ltr">A</div></div></td><td class="r-a66 r-d38"><div><div class="ltr">I</div></div></td><td class="r-a66 r-d58"><div><div class="ltr">T</div></div></td><td class="l r-a69 r-d59"><div><div class="num">69</div><div class="ltr">T</div></div></td><td class="r-a69 r-d45"><div><div class="ltr">U</div></div></td><td class="t r-a69 r-d70"><div><div class="num">70</div><div class="ltr">X</div></div></td><td class="l r-a71 r-d53"><div><div class="num">71</div><div class="ltr">P</div></div></td><td class="r-a71 r-d65"><div><div class="ltr">A</div></div></td><td class="r-a71 r-d61"><div><div class="ltr">C</div></div></td><td class="r-a71 r-d15"><div><div class="ltr">T</div></div></td></tr><tr><td class="r-a72 r-d54"><div><div class="num">72</div><div class="ltr">T</div></div></td><td class="r-a72 r-d67"><div><div class="ltr">B</div></div></td><td class="r-a72 r-d55"><div><div class="ltr">A</div></div></td><td class="r-a72 r-d68"><div><div class="ltr">R</div></div></td><td class="l r-a73 r-d63"><div><div class="num">73</div><div class="ltr">O</div></div></td><td class="r-a73 r-d57"><div><div class="ltr">F</div></div></td><td class="r-a73 r-d38"><div><div class="ltr">F</div></div></td><td class="l r-a74 r-d58"><div><div class="num">74</div><div class="ltr">S</div></div></td><td class="t r-a74 r-d75"><div><div class="num">75</div><div class="ltr">E</div></div></td><td class="r-a74 r-d45"><div><div class="ltr">R</div></div></td><td class="r-a74 r-d70"><div><div class="ltr">I</div></div></td><td class="r-a74 r-d53"><div><div class="ltr">F</div></div></td><td class="l r-a76 r-d65"><div><div class="num">76</div><div class="ltr">N</div></div></td><td class="t r-a76 r-d77"><div><div class="num">77</div><div class="ltr">O</div></div></td><td class="t r-a76 r-d78"><div><div class="num">78</div><div class="ltr">R</div></div></td></tr><tr><td class="r-a79 r-d54"><div><div class="num">79</div><div class="ltr">Y</div></div></td><td class="r-a79 r-d67"><div><div class="ltr">A</div></div></td><td class="r-a79 r-d55"><div><div class="ltr">W</div></div></td><td class="r-a79 r-d68"><div><div class="ltr">E</div></div></td><td class="r-a79 r-d63"><div><div class="ltr">D</div></div></td><td class="l r-a80 r-d57"><div><div class="num">80</div><div class="ltr">T</div></div></td><td class="r-a80 r-d38"><div><div class="ltr">I</div></div></td><td class="t r-a80 r-d81"><div><div class="num">81</div><div class="ltr">P</div></div></td><td class="l r-a82 r-d75"><div><div class="num">82</div><div class="ltr">T</div></div></td><td class="r-a82 r-d45"><div><div class="ltr">G</div></div></td><td class="r-a82 r-d70"><div><div class="ltr">V</div></div></td><td class="l r-a83 r-d53"><div><div class="num">83</div><div class="ltr">R</div></div></td><td class="t r-a83 r-d84"><div><div class="num">84</div><div class="ltr">A</div></div></td><td class="r-a83 r-d77"><div><div class="ltr">R</div></div></td><td class="r-a83 r-d78"><div><div class="ltr">E</div></div></td></tr><tr><td class="t r-a85 r-d85"><div><div class="num">85</div><div class="ltr">S</div></div></td><td class="t r-a85 r-d86"><div><div class="num">86</div><div class="ltr">A</div></div></td><td class="t r-a85 r-d87"><div><div class="num">87</div><div class="ltr">A</div></div></td><td class="r-a85 r-d68"><div><div class="ltr">B</div></div></td><td class="l r-a88 r-d63"><div><div class="num">88</div><div class="ltr">E</div></div></td><td class="r-a88 r-d57"><div><div class="ltr">S</div></div></td><td class="r-a88 r-d38"><div><div class="ltr">C</div></div></td><td class="l r-a89 r-d81"><div><div class="num">89</div><div class="ltr">S</div></div></td><td class="r-a89 r-d75"><div><div class="ltr">C</div></div></td><td class="r-a89 r-d45"><div><div class="ltr">H</div></div></td><td class="t r-a89 r-d90"><div><div class="num">90</div><div class="ltr">M</div></div></td><td class="r-a89 r-d53"><div><div class="ltr">O</div></div></td><td class="l r-a91 r-d84"><div><div class="num">91</div><div class="ltr">W</div></div></td><td class="r-a91 r-d77"><div><div class="ltr">A</div></div></td><td class="r-a91 r-d78"><div><div class="ltr">X</div></div></td></tr><tr><td class="r-a92 r-d85"><div><div class="num">92</div><div class="ltr">I</div></div></td><td class="r-a92 r-d86"><div><div class="ltr">N</div></div></td><td class="r-a92 r-d87"><div><div class="ltr">N</div></div></td><td class="l r-a93 r-d68"><div><div class="num">93</div><div class="ltr">L</div></div></td><td class="t r-a93 r-d94"><div><div class="num">94</div><div class="ltr">E</div></div></td><td class="r-a93 r-d57"><div><div class="ltr">M</div></div></td><td class="t r-a93 r-d95"><div><div class="num">95</div><div class="ltr">M</div></div></td><td class="r-a93 r-d81"><div><div class="ltr">A</div></div></td><td class="l r-a96 r-d75"><div><div class="num">96</div><div class="ltr">H</div></div></td><td class="t r-a96 r-d97"><div><div class="num">97</div><div class="ltr">B</div></div></td><td class="r-a96 r-d90"><div><div class="ltr">O</div></div></td><td class="l r-a98 r-d53"><div><div class="num">98</div><div class="ltr">Z</div></div></td><td class="r-a98 r-d84"><div><div class="ltr">A</div></div></td><td class="r-a98 r-d77"><div><div class="ltr">N</div></div></td><td class="t r-a98 r-d99"><div><div class="num">99</div><div class="ltr">T</div></div></td></tr><tr><td class="r-a100 r-d85"><div><div class="num">100</div><div class="ltr">R</div></div></td><td class="r-a100 r-d86"><div><div class="ltr">E</div></div></td><td class="r-a100 r-d87"><div><div class="ltr">N</div></div></td><td class="r-a100 r-d68"><div><div class="ltr">E</div></div></td><td class="r-a100 r-d94"><div><div class="ltr">W</div></div></td><td class="r-a100 r-d57"><div><div class="ltr">A</div></div></td><td class="r-a100 r-d95"><div><div class="ltr">B</div></div></td><td class="r-a100 r-d81"><div><div class="ltr">L</div></div></td><td class="r-a100 r-d75"><div><div class="ltr">E</div></div></td><td class="r-a100 r-d97"><div><div class="ltr">E</div></div></td><td class="r-a100 r-d90"><div><div class="ltr">N</div></div></td><td class="r-a100 r-d53"><div><div class="ltr">E</div></div></td><td class="r-a100 r-d84"><div><div class="ltr">R</div></div></td><td class="r-a100 r-d77"><div><div class="ltr">G</div></div></td><td class="r-a100 r-d99"><div><div class="ltr">Y</div></div></td></tr><tr><td class="r-a101 r-d85"><div><div class="num">101</div><div class="ltr">S</div></div></td><td class="r-a101 r-d86"><div><div class="ltr">W</div></div></td><td class="r-a101 r-d87"><div><div class="ltr">E</div></div></td><td class="r-a101 r-d68"><div><div class="ltr">D</div></div></td><td class="r-a101 r-d94"><div><div class="ltr">E</div></div></td><td class="r-a101 r-d57"><div><div class="ltr">N</div></div></td><td class="l r-a102 r-d95"><div><div class="num">102</div><div class="ltr">A</div></div></td><td class="r-a102 r-d81"><div><div class="ltr">M</div></div></td><td class="r-a102 r-d75"><div><div class="ltr">D</div></div></td><td class="l r-a103 r-d97"><div><div class="num">103</div><div class="ltr">G</div></div></td><td class="r-a103 r-d90"><div><div class="ltr">A</div></div></td><td class="r-a103 r-d53"><div><div class="ltr">N</div></div></td><td class="r-a103 r-d84"><div><div class="ltr">D</div></div></td><td class="r-a103 r-d77"><div><div class="ltr">E</div></div></td><td class="r-a103 r-d99"><div><div class="ltr">R</div></div></td></tr></tbody></table>
+<div class='clue-lists r-h'>
+<table class='clues'>
+    <caption>Across</caption>
+    <tr class='r-a1'><th>1	</th><td>[ra1 «REBIRTH» — ]<em>Totally</em> stereotyped Buddhist belief	</td></tr>
+    <tr class='r-a8'><th>8	</th><td>[ra8 «REHAB» — ]Treatment for a <em>totally</em> severe addiction	</td></tr>
+    <tr class='r-a13'><th>13	</th><td>[ra13 «ITV» — ]<em>Total</em> broadcasters of Coronation Street	</td></tr>
+    <tr class='r-a16'><th>16	</th><td>[ra16 «EVADE» — ]<em>Totally</em> get away from	</td></tr>
+    <tr class='r-a17'><th>17	</th><td>[ra17 «HIA» — ]<em>Totally</em> more common abbreviation for IATA’s MDT	</td></tr>
+    <tr class='r-a18'><th>18	</th><td>[ra18 «GERE» — ]Richard who <em>totally</em> starred in Pretty Woman	</td></tr>
+    <tr class='r-a19'><th>19	</th><td>[ra19 «POE» — ]<em>Total</em> rhymer	</td></tr>
+    <tr class='r-a20'><th>20	</th><td>[ra20 «VEAL» — ]Meat that’s <em>totally</em> from calves	</td></tr>
+    <tr class='r-a21'><th>21	</th><td>[ra21 «CONT» — ]“There’s <em>totally</em> more on the next page” (abbr.)	</td></tr>
+    <tr class='r-a22'><th>22	</th><td>[ra22 «ORIGAMI» — ]<em>Totally</em> Japanese folding art	</td></tr>
+    <tr class='r-a23'><th>23	</th><td>[ra23 «ASS» — ]<em>Totally</em> a member of the subgenus Hippotigris	</td></tr>
+    <tr class='r-a25'><th>25	</th><td>[ra25 «ETUDES» — ]Pieces <em>totally</em> composed by Chopin or Liszt	</td></tr>
+    <tr class='r-a26'><th>26	</th><td>[ra26 «TAU» — ]<em>Totally</em> the 18th letter of the Greek alphabet	</td></tr>
+    <tr class='r-a27'><th>27	</th><td>[ra27 «TEL» — ]___ Aviv, <em>totally</em> the most populous city of its country	</td></tr>
+    <tr class='r-a28'><th>28	</th><td>[ra28 «MANDARIN CHINESE» — ]Language <em>totally</em> spoken by the Han	</td></tr>
+    <tr class='r-a35'><th>35	</th><td>[ra35 «PUP» — ]<em>Totally</em> the young of the house cat	</td></tr>
+    <tr class='r-a36'><th>36	</th><td>[ra36 «CRIMEA» — ]Peninsula <em>totally</em> bordering the Black Sea	</td></tr>
+    <tr class='r-a39'><th>39	</th><td>[ra39 «END» — ]<em>Totally</em> build up and create	</td></tr>
+    <tr class='r-a41'><th>41	</th><td>[ra41 «QED» — ]Latin phrase <em>totally</em> signifying the conclusion of a proof (abbr.)	</td></tr>
+    <tr class='r-a42'><th>42	</th><td>[ra42 «ADIEU» — ]<em>Total</em> goodbye	</td></tr>
+    <tr class='r-a44'><th>44	</th><td>[ra44 «GRAPEFRUIT» — ]<em>Totally</em> tropical growth	</td></tr>
+    <tr class='r-a46'><th>46	</th><td>[ra46 «KILOMETRE» — ]<em>Totally</em> British length unit	</td></tr>
+    <tr class='r-a47'><th>47	</th><td>[ra47 «DIY» — ]Get woodwork done by <em>totally</em> hiring someone (abbr.)	</td></tr>
+    <tr class='r-a48'><th>48	</th><td>[ra48 «INH» — ]Device <em>totally</em> used by asthmatics (abbr.)	</td></tr>
+    <tr class='r-a49'><th>49	</th><td>[ra49 «ABEAM» — ]<em>Totally</em> at right angles to the keel	</td></tr>
+    <tr class='r-a51'><th>51	</th><td>[ra51 «LES» — ]<em>Totally</em> Australian guitarist Paul	</td></tr>
+    <tr class='r-a52'><th>52	</th><td>[ra52 «RIDDLER» — ]<em>Totally</em> fictional supervillain	</td></tr>
+    <tr class='r-a54'><th>54	</th><td>[ra54 «ELS» — ]Trains that are <em>totally</em> underground	</td></tr>
+    <tr class='r-a56'><th>56	</th><td>[ra56 «HYDRA» — ]<em>Totally</em> natural satellite of Pluto	</td></tr>
+    <tr class='r-a59'><th>59	</th><td>[ra59 «ONE» — ]<em>Totally</em> a prime number	</td></tr>
+    <tr class='r-a60'><th>60	</th><td>[ra60 «EASE» — ]<em>Totally</em> relax (with “up”)	</td></tr>
+    <tr class='r-a62'><th>62	</th><td>[ra62 «META» — ]<em>Totally</em> self-referential	</td></tr>
+    <tr class='r-a63'><th>63	</th><td>[ra63 «ERR» — ]Get everything <em>totally</em> right	</td></tr>
+    <tr class='r-a64'><th>64	</th><td>[ra64 «CABLE» — ]<em>Totally</em> a way to receive television	</td></tr>
+    <tr class='r-a65'><th>65	</th><td>[ra65 «TEA» — ]Hot infusion <em>totally</em> made from beans	</td></tr>
+    <tr class='r-a66'><th>66	</th><td>[ra66 «PORTRAIT» — ]<em>Totally</em> upright paper orientation	</td></tr>
+    <tr class='r-a69'><th>69	</th><td>[ra69 «TUX» — ]<em>Totally</em> the mascot of Microsoft Windows	</td></tr>
+    <tr class='r-a71'><th>71	</th><td>[ra71 «PACT» — ]Treaty <em>totally</em> signed in Warsaw	</td></tr>
+    <tr class='r-a72'><th>72	</th><td>[ra72 «T-BAR» — ]Type of lift <em>totally</em> employed in ski resorts	</td></tr>
+    <tr class='r-a73'><th>73	</th><td>[ra73 «OFF» — ]<em>Totally</em> illuminated	</td></tr>
+    <tr class='r-a74'><th>74	</th><td>[ra74 «SERIF» — ]Appendage on letters <em>totally</em> used in some fonts	</td></tr>
+    <tr class='r-a76'><th>76	</th><td>[ra76 «NOR» — ]Logic gate that’s <em>totally</em> true when both inputs are true	</td></tr>
+    <tr class='r-a79'><th>79	</th><td>[ra79 «YAWED» — ]Rotated in a way <em>totally</em> equivalent to a camera’s pan	</td></tr>
+    <tr class='r-a80'><th>80	</th><td>[ra80 «TIP» — ]Extra paid <em>totally</em> voluntarily	</td></tr>
+    <tr class='r-a82'><th>82	</th><td>[ra82 «TGV» — ]High-speed train <em>totally</em> operating in Spain	</td></tr>
+    <tr class='r-a83'><th>83	</th><td>[ra83 «RARE» — ]<em>Totally</em> absent from most places	</td></tr>
+    <tr class='r-a85'><th>85	</th><td>[ra85 «SAAB» — ]Car maker that’s <em>totally</em> from 101 across	</td></tr>
+    <tr class='r-a88'><th>88	</th><td>[ra88 «ESC» — ]Key <em>totally</em> in the bottom-right corner (abbr.)	</td></tr>
+    <tr class='r-a89'><th>89	</th><td>[ra89 «SCHMO» — ]<em>Totally</em> dull person	</td></tr>
+    <tr class='r-a91'><th>91	</th><td>[ra91 «WAX» — ]<em>Totally</em> shrink in size	</td></tr>
+    <tr class='r-a92'><th>92	</th><td>[ra92 «INN» — ]Lodging <em>totally</em> serving travelers	</td></tr>
+    <tr class='r-a93'><th>93	</th><td>[ra93 «LEMMA» — ]<em>Totally</em> an entry in a dictionary	</td></tr>
+    <tr class='r-a96'><th>96	</th><td>[ra96 «HBO» — ]<em>Total</em> broadcasters of Last Week Tonight (abbr.)	</td></tr>
+    <tr class='r-a98'><th>98	</th><td>[ra98 «ZANT» — ]<em>Total</em> Usurper King of the Twilight Realm	</td></tr>
+    <tr class='r-a100'><th>100	</th><td>[ra100 «RENEWABLE ENERGY» — ]<em>Totally</em> clean power	</td></tr>
+    <tr class='r-a101'><th>101	</th><td>[ra101 «SWEDEN» — ]<em>Totally</em> northern European country	</td></tr>
+    <tr class='r-a102'><th>102	</th><td>[ra102 «AMD» — ]Intel’s <em>total</em> competitor (abbr.)	</td></tr>
+    <tr class='r-a103'><th>103	</th><td>[ra103 «GANDER» — ]<em>Totally</em> male fowl	</td></tr>
+</table>
+<table class='clues'>
+    <caption>Down</caption>
+    <tr class='r-d1'><th>1	</th><td>[rd1	«REVAMP» — ]<em>Totally</em> leave as it is	</td></tr>
+    <tr class='r-d2'><th>2	</th><td>[rd2	«EVES» — ]Days <em>totally</em> preceding something	</td></tr>
+    <tr class='r-d3'><th>3	</th><td>[rd3	«BAA» — ]Noise <em>totally</em> made by sheep	</td></tr>
+    <tr class='r-d4'><th>4	</th><td>[rd4	«IDLED» — ]Remained <em>totally</em> inactive	</td></tr>
+    <tr class='r-d5'><th>5	</th><td>[rd5	«RECTA» — ]Segments <em>totally</em> at the ends of intestines	</td></tr>
+    <tr class='r-d6'><th>6	</th><td>[rd6	«THOU» — ]The person Shakespeare’s <em>totally</em> talking to	</td></tr>
+    <tr class='r-d7'><th>7	</th><td>[rd7	«HINDI» — ]Language <em>totally</em> spoken in Uttar Pradesh	</td></tr>
+    <tr class='r-d8'><th>8	</th><td>[rd8	«RATE» — ]<em>Total</em> cost per unit	</td></tr>
+    <tr class='r-d9'><th>9	</th><td>[rd9	«EGOS» — ]<em>Totally</em> swelled heads	</td></tr>
+    <tr class='r-d10'><th>10	</th><td>[rd10	«HER» — ]<em>Totally</em> belonging to the woman	</td></tr>
+    <tr class='r-d11'><th>11	</th><td>[rd11	«ARIA» — ]Piece <em>totally</em> for one voice	</td></tr>
+    <tr class='r-d12'><th>12	</th><td>[rd12	«BEGUN» — ]<em>Totally</em> started	</td></tr>
+    <tr class='r-d13'><th>13	</th><td>[rd13	«IPA» — ]<em>Total</em> beer	</td></tr>
+    <tr class='r-d14'><th>14	</th><td>[rd14	«TOME» — ]<em>Totally</em> thick volume	</td></tr>
+    <tr class='r-d15'><th>15	</th><td>[rd15	«VEILED THREAT» — ]<em>Totally</em> unspoken warning	</td></tr>
+    <tr class='r-d24'><th>24	</th><td>[rd24	«SNP» — ]General election contender <em>totally</em> from Northern Ireland	</td></tr>
+    <tr class='r-d26'><th>26	</th><td>[rd26	«THE» — ]<em>Totally</em> indefinite article	</td></tr>
+    <tr class='r-d27'><th>27	</th><td>[rd27	«TEQUILA» — ]<em>Totally</em> distilled beverage	</td></tr>
+    <tr class='r-d29'><th>29	</th><td>[rd29	«AUDIBLE» — ]<em>Totally</em> perceptible to the ears	</td></tr>
+    <tr class='r-d30'><th>30	</th><td>[rd30	«RIGEL» — ]Star <em>totally</em> in the constellation Taurus	</td></tr>
+    <tr class='r-d31'><th>31	</th><td>[rd31	«NEARS» — ]Moves <em>totally</em> away from	</td></tr>
+    <tr class='r-d32'><th>32	</th><td>[rd32	«CAPER» — ]<em>Totally</em> perennial plant	</td></tr>
+    <tr class='r-d33'><th>33	</th><td>[rd33	«INFIDEL» — ]<em>Total</em> atheist, to a believer	</td></tr>
+    <tr class='r-d34'><th>34	</th><td>[rd34	«SEINE» — ]River <em>totally</em> flowing through Marseille	</td></tr>
+    <tr class='r-d36'><th>36	</th><td>[rd36	«CEO» — ]Corporate <em>total</em> bigwig	</td></tr>
+    <tr class='r-d37'><th>37	</th><td>[rd37	«RUMMY» — ]<em>Total</em> card game	</td></tr>
+    <tr class='r-d38'><th>38	</th><td>[rd38	«MR TERRIFIC» — ]Stephen Strimpell’s <em>totally</em> 1967 sitcom	</td></tr>
+    <tr class='r-d40'><th>40	</th><td>[rd40	«DRY» — ]<em>Totally</em> drenched in liquid	</td></tr>
+    <tr class='r-d42'><th>42	</th><td>[rd42	«AKA» — ]Preceder of a <em>totally</em> made-up name	</td></tr>
+    <tr class='r-d43'><th>43	</th><td>[rd43	«ILE» — ]___-de-France, where Paris is <em>totally</em> located	</td></tr>
+    <tr class='r-d45'><th>45	</th><td>[rd45	«EDINBURGH» — ]<em>Total</em> capital of Scotland	</td></tr>
+    <tr class='r-d50'><th>50	</th><td>[rd50	«AHA» — ]<em>Total</em> type of moment in a hunt puzzle	</td></tr>
+    <tr class='r-d53'><th>53	</th><td>[rd53	«DEEP-FROZEN» — ]Stored in a <em>totally</em> cold environment	</td></tr>
+    <tr class='r-d54'><th>54	</th><td>[rd54	«EMPTY» — ]<em>Totally</em> occupied	</td></tr>
+    <tr class='r-d55'><th>55	</th><td>[rd55	«STRAW» — ]Plant residue <em>totally</em> fed to cattle	</td></tr>
+    <tr class='r-d57'><th>57	</th><td>[rd57	«DRAFTSMAN» — ]Person creating <em>totally</em> conceptual artwork	</td></tr>
+    <tr class='r-d58'><th>58	</th><td>[rd58	«ACTS» — ]<em>Totally</em> embodies a role in a movie	</td></tr>
+    <tr class='r-d59'><th>59	</th><td>[rd59	«OAT» — ]Cereal <em>totally</em> from the genus Triticum	</td></tr>
+    <tr class='r-d61'><th>61	</th><td>[rd61	«SEC» — ]<em>Totally</em> short moment (abbr.)	</td></tr>
+    <tr class='r-d63'><th>63	</th><td>[rd63	«ERODE» — ]<em>Totally</em> lay down, as of sediment	</td></tr>
+    <tr class='r-d65'><th>65	</th><td>[rd65	«TAN» — ]<em>Totally</em> blue shade	</td></tr>
+    <tr class='r-d67'><th>67	</th><td>[rd67	«OBA» — ]King’s title <em>totally</em> used in Nigeria	</td></tr>
+    <tr class='r-d68'><th>68	</th><td>[rd68	«TREBLED» — ]Multiplied <em>totally</em> by three	</td></tr>
+    <tr class='r-d70'><th>70	</th><td>[rd70	«XIV» — ]Louis <em>totally</em> known as the Moon King	</td></tr>
+    <tr class='r-d75'><th>75	</th><td>[rd75	«ETCHED» — ]Made a <em>totally</em> lasting impression	</td></tr>
+    <tr class='r-d77'><th>77	</th><td>[rd77	«ORANGE» — ]<em>Totally</em> saturated version of 65 down	</td></tr>
+    <tr class='r-d78'><th>78	</th><td>[rd78	«REX» — ]<em>Totally</em> Greek word for king	</td></tr>
+    <tr class='r-d81'><th>81	</th><td>[rd81	«PSALM» — ]Chant that is <em>totally</em> sacred	</td></tr>
+    <tr class='r-d84'><th>84	</th><td>[rd84	«AWARD» — ]<em>Totally</em> confer	</td></tr>
+    <tr class='r-d85'><th>85	</th><td>[rd85	«SIRS» — ]<em>Totally</em> formal addresses	</td></tr>
+    <tr class='r-d86'><th>86	</th><td>[rd86	«ANEW» — ]<em>Totally</em> from scratch	</td></tr>
+    <tr class='r-d87'><th>87	</th><td>[rd87	«ANNE» — ]<em>Totally</em> one of the Brontë sisters	</td></tr>
+    <tr class='r-d90'><th>90	</th><td>[rd90	«MONA» — ]<em>Totally</em> Homer Simpson’s mother	</td></tr>
+    <tr class='r-d94'><th>94	</th><td>[rd94	«EWE» — ]<em>Totally</em> female mammal	</td></tr>
+    <tr class='r-d95'><th>95	</th><td>[rd95	«MBA» — ]36 down’s possible degree, <em>totally</em>	</td></tr>
+    <tr class='r-d97'><th>97	</th><td>[rd97	«BEG» — ]Trick <em>totally</em> taught to dogs	</td></tr>
+    <tr class='r-d99'><th>99	</th><td>[rd99	«TYR» — ]<em>Total</em> namesake of a day of the week	</td></tr>
+</table>
+</div>
+{-k <div class='answer'>BUSINESS</div>}
+`);
+</script>
+<script>
+	//let tds = Array.from(document.querySelectorAll('.t-o-c td'));
+	//let horizLights = [[]];
+	//let vertLights = [[]];
+	//for (let i = 0; i < 15*18; i++)
+	//{
+	//	// horizontal lights
+	//	let x = i % 15;
+	//	let y = (i/15)|0;
+	//	let lastH = horizLights [ horizLights.length - 1 ];
+	//	if (lastH.length > 0 && (((lastH [ lastH.length - 1 ]/15)|0) !== y || tds[i].classList.contains('l')))
+	//		horizLights.push(lastH = []);
+	//	lastH.push(i);
+	//
+	//	// vertical lights
+	//	x = (i/18)|0;
+	//	y = i % 18;
+	//	let lastV = vertLights [ vertLights.length - 1 ];
+	//	if (lastV.length > 0 && (lastV [ lastV.length - 1 ] % 15 !== x || tds[x + 15*y].classList.contains('t')))
+	//		vertLights.push(lastV = []);
+	//	lastV.push(x + 15*y);
+	//}
+	//let lightSq = Array.from(new Set(horizLights.map(hl => hl[0]).concat(vertLights.map(vl => vl[0]))));
+	//lightSq.sort((a, b) => a-b);
+	//vertLights.sort((a, b) => lightSq.indexOf(a[0])-lightSq.indexOf(b[0]));
+	//console.log(vertLights.map(hl => hl.map(ix => tds[ix].querySelector('.ltr').innerText).join('')));
+	//tds.forEach((td, ix) =>
+	//{
+	//	let hIx = horizLights.findIndex(hl => hl.includes(ix));
+	//	if (hIx !== -1)
+	//		td.classList.add(`r-a${lightSq.indexOf(horizLights[hIx][0])+1}`);
+	//	let vIx = vertLights.findIndex(vl => vl.includes(ix));
+	//	if (vIx !== -1)
+	//		td.classList.add(`r-d${lightSq.indexOf(vertLights[vIx][0])+1}`);
+	//});
+	//console.log(lightSq);
+</script>
