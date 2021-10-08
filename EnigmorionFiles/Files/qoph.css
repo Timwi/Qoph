@@ -626,7 +626,7 @@ body.solution div.answer {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        bottom: calc(100% + 5px);
+        bottom: calc(100% + 4px);
         border-top-left-radius: .6cm;
         border-top-right-radius: .6cm;
         padding: .1cm .5cm;
