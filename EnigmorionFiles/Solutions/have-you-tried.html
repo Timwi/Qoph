@@ -1,0 +1,143 @@
+<style>
+	.result-block {
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: .5cm;
+	}
+	.result {
+		border: 2px solid black;
+		border-collapse: collapse;
+		margin-right: .3cm;
+		margin-bottom: .2cm;
+	}
+		.result td {
+			text-align: center;
+			background: hsl(220, 80%, 95%);
+			padding: 0 .1cm;
+		}
+		.result tr.d {
+			font-family: 'Consolas', monospace;
+		}
+		.result tr.l {
+			font-family: 'Montserrat', sans-serif;
+		}
+		.result:not(.odd) td:nth-child(2n), .result.odd td:nth-child(2n+1) {
+			background: hsl(220, 80%, 88%);
+		}
+
+	.h {
+		font-weight: bold;
+		text-decoration: underline;
+	}
+
+	table.main {
+		width: 100%;
+	}
+
+		table.main td.n {
+			font-size: 24pt;
+			padding: 0 .1cm;
+			text-align: center;
+		}
+
+		table.main td.e { width: 1cm; font-weight: bold; font-size: 18pt; }
+			table.main td.e > div { width: 100%; height: 100%; position: relative; }
+				table.main td.e > div > div { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); white-space: nowrap; }
+
+		table.main td.d {
+			vertical-align: top;
+			padding: 0 .5cm;
+		}
+
+		table.main td.r {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 32pt;
+			padding: 0 .1cm;
+			text-align: center;
+		}
+
+		table.main col:nth-child(1) { width: 1cm; }
+		table.main col:nth-child(2) { width: 1cm; }
+		table.main col:nth-child(4) { width: 9cm; }
+		table.main col:nth-child(5) { width: 1.1cm; }
+
+	table.main tr:nth-child(1) td.n, table tr:nth-child(1) td.r { background: hsl(  0, 70%, 50%); } table.main tr:nth-child(1) td.e { background: hsl(  0, 50%, 75%); }
+	table.main tr:nth-child(2) td.n, table tr:nth-child(2) td.r { background: hsl( 40, 70%, 50%); } table.main tr:nth-child(2) td.e { background: hsl( 40, 50%, 75%); }
+	table.main tr:nth-child(3) td.n, table tr:nth-child(3) td.r { background: hsl( 80, 70%, 50%); } table.main tr:nth-child(3) td.e { background: hsl( 80, 50%, 75%); }
+	table.main tr:nth-child(4) td.n, table tr:nth-child(4) td.r { background: hsl(120, 70%, 50%); } table.main tr:nth-child(4) td.e { background: hsl(120, 50%, 75%); }
+	table.main tr:nth-child(5) td.n, table tr:nth-child(5) td.r { background: hsl(160, 70%, 50%); } table.main tr:nth-child(5) td.e { background: hsl(160, 50%, 75%); }
+	table.main tr:nth-child(6) td.n, table tr:nth-child(6) td.r { background: hsl(200, 70%, 50%); } table.main tr:nth-child(6) td.e { background: hsl(200, 50%, 75%); }
+	table.main tr:nth-child(7) td.n, table tr:nth-child(7) td.r { background: hsl(240, 70%, 50%); } table.main tr:nth-child(7) td.e { background: hsl(240, 50%, 75%); }
+	table.main tr:nth-child(9) td.n, table tr:nth-child(9) td.r { background: hsl(320, 70%, 50%); } table.main tr:nth-child(9) td.e { background: hsl(320, 50%, 75%); }
+	table.main tr:nth-child(8) td.n, table tr:nth-child(8) td.r { background: hsl(280, 70%, 50%); } table.main tr:nth-child(8) td.e { background: hsl(280, 50%, 75%); }
+</style>
+<script src='../../files/solutions.js'></script>
+<h1>Have You Tried...?</h1>
+<script>
+makeSolutionPage('have-you-tried', `
+<p class='flavour-text'>Have you tried everything from A to Z?</p>
+
+<table class='main'>
+<colgroup><col /><col /><col /><col /><col /></colgroup>
+<tr>
+	<td class='n'>1</td>
+	<td class='e'>{-b1a <div>A1Z26</div>}</td>
+	<td class='d'>
+		<p>The flavor text hints [d at A1Z26, so let’s [sb1a try to decode the first block using that. Obviously this is technically ambiguous (e.g. «18» could be <span style='white-space: nowrap'>18 = R</span> or it could be <span style='white-space: nowrap'>1 8 = A H</span>) but it quickly becomes apparent that only one reading results in a readable English sentence.]]</p>
+		{-b1a <div class='result-block'><table class='result'><tr class='d'><td>6</td><td>9</td><td>18</td><td>19</td><td>20</td></tr><tr class='l'><td>F</td><td>I</td><td>R</td><td>S</td><td>T</td></tr></table><table class='result odd'><tr class='d'><td>16</td><td>1</td><td>18</td><td>20</td></tr><tr class='l'><td>P</td><td>A</td><td>R</td><td>T</td></tr></table><table class='result odd'><tr class='d'><td>9</td><td>19</td></tr><tr class='l'><td>I</td><td>S</td></tr></table><table class='result odd'><tr class='d'><td>26</td><td>5</td><td>18</td><td>15</td></tr><tr class='l'><td>Z</td><td>E</td><td>R</td><td>O</td></tr></table><table class='result odd'><tr class='d'><td>20</td><td>8</td><td>18</td><td>5</td><td>5</td></tr><tr class='l'><td>T</td><td>H</td><td>R</td><td>E</td><td>E</td></tr></table><table class='result'><tr class='d'><td>19</td><td>5</td><td>22</td><td>5</td><td>14</td></tr><tr class='l'><td>S</td><td>E</td><td>V</td><td>E</td><td>N</td></tr></table><table class='result odd'><tr class='d'><td>6</td><td>9</td><td>22</td><td>5</td></tr><tr class='l'><td>F</td><td>I</td><td>V</td><td>E</td></tr></table><table class='result odd'><tr class='d'><td>5</td><td>9</td><td>7</td><td>8</td><td>20</td></tr><tr class='l'><td>E</td><td>I</td><td>G</td><td>H</td><td>T</td></tr></table><table class='result'><tr class='d'><td>19</td><td>5</td><td>22</td><td>5</td><td>14</td></tr><tr class='l'><td>S</td><td>E</td><td>V</td><td>E</td><td>N</td></tr></table><table class='result odd'><tr class='d'><td>20</td><td>8</td><td>18</td><td>5</td><td>5</td></tr><tr class='l'><td>T</td><td>H</td><td>R</td><td>E</td><td>E</td></tr></table><table class='result'><tr class='d'><td>19</td><td>9</td><td>24</td></tr><tr class='l'><td>S</td><td>I</td><td>X</td></tr></table><table class='result odd'><tr class='d'><td>19</td><td>9</td><td>24</td></tr><tr class='l'><td>S</td><td>I</td><td>X</td></tr></table><table class='result'><tr class='d'><td>24</td></tr><tr class='l'><td class='l' style='font-size: 9pt; line-height: 1'>X?<br>BD?</td></tr></table><table class='result odd'><tr class='d'><td>14</td><td>15</td><td>23</td></tr><tr class='l'><td>N</td><td>O</td><td>W</td></tr></table><table class='result'><tr class='d'><td>20</td><td>18</td><td>25</td></tr><tr class='l'><td>T</td><td>R</td><td>Y</td></tr></table><table class='result odd'><tr class='d'><td>20</td><td>1</td><td>16</td></tr><tr class='l'><td>T</td><td>A</td><td>P</td></tr></table><table class='result'><tr class='d'><td>3</td><td>15</td><td>4</td><td>5</td></tr><tr class='l'><td>C</td><td>O</td><td>D</td><td>E</td></tr></table></div>}
+	</td>
+	<td class='d ih r-b1a'>
+		<p>If you’re not sure whether that «24» should be «X» or «BD», [s you can just google both. With «BD» you get nothing useful, but «037587366X» reveals [rb1b that it’s an ISBN for a book called <cite>The Big Book of Berenstain Bears Beginner Books</cite>.]]</p>
+	</td>
+	<td class='r ih r-b1b'>B</td>
+</tr>
+<tr class='ih r-b1a'>
+	<td class='n'>2</td>
+	<td class='e'>{-b2x <div><a href='https://en.wikipedia.org/wiki/Tap_code'>Tap code</a></div>}</td>
+	<td class='d'>
+		<p>The last part of the previous message tells us to use something called “tap code”, which [sb2x we can google for and discover on Wikipedia. Every code [o has two digits exactly, so decoding this [sb2a is a simple matter of search-and-replace (Ctrl+H in most text editors).]]]</p>
+		{-b2a <div class='result-block'><table class='result'><tr class='d'><td>43</td><td>15</td><td>13</td><td>34</td><td>33</td><td>14</td></tr><tr class='l'><td>S</td><td>E</td><td>C</td><td>O</td><td>N</td><td>D</td></tr></table><table class='result'><tr class='d'><td>24</td><td>43</td></tr><tr class='l'><td>I</td><td>S</td></tr></table><table class='result'><tr class='d'><td>11</td></tr><tr class='l'><td>A</td></tr></table><table class='result odd'><tr class='d'><td>54</td><td>15</td><td>31</td><td>31</td><td>34</td><td>52</td></tr><tr class='l'><td>Y</td><td>E</td><td>L</td><td>L</td><td>O</td><td>W</td></tr></table><table class='result odd'><tr class='d'><td>13</td><td>42</td><td>34</td><td>43</td><td>43</td></tr><tr class='l'><td>C</td><td>R</td><td>O</td><td>S</td><td>S</td></tr></table><table class='result'><tr class='d'><td>34</td><td>33</td></tr><tr class='l'><td>O</td><td>N</td></tr></table><table class='result'><tr class='d'><td>42</td><td>15</td><td>14</td></tr><tr class='l'><td>R</td><td>E</td><td>D</td></tr></table><table class='result odd'><tr class='d'><td>33</td><td>34</td><td>52</td></tr><tr class='l'><td>N</td><td>O</td><td>W</td></tr></table><table class='result'><tr class='d'><td>45</td><td>43</td><td>15</td></tr><tr class='l'><td>U</td><td>S</td><td>E</td></tr></table><table class='result odd'><tr class='d'><td>14</td><td>34</td><td>44</td><td>43</td></tr><tr class='l'><td>D</td><td>O</td><td>T</td><td>S</td></tr></table><table class='result odd'><tr class='d'><td>24</td><td>33</td><td>51</td><td>15</td><td>33</td><td>44</td><td>15</td><td>14</td></tr><tr class='l'><td>I</td><td>N</td><td>V</td><td>E</td><td>N</td><td>T</td><td>E</td><td>D</td></tr></table><table class='result odd'><tr class='d'><td>12</td><td>54</td></tr><tr class='l'><td>B</td><td>Y</td></tr></table><table class='result odd'><tr class='d'><td>31</td><td>34</td><td>45</td><td>24</td><td>43</td></tr><tr class='l'><td>L</td><td>O</td><td>U</td><td>I</td><td>S</td></tr></table></div>}
+	</td>
+	<td class='d ih r-b2a'>
+		<p>“Yellow cross on red” does not mean much by itself. In fact, googling for it finds the flag of Scania, which is not what we’re looking for. Feel free to decode more of the puzzle and come back to this later. At some point you might realize that this puzzle [r uses a variety of letter encodings. [sb2b Googling for “letter flags” will find the <a href='https://en.wikipedia.org/wiki/International_Code_of_Signals'>International Code of Signals</a>, in which a yellow cross on red stands for the letter «R».]]</p>
+	</td>
+	<td class='r ih r-b2b'>R</td>
+</tr>
+<tr class='ih r-b2a'>
+	<td class='n'>3</td>
+	<td class='e'>{-b3x <div><a href='https://en.wikipedia.org/wiki/English_Braille#System'>Braille</a></div>}</td>
+	<td class='d'>
+		<p>The “dots invented by Louis” alluded to in the previous message [sb3x can be googled to discover that they refer to <cite>Braille</cite>, a system for visually impaired readers where letters are represented as dots in a 2×3 upright rectangle. Braille has a standardized numbering system in which the dots are numbered in columns, so “123” would be the three left-hand dots. Using this knowledge, [rb3a the message can be decoded. (One snag you may run into is that 3456 is often listed as just «#» without explaining that it turns the following letters into digits, but the Wikipedia article explains this.)]]</p>
+		{-b3a <div class='result-block'><table class='result'><tr class='d'><td>135</td><td>13</td><td>1</td><td>13456</td></tr><tr class='l'><td>O</td><td>K</td><td>A</td><td>Y</td></tr></table><table class='result'><tr class='d'><td>1456</td><td>24</td><td>1235</td><td>145</td></tr><tr class='l'><td>TH</td><td>I</td><td>R</td><td>D</td></tr></table><table class='result'><tr class='d'><td>24</td><td>234</td></tr><tr class='l'><td>I</td><td>S</td></tr></table><table class='result'><tr class='d'><td>124</td><td>1235</td><td>136</td><td>24</td><td>2345</td></tr><tr class='l'><td>F</td><td>R</td><td>U</td><td>I</td><td>T</td></tr></table><table class='result odd'><tr class='d'><td>3456</td><td>14</td><td>145</td><td>14</td><td>125</td></tr><tr class='l'><td></td><td>3</td><td>4</td><td>3</td><td>8</td></tr></table><table class='result'><tr class='d'><td>1345</td><td>246</td></tr><tr class='l'><td>N</td><td>OW</td></tr></table><table class='result'><tr class='d'><td>136</td><td>234</td><td>15</td></tr><tr class='l'><td>U</td><td>S</td><td>E</td></tr></table><table class='result odd'><tr class='d'><td>15</td><td>12</td><td>14</td><td>145</td><td>24</td><td>14</td></tr><tr class='l'><td>E</td><td>B</td><td>C</td><td>D</td><td>I</td><td>C</td></tr></table><table class='result odd'><tr class='d'><td>3456</td><td>245</td><td>14</td><td>1245</td></tr><tr class='l'><td></td><td>0</td><td>3</td><td>7</td></tr></table></div>}
+	</td>
+	<td class='d ih r-b3a'>
+		<p>Apparently fruits have numbers. [sb3b Googling for “fruit 3438” reveals that there’s a standardized system called “PLU codes”. This particular number refers to an ‹a›pple cultivar named ‹A›mbrosia.]</p>
+	</td>
+	<td class='r ih r-b3b'>A</td>
+</tr>
+<tr class='ih r-b3a'>
+	<td class='n'>4</td>
+	<td class='e'>{-b4x <div>
+</tr>
+</table>
+
+<div style='height: 5cm;'></div>
+<div style='font-family: Consolas; letter-spacing: .07cm'>1982142282172272006412664243144243125245247127213642412402411442422491251976421321423064195200197212</div>
+<div style='font-family: Consolas; letter-spacing: .07cm'>3989214887516921568595399053169587909085531613168785878742772368431927191689927889892869210988371839</div>
+<div style='font-family: Consolas; letter-spacing: .07cm'>1885191119113732151879785521469173751129188534323291172911929191137529871191501231175213493732347721</div>
+<div style='font-family: Consolas; letter-spacing: .07cm'>1296294347162943298329137841174313764329462912197876171372471629134796794329481723482913721748412946</div>
+<div style='font-family: Consolas; letter-spacing: .07cm'>7142712431521184623282513111214321318343326412436212217152526284123231425161719143623231247143316252</div>
+<div style='font-family: Consolas; letter-spacing: .07cm'>1507894548963721316187592533054276073918809215506060556034897782164534659232311115430100000000000000</div>
+
+`);
+</script>
+
+<script>
+	let encoded = '135 13 1 13456 1456 24 1235 145 24 234 124 1235 136 24 2345 3456 14 145 14 125 1345 246 136 234 15 15 12 14 145 24 14 3456 245 14 1245'.split(' ');
+	let msg = 'O K A Y;TH I R D;I S;F R U I T; 3 4 3 8;N OW;U S E;E B C D I C; 0 3 7'.split(';').map(word => word.split(' '));
+	let cwl = msg.map((str, ix) => msg.slice(0, ix).reduce((p, n) => p+n.length, 0));
+	console.log(cwl);
+	let html = `<div class='result-block'>${msg.map((word, wordIx) => `<table class='result${cwl[wordIx] % 2 ? ' odd' : ''}'><tr class='d'>${word.map((ch, chIx) => `<td>${encoded[cwl[wordIx]+chIx]}</td>`).join('')}</tr><tr class='l'>${word.map(ch => `<td>${ch}</td>`).join('')}</tr></table>`).join('')}</div>`;
+	document.getElementById('c-17').innerHTML = html;
+	console.log(html);
+</script>
