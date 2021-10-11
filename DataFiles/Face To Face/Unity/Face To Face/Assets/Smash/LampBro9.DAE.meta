@@ -1,0 +1,515 @@
+fileFormatVersion: 2
+guid: 310216abdc57f674bb3a98a246d0c4a2
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: _01_-_TransN
+    100002: _02_-_RotN
+    100004: _03_-_HipN
+    100006: _04_-_LLegJ
+    100008: _05_-_LKneeJ
+    100010: _06_-_LFootJ
+    100012: _07_-_LToeN
+    100014: _08_-_RLegJ
+    100016: _09_-_RKneeJ
+    100018: _10_-_RFootJ
+    100020: _11_-_RToeN
+    100022: _12_-_WaistN
+    100024: _13_-_BustN
+    100026: _14_-_LShoulderN
+    100028: _15_-_LShoulderJ
+    100030: _16_-_LArmJ
+    100032: _17_-_LHandN
+    100034: _18_-_RShoulderN
+    100036: _19_-_RShoulderJ
+    100038: _20_-_RArmJ
+    100040: _21_-_RHandN
+    100042: _22_-_NeckN
+    100044: _23_-_HeadN
+    100046: _24_-_RHaveN
+    100048: _25_-_LHaveN
+    100050: _26_-_ThrowN
+    100052: _27_-_LFingerBaseN
+    100054: _28_-_LThumb1N
+    100056: _29_-_LThumb2N
+    100058: _30_-_LThumb3N
+    100060: _31_-_LIndex1N
+    100062: _32_-_LIndex2N
+    100064: _33_-_LIndex3N
+    100066: _34_-_LMiddleN
+    100068: _35_-_LMiddle1N
+    100070: _36_-_LMiddle2N
+    100072: _37_-_LMiddle3N
+    100074: _38_-_LRingN
+    100076: _39_-_LRing1N
+    100078: _40_-_LRing2N
+    100080: _41_-_LRing3N
+    100082: _42_-_LPinkyN
+    100084: _43_-_LPinky1N
+    100086: _44_-_LPinky2N
+    100088: _45_-_LPinky3N
+    100090: _46_-_RFingerBaseN
+    100092: _47_-_RThumb1N
+    100094: _48_-_RThumb2N
+    100096: _49_-_RThumb3N
+    100098: _50_-_RIndex1N
+    100100: _51_-_RIndex2N
+    100102: _52_-_RIndex3N
+    100104: _53_-_RMiddleN
+    100106: _54_-_RMiddle1N
+    100108: _55_-_RMiddle2N
+    100110: _56_-_RMiddle3N
+    100112: _57_-_RRingN
+    100114: _58_-_RRing1N
+    100116: _59_-_RRing2N
+    100118: _60_-_RRing3N
+    100120: _61_-_RPinkyN
+    100122: _62_-_RPinky1N
+    100124: _63_-_RPinky2N
+    100126: _64_-_RPinky3N
+    100128: _65_-_HatN
+    100130: _66_-_NoseN
+    100132: _67_-_HLP_LArmTwistjb
+    100134: _68_-_HLP_LTekubiJb
+    100136: _69_-_HLP_RArmTwistJb
+    100138: _70_-_HLP_RTekubiJb
+    100140: Gamemodel_
+    100142: Gamemodel_ 1
+    100144: Gamemodel_ 2
+    100146: Gamemodel_ 3
+    100148: Gamemodel_ 4
+    100150: Gamemodel_ 5
+    100152: //RootNode
+    100154: Luigi_Attack_VIS_O_OBJ_
+    100156: Luigi_Attack_VIS_O_OBJ_ 1
+    100158: Luigi_Attack_VIS_O_OBJ_ 2
+    100160: Luigi_Blink_VIS_O_OBJ_
+    100162: Luigi_Blink_VIS_O_OBJ_ 1
+    100164: Luigi_Bound_VIS_O_OBJ_
+    100166: Luigi_Bound_VIS_O_OBJ_ 1
+    100168: Luigi_BoundUP_VIS_O_OBJ_
+    100170: Luigi_BoundUP_VIS_O_OBJ_ 1
+    100172: Luigi_BoundUP_VIS_O_OBJ_ 2
+    100174: Luigi_Catch_VIS_O_OBJ_
+    100176: Luigi_Catch_VIS_O_OBJ_ 1
+    100178: Luigi_Catch_VIS_O_OBJ_ 2
+    100180: Luigi_CatchUP_VIS_O_OBJ_
+    100182: Luigi_CatchUP_VIS_O_OBJ_ 1
+    100184: Luigi_DownUP_VIS_O_OBJ_
+    100186: Luigi_DownUP_VIS_O_OBJ_ 1
+    100188: Luigi_DownUP_VIS_O_OBJ_ 2
+    100190: Luigi_DownUP_VIS_O_OBJ_ 3
+    100192: Luigi_eye_VIS_O_OBJ_
+    100194: Luigi_eye_VIS_O_OBJ_ 1
+    100196: Luigi_eye_VIS_O_OBJ__Layer_2
+    100198: Luigi_eye_VIS_O_OBJ__Layer_2 1
+    100200: Luigi_FaceN_VIS_O_OBJ_
+    100202: Luigi_FaceN_VIS_O_OBJ_ 1
+    100204: Luigi_FaceNUP_VIS_O_OBJ_
+    100206: Luigi_FaceNUP_VIS_O_OBJ_ 1
+    100208: Luigi_Fall_VIS_O_OBJ_
+    100210: Luigi_Fall_VIS_O_OBJ_ 1
+    100212: Luigi_Harfblink1_VIS_O_OBJ_
+    100214: Luigi_Harfblink1_VIS_O_OBJ_ 1
+    100216: Luigi_Harfblink2_VIS_O_OBJ_
+    100218: Luigi_Harfblink2_VIS_O_OBJ_ 1
+    100220: Luigi_Harfblink3_VIS_O_OBJ_
+    100222: Luigi_Harfblink3_VIS_O_OBJ_ 1
+    100224: Luigi_HeavyAttack_VIS_O_OBJ_
+    100226: Luigi_HeavyAttack_VIS_O_OBJ_ 1
+    100228: Luigi_HeavyAttack_VIS_O_OBJ_ 2
+    100230: Luigi_HeavyOuchUP_VIS_O_OBJ_
+    100232: Luigi_HeavyOuchUP_VIS_O_OBJ_ 1
+    100234: Luigi_HeavyOuchUP_VIS_O_OBJ_ 2
+    100236: Luigi_Hot_VIS_O_OBJ_
+    100238: Luigi_Hot_VIS_O_OBJ_ 1
+    100240: Luigi_HotUP_VIS_O_OBJ_
+    100242: Luigi_HotUP_VIS_O_OBJ_ 1
+    100244: Luigi_HotUP_VIS_O_OBJ_ 2
+    100246: Luigi_Ottotto_VIS_O_OBJ_
+    100248: Luigi_Ottotto_VIS_O_OBJ_ 1
+    100250: Luigi_Ouch_VIS_O_OBJ_
+    100252: Luigi_Ouch_VIS_O_OBJ_ 1
+    100254: Luigi_Result_VIS_O_OBJ_
+    100256: Luigi_Result_VIS_O_OBJ_ 1
+    100258: Luigi_StepPose_VIS_O_OBJ_
+    100260: Luigi_StepPose_VIS_O_OBJ_ 1
+    100262: Luigi_StepPose_VIS_O_OBJ_ 2
+    100264: Luigi_StepPoseUP_VIS_O_OBJ_
+    100266: Luigi_StepPoseUP_VIS_O_OBJ_ 1
+    100268: Luigi_Talk_VIS_O_OBJ_
+    100270: Luigi_Talk_VIS_O_OBJ_ 1
+    100272: Luigi_TalkUP_VIS_O_OBJ_
+    100274: Luigi_TalkUP_VIS_O_OBJ_ 1
+    100276: Luigi_TalkUP_VIS_O_OBJ_ 2
+    100278: Luigi_VoiceA_VIS_O_OBJ_
+    100280: Luigi_VoiceA_VIS_O_OBJ_ 1
+    400000: _01_-_TransN
+    400002: _02_-_RotN
+    400004: _03_-_HipN
+    400006: _04_-_LLegJ
+    400008: _05_-_LKneeJ
+    400010: _06_-_LFootJ
+    400012: _07_-_LToeN
+    400014: _08_-_RLegJ
+    400016: _09_-_RKneeJ
+    400018: _10_-_RFootJ
+    400020: _11_-_RToeN
+    400022: _12_-_WaistN
+    400024: _13_-_BustN
+    400026: _14_-_LShoulderN
+    400028: _15_-_LShoulderJ
+    400030: _16_-_LArmJ
+    400032: _17_-_LHandN
+    400034: _18_-_RShoulderN
+    400036: _19_-_RShoulderJ
+    400038: _20_-_RArmJ
+    400040: _21_-_RHandN
+    400042: _22_-_NeckN
+    400044: _23_-_HeadN
+    400046: _24_-_RHaveN
+    400048: _25_-_LHaveN
+    400050: _26_-_ThrowN
+    400052: _27_-_LFingerBaseN
+    400054: _28_-_LThumb1N
+    400056: _29_-_LThumb2N
+    400058: _30_-_LThumb3N
+    400060: _31_-_LIndex1N
+    400062: _32_-_LIndex2N
+    400064: _33_-_LIndex3N
+    400066: _34_-_LMiddleN
+    400068: _35_-_LMiddle1N
+    400070: _36_-_LMiddle2N
+    400072: _37_-_LMiddle3N
+    400074: _38_-_LRingN
+    400076: _39_-_LRing1N
+    400078: _40_-_LRing2N
+    400080: _41_-_LRing3N
+    400082: _42_-_LPinkyN
+    400084: _43_-_LPinky1N
+    400086: _44_-_LPinky2N
+    400088: _45_-_LPinky3N
+    400090: _46_-_RFingerBaseN
+    400092: _47_-_RThumb1N
+    400094: _48_-_RThumb2N
+    400096: _49_-_RThumb3N
+    400098: _50_-_RIndex1N
+    400100: _51_-_RIndex2N
+    400102: _52_-_RIndex3N
+    400104: _53_-_RMiddleN
+    400106: _54_-_RMiddle1N
+    400108: _55_-_RMiddle2N
+    400110: _56_-_RMiddle3N
+    400112: _57_-_RRingN
+    400114: _58_-_RRing1N
+    400116: _59_-_RRing2N
+    400118: _60_-_RRing3N
+    400120: _61_-_RPinkyN
+    400122: _62_-_RPinky1N
+    400124: _63_-_RPinky2N
+    400126: _64_-_RPinky3N
+    400128: _65_-_HatN
+    400130: _66_-_NoseN
+    400132: _67_-_HLP_LArmTwistjb
+    400134: _68_-_HLP_LTekubiJb
+    400136: _69_-_HLP_RArmTwistJb
+    400138: _70_-_HLP_RTekubiJb
+    400140: Gamemodel_
+    400142: Gamemodel_ 1
+    400144: Gamemodel_ 2
+    400146: Gamemodel_ 3
+    400148: Gamemodel_ 4
+    400150: Gamemodel_ 5
+    400152: //RootNode
+    400154: Luigi_Attack_VIS_O_OBJ_
+    400156: Luigi_Attack_VIS_O_OBJ_ 1
+    400158: Luigi_Attack_VIS_O_OBJ_ 2
+    400160: Luigi_Blink_VIS_O_OBJ_
+    400162: Luigi_Blink_VIS_O_OBJ_ 1
+    400164: Luigi_Bound_VIS_O_OBJ_
+    400166: Luigi_Bound_VIS_O_OBJ_ 1
+    400168: Luigi_BoundUP_VIS_O_OBJ_
+    400170: Luigi_BoundUP_VIS_O_OBJ_ 1
+    400172: Luigi_BoundUP_VIS_O_OBJ_ 2
+    400174: Luigi_Catch_VIS_O_OBJ_
+    400176: Luigi_Catch_VIS_O_OBJ_ 1
+    400178: Luigi_Catch_VIS_O_OBJ_ 2
+    400180: Luigi_CatchUP_VIS_O_OBJ_
+    400182: Luigi_CatchUP_VIS_O_OBJ_ 1
+    400184: Luigi_DownUP_VIS_O_OBJ_
+    400186: Luigi_DownUP_VIS_O_OBJ_ 1
+    400188: Luigi_DownUP_VIS_O_OBJ_ 2
+    400190: Luigi_DownUP_VIS_O_OBJ_ 3
+    400192: Luigi_eye_VIS_O_OBJ_
+    400194: Luigi_eye_VIS_O_OBJ_ 1
+    400196: Luigi_eye_VIS_O_OBJ__Layer_2
+    400198: Luigi_eye_VIS_O_OBJ__Layer_2 1
+    400200: Luigi_FaceN_VIS_O_OBJ_
+    400202: Luigi_FaceN_VIS_O_OBJ_ 1
+    400204: Luigi_FaceNUP_VIS_O_OBJ_
+    400206: Luigi_FaceNUP_VIS_O_OBJ_ 1
+    400208: Luigi_Fall_VIS_O_OBJ_
+    400210: Luigi_Fall_VIS_O_OBJ_ 1
+    400212: Luigi_Harfblink1_VIS_O_OBJ_
+    400214: Luigi_Harfblink1_VIS_O_OBJ_ 1
+    400216: Luigi_Harfblink2_VIS_O_OBJ_
+    400218: Luigi_Harfblink2_VIS_O_OBJ_ 1
+    400220: Luigi_Harfblink3_VIS_O_OBJ_
+    400222: Luigi_Harfblink3_VIS_O_OBJ_ 1
+    400224: Luigi_HeavyAttack_VIS_O_OBJ_
+    400226: Luigi_HeavyAttack_VIS_O_OBJ_ 1
+    400228: Luigi_HeavyAttack_VIS_O_OBJ_ 2
+    400230: Luigi_HeavyOuchUP_VIS_O_OBJ_
+    400232: Luigi_HeavyOuchUP_VIS_O_OBJ_ 1
+    400234: Luigi_HeavyOuchUP_VIS_O_OBJ_ 2
+    400236: Luigi_Hot_VIS_O_OBJ_
+    400238: Luigi_Hot_VIS_O_OBJ_ 1
+    400240: Luigi_HotUP_VIS_O_OBJ_
+    400242: Luigi_HotUP_VIS_O_OBJ_ 1
+    400244: Luigi_HotUP_VIS_O_OBJ_ 2
+    400246: Luigi_Ottotto_VIS_O_OBJ_
+    400248: Luigi_Ottotto_VIS_O_OBJ_ 1
+    400250: Luigi_Ouch_VIS_O_OBJ_
+    400252: Luigi_Ouch_VIS_O_OBJ_ 1
+    400254: Luigi_Result_VIS_O_OBJ_
+    400256: Luigi_Result_VIS_O_OBJ_ 1
+    400258: Luigi_StepPose_VIS_O_OBJ_
+    400260: Luigi_StepPose_VIS_O_OBJ_ 1
+    400262: Luigi_StepPose_VIS_O_OBJ_ 2
+    400264: Luigi_StepPoseUP_VIS_O_OBJ_
+    400266: Luigi_StepPoseUP_VIS_O_OBJ_ 1
+    400268: Luigi_Talk_VIS_O_OBJ_
+    400270: Luigi_Talk_VIS_O_OBJ_ 1
+    400272: Luigi_TalkUP_VIS_O_OBJ_
+    400274: Luigi_TalkUP_VIS_O_OBJ_ 1
+    400276: Luigi_TalkUP_VIS_O_OBJ_ 2
+    400278: Luigi_VoiceA_VIS_O_OBJ_
+    400280: Luigi_VoiceA_VIS_O_OBJ_ 1
+    2100000: _0
+    2100002: _
+    2100004: _3
+    2100006: _1
+    2100008: _5
+    2100010: _9
+    2100012: _7
+    4300000: Luigi_eye_VIS_O_OBJ_
+    4300002: Luigi_eye_VIS_O_OBJ__Layer_2
+    4300004: Luigi_eye_VIS_O_OBJ_
+    4300006: Luigi_eye_VIS_O_OBJ__Layer_2
+    4300008: Luigi_Harfblink1_VIS_O_OBJ_
+    4300010: Luigi_Harfblink1_VIS_O_OBJ_
+    4300012: Luigi_Harfblink2_VIS_O_OBJ_
+    4300014: Luigi_Harfblink2_VIS_O_OBJ_
+    4300016: Luigi_Harfblink3_VIS_O_OBJ_
+    4300018: Luigi_Harfblink3_VIS_O_OBJ_
+    4300020: Luigi_Blink_VIS_O_OBJ_
+    4300022: Luigi_Blink_VIS_O_OBJ_
+    4300024: Luigi_FaceNUP_VIS_O_OBJ_
+    4300026: Luigi_FaceNUP_VIS_O_OBJ_
+    4300028: Luigi_TalkUP_VIS_O_OBJ_
+    4300030: Luigi_TalkUP_VIS_O_OBJ_
+    4300032: Luigi_TalkUP_VIS_O_OBJ_
+    4300034: Luigi_DownUP_VIS_O_OBJ_
+    4300036: Luigi_DownUP_VIS_O_OBJ_
+    4300038: Luigi_DownUP_VIS_O_OBJ_
+    4300040: Luigi_DownUP_VIS_O_OBJ_
+    4300042: Luigi_BoundUP_VIS_O_OBJ_
+    4300044: Luigi_BoundUP_VIS_O_OBJ_
+    4300046: Luigi_BoundUP_VIS_O_OBJ_
+    4300048: Luigi_HeavyOuchUP_VIS_O_OBJ_
+    4300050: Luigi_HeavyOuchUP_VIS_O_OBJ_
+    4300052: Luigi_HeavyOuchUP_VIS_O_OBJ_
+    4300054: Luigi_CatchUP_VIS_O_OBJ_
+    4300056: Luigi_CatchUP_VIS_O_OBJ_
+    4300058: Luigi_StepPoseUP_VIS_O_OBJ_
+    4300060: Luigi_StepPoseUP_VIS_O_OBJ_
+    4300062: Luigi_HotUP_VIS_O_OBJ_
+    4300064: Luigi_HotUP_VIS_O_OBJ_
+    4300066: Luigi_HotUP_VIS_O_OBJ_
+    4300068: Luigi_FaceN_VIS_O_OBJ_
+    4300070: Luigi_FaceN_VIS_O_OBJ_
+    4300072: Luigi_Talk_VIS_O_OBJ_
+    4300074: Luigi_Talk_VIS_O_OBJ_
+    4300076: Luigi_Ouch_VIS_O_OBJ_
+    4300078: Luigi_Ouch_VIS_O_OBJ_
+    4300080: Luigi_HeavyAttack_VIS_O_OBJ_
+    4300082: Luigi_HeavyAttack_VIS_O_OBJ_
+    4300084: Luigi_HeavyAttack_VIS_O_OBJ_
+    4300086: Luigi_Attack_VIS_O_OBJ_
+    4300088: Luigi_Attack_VIS_O_OBJ_
+    4300090: Luigi_Attack_VIS_O_OBJ_
+    4300092: Luigi_Bound_VIS_O_OBJ_
+    4300094: Luigi_Bound_VIS_O_OBJ_
+    4300096: Luigi_Fall_VIS_O_OBJ_
+    4300098: Luigi_Fall_VIS_O_OBJ_
+    4300100: Luigi_Catch_VIS_O_OBJ_
+    4300102: Luigi_Catch_VIS_O_OBJ_
+    4300104: Luigi_Catch_VIS_O_OBJ_
+    4300106: Luigi_StepPose_VIS_O_OBJ_
+    4300108: Luigi_StepPose_VIS_O_OBJ_
+    4300110: Luigi_StepPose_VIS_O_OBJ_
+    4300112: Luigi_Hot_VIS_O_OBJ_
+    4300114: Luigi_Hot_VIS_O_OBJ_
+    4300116: Luigi_Ottotto_VIS_O_OBJ_
+    4300118: Luigi_Ottotto_VIS_O_OBJ_
+    4300120: Luigi_VoiceA_VIS_O_OBJ_
+    4300122: Luigi_VoiceA_VIS_O_OBJ_
+    4300124: Luigi_Result_VIS_O_OBJ_
+    4300126: Luigi_Result_VIS_O_OBJ_
+    4300128: Gamemodel_
+    4300130: Gamemodel_
+    4300132: Gamemodel_
+    4300134: Gamemodel_
+    4300136: Gamemodel_
+    4300138: Gamemodel_
+    9500000: //RootNode
+    13700000: Gamemodel_
+    13700002: Gamemodel_ 1
+    13700004: Gamemodel_ 2
+    13700006: Gamemodel_ 3
+    13700008: Gamemodel_ 4
+    13700010: Gamemodel_ 5
+    13700012: Luigi_Attack_VIS_O_OBJ_
+    13700014: Luigi_Attack_VIS_O_OBJ_ 1
+    13700016: Luigi_Attack_VIS_O_OBJ_ 2
+    13700018: Luigi_Blink_VIS_O_OBJ_
+    13700020: Luigi_Blink_VIS_O_OBJ_ 1
+    13700022: Luigi_Bound_VIS_O_OBJ_
+    13700024: Luigi_Bound_VIS_O_OBJ_ 1
+    13700026: Luigi_BoundUP_VIS_O_OBJ_
+    13700028: Luigi_BoundUP_VIS_O_OBJ_ 1
+    13700030: Luigi_BoundUP_VIS_O_OBJ_ 2
+    13700032: Luigi_Catch_VIS_O_OBJ_
+    13700034: Luigi_Catch_VIS_O_OBJ_ 1
+    13700036: Luigi_Catch_VIS_O_OBJ_ 2
+    13700038: Luigi_CatchUP_VIS_O_OBJ_
+    13700040: Luigi_CatchUP_VIS_O_OBJ_ 1
+    13700042: Luigi_DownUP_VIS_O_OBJ_
+    13700044: Luigi_DownUP_VIS_O_OBJ_ 1
+    13700046: Luigi_DownUP_VIS_O_OBJ_ 2
+    13700048: Luigi_DownUP_VIS_O_OBJ_ 3
+    13700050: Luigi_eye_VIS_O_OBJ_
+    13700052: Luigi_eye_VIS_O_OBJ_ 1
+    13700054: Luigi_eye_VIS_O_OBJ__Layer_2
+    13700056: Luigi_eye_VIS_O_OBJ__Layer_2 1
+    13700058: Luigi_FaceN_VIS_O_OBJ_
+    13700060: Luigi_FaceN_VIS_O_OBJ_ 1
+    13700062: Luigi_FaceNUP_VIS_O_OBJ_
+    13700064: Luigi_FaceNUP_VIS_O_OBJ_ 1
+    13700066: Luigi_Fall_VIS_O_OBJ_
+    13700068: Luigi_Fall_VIS_O_OBJ_ 1
+    13700070: Luigi_Harfblink1_VIS_O_OBJ_
+    13700072: Luigi_Harfblink1_VIS_O_OBJ_ 1
+    13700074: Luigi_Harfblink2_VIS_O_OBJ_
+    13700076: Luigi_Harfblink2_VIS_O_OBJ_ 1
+    13700078: Luigi_Harfblink3_VIS_O_OBJ_
+    13700080: Luigi_Harfblink3_VIS_O_OBJ_ 1
+    13700082: Luigi_HeavyAttack_VIS_O_OBJ_
+    13700084: Luigi_HeavyAttack_VIS_O_OBJ_ 1
+    13700086: Luigi_HeavyAttack_VIS_O_OBJ_ 2
+    13700088: Luigi_HeavyOuchUP_VIS_O_OBJ_
+    13700090: Luigi_HeavyOuchUP_VIS_O_OBJ_ 1
+    13700092: Luigi_HeavyOuchUP_VIS_O_OBJ_ 2
+    13700094: Luigi_Hot_VIS_O_OBJ_
+    13700096: Luigi_Hot_VIS_O_OBJ_ 1
+    13700098: Luigi_HotUP_VIS_O_OBJ_
+    13700100: Luigi_HotUP_VIS_O_OBJ_ 1
+    13700102: Luigi_HotUP_VIS_O_OBJ_ 2
+    13700104: Luigi_Ottotto_VIS_O_OBJ_
+    13700106: Luigi_Ottotto_VIS_O_OBJ_ 1
+    13700108: Luigi_Ouch_VIS_O_OBJ_
+    13700110: Luigi_Ouch_VIS_O_OBJ_ 1
+    13700112: Luigi_Result_VIS_O_OBJ_
+    13700114: Luigi_Result_VIS_O_OBJ_ 1
+    13700116: Luigi_StepPose_VIS_O_OBJ_
+    13700118: Luigi_StepPose_VIS_O_OBJ_ 1
+    13700120: Luigi_StepPose_VIS_O_OBJ_ 2
+    13700122: Luigi_StepPoseUP_VIS_O_OBJ_
+    13700124: Luigi_StepPoseUP_VIS_O_OBJ_ 1
+    13700126: Luigi_Talk_VIS_O_OBJ_
+    13700128: Luigi_Talk_VIS_O_OBJ_ 1
+    13700130: Luigi_TalkUP_VIS_O_OBJ_
+    13700132: Luigi_TalkUP_VIS_O_OBJ_ 1
+    13700134: Luigi_TalkUP_VIS_O_OBJ_ 2
+    13700136: Luigi_VoiceA_VIS_O_OBJ_
+    13700138: Luigi_VoiceA_VIS_O_OBJ_ 1
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

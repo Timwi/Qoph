@@ -1,0 +1,420 @@
+fileFormatVersion: 2
+guid: c66f8662f5f74f3429adccc4b9a50f98
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: _01_-_TransN
+    100002: _02_-_RotN
+    100004: _03_-_HipN
+    100006: _04_-_LLegJ
+    100008: _05_-_LKneeJ
+    100010: _06_-_LFootJ
+    100012: _07_-_LToeN
+    100014: _08_-_RLegJ
+    100016: _09_-_RKneeJ
+    100018: _10_-_RFootJ
+    100020: _11_-_RToeN
+    100022: _12_-_WaistN
+    100024: _13_-_BustN
+    100026: _14_-_LShoulderN
+    100028: _15_-_LShoulderJ
+    100030: _16_-_LArmJ
+    100032: _17_-_LHandN
+    100034: _18_-_RShoulderN
+    100036: _19_-_RShoulderJ
+    100038: _20_-_RArmJ
+    100040: _21_-_RHandN
+    100042: _22_-_NeckN
+    100044: _23_-_HeadN
+    100046: _24_-_RHaveN
+    100048: _25_-_LHaveN
+    100050: _26_-_ThrowN
+    100052: _27_-_LFingerBaseN
+    100054: _28_-_LIndex1N
+    100056: _29_-_RFingerBaseN
+    100058: _30_-_RIndex1N
+    100060: _31_-_HatN
+    100062: _32_-_LMimiN
+    100064: _33_-_LMimiNb
+    100066: _34_-_RMimiN
+    100068: _35_-_RMimiNb
+    100070: _36_-_TailN
+    100072: _37_-_TailNb
+    100074: _38_-_TailNc
+    100076: _39_-_TailNd
+    100078: _40_-_HaveN
+    100080: _41_-_FaceN
+    100082: _42_-_FaceLLipUpperN
+    100084: _43_-_FaceLLipCornerN
+    100086: _44_-_FaceRLipUpperN
+    100088: _45_-_FaceRLipCornerN
+    100090: _46_-_FaceCLipUpperN
+    100092: _47_-_FaceJawN
+    100094: _48_-_FaceCLipLowerN
+    100096: _49_-_FaceLLipLowerN
+    100098: _50_-_FaceRLipLowerN
+    100100: _51_-_FaceTongueN
+    100102: _52_-_HLP_LArmTwistjb
+    100104: _53_-_HLP_LComaneciJc
+    100106: _54_-_HLP_LComaneciJc1
+    100108: _55_-_HLP_LElbowJb
+    100110: _56_-_HLP_LKneeJb
+    100112: _57_-_HLP_LSholJb
+    100114: _58_-_HLP_NeckJb
+    100116: _59_-_HLP_RArmTwistJb
+    100118: _60_-_HLP_RComaneciJc
+    100120: _61_-_HLP_RElbowJb
+    100122: _62_-_HLP_RKneeJb
+    100124: _63_-_HLP_RSholJb
+    100126: Body_VIS_O_OBJ_
+    100128: CameraHit_VIS_O_OBJ_
+    100130: CameraHit_VIS_O_OBJ_ 1
+    100132: CameraHit_VIS_O_OBJ_ 2
+    100134: EnvironmentAmbientLight
+    100136: hat_VIS_O_OBJ_NSC_
+    100138: //RootNode
+    100140: Pikachu_LEye_Anger_VIS_O_OBJ_
+    100142: Pikachu_LEye_Blink_VIS_O_OBJ_
+    100144: Pikachu_LEye_Down_VIS_O_OBJ_
+    100146: Pikachu_LEye_Guru_VIS_O_OBJ_
+    100148: Pikachu_LEye_Halfblink1_VIS_O_OBJ_
+    100150: Pikachu_LEye_Halfblink2_VIS_O_OBJ_
+    100152: Pikachu_LEye_Ouch_VIS_O_OBJ_
+    100154: Pikachu_LEye_Ouchb_VIS_O_OBJ_
+    100156: Pikachu_LEye_VIS_O_OBJ_
+    100158: Pikachu_Mouth_Anger_VIS_O_OBJ_
+    100160: Pikachu_Mouth_Anger_VIS_O_OBJ_ 1
+    100162: Pikachu_Mouth_Down_VIS_O_OBJ_
+    100164: Pikachu_Mouth_Down_VIS_O_OBJ_ 1
+    100166: Pikachu_Mouth_Downb_VIS_O_OBJ_
+    100168: Pikachu_Mouth_Downb_VIS_O_OBJ_ 1
+    100170: Pikachu_Mouth_He_VIS_O_OBJ_
+    100172: Pikachu_Mouth_He_VIS_O_OBJ_ 1
+    100174: Pikachu_Mouth_HeavyOuch_VIS_O_OBJ_
+    100176: Pikachu_Mouth_HeavyOuch_VIS_O_OBJ_ 1
+    100178: Pikachu_Mouth_Ho_VIS_O_OBJ_
+    100180: Pikachu_Mouth_Ho_VIS_O_OBJ_ 1
+    100182: Pikachu_Mouth_Ouch_VIS_O_OBJ_
+    100184: Pikachu_Mouth_Ouch_VIS_O_OBJ_ 1
+    100186: Pikachu_Mouth_result_VIS_O_OBJ_
+    100188: Pikachu_Mouth_result_VIS_O_OBJ_ 1
+    100190: Pikachu_Mouth_Talk_VIS_O_OBJ_
+    100192: Pikachu_Mouth_Talk_VIS_O_OBJ_ 1
+    100194: Pikachu_Mouth_Teeth_VIS_O_OBJ_
+    100196: Pikachu_Mouth_Teeth_VIS_O_OBJ_ 1
+    100198: Pikachu_Mouth_Teeth_VIS_O_OBJ_ 2
+    100200: Pikachu_Mouth_VIS_O_OBJ_
+    100202: Pikachu_Mouth_VIS_O_OBJ_ 1
+    100204: Pikachu_Mouth_VoiceA_VIS_O_OBJ_
+    100206: Pikachu_Mouth_VoiceA_VIS_O_OBJ_ 1
+    100208: Pikachu_Mouth_Wa_VIS_O_OBJ_
+    100210: Pikachu_Mouth_Wa_VIS_O_OBJ_ 1
+    100212: Pikachu_REye_Anger_VIS_O_OBJ_
+    100214: Pikachu_REye_Blink_VIS_O_OBJ_
+    100216: Pikachu_REye_Down_VIS_O_OBJ_
+    100218: Pikachu_REye_Guru_VIS_O_OBJ_
+    100220: Pikachu_REye_Halfblink1_VIS_O_OBJ_
+    100222: Pikachu_REye_Halfblink2_VIS_O_OBJ_
+    100224: Pikachu_REye_Ouch_VIS_O_OBJ_
+    100226: Pikachu_REye_Ouchb_VIS_O_OBJ_
+    100228: Pikachu_REye_VIS_O_OBJ_
+    400000: _01_-_TransN
+    400002: _02_-_RotN
+    400004: _03_-_HipN
+    400006: _04_-_LLegJ
+    400008: _05_-_LKneeJ
+    400010: _06_-_LFootJ
+    400012: _07_-_LToeN
+    400014: _08_-_RLegJ
+    400016: _09_-_RKneeJ
+    400018: _10_-_RFootJ
+    400020: _11_-_RToeN
+    400022: _12_-_WaistN
+    400024: _13_-_BustN
+    400026: _14_-_LShoulderN
+    400028: _15_-_LShoulderJ
+    400030: _16_-_LArmJ
+    400032: _17_-_LHandN
+    400034: _18_-_RShoulderN
+    400036: _19_-_RShoulderJ
+    400038: _20_-_RArmJ
+    400040: _21_-_RHandN
+    400042: _22_-_NeckN
+    400044: _23_-_HeadN
+    400046: _24_-_RHaveN
+    400048: _25_-_LHaveN
+    400050: _26_-_ThrowN
+    400052: _27_-_LFingerBaseN
+    400054: _28_-_LIndex1N
+    400056: _29_-_RFingerBaseN
+    400058: _30_-_RIndex1N
+    400060: _31_-_HatN
+    400062: _32_-_LMimiN
+    400064: _33_-_LMimiNb
+    400066: _34_-_RMimiN
+    400068: _35_-_RMimiNb
+    400070: _36_-_TailN
+    400072: _37_-_TailNb
+    400074: _38_-_TailNc
+    400076: _39_-_TailNd
+    400078: _40_-_HaveN
+    400080: _41_-_FaceN
+    400082: _42_-_FaceLLipUpperN
+    400084: _43_-_FaceLLipCornerN
+    400086: _44_-_FaceRLipUpperN
+    400088: _45_-_FaceRLipCornerN
+    400090: _46_-_FaceCLipUpperN
+    400092: _47_-_FaceJawN
+    400094: _48_-_FaceCLipLowerN
+    400096: _49_-_FaceLLipLowerN
+    400098: _50_-_FaceRLipLowerN
+    400100: _51_-_FaceTongueN
+    400102: _52_-_HLP_LArmTwistjb
+    400104: _53_-_HLP_LComaneciJc
+    400106: _54_-_HLP_LComaneciJc1
+    400108: _55_-_HLP_LElbowJb
+    400110: _56_-_HLP_LKneeJb
+    400112: _57_-_HLP_LSholJb
+    400114: _58_-_HLP_NeckJb
+    400116: _59_-_HLP_RArmTwistJb
+    400118: _60_-_HLP_RComaneciJc
+    400120: _61_-_HLP_RElbowJb
+    400122: _62_-_HLP_RKneeJb
+    400124: _63_-_HLP_RSholJb
+    400126: Body_VIS_O_OBJ_
+    400128: CameraHit_VIS_O_OBJ_
+    400130: CameraHit_VIS_O_OBJ_ 1
+    400132: CameraHit_VIS_O_OBJ_ 2
+    400134: EnvironmentAmbientLight
+    400136: hat_VIS_O_OBJ_NSC_
+    400138: //RootNode
+    400140: Pikachu_LEye_Anger_VIS_O_OBJ_
+    400142: Pikachu_LEye_Blink_VIS_O_OBJ_
+    400144: Pikachu_LEye_Down_VIS_O_OBJ_
+    400146: Pikachu_LEye_Guru_VIS_O_OBJ_
+    400148: Pikachu_LEye_Halfblink1_VIS_O_OBJ_
+    400150: Pikachu_LEye_Halfblink2_VIS_O_OBJ_
+    400152: Pikachu_LEye_Ouch_VIS_O_OBJ_
+    400154: Pikachu_LEye_Ouchb_VIS_O_OBJ_
+    400156: Pikachu_LEye_VIS_O_OBJ_
+    400158: Pikachu_Mouth_Anger_VIS_O_OBJ_
+    400160: Pikachu_Mouth_Anger_VIS_O_OBJ_ 1
+    400162: Pikachu_Mouth_Down_VIS_O_OBJ_
+    400164: Pikachu_Mouth_Down_VIS_O_OBJ_ 1
+    400166: Pikachu_Mouth_Downb_VIS_O_OBJ_
+    400168: Pikachu_Mouth_Downb_VIS_O_OBJ_ 1
+    400170: Pikachu_Mouth_He_VIS_O_OBJ_
+    400172: Pikachu_Mouth_He_VIS_O_OBJ_ 1
+    400174: Pikachu_Mouth_HeavyOuch_VIS_O_OBJ_
+    400176: Pikachu_Mouth_HeavyOuch_VIS_O_OBJ_ 1
+    400178: Pikachu_Mouth_Ho_VIS_O_OBJ_
+    400180: Pikachu_Mouth_Ho_VIS_O_OBJ_ 1
+    400182: Pikachu_Mouth_Ouch_VIS_O_OBJ_
+    400184: Pikachu_Mouth_Ouch_VIS_O_OBJ_ 1
+    400186: Pikachu_Mouth_result_VIS_O_OBJ_
+    400188: Pikachu_Mouth_result_VIS_O_OBJ_ 1
+    400190: Pikachu_Mouth_Talk_VIS_O_OBJ_
+    400192: Pikachu_Mouth_Talk_VIS_O_OBJ_ 1
+    400194: Pikachu_Mouth_Teeth_VIS_O_OBJ_
+    400196: Pikachu_Mouth_Teeth_VIS_O_OBJ_ 1
+    400198: Pikachu_Mouth_Teeth_VIS_O_OBJ_ 2
+    400200: Pikachu_Mouth_VIS_O_OBJ_
+    400202: Pikachu_Mouth_VIS_O_OBJ_ 1
+    400204: Pikachu_Mouth_VoiceA_VIS_O_OBJ_
+    400206: Pikachu_Mouth_VoiceA_VIS_O_OBJ_ 1
+    400208: Pikachu_Mouth_Wa_VIS_O_OBJ_
+    400210: Pikachu_Mouth_Wa_VIS_O_OBJ_ 1
+    400212: Pikachu_REye_Anger_VIS_O_OBJ_
+    400214: Pikachu_REye_Blink_VIS_O_OBJ_
+    400216: Pikachu_REye_Down_VIS_O_OBJ_
+    400218: Pikachu_REye_Guru_VIS_O_OBJ_
+    400220: Pikachu_REye_Halfblink1_VIS_O_OBJ_
+    400222: Pikachu_REye_Halfblink2_VIS_O_OBJ_
+    400224: Pikachu_REye_Ouch_VIS_O_OBJ_
+    400226: Pikachu_REye_Ouchb_VIS_O_OBJ_
+    400228: Pikachu_REye_VIS_O_OBJ_
+    2100000: _
+    2100002: _0
+    2100004: _8
+    2100006: _6
+    4300000: Body_VIS_O_OBJ_
+    4300002: CameraHit_VIS_O_OBJ_
+    4300004: CameraHit_VIS_O_OBJ_
+    4300006: CameraHit_VIS_O_OBJ_
+    4300008: Pikachu_LEye_VIS_O_OBJ_
+    4300010: Pikachu_LEye_Halfblink1_VIS_O_OBJ_
+    4300012: Pikachu_LEye_Halfblink2_VIS_O_OBJ_
+    4300014: Pikachu_LEye_Blink_VIS_O_OBJ_
+    4300016: Pikachu_LEye_Ouch_VIS_O_OBJ_
+    4300018: Pikachu_LEye_Down_VIS_O_OBJ_
+    4300020: Pikachu_LEye_Ouchb_VIS_O_OBJ_
+    4300022: Pikachu_LEye_Anger_VIS_O_OBJ_
+    4300024: Pikachu_LEye_Guru_VIS_O_OBJ_
+    4300026: Pikachu_REye_VIS_O_OBJ_
+    4300028: Pikachu_REye_Halfblink1_VIS_O_OBJ_
+    4300030: Pikachu_REye_Halfblink2_VIS_O_OBJ_
+    4300032: Pikachu_REye_Blink_VIS_O_OBJ_
+    4300034: Pikachu_REye_Ouch_VIS_O_OBJ_
+    4300036: Pikachu_REye_Down_VIS_O_OBJ_
+    4300038: Pikachu_REye_Ouchb_VIS_O_OBJ_
+    4300040: Pikachu_REye_Anger_VIS_O_OBJ_
+    4300042: Pikachu_REye_Guru_VIS_O_OBJ_
+    4300044: Pikachu_Mouth_VIS_O_OBJ_
+    4300046: Pikachu_Mouth_VIS_O_OBJ_
+    4300048: Pikachu_Mouth_Talk_VIS_O_OBJ_
+    4300050: Pikachu_Mouth_Talk_VIS_O_OBJ_
+    4300052: Pikachu_Mouth_Ouch_VIS_O_OBJ_
+    4300054: Pikachu_Mouth_Ouch_VIS_O_OBJ_
+    4300056: Pikachu_Mouth_Down_VIS_O_OBJ_
+    4300058: Pikachu_Mouth_Down_VIS_O_OBJ_
+    4300060: Pikachu_Mouth_Anger_VIS_O_OBJ_
+    4300062: Pikachu_Mouth_Anger_VIS_O_OBJ_
+    4300064: Pikachu_Mouth_He_VIS_O_OBJ_
+    4300066: Pikachu_Mouth_He_VIS_O_OBJ_
+    4300068: Pikachu_Mouth_Ho_VIS_O_OBJ_
+    4300070: Pikachu_Mouth_Ho_VIS_O_OBJ_
+    4300072: Pikachu_Mouth_Teeth_VIS_O_OBJ_
+    4300074: Pikachu_Mouth_Teeth_VIS_O_OBJ_
+    4300076: Pikachu_Mouth_Teeth_VIS_O_OBJ_
+    4300078: Pikachu_Mouth_HeavyOuch_VIS_O_OBJ_
+    4300080: Pikachu_Mouth_HeavyOuch_VIS_O_OBJ_
+    4300082: Pikachu_Mouth_Wa_VIS_O_OBJ_
+    4300084: Pikachu_Mouth_Wa_VIS_O_OBJ_
+    4300086: Pikachu_Mouth_Downb_VIS_O_OBJ_
+    4300088: Pikachu_Mouth_Downb_VIS_O_OBJ_
+    4300090: Pikachu_Mouth_VoiceA_VIS_O_OBJ_
+    4300092: Pikachu_Mouth_VoiceA_VIS_O_OBJ_
+    4300094: Pikachu_Mouth_result_VIS_O_OBJ_
+    4300096: Pikachu_Mouth_result_VIS_O_OBJ_
+    4300098: hat_VIS_O_OBJ_NSC_
+    9500000: //RootNode
+    13700000: Body_VIS_O_OBJ_
+    13700002: CameraHit_VIS_O_OBJ_
+    13700004: CameraHit_VIS_O_OBJ_ 1
+    13700006: CameraHit_VIS_O_OBJ_ 2
+    13700008: hat_VIS_O_OBJ_NSC_
+    13700010: Pikachu_LEye_Anger_VIS_O_OBJ_
+    13700012: Pikachu_LEye_Blink_VIS_O_OBJ_
+    13700014: Pikachu_LEye_Down_VIS_O_OBJ_
+    13700016: Pikachu_LEye_Guru_VIS_O_OBJ_
+    13700018: Pikachu_LEye_Halfblink1_VIS_O_OBJ_
+    13700020: Pikachu_LEye_Halfblink2_VIS_O_OBJ_
+    13700022: Pikachu_LEye_Ouch_VIS_O_OBJ_
+    13700024: Pikachu_LEye_Ouchb_VIS_O_OBJ_
+    13700026: Pikachu_LEye_VIS_O_OBJ_
+    13700028: Pikachu_Mouth_Anger_VIS_O_OBJ_
+    13700030: Pikachu_Mouth_Anger_VIS_O_OBJ_ 1
+    13700032: Pikachu_Mouth_Down_VIS_O_OBJ_
+    13700034: Pikachu_Mouth_Down_VIS_O_OBJ_ 1
+    13700036: Pikachu_Mouth_Downb_VIS_O_OBJ_
+    13700038: Pikachu_Mouth_Downb_VIS_O_OBJ_ 1
+    13700040: Pikachu_Mouth_He_VIS_O_OBJ_
+    13700042: Pikachu_Mouth_He_VIS_O_OBJ_ 1
+    13700044: Pikachu_Mouth_HeavyOuch_VIS_O_OBJ_
+    13700046: Pikachu_Mouth_HeavyOuch_VIS_O_OBJ_ 1
+    13700048: Pikachu_Mouth_Ho_VIS_O_OBJ_
+    13700050: Pikachu_Mouth_Ho_VIS_O_OBJ_ 1
+    13700052: Pikachu_Mouth_Ouch_VIS_O_OBJ_
+    13700054: Pikachu_Mouth_Ouch_VIS_O_OBJ_ 1
+    13700056: Pikachu_Mouth_result_VIS_O_OBJ_
+    13700058: Pikachu_Mouth_result_VIS_O_OBJ_ 1
+    13700060: Pikachu_Mouth_Talk_VIS_O_OBJ_
+    13700062: Pikachu_Mouth_Talk_VIS_O_OBJ_ 1
+    13700064: Pikachu_Mouth_Teeth_VIS_O_OBJ_
+    13700066: Pikachu_Mouth_Teeth_VIS_O_OBJ_ 1
+    13700068: Pikachu_Mouth_Teeth_VIS_O_OBJ_ 2
+    13700070: Pikachu_Mouth_VIS_O_OBJ_
+    13700072: Pikachu_Mouth_VIS_O_OBJ_ 1
+    13700074: Pikachu_Mouth_VoiceA_VIS_O_OBJ_
+    13700076: Pikachu_Mouth_VoiceA_VIS_O_OBJ_ 1
+    13700078: Pikachu_Mouth_Wa_VIS_O_OBJ_
+    13700080: Pikachu_Mouth_Wa_VIS_O_OBJ_ 1
+    13700082: Pikachu_REye_Anger_VIS_O_OBJ_
+    13700084: Pikachu_REye_Blink_VIS_O_OBJ_
+    13700086: Pikachu_REye_Down_VIS_O_OBJ_
+    13700088: Pikachu_REye_Guru_VIS_O_OBJ_
+    13700090: Pikachu_REye_Halfblink1_VIS_O_OBJ_
+    13700092: Pikachu_REye_Halfblink2_VIS_O_OBJ_
+    13700094: Pikachu_REye_Ouch_VIS_O_OBJ_
+    13700096: Pikachu_REye_Ouchb_VIS_O_OBJ_
+    13700098: Pikachu_REye_VIS_O_OBJ_
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
