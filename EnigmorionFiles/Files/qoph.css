@@ -395,20 +395,14 @@ a#puzzles-link {
 }
 
 #answer-box {
-    overflow: auto;
     margin-top: .5cm;
+	display: flex;
+	justify-content: space-between;
 }
 
     #answer-box .checker {
-        float: right;
         text-align: right;
     }
-	#answer-box .response {
-		float: right;
-		clear: right;
-		width: 12cm;
-		text-align: center;
-	}
 	#answer-box #answer-checker input[type='text'] {
 		width: 5cm;
 	}
@@ -416,8 +410,6 @@ a#puzzles-link {
 		display: flex;
     }
     #answers h3 {
-		text-align: left;
-        float: left;
         margin: 0;
         font-size: 16pt;
     }
@@ -426,33 +418,36 @@ a#puzzles-link {
         float: left;
         margin: 0;
     }
-    #answers .correct {
-        color: hsl(120, 50%, 47%);
-    }
-    #answers .wrong {
-        color: hsl(0, 50%, 47%);
-    }
-    #answers .almost {
-        color: hsl(60, 50%, 35%);
-    }
-    #answers .message {
-        font-size: 24pt;
-        font-weight: bold;
-    }
     #answers .answer {
         font-size: 16pt;
     }
-    #answers .unlocked {
+
+	#answer-box #answer-message {
+		text-align: center;
+	}
+    #answer-box .unlocked {
         background: white;
         border-radius: 1cm;
         margin: .5cm auto;
-        max-width: 15cm;
-        padding: .3cm;
+        max-width: 12cm;
+        padding: .3cm .5cm;
+    }
+    #answer-box .correct {
+        color: hsl(120, 50%, 47%);
+    }
+    #answer-box .wrong {
+        color: hsl(0, 50%, 47%);
+    }
+    #answer-box .almost {
+        color: hsl(60, 50%, 35%);
+    }
+    #answer-box .message {
+        font-size: 24pt;
+        font-weight: bold;
     }
 
 .ajax-message {
     max-width: 11cm;
-    margin: 0 0 0 auto;
 }
     .ajax-message > div {
         text-align: center;

@@ -117,12 +117,32 @@ makeSolutionPage('have-you-tried', `
 </tr>
 <tr class='ih r-b3a'>
 	<td class='n'>4</td>
-	<td class='e'>{-b4x <div>
+	<td class='e'>{-b4a <div><a href='http://www.kostis.net/charsets/ebc037.htm'>EBCDIC 037</a></div>}</td>
+	<td class='d'>
+		<p>We’re venturing into the world of “alleged character sets used on IBM dinosaurs” (Eric S. Raymond). Unfortunately the Wikipedia page only shows EBCDIC codes in hexadecimal in its tables, [sb4a but your third or fourth Google hit for “EBCDIC 037” might link to a page similar to the one we linked here which includes the decimal equivalents.]</p>
+		{-b4a <div class='result-block'><table class="result"><tr class="d"><td>198</td><td>214</td><td>228</td><td>217</td><td>227</td><td>200</td></tr><tr class="l"><td>F</td><td>O</td><td>U</td><td>R</td><td>T</td><td>H</td></tr></table><table class="result"><tr class="d"><td>64</td></tr><tr class="l"><td>&nbsp;</td></tr></table><table class="result odd"><tr class="d"><td>126</td></tr><tr class="l"><td>=</td></tr></table><table class="result"><tr class="d"><td>64</td></tr><tr class="l"><td>&nbsp;</td></tr></table><table class="result odd"><tr class="d"><td>243</td><td>144</td><td>243</td><td>125</td><td>245</td><td>247</td><td>127</td><td>213</td></tr><tr class="l"><td>3</td><td>°</td><td>3</td><td>'</td><td>5</td><td>7</td><td>"</td><td>N</td></tr></table><table class="result odd"><tr class="d"><td>64</td></tr><tr class="l"><td>&nbsp;</td></tr></table><table class="result"><tr class="d"><td>241</td><td>240</td><td>241</td><td>144</td><td>242</td><td>249</td><td>125</td><td>197</td></tr><tr class="l"><td>1</td><td>0</td><td>1</td><td>°</td><td>2</td><td>9</td><td>'</td><td>E</td></tr></table><table class="result"><tr class="d"><td>64</td></tr><tr class="l"><td>&nbsp;</td></tr></table><table class="result odd"><tr class="d"><td>213</td><td>214</td><td>230</td></tr><tr class="l"><td>N</td><td>O</td><td>W</td></tr></table><table class="result"><tr class="d"><td>64</td></tr><tr class="l"><td>&nbsp;</td></tr></table><table class="result odd"><tr class="d"><td>195</td><td>200</td><td>197</td><td>212</td></tr><tr class="l"><td>C</td><td>H</td><td>E</td><td>M</td></tr></table></div>}
+	</td>
+	<td class='d ih r-b4a'>
+		<p>Those codes [d look like GPS coordinates, so [s looking it up on Google Maps or similar will quickly reveal [rb4b that they point at a place called “I-City”.]]]</p>
+	</td>
+	<td class='r ih r-b4b'>I</td>
+</tr>
+<tr class='ih r-b4a'>
+	<td class='n'>5</td>
+	<td class='e'>{-b5x <div><a href='https://en.wikipedia.org/wiki/List_of_chemical_elements'>Periodic Table</a></div>}</td>
+	<td class='d'>
+		<p>The hint from the previous section implies [db5x that we need to use chemical elements now. Since each chemical element comes with a number (the atomic number) and one or two letters (the element symbol), we need to separate out the digits in such a way that the element symbols read out a meaningful English sentence.]</p>
+		{-b5x <p>This is certainly the hardest section of this puzzle because every two-digit combination and every singular digit translates to a possible chemical element, but there are ways to expedite this: (1) the previous phrases [o had «FIRST», «SECOND», etc. in them, and [s there is only one way to write «IFTH» after an «F»; and (2) the previous phrases [o all had «NOW» in them. Turns out [sb5a there’s only one chemical element with a «W» in it.]]]]</p>}
+		{-b5a <div class='result-block' id='xx'></div>}
+	</td>
+	<td class='d ih r-b5b'>
+		<p>?</td>
+	</td>
+	<td class='r ih r-b5b'>N</td>
 </tr>
 </table>
 
 <div style='height: 5cm;'></div>
-<div style='font-family: Consolas; letter-spacing: .07cm'>1982142282172272006412664243144243125245247127213642412402411442422491251976421321423064195200197212</div>
 <div style='font-family: Consolas; letter-spacing: .07cm'>3989214887516921568595399053169587909085531613168785878742772368431927191689927889892869210988371839</div>
 <div style='font-family: Consolas; letter-spacing: .07cm'>1885191119113732151879785521469173751129188534323291172911929191137529871191501231175213493732347721</div>
 <div style='font-family: Consolas; letter-spacing: .07cm'>1296294347162943298329137841174313764329462912197876171372471629134796794329481723482913721748412946</div>
@@ -133,11 +153,11 @@ makeSolutionPage('have-you-tried', `
 </script>
 
 <script>
-	let encoded = '135 13 1 13456 1456 24 1235 145 24 234 124 1235 136 24 2345 3456 14 145 14 125 1345 246 136 234 15 15 12 14 145 24 14 3456 245 14 1245'.split(' ');
-	let msg = 'O K A Y;TH I R D;I S;F R U I T; 3 4 3 8;N OW;U S E;E B C D I C; 0 3 7'.split(';').map(word => word.split(' '));
-	let cwl = msg.map((str, ix) => msg.slice(0, ix).reduce((p, n) => p+n.length, 0));
-	console.log(cwl);
-	let html = `<div class='result-block'>${msg.map((word, wordIx) => `<table class='result${cwl[wordIx] % 2 ? ' odd' : ''}'><tr class='d'>${word.map((ch, chIx) => `<td>${encoded[cwl[wordIx]+chIx]}</td>`).join('')}</tr><tr class='l'>${word.map(ch => `<td>${ch}</td>`).join('')}</tr></table>`).join('')}</div>`;
-	document.getElementById('c-17').innerHTML = html;
-	console.log(html);
+	//let encoded = '198 214 228 217 227 200 64 126 64 243 144 243 125 245 247 127 213 64 241 240 241 144 242 249 125 197 64 213 214 230 64 195 200 197 212'.split(' ');
+	//let msg = 'FOURTH _ = _ 3°3\'57"N _ 101°29\'E _ NOW _ CHEM'.split(' ').map(word => word.split(''));
+	//let cwl = msg.map((str, ix) => msg.slice(0, ix).reduce((p, n) => p+n.length, 0));
+	//console.log(cwl);
+	//let html = `<div class='result-block'>${msg.map((word, wordIx) => `<table class='result${cwl[wordIx] % 2 ? ' odd' : ''}'><tr class='d'>${word.map((ch, chIx) => `<td>${encoded[cwl[wordIx]+chIx]}</td>`).join('')}</tr><tr class='l'>${word.map(ch => `<td>${ch === '_' ? ' ' : ch}</td>`).join('')}</tr></table>`).join('')}</div>`;
+	//document.getElementById('xx').innerHTML = html;
+	//console.log(html);
 </script>
