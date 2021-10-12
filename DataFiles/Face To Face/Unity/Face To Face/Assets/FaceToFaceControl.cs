@@ -34,11 +34,8 @@ public class FaceToFaceControl : MonoBehaviour
         for (var ix = 0; ix < 5; ix++)
         {
             t.Room.Doors[ix].transform.Set(Data.DoorPositions[ix], new Vector3(1, 1, 1));
-            t.Room.CyanNumbers[ix].transform.parent = t.Room.transform;
-            t.Room.CyanNumbers[ix].transform.Set(Data.CyanNumbersPositions[ix], new Vector3(.01f, .01f, .01f));
-            t.Room.CyanNumbers[ix].transform.parent = t.Room.Doors[ix].transform;
-            t.Room.PinkNumbers1[ix].transform.Set(Data.PinkNumbers1Positions[ix], new Vector3(.013f, .013f, .013f));
-            t.Room.PinkNumbers2[ix].transform.Set(Data.PinkNumbers2Positions[ix], new Vector3(.013f, .013f, .013f));
+            t.Room.CyanNumbers1[ix].transform.Set(Data.CyanNumbers1Positions[ix], new Vector3(.013f, .013f, .013f));
+            t.Room.CyanNumbers2[ix].transform.Set(Data.CyanNumbers2Positions[ix], new Vector3(.013f, .013f, .013f));
         }
     }
 #endif

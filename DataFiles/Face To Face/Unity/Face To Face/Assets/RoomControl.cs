@@ -6,9 +6,8 @@ public partial class RoomControl : MonoBehaviour
 {
     public AudioClip[] AudioClips;
     public GameObject[] Walls;
-    public TextMesh[] CyanNumbers;
-    public TextMesh[] PinkNumbers1;
-    public TextMesh[] PinkNumbers2;
+    public TextMesh[] CyanNumbers1;
+    public TextMesh[] CyanNumbers2;
     public GameObject[] DoorSigns;
     public TextMesh[] DoorSignTexts;
     public GameObject[] Doors;
@@ -22,6 +21,7 @@ public partial class RoomControl : MonoBehaviour
     public float[] DoorRotationsY;
     public Material[] CarpetMaterials;
     public MeshRenderer[] Carpets;
+    public GameObject[] LampBroModels;
 
     public void SetRoom(int faceIx, int edgeIx, bool setCamera, bool setAllWalls = false)
     {
@@ -32,17 +32,19 @@ public partial class RoomControl : MonoBehaviour
 
         for (var i = 0; i < 5; i++)
         {
-            CyanNumbers[i].gameObject.SetActive(Data.Faces[faceIx].Edges[i].CyanNumber != null);
-            CyanNumbers[i].text = Data.Faces[faceIx].Edges[i].CyanNumber.ToString();
-            PinkNumbers1[i].gameObject.SetActive(Data.Faces[faceIx].Edges[i].PinkNumber != null);
-            PinkNumbers1[i].text = Data.Faces[faceIx].Edges[i].PinkNumber.ToString();
-            PinkNumbers2[i].gameObject.SetActive(Data.Faces[faceIx].Edges[i].PinkNumber != null);
-            PinkNumbers2[i].text = Data.Faces[faceIx].Edges[i].PinkNumber.ToString();
+            CyanNumbers1[i].gameObject.SetActive(Data.Faces[faceIx].Edges[i].PinkNumber != null);
+            CyanNumbers1[i].text = Data.Faces[faceIx].Edges[i].PinkNumber.ToString();
+            CyanNumbers2[i].gameObject.SetActive(Data.Faces[faceIx].Edges[i].PinkNumber != null);
+            CyanNumbers2[i].text = Data.Faces[faceIx].Edges[i].PinkNumber.ToString();
             Doors[i].transform.localEulerAngles = new Vector3(0, DoorRotationsY[i], 0);
             DoorSigns[i].SetActive(Data.Faces[faceIx].Edges[i].Label != null);
             DoorSignTexts[i].text = Data.Faces[faceIx].Edges[i].Label ?? "";
             DoorSignTexts[i].fontSize = Data.Faces[faceIx].Edges[i].LabelFontSize ?? 18;
         }
+
+        for (var i = 0; i < LampBroModels.Length; i++)
+            if (LampBroModels[i] != null)
+                LampBroModels[i].gameObject.SetActive(Data.Faces[faceIx].LampBro == i);
 
         RadioAudio.clip = AudioClips[faceIx];
         Light.intensity = Data.LightIntensity;

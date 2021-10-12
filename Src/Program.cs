@@ -37,7 +37,7 @@ namespace Qoph
 
             FaceToFace.Planning();
             FaceToFace.GatherAllData();
-            FaceToFace.GenerateModels();
+            //FaceToFace.GenerateModels();
 
 
             Console.WriteLine("Done.");

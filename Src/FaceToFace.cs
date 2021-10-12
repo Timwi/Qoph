@@ -55,14 +55,13 @@ namespace Qoph
                 (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "LAMP", faces: new[] { 8, 11, 0, 1 }, color: 1),
                 (word: "BROS", faces: new[] { 15, 12, 16, 19 }, color: 2),
-                (word: "WDFGHJKNCYTVUXZ", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 17, 18, 6, 20, 21, 23 }, color: null));
-        private static readonly DistrInfo _smashChars = new DistrInfo("Smash Bros characters", "PINK SUM",
+                (word: "EDFGHJKNIYTVUXZ", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 17, 18, 6, 20, 21, 23 }, color: null));
+        private static readonly DistrInfo _smashChars = new DistrInfo("Smash Bros characters", "CYAN SUM",
                 (word: "Q", faces: new[] { 22 }, color: 0),
-                (word: "GET", faces: new[] { 8, 11, 0 }, color: 1),
-                (word: "PINK", faces: new[] { 1, 15, 12, 16 }, color: 2),
-                (word: "SUM", faces: new[] { 19, 9, 4 }, color: 3),
-                (word: "ABHDJLOFRVZYX", faces: new[] { 2, 3, 5, 7, 10, 13, 14, 6, 17, 18, 20, 21, 23 }, color: null));
-        private static readonly DistrInfo _pinkSums = new DistrInfo("Vertex sums (pink numbers)", "LYRICS NEXT WORD",
+                (word: "CYAN", faces: new[] { 8, 11, 0, 1 }, color: 1),
+                (word: "SUM", faces: new[] { 15, 12, 16 }, color: 2),
+                (word: "TKHDLVOBRJZGXWPF", faces: new[] { 2, 3, 5, 7, 10, 13, 14, 6, 17, 18, 20, 21, 23, 19, 9, 4 }, color: null));
+        private static readonly DistrInfo _cyanSums = new DistrInfo("Vertex sums (cyan numbers)", "LYRICS NEXT WORD",
                 (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "LYRICS", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: 1),
                 (word: "NEXT", faces: new[] { 14, 13, 5, 4 }, color: 2),
@@ -85,7 +84,7 @@ namespace Qoph
                 (word: "INDX", faces: new[] { 23, 3, 2, 17 }, color: 2),
                 (word: "FGHJKLMSUVWYZ", faces: new[] { 4, 5, 6, 7, 9, 10, 13, 14, 16, 18, 19, 20, 21 }, color: null));
 
-        private static readonly DistrInfo[] _distributions = new[] { _carpetColors, _smashChars, _pinkSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
+        private static readonly DistrInfo[] _distributions = new[] { _carpetColors, _smashChars, _cyanSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
 
         private static readonly string[] _carpetColorNames = "WHITE,AQUA,AZURE,FUCHSIA,JADE,VIOLET,ONYX,PINK,GAMBOGE".Split(',');
 
@@ -693,8 +692,7 @@ h3 {{ font-size: 14pt; }}
             public int AdjacentFace;
             public int AdjacentEdge;
             public bool Locked;
-            public int? CyanNumber;  // on the door
-            public int? PinkNumber;  // in the corner where this edge starts (clockwise from the door)
+            public int? CyanNumber;  // in the corner where this edge starts (clockwise from the door)
             public string CrosswordInfo;    // could be crossword clue or offset
             public int CrosswordInfoFontSize;
             public EdgeD Edge;
@@ -710,6 +708,10 @@ h3 {{ font-size: 14pt; }}
             public string SongTitle;
             public string SongLyrics;
             public string SongNextWord;
+            public int LampBro;
+
+            public static readonly string[] LampBroNames = { "Mario", "Donkey Kong", "Link", "Samus", "Yoshi", "Kirby", "Fox", "Pikachu", "Luigi", "Ness", "Captain Falcon", "Jigglypuff", "Peach", "Bowser", "Ice Climbers", "Sheik", "Zelda", "Dr. Mario", "Pichu", "Falco", "Marth", "Young Link", "Ganondorf", "Mewtwo", "Roy Fire Emblem", "Mr. Game & Watch" };
+            public string LampBroName => LampBroNames[LampBro - 1];
         }
 
         private static int getFaceValue(int face, DistrInfo distr) => distr.Distribution.Select(d => new { Data = d, Ix = d.faces.IndexOf(face) }).Where(inf => inf.Ix != -1).Single().Apply(inf => inf.Data.word[inf.Ix] - 'A' + 1);
@@ -719,21 +721,21 @@ h3 {{ font-size: 14pt; }}
             var faceInfos = GetFaceData();
 
             var maplePieces = new List<string>();
-            var pinkCorners = new List<((int faceIx, int vertexIx)[] adj, int pinkNumber)>();
+            var cyanCorners = new List<((int faceIx, int vertexIx)[] adj, int cyanNumber)>();
             for (var faceIx = 0; faceIx < faceInfos.Length; faceIx++)
             {
                 var face = faceInfos[faceIx];
                 for (var vertexIx = 0; vertexIx < face.Edges.Length; vertexIx++)
                 {
                     var edge = face.Edges[vertexIx];
-                    if (edge.PinkNumber == null)
+                    if (edge.CyanNumber == null)
                         continue;
                     var vertex = _polyhedron.Faces[faceIx][vertexIx];
                     var adjoiningFaces = _polyhedron.Faces.SelectIndexWhere(f => f.Contains(vertex)).ToArray();
                     if (faceIx != adjoiningFaces.Min())
                         continue;
-                    maplePieces.Add($"{adjoiningFaces.Select(ix => $"f{ix}").JoinString("+")}={edge.PinkNumber.Value}");
-                    pinkCorners.Add((adjoiningFaces.Select(f => (f, _polyhedron.Faces[f].IndexOf(vertex))).ToArray(), edge.PinkNumber.Value));
+                    maplePieces.Add($"{adjoiningFaces.Select(ix => $"f{ix}").JoinString("+")}={edge.CyanNumber.Value}");
+                    cyanCorners.Add((adjoiningFaces.Select(f => (f, _polyhedron.Faces[f].IndexOf(vertex))).ToArray(), edge.CyanNumber.Value));
                 }
             }
             //Clipboard.SetText($"solve({{{maplePieces.JoinString(", ")}}}, {{{Enumerable.Range(0, 24).Select(i => $"f{i}").JoinString(", ")}}});");
@@ -745,9 +747,9 @@ h3 {{ font-size: 14pt; }}
                     $@"CarpetColor = ""{fi.CarpetColor.ToLowerInvariant().CLiteralEscape()}"", " +
                     $@"CarpetLength = {fi.CarpetColorIndex}, " +
                     $@"ItemInBox = ""{fi.GashlycrumbTiniesObject.CLiteralEscape()}"", " +
+                    $@"LampBro = {fi.LampBro}, " +
                     $@"Edges = new[] {{ {fi.Edges.Select(e => $@"new Edge {{ {Ut.NewArray(
-                        e.CyanNumber.NullOr(c => $"CyanNumber = {c}"),
-                        e.PinkNumber.NullOr(p => $"PinkNumber = {p}"),
+                        e.CyanNumber.NullOr(p => $"CyanNumber = {p}"),
                         e.Locked && e.CrosswordInfo != null ? $@"Label = ""{e.CrosswordInfo.CLiteralEscape()}"", LabelFontSize = {e.CrosswordInfoFontSize}" : null,
                         e.Locked ? null : $"Face = {e.AdjacentFace}").Where(str => str != null).JoinString(", ")} }}").JoinString(", ")} }} }}").JoinString(", ")} }}");
 
@@ -758,23 +760,23 @@ h3 {{ font-size: 14pt; }}
                     $@"v: [ {_distributions.Select(dist => getFaceValue(fIx, dist)).JoinString(", ")} ], " +
                     $@"cc: ""{fi.CarpetColor.ToUpperInvariant().CLiteralEscape()}"", " +
                     $@"ci: {fi.CarpetColorIndex}, " +
+                    $@"lb: {fi.LampBro}, " +
                     $@"s: {{ t: ""{fi.SongTitle.CLiteralEscape()}"", l: ""{fi.SongLyrics}"", n: ""{fi.SongNextWord}"" }}, " +
                     $@"item: ""{Regex.Replace(fi.GashlycrumbTiniesObject, @"""(.*?)""", m => $"“{m.Groups[1].Value}”").CLiteralEscape()}"", " +
                     $@"e: [ {fi.Edges.Select(e => $@"{{ {Ut.NewArray(
-                        e.CyanNumber.NullOr(c => $"cn: {c}"),
-                        e.PinkNumber.NullOr(p => $"pn: {p}"),
+                        e.CyanNumber.NullOr(p => $"pn: {p}"),
                         e.CrosswordInfo.NullOr(c => $@"cm: ""{("+-".Contains(e.CrosswordInfo[0]) ? e.CrosswordInfo.Replace("-", "−") : "(clue)").CLiteralEscape()}"""),
                         e.CrosswordInfo.NullOr(c => $"cmx: {e.Edge.Midpoint.X:.00}"),
                         e.CrosswordInfo.NullOr(c => $"cmy: {e.Edge.Midpoint.Y:.00}"),
                         e.CrosswordInfo.NullOr(c => $"cma: {e.Edge.AngleDeg:.00}"),
                         $"face: {e.AdjacentFace}").Where(str => str != null).JoinString(", ")} }}").JoinString(", ")} ] }}").JoinString(",\n\t")}]");
 
-            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"<!--PinkCorners-start-->", @"<!--PinkCorners-end-->",
-                pinkCorners.SelectMany(corner => corner.adj
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"<!--CyanCorners-start-->", @"<!--CyanCorners-end-->",
+                cyanCorners.SelectMany(corner => corner.adj
                     .Select(inf => (p: faceInfos[inf.faceIx].Edges[inf.vertexIx].Edge.Start, prevP: faceInfos[inf.faceIx].Edges[(inf.vertexIx + 4) % 5].Edge.Start, nextP: faceInfos[inf.faceIx].Edges[inf.vertexIx].Edge.End))
                     .Select(inf => (inf.p, vector: (inf.prevP - inf.p).Unit() + (inf.nextP - inf.p).Unit()))
                     .Select(inf => (p: inf.p + .1 * inf.vector.Unit(), angle: inf.vector.Theta() * 180 / Math.PI))
-                    .Select(inf => $"<text transform='translate({inf.p.X:.00} {inf.p.Y:.00}) rotate({inf.angle - 90:.00})' y='.06'>{corner.pinkNumber}</text>")).JoinString());
+                    .Select(inf => $"<text transform='translate({inf.p.X:.00} {inf.p.Y:.00}) rotate({inf.angle - 90:.00})' y='.06'>{corner.cyanNumber}</text>")).JoinString());
 
             General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"/\*DoorInfo-start\*/", @"/\*DoorInfo-end\*/",
                 $@"[ {_crosswordLights.Select(cl => $@"{{ w: ""{cl.word}"", l: ""{cl.clue.Replace("\n", " ").CLiteralEscape()}"", c: [ {cl.cells.JoinString(", ")} ], e: {faceInfos[cl.cells[0]].Edges.IndexOf(e => e.CrosswordInfo == cl.clue)} }}").JoinString(", ")} ]");
@@ -784,11 +786,11 @@ h3 {{ font-size: 14pt; }}
                 File.Copy($@"D:\c\Qoph\DataFiles\Face To Face\SongRadiofied\{faceInfos[i].SongFilename}.mp3", $@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\RadioSongs\radio{i}.mp3", overwrite: true);
 
             // Google Sheets
-            Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{(f.Edges[edge].Locked ? f.Edges[edge].CrosswordInfo.Apply(ci => string.IsNullOrWhiteSpace(ci) ? "" : !"+-".Contains(ci[0]) ? ci.Replace("\n", " ") : $"‘{ci}’") : f.Edges[edge].AdjacentFace.ToString())}\t{(f.Edges[edge].Locked ? "" : f.Edges[edge].AdjacentEdge.ToString())}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].PinkNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex}\t{f.SongTitle}\t{f.GashlycrumbTiniesObject}").JoinString("\n"));
+            Clipboard.SetText(faceInfos.Select((f, ix) => $"{ix}\t{Enumerable.Range(0, 5).Select(edge => $"{(f.Edges[edge].Locked ? f.Edges[edge].CrosswordInfo.Apply(ci => string.IsNullOrWhiteSpace(ci) ? "" : !"+-".Contains(ci[0]) ? ci.Replace("\n", " ") : $"‘{ci}’") : f.Edges[edge].AdjacentFace.ToString())}\t{(f.Edges[edge].Locked ? "" : f.Edges[edge].AdjacentEdge.ToString())}").JoinString("\t")}\t{Enumerable.Range(0, 5).Select(edge => f.Edges[edge].CyanNumber).JoinString("\t")}\t{f.CarpetColor}\t{f.CarpetColorIndex}\t{f.SongTitle}\t{f.GashlycrumbTiniesObject}\t{f.LampBroName}").JoinString("\n"));
         }
 
         // Cached here because generating this takes several seconds. Generated from random seed 47, git commit 4ebc757c65e5165e2dac6ba5440ed8d24f98fa3f
-        private static readonly int?[][] _pinkNumbers = new int?[][]
+        private static readonly int?[][] _cyanNumbers = new int?[][]
         {
             new int?[] { 41, 40, null, null, 47 },
             new int?[] { 41, 22, null, 33, 40 },
@@ -884,70 +886,52 @@ h3 {{ font-size: 14pt; }}
                 faceInfos[faceIx].Edges[barEdge].CrosswordInfoFontSize = 32;
             }
 
-            // Cyan numbers (edge sums)
+            // Lamp Bros
+            for (var faceIx = 0; faceIx < 24; faceIx++)
+                faceInfos[faceIx].LampBro = getFaceValue(faceIx, _smashChars);
+
+            // Cyan numbers (vertex sums)
             var rnd = new Random(47);
-
-            var cyanClues = faceInfos
-                .SelectMany((face, faceIx) => face.Edges.Select(edge => (face1: faceIx, face2: edge.AdjacentFace, sum: getFaceValue(faceIx, _smashChars) + getFaceValue(edge.AdjacentFace, _smashChars))))
-                .ToArray()
-                .Shuffle(rnd);
-
-            var requiredCyanClues = Ut.ReduceRequiredSet(cyanClues, skipConsistencyTest: true, test: state =>
+            if (_cyanNumbers == null)
             {
-                var puzzle = new Puzzle(_polyhedron.Faces.Length, 0, 26);
-                foreach (var (face1, face2, sum) in state.SetToTest)
-                    puzzle.AddConstraint(new SumConstraint(sum, new[] { face1, face2 }));
-                return !puzzle.Solve().Skip(1).Any();
-            })
-                .ToArray();
-
-            foreach (var (face1, face2, sum) in requiredCyanClues)
-            {
-                faceInfos[face1].Edges[faceInfos[face1].Edges.IndexOf(e => e.AdjacentFace == face2)].CyanNumber = sum;
-                faceInfos[face2].Edges[faceInfos[face2].Edges.IndexOf(e => e.AdjacentFace == face1)].CyanNumber = sum;
-            }
-
-            // Pink numbers (vertex sums)
-            if (_pinkNumbers == null)
-            {
-                var pinkCluesRaw =
+                var cyanCluesRaw =
                     from faceIx in Enumerable.Range(0, _polyhedron.Faces.Length)
                     from edgeIx in Enumerable.Range(0, 5)
                     let vertex = _polyhedron.Faces[faceIx][edgeIx]
                     let adjoiningFaces = _polyhedron.Faces.SelectIndexWhere(f => f.Contains(vertex))
-                    select (faces: adjoiningFaces.ToArray(), sum: adjoiningFaces.Sum(f => getFaceValue(f, _pinkSums)));
-                var pinkClues = pinkCluesRaw.Where(cl => cl.faces[0] == cl.faces.Min()).ToArray();
+                    select (faces: adjoiningFaces.ToArray(), sum: adjoiningFaces.Sum(f => getFaceValue(f, _cyanSums)));
+                var cyanClues = cyanCluesRaw.Where(cl => cl.faces[0] == cl.faces.Min()).ToArray();
 
                 Puzzle makePuzzle(IEnumerable<int> clues)
                 {
                     var puzzle = new Puzzle(_polyhedron.Faces.Length, 0, 50);
                     foreach (var i in clues)
-                        puzzle.AddConstraint(new SumConstraint(pinkClues[i].sum, pinkClues[i].faces));
+                        puzzle.AddConstraint(new SumConstraint(cyanClues[i].sum, cyanClues[i].faces));
                     return puzzle;
                 }
-                if (makePuzzle(Enumerable.Range(0, pinkClues.Length)).Solve().Skip(1).Any())
+                if (makePuzzle(Enumerable.Range(0, cyanClues.Length)).Solve().Skip(1).Any())
                     Debugger.Break();
 
-                var requiredPinkClues = Ut.ReduceRequiredSet(Enumerable.Range(0, pinkClues.Length).ToArray().Shuffle(rnd), skipConsistencyTest: true, test: state =>
+                var requiredCyanClues = Ut.ReduceRequiredSet(Enumerable.Range(0, cyanClues.Length).ToArray().Shuffle(rnd), skipConsistencyTest: true, test: state =>
                 {
-                    Console.WriteLine(Enumerable.Range(0, pinkClues.Length).Select(i => state.SetToTest.Contains(i) ? "█" : "░").JoinString());
+                    Console.WriteLine(Enumerable.Range(0, cyanClues.Length).Select(i => state.SetToTest.Contains(i) ? "█" : "░").JoinString());
                     return !makePuzzle(state.SetToTest).Solve().Skip(1).Any();
                 })
-                    .Select(ix => pinkClues[ix])
+                    .Select(ix => cyanClues[ix])
                     .ToArray();
 
-                foreach (var (faces, sum) in requiredPinkClues)
+                foreach (var (faces, sum) in requiredCyanClues)
                 {
                     var commonVertex = Enumerable.Range(0, _polyhedron.Vertices.Length).Single(vIx => faces.All(f => _polyhedron.Faces[f].Contains(vIx)));
                     for (var faceIx = 0; faceIx < _polyhedron.Faces.Length; faceIx++)
                         if (_polyhedron.Faces[faceIx].Contains(commonVertex))
-                            faceInfos[faceIx].Edges[_polyhedron.Faces[faceIx].IndexOf(commonVertex)].PinkNumber = sum;
+                            faceInfos[faceIx].Edges[_polyhedron.Faces[faceIx].IndexOf(commonVertex)].CyanNumber = sum;
                 }
             }
             else
                 for (var fIx = 0; fIx < faceInfos.Count; fIx++)
                     for (var eIx = 0; eIx < faceInfos[fIx].Edges.Length; eIx++)
-                        faceInfos[fIx].Edges[eIx].PinkNumber = _pinkNumbers[fIx][eIx];
+                        faceInfos[fIx].Edges[eIx].CyanNumber = _cyanNumbers[fIx][eIx];
 
             return faceInfos.ToArray();
         }
@@ -967,14 +951,13 @@ h3 {{ font-size: 14pt; }}
             const double cameraHeightLook = .2;
             const double inCameraHeight = .275;
             const double inCameraHeightLook = .13;
-            const double cyanNumberHeight = .28;
-            const double pinkNumberHeight = .365;
+            const double cyanNumberHeight = .365;
 
             var outCameras = new List<(Pt from, Pt to)>();
             var inCameras = new List<(Pt from, Pt to)>();
             var cyanNumbers = new List<(Pt from, Pt to)>();
-            var pinkNumbers1 = new List<(Pt from, Pt to)>();
-            var pinkNumbers2 = new List<(Pt from, Pt to)>();
+            var cyanNumbers1 = new List<(Pt from, Pt to)>();
+            var cyanNumbers2 = new List<(Pt from, Pt to)>();
             var doors = new List<(Pt from, Pt to)>();
             var wallPositions = new List<Pt>();
 
@@ -1025,20 +1008,19 @@ h3 {{ font-size: 14pt; }}
                     (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * inCameraDistance).h(inCameraHeightLook)));
                 var cyanMid = .49 * p2 + .51 * p1;
 
-                cyanNumbers.Add(((mid + (p2 - p1).Normal().Unit() * 0.0026).h(cyanNumberHeight), (mid - (p2 - p1).Normal().Unit() * .1).h(cyanNumberHeight)));
-                // pink number on the right side of the wall
-                pinkNumbers1.Add(((p1 + (p2 - p1).Normal().Unit() * .0001).h(pinkNumberHeight), (p1 - (p2 - p1).Normal().Unit() * .1).h(pinkNumberHeight)));
-                // pink number on the left side of the wall
-                pinkNumbers2.Add(((p2 + (p2 - p1).Normal().Unit() * .0001).h(pinkNumberHeight), (p2 - (p2 - p1).Normal().Unit() * .1).h(pinkNumberHeight)));
+                // cyan number on the right side of the wall
+                cyanNumbers1.Add(((p1 + (p2 - p1).Normal().Unit() * .0001).h(cyanNumberHeight), (p1 - (p2 - p1).Normal().Unit() * .1).h(cyanNumberHeight)));
+                // cyan number on the left side of the wall
+                cyanNumbers2.Add(((p2 + (p2 - p1).Normal().Unit() * .0001).h(cyanNumberHeight), (p2 - (p2 - p1).Normal().Unit() * .1).h(cyanNumberHeight)));
 
                 doors.Add((left.h(doorHeight / 2), (left - (p2 - p1).Normal().Unit()).h(doorHeight / 2)));
                 wallPositions.Add(pt(-mid.X, 0, mid.Y));
                 ix++;
             }
 
-            // Note that pinkNumbers2 are on the left side of wall x. But we want them on the vertex on the right side of the wall (because edges go widdershins), so cycle them over by one
-            pinkNumbers2.Insert(0, pinkNumbers2.Last());
-            pinkNumbers2.RemoveAt(pinkNumbers2.Count - 1);
+            // Note that cyanNumbers2 are on the left side of wall x. But we want them on the vertex on the right side of the wall (because edges go widdershins), so cycle them over by one
+            cyanNumbers2.Insert(0, cyanNumbers2.Last());
+            cyanNumbers2.RemoveAt(cyanNumbers2.Count - 1);
 
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Floor.obj",
                 GenerateObjFile(new[] { poly.Select(p => pt(p.X, 0, p.Y).WithTexture(p.X, p.Y)).ToArray() }, "Floor", AutoNormal.Flat));
@@ -1050,8 +1032,8 @@ h3 {{ font-size: 14pt; }}
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*CameraPositions-start\*/", @"/\*CameraPositions-end\*/", makeArray(outCameras));
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*InCameraPositions-start\*/", @"/\*InCameraPositions-end\*/", makeArray(inCameras));
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*CyanNumbersPositions-start\*/", @"/\*CyanNumbersPositions-end\*/", makeArray(cyanNumbers));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*PinkNumbers1Positions-start\*/", @"/\*PinkNumbers1Positions-end\*/", makeArray(pinkNumbers1));
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*PinkNumbers2Positions-start\*/", @"/\*PinkNumbers2Positions-end\*/", makeArray(pinkNumbers2));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*CyanNumbers1Positions-start\*/", @"/\*CyanNumbers1Positions-end\*/", makeArray(cyanNumbers1));
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*CyanNumbers2Positions-start\*/", @"/\*CyanNumbers2Positions-end\*/", makeArray(cyanNumbers2));
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*DoorPositions-start\*/", @"/\*DoorPositions-end\*/", makeArray(doors));
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*WallPositions-start\*/", @"/\*WallPositions-end\*/", wallPositions.Select(p => $"vec{p}").JoinString(", "));
 
