@@ -1,0 +1,697 @@
+fileFormatVersion: 2
+guid: e3a1ed58c033ab447b073ce1e167c2d8
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: _00_-_SWG_LSSkirt1__swing
+    100002: _01_-_SWG_LSSkirt2__swing
+    100004: _01_-_TransN
+    100006: _02_-_RotN
+    100008: _02_-_SWG_LSSkirt3__swing
+    100010: _03_-_HipN
+    100012: _03_-_SWG_RBSkirt0__swing
+    100014: _04_-_LLegJ
+    100016: _04_-_SWG_RBSkirt1__swing
+    100018: _05_-_LKneeJ
+    100020: _05_-_SWG_RBSkirt2__swing
+    100022: _06_-_LFootJ
+    100024: _06_-_SWG_RBSkirt3__swing
+    100026: _07_-_LToeN
+    100028: _07_-_SWG_RFSkirt0__swing
+    100030: _08_-_RLegJ
+    100032: _08_-_SWG_RFSkirt1__swing
+    100034: _09_-_RKneeJ
+    100036: _09_-_SWG_RFSkirt2__swing
+    100038: _10_-_RFootJ
+    100040: _10_-_SWG_RFSkirt3__swing
+    100042: _11_-_RToeN
+    100044: _11_-_SWG_RSSkirt0__swing
+    100046: _12_-_SWG_RSSkirt1__swing
+    100048: _12_-_WaistN
+    100050: _13_-_BustN
+    100052: _13_-_SWG_RSSkirt2__swing
+    100054: _14_-_LShoulderN
+    100056: _14_-_SWG_RSSkirt3__swing
+    100058: _15_-_LShoulderJ
+    100060: _15_-_SWG_Bhair0__swing
+    100062: _16_-_LArmJ
+    100064: _16_-_SWG_Bhair1__swing
+    100066: _17_-_LHandN
+    100068: _17_-_SWG_Bhair2__swing
+    100070: _18_-_RShoulderN
+    100072: _19_-_RShoulderJ
+    100074: _20_-_RArmJ
+    100076: _21_-_RHandN
+    100078: _22_-_NeckN
+    100080: _23_-_HeadN
+    100082: _24_-_RHaveN
+    100084: _25_-_LHaveN
+    100086: _26_-_ThrowN
+    100088: _27_-_LFingerBaseN
+    100090: _28_-_LThumb1N
+    100092: _29_-_LThumb2N
+    100094: _30_-_LThumb3N
+    100096: _31_-_LIndex1N
+    100098: _32_-_LIndex2N
+    100100: _33_-_LIndex3N
+    100102: _34_-_LMiddleN
+    100104: _35_-_LMiddle1N
+    100106: _36_-_LMiddle2N
+    100108: _37_-_LMiddle3N
+    100110: _38_-_LRingN
+    100112: _39_-_LRing1N
+    100114: _40_-_LRing2N
+    100116: _41_-_LRing3N
+    100118: _42_-_LPinkyN
+    100120: _43_-_LPinky1N
+    100122: _44_-_LPinky2N
+    100124: _45_-_LPinky3N
+    100126: _46_-_RFingerBaseN
+    100128: _47_-_RThumb1N
+    100130: _48_-_RThumb2N
+    100132: _49_-_RThumb3N
+    100134: _50_-_RIndex1N
+    100136: _51_-_RIndex2N
+    100138: _52_-_RIndex3N
+    100140: _53_-_RMiddleN
+    100142: _54_-_RMiddle1N
+    100144: _55_-_RMiddle2N
+    100146: _56_-_RMiddle3N
+    100148: _57_-_RRingN
+    100150: _58_-_RRing1N
+    100152: _59_-_RRing2N
+    100154: _60_-_RRing3N
+    100156: _61_-_RPinkyN
+    100158: _62_-_RPinky1N
+    100160: _63_-_RPinky2N
+    100162: _64_-_RPinky3N
+    100164: _65_-_FaceN
+    100166: _66_-_FaceLLipUpperN
+    100168: _67_-_FaceLLipCornerN
+    100170: _68_-_FaceRLipUpperN
+    100172: _69_-_FaceRLipCornerN
+    100174: _70_-_FaceCLipUpperN
+    100176: _71_-_FaceJawN
+    100178: _72_-_FaceCLipLowerN
+    100180: _73_-_FaceLLipLowerN
+    100182: _74_-_FaceRLipLowerN
+    100184: _75_-_HLP_LTekubiJb
+    100186: _76_-_HLP_RTekubiJb
+    100188: _77_-_SWG_bust__shit
+    100190: _78_-_SWG_hip__shit
+    100192: _79_-_SWG_kneeL__shit
+    100194: _80_-_SWG_kneeR__shit
+    100196: _81_-_SWG_legL__shit
+    100198: _82_-_SWG_legR__shit
+    100200: _83_-_SWG_BSkirt0__swing
+    100202: _84_-_SWG_BSkirt1__swing
+    100204: _85_-_SWG_BSkirt2__swing
+    100206: _86_-_SWG_BSkirt3__swing
+    100208: _87_-_SWG_FSkirt0__swing
+    100210: _88_-_SWG_FSkirt1__swing
+    100212: _89_-_SWG_FSkirt2__swing
+    100214: _90_-_SWG_FSkirt3__swing
+    100216: _91_-_SWG_LBSkirt0__swing
+    100218: _92_-_SWG_LBSkirt1__swing
+    100220: _93_-_SWG_LBSkirt2__swing
+    100222: _94_-_SWG_LBSkirt3__swing
+    100224: _95_-_SWG_LFSkirt0__swing
+    100226: _96_-_SWG_LFSkirt1__swing
+    100228: _97_-_SWG_LFSkirt2__swing
+    100230: _98_-_SWG_LFSkirt3__swing
+    100232: _99_-_SWG_LSSkirt0__swing
+    100234: ClubM_VIS_O_OBJ_
+    100236: CrownBM_VIS_O_OBJ_
+    100238: CrownM_VIS_O_OBJ_
+    100240: CrownM_VIS_O_OBJ_ 1
+    100242: EnvironmentAmbientLight
+    100244: fullhands_
+    100246: fullhands_ 1
+    100248: fullhands_ 2
+    100250: fullhands_ 3
+    100252: fullhands_ 4
+    100254: fullhands_ 5
+    100256: fullhands_ 6
+    100258: fullhands_ 7
+    100260: //RootNode
+    100262: PanM_VIS_O_OBJ_
+    100264: Peach_Blink_Attack_VIS_O_OBJ_
+    100266: Peach_Blink_Catch_VIS_O_OBJ_
+    100268: Peach_Blink_DamageFlyFront_VIS_O_OBJ_
+    100270: Peach_Blink_DamageFlyFront_VIS_O_OBJ_ 1
+    100272: Peach_Blink_down_VIS_O_OBJ_
+    100274: Peach_Blink_Escape_VIS_O_OBJ_
+    100276: Peach_Blink_Furafura_VIS_O_OBJ_
+    100278: Peach_Blink_Furafura_VIS_O_OBJ_ 1
+    100280: Peach_Blink_Furafura_VIS_O_OBJ_ 2
+    100282: Peach_Blink_Furafura_VIS_O_OBJ__Layer_2
+    100284: Peach_Blink_Furafura_VIS_O_OBJ__Layer_2 1
+    100286: Peach_Blink_HeavyOuch_VIS_O_OBJ_
+    100288: Peach_Blink_Hot_VIS_O_OBJ_
+    100290: Peach_Blink_Hot_VIS_O_OBJ_ 1
+    100292: Peach_Blink_Hot_VIS_O_OBJ_ 2
+    100294: Peach_Blink_Hot_VIS_O_OBJ_ 3
+    100296: Peach_Blink_Hot_VIS_O_OBJ__Layer_2
+    100298: Peach_Blink_Hot_VIS_O_OBJ__Layer_2 1
+    100300: Peach_Blink_Ottotto_VIS_O_OBJ_
+    100302: Peach_Blink_Ottotto_VIS_O_OBJ_ 1
+    100304: Peach_Blink_Ottotto_VIS_O_OBJ_ 2
+    100306: Peach_Blink_Ottotto_VIS_O_OBJ__Layer_2
+    100308: Peach_Blink_Ottotto_VIS_O_OBJ__Layer_2 1
+    100310: Peach_Blink_Ouch_VIS_O_OBJ_
+    100312: Peach_Blink_Ouch_VIS_O_OBJ_ 1
+    100314: Peach_Blink_Ouch_VIS_O_OBJ_ 2
+    100316: Peach_Blink_Ouch_VIS_O_OBJ__Layer_2
+    100318: Peach_Blink_Ouch_VIS_O_OBJ__Layer_2 1
+    100320: Peach_Blink_PatternA_VIS_O_OBJ_
+    100322: Peach_Blink_PatternA_VIS_O_OBJ_ 1
+    100324: Peach_Blink_StepPose_VIS_O_OBJ_
+    100326: Peach_Blink_StepPose_VIS_O_OBJ_ 1
+    100328: Peach_Blink_StepPose_VIS_O_OBJ_ 2
+    100330: Peach_Blink_StepPose_VIS_O_OBJ__Layer_2
+    100332: Peach_Blink_StepPose_VIS_O_OBJ__Layer_2 1
+    100334: Peach_Blink_Talk_VIS_O_OBJ_
+    100336: Peach_Blink_VIS_O_OBJ_
+    100338: Peach_Blink_VoiceA_VIS_O_OBJ_
+    100340: Peach_eye_VIS_O_OBJ_
+    100342: Peach_eye_VIS_O_OBJ_ 1
+    100344: Peach_eye_VIS_O_OBJ__Layer_2
+    100346: Peach_eye_VIS_O_OBJ__Layer_2 1
+    100348: Peach_faceN_VIS_O_OBJ_
+    100350: Peach_faceN_VIS_O_OBJ_ 1
+    100352: Peach_Harfblink1_VIS_O_OBJ_
+    100354: Peach_Harfblink2_VIS_O_OBJ_
+    100356: Peach_Mouth_Attack_VIS_O_OBJ_
+    100358: Peach_Mouth_Attack_VIS_O_OBJ_ 1
+    100360: Peach_Mouth_Catch_VIS_O_OBJ_
+    100362: Peach_Mouth_Catch_VIS_O_OBJ_ 1
+    100364: Peach_Mouth_DamageFlyFront_VIS_O_OBJ_
+    100366: Peach_Mouth_DamageFlyFront_VIS_O_OBJ_ 1
+    100368: Peach_Mouth_down_VIS_O_OBJ_
+    100370: Peach_Mouth_down_VIS_O_OBJ_ 1
+    100372: Peach_Mouth_Escape_VIS_O_OBJ_
+    100374: Peach_Mouth_Escape_VIS_O_OBJ_ 1
+    100376: Peach_Mouth_Furafura_VIS_O_OBJ_
+    100378: Peach_Mouth_Furafura_VIS_O_OBJ_ 1
+    100380: Peach_Mouth_HeavyOuch_VIS_O_OBJ_
+    100382: Peach_Mouth_HeavyOuch_VIS_O_OBJ_ 1
+    100384: Peach_Mouth_Hot_VIS_O_OBJ_
+    100386: Peach_Mouth_Hot_VIS_O_OBJ_ 1
+    100388: Peach_Mouth_Ottotto_VIS_O_OBJ_
+    100390: Peach_Mouth_Ottotto_VIS_O_OBJ_ 1
+    100392: Peach_Mouth_Ouch_VIS_O_OBJ_
+    100394: Peach_Mouth_Ouch_VIS_O_OBJ_ 1
+    100396: Peach_Mouth_PatternA_VIS_O_OBJ_
+    100398: Peach_Mouth_PatternA_VIS_O_OBJ_ 1
+    100400: Peach_Mouth_StepPose_VIS_O_OBJ_
+    100402: Peach_Mouth_StepPose_VIS_O_OBJ_ 1
+    100404: Peach_Mouth_Talk_VIS_O_OBJ_
+    100406: Peach_Mouth_Talk_VIS_O_OBJ_ 1
+    100408: Peach_Mouth_VoiceA_VIS_O_OBJ_
+    100410: Peach_Mouth_VoiceA_VIS_O_OBJ_ 1
+    100412: Peach_openblink_VIS_O_OBJ_
+    100414: Peach_Result_VIS_O_OBJ_
+    100416: Peach_Result_VIS_O_OBJ_ 1
+    100418: RacketM_VIS_O_OBJ_
+    400000: _00_-_SWG_LSSkirt1__swing
+    400002: _01_-_SWG_LSSkirt2__swing
+    400004: _01_-_TransN
+    400006: _02_-_RotN
+    400008: _02_-_SWG_LSSkirt3__swing
+    400010: _03_-_HipN
+    400012: _03_-_SWG_RBSkirt0__swing
+    400014: _04_-_LLegJ
+    400016: _04_-_SWG_RBSkirt1__swing
+    400018: _05_-_LKneeJ
+    400020: _05_-_SWG_RBSkirt2__swing
+    400022: _06_-_LFootJ
+    400024: _06_-_SWG_RBSkirt3__swing
+    400026: _07_-_LToeN
+    400028: _07_-_SWG_RFSkirt0__swing
+    400030: _08_-_RLegJ
+    400032: _08_-_SWG_RFSkirt1__swing
+    400034: _09_-_RKneeJ
+    400036: _09_-_SWG_RFSkirt2__swing
+    400038: _10_-_RFootJ
+    400040: _10_-_SWG_RFSkirt3__swing
+    400042: _11_-_RToeN
+    400044: _11_-_SWG_RSSkirt0__swing
+    400046: _12_-_SWG_RSSkirt1__swing
+    400048: _12_-_WaistN
+    400050: _13_-_BustN
+    400052: _13_-_SWG_RSSkirt2__swing
+    400054: _14_-_LShoulderN
+    400056: _14_-_SWG_RSSkirt3__swing
+    400058: _15_-_LShoulderJ
+    400060: _15_-_SWG_Bhair0__swing
+    400062: _16_-_LArmJ
+    400064: _16_-_SWG_Bhair1__swing
+    400066: _17_-_LHandN
+    400068: _17_-_SWG_Bhair2__swing
+    400070: _18_-_RShoulderN
+    400072: _19_-_RShoulderJ
+    400074: _20_-_RArmJ
+    400076: _21_-_RHandN
+    400078: _22_-_NeckN
+    400080: _23_-_HeadN
+    400082: _24_-_RHaveN
+    400084: _25_-_LHaveN
+    400086: _26_-_ThrowN
+    400088: _27_-_LFingerBaseN
+    400090: _28_-_LThumb1N
+    400092: _29_-_LThumb2N
+    400094: _30_-_LThumb3N
+    400096: _31_-_LIndex1N
+    400098: _32_-_LIndex2N
+    400100: _33_-_LIndex3N
+    400102: _34_-_LMiddleN
+    400104: _35_-_LMiddle1N
+    400106: _36_-_LMiddle2N
+    400108: _37_-_LMiddle3N
+    400110: _38_-_LRingN
+    400112: _39_-_LRing1N
+    400114: _40_-_LRing2N
+    400116: _41_-_LRing3N
+    400118: _42_-_LPinkyN
+    400120: _43_-_LPinky1N
+    400122: _44_-_LPinky2N
+    400124: _45_-_LPinky3N
+    400126: _46_-_RFingerBaseN
+    400128: _47_-_RThumb1N
+    400130: _48_-_RThumb2N
+    400132: _49_-_RThumb3N
+    400134: _50_-_RIndex1N
+    400136: _51_-_RIndex2N
+    400138: _52_-_RIndex3N
+    400140: _53_-_RMiddleN
+    400142: _54_-_RMiddle1N
+    400144: _55_-_RMiddle2N
+    400146: _56_-_RMiddle3N
+    400148: _57_-_RRingN
+    400150: _58_-_RRing1N
+    400152: _59_-_RRing2N
+    400154: _60_-_RRing3N
+    400156: _61_-_RPinkyN
+    400158: _62_-_RPinky1N
+    400160: _63_-_RPinky2N
+    400162: _64_-_RPinky3N
+    400164: _65_-_FaceN
+    400166: _66_-_FaceLLipUpperN
+    400168: _67_-_FaceLLipCornerN
+    400170: _68_-_FaceRLipUpperN
+    400172: _69_-_FaceRLipCornerN
+    400174: _70_-_FaceCLipUpperN
+    400176: _71_-_FaceJawN
+    400178: _72_-_FaceCLipLowerN
+    400180: _73_-_FaceLLipLowerN
+    400182: _74_-_FaceRLipLowerN
+    400184: _75_-_HLP_LTekubiJb
+    400186: _76_-_HLP_RTekubiJb
+    400188: _77_-_SWG_bust__shit
+    400190: _78_-_SWG_hip__shit
+    400192: _79_-_SWG_kneeL__shit
+    400194: _80_-_SWG_kneeR__shit
+    400196: _81_-_SWG_legL__shit
+    400198: _82_-_SWG_legR__shit
+    400200: _83_-_SWG_BSkirt0__swing
+    400202: _84_-_SWG_BSkirt1__swing
+    400204: _85_-_SWG_BSkirt2__swing
+    400206: _86_-_SWG_BSkirt3__swing
+    400208: _87_-_SWG_FSkirt0__swing
+    400210: _88_-_SWG_FSkirt1__swing
+    400212: _89_-_SWG_FSkirt2__swing
+    400214: _90_-_SWG_FSkirt3__swing
+    400216: _91_-_SWG_LBSkirt0__swing
+    400218: _92_-_SWG_LBSkirt1__swing
+    400220: _93_-_SWG_LBSkirt2__swing
+    400222: _94_-_SWG_LBSkirt3__swing
+    400224: _95_-_SWG_LFSkirt0__swing
+    400226: _96_-_SWG_LFSkirt1__swing
+    400228: _97_-_SWG_LFSkirt2__swing
+    400230: _98_-_SWG_LFSkirt3__swing
+    400232: _99_-_SWG_LSSkirt0__swing
+    400234: ClubM_VIS_O_OBJ_
+    400236: CrownBM_VIS_O_OBJ_
+    400238: CrownM_VIS_O_OBJ_
+    400240: CrownM_VIS_O_OBJ_ 1
+    400242: EnvironmentAmbientLight
+    400244: fullhands_
+    400246: fullhands_ 1
+    400248: fullhands_ 2
+    400250: fullhands_ 3
+    400252: fullhands_ 4
+    400254: fullhands_ 5
+    400256: fullhands_ 6
+    400258: fullhands_ 7
+    400260: //RootNode
+    400262: PanM_VIS_O_OBJ_
+    400264: Peach_Blink_Attack_VIS_O_OBJ_
+    400266: Peach_Blink_Catch_VIS_O_OBJ_
+    400268: Peach_Blink_DamageFlyFront_VIS_O_OBJ_
+    400270: Peach_Blink_DamageFlyFront_VIS_O_OBJ_ 1
+    400272: Peach_Blink_down_VIS_O_OBJ_
+    400274: Peach_Blink_Escape_VIS_O_OBJ_
+    400276: Peach_Blink_Furafura_VIS_O_OBJ_
+    400278: Peach_Blink_Furafura_VIS_O_OBJ_ 1
+    400280: Peach_Blink_Furafura_VIS_O_OBJ_ 2
+    400282: Peach_Blink_Furafura_VIS_O_OBJ__Layer_2
+    400284: Peach_Blink_Furafura_VIS_O_OBJ__Layer_2 1
+    400286: Peach_Blink_HeavyOuch_VIS_O_OBJ_
+    400288: Peach_Blink_Hot_VIS_O_OBJ_
+    400290: Peach_Blink_Hot_VIS_O_OBJ_ 1
+    400292: Peach_Blink_Hot_VIS_O_OBJ_ 2
+    400294: Peach_Blink_Hot_VIS_O_OBJ_ 3
+    400296: Peach_Blink_Hot_VIS_O_OBJ__Layer_2
+    400298: Peach_Blink_Hot_VIS_O_OBJ__Layer_2 1
+    400300: Peach_Blink_Ottotto_VIS_O_OBJ_
+    400302: Peach_Blink_Ottotto_VIS_O_OBJ_ 1
+    400304: Peach_Blink_Ottotto_VIS_O_OBJ_ 2
+    400306: Peach_Blink_Ottotto_VIS_O_OBJ__Layer_2
+    400308: Peach_Blink_Ottotto_VIS_O_OBJ__Layer_2 1
+    400310: Peach_Blink_Ouch_VIS_O_OBJ_
+    400312: Peach_Blink_Ouch_VIS_O_OBJ_ 1
+    400314: Peach_Blink_Ouch_VIS_O_OBJ_ 2
+    400316: Peach_Blink_Ouch_VIS_O_OBJ__Layer_2
+    400318: Peach_Blink_Ouch_VIS_O_OBJ__Layer_2 1
+    400320: Peach_Blink_PatternA_VIS_O_OBJ_
+    400322: Peach_Blink_PatternA_VIS_O_OBJ_ 1
+    400324: Peach_Blink_StepPose_VIS_O_OBJ_
+    400326: Peach_Blink_StepPose_VIS_O_OBJ_ 1
+    400328: Peach_Blink_StepPose_VIS_O_OBJ_ 2
+    400330: Peach_Blink_StepPose_VIS_O_OBJ__Layer_2
+    400332: Peach_Blink_StepPose_VIS_O_OBJ__Layer_2 1
+    400334: Peach_Blink_Talk_VIS_O_OBJ_
+    400336: Peach_Blink_VIS_O_OBJ_
+    400338: Peach_Blink_VoiceA_VIS_O_OBJ_
+    400340: Peach_eye_VIS_O_OBJ_
+    400342: Peach_eye_VIS_O_OBJ_ 1
+    400344: Peach_eye_VIS_O_OBJ__Layer_2
+    400346: Peach_eye_VIS_O_OBJ__Layer_2 1
+    400348: Peach_faceN_VIS_O_OBJ_
+    400350: Peach_faceN_VIS_O_OBJ_ 1
+    400352: Peach_Harfblink1_VIS_O_OBJ_
+    400354: Peach_Harfblink2_VIS_O_OBJ_
+    400356: Peach_Mouth_Attack_VIS_O_OBJ_
+    400358: Peach_Mouth_Attack_VIS_O_OBJ_ 1
+    400360: Peach_Mouth_Catch_VIS_O_OBJ_
+    400362: Peach_Mouth_Catch_VIS_O_OBJ_ 1
+    400364: Peach_Mouth_DamageFlyFront_VIS_O_OBJ_
+    400366: Peach_Mouth_DamageFlyFront_VIS_O_OBJ_ 1
+    400368: Peach_Mouth_down_VIS_O_OBJ_
+    400370: Peach_Mouth_down_VIS_O_OBJ_ 1
+    400372: Peach_Mouth_Escape_VIS_O_OBJ_
+    400374: Peach_Mouth_Escape_VIS_O_OBJ_ 1
+    400376: Peach_Mouth_Furafura_VIS_O_OBJ_
+    400378: Peach_Mouth_Furafura_VIS_O_OBJ_ 1
+    400380: Peach_Mouth_HeavyOuch_VIS_O_OBJ_
+    400382: Peach_Mouth_HeavyOuch_VIS_O_OBJ_ 1
+    400384: Peach_Mouth_Hot_VIS_O_OBJ_
+    400386: Peach_Mouth_Hot_VIS_O_OBJ_ 1
+    400388: Peach_Mouth_Ottotto_VIS_O_OBJ_
+    400390: Peach_Mouth_Ottotto_VIS_O_OBJ_ 1
+    400392: Peach_Mouth_Ouch_VIS_O_OBJ_
+    400394: Peach_Mouth_Ouch_VIS_O_OBJ_ 1
+    400396: Peach_Mouth_PatternA_VIS_O_OBJ_
+    400398: Peach_Mouth_PatternA_VIS_O_OBJ_ 1
+    400400: Peach_Mouth_StepPose_VIS_O_OBJ_
+    400402: Peach_Mouth_StepPose_VIS_O_OBJ_ 1
+    400404: Peach_Mouth_Talk_VIS_O_OBJ_
+    400406: Peach_Mouth_Talk_VIS_O_OBJ_ 1
+    400408: Peach_Mouth_VoiceA_VIS_O_OBJ_
+    400410: Peach_Mouth_VoiceA_VIS_O_OBJ_ 1
+    400412: Peach_openblink_VIS_O_OBJ_
+    400414: Peach_Result_VIS_O_OBJ_
+    400416: Peach_Result_VIS_O_OBJ_ 1
+    400418: RacketM_VIS_O_OBJ_
+    2100000: _6
+    2100002: _
+    2100004: _3
+    2100006: _5
+    2100008: _7
+    2100010: _9
+    2100012: _1
+    2100014: _2
+    2100016: _4
+    4300000: CrownM_VIS_O_OBJ_
+    4300002: CrownM_VIS_O_OBJ_
+    4300004: RacketM_VIS_O_OBJ_
+    4300006: ClubM_VIS_O_OBJ_
+    4300008: CrownBM_VIS_O_OBJ_
+    4300010: PanM_VIS_O_OBJ_
+    4300012: Peach_faceN_VIS_O_OBJ_
+    4300014: Peach_faceN_VIS_O_OBJ_
+    4300016: Peach_eye_VIS_O_OBJ_
+    4300018: Peach_eye_VIS_O_OBJ__Layer_2
+    4300020: Peach_eye_VIS_O_OBJ_
+    4300022: Peach_eye_VIS_O_OBJ__Layer_2
+    4300024: Peach_openblink_VIS_O_OBJ_
+    4300026: Peach_Harfblink1_VIS_O_OBJ_
+    4300028: Peach_Harfblink2_VIS_O_OBJ_
+    4300030: Peach_Blink_VIS_O_OBJ_
+    4300032: Peach_Blink_Ouch_VIS_O_OBJ_
+    4300034: Peach_Blink_Ouch_VIS_O_OBJ__Layer_2
+    4300036: Peach_Blink_Ouch_VIS_O_OBJ_
+    4300038: Peach_Blink_Ouch_VIS_O_OBJ_
+    4300040: Peach_Blink_Ouch_VIS_O_OBJ__Layer_2
+    4300042: Peach_Mouth_Ouch_VIS_O_OBJ_
+    4300044: Peach_Mouth_Ouch_VIS_O_OBJ_
+    4300046: Peach_Blink_down_VIS_O_OBJ_
+    4300048: Peach_Mouth_down_VIS_O_OBJ_
+    4300050: Peach_Mouth_down_VIS_O_OBJ_
+    4300052: Peach_Blink_Talk_VIS_O_OBJ_
+    4300054: Peach_Mouth_Talk_VIS_O_OBJ_
+    4300056: Peach_Mouth_Talk_VIS_O_OBJ_
+    4300058: Peach_Blink_Attack_VIS_O_OBJ_
+    4300060: Peach_Mouth_Attack_VIS_O_OBJ_
+    4300062: Peach_Mouth_Attack_VIS_O_OBJ_
+    4300064: Peach_Blink_HeavyOuch_VIS_O_OBJ_
+    4300066: Peach_Mouth_HeavyOuch_VIS_O_OBJ_
+    4300068: Peach_Mouth_HeavyOuch_VIS_O_OBJ_
+    4300070: Peach_Blink_Furafura_VIS_O_OBJ_
+    4300072: Peach_Blink_Furafura_VIS_O_OBJ_
+    4300074: Peach_Blink_Furafura_VIS_O_OBJ__Layer_2
+    4300076: Peach_Blink_Furafura_VIS_O_OBJ_
+    4300078: Peach_Blink_Furafura_VIS_O_OBJ__Layer_2
+    4300080: Peach_Mouth_Furafura_VIS_O_OBJ_
+    4300082: Peach_Mouth_Furafura_VIS_O_OBJ_
+    4300084: Peach_Blink_Escape_VIS_O_OBJ_
+    4300086: Peach_Mouth_Escape_VIS_O_OBJ_
+    4300088: Peach_Mouth_Escape_VIS_O_OBJ_
+    4300090: Peach_Blink_Ottotto_VIS_O_OBJ_
+    4300092: Peach_Blink_Ottotto_VIS_O_OBJ__Layer_2
+    4300094: Peach_Blink_Ottotto_VIS_O_OBJ_
+    4300096: Peach_Blink_Ottotto_VIS_O_OBJ__Layer_2
+    4300098: Peach_Blink_Ottotto_VIS_O_OBJ_
+    4300100: Peach_Mouth_Ottotto_VIS_O_OBJ_
+    4300102: Peach_Mouth_Ottotto_VIS_O_OBJ_
+    4300104: Peach_Blink_PatternA_VIS_O_OBJ_
+    4300106: Peach_Blink_PatternA_VIS_O_OBJ_
+    4300108: Peach_Mouth_PatternA_VIS_O_OBJ_
+    4300110: Peach_Mouth_PatternA_VIS_O_OBJ_
+    4300112: Peach_Blink_VoiceA_VIS_O_OBJ_
+    4300114: Peach_Mouth_VoiceA_VIS_O_OBJ_
+    4300116: Peach_Mouth_VoiceA_VIS_O_OBJ_
+    4300118: Peach_Blink_Catch_VIS_O_OBJ_
+    4300120: Peach_Mouth_Catch_VIS_O_OBJ_
+    4300122: Peach_Mouth_Catch_VIS_O_OBJ_
+    4300124: Peach_Blink_Hot_VIS_O_OBJ_
+    4300126: Peach_Blink_Hot_VIS_O_OBJ_
+    4300128: Peach_Blink_Hot_VIS_O_OBJ__Layer_2
+    4300130: Peach_Blink_Hot_VIS_O_OBJ_
+    4300132: Peach_Blink_Hot_VIS_O_OBJ__Layer_2
+    4300134: Peach_Blink_Hot_VIS_O_OBJ_
+    4300136: Peach_Mouth_Hot_VIS_O_OBJ_
+    4300138: Peach_Mouth_Hot_VIS_O_OBJ_
+    4300140: Peach_Blink_StepPose_VIS_O_OBJ_
+    4300142: Peach_Blink_StepPose_VIS_O_OBJ_
+    4300144: Peach_Blink_StepPose_VIS_O_OBJ__Layer_2
+    4300146: Peach_Blink_StepPose_VIS_O_OBJ_
+    4300148: Peach_Blink_StepPose_VIS_O_OBJ__Layer_2
+    4300150: Peach_Mouth_StepPose_VIS_O_OBJ_
+    4300152: Peach_Mouth_StepPose_VIS_O_OBJ_
+    4300154: Peach_Blink_DamageFlyFront_VIS_O_OBJ_
+    4300156: Peach_Blink_DamageFlyFront_VIS_O_OBJ_
+    4300158: Peach_Mouth_DamageFlyFront_VIS_O_OBJ_
+    4300160: Peach_Mouth_DamageFlyFront_VIS_O_OBJ_
+    4300162: Peach_Result_VIS_O_OBJ_
+    4300164: Peach_Result_VIS_O_OBJ_
+    4300166: fullhands_
+    4300168: fullhands_
+    4300170: fullhands_
+    4300172: fullhands_
+    4300174: fullhands_
+    4300176: fullhands_
+    4300178: fullhands_
+    4300180: fullhands_
+    9500000: //RootNode
+    13700000: ClubM_VIS_O_OBJ_
+    13700002: CrownBM_VIS_O_OBJ_
+    13700004: CrownM_VIS_O_OBJ_
+    13700006: CrownM_VIS_O_OBJ_ 1
+    13700008: fullhands_
+    13700010: fullhands_ 1
+    13700012: fullhands_ 2
+    13700014: fullhands_ 3
+    13700016: fullhands_ 4
+    13700018: fullhands_ 5
+    13700020: fullhands_ 6
+    13700022: fullhands_ 7
+    13700024: PanM_VIS_O_OBJ_
+    13700026: Peach_Blink_Attack_VIS_O_OBJ_
+    13700028: Peach_Blink_Catch_VIS_O_OBJ_
+    13700030: Peach_Blink_DamageFlyFront_VIS_O_OBJ_
+    13700032: Peach_Blink_DamageFlyFront_VIS_O_OBJ_ 1
+    13700034: Peach_Blink_down_VIS_O_OBJ_
+    13700036: Peach_Blink_Escape_VIS_O_OBJ_
+    13700038: Peach_Blink_Furafura_VIS_O_OBJ_
+    13700040: Peach_Blink_Furafura_VIS_O_OBJ_ 1
+    13700042: Peach_Blink_Furafura_VIS_O_OBJ_ 2
+    13700044: Peach_Blink_Furafura_VIS_O_OBJ__Layer_2
+    13700046: Peach_Blink_Furafura_VIS_O_OBJ__Layer_2 1
+    13700048: Peach_Blink_HeavyOuch_VIS_O_OBJ_
+    13700050: Peach_Blink_Hot_VIS_O_OBJ_
+    13700052: Peach_Blink_Hot_VIS_O_OBJ_ 1
+    13700054: Peach_Blink_Hot_VIS_O_OBJ_ 2
+    13700056: Peach_Blink_Hot_VIS_O_OBJ_ 3
+    13700058: Peach_Blink_Hot_VIS_O_OBJ__Layer_2
+    13700060: Peach_Blink_Hot_VIS_O_OBJ__Layer_2 1
+    13700062: Peach_Blink_Ottotto_VIS_O_OBJ_
+    13700064: Peach_Blink_Ottotto_VIS_O_OBJ_ 1
+    13700066: Peach_Blink_Ottotto_VIS_O_OBJ_ 2
+    13700068: Peach_Blink_Ottotto_VIS_O_OBJ__Layer_2
+    13700070: Peach_Blink_Ottotto_VIS_O_OBJ__Layer_2 1
+    13700072: Peach_Blink_Ouch_VIS_O_OBJ_
+    13700074: Peach_Blink_Ouch_VIS_O_OBJ_ 1
+    13700076: Peach_Blink_Ouch_VIS_O_OBJ_ 2
+    13700078: Peach_Blink_Ouch_VIS_O_OBJ__Layer_2
+    13700080: Peach_Blink_Ouch_VIS_O_OBJ__Layer_2 1
+    13700082: Peach_Blink_PatternA_VIS_O_OBJ_
+    13700084: Peach_Blink_PatternA_VIS_O_OBJ_ 1
+    13700086: Peach_Blink_StepPose_VIS_O_OBJ_
+    13700088: Peach_Blink_StepPose_VIS_O_OBJ_ 1
+    13700090: Peach_Blink_StepPose_VIS_O_OBJ_ 2
+    13700092: Peach_Blink_StepPose_VIS_O_OBJ__Layer_2
+    13700094: Peach_Blink_StepPose_VIS_O_OBJ__Layer_2 1
+    13700096: Peach_Blink_Talk_VIS_O_OBJ_
+    13700098: Peach_Blink_VIS_O_OBJ_
+    13700100: Peach_Blink_VoiceA_VIS_O_OBJ_
+    13700102: Peach_eye_VIS_O_OBJ_
+    13700104: Peach_eye_VIS_O_OBJ_ 1
+    13700106: Peach_eye_VIS_O_OBJ__Layer_2
+    13700108: Peach_eye_VIS_O_OBJ__Layer_2 1
+    13700110: Peach_faceN_VIS_O_OBJ_
+    13700112: Peach_faceN_VIS_O_OBJ_ 1
+    13700114: Peach_Harfblink1_VIS_O_OBJ_
+    13700116: Peach_Harfblink2_VIS_O_OBJ_
+    13700118: Peach_Mouth_Attack_VIS_O_OBJ_
+    13700120: Peach_Mouth_Attack_VIS_O_OBJ_ 1
+    13700122: Peach_Mouth_Catch_VIS_O_OBJ_
+    13700124: Peach_Mouth_Catch_VIS_O_OBJ_ 1
+    13700126: Peach_Mouth_DamageFlyFront_VIS_O_OBJ_
+    13700128: Peach_Mouth_DamageFlyFront_VIS_O_OBJ_ 1
+    13700130: Peach_Mouth_down_VIS_O_OBJ_
+    13700132: Peach_Mouth_down_VIS_O_OBJ_ 1
+    13700134: Peach_Mouth_Escape_VIS_O_OBJ_
+    13700136: Peach_Mouth_Escape_VIS_O_OBJ_ 1
+    13700138: Peach_Mouth_Furafura_VIS_O_OBJ_
+    13700140: Peach_Mouth_Furafura_VIS_O_OBJ_ 1
+    13700142: Peach_Mouth_HeavyOuch_VIS_O_OBJ_
+    13700144: Peach_Mouth_HeavyOuch_VIS_O_OBJ_ 1
+    13700146: Peach_Mouth_Hot_VIS_O_OBJ_
+    13700148: Peach_Mouth_Hot_VIS_O_OBJ_ 1
+    13700150: Peach_Mouth_Ottotto_VIS_O_OBJ_
+    13700152: Peach_Mouth_Ottotto_VIS_O_OBJ_ 1
+    13700154: Peach_Mouth_Ouch_VIS_O_OBJ_
+    13700156: Peach_Mouth_Ouch_VIS_O_OBJ_ 1
+    13700158: Peach_Mouth_PatternA_VIS_O_OBJ_
+    13700160: Peach_Mouth_PatternA_VIS_O_OBJ_ 1
+    13700162: Peach_Mouth_StepPose_VIS_O_OBJ_
+    13700164: Peach_Mouth_StepPose_VIS_O_OBJ_ 1
+    13700166: Peach_Mouth_Talk_VIS_O_OBJ_
+    13700168: Peach_Mouth_Talk_VIS_O_OBJ_ 1
+    13700170: Peach_Mouth_VoiceA_VIS_O_OBJ_
+    13700172: Peach_Mouth_VoiceA_VIS_O_OBJ_ 1
+    13700174: Peach_openblink_VIS_O_OBJ_
+    13700176: Peach_Result_VIS_O_OBJ_
+    13700178: Peach_Result_VIS_O_OBJ_ 1
+    13700180: RacketM_VIS_O_OBJ_
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
