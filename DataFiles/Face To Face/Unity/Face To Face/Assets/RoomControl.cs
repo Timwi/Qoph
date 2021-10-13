@@ -22,6 +22,8 @@ public partial class RoomControl : MonoBehaviour
     public Material[] CarpetMaterials;
     public MeshRenderer[] Carpets;
     public GameObject[] LampBroModels;
+    public bool[] OwnLamp;
+    public GameObject NormalLampStand;
 
     public void SetRoom(int faceIx, int edgeIx, bool setCamera, bool setAllWalls = false)
     {
@@ -45,6 +47,7 @@ public partial class RoomControl : MonoBehaviour
         for (var i = 0; i < LampBroModels.Length; i++)
             if (LampBroModels[i] != null)
                 LampBroModels[i].gameObject.SetActive(Data.Faces[faceIx].LampBro == i);
+        NormalLampStand.gameObject.SetActive(!OwnLamp[Data.Faces[faceIx].LampBro]);
 
         RadioAudio.clip = AudioClips[faceIx];
         Light.intensity = Data.LightIntensity;

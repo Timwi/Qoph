@@ -1,0 +1,336 @@
+fileFormatVersion: 2
+guid: 000380fde98a3a04bb7fd2e10e27dfe6
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: ' 1'
+    100002: ' 2'
+    100004: ArmL
+    100006: ArmR
+    100008: body_highShape
+    100010: body_lowShape
+    100012: Bust
+    100014: ClavicleC
+    100016: ClavicleL
+    100018: ClavicleR
+    100020: EnvironmentAmbientLight
+    100022: FingerL10
+    100024: FingerL11
+    100026: FingerL12
+    100028: FingerL13
+    100030: FingerL51
+    100032: FingerL52
+    100034: FingerL53
+    100036: FingerR10
+    100038: FingerR11
+    100040: FingerR12
+    100042: FingerR13
+    100044: FingerR51
+    100046: FingerR52
+    100048: FingerR53
+    100050: FootL
+    100052: FootR
+    100054: fur_highShape
+    100056: fur_highShape 1
+    100058: fur_lowShape
+    100060: fur_lowShape 1
+    100062: fur_middleShape
+    100064: fur_middleShape 1
+    100066: fur_vlowShape
+    100068: GamemodelShape
+    100070: H_WristL
+    100072: H_WristR
+    100074: hair_popoShape
+    100076: HammerL
+    100078: HammerR
+    100080: HandL
+    100082: HandR
+    100084: HaveL
+    100086: HaveR
+    100088: Head
+    100090: Hip
+    100092: KneeL
+    100094: KneeR
+    100096: //RootNode
+    100098: LegC
+    100100: LegL
+    100102: LegR
+    100104: Neck
+    100106: popo_Blink_Attack_VIS_O_OBJShape
+    100108: popo_Blink_Bound_VIS_O_OBJShape
+    100110: popo_Blink_Down_VIS_O_OBJShape
+    100112: popo_Blink_HeavyAttack_VIS_O_OBJShape
+    100114: popo_Blink_HeavyHit_VIS_O_OBJShape
+    100116: popo_Blink_Ouch_VIS_O_OBJShape
+    100118: popo_Blink_VIS_O_OBJShape
+    100120: popo_HalfBlink_VIS_O_OBJShape
+    100122: popo_hammer_VIS_O_OBJShape
+    100124: popo_hammerFLIP_VIS_O_OBJShape
+    100126: popo_Mouth_Attack_VIS_O_OBJShape
+    100128: popo_Mouth_Capture_VIS_O_OBJShape
+    100130: popo_Mouth_Cliff_VIS_O_OBJShape
+    100132: popo_Mouth_CliffFLIP_VIS_O_OBJShape
+    100134: popo_Mouth_Down_VIS_O_OBJShape
+    100136: popo_Mouth_FaceN_VIS_O_OBJShape
+    100138: popo_Mouth_HeavyAttack_VIS_O_OBJShape
+    100140: popo_Mouth_HeavyHit_VIS_O_OBJShape
+    100142: popo_Mouth_Ottotto_VIS_O_OBJShape
+    100144: popo_Mouth_Ouch_VIS_O_OBJShape
+    100146: popo_Mouth_StepPose_VIS_O_OBJShape
+    100148: popo_Mouth_Talk_VIS_O_OBJShape
+    100150: popo_Mouth_VoiceA_VIS_O_OBJShape
+    100152: popo_OpenBlink_VIS_O_OBJShape
+    100154: Rot
+    100156: ShirttailC
+    100158: ShirttailL
+    100160: ShirttailR
+    100162: ShoulderL
+    100164: ShoulderR
+    100166: Throw
+    100168: ToeL
+    100170: ToeR
+    100172: Trans
+    100174: Waist
+    400000: ' 1'
+    400002: ' 2'
+    400004: ArmL
+    400006: ArmR
+    400008: body_highShape
+    400010: body_lowShape
+    400012: Bust
+    400014: ClavicleC
+    400016: ClavicleL
+    400018: ClavicleR
+    400020: EnvironmentAmbientLight
+    400022: FingerL10
+    400024: FingerL11
+    400026: FingerL12
+    400028: FingerL13
+    400030: FingerL51
+    400032: FingerL52
+    400034: FingerL53
+    400036: FingerR10
+    400038: FingerR11
+    400040: FingerR12
+    400042: FingerR13
+    400044: FingerR51
+    400046: FingerR52
+    400048: FingerR53
+    400050: FootL
+    400052: FootR
+    400054: fur_highShape
+    400056: fur_highShape 1
+    400058: fur_lowShape
+    400060: fur_lowShape 1
+    400062: fur_middleShape
+    400064: fur_middleShape 1
+    400066: fur_vlowShape
+    400068: GamemodelShape
+    400070: H_WristL
+    400072: H_WristR
+    400074: hair_popoShape
+    400076: HammerL
+    400078: HammerR
+    400080: HandL
+    400082: HandR
+    400084: HaveL
+    400086: HaveR
+    400088: Head
+    400090: Hip
+    400092: KneeL
+    400094: KneeR
+    400096: //RootNode
+    400098: LegC
+    400100: LegL
+    400102: LegR
+    400104: Neck
+    400106: popo_Blink_Attack_VIS_O_OBJShape
+    400108: popo_Blink_Bound_VIS_O_OBJShape
+    400110: popo_Blink_Down_VIS_O_OBJShape
+    400112: popo_Blink_HeavyAttack_VIS_O_OBJShape
+    400114: popo_Blink_HeavyHit_VIS_O_OBJShape
+    400116: popo_Blink_Ouch_VIS_O_OBJShape
+    400118: popo_Blink_VIS_O_OBJShape
+    400120: popo_HalfBlink_VIS_O_OBJShape
+    400122: popo_hammer_VIS_O_OBJShape
+    400124: popo_hammerFLIP_VIS_O_OBJShape
+    400126: popo_Mouth_Attack_VIS_O_OBJShape
+    400128: popo_Mouth_Capture_VIS_O_OBJShape
+    400130: popo_Mouth_Cliff_VIS_O_OBJShape
+    400132: popo_Mouth_CliffFLIP_VIS_O_OBJShape
+    400134: popo_Mouth_Down_VIS_O_OBJShape
+    400136: popo_Mouth_FaceN_VIS_O_OBJShape
+    400138: popo_Mouth_HeavyAttack_VIS_O_OBJShape
+    400140: popo_Mouth_HeavyHit_VIS_O_OBJShape
+    400142: popo_Mouth_Ottotto_VIS_O_OBJShape
+    400144: popo_Mouth_Ouch_VIS_O_OBJShape
+    400146: popo_Mouth_StepPose_VIS_O_OBJShape
+    400148: popo_Mouth_Talk_VIS_O_OBJShape
+    400150: popo_Mouth_VoiceA_VIS_O_OBJShape
+    400152: popo_OpenBlink_VIS_O_OBJShape
+    400154: Rot
+    400156: ShirttailC
+    400158: ShirttailL
+    400160: ShirttailR
+    400162: ShoulderL
+    400164: ShoulderR
+    400166: Throw
+    400168: ToeL
+    400170: ToeR
+    400172: Trans
+    400174: Waist
+    2100000: skin_popo_001
+    2100002: alp_popo_002
+    2100004: alp_popo_003
+    2100006: alp_popo_001
+    2100008: def_popo_001
+    2100010: EyeL
+    4300000: GamemodelShape
+    4300002: fur_vlowShape
+    4300004: fur_lowShape
+    4300006: fur_lowShape
+    4300008: fur_middleShape
+    4300010: fur_middleShape
+    4300012: fur_highShape
+    4300014: fur_highShape
+    4300016: hair_popoShape
+    4300022: popo_Mouth_FaceN_VIS_O_OBJShape
+    4300024: popo_Mouth_Talk_VIS_O_OBJShape
+    4300026: popo_Mouth_HeavyAttack_VIS_O_OBJShape
+    4300028: popo_Mouth_VoiceA_VIS_O_OBJShape
+    4300030: popo_Mouth_StepPose_VIS_O_OBJShape
+    4300032: popo_Mouth_Cliff_VIS_O_OBJShape
+    4300034: popo_Mouth_CliffFLIP_VIS_O_OBJShape
+    4300036: popo_Mouth_Ottotto_VIS_O_OBJShape
+    4300038: popo_Mouth_Attack_VIS_O_OBJShape
+    4300040: popo_Mouth_Ouch_VIS_O_OBJShape
+    4300042: popo_Mouth_HeavyHit_VIS_O_OBJShape
+    4300044: popo_Mouth_Down_VIS_O_OBJShape
+    4300046: popo_Mouth_Capture_VIS_O_OBJShape
+    4300048: popo_OpenBlink_VIS_O_OBJShape
+    4300050: popo_HalfBlink_VIS_O_OBJShape
+    4300052: popo_Blink_VIS_O_OBJShape
+    4300054: popo_Blink_Attack_VIS_O_OBJShape
+    4300056: popo_Blink_Down_VIS_O_OBJShape
+    4300058: popo_Blink_Bound_VIS_O_OBJShape
+    4300060: popo_Blink_HeavyHit_VIS_O_OBJShape
+    4300062: popo_Blink_Ouch_VIS_O_OBJShape
+    4300064: popo_Blink_HeavyAttack_VIS_O_OBJShape
+    4300066: body_highShape
+    4300068: body_lowShape
+    9500000: //RootNode
+    13700000: ' 1'
+    13700002: ' 2'
+    13700004: body_highShape
+    13700006: body_lowShape
+    13700008: fur_highShape
+    13700010: fur_highShape 1
+    13700012: fur_lowShape
+    13700014: fur_lowShape 1
+    13700016: fur_middleShape
+    13700018: fur_middleShape 1
+    13700020: fur_vlowShape
+    13700022: GamemodelShape
+    13700024: hair_popoShape
+    13700026: popo_Blink_Attack_VIS_O_OBJShape
+    13700028: popo_Blink_Bound_VIS_O_OBJShape
+    13700030: popo_Blink_Down_VIS_O_OBJShape
+    13700032: popo_Blink_HeavyAttack_VIS_O_OBJShape
+    13700034: popo_Blink_HeavyHit_VIS_O_OBJShape
+    13700036: popo_Blink_Ouch_VIS_O_OBJShape
+    13700038: popo_Blink_VIS_O_OBJShape
+    13700040: popo_HalfBlink_VIS_O_OBJShape
+    13700042: popo_Mouth_Attack_VIS_O_OBJShape
+    13700044: popo_Mouth_Capture_VIS_O_OBJShape
+    13700046: popo_Mouth_Cliff_VIS_O_OBJShape
+    13700048: popo_Mouth_CliffFLIP_VIS_O_OBJShape
+    13700050: popo_Mouth_Down_VIS_O_OBJShape
+    13700052: popo_Mouth_FaceN_VIS_O_OBJShape
+    13700054: popo_Mouth_HeavyAttack_VIS_O_OBJShape
+    13700056: popo_Mouth_HeavyHit_VIS_O_OBJShape
+    13700058: popo_Mouth_Ottotto_VIS_O_OBJShape
+    13700060: popo_Mouth_Ouch_VIS_O_OBJShape
+    13700062: popo_Mouth_StepPose_VIS_O_OBJShape
+    13700064: popo_Mouth_Talk_VIS_O_OBJShape
+    13700066: popo_Mouth_VoiceA_VIS_O_OBJShape
+    13700068: popo_OpenBlink_VIS_O_OBJShape
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

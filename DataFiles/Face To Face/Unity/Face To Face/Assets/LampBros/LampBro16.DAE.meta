@@ -1,0 +1,426 @@
+fileFormatVersion: 2
+guid: 88d339b0b629c7146a1f03d955e0f917
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: _01_-_TransN
+    100002: _02_-_RotN
+    100004: _03_-_HipN
+    100006: _04_-_LLegJ
+    100008: _05_-_LKneeJ
+    100010: _06_-_LFootJ
+    100012: _07_-_LToeN
+    100014: _08_-_RLegJ
+    100016: _09_-_RKneeJ
+    100018: _10_-_RFootJ
+    100020: _11_-_RToeN
+    100022: _12_-_WaistN
+    100024: _13_-_BustN
+    100026: _14_-_LShoulderN
+    100028: _15_-_LShoulderJ
+    100030: _16_-_LArmJ
+    100032: _17_-_LHandN
+    100034: _18_-_RShoulderN
+    100036: _19_-_RShoulderJ
+    100038: _20_-_RArmJ
+    100040: _21_-_RHandN
+    100042: _22_-_NeckN
+    100044: _23_-_HeadN
+    100046: _24_-_RHaveN
+    100048: _25_-_LHaveN
+    100050: _26_-_ThrowN
+    100052: _27_-_LFingerBaseN
+    100054: _28_-_LThumb1N
+    100056: _29_-_LThumb2N
+    100058: _30_-_LThumb3N
+    100060: _31_-_LIndex1N
+    100062: _32_-_LIndex2N
+    100064: _33_-_LIndex3N
+    100066: _34_-_LMiddleN
+    100068: _35_-_LMiddle1N
+    100070: _36_-_LMiddle2N
+    100072: _37_-_LMiddle3N
+    100074: _38_-_LRingN
+    100076: _39_-_LRing1N
+    100078: _40_-_LRing2N
+    100080: _41_-_LRing3N
+    100082: _42_-_LPinkyN
+    100084: _43_-_LPinky1N
+    100086: _44_-_LPinky2N
+    100088: _45_-_LPinky3N
+    100090: _46_-_RFingerBaseN
+    100092: _47_-_RThumb1N
+    100094: _48_-_RThumb2N
+    100096: _49_-_RThumb3N
+    100098: _50_-_RIndex1N
+    100100: _51_-_RIndex2N
+    100102: _52_-_RIndex3N
+    100104: _53_-_RMiddleN
+    100106: _54_-_RMiddle1N
+    100108: _55_-_RMiddle2N
+    100110: _56_-_RMiddle3N
+    100112: _57_-_RRingN
+    100114: _58_-_RRing1N
+    100116: _59_-_RRing2N
+    100118: _60_-_RRing3N
+    100120: _61_-_RPinkyN
+    100122: _62_-_RPinky1N
+    100124: _63_-_RPinky2N
+    100126: _64_-_RPinky3N
+    100128: _65_-_HLP_LComaneciJb
+    100130: _66_-_HLP_LElbowJb
+    100132: _67_-_HLP_LKneeJb
+    100134: _68_-_HLP_LSakotsuJb
+    100136: _69_-_HLP_LSakotsuJb_eff
+    100138: _70_-_HLP_LSholJb
+    100140: _71_-_HLP_LTekubiJb
+    100142: _72_-_HLP_RComaneciJb
+    100144: _73_-_HLP_RElbowJb
+    100146: _74_-_HLP_RKneeJb
+    100148: _75_-_HLP_RSakotsuJb
+    100150: _76_-_HLP_RSakotsuJb_eff
+    100152: _77_-_HLP_RSholJb
+    100154: _78_-_HLP_RTekubiJb
+    100156: _79_-_SWG_LShoul__shit
+    100158: _80_-_SWG_RShoul__shit
+    100160: _81_-_SWG_nurbsSphere1__shit
+    100162: _82_-_SWG_LFrontHair01N__swing
+    100164: _83_-_SWG_Pony01N__swing
+    100166: _84_-_SWG_Pony02N__swing
+    100168: _85_-_SWG_Pony03N__swing
+    100170: _86_-_SWG_Pony04N__swing
+    100172: _87_-_SWG_RFrontHair01N__swing
+    100174: BodyLBF_Should_O_OBJ_O_SORTEACHNODE_
+    100176: BodyLBF_Sode_O_OBJ_O_SORTEACHNODE_
+    100178: BodyRBF_Should_O_OBJ_O_SORTEACHNODE_
+    100180: BodyRBF_Sode_O_OBJ_O_SORTEACHNODE_
+    100182: EnvironmentAmbientLight
+    100184: Gamemodel_
+    100186: Gamemodel_ 1
+    100188: Gamemodel_ 2
+    100190: Gamemodel_ 3
+    100192: Gamemodel_ 4
+    100194: Gamemodel_ 5
+    100196: Gamemodel_ 6
+    100198: //RootNode
+    100200: LHair_O_OBJ_O_SORTEACHNODE_
+    100202: RHair_O_OBJ_O_SORTEACHNODE_
+    100204: Sheik_Blink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    100206: Sheik_Blink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    100208: Sheik_Eye_VIS_O_OBJ_
+    100210: Sheik_Eye_VIS_O_OBJ_ 1
+    100212: Sheik_Eye_VIS_O_OBJ__Layer_2
+    100214: Sheik_Eye_VIS_O_OBJ__Layer_2 1
+    100216: Sheik_FaceN_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    100218: Sheik_FaceN_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    100220: Sheik_Final_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    100222: Sheik_Final_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    100224: Sheik_Furafura_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    100226: Sheik_Furafura_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    100228: Sheik_Halfblink1_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    100230: Sheik_Halfblink1_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    100232: Sheik_Halfblink2_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    100234: Sheik_Halfblink2_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    100236: Sheik_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    100238: Sheik_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    100240: Sheik_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 2
+    100242: Sheik_Openblink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    100244: Sheik_Openblink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    100246: Sheik_Ouch_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    100248: Sheik_Ouch_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    100250: Sheik_Ouch_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 2
+    100252: Sheik_Talk_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    100254: Sheik_Talk_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    100256: Sheik_Talk_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 2
+    400000: _01_-_TransN
+    400002: _02_-_RotN
+    400004: _03_-_HipN
+    400006: _04_-_LLegJ
+    400008: _05_-_LKneeJ
+    400010: _06_-_LFootJ
+    400012: _07_-_LToeN
+    400014: _08_-_RLegJ
+    400016: _09_-_RKneeJ
+    400018: _10_-_RFootJ
+    400020: _11_-_RToeN
+    400022: _12_-_WaistN
+    400024: _13_-_BustN
+    400026: _14_-_LShoulderN
+    400028: _15_-_LShoulderJ
+    400030: _16_-_LArmJ
+    400032: _17_-_LHandN
+    400034: _18_-_RShoulderN
+    400036: _19_-_RShoulderJ
+    400038: _20_-_RArmJ
+    400040: _21_-_RHandN
+    400042: _22_-_NeckN
+    400044: _23_-_HeadN
+    400046: _24_-_RHaveN
+    400048: _25_-_LHaveN
+    400050: _26_-_ThrowN
+    400052: _27_-_LFingerBaseN
+    400054: _28_-_LThumb1N
+    400056: _29_-_LThumb2N
+    400058: _30_-_LThumb3N
+    400060: _31_-_LIndex1N
+    400062: _32_-_LIndex2N
+    400064: _33_-_LIndex3N
+    400066: _34_-_LMiddleN
+    400068: _35_-_LMiddle1N
+    400070: _36_-_LMiddle2N
+    400072: _37_-_LMiddle3N
+    400074: _38_-_LRingN
+    400076: _39_-_LRing1N
+    400078: _40_-_LRing2N
+    400080: _41_-_LRing3N
+    400082: _42_-_LPinkyN
+    400084: _43_-_LPinky1N
+    400086: _44_-_LPinky2N
+    400088: _45_-_LPinky3N
+    400090: _46_-_RFingerBaseN
+    400092: _47_-_RThumb1N
+    400094: _48_-_RThumb2N
+    400096: _49_-_RThumb3N
+    400098: _50_-_RIndex1N
+    400100: _51_-_RIndex2N
+    400102: _52_-_RIndex3N
+    400104: _53_-_RMiddleN
+    400106: _54_-_RMiddle1N
+    400108: _55_-_RMiddle2N
+    400110: _56_-_RMiddle3N
+    400112: _57_-_RRingN
+    400114: _58_-_RRing1N
+    400116: _59_-_RRing2N
+    400118: _60_-_RRing3N
+    400120: _61_-_RPinkyN
+    400122: _62_-_RPinky1N
+    400124: _63_-_RPinky2N
+    400126: _64_-_RPinky3N
+    400128: _65_-_HLP_LComaneciJb
+    400130: _66_-_HLP_LElbowJb
+    400132: _67_-_HLP_LKneeJb
+    400134: _68_-_HLP_LSakotsuJb
+    400136: _69_-_HLP_LSakotsuJb_eff
+    400138: _70_-_HLP_LSholJb
+    400140: _71_-_HLP_LTekubiJb
+    400142: _72_-_HLP_RComaneciJb
+    400144: _73_-_HLP_RElbowJb
+    400146: _74_-_HLP_RKneeJb
+    400148: _75_-_HLP_RSakotsuJb
+    400150: _76_-_HLP_RSakotsuJb_eff
+    400152: _77_-_HLP_RSholJb
+    400154: _78_-_HLP_RTekubiJb
+    400156: _79_-_SWG_LShoul__shit
+    400158: _80_-_SWG_RShoul__shit
+    400160: _81_-_SWG_nurbsSphere1__shit
+    400162: _82_-_SWG_LFrontHair01N__swing
+    400164: _83_-_SWG_Pony01N__swing
+    400166: _84_-_SWG_Pony02N__swing
+    400168: _85_-_SWG_Pony03N__swing
+    400170: _86_-_SWG_Pony04N__swing
+    400172: _87_-_SWG_RFrontHair01N__swing
+    400174: BodyLBF_Should_O_OBJ_O_SORTEACHNODE_
+    400176: BodyLBF_Sode_O_OBJ_O_SORTEACHNODE_
+    400178: BodyRBF_Should_O_OBJ_O_SORTEACHNODE_
+    400180: BodyRBF_Sode_O_OBJ_O_SORTEACHNODE_
+    400182: EnvironmentAmbientLight
+    400184: Gamemodel_
+    400186: Gamemodel_ 1
+    400188: Gamemodel_ 2
+    400190: Gamemodel_ 3
+    400192: Gamemodel_ 4
+    400194: Gamemodel_ 5
+    400196: Gamemodel_ 6
+    400198: //RootNode
+    400200: LHair_O_OBJ_O_SORTEACHNODE_
+    400202: RHair_O_OBJ_O_SORTEACHNODE_
+    400204: Sheik_Blink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    400206: Sheik_Blink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    400208: Sheik_Eye_VIS_O_OBJ_
+    400210: Sheik_Eye_VIS_O_OBJ_ 1
+    400212: Sheik_Eye_VIS_O_OBJ__Layer_2
+    400214: Sheik_Eye_VIS_O_OBJ__Layer_2 1
+    400216: Sheik_FaceN_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    400218: Sheik_FaceN_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    400220: Sheik_Final_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    400222: Sheik_Final_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    400224: Sheik_Furafura_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    400226: Sheik_Furafura_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    400228: Sheik_Halfblink1_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    400230: Sheik_Halfblink1_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    400232: Sheik_Halfblink2_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    400234: Sheik_Halfblink2_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    400236: Sheik_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    400238: Sheik_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    400240: Sheik_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 2
+    400242: Sheik_Openblink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    400244: Sheik_Openblink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    400246: Sheik_Ouch_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    400248: Sheik_Ouch_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    400250: Sheik_Ouch_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 2
+    400252: Sheik_Talk_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    400254: Sheik_Talk_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    400256: Sheik_Talk_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 2
+    2100000: _
+    2100002: _1
+    4300000: LHair_O_OBJ_O_SORTEACHNODE_
+    4300002: RHair_O_OBJ_O_SORTEACHNODE_
+    4300004: BodyRBF_Sode_O_OBJ_O_SORTEACHNODE_
+    4300006: BodyLBF_Should_O_OBJ_O_SORTEACHNODE_
+    4300008: BodyRBF_Should_O_OBJ_O_SORTEACHNODE_
+    4300010: BodyLBF_Sode_O_OBJ_O_SORTEACHNODE_
+    4300012: Sheik_Eye_VIS_O_OBJ_
+    4300014: Sheik_Eye_VIS_O_OBJ__Layer_2
+    4300016: Sheik_Eye_VIS_O_OBJ_
+    4300018: Sheik_Eye_VIS_O_OBJ__Layer_2
+    4300020: Sheik_FaceN_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300022: Sheik_FaceN_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300024: Sheik_Openblink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300026: Sheik_Openblink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300028: Sheik_Furafura_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300030: Sheik_Furafura_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300032: Sheik_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300034: Sheik_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300036: Sheik_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300038: Sheik_Ouch_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300040: Sheik_Ouch_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300042: Sheik_Ouch_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300044: Sheik_Final_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300046: Sheik_Final_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300048: Sheik_Talk_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300050: Sheik_Talk_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300052: Sheik_Talk_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300054: Sheik_Halfblink2_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300056: Sheik_Halfblink2_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300058: Sheik_Halfblink1_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300060: Sheik_Halfblink1_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300062: Sheik_Blink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300064: Sheik_Blink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    4300066: Gamemodel_
+    4300068: Gamemodel_
+    4300070: Gamemodel_
+    4300072: Gamemodel_
+    4300074: Gamemodel_
+    4300076: Gamemodel_
+    4300078: Gamemodel_
+    9500000: //RootNode
+    13700000: BodyLBF_Should_O_OBJ_O_SORTEACHNODE_
+    13700002: BodyLBF_Sode_O_OBJ_O_SORTEACHNODE_
+    13700004: BodyRBF_Should_O_OBJ_O_SORTEACHNODE_
+    13700006: BodyRBF_Sode_O_OBJ_O_SORTEACHNODE_
+    13700008: Gamemodel_
+    13700010: Gamemodel_ 1
+    13700012: Gamemodel_ 2
+    13700014: Gamemodel_ 3
+    13700016: Gamemodel_ 4
+    13700018: Gamemodel_ 5
+    13700020: Gamemodel_ 6
+    13700022: LHair_O_OBJ_O_SORTEACHNODE_
+    13700024: RHair_O_OBJ_O_SORTEACHNODE_
+    13700026: Sheik_Blink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    13700028: Sheik_Blink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    13700030: Sheik_Eye_VIS_O_OBJ_
+    13700032: Sheik_Eye_VIS_O_OBJ_ 1
+    13700034: Sheik_Eye_VIS_O_OBJ__Layer_2
+    13700036: Sheik_Eye_VIS_O_OBJ__Layer_2 1
+    13700038: Sheik_FaceN_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    13700040: Sheik_FaceN_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    13700042: Sheik_Final_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    13700044: Sheik_Final_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    13700046: Sheik_Furafura_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    13700048: Sheik_Furafura_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    13700050: Sheik_Halfblink1_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    13700052: Sheik_Halfblink1_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    13700054: Sheik_Halfblink2_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    13700056: Sheik_Halfblink2_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    13700058: Sheik_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    13700060: Sheik_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    13700062: Sheik_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 2
+    13700064: Sheik_Openblink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    13700066: Sheik_Openblink_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    13700068: Sheik_Ouch_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    13700070: Sheik_Ouch_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    13700072: Sheik_Ouch_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 2
+    13700074: Sheik_Talk_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_
+    13700076: Sheik_Talk_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 1
+    13700078: Sheik_Talk_VIS_O_OBJ_O_NOSORT_FAR_O_SORTEACHNODE_ 2
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
