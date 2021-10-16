@@ -16,7 +16,7 @@
 16	SHEIK	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/11595/
 17	ZELDA	- https://www.models-resource.com/3ds/supersmashbrosfornintendo3ds/model/36782/
 18	DR. MARIO	- https://www.models-resource.com/nintendo_switch/supersmashbrosultimate/model/31653/
-19	PICHU	- https://www.models-resource.com/gamecube/ssbm/model/5386/
+19	PICHU	- https://www.models-resource.com/3ds/supersmashbrosfornintendo3ds/model/20707/
 20	FALCO	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/11555/
 21	MARTH	- https://www.models-resource.com/wii_u/supersmashbrosforwiiu/model/11421/
 22	YOUNG LINK	- https://www.models-resource.com/nintendo_switch/supersmashbrosultimate/model/27882/

@@ -1,0 +1,634 @@
+fileFormatVersion: 2
+guid: 0364f1fab0e758f47b970f678d7311ba
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: _00_-_SWG_knee_R01__shit
+    100002: _01_-_SWG_sword_C02__shit
+    100004: _01_-_TransN
+    100006: _02_-_RotN
+    100008: _02_-_SWG_waist_C01__shit
+    100010: _03_-_HipN
+    100012: _03_-_SWG_CMant0__swing
+    100014: _04_-_LLegJ
+    100016: _04_-_SWG_CMant1__swing
+    100018: _05_-_LKneeJ
+    100020: _05_-_SWG_CMant2__swing
+    100022: _06_-_LFootJ
+    100024: _06_-_SWG_CMant3__swing
+    100026: _07_-_LToeN
+    100028: _07_-_SWG_HairA1__swing
+    100030: _08_-_RLegJ
+    100032: _08_-_SWG_HairB1__swing
+    100034: _09_-_RKneeJ
+    100036: _09_-_SWG_HairC1__swing
+    100038: _10_-_RFootJ
+    100040: _10_-_SWG_HairD1__swing
+    100042: _11_-_RToeN
+    100044: _11_-_SWG_HairE1__swing
+    100046: _12_-_SWG_LBHip0__swing
+    100048: _12_-_WaistN
+    100050: _13_-_BustN
+    100052: _13_-_SWG_LBHip1__swing
+    100054: _14_-_LShoulderN
+    100056: _14_-_SWG_LBHip2__swing
+    100058: _15_-_LShoulderJ
+    100060: _15_-_SWG_LBHip3__swing
+    100062: _16_-_LArmJ
+    100064: _16_-_SWG_LFLeg0__swing
+    100066: _17_-_LHandN
+    100068: _17_-_SWG_LFLeg1__swing
+    100070: _18_-_RShoulderN
+    100072: _18_-_SWG_LFLeg2__swing
+    100074: _19_-_RShoulderJ
+    100076: _19_-_SWG_LMant0__swing
+    100078: _20_-_RArmJ
+    100080: _20_-_SWG_LMant1__swing
+    100082: _21_-_RHandN
+    100084: _21_-_SWG_LMant2__swing
+    100086: _22_-_NeckN
+    100088: _22_-_SWG_LMant3__swing
+    100090: _23_-_HeadN
+    100092: _23_-_SWG_RBHip0__swing
+    100094: _24_-_RHaveN
+    100096: _24_-_SWG_RBHip1__swing
+    100098: _25_-_LHaveN
+    100100: _25_-_SWG_RBHip2__swing
+    100102: _26_-_SWG_RBHip3__swing
+    100104: _26_-_ThrowN
+    100106: _27_-_LFingerBaseN
+    100108: _27_-_SWG_RFLeg0__swing
+    100110: _28_-_LThumb1N
+    100112: _28_-_SWG_RFLeg1__swing
+    100114: _29_-_LThumb2N
+    100116: _29_-_SWG_RFLeg2__swing
+    100118: _30_-_LThumb3N
+    100120: _30_-_SWG_RMant0__swing
+    100122: _31_-_LIndex1N
+    100124: _31_-_SWG_RMant1__swing
+    100126: _32_-_LIndex2N
+    100128: _32_-_SWG_RMant2__swing
+    100130: _33_-_LIndex3N
+    100132: _33_-_SWG_RMant3__swing
+    100134: _34_-_LMiddleN
+    100136: _35_-_LMiddle1N
+    100138: _36_-_LMiddle2N
+    100140: _37_-_LMiddle3N
+    100142: _38_-_LRingN
+    100144: _39_-_LRing1N
+    100146: _40_-_LRing2N
+    100148: _41_-_LRing3N
+    100150: _42_-_LPinkyN
+    100152: _43_-_LPinky1N
+    100154: _44_-_LPinky2N
+    100156: _45_-_LPinky3N
+    100158: _46_-_RFingerBaseN
+    100160: _47_-_RThumb1N
+    100162: _48_-_RThumb2N
+    100164: _49_-_RThumb3N
+    100166: _50_-_RIndex1N
+    100168: _51_-_RIndex2N
+    100170: _52_-_RIndex3N
+    100172: _53_-_RMiddleN
+    100174: _54_-_RMiddle1N
+    100176: _55_-_RMiddle2N
+    100178: _56_-_RMiddle3N
+    100180: _57_-_RRingN
+    100182: _58_-_RRing1N
+    100184: _59_-_RRing2N
+    100186: _60_-_RRing3N
+    100188: _61_-_RPinkyN
+    100190: _62_-_RPinky1N
+    100192: _63_-_RPinky2N
+    100194: _64_-_RPinky3N
+    100196: _65_-_Saya01N
+    100198: _66_-_TsukaN
+    100200: _67_-_SwordN
+    100202: _68_-_SwordHeadN
+    100204: _69_-_FaceN
+    100206: _70_-_FaceLLipUpperN
+    100208: _71_-_FaceLLipCornerN
+    100210: _72_-_FaceRLipUpperN
+    100212: _73_-_FaceRLipCornerN
+    100214: _74_-_FaceCLipUpperN
+    100216: _75_-_FaceJawN
+    100218: _76_-_FaceCLipLowerN
+    100220: _77_-_FaceLLipLowerN
+    100222: _78_-_FaceRLipLowerN
+    100224: _79_-_HLP_LArmTwistjb
+    100226: _80_-_HLP_LSakotsuJb
+    100228: _81_-_HLP_LSholJb
+    100230: _82_-_HLP_LTekubiJb
+    100232: _83_-_HLP_LUpArmTwistjb
+    100234: _84_-_HLP_RArmTwistJb
+    100236: _85_-_HLP_RSakotsuJb
+    100238: _86_-_HLP_RSholJb
+    100240: _87_-_HLP_RTekubiJb
+    100242: _88_-_HLP_RUpArmTwistjb
+    100244: _89_-_SWG_LArm_C01__shit
+    100246: _90_-_SWG_LLeg_C01__shit
+    100248: _91_-_SWG_LLeg_C02__shit
+    100250: _92_-_SWG_LShoulder_L01__shit
+    100252: _93_-_SWG_RLeg_C01__shit
+    100254: _94_-_SWG_RLeg_C02__shit
+    100256: _95_-_SWG_RLeg_C03__shit
+    100258: _96_-_SWG_RShoulder_R01__shit
+    100260: _97_-_SWG_bust_C01__shit
+    100262: _98_-_SWG_hip_C01__shit
+    100264: _99_-_SWG_knee_L01__shit
+    100266: EnvironmentAmbientLight
+    100268: Gamemodel_
+    100270: Gamemodel_ 1
+    100272: Gamemodel_ 2
+    100274: Gamemodel_ 3
+    100276: Gamemodel_ 4
+    100278: Gamemodel_ 5
+    100280: Gamemodel_ 6
+    100282: Gamemodel_ 7
+    100284: Gamemodel_ 8
+    100286: Hair_O_OBJ_O_SORTEACHNODE_
+    100288: Hair_O_OBJ_O_SORTEACHNODE_ 1
+    100290: headband_O_OBJ_
+    100292: L_footring_O_OBJ_
+    100294: //RootNode
+    100296: Marth_Attack_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    100298: Marth_Attack_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100300: Marth_blink_VIS_O_OBJ_O_NOSORT_FAR_
+    100302: Marth_blink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100304: Marth_Capture_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    100306: Marth_Capture_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100308: Marth_Capture_Mouth_VIS_O_OBJ_
+    100310: Marth_Cliff_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    100312: Marth_Cliff_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100314: Marth_Cliff_Mouth_VIS_O_OBJ_
+    100316: Marth_DownM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    100318: Marth_DownM_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100320: Marth_DownM_Mouth_VIS_O_OBJ_
+    100322: Marth_Escape_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    100324: Marth_Escape_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100326: marth_eye2_VIS_O_OBJ_
+    100328: marth_eye2_VIS_O_OBJ_ 1
+    100330: marth_eye2_VIS_O_OBJ__Layer_2
+    100332: marth_eye2_VIS_O_OBJ__Layer_2 1
+    100334: marth_eye_VIS_O_OBJ_
+    100336: marth_eye_VIS_O_OBJ_ 1
+    100338: marth_eye_VIS_O_OBJ__Layer_2
+    100340: marth_eye_VIS_O_OBJ__Layer_2 1
+    100342: Marth_faceM_VIS_O_OBJ_
+    100344: Marth_halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    100346: Marth_halfblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100348: Marth_HeavyAttack_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    100350: Marth_HeavyAttack_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100352: Marth_HeavyAttack_Mouth_VIS_O_OBJ_
+    100354: Marth_HeavyOuch_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    100356: Marth_HeavyOuch_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100358: Marth_HeavyOuch_Mouth_VIS_O_OBJ_
+    100360: Marth_HilightL_VIS_O_OBJ_O_OBJ_O_SORTBIASm5__
+    100362: Marth_HilightR_VIS_O_OBJ_O_OBJ_O_SORTBIASm5__
+    100364: Marth_Hot_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    100366: Marth_Hot_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100368: Marth_Hot_VIS_O_OBJ_
+    100370: Marth_openblink_VIS_O_OBJ_O_NOSORT_FAR_
+    100372: Marth_openblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100374: Marth_OuchM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    100376: Marth_OuchM_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100378: Marth_OuchM_Mouth_VIS_O_OBJ_
+    100380: Marth_PatternA_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    100382: Marth_PatternA_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100384: Marth_PatternA_Mouth_VIS_O_OBJ_
+    100386: Marth_Result_Mouth_VIS_O_OBJ_
+    100388: Marth_TalkM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    100390: Marth_TalkM_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100392: Marth_TalkM_Mouth_VIS_O_OBJ_
+    100394: R_footring_O_OBJ_
+    100396: SayaM_O_OBJ_
+    100398: SayaM_O_OBJ_ 1
+    100400: tsuka_VIS_O_OBJ_
+    100402: WeaponbladeM_VIS_O_OBJ_
+    100404: WeapongripM_VIS_O_OBJ_
+    400000: _00_-_SWG_knee_R01__shit
+    400002: _01_-_SWG_sword_C02__shit
+    400004: _01_-_TransN
+    400006: _02_-_RotN
+    400008: _02_-_SWG_waist_C01__shit
+    400010: _03_-_HipN
+    400012: _03_-_SWG_CMant0__swing
+    400014: _04_-_LLegJ
+    400016: _04_-_SWG_CMant1__swing
+    400018: _05_-_LKneeJ
+    400020: _05_-_SWG_CMant2__swing
+    400022: _06_-_LFootJ
+    400024: _06_-_SWG_CMant3__swing
+    400026: _07_-_LToeN
+    400028: _07_-_SWG_HairA1__swing
+    400030: _08_-_RLegJ
+    400032: _08_-_SWG_HairB1__swing
+    400034: _09_-_RKneeJ
+    400036: _09_-_SWG_HairC1__swing
+    400038: _10_-_RFootJ
+    400040: _10_-_SWG_HairD1__swing
+    400042: _11_-_RToeN
+    400044: _11_-_SWG_HairE1__swing
+    400046: _12_-_SWG_LBHip0__swing
+    400048: _12_-_WaistN
+    400050: _13_-_BustN
+    400052: _13_-_SWG_LBHip1__swing
+    400054: _14_-_LShoulderN
+    400056: _14_-_SWG_LBHip2__swing
+    400058: _15_-_LShoulderJ
+    400060: _15_-_SWG_LBHip3__swing
+    400062: _16_-_LArmJ
+    400064: _16_-_SWG_LFLeg0__swing
+    400066: _17_-_LHandN
+    400068: _17_-_SWG_LFLeg1__swing
+    400070: _18_-_RShoulderN
+    400072: _18_-_SWG_LFLeg2__swing
+    400074: _19_-_RShoulderJ
+    400076: _19_-_SWG_LMant0__swing
+    400078: _20_-_RArmJ
+    400080: _20_-_SWG_LMant1__swing
+    400082: _21_-_RHandN
+    400084: _21_-_SWG_LMant2__swing
+    400086: _22_-_NeckN
+    400088: _22_-_SWG_LMant3__swing
+    400090: _23_-_HeadN
+    400092: _23_-_SWG_RBHip0__swing
+    400094: _24_-_RHaveN
+    400096: _24_-_SWG_RBHip1__swing
+    400098: _25_-_LHaveN
+    400100: _25_-_SWG_RBHip2__swing
+    400102: _26_-_SWG_RBHip3__swing
+    400104: _26_-_ThrowN
+    400106: _27_-_LFingerBaseN
+    400108: _27_-_SWG_RFLeg0__swing
+    400110: _28_-_LThumb1N
+    400112: _28_-_SWG_RFLeg1__swing
+    400114: _29_-_LThumb2N
+    400116: _29_-_SWG_RFLeg2__swing
+    400118: _30_-_LThumb3N
+    400120: _30_-_SWG_RMant0__swing
+    400122: _31_-_LIndex1N
+    400124: _31_-_SWG_RMant1__swing
+    400126: _32_-_LIndex2N
+    400128: _32_-_SWG_RMant2__swing
+    400130: _33_-_LIndex3N
+    400132: _33_-_SWG_RMant3__swing
+    400134: _34_-_LMiddleN
+    400136: _35_-_LMiddle1N
+    400138: _36_-_LMiddle2N
+    400140: _37_-_LMiddle3N
+    400142: _38_-_LRingN
+    400144: _39_-_LRing1N
+    400146: _40_-_LRing2N
+    400148: _41_-_LRing3N
+    400150: _42_-_LPinkyN
+    400152: _43_-_LPinky1N
+    400154: _44_-_LPinky2N
+    400156: _45_-_LPinky3N
+    400158: _46_-_RFingerBaseN
+    400160: _47_-_RThumb1N
+    400162: _48_-_RThumb2N
+    400164: _49_-_RThumb3N
+    400166: _50_-_RIndex1N
+    400168: _51_-_RIndex2N
+    400170: _52_-_RIndex3N
+    400172: _53_-_RMiddleN
+    400174: _54_-_RMiddle1N
+    400176: _55_-_RMiddle2N
+    400178: _56_-_RMiddle3N
+    400180: _57_-_RRingN
+    400182: _58_-_RRing1N
+    400184: _59_-_RRing2N
+    400186: _60_-_RRing3N
+    400188: _61_-_RPinkyN
+    400190: _62_-_RPinky1N
+    400192: _63_-_RPinky2N
+    400194: _64_-_RPinky3N
+    400196: _65_-_Saya01N
+    400198: _66_-_TsukaN
+    400200: _67_-_SwordN
+    400202: _68_-_SwordHeadN
+    400204: _69_-_FaceN
+    400206: _70_-_FaceLLipUpperN
+    400208: _71_-_FaceLLipCornerN
+    400210: _72_-_FaceRLipUpperN
+    400212: _73_-_FaceRLipCornerN
+    400214: _74_-_FaceCLipUpperN
+    400216: _75_-_FaceJawN
+    400218: _76_-_FaceCLipLowerN
+    400220: _77_-_FaceLLipLowerN
+    400222: _78_-_FaceRLipLowerN
+    400224: _79_-_HLP_LArmTwistjb
+    400226: _80_-_HLP_LSakotsuJb
+    400228: _81_-_HLP_LSholJb
+    400230: _82_-_HLP_LTekubiJb
+    400232: _83_-_HLP_LUpArmTwistjb
+    400234: _84_-_HLP_RArmTwistJb
+    400236: _85_-_HLP_RSakotsuJb
+    400238: _86_-_HLP_RSholJb
+    400240: _87_-_HLP_RTekubiJb
+    400242: _88_-_HLP_RUpArmTwistjb
+    400244: _89_-_SWG_LArm_C01__shit
+    400246: _90_-_SWG_LLeg_C01__shit
+    400248: _91_-_SWG_LLeg_C02__shit
+    400250: _92_-_SWG_LShoulder_L01__shit
+    400252: _93_-_SWG_RLeg_C01__shit
+    400254: _94_-_SWG_RLeg_C02__shit
+    400256: _95_-_SWG_RLeg_C03__shit
+    400258: _96_-_SWG_RShoulder_R01__shit
+    400260: _97_-_SWG_bust_C01__shit
+    400262: _98_-_SWG_hip_C01__shit
+    400264: _99_-_SWG_knee_L01__shit
+    400266: EnvironmentAmbientLight
+    400268: Gamemodel_
+    400270: Gamemodel_ 1
+    400272: Gamemodel_ 2
+    400274: Gamemodel_ 3
+    400276: Gamemodel_ 4
+    400278: Gamemodel_ 5
+    400280: Gamemodel_ 6
+    400282: Gamemodel_ 7
+    400284: Gamemodel_ 8
+    400286: Hair_O_OBJ_O_SORTEACHNODE_
+    400288: Hair_O_OBJ_O_SORTEACHNODE_ 1
+    400290: headband_O_OBJ_
+    400292: L_footring_O_OBJ_
+    400294: //RootNode
+    400296: Marth_Attack_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    400298: Marth_Attack_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400300: Marth_blink_VIS_O_OBJ_O_NOSORT_FAR_
+    400302: Marth_blink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400304: Marth_Capture_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    400306: Marth_Capture_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400308: Marth_Capture_Mouth_VIS_O_OBJ_
+    400310: Marth_Cliff_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    400312: Marth_Cliff_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400314: Marth_Cliff_Mouth_VIS_O_OBJ_
+    400316: Marth_DownM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    400318: Marth_DownM_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400320: Marth_DownM_Mouth_VIS_O_OBJ_
+    400322: Marth_Escape_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    400324: Marth_Escape_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400326: marth_eye2_VIS_O_OBJ_
+    400328: marth_eye2_VIS_O_OBJ_ 1
+    400330: marth_eye2_VIS_O_OBJ__Layer_2
+    400332: marth_eye2_VIS_O_OBJ__Layer_2 1
+    400334: marth_eye_VIS_O_OBJ_
+    400336: marth_eye_VIS_O_OBJ_ 1
+    400338: marth_eye_VIS_O_OBJ__Layer_2
+    400340: marth_eye_VIS_O_OBJ__Layer_2 1
+    400342: Marth_faceM_VIS_O_OBJ_
+    400344: Marth_halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    400346: Marth_halfblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400348: Marth_HeavyAttack_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    400350: Marth_HeavyAttack_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400352: Marth_HeavyAttack_Mouth_VIS_O_OBJ_
+    400354: Marth_HeavyOuch_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    400356: Marth_HeavyOuch_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400358: Marth_HeavyOuch_Mouth_VIS_O_OBJ_
+    400360: Marth_HilightL_VIS_O_OBJ_O_OBJ_O_SORTBIASm5__
+    400362: Marth_HilightR_VIS_O_OBJ_O_OBJ_O_SORTBIASm5__
+    400364: Marth_Hot_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    400366: Marth_Hot_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400368: Marth_Hot_VIS_O_OBJ_
+    400370: Marth_openblink_VIS_O_OBJ_O_NOSORT_FAR_
+    400372: Marth_openblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400374: Marth_OuchM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    400376: Marth_OuchM_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400378: Marth_OuchM_Mouth_VIS_O_OBJ_
+    400380: Marth_PatternA_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    400382: Marth_PatternA_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400384: Marth_PatternA_Mouth_VIS_O_OBJ_
+    400386: Marth_Result_Mouth_VIS_O_OBJ_
+    400388: Marth_TalkM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    400390: Marth_TalkM_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400392: Marth_TalkM_Mouth_VIS_O_OBJ_
+    400394: R_footring_O_OBJ_
+    400396: SayaM_O_OBJ_
+    400398: SayaM_O_OBJ_ 1
+    400400: tsuka_VIS_O_OBJ_
+    400402: WeaponbladeM_VIS_O_OBJ_
+    400404: WeapongripM_VIS_O_OBJ_
+    2100000: _
+    2100002: _2
+    2100004: _3
+    2100006: _1
+    2100008: _6
+    2100010: _4
+    4300000: marth_eye_VIS_O_OBJ_
+    4300002: marth_eye_VIS_O_OBJ__Layer_2
+    4300004: marth_eye_VIS_O_OBJ_
+    4300006: marth_eye_VIS_O_OBJ__Layer_2
+    4300008: Marth_faceM_VIS_O_OBJ_
+    4300010: Marth_openblink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300012: Marth_openblink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300014: Marth_halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300016: Marth_halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300018: Marth_blink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300020: Marth_blink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300022: Marth_TalkM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300024: Marth_TalkM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300026: Marth_OuchM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300028: Marth_OuchM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300030: Marth_DownM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300032: Marth_DownM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300034: Marth_HeavyAttack_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300036: Marth_HeavyAttack_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300038: Marth_Escape_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300040: Marth_Escape_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300042: Marth_Attack_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300044: Marth_Attack_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300046: Marth_Capture_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300048: Marth_Capture_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300050: Marth_HeavyOuch_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300052: Marth_HeavyOuch_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300054: Marth_Cliff_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300056: Marth_Cliff_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300058: Marth_PatternA_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300060: Marth_PatternA_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300062: Marth_Hot_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300064: Marth_Hot_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    4300066: Marth_TalkM_Mouth_VIS_O_OBJ_
+    4300068: Marth_DownM_Mouth_VIS_O_OBJ_
+    4300070: Marth_OuchM_Mouth_VIS_O_OBJ_
+    4300072: Marth_HeavyAttack_Mouth_VIS_O_OBJ_
+    4300074: Marth_Capture_Mouth_VIS_O_OBJ_
+    4300076: Marth_HeavyOuch_Mouth_VIS_O_OBJ_
+    4300078: Marth_PatternA_Mouth_VIS_O_OBJ_
+    4300080: Marth_Cliff_Mouth_VIS_O_OBJ_
+    4300082: Marth_HilightR_VIS_O_OBJ_O_OBJ_O_SORTBIASm5__
+    4300084: Marth_HilightL_VIS_O_OBJ_O_OBJ_O_SORTBIASm5__
+    4300086: Marth_Hot_VIS_O_OBJ_
+    4300088: marth_eye2_VIS_O_OBJ_
+    4300090: marth_eye2_VIS_O_OBJ__Layer_2
+    4300092: marth_eye2_VIS_O_OBJ_
+    4300094: marth_eye2_VIS_O_OBJ__Layer_2
+    4300096: Marth_Result_Mouth_VIS_O_OBJ_
+    4300098: Hair_O_OBJ_O_SORTEACHNODE_
+    4300100: Hair_O_OBJ_O_SORTEACHNODE_
+    4300102: headband_O_OBJ_
+    4300104: WeaponbladeM_VIS_O_OBJ_
+    4300106: WeapongripM_VIS_O_OBJ_
+    4300108: SayaM_O_OBJ_
+    4300110: SayaM_O_OBJ_
+    4300112: tsuka_VIS_O_OBJ_
+    4300114: L_footring_O_OBJ_
+    4300116: R_footring_O_OBJ_
+    4300118: Gamemodel_
+    4300120: Gamemodel_
+    4300122: Gamemodel_
+    4300124: Gamemodel_
+    4300126: Gamemodel_
+    4300128: Gamemodel_
+    4300130: Gamemodel_
+    4300132: Gamemodel_
+    4300134: Gamemodel_
+    9500000: //RootNode
+    13700000: Gamemodel_
+    13700002: Gamemodel_ 1
+    13700004: Gamemodel_ 2
+    13700006: Gamemodel_ 3
+    13700008: Gamemodel_ 4
+    13700010: Gamemodel_ 5
+    13700012: Gamemodel_ 6
+    13700014: Gamemodel_ 7
+    13700016: Gamemodel_ 8
+    13700018: Hair_O_OBJ_O_SORTEACHNODE_
+    13700020: Hair_O_OBJ_O_SORTEACHNODE_ 1
+    13700022: headband_O_OBJ_
+    13700024: L_footring_O_OBJ_
+    13700026: Marth_Attack_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    13700028: Marth_Attack_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700030: Marth_blink_VIS_O_OBJ_O_NOSORT_FAR_
+    13700032: Marth_blink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700034: Marth_Capture_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    13700036: Marth_Capture_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700038: Marth_Capture_Mouth_VIS_O_OBJ_
+    13700040: Marth_Cliff_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    13700042: Marth_Cliff_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700044: Marth_Cliff_Mouth_VIS_O_OBJ_
+    13700046: Marth_DownM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    13700048: Marth_DownM_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700050: Marth_DownM_Mouth_VIS_O_OBJ_
+    13700052: Marth_Escape_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    13700054: Marth_Escape_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700056: marth_eye2_VIS_O_OBJ_
+    13700058: marth_eye2_VIS_O_OBJ_ 1
+    13700060: marth_eye2_VIS_O_OBJ__Layer_2
+    13700062: marth_eye2_VIS_O_OBJ__Layer_2 1
+    13700064: marth_eye_VIS_O_OBJ_
+    13700066: marth_eye_VIS_O_OBJ_ 1
+    13700068: marth_eye_VIS_O_OBJ__Layer_2
+    13700070: marth_eye_VIS_O_OBJ__Layer_2 1
+    13700072: Marth_faceM_VIS_O_OBJ_
+    13700074: Marth_halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    13700076: Marth_halfblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700078: Marth_HeavyAttack_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    13700080: Marth_HeavyAttack_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700082: Marth_HeavyAttack_Mouth_VIS_O_OBJ_
+    13700084: Marth_HeavyOuch_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    13700086: Marth_HeavyOuch_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700088: Marth_HeavyOuch_Mouth_VIS_O_OBJ_
+    13700090: Marth_HilightL_VIS_O_OBJ_O_OBJ_O_SORTBIASm5__
+    13700092: Marth_HilightR_VIS_O_OBJ_O_OBJ_O_SORTBIASm5__
+    13700094: Marth_Hot_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    13700096: Marth_Hot_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700098: Marth_Hot_VIS_O_OBJ_
+    13700100: Marth_openblink_VIS_O_OBJ_O_NOSORT_FAR_
+    13700102: Marth_openblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700104: Marth_OuchM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    13700106: Marth_OuchM_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700108: Marth_OuchM_Mouth_VIS_O_OBJ_
+    13700110: Marth_PatternA_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    13700112: Marth_PatternA_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700114: Marth_PatternA_Mouth_VIS_O_OBJ_
+    13700116: Marth_Result_Mouth_VIS_O_OBJ_
+    13700118: Marth_TalkM_Eye_VIS_O_OBJ_O_NOSORT_FAR_
+    13700120: Marth_TalkM_Eye_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700122: Marth_TalkM_Mouth_VIS_O_OBJ_
+    13700124: R_footring_O_OBJ_
+    13700126: SayaM_O_OBJ_
+    13700128: SayaM_O_OBJ_ 1
+    13700130: tsuka_VIS_O_OBJ_
+    13700132: WeaponbladeM_VIS_O_OBJ_
+    13700134: WeapongripM_VIS_O_OBJ_
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

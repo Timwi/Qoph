@@ -1,0 +1,534 @@
+fileFormatVersion: 2
+guid: 360ab7387631422478076634f8cf2511
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: ArmL
+    100002: ArmR
+    100004: Bust
+    100006: ClavicleC
+    100008: ClavicleL
+    100010: ClavicleR
+    100012: EnvironmentAmbientLight
+    100014: eyeShape
+    100016: eyeShape 1
+    100018: FingerL10
+    100020: FingerL11
+    100022: FingerL12
+    100024: FingerL13
+    100026: FingerL20
+    100028: FingerL21
+    100030: FingerL22
+    100032: FingerL23
+    100034: FingerL30
+    100036: FingerL31
+    100038: FingerL32
+    100040: FingerL33
+    100042: FingerL40
+    100044: FingerL41
+    100046: FingerL42
+    100048: FingerL43
+    100050: FingerL51
+    100052: FingerL52
+    100054: FingerL53
+    100056: FingerR10
+    100058: FingerR11
+    100060: FingerR12
+    100062: FingerR13
+    100064: FingerR20
+    100066: FingerR21
+    100068: FingerR22
+    100070: FingerR23
+    100072: FingerR30
+    100074: FingerR31
+    100076: FingerR32
+    100078: FingerR33
+    100080: FingerR40
+    100082: FingerR41
+    100084: FingerR42
+    100086: FingerR43
+    100088: FingerR51
+    100090: FingerR52
+    100092: FingerR53
+    100094: FootL
+    100096: FootR
+    100098: GamemodelShape
+    100100: GamemodelShape 1
+    100102: GamemodelShape 2
+    100104: GamemodelShape 3
+    100106: H_LegL
+    100108: H_LegR
+    100110: H_SholderL
+    100112: H_SholderR
+    100114: HairL1
+    100116: HairL2
+    100118: HairR1
+    100120: HairR2
+    100122: HandL
+    100124: HandR
+    100126: Hat1
+    100128: Hat2
+    100130: Hat3
+    100132: Hat4
+    100134: HaveL
+    100136: HaveR
+    100138: Head
+    100140: Hilt
+    100142: Hip
+    100144: KneeL
+    100146: KneeR
+    100148: //RootNode
+    100150: LegC
+    100152: LegL
+    100154: LegR
+    100156: Neck
+    100158: Rot
+    100160: S_hat01
+    100162: S_hat02
+    100164: S_hat03
+    100166: S_hat04_null
+    100168: S_skirtBL01
+    100170: S_skirtBL02
+    100172: S_skirtBL03_null
+    100174: S_skirtBR01
+    100176: S_skirtBR02
+    100178: S_skirtBR03_null
+    100180: S_skirtFL01
+    100182: S_skirtFL02
+    100184: S_skirtFL03_null
+    100186: S_skirtFR01
+    100188: S_skirtFR02
+    100190: S_skirtFR03_null
+    100192: S_skirtL01
+    100194: S_skirtL02
+    100196: S_skirtL03_null
+    100198: S_skirtR01
+    100200: S_skirtR02
+    100202: S_skirtR03_null
+    100204: Scabbard
+    100206: Shield
+    100208: ShieldB
+    100210: ShoulderL
+    100212: ShoulderR
+    100214: Sword
+    100216: Swordstrap
+    100218: Throw
+    100220: ToeL
+    100222: ToeR
+    100224: Trans
+    100226: Waist
+    100228: younglink_Blink_VIS_O_OBJShape
+    100230: younglink_Blink_VIS_O_OBJShape 1
+    100232: younglink_Capture_Mouth_VIS_O_OBJShape
+    100234: younglink_Capture_Mouth_VIS_O_OBJShape 1
+    100236: younglink_Catch_Mouth_VIS_O_OBJShape
+    100238: younglink_Down_Blink_VIS_O_OBJShape
+    100240: younglink_Down_Blink_VIS_O_OBJShape 1
+    100242: younglink_Down_Mouth_VIS_O_OBJShape
+    100244: younglink_Down_Mouth_VIS_O_OBJShape 1
+    100246: younglink_Escape_Blink_VIS_O_OBJShape
+    100248: younglink_Escape_Blink_VIS_O_OBJShape 1
+    100250: younglink_Escape_EscapeBlink_VIS_O_OBJShape
+    100252: younglink_Escape_EscapeBlink_VIS_O_OBJShape 1
+    100254: younglink_Escape_EscapeHarf_VIS_O_OBJShape
+    100256: younglink_Escape_EscapeHarf_VIS_O_OBJShape 1
+    100258: younglink_Escape_Mouth_VIS_O_OBJShape
+    100260: younglink_FaceN_Mouth_VIS_O_OBJShape
+    100262: younglink_FaceN_Mouth_VIS_O_OBJShape 1
+    100264: younglink_Furafura_Blink_VIS_O_OBJShape
+    100266: younglink_Furafura_Blink_VIS_O_OBJShape 1
+    100268: younglink_Harfblink_VIS_O_OBJShape
+    100270: younglink_Harfblink_VIS_O_OBJShape 1
+    100272: younglink_Heavyattack_Mouth_VIS_O_OBJShape
+    100274: younglink_Heavyattack_Mouth_VIS_O_OBJShape 1
+    100276: younglink_Heavyhit_Mouth_VIS_O_OBJShape
+    100278: younglink_Heavyhit_Mouth_VIS_O_OBJShape 1
+    100280: younglink_Heavyouch_Blink_VIS_O_OBJShape
+    100282: younglink_Heavyouch_Blink_VIS_O_OBJShape 1
+    100284: younglink_hot_Mouth_VIS_O_OBJShape
+    100286: younglink_hot_Mouth_VIS_O_OBJShape 1
+    100288: younglink_hot_Mouth_VIS_O_OBJShape 2
+    100290: younglink_ken_VIS_O_OBJShape
+    100292: younglink_kenb_VIS_O_OBJShape
+    100294: younglink_Openblink_VIS_O_OBJShape
+    100296: younglink_Openblink_VIS_O_OBJShape 1
+    100298: younglink_Ouch_Blink_VIS_O_OBJShape
+    100300: younglink_Ouch_Blink_VIS_O_OBJShape 1
+    100302: younglink_Ouch_Mouth_VIS_O_OBJShape
+    100304: younglink_Ouch_Mouth_VIS_O_OBJShape 1
+    100306: younglink_sayatuka_VIS_O_OBJShape
+    100308: younglink_Talk_Blink_VIS_O_OBJShape
+    100310: younglink_Talk_Blink_VIS_O_OBJShape 1
+    100312: younglink_Talk_Mouth_VIS_O_OBJShape
+    100314: younglink_Talk_Mouth_VIS_O_OBJShape 1
+    100316: younglink_tate_VIS_O_OBJShape
+    100318: younglink_tate_VIS_O_OBJShape 1
+    100320: younglink_tateb_VIS_O_OBJShape
+    100322: younglink_tateb_VIS_O_OBJShape 1
+    100324: younglink_VoiceB_Mouth_VIS_O_OBJShape
+    100326: younglink_VoiceB_Mouth_VIS_O_OBJShape 1
+    400000: ArmL
+    400002: ArmR
+    400004: Bust
+    400006: ClavicleC
+    400008: ClavicleL
+    400010: ClavicleR
+    400012: EnvironmentAmbientLight
+    400014: eyeShape
+    400016: eyeShape 1
+    400018: FingerL10
+    400020: FingerL11
+    400022: FingerL12
+    400024: FingerL13
+    400026: FingerL20
+    400028: FingerL21
+    400030: FingerL22
+    400032: FingerL23
+    400034: FingerL30
+    400036: FingerL31
+    400038: FingerL32
+    400040: FingerL33
+    400042: FingerL40
+    400044: FingerL41
+    400046: FingerL42
+    400048: FingerL43
+    400050: FingerL51
+    400052: FingerL52
+    400054: FingerL53
+    400056: FingerR10
+    400058: FingerR11
+    400060: FingerR12
+    400062: FingerR13
+    400064: FingerR20
+    400066: FingerR21
+    400068: FingerR22
+    400070: FingerR23
+    400072: FingerR30
+    400074: FingerR31
+    400076: FingerR32
+    400078: FingerR33
+    400080: FingerR40
+    400082: FingerR41
+    400084: FingerR42
+    400086: FingerR43
+    400088: FingerR51
+    400090: FingerR52
+    400092: FingerR53
+    400094: FootL
+    400096: FootR
+    400098: GamemodelShape
+    400100: GamemodelShape 1
+    400102: GamemodelShape 2
+    400104: GamemodelShape 3
+    400106: H_LegL
+    400108: H_LegR
+    400110: H_SholderL
+    400112: H_SholderR
+    400114: HairL1
+    400116: HairL2
+    400118: HairR1
+    400120: HairR2
+    400122: HandL
+    400124: HandR
+    400126: Hat1
+    400128: Hat2
+    400130: Hat3
+    400132: Hat4
+    400134: HaveL
+    400136: HaveR
+    400138: Head
+    400140: Hilt
+    400142: Hip
+    400144: KneeL
+    400146: KneeR
+    400148: //RootNode
+    400150: LegC
+    400152: LegL
+    400154: LegR
+    400156: Neck
+    400158: Rot
+    400160: S_hat01
+    400162: S_hat02
+    400164: S_hat03
+    400166: S_hat04_null
+    400168: S_skirtBL01
+    400170: S_skirtBL02
+    400172: S_skirtBL03_null
+    400174: S_skirtBR01
+    400176: S_skirtBR02
+    400178: S_skirtBR03_null
+    400180: S_skirtFL01
+    400182: S_skirtFL02
+    400184: S_skirtFL03_null
+    400186: S_skirtFR01
+    400188: S_skirtFR02
+    400190: S_skirtFR03_null
+    400192: S_skirtL01
+    400194: S_skirtL02
+    400196: S_skirtL03_null
+    400198: S_skirtR01
+    400200: S_skirtR02
+    400202: S_skirtR03_null
+    400204: Scabbard
+    400206: Shield
+    400208: ShieldB
+    400210: ShoulderL
+    400212: ShoulderR
+    400214: Sword
+    400216: Swordstrap
+    400218: Throw
+    400220: ToeL
+    400222: ToeR
+    400224: Trans
+    400226: Waist
+    400228: younglink_Blink_VIS_O_OBJShape
+    400230: younglink_Blink_VIS_O_OBJShape 1
+    400232: younglink_Capture_Mouth_VIS_O_OBJShape
+    400234: younglink_Capture_Mouth_VIS_O_OBJShape 1
+    400236: younglink_Catch_Mouth_VIS_O_OBJShape
+    400238: younglink_Down_Blink_VIS_O_OBJShape
+    400240: younglink_Down_Blink_VIS_O_OBJShape 1
+    400242: younglink_Down_Mouth_VIS_O_OBJShape
+    400244: younglink_Down_Mouth_VIS_O_OBJShape 1
+    400246: younglink_Escape_Blink_VIS_O_OBJShape
+    400248: younglink_Escape_Blink_VIS_O_OBJShape 1
+    400250: younglink_Escape_EscapeBlink_VIS_O_OBJShape
+    400252: younglink_Escape_EscapeBlink_VIS_O_OBJShape 1
+    400254: younglink_Escape_EscapeHarf_VIS_O_OBJShape
+    400256: younglink_Escape_EscapeHarf_VIS_O_OBJShape 1
+    400258: younglink_Escape_Mouth_VIS_O_OBJShape
+    400260: younglink_FaceN_Mouth_VIS_O_OBJShape
+    400262: younglink_FaceN_Mouth_VIS_O_OBJShape 1
+    400264: younglink_Furafura_Blink_VIS_O_OBJShape
+    400266: younglink_Furafura_Blink_VIS_O_OBJShape 1
+    400268: younglink_Harfblink_VIS_O_OBJShape
+    400270: younglink_Harfblink_VIS_O_OBJShape 1
+    400272: younglink_Heavyattack_Mouth_VIS_O_OBJShape
+    400274: younglink_Heavyattack_Mouth_VIS_O_OBJShape 1
+    400276: younglink_Heavyhit_Mouth_VIS_O_OBJShape
+    400278: younglink_Heavyhit_Mouth_VIS_O_OBJShape 1
+    400280: younglink_Heavyouch_Blink_VIS_O_OBJShape
+    400282: younglink_Heavyouch_Blink_VIS_O_OBJShape 1
+    400284: younglink_hot_Mouth_VIS_O_OBJShape
+    400286: younglink_hot_Mouth_VIS_O_OBJShape 1
+    400288: younglink_hot_Mouth_VIS_O_OBJShape 2
+    400290: younglink_ken_VIS_O_OBJShape
+    400292: younglink_kenb_VIS_O_OBJShape
+    400294: younglink_Openblink_VIS_O_OBJShape
+    400296: younglink_Openblink_VIS_O_OBJShape 1
+    400298: younglink_Ouch_Blink_VIS_O_OBJShape
+    400300: younglink_Ouch_Blink_VIS_O_OBJShape 1
+    400302: younglink_Ouch_Mouth_VIS_O_OBJShape
+    400304: younglink_Ouch_Mouth_VIS_O_OBJShape 1
+    400306: younglink_sayatuka_VIS_O_OBJShape
+    400308: younglink_Talk_Blink_VIS_O_OBJShape
+    400310: younglink_Talk_Blink_VIS_O_OBJShape 1
+    400312: younglink_Talk_Mouth_VIS_O_OBJShape
+    400314: younglink_Talk_Mouth_VIS_O_OBJShape 1
+    400316: younglink_tate_VIS_O_OBJShape
+    400318: younglink_tate_VIS_O_OBJShape 1
+    400320: younglink_tateb_VIS_O_OBJShape
+    400322: younglink_tateb_VIS_O_OBJShape 1
+    400324: younglink_VoiceB_Mouth_VIS_O_OBJShape
+    400326: younglink_VoiceB_Mouth_VIS_O_OBJShape 1
+    2100000: alp_younglink_000
+    2100002: def_younglink_000
+    2100004: metal_younglink_000
+    2100006: skin_younglink_000
+    2100008: EyeL
+    2100010: EyeR
+    2100012: alp_younglink_002
+    2100014: ShaderfxShader19
+    4300000: GamemodelShape
+    4300002: GamemodelShape
+    4300004: GamemodelShape
+    4300006: GamemodelShape
+    4300008: eyeShape
+    4300010: eyeShape
+    4300012: younglink_Openblink_VIS_O_OBJShape
+    4300014: younglink_Openblink_VIS_O_OBJShape
+    4300016: younglink_Harfblink_VIS_O_OBJShape
+    4300018: younglink_Harfblink_VIS_O_OBJShape
+    4300020: younglink_Blink_VIS_O_OBJShape
+    4300022: younglink_Blink_VIS_O_OBJShape
+    4300024: younglink_FaceN_Mouth_VIS_O_OBJShape
+    4300026: younglink_FaceN_Mouth_VIS_O_OBJShape
+    4300028: younglink_Talk_Blink_VIS_O_OBJShape
+    4300030: younglink_Talk_Blink_VIS_O_OBJShape
+    4300032: younglink_Talk_Mouth_VIS_O_OBJShape
+    4300034: younglink_Talk_Mouth_VIS_O_OBJShape
+    4300036: younglink_Heavyattack_Mouth_VIS_O_OBJShape
+    4300038: younglink_Heavyattack_Mouth_VIS_O_OBJShape
+    4300040: younglink_VoiceB_Mouth_VIS_O_OBJShape
+    4300042: younglink_VoiceB_Mouth_VIS_O_OBJShape
+    4300044: younglink_Escape_Blink_VIS_O_OBJShape
+    4300046: younglink_Escape_Blink_VIS_O_OBJShape
+    4300048: younglink_Escape_EscapeHarf_VIS_O_OBJShape
+    4300050: younglink_Escape_EscapeHarf_VIS_O_OBJShape
+    4300052: younglink_Escape_EscapeBlink_VIS_O_OBJShape
+    4300054: younglink_Escape_EscapeBlink_VIS_O_OBJShape
+    4300056: younglink_Escape_Mouth_VIS_O_OBJShape
+    4300058: younglink_Catch_Mouth_VIS_O_OBJShape
+    4300060: younglink_Ouch_Mouth_VIS_O_OBJShape
+    4300062: younglink_Ouch_Mouth_VIS_O_OBJShape
+    4300064: younglink_Ouch_Blink_VIS_O_OBJShape
+    4300066: younglink_Ouch_Blink_VIS_O_OBJShape
+    4300068: younglink_Capture_Mouth_VIS_O_OBJShape
+    4300070: younglink_Capture_Mouth_VIS_O_OBJShape
+    4300072: younglink_Heavyhit_Mouth_VIS_O_OBJShape
+    4300074: younglink_Heavyhit_Mouth_VIS_O_OBJShape
+    4300076: younglink_Heavyouch_Blink_VIS_O_OBJShape
+    4300078: younglink_Heavyouch_Blink_VIS_O_OBJShape
+    4300080: younglink_Down_Mouth_VIS_O_OBJShape
+    4300082: younglink_Down_Mouth_VIS_O_OBJShape
+    4300084: younglink_Down_Blink_VIS_O_OBJShape
+    4300086: younglink_Down_Blink_VIS_O_OBJShape
+    4300088: younglink_Furafura_Blink_VIS_O_OBJShape
+    4300090: younglink_Furafura_Blink_VIS_O_OBJShape
+    4300092: younglink_hot_Mouth_VIS_O_OBJShape
+    4300094: younglink_hot_Mouth_VIS_O_OBJShape
+    4300096: younglink_hot_Mouth_VIS_O_OBJShape
+    4300098: younglink_kenb_VIS_O_OBJShape
+    4300100: younglink_ken_VIS_O_OBJShape
+    4300102: younglink_tate_VIS_O_OBJShape
+    4300104: younglink_tate_VIS_O_OBJShape
+    4300106: younglink_tateb_VIS_O_OBJShape
+    4300108: younglink_tateb_VIS_O_OBJShape
+    4300110: younglink_sayatuka_VIS_O_OBJShape
+    9500000: //RootNode
+    13700000: eyeShape
+    13700002: eyeShape 1
+    13700004: GamemodelShape
+    13700006: GamemodelShape 1
+    13700008: GamemodelShape 2
+    13700010: GamemodelShape 3
+    13700012: younglink_Blink_VIS_O_OBJShape
+    13700014: younglink_Blink_VIS_O_OBJShape 1
+    13700016: younglink_Capture_Mouth_VIS_O_OBJShape
+    13700018: younglink_Capture_Mouth_VIS_O_OBJShape 1
+    13700020: younglink_Catch_Mouth_VIS_O_OBJShape
+    13700022: younglink_Down_Blink_VIS_O_OBJShape
+    13700024: younglink_Down_Blink_VIS_O_OBJShape 1
+    13700026: younglink_Down_Mouth_VIS_O_OBJShape
+    13700028: younglink_Down_Mouth_VIS_O_OBJShape 1
+    13700030: younglink_Escape_Blink_VIS_O_OBJShape
+    13700032: younglink_Escape_Blink_VIS_O_OBJShape 1
+    13700034: younglink_Escape_EscapeBlink_VIS_O_OBJShape
+    13700036: younglink_Escape_EscapeBlink_VIS_O_OBJShape 1
+    13700038: younglink_Escape_EscapeHarf_VIS_O_OBJShape
+    13700040: younglink_Escape_EscapeHarf_VIS_O_OBJShape 1
+    13700042: younglink_Escape_Mouth_VIS_O_OBJShape
+    13700044: younglink_FaceN_Mouth_VIS_O_OBJShape
+    13700046: younglink_FaceN_Mouth_VIS_O_OBJShape 1
+    13700048: younglink_Furafura_Blink_VIS_O_OBJShape
+    13700050: younglink_Furafura_Blink_VIS_O_OBJShape 1
+    13700052: younglink_Harfblink_VIS_O_OBJShape
+    13700054: younglink_Harfblink_VIS_O_OBJShape 1
+    13700056: younglink_Heavyattack_Mouth_VIS_O_OBJShape
+    13700058: younglink_Heavyattack_Mouth_VIS_O_OBJShape 1
+    13700060: younglink_Heavyhit_Mouth_VIS_O_OBJShape
+    13700062: younglink_Heavyhit_Mouth_VIS_O_OBJShape 1
+    13700064: younglink_Heavyouch_Blink_VIS_O_OBJShape
+    13700066: younglink_Heavyouch_Blink_VIS_O_OBJShape 1
+    13700068: younglink_hot_Mouth_VIS_O_OBJShape
+    13700070: younglink_hot_Mouth_VIS_O_OBJShape 1
+    13700072: younglink_hot_Mouth_VIS_O_OBJShape 2
+    13700074: younglink_ken_VIS_O_OBJShape
+    13700076: younglink_kenb_VIS_O_OBJShape
+    13700078: younglink_Openblink_VIS_O_OBJShape
+    13700080: younglink_Openblink_VIS_O_OBJShape 1
+    13700082: younglink_Ouch_Blink_VIS_O_OBJShape
+    13700084: younglink_Ouch_Blink_VIS_O_OBJShape 1
+    13700086: younglink_Ouch_Mouth_VIS_O_OBJShape
+    13700088: younglink_Ouch_Mouth_VIS_O_OBJShape 1
+    13700090: younglink_sayatuka_VIS_O_OBJShape
+    13700092: younglink_Talk_Blink_VIS_O_OBJShape
+    13700094: younglink_Talk_Blink_VIS_O_OBJShape 1
+    13700096: younglink_Talk_Mouth_VIS_O_OBJShape
+    13700098: younglink_Talk_Mouth_VIS_O_OBJShape 1
+    13700100: younglink_tate_VIS_O_OBJShape
+    13700102: younglink_tate_VIS_O_OBJShape 1
+    13700104: younglink_tateb_VIS_O_OBJShape
+    13700106: younglink_tateb_VIS_O_OBJShape 1
+    13700108: younglink_VoiceB_Mouth_VIS_O_OBJShape
+    13700110: younglink_VoiceB_Mouth_VIS_O_OBJShape 1
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

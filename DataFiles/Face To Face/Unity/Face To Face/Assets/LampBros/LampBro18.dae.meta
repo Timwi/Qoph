@@ -1,0 +1,644 @@
+fileFormatVersion: 2
+guid: a10c17eb87c8ba8439ff5175b0e34288
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: ArmL
+    100002: ArmR
+    100004: Bust
+    100006: ClavicleC
+    100008: ClavicleL
+    100010: ClavicleR
+    100012: DownlipC
+    100014: DownlipC_offset
+    100016: DownlipL
+    100018: DownlipL_offset
+    100020: DownlipR
+    100022: DownlipR_offset
+    100024: EnvironmentAmbientLight
+    100026: Face
+    100028: facegroupShape
+    100030: FingerL10
+    100032: FingerL11
+    100034: FingerL12
+    100036: FingerL13
+    100038: FingerL20
+    100040: FingerL21
+    100042: FingerL22
+    100044: FingerL23
+    100046: FingerL30
+    100048: FingerL31
+    100050: FingerL32
+    100052: FingerL33
+    100054: FingerL40
+    100056: FingerL41
+    100058: FingerL42
+    100060: FingerL43
+    100062: FingerL51
+    100064: FingerL52
+    100066: FingerL53
+    100068: FingerR10
+    100070: FingerR11
+    100072: FingerR12
+    100074: FingerR13
+    100076: FingerR20
+    100078: FingerR21
+    100080: FingerR22
+    100082: FingerR23
+    100084: FingerR30
+    100086: FingerR31
+    100088: FingerR32
+    100090: FingerR33
+    100092: FingerR40
+    100094: FingerR41
+    100096: FingerR42
+    100098: FingerR43
+    100100: FingerR51
+    100102: FingerR52
+    100104: FingerR53
+    100106: FootL
+    100108: FootR
+    100110: GamemodelShape
+    100112: GamemodelShape 1
+    100114: H_ArmtwistL
+    100116: H_ArmtwistR
+    100118: H_ClavicleL
+    100120: H_ClavicleR
+    100122: H_ElbowL
+    100124: H_ElbowR
+    100126: H_KneeL
+    100128: H_KneeR
+    100130: H_LegL
+    100132: H_LegR
+    100134: H_SholderL
+    100136: H_SholderR
+    100138: H_UparmtwistL
+    100140: H_UparmtwistR
+    100142: H_Waist
+    100144: H_WristL
+    100146: H_WristR
+    100148: HandL
+    100150: HandR
+    100152: Hat
+    100154: HaveL
+    100156: HaveR
+    100158: Head
+    100160: Hip
+    100162: Jaw
+    100164: Jaw_offset
+    100166: KneeL
+    100168: KneeR
+    100170: //RootNode
+    100172: LegC
+    100174: LegL
+    100176: LegR
+    100178: Mario_Attack_VIS_O_OBJShape
+    100180: Mario_Attack_VIS_O_OBJShape 1
+    100182: Mario_Blink_VIS_O_OBJShape
+    100184: Mario_Blink_VIS_O_OBJShape 1
+    100186: Mario_Bound_VIS_O_OBJShape
+    100188: Mario_Bound_VIS_O_OBJShape 1
+    100190: Mario_Capture_VIS_O_OBJShape
+    100192: Mario_Capture_VIS_O_OBJShape 1
+    100194: Mario_Cliff_VIS_O_OBJShape
+    100196: Mario_Cliff_VIS_O_OBJShape 1
+    100198: Mario_Damageflyfront_VIS_O_OBJShape
+    100200: Mario_Damageflyfront_VIS_O_OBJShape 1
+    100202: Mario_Down_VIS_O_OBJShape
+    100204: Mario_Down_VIS_O_OBJShape 1
+    100206: Mario_Escape_VIS_O_OBJShape
+    100208: Mario_Escape_VIS_O_OBJShape 1
+    100210: Mario_Eye_VIS_O_OBJShape
+    100212: Mario_Eye_VIS_O_OBJShape 1
+    100214: Mario_FaceN_VIS_O_OBJShape
+    100216: Mario_FaceN_VIS_O_OBJShape 1
+    100218: Mario_FaceNMClose_VIS_O_OBJShape
+    100220: Mario_FaceNMHalf_VIS_O_OBJShape
+    100222: Mario_FaceNMOpen_VIS_O_OBJShape
+    100224: Mario_Final_VIS_O_OBJShape
+    100226: Mario_Final_VIS_O_OBJShape 1
+    100228: Mario_Furafura_VIS_O_OBJShape
+    100230: Mario_Furafura_VIS_O_OBJShape 1
+    100232: Mario_Halfblink1_VIS_O_OBJShape
+    100234: Mario_Halfblink1_VIS_O_OBJShape 1
+    100236: Mario_Halfblink2_VIS_O_OBJShape
+    100238: Mario_Halfblink2_VIS_O_OBJShape 1
+    100240: Mario_Halfblink3_VIS_O_OBJShape
+    100242: Mario_Halfblink3_VIS_O_OBJShape 1
+    100244: Mario_HeavyAttackOpen_VIS_O_OBJShape
+    100246: Mario_Heavyhit_VIS_O_OBJShape
+    100248: Mario_Heavyhit_VIS_O_OBJShape 1
+    100250: Mario_Heavyouch_VIS_O_OBJShape
+    100252: Mario_Heavyouch_VIS_O_OBJShape 1
+    100254: Mario_Ottotto_VIS_O_OBJShape
+    100256: Mario_Ottotto_VIS_O_OBJShape 1
+    100258: Mario_Ouch_VIS_O_OBJShape
+    100260: Mario_Ouch_VIS_O_OBJShape 1
+    100262: Mario_OuchMClose_VIS_O_OBJShape
+    100264: Mario_OuchMHalf_VIS_O_OBJShape
+    100266: Mario_OuchMOpen_VIS_O_OBJShape
+    100268: Mario_PatternB_VIS_O_OBJShape
+    100270: Mario_PatternB_VIS_O_OBJShape 1
+    100272: Mario_PatternBmonth_VIS_O_OBJShape
+    100274: Mario_PatternC_VIS_O_OBJShape
+    100276: Mario_PatternC_VIS_O_OBJShape 1
+    100278: Mario_Result_VIS_O_OBJShape
+    100280: Mario_Sorori_VIS_O_OBJShape
+    100282: Mario_Sorori_VIS_O_OBJShape 1
+    100284: Mario_Talk_VIS_O_OBJShape
+    100286: Mario_Talk_VIS_O_OBJShape 1
+    100288: Mario_TalkMClose_VIS_O_OBJShape
+    100290: Mario_TalkMHalf_VIS_O_OBJShape
+    100292: Mario_TalkMOpen_VIS_O_OBJShape
+    100294: MarioD_hair_O_OBJShape
+    100296: Mouth_group
+    100298: mustacheL
+    100300: mustacheR
+    100302: Neck
+    100304: Rot
+    100306: S_CoatBLa1
+    100308: S_CoatBLa2
+    100310: S_CoatBLa3_null
+    100312: S_CoatBLb1
+    100314: S_CoatBLb2
+    100316: S_CoatBLb3_null
+    100318: S_CoatBRa1
+    100320: S_CoatBRa2
+    100322: S_CoatBRa3_null
+    100324: S_CoatBRb1
+    100326: S_CoatBRb2
+    100328: S_CoatBRb3_null
+    100330: S_CoatFLa1
+    100332: S_CoatFLa2
+    100334: S_CoatFLa3
+    100336: S_CoatFLa4_null
+    100338: S_CoatFLb1
+    100340: S_CoatFLb2
+    100342: S_CoatFLb3
+    100344: S_CoatFLb4_null
+    100346: S_CoatFRa1
+    100348: S_CoatFRa2
+    100350: S_CoatFRa3
+    100352: S_CoatFRa4_null
+    100354: S_CoatFRb1
+    100356: S_CoatFRb2
+    100358: S_CoatFRb3
+    100360: S_CoatFRb4_null
+    100362: S_CoatL1
+    100364: S_CoatL2
+    100366: S_CoatL3
+    100368: S_CoatL4_null
+    100370: S_CoatR1
+    100372: S_CoatR2
+    100374: S_CoatR3
+    100376: S_CoatR4_null
+    100378: S_Stethoscope1
+    100380: S_Stethoscope2
+    100382: S_Stethoscope3
+    100384: S_Stethoscope4
+    100386: S_Stethoscope5_null
+    100388: ShoulderL
+    100390: ShoulderR
+    100392: stethoscope_VIS_O_OBJShape
+    100394: Throw
+    100396: ToeL
+    100398: ToeR
+    100400: Trans
+    100402: UplipC
+    100404: UplipC_offset
+    100406: UplipL1
+    100408: UplipL1_offset
+    100410: UplipL2
+    100412: UplipL2_offset
+    100414: UplipR1
+    100416: UplipR1_offset
+    100418: UplipR2
+    100420: UplipR2_offset
+    100422: Waist
+    400000: ArmL
+    400002: ArmR
+    400004: Bust
+    400006: ClavicleC
+    400008: ClavicleL
+    400010: ClavicleR
+    400012: DownlipC
+    400014: DownlipC_offset
+    400016: DownlipL
+    400018: DownlipL_offset
+    400020: DownlipR
+    400022: DownlipR_offset
+    400024: EnvironmentAmbientLight
+    400026: Face
+    400028: facegroupShape
+    400030: FingerL10
+    400032: FingerL11
+    400034: FingerL12
+    400036: FingerL13
+    400038: FingerL20
+    400040: FingerL21
+    400042: FingerL22
+    400044: FingerL23
+    400046: FingerL30
+    400048: FingerL31
+    400050: FingerL32
+    400052: FingerL33
+    400054: FingerL40
+    400056: FingerL41
+    400058: FingerL42
+    400060: FingerL43
+    400062: FingerL51
+    400064: FingerL52
+    400066: FingerL53
+    400068: FingerR10
+    400070: FingerR11
+    400072: FingerR12
+    400074: FingerR13
+    400076: FingerR20
+    400078: FingerR21
+    400080: FingerR22
+    400082: FingerR23
+    400084: FingerR30
+    400086: FingerR31
+    400088: FingerR32
+    400090: FingerR33
+    400092: FingerR40
+    400094: FingerR41
+    400096: FingerR42
+    400098: FingerR43
+    400100: FingerR51
+    400102: FingerR52
+    400104: FingerR53
+    400106: FootL
+    400108: FootR
+    400110: GamemodelShape
+    400112: GamemodelShape 1
+    400114: H_ArmtwistL
+    400116: H_ArmtwistR
+    400118: H_ClavicleL
+    400120: H_ClavicleR
+    400122: H_ElbowL
+    400124: H_ElbowR
+    400126: H_KneeL
+    400128: H_KneeR
+    400130: H_LegL
+    400132: H_LegR
+    400134: H_SholderL
+    400136: H_SholderR
+    400138: H_UparmtwistL
+    400140: H_UparmtwistR
+    400142: H_Waist
+    400144: H_WristL
+    400146: H_WristR
+    400148: HandL
+    400150: HandR
+    400152: Hat
+    400154: HaveL
+    400156: HaveR
+    400158: Head
+    400160: Hip
+    400162: Jaw
+    400164: Jaw_offset
+    400166: KneeL
+    400168: KneeR
+    400170: //RootNode
+    400172: LegC
+    400174: LegL
+    400176: LegR
+    400178: Mario_Attack_VIS_O_OBJShape
+    400180: Mario_Attack_VIS_O_OBJShape 1
+    400182: Mario_Blink_VIS_O_OBJShape
+    400184: Mario_Blink_VIS_O_OBJShape 1
+    400186: Mario_Bound_VIS_O_OBJShape
+    400188: Mario_Bound_VIS_O_OBJShape 1
+    400190: Mario_Capture_VIS_O_OBJShape
+    400192: Mario_Capture_VIS_O_OBJShape 1
+    400194: Mario_Cliff_VIS_O_OBJShape
+    400196: Mario_Cliff_VIS_O_OBJShape 1
+    400198: Mario_Damageflyfront_VIS_O_OBJShape
+    400200: Mario_Damageflyfront_VIS_O_OBJShape 1
+    400202: Mario_Down_VIS_O_OBJShape
+    400204: Mario_Down_VIS_O_OBJShape 1
+    400206: Mario_Escape_VIS_O_OBJShape
+    400208: Mario_Escape_VIS_O_OBJShape 1
+    400210: Mario_Eye_VIS_O_OBJShape
+    400212: Mario_Eye_VIS_O_OBJShape 1
+    400214: Mario_FaceN_VIS_O_OBJShape
+    400216: Mario_FaceN_VIS_O_OBJShape 1
+    400218: Mario_FaceNMClose_VIS_O_OBJShape
+    400220: Mario_FaceNMHalf_VIS_O_OBJShape
+    400222: Mario_FaceNMOpen_VIS_O_OBJShape
+    400224: Mario_Final_VIS_O_OBJShape
+    400226: Mario_Final_VIS_O_OBJShape 1
+    400228: Mario_Furafura_VIS_O_OBJShape
+    400230: Mario_Furafura_VIS_O_OBJShape 1
+    400232: Mario_Halfblink1_VIS_O_OBJShape
+    400234: Mario_Halfblink1_VIS_O_OBJShape 1
+    400236: Mario_Halfblink2_VIS_O_OBJShape
+    400238: Mario_Halfblink2_VIS_O_OBJShape 1
+    400240: Mario_Halfblink3_VIS_O_OBJShape
+    400242: Mario_Halfblink3_VIS_O_OBJShape 1
+    400244: Mario_HeavyAttackOpen_VIS_O_OBJShape
+    400246: Mario_Heavyhit_VIS_O_OBJShape
+    400248: Mario_Heavyhit_VIS_O_OBJShape 1
+    400250: Mario_Heavyouch_VIS_O_OBJShape
+    400252: Mario_Heavyouch_VIS_O_OBJShape 1
+    400254: Mario_Ottotto_VIS_O_OBJShape
+    400256: Mario_Ottotto_VIS_O_OBJShape 1
+    400258: Mario_Ouch_VIS_O_OBJShape
+    400260: Mario_Ouch_VIS_O_OBJShape 1
+    400262: Mario_OuchMClose_VIS_O_OBJShape
+    400264: Mario_OuchMHalf_VIS_O_OBJShape
+    400266: Mario_OuchMOpen_VIS_O_OBJShape
+    400268: Mario_PatternB_VIS_O_OBJShape
+    400270: Mario_PatternB_VIS_O_OBJShape 1
+    400272: Mario_PatternBmonth_VIS_O_OBJShape
+    400274: Mario_PatternC_VIS_O_OBJShape
+    400276: Mario_PatternC_VIS_O_OBJShape 1
+    400278: Mario_Result_VIS_O_OBJShape
+    400280: Mario_Sorori_VIS_O_OBJShape
+    400282: Mario_Sorori_VIS_O_OBJShape 1
+    400284: Mario_Talk_VIS_O_OBJShape
+    400286: Mario_Talk_VIS_O_OBJShape 1
+    400288: Mario_TalkMClose_VIS_O_OBJShape
+    400290: Mario_TalkMHalf_VIS_O_OBJShape
+    400292: Mario_TalkMOpen_VIS_O_OBJShape
+    400294: MarioD_hair_O_OBJShape
+    400296: Mouth_group
+    400298: mustacheL
+    400300: mustacheR
+    400302: Neck
+    400304: Rot
+    400306: S_CoatBLa1
+    400308: S_CoatBLa2
+    400310: S_CoatBLa3_null
+    400312: S_CoatBLb1
+    400314: S_CoatBLb2
+    400316: S_CoatBLb3_null
+    400318: S_CoatBRa1
+    400320: S_CoatBRa2
+    400322: S_CoatBRa3_null
+    400324: S_CoatBRb1
+    400326: S_CoatBRb2
+    400328: S_CoatBRb3_null
+    400330: S_CoatFLa1
+    400332: S_CoatFLa2
+    400334: S_CoatFLa3
+    400336: S_CoatFLa4_null
+    400338: S_CoatFLb1
+    400340: S_CoatFLb2
+    400342: S_CoatFLb3
+    400344: S_CoatFLb4_null
+    400346: S_CoatFRa1
+    400348: S_CoatFRa2
+    400350: S_CoatFRa3
+    400352: S_CoatFRa4_null
+    400354: S_CoatFRb1
+    400356: S_CoatFRb2
+    400358: S_CoatFRb3
+    400360: S_CoatFRb4_null
+    400362: S_CoatL1
+    400364: S_CoatL2
+    400366: S_CoatL3
+    400368: S_CoatL4_null
+    400370: S_CoatR1
+    400372: S_CoatR2
+    400374: S_CoatR3
+    400376: S_CoatR4_null
+    400378: S_Stethoscope1
+    400380: S_Stethoscope2
+    400382: S_Stethoscope3
+    400384: S_Stethoscope4
+    400386: S_Stethoscope5_null
+    400388: ShoulderL
+    400390: ShoulderR
+    400392: stethoscope_VIS_O_OBJShape
+    400394: Throw
+    400396: ToeL
+    400398: ToeR
+    400400: Trans
+    400402: UplipC
+    400404: UplipC_offset
+    400406: UplipL1
+    400408: UplipL1_offset
+    400410: UplipL2
+    400412: UplipL2_offset
+    400414: UplipR1
+    400416: UplipR1_offset
+    400418: UplipR2
+    400420: UplipR2_offset
+    400422: Waist
+    2100000: kutu_phong0_sfx_0x9a011063_____VTC___TANGENT___BINORMAL_101
+    2100002: metal_mariod_001
+    2100004: alp_mario_001
+    2100006: ShaderfxShader8
+    2100008: alp_mario_002
+    2100010: skin_mario_001
+    2100012: EyeL
+    2100014: EyeR
+    4300000: GamemodelShape
+    4300002: GamemodelShape
+    4300004: stethoscope_VIS_O_OBJShape
+    4300006: MarioD_hair_O_OBJShape
+    4300008: facegroupShape
+    4300010: Mario_FaceN_VIS_O_OBJShape
+    4300012: Mario_FaceN_VIS_O_OBJShape
+    4300014: Mario_FaceNMClose_VIS_O_OBJShape
+    4300016: Mario_FaceNMHalf_VIS_O_OBJShape
+    4300018: Mario_FaceNMOpen_VIS_O_OBJShape
+    4300020: Mario_Eye_VIS_O_OBJShape
+    4300022: Mario_Eye_VIS_O_OBJShape
+    4300024: Mario_Halfblink1_VIS_O_OBJShape
+    4300026: Mario_Halfblink1_VIS_O_OBJShape
+    4300028: Mario_Halfblink2_VIS_O_OBJShape
+    4300030: Mario_Halfblink2_VIS_O_OBJShape
+    4300032: Mario_Halfblink3_VIS_O_OBJShape
+    4300034: Mario_Halfblink3_VIS_O_OBJShape
+    4300036: Mario_Blink_VIS_O_OBJShape
+    4300038: Mario_Blink_VIS_O_OBJShape
+    4300040: Mario_Ouch_VIS_O_OBJShape
+    4300042: Mario_Ouch_VIS_O_OBJShape
+    4300044: Mario_OuchMOpen_VIS_O_OBJShape
+    4300046: Mario_OuchMHalf_VIS_O_OBJShape
+    4300048: Mario_OuchMClose_VIS_O_OBJShape
+    4300050: Mario_Down_VIS_O_OBJShape
+    4300052: Mario_Down_VIS_O_OBJShape
+    4300054: Mario_Talk_VIS_O_OBJShape
+    4300056: Mario_Talk_VIS_O_OBJShape
+    4300058: Mario_TalkMOpen_VIS_O_OBJShape
+    4300060: Mario_HeavyAttackOpen_VIS_O_OBJShape
+    4300062: Mario_TalkMHalf_VIS_O_OBJShape
+    4300064: Mario_TalkMClose_VIS_O_OBJShape
+    4300066: Mario_Attack_VIS_O_OBJShape
+    4300068: Mario_Attack_VIS_O_OBJShape
+    4300070: Mario_Capture_VIS_O_OBJShape
+    4300072: Mario_Capture_VIS_O_OBJShape
+    4300074: Mario_Bound_VIS_O_OBJShape
+    4300076: Mario_Bound_VIS_O_OBJShape
+    4300078: Mario_Heavyouch_VIS_O_OBJShape
+    4300080: Mario_Heavyouch_VIS_O_OBJShape
+    4300082: Mario_Furafura_VIS_O_OBJShape
+    4300084: Mario_Furafura_VIS_O_OBJShape
+    4300086: Mario_Cliff_VIS_O_OBJShape
+    4300088: Mario_Cliff_VIS_O_OBJShape
+    4300090: Mario_Sorori_VIS_O_OBJShape
+    4300092: Mario_Sorori_VIS_O_OBJShape
+    4300094: Mario_Final_VIS_O_OBJShape
+    4300096: Mario_Final_VIS_O_OBJShape
+    4300098: Mario_Escape_VIS_O_OBJShape
+    4300100: Mario_Escape_VIS_O_OBJShape
+    4300102: Mario_Ottotto_VIS_O_OBJShape
+    4300104: Mario_Ottotto_VIS_O_OBJShape
+    4300106: Mario_Damageflyfront_VIS_O_OBJShape
+    4300108: Mario_Damageflyfront_VIS_O_OBJShape
+    4300110: Mario_Result_VIS_O_OBJShape
+    4300112: Mario_PatternB_VIS_O_OBJShape
+    4300114: Mario_PatternB_VIS_O_OBJShape
+    4300116: Mario_PatternC_VIS_O_OBJShape
+    4300118: Mario_PatternC_VIS_O_OBJShape
+    4300120: Mario_Heavyhit_VIS_O_OBJShape
+    4300122: Mario_Heavyhit_VIS_O_OBJShape
+    4300124: Mario_PatternBmonth_VIS_O_OBJShape
+    9500000: //RootNode
+    13700000: facegroupShape
+    13700002: GamemodelShape
+    13700004: GamemodelShape 1
+    13700006: Mario_Attack_VIS_O_OBJShape
+    13700008: Mario_Attack_VIS_O_OBJShape 1
+    13700010: Mario_Blink_VIS_O_OBJShape
+    13700012: Mario_Blink_VIS_O_OBJShape 1
+    13700014: Mario_Bound_VIS_O_OBJShape
+    13700016: Mario_Bound_VIS_O_OBJShape 1
+    13700018: Mario_Capture_VIS_O_OBJShape
+    13700020: Mario_Capture_VIS_O_OBJShape 1
+    13700022: Mario_Cliff_VIS_O_OBJShape
+    13700024: Mario_Cliff_VIS_O_OBJShape 1
+    13700026: Mario_Damageflyfront_VIS_O_OBJShape
+    13700028: Mario_Damageflyfront_VIS_O_OBJShape 1
+    13700030: Mario_Down_VIS_O_OBJShape
+    13700032: Mario_Down_VIS_O_OBJShape 1
+    13700034: Mario_Escape_VIS_O_OBJShape
+    13700036: Mario_Escape_VIS_O_OBJShape 1
+    13700038: Mario_Eye_VIS_O_OBJShape
+    13700040: Mario_Eye_VIS_O_OBJShape 1
+    13700042: Mario_FaceN_VIS_O_OBJShape
+    13700044: Mario_FaceN_VIS_O_OBJShape 1
+    13700046: Mario_FaceNMClose_VIS_O_OBJShape
+    13700048: Mario_FaceNMHalf_VIS_O_OBJShape
+    13700050: Mario_FaceNMOpen_VIS_O_OBJShape
+    13700052: Mario_Final_VIS_O_OBJShape
+    13700054: Mario_Final_VIS_O_OBJShape 1
+    13700056: Mario_Furafura_VIS_O_OBJShape
+    13700058: Mario_Furafura_VIS_O_OBJShape 1
+    13700060: Mario_Halfblink1_VIS_O_OBJShape
+    13700062: Mario_Halfblink1_VIS_O_OBJShape 1
+    13700064: Mario_Halfblink2_VIS_O_OBJShape
+    13700066: Mario_Halfblink2_VIS_O_OBJShape 1
+    13700068: Mario_Halfblink3_VIS_O_OBJShape
+    13700070: Mario_Halfblink3_VIS_O_OBJShape 1
+    13700072: Mario_HeavyAttackOpen_VIS_O_OBJShape
+    13700074: Mario_Heavyhit_VIS_O_OBJShape
+    13700076: Mario_Heavyhit_VIS_O_OBJShape 1
+    13700078: Mario_Heavyouch_VIS_O_OBJShape
+    13700080: Mario_Heavyouch_VIS_O_OBJShape 1
+    13700082: Mario_Ottotto_VIS_O_OBJShape
+    13700084: Mario_Ottotto_VIS_O_OBJShape 1
+    13700086: Mario_Ouch_VIS_O_OBJShape
+    13700088: Mario_Ouch_VIS_O_OBJShape 1
+    13700090: Mario_OuchMClose_VIS_O_OBJShape
+    13700092: Mario_OuchMHalf_VIS_O_OBJShape
+    13700094: Mario_OuchMOpen_VIS_O_OBJShape
+    13700096: Mario_PatternB_VIS_O_OBJShape
+    13700098: Mario_PatternB_VIS_O_OBJShape 1
+    13700100: Mario_PatternBmonth_VIS_O_OBJShape
+    13700102: Mario_PatternC_VIS_O_OBJShape
+    13700104: Mario_PatternC_VIS_O_OBJShape 1
+    13700106: Mario_Result_VIS_O_OBJShape
+    13700108: Mario_Sorori_VIS_O_OBJShape
+    13700110: Mario_Sorori_VIS_O_OBJShape 1
+    13700112: Mario_Talk_VIS_O_OBJShape
+    13700114: Mario_Talk_VIS_O_OBJShape 1
+    13700116: Mario_TalkMClose_VIS_O_OBJShape
+    13700118: Mario_TalkMHalf_VIS_O_OBJShape
+    13700120: Mario_TalkMOpen_VIS_O_OBJShape
+    13700122: MarioD_hair_O_OBJShape
+    13700124: stethoscope_VIS_O_OBJShape
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
