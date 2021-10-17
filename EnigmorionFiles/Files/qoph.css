@@ -1,502 +1,502 @@
 @font-face {
-    font-family: 'Presquire';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Presquire'), url('Presquire.ttf');
+	font-family: 'Presquire';
+	font-style: normal;
+	font-weight: normal;
+	src: local('Presquire'), url('Presquire.ttf');
 }
 
 @font-face {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: normal;
-    src: url('Montserrat-Regular.ttf');
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: normal;
+	src: url('Montserrat-Regular.ttf');
 }
 
 @font-face {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: bold;
-    src: url('Montserrat-Bold.ttf');
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: bold;
+	src: url('Montserrat-Bold.ttf');
 }
 
 @font-face {
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Lato Black'), local('Lato'), url('Lato-black.ttf');
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: normal;
+	src: local('Lato Black'), local('Lato'), url('Lato-black.ttf');
 }
 
 @font-face {
-    font-family: 'Book Antiqua';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Book Antiqua'), url(Book%20Antiqua.ttf);
+	font-family: 'Book Antiqua';
+	font-style: normal;
+	font-weight: normal;
+	src: local('Book Antiqua'), url(Book%20Antiqua.ttf);
 }
 
 @font-face {
-    font-family: 'Book Antiqua';
-    font-style: normal;
-    font-weight: bold;
-    src: local('Book Antiqua Bold'), url(Book%20Antiqua%20Bold.ttf);
+	font-family: 'Book Antiqua';
+	font-style: normal;
+	font-weight: bold;
+	src: local('Book Antiqua Bold'), url(Book%20Antiqua%20Bold.ttf);
 }
 
 @font-face {
-    font-family: 'Book Antiqua';
-    font-style: italic;
-    font-weight: normal;
-    src: local('Book Antiqua Italic'), url(Book%20Antiqua%20Italics.ttf);
+	font-family: 'Book Antiqua';
+	font-style: italic;
+	font-weight: normal;
+	src: local('Book Antiqua Italic'), url(Book%20Antiqua%20Italics.ttf);
 }
 
 @font-face {
-    font-family: 'Book Antiqua';
-    font-style: italic;
-    font-weight: bold;
-    src: local('Book Antiqua Bold Italic'), url(Book%20Antiqua%20Bold%20Italics.ttf);
+	font-family: 'Book Antiqua';
+	font-style: italic;
+	font-weight: bold;
+	src: local('Book Antiqua Bold Italic'), url(Book%20Antiqua%20Bold%20Italics.ttf);
 }
 
 @font-face {
-    font-family: 'Work Sans';
-    font-weight: normal;
-    src: local('Work Sans Regular'), url(WorkSans-Regular.otf);
+	font-family: 'Work Sans';
+	font-weight: normal;
+	src: local('Work Sans Regular'), url(WorkSans-Regular.otf);
 }
 
 @font-face {
-    font-family: 'Work Sans';
-    font-weight: bold;
-    src: local('Work Sans Bold'), url(WorkSans-Bold.otf);
+	font-family: 'Work Sans';
+	font-weight: bold;
+	src: local('Work Sans Bold'), url(WorkSans-Bold.otf);
 }
 
 @font-face {
-    font-family: 'Agency FB';
-    src: local('Agency FB'), url('Agency%20FB.ttf');
+	font-family: 'Agency FB';
+	src: local('Agency FB'), url('Agency%20FB.ttf');
 }
 
 @font-face {
-    font-family: 'Agency FB';
-    font-weight: bold;
-    src: local('Agency FB Bold'), url('Agency%20FB%20Bold.ttf');
+	font-family: 'Agency FB';
+	font-weight: bold;
+	src: local('Agency FB Bold'), url('Agency%20FB%20Bold.ttf');
 }
 
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html, input, button, textarea, kbd {
-    font-family: 'Presquire';
+	font-family: 'Presquire';
 }
 
 body {
-    background: hsl(220, 60%, 80%);
-    margin: 0;
-    font-size: 14pt;
+	background: hsl(220, 60%, 80%);
+	margin: 0;
+	font-size: 14pt;
 }
 
 div#top {
-    background: hsl(210, 40%, 50%);
-    height: 2cm;
-    position: relative;
-    padding-top: .6cm;
-    box-shadow: 0 0 .2cm rgba(0, 0, 0, .3);
+	background: hsl(210, 40%, 50%);
+	height: 2cm;
+	position: relative;
+	padding-top: .6cm;
+	box-shadow: 0 0 .2cm rgba(0, 0, 0, .3);
 }
 
-    div#top > img.logo {
-        height: 1.8cm;
-        position: absolute;
-        left: 1cm;
-        top: .1cm;
-    }
+	div#top > img.logo {
+		height: 1.8cm;
+		position: absolute;
+		left: 1cm;
+		top: .1cm;
+	}
 
-    div#top > div.links {
-        position: absolute;
-        right: 1cm;
-        top: .2cm;
-        line-height: 1.6;
-        text-align: right;
-    }
+	div#top > div.links {
+		position: absolute;
+		right: 1cm;
+		top: .2cm;
+		line-height: 1.6;
+		text-align: right;
+	}
 
-        div#top > div.links > a {
-            display: block;
-        }
+		div#top > div.links > a {
+			display: block;
+		}
 
-        div#top > div.links > #login {
-            margin-top: .35cm;
-            background: hsl(50, 70%, 80%);
-            padding: .1cm .5cm;
-            color: black;
-        }
+		div#top > div.links > #login {
+			margin-top: .35cm;
+			background: hsl(50, 70%, 80%);
+			padding: .1cm .5cm;
+			color: black;
+		}
 
-            div#top > div.links > #login:hover {
-                background: white;
-                box-shadow: 0 0 .2cm rgba(0, 0, 0, .5);
-            }
+			div#top > div.links > #login:hover {
+				background: white;
+				box-shadow: 0 0 .2cm rgba(0, 0, 0, .5);
+			}
 
-    div#top a {
-        color: hsl(220, 80%, 90%);
-        text-decoration: none;
-    }
+	div#top a {
+		color: hsl(220, 80%, 90%);
+		text-decoration: none;
+	}
 
-        div#top a:hover {
-            text-decoration: underline;
-            color: white;
-        }
+		div#top a:hover {
+			text-decoration: underline;
+			color: white;
+		}
 
-    div#top menu {
-        text-align: center;
-        font-size: 18pt;
-        margin: 0;
-    }
+	div#top menu {
+		text-align: center;
+		font-size: 18pt;
+		margin: 0;
+	}
 
-        div#top menu li {
-            display: inline;
-            padding: 0 .3cm;
-        }
+		div#top menu li {
+			display: inline;
+			padding: 0 .3cm;
+		}
 
 		div#top menu li.staff > a {
 			color: white;
 		}
 
 div#main {
-    background: hsl(220, 60%, 90%);
-    max-width: 30cm;
-    min-height: calc(100vh - 2cm);
-    margin: 0 auto;
-    padding: .25cm 1cm 5cm;
-    box-shadow: 0 0 .2cm rgba(0, 0, 0, .1);
+	background: hsl(220, 60%, 90%);
+	max-width: 30cm;
+	min-height: calc(100vh - 2cm);
+	margin: 0 auto;
+	padding: .25cm 1cm 5cm;
+	box-shadow: 0 0 .2cm rgba(0, 0, 0, .1);
 }
 
 h1 {
-    margin: 1cm -3cm 1cm;
-    padding: .5cm 0;
-    font-size: 56pt;
-    font-weight: normal;
-    text-align: center;
-    background: white;
-    box-shadow: 0 0 .3cm rgba(0, 0, 0, .3);
-    border-radius: 100vw;
-    clear: both;
+	margin: 1cm -3cm 1cm;
+	padding: .5cm 0;
+	font-size: 56pt;
+	font-weight: normal;
+	text-align: center;
+	background: white;
+	box-shadow: 0 0 .3cm rgba(0, 0, 0, .3);
+	border-radius: 100vw;
+	clear: both;
 }
 
-    h1 > bdi {
-        font-weight: bold;
-    }
+	h1 > bdi {
+		font-weight: bold;
+	}
 
-    h1.meta {
-        position: relative;
-        background: hsl(220, 50%, 40%);
-        color: white;
-    }
-    h1.meta-meta {
-        position: relative;
-        background: hsl(0, 50%, 40%);
-        color: white;
-    }
+	h1.meta {
+		position: relative;
+		background: hsl(220, 50%, 40%);
+		color: white;
+	}
+	h1.meta-meta {
+		position: relative;
+		background: hsl(0, 50%, 40%);
+		color: white;
+	}
 
-        h1.meta::before, h1.meta-meta::before {
-            content: 'META';
-            position: absolute;
-            left: 3cm;
-            bottom: 100%;
-            background: inherit;
-            border-top-left-radius: .6cm;
-            border-top-right-radius: .6cm;
-            padding: .1cm .5cm;
-            font-size: 18pt;
-            box-shadow: 0 -.1cm .1cm rgba(0, 0, 0, .2);
-        }
+		h1.meta::before, h1.meta-meta::before {
+			content: 'META';
+			position: absolute;
+			left: 3cm;
+			bottom: 100%;
+			background: inherit;
+			border-top-left-radius: .6cm;
+			border-top-right-radius: .6cm;
+			padding: .1cm .5cm;
+			font-size: 18pt;
+			box-shadow: 0 -.1cm .1cm rgba(0, 0, 0, .2);
+		}
 
 kbd {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 table.bordered {
-    border-collapse: collapse;
+	border-collapse: collapse;
 }
 
-    table.bordered td, table.bordered th {
-        border: 1px solid black;
-        text-align: left;
-        padding: .1cm .3cm;
-        background: hsl(220, 60%, 95%);
-    }
+	table.bordered td, table.bordered th {
+		border: 1px solid black;
+		text-align: left;
+		padding: .1cm .3cm;
+		background: hsl(220, 60%, 95%);
+	}
 
-    table.bordered th {
-        background: hsl(220, 60%, 80%);
-    }
+	table.bordered th {
+		background: hsl(220, 60%, 80%);
+	}
 
-        table.bordered th.small {
-            font-size: 8pt;
-            line-height: 1;
-        }
+		table.bordered th.small {
+			font-size: 8pt;
+			line-height: 1;
+		}
 
 table.centered {
-    margin-left: auto;
-    margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .team-controls {
-    margin: 1cm 0;
+	margin: 1cm 0;
 }
 
 button, a.button {
-    font: inherit;
-    padding: .15cm .4cm;
-    margin: .2cm .3cm;
-    background: hsl(220, 50%, 100%);
-    font-weight: bold;
-    font-size: 16pt;
-    border: none;
-    box-shadow: 0 0 .2cm rgba(0, 0, 0, .3);
-    border-radius: .5cm;
-    display: inline-block;
-    text-decoration: none;
-    color: black;
+	font: inherit;
+	padding: .15cm .4cm;
+	margin: .2cm .3cm;
+	background: hsl(220, 50%, 100%);
+	font-weight: bold;
+	font-size: 16pt;
+	border: none;
+	box-shadow: 0 0 .2cm rgba(0, 0, 0, .3);
+	border-radius: .5cm;
+	display: inline-block;
+	text-decoration: none;
+	color: black;
 }
 
-    button:hover, a.button:hover {
-        background: hsl(220, 50%, 50%);
-        color: white;
-        cursor: pointer;
-    }
+	button:hover, a.button:hover {
+		background: hsl(220, 50%, 50%);
+		color: white;
+		cursor: pointer;
+	}
 
 input[type="text"], input[type="password"], input[type="email"], textarea {
-    font-size: 16pt;
-    padding: .2em .3cm;
-    width: 8cm;
-    border: 1px solid #ccc;
-    border-radius: .5cm;
+	font-size: 16pt;
+	padding: .2em .3cm;
+	width: 8cm;
+	border: 1px solid #ccc;
+	border-radius: .5cm;
 }
 
 form.logout {
-    float: right;
+	float: right;
 }
 
 div#countdown {
-    clear: both;
-    margin: 2cm auto;
-    text-align: center;
-    font-size: 64pt;
-    position: relative;
+	clear: both;
+	margin: 2cm auto;
+	text-align: center;
+	font-size: 64pt;
+	position: relative;
 }
 
-    div#countdown::before {
-        content: 'The hunt begins in ...';
-        font-size: 32pt;
-        display: block;
-        padding-bottom: .5cm;
-    }
+	div#countdown::before {
+		content: 'The hunt begins in ...';
+		font-size: 32pt;
+		display: block;
+		padding-bottom: .5cm;
+	}
 
-    div#countdown > .box {
-        padding: .2cm .2cm 0;
-        margin: 0 .6cm;
-        display: inline-block;
-        vertical-align: top;
-        color: white;
-        position: relative;
-        /*box-shadow: 0 0 .3cm rgba(0, 0, 0, .3);*/
-        /*filter: drop-shadow(0 0 .3cm rgba(0, 0, 0, .3));*/
-        height: 150px;
-    }
+	div#countdown > .box {
+		padding: .2cm .2cm 0;
+		margin: 0 .6cm;
+		display: inline-block;
+		vertical-align: top;
+		color: white;
+		position: relative;
+		/*box-shadow: 0 0 .3cm rgba(0, 0, 0, .3);*/
+		/*filter: drop-shadow(0 0 .3cm rgba(0, 0, 0, .3));*/
+		height: 150px;
+	}
 
-        div#countdown > .box:not(.days)::before {
-            content: '';
-            position: absolute;
-            right: 100%;
-            top: 0;
-            height: 0;
-            border-left-width: .9cm;
-            border-left-color: transparent !important;
-            border-left-style: solid;
-            border-bottom-width: 150px;
-            border-bottom-style: solid;
-        }
+		div#countdown > .box:not(.days)::before {
+			content: '';
+			position: absolute;
+			right: 100%;
+			top: 0;
+			height: 0;
+			border-left-width: .9cm;
+			border-left-color: transparent !important;
+			border-left-style: solid;
+			border-bottom-width: 150px;
+			border-bottom-style: solid;
+		}
 
-        div#countdown > .box:not(.secs)::after {
-            content: '';
-            position: absolute;
-            left: 100%;
-            top: 0;
-            height: 0;
-            border-right-width: .9cm;
-            border-right-color: transparent !important;
-            border-right-style: solid;
-            border-top-width: 150px;
-            border-top-style: solid;
-        }
+		div#countdown > .box:not(.secs)::after {
+			content: '';
+			position: absolute;
+			left: 100%;
+			top: 0;
+			height: 0;
+			border-right-width: .9cm;
+			border-right-color: transparent !important;
+			border-right-style: solid;
+			border-top-width: 150px;
+			border-top-style: solid;
+		}
 
-        div#countdown > .box > .unit {
-            font-size: 18pt;
-            display: block;
-            padding-bottom: .2cm;
-        }
+		div#countdown > .box > .unit {
+			font-size: 18pt;
+			display: block;
+			padding-bottom: .2cm;
+		}
 
-        div#countdown > .box.days {
-            background: hsl(10, 70%, 40%);
-            border-top-left-radius: 2cm;
-            border-bottom-left-radius: 2cm;
-            padding-left: 1.2cm;
-        }
+		div#countdown > .box.days {
+			background: hsl(10, 70%, 40%);
+			border-top-left-radius: 2cm;
+			border-bottom-left-radius: 2cm;
+			padding-left: 1.2cm;
+		}
 
-        div#countdown > .box.hours {
-            background: hsl(90, 70%, 30%);
-        }
+		div#countdown > .box.hours {
+			background: hsl(90, 70%, 30%);
+		}
 
-        div#countdown > .box.mins {
-            background: hsl(210, 70%, 40%);
-        }
+		div#countdown > .box.mins {
+			background: hsl(210, 70%, 40%);
+		}
 
-        div#countdown > .box.secs {
-            background: hsl(280, 70%, 32%);
-            border-top-right-radius: 2cm;
-            border-bottom-right-radius: 2cm;
-            padding-right: 1.2cm;
-        }
+		div#countdown > .box.secs {
+			background: hsl(280, 70%, 32%);
+			border-top-right-radius: 2cm;
+			border-bottom-right-radius: 2cm;
+			padding-right: 1.2cm;
+		}
 
-            div#countdown > .box.days::after { border-top-color: hsl(10, 70%, 40%); }
-            div#countdown > .box.hours::after { border-top-color: hsl(90, 70%, 30%); }
-            div#countdown > .box.mins::after { border-top-color: hsl(210, 70%, 40%); }
-            div#countdown > .box.hours::before { border-bottom-color: hsl(90, 70%, 30%); }
-            div#countdown > .box.mins::before { border-bottom-color: hsl(210, 70%, 40%); }
-            div#countdown > .box.secs::before { border-bottom-color: hsl(280, 70%, 32%); }
+			div#countdown > .box.days::after { border-top-color: hsl(10, 70%, 40%); }
+			div#countdown > .box.hours::after { border-top-color: hsl(90, 70%, 30%); }
+			div#countdown > .box.mins::after { border-top-color: hsl(210, 70%, 40%); }
+			div#countdown > .box.hours::before { border-bottom-color: hsl(90, 70%, 30%); }
+			div#countdown > .box.mins::before { border-bottom-color: hsl(210, 70%, 40%); }
+			div#countdown > .box.secs::before { border-bottom-color: hsl(280, 70%, 32%); }
 
 a#puzzles-link {
-    clear: both;
-    display: block;
-    margin: 2cm;
-    padding: .5cm 0;
-    font-size: 56pt;
-    text-align: center;
-    background: white;
-    box-shadow: 0 0 .3cm rgba(0, 0, 0, .3);
-    border-radius: 100vw;
-    text-decoration: none;
-    color: hsl(270, 80%, 25%);
+	clear: both;
+	display: block;
+	margin: 2cm;
+	padding: .5cm 0;
+	font-size: 56pt;
+	text-align: center;
+	background: white;
+	box-shadow: 0 0 .3cm rgba(0, 0, 0, .3);
+	border-radius: 100vw;
+	text-decoration: none;
+	color: hsl(270, 80%, 25%);
 }
 
-    a#puzzles-link::before {
-        content: 'TO THE PUZZLES'
-    }
+	a#puzzles-link::before {
+		content: 'TO THE PUZZLES'
+	}
 
-    a#puzzles-link::after {
-        content: ' ▶'
-    }
+	a#puzzles-link::after {
+		content: ' ▶'
+	}
 
-    a#puzzles-link:hover::before {
-        text-decoration: underline;
-    }
+	a#puzzles-link:hover::before {
+		text-decoration: underline;
+	}
 
-    a#puzzles-link:hover {
-        color: white;
-        background: hsl(270, 80%, 25%);
-    }
+	a#puzzles-link:hover {
+		color: white;
+		background: hsl(270, 80%, 25%);
+	}
 
 .flavour-text {
-    text-align: center;
-    font-style: italic;
+	text-align: center;
+	font-style: italic;
 }
 
 #answer-box {
-    margin-top: .5cm;
+	margin-top: .5cm;
 	display: flex;
 	justify-content: space-between;
 }
 
-    #answer-box .checker {
-        text-align: right;
-    }
+	#answer-box .checker {
+		text-align: right;
+	}
 	#answer-box #answer-checker input[type='text'] {
 		width: 5cm;
 	}
-    #answers .guess-log {
+	#answers .guess-log {
 		display: flex;
-    }
-    #answers h3 {
-        margin: 0;
-        font-size: 16pt;
-    }
-    #answers ul {
-        text-align: left;
-        float: left;
-        margin: 0;
-    }
-    #answers .answer {
-        font-size: 16pt;
-    }
+	}
+	#answers h3 {
+		margin: 0;
+		font-size: 16pt;
+	}
+	#answers ul {
+		text-align: left;
+		float: left;
+		margin: 0;
+	}
+	#answers .answer {
+		font-size: 16pt;
+	}
 
 	#answer-box #answer-message {
 		text-align: center;
 	}
-    #answer-box .unlocked {
-        background: white;
-        border-radius: 1cm;
-        margin: .5cm auto;
-        max-width: 12cm;
-        padding: .3cm .5cm;
-    }
-    #answer-box .correct {
-        color: hsl(120, 50%, 47%);
-    }
-    #answer-box .wrong {
-        color: hsl(0, 50%, 47%);
-    }
-    #answer-box .almost {
-        color: hsl(60, 50%, 35%);
-    }
-    #answer-box .message {
-        font-size: 24pt;
-        font-weight: bold;
-    }
+	#answer-box .unlocked {
+		background: white;
+		border-radius: 1cm;
+		margin: .5cm auto;
+		max-width: 12cm;
+		padding: .3cm .5cm;
+	}
+	#answer-box .correct {
+		color: hsl(120, 50%, 47%);
+	}
+	#answer-box .wrong {
+		color: hsl(0, 50%, 47%);
+	}
+	#answer-box .almost {
+		color: hsl(60, 50%, 35%);
+	}
+	#answer-box .message {
+		font-size: 24pt;
+		font-weight: bold;
+	}
 
 .ajax-message {
-    max-width: 11cm;
+	max-width: 11cm;
 }
-    .ajax-message > div {
-        text-align: center;
-        background: white;
-        padding: .1cm .3cm;
-        border-radius: 1cm;
-        font-size: 14pt;
-    }
+	.ajax-message > div {
+		text-align: center;
+		background: white;
+		padding: .1cm .3cm;
+		border-radius: 1cm;
+		font-size: 14pt;
+	}
 
 form td.label {
-    white-space: nowrap;
+	white-space: nowrap;
 }
 form td.explain {
-    font-size: 9pt;
-    padding-left: 1cm;
+	font-size: 9pt;
+	padding-left: 1cm;
 }
 
 #hints {
-    margin-top: 5cm;
-    border-top: 1px solid hsl(220, 40%, 80%);
+	margin-top: 5cm;
+	border-top: 1px solid hsl(220, 40%, 80%);
 }
 
-    .hints textarea {
-        width: 100%;
-        height: 8em;
-    }
+	.hints textarea {
+		width: 100%;
+		height: 8em;
+	}
 
-    .hints table {
-        border-collapse: collapse;
-        width: 100%;
-    }
+	.hints table {
+		border-collapse: collapse;
+		width: 100%;
+	}
 
-    .hints td, .hints th {
-        border: 1px solid black;
-        padding: .25cm .4cm;
-        vertical-align: top;
-    }
+	.hints td, .hints th {
+		border: 1px solid black;
+		padding: .25cm .4cm;
+		vertical-align: top;
+	}
 
-    .hints th {
-        background: hsl(220, 60%, 85%);
-    }
+	.hints th {
+		background: hsl(220, 60%, 85%);
+	}
 
-    .hints .datetime {
-        font-weight: bold;
-    }
+	.hints .datetime {
+		font-weight: bold;
+	}
 
-    .hints .text {
-        padding-left: 1cm;
-    }
+	.hints .text {
+		padding-left: 1cm;
+	}
 
 	.hints .controls {
 		float: right;
@@ -521,115 +521,115 @@ form td.explain {
 
 /* Solution pages */
 .w {
-    font-family: 'Montserrat';
+	font-family: 'Montserrat';
 }
 
 body.solution h1 {
-    position: relative;
-    background: hsl(100, 50%, 40%);
-    color: white;
+	position: relative;
+	background: hsl(100, 50%, 40%);
+	color: white;
 }
 
-    body.solution h1::after {
-        content: 'SOLUTION';
-        position: absolute;
-        right: 3cm;
-        top: 100%;
-        background: inherit;
-        border-bottom-left-radius: .6cm;
-        border-bottom-right-radius: .6cm;
-        padding: .1cm .5cm;
-        font-size: 18pt;
-        box-shadow: 0 .1cm .1cm rgba(0, 0, 0, .2);
-    }
+	body.solution h1::after {
+		content: 'SOLUTION';
+		position: absolute;
+		right: 3cm;
+		top: 100%;
+		background: inherit;
+		border-bottom-left-radius: .6cm;
+		border-bottom-right-radius: .6cm;
+		padding: .1cm .5cm;
+		font-size: 18pt;
+		box-shadow: 0 .1cm .1cm rgba(0, 0, 0, .2);
+	}
 
 button.reveal {
-    padding: 0 .2cm 0 .8cm;
-    margin: 0 .2cm;
-    background: black;
-    color: white;
-    display: inline;
-    font-weight: normal;
-    font-size: 12pt;
-    position: relative;
+	padding: 0 .2cm 0 .8cm;
+	margin: 0 .2cm;
+	background: black;
+	color: white;
+	display: inline;
+	font-weight: normal;
+	font-size: 12pt;
+	position: relative;
 }
-    button.reveal::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: -.1cm;
-        bottom: -.1cm;
-        width: 1cm;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: left 50%;
-    }
+	button.reveal::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: -.1cm;
+		bottom: -.1cm;
+		width: 1cm;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: left 50%;
+	}
 
-    button.reveal.c::after { content: '(convention)'; }
-    button.reveal.c::before {
-        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23fff" stroke="%23989898" stroke-opacity=".5" stroke-width="5" d="M56.68 68.53c-2.74-.25-8.03-2.58-8.03-2.58s-3.37 2.15-4.9 2.88a21.32 21.32 0 0 1-8.47 1.97c-4.6.1-9.87-1.32-12.56-5.29-1.05-1.56-1.27-6.62-1.27-6.62s-4.03.42-5.35.15a13.27 13.27 0 0 1-7.04-3.72c-6.4-6.9 2.1-15.23 9.27-16.3-.09-2.13-.45-4.1.27-6.18 1.88-5.41 9.3-8.45 13.55-8.75 4.26-.3 8.92 1.24 8.92 1.24s3.08-3.97 4.9-5.09a19.93 19.93 0 0 1 15.61-1.95c1.94.57 3.78 1.47 5.27 2.84 1.16 1.05 2.76 3.76 2.76 3.76s4.25-.88 5.8-.88c4.33 0 9.12 1.3 11.85 4.86a8.2 8.2 0 0 1 1.35 6.62c-.2.95-1.16 2.65-1.16 2.65s2.23 2.35 3.07 3.17a8.6 8.6 0 0 1 2.63 5.22c.9 8.96-11.9 13.6-19.08 11.92-2.84 6.7-10.02 10.75-17.4 10.08Zm19.17-.22c1.78-.34 4.21-.28 5.6 1.02 2.53 2.37-.34 5.58-2.92 6.16-1.76.4-4.23.3-5.6-1-2.62-2.45.21-5.66 2.92-6.18m9.82 9.3c4.08-.81 5.1 4.17.88 4.84-4.03.65-4.93-4.03-.88-4.84z"/></svg>');
-    }
+	button.reveal.c::after { content: '(convention)'; }
+	button.reveal.c::before {
+		background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23fff" stroke="%23989898" stroke-opacity=".5" stroke-width="5" d="M56.68 68.53c-2.74-.25-8.03-2.58-8.03-2.58s-3.37 2.15-4.9 2.88a21.32 21.32 0 0 1-8.47 1.97c-4.6.1-9.87-1.32-12.56-5.29-1.05-1.56-1.27-6.62-1.27-6.62s-4.03.42-5.35.15a13.27 13.27 0 0 1-7.04-3.72c-6.4-6.9 2.1-15.23 9.27-16.3-.09-2.13-.45-4.1.27-6.18 1.88-5.41 9.3-8.45 13.55-8.75 4.26-.3 8.92 1.24 8.92 1.24s3.08-3.97 4.9-5.09a19.93 19.93 0 0 1 15.61-1.95c1.94.57 3.78 1.47 5.27 2.84 1.16 1.05 2.76 3.76 2.76 3.76s4.25-.88 5.8-.88c4.33 0 9.12 1.3 11.85 4.86a8.2 8.2 0 0 1 1.35 6.62c-.2.95-1.16 2.65-1.16 2.65s2.23 2.35 3.07 3.17a8.6 8.6 0 0 1 2.63 5.22c.9 8.96-11.9 13.6-19.08 11.92-2.84 6.7-10.02 10.75-17.4 10.08Zm19.17-.22c1.78-.34 4.21-.28 5.6 1.02 2.53 2.37-.34 5.58-2.92 6.16-1.76.4-4.23.3-5.6-1-2.62-2.45.21-5.66 2.92-6.18m9.82 9.3c4.08-.81 5.1 4.17.88 4.84-4.03.65-4.93-4.03-.88-4.84z"/></svg>');
+	}
 
-    button.reveal.d::after { content: '(deduction)'; }
-    button.reveal.d::before {
-        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="a" color-interpolation-filters="sRGB"><feGaussianBlur result="blur" stdDeviation="2 2"/></filter><filter id="b" color-interpolation-filters="sRGB"><feGaussianBlur result="blur" stdDeviation="2 2"/></filter></defs><path fill="%235b5b5b" d="M55.78 94.32a4.14 4.14 0 0 1-3.85 3.86h-3.86a4.14 4.14 0 0 1-3.85-3.86z"/><path fill="gray" d="M40.36 75.05h19.28V92.4a4.14 4.14 0 0 1-3.86 3.85H44.22a4.14 4.14 0 0 1-3.86-3.85z"/><path fill="%23f6c900" stroke="%23000" stroke-width=".08" d="M49.83 23.06c-11.4-.04-22.95 9.6-22.92 23.09-.03 19.27 11.53 11.56 11.53 30.83h23.12c0-19.27 11.57-11.56 11.53-30.83.03-13.5-11.53-23.13-23.09-23.09h-.17z"/><path fill="none" stroke="%23b4b4b4" stroke-linecap="round" stroke-width="3.85" d="M40.36 80.83h19.28m-19.28 5.78h19.28M40.36 92.4h19.28"/><path fill="%23fff" d="M52.5 5C32.5 5 25 15 25 35 27.5 22.5 40 7.5 52.5 5Z" filter="url(%23a)" transform="translate(11.46 23.02) scale(.77083)"/><path fill="none" stroke="%23fff" stroke-width="1.54" d="M46.15 76.98v-28.9a3.85 3.85 0 1 0-7.71 0c0 3.85 1.72 5.77 3.85 5.77h15.42c2.13 0 3.85-1.92 3.85-5.78a3.85 3.85 0 1 0-7.7 0v28.9"/><path fill-opacity=".5" d="M69.49 7.5a31.98 31.98 0 0 1 8.01 21.25c0 17.26-14.26 31.44-30.83 31.44-7.14 0-13.23-2.85-18.66-7.68 5.68 6.37 15.1 7.68 23.45 7.68C68.03 60.2 80 48.51 80 31.25A31.8 31.8 0 0 0 69.49 7.49Z" filter="url(%23b)" transform="matrix(.80495 0 0 .76811 10.5 23.03)"/><path fill="none" stroke="%23f6c900" stroke-linecap="round" stroke-width="3.85" d="m28.2 69.88-9.54 9.53m.51-31.34H5.67m22.53-21.8-9.54-9.54m31.34.51V3.75m21.8 22.52 9.54-9.54m-.51 31.34h13.5M71.8 69.88l9.54 9.53"/></svg>');
-    }
+	button.reveal.d::after { content: '(deduction)'; }
+	button.reveal.d::before {
+		background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="a" color-interpolation-filters="sRGB"><feGaussianBlur result="blur" stdDeviation="2 2"/></filter><filter id="b" color-interpolation-filters="sRGB"><feGaussianBlur result="blur" stdDeviation="2 2"/></filter></defs><path fill="%235b5b5b" d="M55.78 94.32a4.14 4.14 0 0 1-3.85 3.86h-3.86a4.14 4.14 0 0 1-3.85-3.86z"/><path fill="gray" d="M40.36 75.05h19.28V92.4a4.14 4.14 0 0 1-3.86 3.85H44.22a4.14 4.14 0 0 1-3.86-3.85z"/><path fill="%23f6c900" stroke="%23000" stroke-width=".08" d="M49.83 23.06c-11.4-.04-22.95 9.6-22.92 23.09-.03 19.27 11.53 11.56 11.53 30.83h23.12c0-19.27 11.57-11.56 11.53-30.83.03-13.5-11.53-23.13-23.09-23.09h-.17z"/><path fill="none" stroke="%23b4b4b4" stroke-linecap="round" stroke-width="3.85" d="M40.36 80.83h19.28m-19.28 5.78h19.28M40.36 92.4h19.28"/><path fill="%23fff" d="M52.5 5C32.5 5 25 15 25 35 27.5 22.5 40 7.5 52.5 5Z" filter="url(%23a)" transform="translate(11.46 23.02) scale(.77083)"/><path fill="none" stroke="%23fff" stroke-width="1.54" d="M46.15 76.98v-28.9a3.85 3.85 0 1 0-7.71 0c0 3.85 1.72 5.77 3.85 5.77h15.42c2.13 0 3.85-1.92 3.85-5.78a3.85 3.85 0 1 0-7.7 0v28.9"/><path fill-opacity=".5" d="M69.49 7.5a31.98 31.98 0 0 1 8.01 21.25c0 17.26-14.26 31.44-30.83 31.44-7.14 0-13.23-2.85-18.66-7.68 5.68 6.37 15.1 7.68 23.45 7.68C68.03 60.2 80 48.51 80 31.25A31.8 31.8 0 0 0 69.49 7.49Z" filter="url(%23b)" transform="matrix(.80495 0 0 .76811 10.5 23.03)"/><path fill="none" stroke="%23f6c900" stroke-linecap="round" stroke-width="3.85" d="m28.2 69.88-9.54 9.53m.51-31.34H5.67m22.53-21.8-9.54-9.54m31.34.51V3.75m21.8 22.52 9.54-9.54m-.51 31.34h13.5M71.8 69.88l9.54 9.53"/></svg>');
+	}
 
-    button.reveal.o::after { content: '(observation)'; }
-    button.reveal.o::before {
-        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M 39.023438 31.804688 C 23.283441 36.721175 10 50 10 50 C 10 50 23.283441 63.278825 39.023438 68.195312 A 21.25 21.25 0 0 1 28.75 50 A 21.25 21.25 0 0 1 39.023438 31.804688 z M 60.976562 31.804688 A 21.25 21.25 0 0 1 71.25 50 A 21.25 21.25 0 0 1 60.972656 68.197266 C 76.714449 63.281806 90 50 90 50 C 90 50 76.71656 36.721175 60.976562 31.804688 z M 50 33 A 17 17 0 0 0 33 50 A 17 17 0 0 0 50 67 A 17 17 0 0 0 67 50 A 17 17 0 0 0 50 33 A 17 17 0 0 0 50 33 z M 50 40 A 10 10 0 0 1 50 40 A 10 10 0 0 1 55.287109 41.511719 A 3.5 3.5 0 0 0 55 41.5 A 3.5 3.5 0 0 0 51.5 45 A 3.5 3.5 0 0 0 55 48.5 A 3.5 3.5 0 0 0 58.5 45 A 3.5 3.5 0 0 0 58.488281 44.712891 A 10 10 0 0 1 60 50 A 10 10 0 0 1 50 60 A 10 10 0 0 1 40 50 A 10 10 0 0 1 50 40 z" fill="white" /></svg>');
-    }
+	button.reveal.o::after { content: '(observation)'; }
+	button.reveal.o::before {
+		background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M 39.023438 31.804688 C 23.283441 36.721175 10 50 10 50 C 10 50 23.283441 63.278825 39.023438 68.195312 A 21.25 21.25 0 0 1 28.75 50 A 21.25 21.25 0 0 1 39.023438 31.804688 z M 60.976562 31.804688 A 21.25 21.25 0 0 1 71.25 50 A 21.25 21.25 0 0 1 60.972656 68.197266 C 76.714449 63.281806 90 50 90 50 C 90 50 76.71656 36.721175 60.976562 31.804688 z M 50 33 A 17 17 0 0 0 33 50 A 17 17 0 0 0 50 67 A 17 17 0 0 0 67 50 A 17 17 0 0 0 50 33 A 17 17 0 0 0 50 33 z M 50 40 A 10 10 0 0 1 50 40 A 10 10 0 0 1 55.287109 41.511719 A 3.5 3.5 0 0 0 55 41.5 A 3.5 3.5 0 0 0 51.5 45 A 3.5 3.5 0 0 0 55 48.5 A 3.5 3.5 0 0 0 58.5 45 A 3.5 3.5 0 0 0 58.488281 44.712891 A 10 10 0 0 1 60 50 A 10 10 0 0 1 50 60 A 10 10 0 0 1 40 50 A 10 10 0 0 1 50 40 z" fill="white" /></svg>');
+	}
 
-    button.reveal.r::after { content: '(reveal)'; }
-    button.reveal.r::before {
-        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100"><defs><linearGradient id="a"><stop offset="0" stop-color="%2374f978"/><stop offset="1" stop-color="%231c9722"/></linearGradient><linearGradient xlink:href="%23a" id="b" x1="60" x2="30" y1="100" y2="50" gradientTransform="matrix(.9 0 0 .9 9.5 5)" gradientUnits="userSpaceOnUse"/></defs><path fill="url(%23b)" d="M32 95h31.5s-27-22.5-27-54c0-13.5 3.6-22.5 11.7-22.5 9 0 15.3 4.5 24.3 13.5l-9 9L95 45.5 90.5 14l-9 9c-9-9-18-18-36-18s-27 13.5-27 40.5S32 95 32 95Z"/></svg>');
-    }
+	button.reveal.r::after { content: '(reveal)'; }
+	button.reveal.r::before {
+		background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100"><defs><linearGradient id="a"><stop offset="0" stop-color="%2374f978"/><stop offset="1" stop-color="%231c9722"/></linearGradient><linearGradient xlink:href="%23a" id="b" x1="60" x2="30" y1="100" y2="50" gradientTransform="matrix(.9 0 0 .9 9.5 5)" gradientUnits="userSpaceOnUse"/></defs><path fill="url(%23b)" d="M32 95h31.5s-27-22.5-27-54c0-13.5 3.6-22.5 11.7-22.5 9 0 15.3 4.5 24.3 13.5l-9 9L95 45.5 90.5 14l-9 9c-9-9-18-18-36-18s-27 13.5-27 40.5S32 95 32 95Z"/></svg>');
+	}
 
-    button.reveal.s::after { content: '(strategy)'; }
-    button.reveal.s::before {
-        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="a"><stop offset="0" stop-color="%2374f978"/><stop offset="1" stop-color="%231c9722"/></linearGradient><filter id="b" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceGraphic" result="result6" stdDeviation=".7"/><feComposite in="result6" in2="result6" operator="out" result="result8"/><feComposite in="result6" in2="result8" operator="xor" result="fbSourceGraphic"/><feSpecularLighting in="fbSourceGraphic" kernelUnitLength="1.79" lighting-color="%23FFF" result="result1" specularConstant="2.62" specularExponent="50" surfaceScale="1.5"><fePointLight x="-5000" y="-10000" z="20000"/></feSpecularLighting><feComposite in="result1" in2="fbSourceGraphic" operator="in" result="result2"/><feComposite in="fbSourceGraphic" in2="result2" k2="2" k3="1" operator="arithmetic" result="result4"/><feComposite in="result4" in2="result4" operator="in" result="result91"/></filter></defs><path fill="%23a07a11" d="M47.94 95.48c2.51-4.45 6.38-8.12 9.7-12.02 2.85-2.09 6.03-8.01 9.97-5.79 4.92 2.02.65 7.84 3.32 11.37 1.76 2.82 4.74 5.26 8.05 4.22 6.31-.45 12.01-5.73 13.48-11.82.82-3.96-1.53-8.86-4.94-9.92-3.4-1.06-6.05-.23-8.5-1.21-4.77-3.33.43-8.38 3.48-10.77 3.6-3.47 8.25-6.2 11.58-9.69-4.52-6.56-8.95-13.32-14.7-18.9-1.8-2.29-5.21-3.88-7.65-.8-.98 2.25.14 5.14-2.23 6.85-2.69 2.73-6.9 2.06-9.71.57-4.11-2.6-6.98-7.95-4.65-12.87 2.32-4.93 9.18-2.62 9.76-7.92-1.06-4.19-11.52-11.76-12.3-12.54-.73.86-10.87 13.29-15.2 15.68-4.32 2.4-6.15-1-4.7-4.76 1.47-3.75-2.3-6.48-5.13-7.67-5.7-2.39-15.45 4.37-16.4 11.74-.42 3.75 3.13 8.33 6.15 8.53 3.03.2 8.11-.45 8.53 3.48.43 3.92-4.84 5.98-7.26 8.83-4.2 3.89-8.55 7.62-12.67 11.6C10.57 58 15.38 64.4 21.18 69.74c3.53.5 4-3.76 4.23-7.94.23-4.17 8.22-7.62 12.14-4.13 1.28 1.2 6.5 5.74 5.58 9.83.46 4.8-3.43 7.64-8.83 8.05-5.4.4-.58 7.3 2.1 9.47 3.73 3.67 7.5 7.3 11.44 10.74l.1-.28z" filter="url(%23b)" transform="matrix(.76 0 0 .76 12 12)"/></svg>');
-    }
+	button.reveal.s::after { content: '(strategy)'; }
+	button.reveal.s::before {
+		background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="a"><stop offset="0" stop-color="%2374f978"/><stop offset="1" stop-color="%231c9722"/></linearGradient><filter id="b" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceGraphic" result="result6" stdDeviation=".7"/><feComposite in="result6" in2="result6" operator="out" result="result8"/><feComposite in="result6" in2="result8" operator="xor" result="fbSourceGraphic"/><feSpecularLighting in="fbSourceGraphic" kernelUnitLength="1.79" lighting-color="%23FFF" result="result1" specularConstant="2.62" specularExponent="50" surfaceScale="1.5"><fePointLight x="-5000" y="-10000" z="20000"/></feSpecularLighting><feComposite in="result1" in2="fbSourceGraphic" operator="in" result="result2"/><feComposite in="fbSourceGraphic" in2="result2" k2="2" k3="1" operator="arithmetic" result="result4"/><feComposite in="result4" in2="result4" operator="in" result="result91"/></filter></defs><path fill="%23a07a11" d="M47.94 95.48c2.51-4.45 6.38-8.12 9.7-12.02 2.85-2.09 6.03-8.01 9.97-5.79 4.92 2.02.65 7.84 3.32 11.37 1.76 2.82 4.74 5.26 8.05 4.22 6.31-.45 12.01-5.73 13.48-11.82.82-3.96-1.53-8.86-4.94-9.92-3.4-1.06-6.05-.23-8.5-1.21-4.77-3.33.43-8.38 3.48-10.77 3.6-3.47 8.25-6.2 11.58-9.69-4.52-6.56-8.95-13.32-14.7-18.9-1.8-2.29-5.21-3.88-7.65-.8-.98 2.25.14 5.14-2.23 6.85-2.69 2.73-6.9 2.06-9.71.57-4.11-2.6-6.98-7.95-4.65-12.87 2.32-4.93 9.18-2.62 9.76-7.92-1.06-4.19-11.52-11.76-12.3-12.54-.73.86-10.87 13.29-15.2 15.68-4.32 2.4-6.15-1-4.7-4.76 1.47-3.75-2.3-6.48-5.13-7.67-5.7-2.39-15.45 4.37-16.4 11.74-.42 3.75 3.13 8.33 6.15 8.53 3.03.2 8.11-.45 8.53 3.48.43 3.92-4.84 5.98-7.26 8.83-4.2 3.89-8.55 7.62-12.67 11.6C10.57 58 15.38 64.4 21.18 69.74c3.53.5 4-3.76 4.23-7.94.23-4.17 8.22-7.62 12.14-4.13 1.28 1.2 6.5 5.74 5.58 9.83.46 4.8-3.43 7.64-8.83 8.05-5.4.4-.58 7.3 2.1 9.47 3.73 3.67 7.5 7.3 11.44 10.74l.1-.28z" filter="url(%23b)" transform="matrix(.76 0 0 .76 12 12)"/></svg>');
+	}
 
 #sol-controls {
-    margin-top: -.7cm;
+	margin-top: -.7cm;
 	position: sticky;
 	top: 0;
 	z-index: 1;
 }
 
 body.solution div.answer {
-    margin: 2cm auto 1cm;
-    padding: .4cm 1.2cm;
-    font-family: 'Lato';
-    font-size: 32pt;
-    font-weight: bold;
-    text-align: center;
-    background: hsl(100, 40%, 50%);
-    box-shadow: 0 0 .3cm rgba(0, 0, 0, .3);
-    border: 5px solid hsl(100, 40%, 20%);
-    border-radius: 100vw;
-    clear: both;
-    white-space: nowrap;
-    width: min-content;
-    position: relative;
-    color: white;
+	margin: 2cm auto 1cm;
+	padding: .4cm 1.2cm;
+	font-family: 'Lato';
+	font-size: 32pt;
+	font-weight: bold;
+	text-align: center;
+	background: hsl(100, 40%, 50%);
+	box-shadow: 0 0 .3cm rgba(0, 0, 0, .3);
+	border: 5px solid hsl(100, 40%, 20%);
+	border-radius: 100vw;
+	clear: both;
+	white-space: nowrap;
+	width: min-content;
+	position: relative;
+	color: white;
 	letter-spacing: 0.05em;
 }
 
-    body.solution div.answer::after {
-        content: 'ANSWER';
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: calc(100% + 4px);
-        border-top-left-radius: .6cm;
-        border-top-right-radius: .6cm;
-        padding: .1cm .5cm;
-        font-size: 12pt;
-        font-weight: normal;
-        box-shadow: 0 -.1cm .1cm rgba(0, 0, 0, .2);
-        background: hsl(100, 40%, 20%);
-    }
+	body.solution div.answer::after {
+		content: 'ANSWER';
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: calc(100% + 4px);
+		border-top-left-radius: .6cm;
+		border-top-right-radius: .6cm;
+		padding: .1cm .5cm;
+		font-size: 12pt;
+		font-weight: normal;
+		box-shadow: 0 -.1cm .1cm rgba(0, 0, 0, .2);
+		background: hsl(100, 40%, 20%);
+	}
 
 body.solution #main {
 	padding-bottom: 5cm;
