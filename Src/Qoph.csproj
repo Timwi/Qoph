@@ -58,6 +58,7 @@
     <Compile Include="BattleshipsAndPitfalls.cs" />
     <Compile Include="CrossingBridges.cs" />
     <Compile Include="Comebacks.cs" />
+    <Compile Include="Drumheads.cs" />
     <Compile Include="Eternal.cs" />
     <Compile Include="Modeling\AutoNormal.cs" />
     <Compile Include="Modeling\BevelPoint.cs" />
