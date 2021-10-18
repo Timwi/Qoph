@@ -16,7 +16,7 @@ namespace Assets
         public static readonly float[] RotateRoomBy = { /*RotateRoomBy-start*/80.7517020883924f, -114.812074477902f, 114.812074477902f, 180f, -80.7517020883924f/*RotateRoomBy-end*/ };
         public static readonly Vector3[] TiltRoomAbout = { /*TiltRoomAbout-start*/new Vector3(0.303186869509302f, 0, -0.786065780301299f), new Vector3(0.592214697747754f, 0, -0.0385081875773795f), new Vector3(0.283472436742833f, 0, 0.521387098369377f), new Vector3(-0.177150018060605f, 0, 0.23805073678917f), new Vector3(-0.824573967878678f, 0, -0.172914604069039f)/*TiltRoomAbout-end*/ };
         public const float TiltAngle = /*TiltAngle-start*/-19.819052188761f/*TiltAngle-end*/;
-        public const float LightIntensity = .2f;
+        public static readonly float[] LightIntensities = { .2f, .1f, .1f };
 
         public static readonly Vector3 Midpoint = /*Midpoint-start*/new Vector3(0.640407281728985f, 0.275f, -0.348182402724048f)/*Midpoint-end*/;
 

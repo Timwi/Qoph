@@ -1,0 +1,598 @@
+fileFormatVersion: 2
+guid: 8efc2297ae352314ea412c63a7fa1f85
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: _00_-_SWG_RMant2__swing
+    100002: _01_-_SWG_RMant3__swing
+    100004: _01_-_TransN
+    100006: _02_-_RotN
+    100008: _03_-_HipN
+    100010: _04_-_LLegJ
+    100012: _05_-_LKneeJ
+    100014: _06_-_LFootJ
+    100016: _07_-_LToeN
+    100018: _08_-_RLegJ
+    100020: _09_-_RKneeJ
+    100022: _10_-_RFootJ
+    100024: _11_-_RToeN
+    100026: _12_-_WaistN
+    100028: _13_-_BustN
+    100030: _14_-_LShoulderN
+    100032: _15_-_LShoulderJ
+    100034: _16_-_LArmJ
+    100036: _17_-_LHandN
+    100038: _18_-_RShoulderN
+    100040: _19_-_RShoulderJ
+    100042: _20_-_RArmJ
+    100044: _21_-_RHandN
+    100046: _22_-_NeckN
+    100048: _23_-_HeadN
+    100050: _24_-_RHaveN
+    100052: _25_-_LHaveN
+    100054: _26_-_ThrowN
+    100056: _27_-_LFingerBaseN
+    100058: _28_-_LThumb1N
+    100060: _29_-_LThumb2N
+    100062: _30_-_LThumb3N
+    100064: _31_-_LIndex1N
+    100066: _32_-_LIndex2N
+    100068: _33_-_LIndex3N
+    100070: _34_-_LMiddleN
+    100072: _35_-_LMiddle1N
+    100074: _36_-_LMiddle2N
+    100076: _37_-_LMiddle3N
+    100078: _38_-_LRingN
+    100080: _39_-_LRing1N
+    100082: _40_-_LRing2N
+    100084: _41_-_LRing3N
+    100086: _42_-_LPinkyN
+    100088: _43_-_LPinky1N
+    100090: _44_-_LPinky2N
+    100092: _45_-_LPinky3N
+    100094: _46_-_RFingerBaseN
+    100096: _47_-_RThumb1N
+    100098: _48_-_RThumb2N
+    100100: _49_-_RThumb3N
+    100102: _50_-_RIndex1N
+    100104: _51_-_RIndex2N
+    100106: _52_-_RIndex3N
+    100108: _53_-_RMiddleN
+    100110: _54_-_RMiddle1N
+    100112: _55_-_RMiddle2N
+    100114: _56_-_RMiddle3N
+    100116: _57_-_RRingN
+    100118: _58_-_RRing1N
+    100120: _59_-_RRing2N
+    100122: _60_-_RRing3N
+    100124: _61_-_RPinkyN
+    100126: _62_-_RPinky1N
+    100128: _63_-_RPinky2N
+    100130: _64_-_RPinky3N
+    100132: _65_-_FaceN
+    100134: _66_-_FaceCLipUpperN
+    100136: _67_-_FaceJawN
+    100138: _68_-_FaceCLipLowerN
+    100140: _69_-_FaceLLipLowerN
+    100142: _70_-_FaceRLipLowerN
+    100144: _71_-_FaceTongueN
+    100146: _72_-_FaceLLipCornerN
+    100148: _73_-_FaceLLipUpperN
+    100150: _74_-_FaceRLipCornerN
+    100152: _75_-_FaceRLipUpperN
+    100154: _76_-_HLP_LArmJb
+    100156: _77_-_HLP_LKneeJb
+    100158: _78_-_HLP_RArmJb
+    100160: _79_-_HLP_RKneeJb
+    100162: _80_-_SWG_Hip__shit
+    100164: _81_-_SWG_Lknee__shit
+    100166: _82_-_SWG_Lleg2__shit
+    100168: _83_-_SWG_Lleg__shit
+    100170: _84_-_SWG_RUde__shit
+    100172: _85_-_SWG_Rknee2__shit
+    100174: _86_-_SWG_Rleg__shit
+    100176: _87_-_SWG_Waist__shit
+    100178: _88_-_SWG_CMant0__swing
+    100180: _89_-_SWG_CMant1__swing
+    100182: _90_-_SWG_CMant2__swing
+    100184: _91_-_SWG_CMant3__swing
+    100186: _92_-_SWG_LKoshi0__swing
+    100188: _93_-_SWG_LMant0__swing
+    100190: _94_-_SWG_LMant1__swing
+    100192: _95_-_SWG_LMant2__swing
+    100194: _96_-_SWG_LMant3__swing
+    100196: _97_-_SWG_RKoshi0__swing
+    100198: _98_-_SWG_RMant0__swing
+    100200: _99_-_SWG_RMant1__swing
+    100202: ArmL_O_OBJ_
+    100204: ArmR_O_OBJ_
+    100206: EnvironmentAmbientLight
+    100208: Gamemodel_
+    100210: Gamemodel_ 1
+    100212: Gamemodel_ 2
+    100214: Gamemodel_ 3
+    100216: Gamemodel_ 4
+    100218: Gamemodel_ 5
+    100220: Gamemodel_ 6
+    100222: Ganon_Attack_VIS_O_OBJ_
+    100224: Ganon_Attack_VIS_O_OBJ_ 1
+    100226: Ganon_Attack_VIS_O_OBJ_ 2
+    100228: Ganon_Blink_VIS_O_OBJ_
+    100230: Ganon_Catch_VIS_O_OBJ_
+    100232: Ganon_Catch_VIS_O_OBJ_ 1
+    100234: Ganon_Cliff_VIS_O_OBJ_
+    100236: Ganon_Cliff_VIS_O_OBJ_ 1
+    100238: Ganon_Cliff_VIS_O_OBJ_ 2
+    100240: Ganon_Down_VIS_O_OBJ_
+    100242: Ganon_Down_VIS_O_OBJ_ 1
+    100244: Ganon_Down_VIS_O_OBJ_ 2
+    100246: Ganon_Escape_VIS_O_OBJ_
+    100248: Ganon_Escape_VIS_O_OBJ_ 1
+    100250: Ganon_Escape_VIS_O_OBJ_ 2
+    100252: Ganon_Eye_VIS_O_OBJ_
+    100254: Ganon_Eye_VIS_O_OBJ_ 1
+    100256: Ganon_Eye_VIS_O_OBJ__Layer_2
+    100258: Ganon_Eye_VIS_O_OBJ__Layer_2 1
+    100260: Ganon_faceN_VIS_O_OBJ_
+    100262: Ganon_faceN_VIS_O_OBJ_ 1
+    100264: Ganon_Final_VIS_O_OBJ_
+    100266: Ganon_Final_VIS_O_OBJ_ 1
+    100268: Ganon_Final_VIS_O_OBJ_ 2
+    100270: Ganon_Halfblink1_VIS_O_OBJ_
+    100272: Ganon_HeavyOuch_VIS_O_OBJ_
+    100274: Ganon_HeavyOuch_VIS_O_OBJ_ 1
+    100276: Ganon_HeavyOuch_VIS_O_OBJ_ 2
+    100278: Ganon_Hot_VIS_O_OBJ_
+    100280: Ganon_Hot_VIS_O_OBJ_ 1
+    100282: Ganon_Hot_VIS_O_OBJ_ 2
+    100284: Ganon_Ottotto_VIS_O_OBJ_
+    100286: Ganon_Ottotto_VIS_O_OBJ_ 1
+    100288: Ganon_Ottotto_VIS_O_OBJ_ 2
+    100290: Ganon_Ouch_VIS_O_OBJ_
+    100292: Ganon_Ouch_VIS_O_OBJ_ 1
+    100294: Ganon_OuchMClose_VIS_O_OBJ_
+    100296: Ganon_OuchMHalf_VIS_O_OBJ_
+    100298: Ganon_OuchMHalf_VIS_O_OBJ_ 1
+    100300: Ganon_OuchMNormal_VIS_O_OBJ_
+    100302: Ganon_OuchMNormal_VIS_O_OBJ_ 1
+    100304: Ganon_OuchMOpen_VIS_O_OBJ_
+    100306: Ganon_OuchMOpen_VIS_O_OBJ_ 1
+    100308: Ganon_ResultMouth_VIS_O_OBJ_
+    100310: Ganon_ResultMouth_VIS_O_OBJ_ 1
+    100312: Ganon_Talk_VIS_O_OBJ_
+    100314: Ganon_Talk_VIS_O_OBJ_ 1
+    100316: Ganon_TalkMClose_VIS_O_OBJ_
+    100318: Ganon_TalkMHalf_VIS_O_OBJ_
+    100320: Ganon_TalkMHalf_VIS_O_OBJ_ 1
+    100322: Ganon_TalkMNormal_VIS_O_OBJ_
+    100324: Ganon_TalkMNormal_VIS_O_OBJ_ 1
+    100326: Ganon_TalkMOpen_VIS_O_OBJ_
+    100328: Ganon_TalkMOpen_VIS_O_OBJ_ 1
+    100330: Ganon_VoiceA_VIS_O_OBJ_
+    100332: Ganon_VoiceA_VIS_O_OBJ_ 1
+    100334: Ganon_VoiceA_VIS_O_OBJ_ 2
+    100336: Hairparts_O_OBJ_
+    100338: KneeL_O_OBJ_
+    100340: KneeR_O_OBJ_
+    100342: KosiL_O_OBJ_
+    100344: KosiL_O_OBJ_ 1
+    100346: KosiR_O_OBJ_
+    100348: KosiR_O_OBJ_ 1
+    100350: //RootNode
+    100352: Metal_HeadParts_O_OBJ_
+    100354: UdewaL_O_OBJ_
+    100356: UdewaR_O_OBJ_
+    400000: _00_-_SWG_RMant2__swing
+    400002: _01_-_SWG_RMant3__swing
+    400004: _01_-_TransN
+    400006: _02_-_RotN
+    400008: _03_-_HipN
+    400010: _04_-_LLegJ
+    400012: _05_-_LKneeJ
+    400014: _06_-_LFootJ
+    400016: _07_-_LToeN
+    400018: _08_-_RLegJ
+    400020: _09_-_RKneeJ
+    400022: _10_-_RFootJ
+    400024: _11_-_RToeN
+    400026: _12_-_WaistN
+    400028: _13_-_BustN
+    400030: _14_-_LShoulderN
+    400032: _15_-_LShoulderJ
+    400034: _16_-_LArmJ
+    400036: _17_-_LHandN
+    400038: _18_-_RShoulderN
+    400040: _19_-_RShoulderJ
+    400042: _20_-_RArmJ
+    400044: _21_-_RHandN
+    400046: _22_-_NeckN
+    400048: _23_-_HeadN
+    400050: _24_-_RHaveN
+    400052: _25_-_LHaveN
+    400054: _26_-_ThrowN
+    400056: _27_-_LFingerBaseN
+    400058: _28_-_LThumb1N
+    400060: _29_-_LThumb2N
+    400062: _30_-_LThumb3N
+    400064: _31_-_LIndex1N
+    400066: _32_-_LIndex2N
+    400068: _33_-_LIndex3N
+    400070: _34_-_LMiddleN
+    400072: _35_-_LMiddle1N
+    400074: _36_-_LMiddle2N
+    400076: _37_-_LMiddle3N
+    400078: _38_-_LRingN
+    400080: _39_-_LRing1N
+    400082: _40_-_LRing2N
+    400084: _41_-_LRing3N
+    400086: _42_-_LPinkyN
+    400088: _43_-_LPinky1N
+    400090: _44_-_LPinky2N
+    400092: _45_-_LPinky3N
+    400094: _46_-_RFingerBaseN
+    400096: _47_-_RThumb1N
+    400098: _48_-_RThumb2N
+    400100: _49_-_RThumb3N
+    400102: _50_-_RIndex1N
+    400104: _51_-_RIndex2N
+    400106: _52_-_RIndex3N
+    400108: _53_-_RMiddleN
+    400110: _54_-_RMiddle1N
+    400112: _55_-_RMiddle2N
+    400114: _56_-_RMiddle3N
+    400116: _57_-_RRingN
+    400118: _58_-_RRing1N
+    400120: _59_-_RRing2N
+    400122: _60_-_RRing3N
+    400124: _61_-_RPinkyN
+    400126: _62_-_RPinky1N
+    400128: _63_-_RPinky2N
+    400130: _64_-_RPinky3N
+    400132: _65_-_FaceN
+    400134: _66_-_FaceCLipUpperN
+    400136: _67_-_FaceJawN
+    400138: _68_-_FaceCLipLowerN
+    400140: _69_-_FaceLLipLowerN
+    400142: _70_-_FaceRLipLowerN
+    400144: _71_-_FaceTongueN
+    400146: _72_-_FaceLLipCornerN
+    400148: _73_-_FaceLLipUpperN
+    400150: _74_-_FaceRLipCornerN
+    400152: _75_-_FaceRLipUpperN
+    400154: _76_-_HLP_LArmJb
+    400156: _77_-_HLP_LKneeJb
+    400158: _78_-_HLP_RArmJb
+    400160: _79_-_HLP_RKneeJb
+    400162: _80_-_SWG_Hip__shit
+    400164: _81_-_SWG_Lknee__shit
+    400166: _82_-_SWG_Lleg2__shit
+    400168: _83_-_SWG_Lleg__shit
+    400170: _84_-_SWG_RUde__shit
+    400172: _85_-_SWG_Rknee2__shit
+    400174: _86_-_SWG_Rleg__shit
+    400176: _87_-_SWG_Waist__shit
+    400178: _88_-_SWG_CMant0__swing
+    400180: _89_-_SWG_CMant1__swing
+    400182: _90_-_SWG_CMant2__swing
+    400184: _91_-_SWG_CMant3__swing
+    400186: _92_-_SWG_LKoshi0__swing
+    400188: _93_-_SWG_LMant0__swing
+    400190: _94_-_SWG_LMant1__swing
+    400192: _95_-_SWG_LMant2__swing
+    400194: _96_-_SWG_LMant3__swing
+    400196: _97_-_SWG_RKoshi0__swing
+    400198: _98_-_SWG_RMant0__swing
+    400200: _99_-_SWG_RMant1__swing
+    400202: ArmL_O_OBJ_
+    400204: ArmR_O_OBJ_
+    400206: EnvironmentAmbientLight
+    400208: Gamemodel_
+    400210: Gamemodel_ 1
+    400212: Gamemodel_ 2
+    400214: Gamemodel_ 3
+    400216: Gamemodel_ 4
+    400218: Gamemodel_ 5
+    400220: Gamemodel_ 6
+    400222: Ganon_Attack_VIS_O_OBJ_
+    400224: Ganon_Attack_VIS_O_OBJ_ 1
+    400226: Ganon_Attack_VIS_O_OBJ_ 2
+    400228: Ganon_Blink_VIS_O_OBJ_
+    400230: Ganon_Catch_VIS_O_OBJ_
+    400232: Ganon_Catch_VIS_O_OBJ_ 1
+    400234: Ganon_Cliff_VIS_O_OBJ_
+    400236: Ganon_Cliff_VIS_O_OBJ_ 1
+    400238: Ganon_Cliff_VIS_O_OBJ_ 2
+    400240: Ganon_Down_VIS_O_OBJ_
+    400242: Ganon_Down_VIS_O_OBJ_ 1
+    400244: Ganon_Down_VIS_O_OBJ_ 2
+    400246: Ganon_Escape_VIS_O_OBJ_
+    400248: Ganon_Escape_VIS_O_OBJ_ 1
+    400250: Ganon_Escape_VIS_O_OBJ_ 2
+    400252: Ganon_Eye_VIS_O_OBJ_
+    400254: Ganon_Eye_VIS_O_OBJ_ 1
+    400256: Ganon_Eye_VIS_O_OBJ__Layer_2
+    400258: Ganon_Eye_VIS_O_OBJ__Layer_2 1
+    400260: Ganon_faceN_VIS_O_OBJ_
+    400262: Ganon_faceN_VIS_O_OBJ_ 1
+    400264: Ganon_Final_VIS_O_OBJ_
+    400266: Ganon_Final_VIS_O_OBJ_ 1
+    400268: Ganon_Final_VIS_O_OBJ_ 2
+    400270: Ganon_Halfblink1_VIS_O_OBJ_
+    400272: Ganon_HeavyOuch_VIS_O_OBJ_
+    400274: Ganon_HeavyOuch_VIS_O_OBJ_ 1
+    400276: Ganon_HeavyOuch_VIS_O_OBJ_ 2
+    400278: Ganon_Hot_VIS_O_OBJ_
+    400280: Ganon_Hot_VIS_O_OBJ_ 1
+    400282: Ganon_Hot_VIS_O_OBJ_ 2
+    400284: Ganon_Ottotto_VIS_O_OBJ_
+    400286: Ganon_Ottotto_VIS_O_OBJ_ 1
+    400288: Ganon_Ottotto_VIS_O_OBJ_ 2
+    400290: Ganon_Ouch_VIS_O_OBJ_
+    400292: Ganon_Ouch_VIS_O_OBJ_ 1
+    400294: Ganon_OuchMClose_VIS_O_OBJ_
+    400296: Ganon_OuchMHalf_VIS_O_OBJ_
+    400298: Ganon_OuchMHalf_VIS_O_OBJ_ 1
+    400300: Ganon_OuchMNormal_VIS_O_OBJ_
+    400302: Ganon_OuchMNormal_VIS_O_OBJ_ 1
+    400304: Ganon_OuchMOpen_VIS_O_OBJ_
+    400306: Ganon_OuchMOpen_VIS_O_OBJ_ 1
+    400308: Ganon_ResultMouth_VIS_O_OBJ_
+    400310: Ganon_ResultMouth_VIS_O_OBJ_ 1
+    400312: Ganon_Talk_VIS_O_OBJ_
+    400314: Ganon_Talk_VIS_O_OBJ_ 1
+    400316: Ganon_TalkMClose_VIS_O_OBJ_
+    400318: Ganon_TalkMHalf_VIS_O_OBJ_
+    400320: Ganon_TalkMHalf_VIS_O_OBJ_ 1
+    400322: Ganon_TalkMNormal_VIS_O_OBJ_
+    400324: Ganon_TalkMNormal_VIS_O_OBJ_ 1
+    400326: Ganon_TalkMOpen_VIS_O_OBJ_
+    400328: Ganon_TalkMOpen_VIS_O_OBJ_ 1
+    400330: Ganon_VoiceA_VIS_O_OBJ_
+    400332: Ganon_VoiceA_VIS_O_OBJ_ 1
+    400334: Ganon_VoiceA_VIS_O_OBJ_ 2
+    400336: Hairparts_O_OBJ_
+    400338: KneeL_O_OBJ_
+    400340: KneeR_O_OBJ_
+    400342: KosiL_O_OBJ_
+    400344: KosiL_O_OBJ_ 1
+    400346: KosiR_O_OBJ_
+    400348: KosiR_O_OBJ_ 1
+    400350: //RootNode
+    400352: Metal_HeadParts_O_OBJ_
+    400354: UdewaL_O_OBJ_
+    400356: UdewaR_O_OBJ_
+    2100000: _
+    2100002: _0
+    4300000: Metal_HeadParts_O_OBJ_
+    4300002: KosiR_O_OBJ_
+    4300004: KosiR_O_OBJ_
+    4300006: KosiL_O_OBJ_
+    4300008: KosiL_O_OBJ_
+    4300010: ArmR_O_OBJ_
+    4300012: ArmL_O_OBJ_
+    4300014: KneeL_O_OBJ_
+    4300016: KneeR_O_OBJ_
+    4300018: UdewaL_O_OBJ_
+    4300020: UdewaR_O_OBJ_
+    4300022: Hairparts_O_OBJ_
+    4300024: Ganon_Eye_VIS_O_OBJ_
+    4300026: Ganon_Eye_VIS_O_OBJ__Layer_2
+    4300028: Ganon_Eye_VIS_O_OBJ_
+    4300030: Ganon_Eye_VIS_O_OBJ__Layer_2
+    4300032: Ganon_faceN_VIS_O_OBJ_
+    4300034: Ganon_faceN_VIS_O_OBJ_
+    4300036: Ganon_Blink_VIS_O_OBJ_
+    4300038: Ganon_Halfblink1_VIS_O_OBJ_
+    4300040: Ganon_Talk_VIS_O_OBJ_
+    4300042: Ganon_Talk_VIS_O_OBJ_
+    4300044: Ganon_TalkMNormal_VIS_O_OBJ_
+    4300046: Ganon_TalkMNormal_VIS_O_OBJ_
+    4300048: Ganon_TalkMClose_VIS_O_OBJ_
+    4300050: Ganon_TalkMHalf_VIS_O_OBJ_
+    4300052: Ganon_TalkMHalf_VIS_O_OBJ_
+    4300054: Ganon_TalkMOpen_VIS_O_OBJ_
+    4300056: Ganon_TalkMOpen_VIS_O_OBJ_
+    4300058: Ganon_ResultMouth_VIS_O_OBJ_
+    4300060: Ganon_ResultMouth_VIS_O_OBJ_
+    4300062: Ganon_Final_VIS_O_OBJ_
+    4300064: Ganon_Final_VIS_O_OBJ_
+    4300066: Ganon_Final_VIS_O_OBJ_
+    4300068: Ganon_Ouch_VIS_O_OBJ_
+    4300070: Ganon_Ouch_VIS_O_OBJ_
+    4300072: Ganon_OuchMNormal_VIS_O_OBJ_
+    4300074: Ganon_OuchMNormal_VIS_O_OBJ_
+    4300076: Ganon_OuchMClose_VIS_O_OBJ_
+    4300078: Ganon_OuchMHalf_VIS_O_OBJ_
+    4300080: Ganon_OuchMHalf_VIS_O_OBJ_
+    4300082: Ganon_OuchMOpen_VIS_O_OBJ_
+    4300084: Ganon_OuchMOpen_VIS_O_OBJ_
+    4300086: Ganon_Down_VIS_O_OBJ_
+    4300088: Ganon_Down_VIS_O_OBJ_
+    4300090: Ganon_Down_VIS_O_OBJ_
+    4300092: Ganon_VoiceA_VIS_O_OBJ_
+    4300094: Ganon_VoiceA_VIS_O_OBJ_
+    4300096: Ganon_VoiceA_VIS_O_OBJ_
+    4300098: Ganon_Escape_VIS_O_OBJ_
+    4300100: Ganon_Escape_VIS_O_OBJ_
+    4300102: Ganon_Escape_VIS_O_OBJ_
+    4300104: Ganon_Attack_VIS_O_OBJ_
+    4300106: Ganon_Attack_VIS_O_OBJ_
+    4300108: Ganon_Attack_VIS_O_OBJ_
+    4300110: Ganon_HeavyOuch_VIS_O_OBJ_
+    4300112: Ganon_HeavyOuch_VIS_O_OBJ_
+    4300114: Ganon_HeavyOuch_VIS_O_OBJ_
+    4300116: Ganon_Ottotto_VIS_O_OBJ_
+    4300118: Ganon_Ottotto_VIS_O_OBJ_
+    4300120: Ganon_Ottotto_VIS_O_OBJ_
+    4300122: Ganon_Cliff_VIS_O_OBJ_
+    4300124: Ganon_Cliff_VIS_O_OBJ_
+    4300126: Ganon_Cliff_VIS_O_OBJ_
+    4300128: Ganon_Catch_VIS_O_OBJ_
+    4300130: Ganon_Catch_VIS_O_OBJ_
+    4300132: Ganon_Hot_VIS_O_OBJ_
+    4300134: Ganon_Hot_VIS_O_OBJ_
+    4300136: Ganon_Hot_VIS_O_OBJ_
+    4300138: Gamemodel_
+    4300140: Gamemodel_
+    4300142: Gamemodel_
+    4300144: Gamemodel_
+    4300146: Gamemodel_
+    4300148: Gamemodel_
+    4300150: Gamemodel_
+    9500000: //RootNode
+    13700000: ArmL_O_OBJ_
+    13700002: ArmR_O_OBJ_
+    13700004: Gamemodel_
+    13700006: Gamemodel_ 1
+    13700008: Gamemodel_ 2
+    13700010: Gamemodel_ 3
+    13700012: Gamemodel_ 4
+    13700014: Gamemodel_ 5
+    13700016: Gamemodel_ 6
+    13700018: Ganon_Attack_VIS_O_OBJ_
+    13700020: Ganon_Attack_VIS_O_OBJ_ 1
+    13700022: Ganon_Attack_VIS_O_OBJ_ 2
+    13700024: Ganon_Blink_VIS_O_OBJ_
+    13700026: Ganon_Catch_VIS_O_OBJ_
+    13700028: Ganon_Catch_VIS_O_OBJ_ 1
+    13700030: Ganon_Cliff_VIS_O_OBJ_
+    13700032: Ganon_Cliff_VIS_O_OBJ_ 1
+    13700034: Ganon_Cliff_VIS_O_OBJ_ 2
+    13700036: Ganon_Down_VIS_O_OBJ_
+    13700038: Ganon_Down_VIS_O_OBJ_ 1
+    13700040: Ganon_Down_VIS_O_OBJ_ 2
+    13700042: Ganon_Escape_VIS_O_OBJ_
+    13700044: Ganon_Escape_VIS_O_OBJ_ 1
+    13700046: Ganon_Escape_VIS_O_OBJ_ 2
+    13700048: Ganon_Eye_VIS_O_OBJ_
+    13700050: Ganon_Eye_VIS_O_OBJ_ 1
+    13700052: Ganon_Eye_VIS_O_OBJ__Layer_2
+    13700054: Ganon_Eye_VIS_O_OBJ__Layer_2 1
+    13700056: Ganon_faceN_VIS_O_OBJ_
+    13700058: Ganon_faceN_VIS_O_OBJ_ 1
+    13700060: Ganon_Final_VIS_O_OBJ_
+    13700062: Ganon_Final_VIS_O_OBJ_ 1
+    13700064: Ganon_Final_VIS_O_OBJ_ 2
+    13700066: Ganon_Halfblink1_VIS_O_OBJ_
+    13700068: Ganon_HeavyOuch_VIS_O_OBJ_
+    13700070: Ganon_HeavyOuch_VIS_O_OBJ_ 1
+    13700072: Ganon_HeavyOuch_VIS_O_OBJ_ 2
+    13700074: Ganon_Hot_VIS_O_OBJ_
+    13700076: Ganon_Hot_VIS_O_OBJ_ 1
+    13700078: Ganon_Hot_VIS_O_OBJ_ 2
+    13700080: Ganon_Ottotto_VIS_O_OBJ_
+    13700082: Ganon_Ottotto_VIS_O_OBJ_ 1
+    13700084: Ganon_Ottotto_VIS_O_OBJ_ 2
+    13700086: Ganon_Ouch_VIS_O_OBJ_
+    13700088: Ganon_Ouch_VIS_O_OBJ_ 1
+    13700090: Ganon_OuchMClose_VIS_O_OBJ_
+    13700092: Ganon_OuchMHalf_VIS_O_OBJ_
+    13700094: Ganon_OuchMHalf_VIS_O_OBJ_ 1
+    13700096: Ganon_OuchMNormal_VIS_O_OBJ_
+    13700098: Ganon_OuchMNormal_VIS_O_OBJ_ 1
+    13700100: Ganon_OuchMOpen_VIS_O_OBJ_
+    13700102: Ganon_OuchMOpen_VIS_O_OBJ_ 1
+    13700104: Ganon_ResultMouth_VIS_O_OBJ_
+    13700106: Ganon_ResultMouth_VIS_O_OBJ_ 1
+    13700108: Ganon_Talk_VIS_O_OBJ_
+    13700110: Ganon_Talk_VIS_O_OBJ_ 1
+    13700112: Ganon_TalkMClose_VIS_O_OBJ_
+    13700114: Ganon_TalkMHalf_VIS_O_OBJ_
+    13700116: Ganon_TalkMHalf_VIS_O_OBJ_ 1
+    13700118: Ganon_TalkMNormal_VIS_O_OBJ_
+    13700120: Ganon_TalkMNormal_VIS_O_OBJ_ 1
+    13700122: Ganon_TalkMOpen_VIS_O_OBJ_
+    13700124: Ganon_TalkMOpen_VIS_O_OBJ_ 1
+    13700126: Ganon_VoiceA_VIS_O_OBJ_
+    13700128: Ganon_VoiceA_VIS_O_OBJ_ 1
+    13700130: Ganon_VoiceA_VIS_O_OBJ_ 2
+    13700132: Hairparts_O_OBJ_
+    13700134: KneeL_O_OBJ_
+    13700136: KneeR_O_OBJ_
+    13700138: KosiL_O_OBJ_
+    13700140: KosiL_O_OBJ_ 1
+    13700142: KosiR_O_OBJ_
+    13700144: KosiR_O_OBJ_ 1
+    13700146: Metal_HeadParts_O_OBJ_
+    13700148: UdewaL_O_OBJ_
+    13700150: UdewaR_O_OBJ_
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

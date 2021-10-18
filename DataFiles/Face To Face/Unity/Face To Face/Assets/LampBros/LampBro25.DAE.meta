@@ -1,0 +1,662 @@
+fileFormatVersion: 2
+guid: 4d309269cd2720e49a43751c1910bd36
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: _00_-_SWG_CMant1__swing
+    100002: _01_-_SWG_CMant2__swing
+    100004: _01_-_TransN
+    100006: _02_-_RotN
+    100008: _02_-_SWG_CMant3__swing
+    100010: _03_-_HipN
+    100012: _03_-_SWG_LMant0__swing
+    100014: _04_-_LLegJ
+    100016: _04_-_SWG_LMant1__swing
+    100018: _05_-_LKneeJ
+    100020: _05_-_SWG_LMant2__swing
+    100022: _06_-_LFootJ
+    100024: _06_-_SWG_LMant3__swing
+    100026: _07_-_LToeN
+    100028: _07_-_SWG_RMant0__swing
+    100030: _08_-_RLegJ
+    100032: _08_-_SWG_RMant1__swing
+    100034: _09_-_RKneeJ
+    100036: _09_-_SWG_RMant2__swing
+    100038: _10_-_RFootJ
+    100040: _10_-_SWG_RMant3__swing
+    100042: _11_-_RToeN
+    100044: _11_-_SWG_HairA1__swing
+    100046: _12_-_SWG_HairB1__swing
+    100048: _12_-_WaistN
+    100050: _13_-_BustN
+    100052: _13_-_SWG_HairC1__swing
+    100054: _14_-_LShoulderN
+    100056: _14_-_SWG_HairD1__swing
+    100058: _15_-_LShoulderJ
+    100060: _15_-_SWG_HairE1__swing
+    100062: _16_-_LArmJ
+    100064: _16_-_SWG_LFoot1__swing
+    100066: _17_-_LHandN
+    100068: _17_-_SWG_RFoot1__swing
+    100070: _18_-_RShoulderN
+    100072: _18_-_SWG_belt1__swing
+    100074: _19_-_RShoulderJ
+    100076: _19_-_SWG_hatiA1__swing
+    100078: _20_-_RArmJ
+    100080: _20_-_SWG_hatiA2__swing
+    100082: _21_-_RHandN
+    100084: _21_-_SWG_hatiA3__swing
+    100086: _22_-_NeckN
+    100088: _22_-_SWG_hatiB1__swing
+    100090: _23_-_HeadN
+    100092: _23_-_SWG_hatiB2__swing
+    100094: _24_-_RHaveN
+    100096: _24_-_SWG_hatiB3__swing
+    100098: _25_-_LHaveN
+    100100: _26_-_ThrowN
+    100102: _27_-_LFingerBaseN
+    100104: _28_-_LThumb1N
+    100106: _29_-_LThumb2N
+    100108: _30_-_LThumb3N
+    100110: _31_-_LIndex1N
+    100112: _32_-_LIndex2N
+    100114: _33_-_LIndex3N
+    100116: _34_-_LMiddleN
+    100118: _35_-_LMiddle1N
+    100120: _36_-_LMiddle2N
+    100122: _37_-_LMiddle3N
+    100124: _38_-_LRingN
+    100126: _39_-_LRing1N
+    100128: _40_-_LRing2N
+    100130: _41_-_LRing3N
+    100132: _42_-_LPinkyN
+    100134: _43_-_LPinky1N
+    100136: _44_-_LPinky2N
+    100138: _45_-_LPinky3N
+    100140: _46_-_RFingerBaseN
+    100142: _47_-_RThumb1N
+    100144: _48_-_RThumb2N
+    100146: _49_-_RThumb3N
+    100148: _50_-_RIndex1N
+    100150: _51_-_RIndex2N
+    100152: _52_-_RIndex3N
+    100154: _53_-_RMiddleN
+    100156: _54_-_RMiddle1N
+    100158: _55_-_RMiddle2N
+    100160: _56_-_RMiddle3N
+    100162: _57_-_RRingN
+    100164: _58_-_RRing1N
+    100166: _59_-_RRing2N
+    100168: _60_-_RRing3N
+    100170: _61_-_RPinkyN
+    100172: _62_-_RPinky1N
+    100174: _63_-_RPinky2N
+    100176: _64_-_RPinky3N
+    100178: _65_-_Saya01N
+    100180: _66_-_TsukaN
+    100182: _67_-_SwordN
+    100184: _68_-_SwordHeadN
+    100186: _69_-_FaceN
+    100188: _70_-_FaceLLipUpperN
+    100190: _71_-_FaceLLipCornerN
+    100192: _72_-_FaceRLipUpperN
+    100194: _73_-_FaceRLipCornerN
+    100196: _74_-_FaceCLipUpperN
+    100198: _75_-_FaceJawN
+    100200: _76_-_FaceCLipLowerN
+    100202: _77_-_FaceLLipLowerN
+    100204: _78_-_FaceRLipLowerN
+    100206: _79_-_HLP_LArmTwistjb
+    100208: _80_-_HLP_LSakotsuJb
+    100210: _81_-_HLP_LSholJb
+    100212: _82_-_HLP_LTekubiJb
+    100214: _83_-_HLP_LUpArmTwistjb
+    100216: _84_-_HLP_RArmTwistJb
+    100218: _85_-_HLP_RSakotsuJb
+    100220: _86_-_HLP_RSholJb
+    100222: _87_-_HLP_RTekubiJb
+    100224: _88_-_HLP_RUpArmTwistjb
+    100226: _89_-_SWG_Bust01__shit
+    100228: _90_-_SWG_LKnee01__shit
+    100230: _91_-_SWG_LLeag01__shit
+    100232: _92_-_SWG_Larmt01__shit
+    100234: _93_-_SWG_Lshouldert01__shit
+    100236: _94_-_SWG_RKnee01__shit
+    100238: _95_-_SWG_Rarmt01__shit
+    100240: _96_-_SWG_Rshouldert01__shit
+    100242: _97_-_SWG_hip01__shit
+    100244: _98_-_SWG_waist01__shit
+    100246: _99_-_SWG_CMant0__swing
+    100248: EnvironmentAmbientLight
+    100250: Gamemodel_
+    100252: Gamemodel_ 1
+    100254: Gamemodel_ 10
+    100256: Gamemodel_ 11
+    100258: Gamemodel_ 12
+    100260: Gamemodel_ 13
+    100262: Gamemodel_ 14
+    100264: Gamemodel_ 2
+    100266: Gamemodel_ 3
+    100268: Gamemodel_ 4
+    100270: Gamemodel_ 5
+    100272: Gamemodel_ 6
+    100274: Gamemodel_ 7
+    100276: Gamemodel_ 8
+    100278: Gamemodel_ 9
+    100280: gold_O_OBJ_O_NOSORT_FAR_
+    100282: hair_group_O_OBJ_O_SORTEACHNODE_
+    100284: hatimaki_O_OBJ_O_SORTEACHNODE_
+    100286: //RootNode
+    100288: mant_O_OBJ_O_SORTEACHNODE_
+    100290: mant_O_OBJ_O_SORTEACHNODE_ 1
+    100292: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_
+    100294: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100296: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    100298: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    100300: Roy_Blink_Down_VIS_O_OBJ_O_NOSORT_FAR_
+    100302: Roy_Blink_Down_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100304: Roy_Blink_Escape_VIS_O_OBJ_O_NOSORT_FAR_
+    100306: Roy_Blink_Escape_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100308: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_
+    100310: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100312: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    100314: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    100316: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_
+    100318: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100320: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    100322: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    100324: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_
+    100326: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100328: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    100330: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    100332: Roy_Blink_Ouch_VIS_O_OBJ_O_NOSORT_FAR_
+    100334: Roy_Blink_Ouch_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100336: Roy_Blink_Ouch_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    100338: Roy_Blink_StepPose_VIS_O_OBJ_O_NOSORT_FAR_
+    100340: Roy_Blink_StepPose_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100342: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_
+    100344: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100346: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    100348: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    100350: Roy_Blink_VIS_O_OBJ_O_NOSORT_FAR_
+    100352: Roy_Blink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100354: Roy_Cheek_Hot_VIS_O_OBJ_
+    100356: Roy_Eye_VIS_O_OBJ_
+    100358: Roy_Eye_VIS_O_OBJ_ 1
+    100360: Roy_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    100362: Roy_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100364: Roy_Mouth_Attack_VIS_O_OBJ_
+    100366: Roy_Mouth_Criff_VIS_O_OBJ_
+    100368: Roy_Mouth_Down_VIS_O_OBJ_
+    100370: Roy_Mouth_Escape_VIS_O_OBJ_
+    100372: Roy_Mouth_FaceN_VIS_O_OBJ_
+    100374: Roy_Mouth_HeavyAttack_VIS_O_OBJ_
+    100376: Roy_Mouth_HeavyOuch_VIS_O_OBJ_
+    100378: Roy_Mouth_Ottotto_VIS_O_OBJ_
+    100380: Roy_Mouth_Ouch_VIS_O_OBJ_
+    100382: Roy_Mouth_PatternA_VIS_O_OBJ_
+    100384: Roy_Mouth_Result_VIS_O_OBJ_
+    100386: Roy_Mouth_Talk_VIS_O_OBJ_
+    100388: Roy_Openblink_VIS_O_OBJ_O_NOSORT_FAR_
+    100390: Roy_Openblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    100392: SayaM_VIS_O_OBJ_
+    100394: SayaM_VIS_O_OBJ_ 1
+    100396: tsuka_VIS_O_OBJ_
+    100398: WeaponbladeM_L_VIS_O_OBJ_
+    100400: WeaponbladeM_L_VIS_O_OBJ_ 1
+    100402: WeaponbladeM_VIS_O_OBJ_
+    100404: WeaponbladeM_VIS_O_OBJ_ 1
+    100406: WeapongripM_L_VIS_O_OBJ_
+    100408: WeapongripM_VIS_O_OBJ_
+    400000: _00_-_SWG_CMant1__swing
+    400002: _01_-_SWG_CMant2__swing
+    400004: _01_-_TransN
+    400006: _02_-_RotN
+    400008: _02_-_SWG_CMant3__swing
+    400010: _03_-_HipN
+    400012: _03_-_SWG_LMant0__swing
+    400014: _04_-_LLegJ
+    400016: _04_-_SWG_LMant1__swing
+    400018: _05_-_LKneeJ
+    400020: _05_-_SWG_LMant2__swing
+    400022: _06_-_LFootJ
+    400024: _06_-_SWG_LMant3__swing
+    400026: _07_-_LToeN
+    400028: _07_-_SWG_RMant0__swing
+    400030: _08_-_RLegJ
+    400032: _08_-_SWG_RMant1__swing
+    400034: _09_-_RKneeJ
+    400036: _09_-_SWG_RMant2__swing
+    400038: _10_-_RFootJ
+    400040: _10_-_SWG_RMant3__swing
+    400042: _11_-_RToeN
+    400044: _11_-_SWG_HairA1__swing
+    400046: _12_-_SWG_HairB1__swing
+    400048: _12_-_WaistN
+    400050: _13_-_BustN
+    400052: _13_-_SWG_HairC1__swing
+    400054: _14_-_LShoulderN
+    400056: _14_-_SWG_HairD1__swing
+    400058: _15_-_LShoulderJ
+    400060: _15_-_SWG_HairE1__swing
+    400062: _16_-_LArmJ
+    400064: _16_-_SWG_LFoot1__swing
+    400066: _17_-_LHandN
+    400068: _17_-_SWG_RFoot1__swing
+    400070: _18_-_RShoulderN
+    400072: _18_-_SWG_belt1__swing
+    400074: _19_-_RShoulderJ
+    400076: _19_-_SWG_hatiA1__swing
+    400078: _20_-_RArmJ
+    400080: _20_-_SWG_hatiA2__swing
+    400082: _21_-_RHandN
+    400084: _21_-_SWG_hatiA3__swing
+    400086: _22_-_NeckN
+    400088: _22_-_SWG_hatiB1__swing
+    400090: _23_-_HeadN
+    400092: _23_-_SWG_hatiB2__swing
+    400094: _24_-_RHaveN
+    400096: _24_-_SWG_hatiB3__swing
+    400098: _25_-_LHaveN
+    400100: _26_-_ThrowN
+    400102: _27_-_LFingerBaseN
+    400104: _28_-_LThumb1N
+    400106: _29_-_LThumb2N
+    400108: _30_-_LThumb3N
+    400110: _31_-_LIndex1N
+    400112: _32_-_LIndex2N
+    400114: _33_-_LIndex3N
+    400116: _34_-_LMiddleN
+    400118: _35_-_LMiddle1N
+    400120: _36_-_LMiddle2N
+    400122: _37_-_LMiddle3N
+    400124: _38_-_LRingN
+    400126: _39_-_LRing1N
+    400128: _40_-_LRing2N
+    400130: _41_-_LRing3N
+    400132: _42_-_LPinkyN
+    400134: _43_-_LPinky1N
+    400136: _44_-_LPinky2N
+    400138: _45_-_LPinky3N
+    400140: _46_-_RFingerBaseN
+    400142: _47_-_RThumb1N
+    400144: _48_-_RThumb2N
+    400146: _49_-_RThumb3N
+    400148: _50_-_RIndex1N
+    400150: _51_-_RIndex2N
+    400152: _52_-_RIndex3N
+    400154: _53_-_RMiddleN
+    400156: _54_-_RMiddle1N
+    400158: _55_-_RMiddle2N
+    400160: _56_-_RMiddle3N
+    400162: _57_-_RRingN
+    400164: _58_-_RRing1N
+    400166: _59_-_RRing2N
+    400168: _60_-_RRing3N
+    400170: _61_-_RPinkyN
+    400172: _62_-_RPinky1N
+    400174: _63_-_RPinky2N
+    400176: _64_-_RPinky3N
+    400178: _65_-_Saya01N
+    400180: _66_-_TsukaN
+    400182: _67_-_SwordN
+    400184: _68_-_SwordHeadN
+    400186: _69_-_FaceN
+    400188: _70_-_FaceLLipUpperN
+    400190: _71_-_FaceLLipCornerN
+    400192: _72_-_FaceRLipUpperN
+    400194: _73_-_FaceRLipCornerN
+    400196: _74_-_FaceCLipUpperN
+    400198: _75_-_FaceJawN
+    400200: _76_-_FaceCLipLowerN
+    400202: _77_-_FaceLLipLowerN
+    400204: _78_-_FaceRLipLowerN
+    400206: _79_-_HLP_LArmTwistjb
+    400208: _80_-_HLP_LSakotsuJb
+    400210: _81_-_HLP_LSholJb
+    400212: _82_-_HLP_LTekubiJb
+    400214: _83_-_HLP_LUpArmTwistjb
+    400216: _84_-_HLP_RArmTwistJb
+    400218: _85_-_HLP_RSakotsuJb
+    400220: _86_-_HLP_RSholJb
+    400222: _87_-_HLP_RTekubiJb
+    400224: _88_-_HLP_RUpArmTwistjb
+    400226: _89_-_SWG_Bust01__shit
+    400228: _90_-_SWG_LKnee01__shit
+    400230: _91_-_SWG_LLeag01__shit
+    400232: _92_-_SWG_Larmt01__shit
+    400234: _93_-_SWG_Lshouldert01__shit
+    400236: _94_-_SWG_RKnee01__shit
+    400238: _95_-_SWG_Rarmt01__shit
+    400240: _96_-_SWG_Rshouldert01__shit
+    400242: _97_-_SWG_hip01__shit
+    400244: _98_-_SWG_waist01__shit
+    400246: _99_-_SWG_CMant0__swing
+    400248: EnvironmentAmbientLight
+    400250: Gamemodel_
+    400252: Gamemodel_ 1
+    400254: Gamemodel_ 10
+    400256: Gamemodel_ 11
+    400258: Gamemodel_ 12
+    400260: Gamemodel_ 13
+    400262: Gamemodel_ 14
+    400264: Gamemodel_ 2
+    400266: Gamemodel_ 3
+    400268: Gamemodel_ 4
+    400270: Gamemodel_ 5
+    400272: Gamemodel_ 6
+    400274: Gamemodel_ 7
+    400276: Gamemodel_ 8
+    400278: Gamemodel_ 9
+    400280: gold_O_OBJ_O_NOSORT_FAR_
+    400282: hair_group_O_OBJ_O_SORTEACHNODE_
+    400284: hatimaki_O_OBJ_O_SORTEACHNODE_
+    400286: //RootNode
+    400288: mant_O_OBJ_O_SORTEACHNODE_
+    400290: mant_O_OBJ_O_SORTEACHNODE_ 1
+    400292: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_
+    400294: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400296: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    400298: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    400300: Roy_Blink_Down_VIS_O_OBJ_O_NOSORT_FAR_
+    400302: Roy_Blink_Down_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400304: Roy_Blink_Escape_VIS_O_OBJ_O_NOSORT_FAR_
+    400306: Roy_Blink_Escape_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400308: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_
+    400310: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400312: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    400314: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    400316: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_
+    400318: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400320: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    400322: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    400324: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_
+    400326: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400328: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    400330: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    400332: Roy_Blink_Ouch_VIS_O_OBJ_O_NOSORT_FAR_
+    400334: Roy_Blink_Ouch_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400336: Roy_Blink_Ouch_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    400338: Roy_Blink_StepPose_VIS_O_OBJ_O_NOSORT_FAR_
+    400340: Roy_Blink_StepPose_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400342: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_
+    400344: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400346: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    400348: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    400350: Roy_Blink_VIS_O_OBJ_O_NOSORT_FAR_
+    400352: Roy_Blink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400354: Roy_Cheek_Hot_VIS_O_OBJ_
+    400356: Roy_Eye_VIS_O_OBJ_
+    400358: Roy_Eye_VIS_O_OBJ_ 1
+    400360: Roy_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    400362: Roy_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400364: Roy_Mouth_Attack_VIS_O_OBJ_
+    400366: Roy_Mouth_Criff_VIS_O_OBJ_
+    400368: Roy_Mouth_Down_VIS_O_OBJ_
+    400370: Roy_Mouth_Escape_VIS_O_OBJ_
+    400372: Roy_Mouth_FaceN_VIS_O_OBJ_
+    400374: Roy_Mouth_HeavyAttack_VIS_O_OBJ_
+    400376: Roy_Mouth_HeavyOuch_VIS_O_OBJ_
+    400378: Roy_Mouth_Ottotto_VIS_O_OBJ_
+    400380: Roy_Mouth_Ouch_VIS_O_OBJ_
+    400382: Roy_Mouth_PatternA_VIS_O_OBJ_
+    400384: Roy_Mouth_Result_VIS_O_OBJ_
+    400386: Roy_Mouth_Talk_VIS_O_OBJ_
+    400388: Roy_Openblink_VIS_O_OBJ_O_NOSORT_FAR_
+    400390: Roy_Openblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    400392: SayaM_VIS_O_OBJ_
+    400394: SayaM_VIS_O_OBJ_ 1
+    400396: tsuka_VIS_O_OBJ_
+    400398: WeaponbladeM_L_VIS_O_OBJ_
+    400400: WeaponbladeM_L_VIS_O_OBJ_ 1
+    400402: WeaponbladeM_VIS_O_OBJ_
+    400404: WeaponbladeM_VIS_O_OBJ_ 1
+    400406: WeapongripM_L_VIS_O_OBJ_
+    400408: WeapongripM_VIS_O_OBJ_
+    2100000: _8
+    2100002: _2
+    2100004: _0
+    2100006: _
+    2100008: _6
+    2100010: _1
+    2100012: _5
+    2100014: _4
+    4300000: gold_O_OBJ_O_NOSORT_FAR_
+    4300002: hatimaki_O_OBJ_O_SORTEACHNODE_
+    4300004: mant_O_OBJ_O_SORTEACHNODE_
+    4300006: mant_O_OBJ_O_SORTEACHNODE_
+    4300008: WeaponbladeM_VIS_O_OBJ_
+    4300010: WeaponbladeM_VIS_O_OBJ_
+    4300012: WeapongripM_VIS_O_OBJ_
+    4300014: WeapongripM_L_VIS_O_OBJ_
+    4300016: WeaponbladeM_L_VIS_O_OBJ_
+    4300018: WeaponbladeM_L_VIS_O_OBJ_
+    4300020: tsuka_VIS_O_OBJ_
+    4300022: SayaM_VIS_O_OBJ_
+    4300024: SayaM_VIS_O_OBJ_
+    4300026: hair_group_O_OBJ_O_SORTEACHNODE_
+    4300028: Roy_Mouth_Result_VIS_O_OBJ_
+    4300030: Roy_Mouth_FaceN_VIS_O_OBJ_
+    4300032: Roy_Openblink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300034: Roy_Openblink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300036: Roy_Eye_VIS_O_OBJ_
+    4300038: Roy_Eye_VIS_O_OBJ_
+    4300040: Roy_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300042: Roy_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300044: Roy_Blink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300046: Roy_Blink_VIS_O_OBJ_O_NOSORT_FAR_
+    4300048: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_
+    4300050: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_
+    4300052: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_
+    4300054: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_
+    4300056: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_
+    4300058: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_
+    4300060: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_
+    4300062: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_
+    4300064: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_
+    4300066: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_
+    4300068: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_
+    4300070: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_
+    4300072: Roy_Blink_Ouch_VIS_O_OBJ_O_NOSORT_FAR_
+    4300074: Roy_Blink_Ouch_VIS_O_OBJ_O_NOSORT_FAR_
+    4300076: Roy_Blink_Ouch_VIS_O_OBJ_O_NOSORT_FAR_
+    4300078: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_
+    4300080: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_
+    4300082: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_
+    4300084: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_
+    4300086: Roy_Blink_Down_VIS_O_OBJ_O_NOSORT_FAR_
+    4300088: Roy_Blink_Down_VIS_O_OBJ_O_NOSORT_FAR_
+    4300090: Roy_Blink_Escape_VIS_O_OBJ_O_NOSORT_FAR_
+    4300092: Roy_Blink_Escape_VIS_O_OBJ_O_NOSORT_FAR_
+    4300094: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_
+    4300096: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_
+    4300098: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_
+    4300100: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_
+    4300102: Roy_Blink_StepPose_VIS_O_OBJ_O_NOSORT_FAR_
+    4300104: Roy_Blink_StepPose_VIS_O_OBJ_O_NOSORT_FAR_
+    4300106: Roy_Mouth_Talk_VIS_O_OBJ_
+    4300108: Roy_Mouth_Attack_VIS_O_OBJ_
+    4300110: Roy_Mouth_HeavyAttack_VIS_O_OBJ_
+    4300112: Roy_Mouth_Ouch_VIS_O_OBJ_
+    4300114: Roy_Mouth_HeavyOuch_VIS_O_OBJ_
+    4300116: Roy_Mouth_Down_VIS_O_OBJ_
+    4300118: Roy_Mouth_Escape_VIS_O_OBJ_
+    4300120: Roy_Mouth_Ottotto_VIS_O_OBJ_
+    4300122: Roy_Mouth_Criff_VIS_O_OBJ_
+    4300124: Roy_Mouth_PatternA_VIS_O_OBJ_
+    4300126: Roy_Cheek_Hot_VIS_O_OBJ_
+    4300128: Gamemodel_
+    4300130: Gamemodel_
+    4300132: Gamemodel_
+    4300134: Gamemodel_
+    4300136: Gamemodel_
+    4300138: Gamemodel_
+    4300140: Gamemodel_
+    4300142: Gamemodel_
+    4300144: Gamemodel_
+    4300146: Gamemodel_
+    4300148: Gamemodel_
+    4300150: Gamemodel_
+    4300152: Gamemodel_
+    4300154: Gamemodel_
+    4300156: Gamemodel_
+    9500000: //RootNode
+    13700000: Gamemodel_
+    13700002: Gamemodel_ 1
+    13700004: Gamemodel_ 10
+    13700006: Gamemodel_ 11
+    13700008: Gamemodel_ 12
+    13700010: Gamemodel_ 13
+    13700012: Gamemodel_ 14
+    13700014: Gamemodel_ 2
+    13700016: Gamemodel_ 3
+    13700018: Gamemodel_ 4
+    13700020: Gamemodel_ 5
+    13700022: Gamemodel_ 6
+    13700024: Gamemodel_ 7
+    13700026: Gamemodel_ 8
+    13700028: Gamemodel_ 9
+    13700030: gold_O_OBJ_O_NOSORT_FAR_
+    13700032: hair_group_O_OBJ_O_SORTEACHNODE_
+    13700034: hatimaki_O_OBJ_O_SORTEACHNODE_
+    13700036: mant_O_OBJ_O_SORTEACHNODE_
+    13700038: mant_O_OBJ_O_SORTEACHNODE_ 1
+    13700040: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_
+    13700042: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700044: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    13700046: Roy_Blink_Attack_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    13700048: Roy_Blink_Down_VIS_O_OBJ_O_NOSORT_FAR_
+    13700050: Roy_Blink_Down_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700052: Roy_Blink_Escape_VIS_O_OBJ_O_NOSORT_FAR_
+    13700054: Roy_Blink_Escape_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700056: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_
+    13700058: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700060: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    13700062: Roy_Blink_HeavOouch_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    13700064: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_
+    13700066: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700068: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    13700070: Roy_Blink_HeavyAttack_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    13700072: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_
+    13700074: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700076: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    13700078: Roy_Blink_Ottotto_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    13700080: Roy_Blink_Ouch_VIS_O_OBJ_O_NOSORT_FAR_
+    13700082: Roy_Blink_Ouch_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700084: Roy_Blink_Ouch_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    13700086: Roy_Blink_StepPose_VIS_O_OBJ_O_NOSORT_FAR_
+    13700088: Roy_Blink_StepPose_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700090: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_
+    13700092: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700094: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_ 2
+    13700096: Roy_Blink_Talk_VIS_O_OBJ_O_NOSORT_FAR_ 3
+    13700098: Roy_Blink_VIS_O_OBJ_O_NOSORT_FAR_
+    13700100: Roy_Blink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700102: Roy_Cheek_Hot_VIS_O_OBJ_
+    13700104: Roy_Eye_VIS_O_OBJ_
+    13700106: Roy_Eye_VIS_O_OBJ_ 1
+    13700108: Roy_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_
+    13700110: Roy_Halfblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700112: Roy_Mouth_Attack_VIS_O_OBJ_
+    13700114: Roy_Mouth_Criff_VIS_O_OBJ_
+    13700116: Roy_Mouth_Down_VIS_O_OBJ_
+    13700118: Roy_Mouth_Escape_VIS_O_OBJ_
+    13700120: Roy_Mouth_FaceN_VIS_O_OBJ_
+    13700122: Roy_Mouth_HeavyAttack_VIS_O_OBJ_
+    13700124: Roy_Mouth_HeavyOuch_VIS_O_OBJ_
+    13700126: Roy_Mouth_Ottotto_VIS_O_OBJ_
+    13700128: Roy_Mouth_Ouch_VIS_O_OBJ_
+    13700130: Roy_Mouth_PatternA_VIS_O_OBJ_
+    13700132: Roy_Mouth_Result_VIS_O_OBJ_
+    13700134: Roy_Mouth_Talk_VIS_O_OBJ_
+    13700136: Roy_Openblink_VIS_O_OBJ_O_NOSORT_FAR_
+    13700138: Roy_Openblink_VIS_O_OBJ_O_NOSORT_FAR_ 1
+    13700140: SayaM_VIS_O_OBJ_
+    13700142: SayaM_VIS_O_OBJ_ 1
+    13700144: tsuka_VIS_O_OBJ_
+    13700146: WeaponbladeM_L_VIS_O_OBJ_
+    13700148: WeaponbladeM_L_VIS_O_OBJ_ 1
+    13700150: WeaponbladeM_VIS_O_OBJ_
+    13700152: WeaponbladeM_VIS_O_OBJ_ 1
+    13700154: WeapongripM_L_VIS_O_OBJ_
+    13700156: WeapongripM_VIS_O_OBJ_
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

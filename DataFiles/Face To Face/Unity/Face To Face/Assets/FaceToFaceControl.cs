@@ -96,8 +96,8 @@ public class FaceToFaceControl : MonoBehaviour
                     StartCoroutine(WalkTo(Data.InCameraPositions[edgeIx]));
                     StartCoroutine(RestoreWall(Room.Walls[_edgeIx]));
                     StartCoroutine(OpenDoor(edgeIx));
-                    StartCoroutine(DimLight(Room.Light));
-                    StartCoroutine(RaiseLight(newRoom.Light));
+                    StartCoroutine(DimLights(Room.Lights));
+                    StartCoroutine(RaiseLights(newRoom.Lights));
                     StartCoroutine(StraightenCameraAndWallThenSetRoom(rotationParent, cameraDummy, Room.Walls[edgeIx], newRoom.gameObject, edgeIx, newFaceIx, newEdgeIx));
                     _interactionDisabled = true;
                 }
@@ -186,33 +186,38 @@ public class FaceToFaceControl : MonoBehaviour
         _interactionDisabled = false;
     }
 
-    private IEnumerator RaiseLight(Light light)
+    private IEnumerator RaiseLights(Light[] lights)
     {
-        light.intensity = 0;
+        for (var i = 0; i < lights.Length; i++)
+            lights[i].intensity = 0;
         yield return new WaitForSeconds(1.5f);
         var duration = 1.5f;
         var elapsed = 0f;
         while (elapsed < duration)
         {
-            light.intensity = Mathf.Lerp(0, Data.LightIntensity, elapsed / duration);
+            for (var i = 0; i < lights.Length; i++)
+                lights[i].intensity = Mathf.Lerp(0, Data.LightIntensities[i], elapsed / duration);
             yield return null;
             elapsed += Time.deltaTime;
         }
-        light.intensity = Data.LightIntensity;
+        for (var i = 0; i < lights.Length; i++)
+            lights[i].intensity = Data.LightIntensities[i];
     }
 
-    private IEnumerator DimLight(Light light)
+    private IEnumerator DimLights(Light[] lights)
     {
         yield return new WaitForSeconds(1.5f);
         var duration = 1.5f;
         var elapsed = 0f;
         while (elapsed < duration)
         {
-            light.intensity = Mathf.Lerp(Data.LightIntensity, 0, elapsed / duration);
+            for (var i = 0; i < lights.Length; i++)
+                lights[i].intensity = Mathf.Lerp(Data.LightIntensities[i], 0, elapsed / duration);
             yield return null;
             elapsed += Time.deltaTime;
         }
-        light.intensity = 0;
+        for (var i = 0; i < lights.Length; i++)
+            lights[i].intensity = 0;
     }
 
     private static Vector3 Bézier(Vector3 start, Vector3 control1, Vector3 control2, Vector3 end, float t)

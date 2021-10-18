@@ -17,7 +17,7 @@ public partial class RoomControl : MonoBehaviour
     public MeshRenderer RadioLight;
     public Material RadioLightOn;
     public Material RadioLightOff;
-    public Light Light;
+    public Light[] Lights;
     public float[] DoorRotationsY;
     public Material[] CarpetMaterials;
     public MeshRenderer[] Carpets;
@@ -50,7 +50,8 @@ public partial class RoomControl : MonoBehaviour
         NormalLampStand.gameObject.SetActive(!OwnLamp[Data.Faces[faceIx].LampBro]);
 
         RadioAudio.clip = AudioClips[faceIx];
-        Light.intensity = Data.LightIntensity;
+        for (var i = 0; i < Lights.Length; i++)
+            Lights[i].intensity = Data.LightIntensities[i];
 
         for (var i = 0; i < Data.Faces[faceIx].CarpetLength; i++)
         {
