@@ -11,6 +11,10 @@ public class LampCollider : MonoBehaviour
             return;
         var cp = collision.contacts.Select(p => (ContactPoint?) p).FirstOrDefault(p => p.Value.otherCollider.gameObject == Room.Floor);
         if (cp != null)
-            Room.Smash(cp.Value.point, gameObject);
+        {
+            var p = cp.Value.point;
+            p.y += .1f;
+            Room.Smash(p, gameObject);
+        }
     }
 }

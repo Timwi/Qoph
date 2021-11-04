@@ -29,7 +29,7 @@ public partial class RoomControl : MonoBehaviour
     public GameObject Bubble;
     public FaceToFaceControl FFControl;
 
-    public void SetRoom(int faceIx, int edgeIx, bool setCamera, bool setAllWalls = false, bool smashed = false)
+    public void SetRoom(int faceIx, int edgeIx, bool setCamera, bool setAllWalls = false, bool smashed = false, bool setRidigBody = false)
     {
         foreach (var wall in Walls)
             wall.SetActive(true);
@@ -50,7 +50,21 @@ public partial class RoomControl : MonoBehaviour
 
         for (var i = 0; i < LampBroModels.Length; i++)
             if (LampBroModels[i] != null)
-                LampBroModels[i].gameObject.SetActive(!smashed && Data.Faces[faceIx].LampBro == i);
+            {
+                if (setRidigBody)
+                    foreach (var rb in LampBroModels[i].GetComponentsInChildren<Rigidbody>())
+                        Destroy(rb);
+                var active = !smashed && Data.Faces[faceIx].LampBro == i;
+                if (active)
+                {
+                    LampBroModels[i].gameObject.SetActive(true);
+                    if (setRidigBody && !smashed)
+                        foreach (var rb in LampBroModels[i].GetComponentsInChildren<LampCollider>())
+                            rb.gameObject.AddComponent<Rigidbody>();
+                }
+                else
+                    LampBroModels[i].gameObject.SetActive(false);
+            }
         NormalLampStand.gameObject.SetActive(!OwnLamp[Data.Faces[faceIx].LampBro]);
 
         RadioAudio.clip = AudioClips[faceIx];
