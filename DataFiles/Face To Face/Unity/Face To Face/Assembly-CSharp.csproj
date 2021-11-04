@@ -54,6 +54,7 @@
      <Compile Include="Assets\Data.cs" />
      <Compile Include="Assets\Easing.cs" />
      <Compile Include="Assets\FaceToFaceControl.cs" />
+     <Compile Include="Assets\LampCollider.cs" />
      <Compile Include="Assets\PosAndDir.cs" />
      <Compile Include="Assets\RoomControl.cs" />
      <None Include="Assets\OldRadio\Okean\ReadMe.txt" />

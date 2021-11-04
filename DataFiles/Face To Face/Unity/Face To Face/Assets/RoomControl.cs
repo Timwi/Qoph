@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using Assets;
 using UnityEngine;
@@ -24,8 +25,11 @@ public partial class RoomControl : MonoBehaviour
     public GameObject[] LampBroModels;
     public bool[] OwnLamp;
     public GameObject NormalLampStand;
+    public GameObject Floor;
+    public GameObject Bubble;
+    public FaceToFaceControl FFControl;
 
-    public void SetRoom(int faceIx, int edgeIx, bool setCamera, bool setAllWalls = false)
+    public void SetRoom(int faceIx, int edgeIx, bool setCamera, bool setAllWalls = false, bool smashed = false)
     {
         foreach (var wall in Walls)
             wall.SetActive(true);
@@ -46,7 +50,7 @@ public partial class RoomControl : MonoBehaviour
 
         for (var i = 0; i < LampBroModels.Length; i++)
             if (LampBroModels[i] != null)
-                LampBroModels[i].gameObject.SetActive(Data.Faces[faceIx].LampBro == i);
+                LampBroModels[i].gameObject.SetActive(!smashed && Data.Faces[faceIx].LampBro == i);
         NormalLampStand.gameObject.SetActive(!OwnLamp[Data.Faces[faceIx].LampBro]);
 
         RadioAudio.clip = AudioClips[faceIx];
@@ -66,6 +70,46 @@ public partial class RoomControl : MonoBehaviour
 
         if (setCamera)
             Camera.main.transform.Set(Data.CameraPositions[edgeIx], new Vector3(1, 1, 1));
+    }
+
+    public void Smash(Vector3 contactPoint, GameObject lamp)
+    {
+        FFControl.Smashed[FFControl.FaceIx] = true;
+        Bubble.SetActive(true);
+        Bubble.transform.position = Vector3.Lerp(contactPoint, Camera.main.transform.position, .5f);
+        Bubble.transform.rotation = Quaternion.LookRotation(contactPoint - Camera.main.transform.position, Vector3.up);
+        StartCoroutine(SmashAnimation(lamp));
+    }
+
+    private IEnumerator SmashAnimation(GameObject lamp)
+    {
+        var duration = .4f;
+        var elapsed = 0f;
+        while (elapsed < duration)
+        {
+            Bubble.transform.localScale = new Vector3(1, 1, 1) * BackOut(elapsed, 0, 0.05f, duration, 2);
+            yield return null;
+            elapsed += Time.deltaTime;
+        }
+        Bubble.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        lamp.SetActive(false);
+
+        duration = .25f;
+        elapsed = 0f;
+        while (elapsed < duration)
+        {
+            Bubble.transform.localScale = new Vector3(1, 1, 1) * Mathf.Lerp(0.05f, 0, elapsed / duration);
+            yield return null;
+            elapsed += Time.deltaTime;
+        }
+        Bubble.SetActive(false);
+    }
+
+    private static float BackOut(float time, float start, float end, float duration, float overshoot = 1)
+    {
+        var t = time / duration - 1f;
+        var val = t * t * ((t + 1) * overshoot + t) + 1;
+        return (end - start) * val + start;
     }
 }
 

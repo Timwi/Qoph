@@ -63,6 +63,7 @@
     <Compile Include="Modeling\AutoNormal.cs" />
     <Compile Include="Modeling\BevelPoint.cs" />
     <Compile Include="Modeling\GaussianBlur.cs" />
+    <Compile Include="Modeling\LooseModels.cs" />
     <Compile Include="Modeling\Md.cs" />
     <Compile Include="Modeling\MeshVertexInfo.cs" />
     <Compile Include="Modeling\Normal.cs" />

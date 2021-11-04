@@ -12,6 +12,7 @@ public class FaceToFaceControl : MonoBehaviour
     public RoomControl Room;
     public GameObject Sphere;
     public Text TalkText;
+    public bool[] Smashed = new bool[24];
 
     public int FaceIx;
     private int _edgeIx;
@@ -40,11 +41,6 @@ public class FaceToFaceControl : MonoBehaviour
     }
 #endif
 
-    private static Vector3 vec(double x, double y, double z)
-    {
-        return new Vector3((float) x, (float) y, (float) z);
-    }
-
     void Start()
     {
 #if !UNITY_EDITOR && UNITY_WEBGL
@@ -58,7 +54,8 @@ public class FaceToFaceControl : MonoBehaviour
         }
         while (Data.Faces[FaceIx].Edges[_edgeIx].Face == null);
 
-        Room.SetRoom(FaceIx, _edgeIx, setCamera: true);
+        Room.FFControl = this;
+        Room.SetRoom(FaceIx, _edgeIx, setCamera: true, smashed: Smashed[FaceIx]);
     }
 
     void Update()
@@ -89,6 +86,7 @@ public class FaceToFaceControl : MonoBehaviour
                     cameraDummy.transform.Set(Data.CameraPositions[newEdgeIx], new Vector3(1, 1, 1));
                     cameraDummy.transform.parent = rotationParent.transform;
                     var newRoom = Instantiate(Room);
+                    newRoom.FFControl = this;
                     newRoom.transform.parent = rotationParent.transform;
                     rotationParent.transform.localRotation = Quaternion.AngleAxis(Data.TiltAngle, Data.TiltRoomAbout[edgeIx]) * Quaternion.AngleAxis(Data.RotateRoomBy[edgeIx], Vector3.up);
                     newRoom.SetRoom(newFaceIx, newEdgeIx, setCamera: false);
@@ -119,6 +117,8 @@ public class FaceToFaceControl : MonoBehaviour
                 Talk(string.Format("This box contains {0}.", Data.Faces[FaceIx].ItemInBox));
             else if (Room.Carpets.Any(c => c.gameObject == hit.transform.gameObject))
                 Talk(string.Format("What a nice {0} carpet design!", Data.Faces[FaceIx].CarpetColor));
+            else if (Room.LampBroModels.Contains(hit.transform.gameObject) && !Smashed[FaceIx])
+                hit.transform.gameObject.GetComponent<Rigidbody>().AddForce(5 * hit.transform.position);
         }
     }
 

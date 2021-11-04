@@ -1094,6 +1094,9 @@ h3 {{ font-size: 14pt; }}
             // Calculate the room’s midpoint
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*Midpoint-start\*/", @"/\*Midpoint-end\*/",
                 (net[0].Aggregate(new PointD(0, 0), (p, n) => p + n) / net[0].Length).Apply(p => $"new Vector3({-p.X}f, {inCameraHeight}f, {p.Y}f)"));
+
+            File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Cylinder.obj", GenerateObjFile(LooseModels.Cylinder(0, 1.4, .3, 36), "Cylinder"));
+            File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\LampCylinder.obj", GenerateObjFile(LooseModels.Cylinder(0, 1.4, .3, 36), "Cylinder"));
         }
 
         private static Pt h(this PointD p, double y) => pt(p.X, y, p.Y);
