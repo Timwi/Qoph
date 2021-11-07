@@ -29,7 +29,7 @@ public partial class RoomControl : MonoBehaviour
     public GameObject Bubble;
     public FaceToFaceControl FFControl;
 
-    public void SetRoom(int faceIx, int edgeIx, bool setCamera, bool setAllWalls = false, bool smashed = false, bool setRidigBody = false)
+    public void SetRoom(int faceIx, int edgeIx, bool setCamera, bool setAllWalls = false)
     {
         foreach (var wall in Walls)
             wall.SetActive(true);
@@ -51,19 +51,12 @@ public partial class RoomControl : MonoBehaviour
         for (var i = 0; i < LampBroModels.Length; i++)
             if (LampBroModels[i] != null)
             {
-                if (setRidigBody)
-                    foreach (var rb in LampBroModels[i].GetComponentsInChildren<Rigidbody>())
-                        Destroy(rb);
-                var active = !smashed && Data.Faces[faceIx].LampBro == i;
-                if (active)
-                {
-                    LampBroModels[i].gameObject.SetActive(true);
-                    if (setRidigBody && !smashed)
-                        foreach (var rb in LampBroModels[i].GetComponentsInChildren<LampCollider>())
-                            rb.gameObject.AddComponent<Rigidbody>();
-                }
-                else
-                    LampBroModels[i].gameObject.SetActive(false);
+                foreach (var rb in LampBroModels[i].GetComponentsInChildren<Rigidbody>())
+                    Destroy(rb);
+                LampBroModels[i].gameObject.SetActive(Data.Faces[faceIx].LampBro == i);
+                if (Data.Faces[faceIx].LampBro == i)
+                    foreach (var lc in LampBroModels[i].GetComponentsInChildren<LampCollider>())
+                        lc.gameObject.SetActive(!lc.Smashed);
             }
         NormalLampStand.gameObject.SetActive(!OwnLamp[Data.Faces[faceIx].LampBro]);
 
@@ -88,7 +81,6 @@ public partial class RoomControl : MonoBehaviour
 
     public void Smash(Vector3 contactPoint, GameObject lamp)
     {
-        FFControl.Smashed[FFControl.FaceIx] = true;
         Bubble.SetActive(true);
         Bubble.transform.position = Vector3.Lerp(contactPoint, Camera.main.transform.position, .5f);
         Bubble.transform.rotation = Quaternion.LookRotation(contactPoint - Camera.main.transform.position, Vector3.up);

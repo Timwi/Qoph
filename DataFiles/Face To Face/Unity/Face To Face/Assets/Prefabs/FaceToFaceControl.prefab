@@ -4856,54 +4856,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AudioClips:
-  - {fileID: 8300000, guid: 4d4d6d7c7bfe06c49a3e7761854c1338, type: 3}
-  - {fileID: 8300000, guid: 0aec190c653fa9741824d9cdd229c41d, type: 3}
-  - {fileID: 8300000, guid: 922f077c109a04e468d247a79d325bd7, type: 3}
-  - {fileID: 8300000, guid: 8c4351e64577a264689dd501e9cb4c85, type: 3}
-  - {fileID: 8300000, guid: 3704d58e333e8074291a75c81770deda, type: 3}
-  - {fileID: 8300000, guid: c1e21e1b27821364192c08e8c67ce7d4, type: 3}
-  - {fileID: 8300000, guid: 80e73da674a7e2c46b60bdd8a6d5f9ce, type: 3}
-  - {fileID: 8300000, guid: 468698c10c9a37148a07b37699476554, type: 3}
-  - {fileID: 8300000, guid: 2e02c98177d72174a83d5492340490f6, type: 3}
-  - {fileID: 8300000, guid: c9675975e5cd3a34d85d941bf4bd4985, type: 3}
-  - {fileID: 8300000, guid: a15c227129d22df4dae9bb3e27ecbef9, type: 3}
-  - {fileID: 8300000, guid: be1e84fba52a8e848a16635e2227b116, type: 3}
-  - {fileID: 8300000, guid: 45feac57a7db872438e82873585fd12a, type: 3}
-  - {fileID: 8300000, guid: c6cbf0ee6dc619f4fbefb82eaa03e4a8, type: 3}
-  - {fileID: 8300000, guid: acd632686bd47a0479c8e0fd46ee1cf8, type: 3}
-  - {fileID: 8300000, guid: f4a281c2de775774dad829bb71ae0977, type: 3}
-  - {fileID: 8300000, guid: df861d199ec9088429613055fff2e23f, type: 3}
-  - {fileID: 8300000, guid: 4d37a1c9900f06f45a0cf50f3849add0, type: 3}
-  - {fileID: 8300000, guid: b4d5df0acb8617f4eb9bae3eaa5fda0c, type: 3}
-  - {fileID: 8300000, guid: af6f9c1834d018048a8264ee8c72fbd8, type: 3}
-  - {fileID: 8300000, guid: d40a5170819605344a1fff2f786e1945, type: 3}
-  - {fileID: 8300000, guid: b49b142f52a7fec4283f2081932d23d7, type: 3}
-  - {fileID: 8300000, guid: 3f92c0e79b70743488e61323c4d3d91b, type: 3}
-  - {fileID: 8300000, guid: cbbc09000a849414fa27cfe283db16fd, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Walls:
   - {fileID: 1442947072441718}
   - {fileID: 1897386108531794}
   - {fileID: 1836310290180470}
   - {fileID: 1222905345420758}
   - {fileID: 1315868000971730}
-  CyanNumbers:
-  - {fileID: 102421442299473604}
-  - {fileID: 102587104600533482}
-  - {fileID: 102681991308058960}
-  - {fileID: 102704196278569710}
-  - {fileID: 102815808718323622}
-  PinkNumbers1:
-  - {fileID: 102990325060624486}
-  - {fileID: 102760638571731440}
-  - {fileID: 102958416133193126}
-  - {fileID: 102577520225267034}
-  - {fileID: 102586509645483276}
-  PinkNumbers2:
-  - {fileID: 102504861305389544}
-  - {fileID: 102309839997590446}
-  - {fileID: 102221208934977614}
-  - {fileID: 102818514236814272}
-  - {fileID: 102987791767913460}
+  CyanNumbers1: []
+  CyanNumbers2: []
+  DoorSigns: []
+  DoorSignTexts: []
   Doors:
   - {fileID: 1872396112560182}
   - {fileID: 1341748344353928}
@@ -4913,8 +4899,10 @@ MonoBehaviour:
   Box: {fileID: 1942127546408732}
   Radio: {fileID: 1965619840478476}
   RadioAudio: {fileID: 82111779859934084}
-  RadioMaterial: {fileID: 2100000, guid: a0781af477f02534ba9bbda97c517883, type: 2}
-  Light: {fileID: 108233743653559992}
+  RadioLight: {fileID: 0}
+  RadioLightOn: {fileID: 0}
+  RadioLightOff: {fileID: 0}
+  Lights: []
   DoorRotationsY:
   - 248.9083
   - 183.72035
@@ -4938,6 +4926,12 @@ MonoBehaviour:
   - {fileID: 23639537067851276}
   - {fileID: 23373782671836978}
   - {fileID: 23361214680506102}
+  LampBroModels: []
+  OwnLamp: 
+  NormalLampStand: {fileID: 0}
+  Floor: {fileID: 0}
+  Bubble: {fileID: 0}
+  FFControl: {fileID: 0}
 --- !u!114 &114931516371928814
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -12,7 +12,6 @@ public class FaceToFaceControl : MonoBehaviour
     public RoomControl Room;
     public GameObject Sphere;
     public Text TalkText;
-    public bool[] Smashed = new bool[24];
 
     public int FaceIx;
     private int _edgeIx;
@@ -55,13 +54,14 @@ public class FaceToFaceControl : MonoBehaviour
         while (Data.Faces[FaceIx].Edges[_edgeIx].Face == null);
 
         Room.FFControl = this;
-        Room.SetRoom(FaceIx, _edgeIx, setCamera: true, smashed: Smashed[FaceIx], setRidigBody: true);
+        Room.SetRoom(FaceIx, _edgeIx, setCamera: true);
     }
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && !_interactionDisabled)
         {
+            LampCollider lc;
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (!Physics.Raycast(ray, out hit))
@@ -91,7 +91,7 @@ public class FaceToFaceControl : MonoBehaviour
                     newRoom.FFControl = this;
                     newRoom.transform.parent = rotationParent.transform;
                     rotationParent.transform.localRotation = Quaternion.AngleAxis(Data.TiltAngle, Data.TiltRoomAbout[edgeIx]) * Quaternion.AngleAxis(Data.RotateRoomBy[edgeIx], Vector3.up);
-                    newRoom.SetRoom(newFaceIx, newEdgeIx, setCamera: false, smashed: Smashed[newFaceIx], setRidigBody: false);
+                    newRoom.SetRoom(newFaceIx, newEdgeIx, setCamera: false);
 
                     StartCoroutine(WalkTo(Data.InCameraPositions[edgeIx]));
                     StartCoroutine(RestoreWall(Room.Walls[_edgeIx]));
@@ -119,12 +119,8 @@ public class FaceToFaceControl : MonoBehaviour
                 Talk(string.Format("This box contains {0}.", Data.Faces[FaceIx].ItemInBox));
             else if (Room.Carpets.Any(c => c.gameObject == hit.transform.gameObject))
                 Talk(string.Format("What a nice {0} carpet design!", Data.Faces[FaceIx].CarpetColor));
-            else if (Room.LampBroModels.Contains(hit.transform.gameObject) && !Smashed[FaceIx])
-            {
-                var rb = hit.transform.gameObject.GetComponent<Rigidbody>();
-                if (rb != null)
-                    rb.AddForce(5 * hit.transform.position);
-            }
+            else if ((lc = hit.transform.GetComponent<LampCollider>()) != null && lc.gameObject.GetComponent<Rigidbody>() == null)
+                lc.gameObject.AddComponent<Rigidbody>().AddForce(5 * hit.transform.position);
         }
     }
 
@@ -186,7 +182,7 @@ public class FaceToFaceControl : MonoBehaviour
         Destroy(rotationParent);
         Destroy(wallSizer);
         Room.gameObject.SetActive(true);
-        Room.SetRoom(newFaceIx, newEdgeIx, setCamera: true, smashed: Smashed[newFaceIx], setRidigBody: true);
+        Room.SetRoom(newFaceIx, newEdgeIx, setCamera: true);
         FaceIx = newFaceIx;
         _edgeIx = newEdgeIx;
         _interactionDisabled = false;
