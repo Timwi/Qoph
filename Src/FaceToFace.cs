@@ -28,10 +28,10 @@ namespace Qoph
         private static readonly (string word, int clueSize, string clue, int[] cells)[] _crosswordLights = Ut.NewArray(
             ("NEED", 18, "Require\n(4)", new[] { 2, 14, 13, 5 }),
             ("DEAL", 9, "Agreement or dish\nout cards (4)", new[] { 5, 4, 9, 10 }),
-            ("ONSET", 16, "Beginning\n(5)", new[] { 3, 23, 22, 4, 7 }),
+            ("ONSET", 12, "Beginning\nphase (5)", new[] { 3, 23, 22, 4, 7 }),
             ("SHARING", 14, "Apportioning\n(7)", new[] { 22, 8, 11, 0, 1, 17, 16 }),
             ("NUN", 16, "Sister (3)", new[] { 23, 20, 2 }),
-            ("TEN", 18, "X (3)", new[] { 21, 14, 15 }),
+            ("TEN", 14, "X in\nRome (3)", new[] { 21, 14, 15 }),
             ("ROUTE", 14, "Itinerary\n(5)", new[] { 0, 3, 20, 21, 13 }),
             ("HATE", 17, "Loathe\n(4)", new[] { 8, 9, 7, 6 }),
             ("EGG", 18, "Ovum (3)", new[] { 6, 16, 19 }),
@@ -82,7 +82,7 @@ namespace Qoph
                 (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "CARPET", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: 1),
                 (word: "INDX", faces: new[] { 23, 3, 2, 17 }, color: 2),
-                (word: "FGHJKLMSUVWYZ", faces: new[] { 4, 5, 6, 7, 9, 10, 13, 14, 16, 18, 19, 20, 21 }, color: null));
+                (word: "FGHKJLMSUVWYZ", faces: new[] { 4, 5, 6, 7, 9, 10, 13, 14, 16, 18, 19, 20, 21 }, color: null));
 
         private static readonly DistrInfo[] _distributions = new[] { _carpetColors, _smashChars, _cyanSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
 
@@ -90,7 +90,7 @@ namespace Qoph
 
         private static readonly (string author, string title, string givenLyrics, string nextWord)?[] _songTitles = Ut.NewArray<(string title, string author, string givenLyrics, string nextWord)?>(
             ("Fools Garden", "Lemon Tree", "I’m sitting here in a boring room, it’s just another rainy Sunday...", "Afternoon"),
-            ("The Weekend", "Blinding Lights", "So I hit the road in overdrive...", "Baby"),
+            ("The Weeknd", "Blinding Lights", "So I hit the road in overdrive...", "Baby"),
             ("Jonathan Coulton", "Still Alive", "... there’s no sense crying over every mistake. You just keep on trying till you run out of...", "Cake"),
             ("John Lennon", "Imagine", "... sharing all the world, yoo-hoo... You may say I’m a...", "Dreamer"),
             null,

@@ -337,7 +337,7 @@ MonoBehaviour:
   Room: {fileID: 1955485462}
   Sphere: {fileID: 1485708090}
   TalkText: {fileID: 1068882850}
-  FaceIx: 14
+  FaceIx: 19
 --- !u!4 &811278415
 Transform:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ using UnityEngine;
 public partial class RoomControl : MonoBehaviour
 {
     public AudioClip[] AudioClips;
+    public AudioClip SmashClip;
     public GameObject[] Walls;
     public TextMesh[] CyanNumbers1;
     public TextMesh[] CyanNumbers2;
@@ -15,6 +16,7 @@ public partial class RoomControl : MonoBehaviour
     public GameObject Box;
     public GameObject Radio;
     public AudioSource RadioAudio;
+    public AudioSource SmashAudio;
     public MeshRenderer RadioLight;
     public Material RadioLightOn;
     public Material RadioLightOff;
@@ -38,10 +40,10 @@ public partial class RoomControl : MonoBehaviour
 
         for (var i = 0; i < 5; i++)
         {
-            CyanNumbers1[i].gameObject.SetActive(Data.Faces[faceIx].Edges[i].PinkNumber != null);
-            CyanNumbers1[i].text = Data.Faces[faceIx].Edges[i].PinkNumber.ToString();
-            CyanNumbers2[i].gameObject.SetActive(Data.Faces[faceIx].Edges[i].PinkNumber != null);
-            CyanNumbers2[i].text = Data.Faces[faceIx].Edges[i].PinkNumber.ToString();
+            CyanNumbers1[i].gameObject.SetActive(Data.Faces[faceIx].Edges[i].CyanNumber != null);
+            CyanNumbers1[i].text = Data.Faces[faceIx].Edges[i].CyanNumber.ToString();
+            CyanNumbers2[i].gameObject.SetActive(Data.Faces[faceIx].Edges[i].CyanNumber != null);
+            CyanNumbers2[i].text = Data.Faces[faceIx].Edges[i].CyanNumber.ToString();
             Doors[i].transform.localEulerAngles = new Vector3(0, DoorRotationsY[i], 0);
             DoorSigns[i].SetActive(Data.Faces[faceIx].Edges[i].Label != null);
             DoorSignTexts[i].text = Data.Faces[faceIx].Edges[i].Label ?? "";
@@ -85,6 +87,7 @@ public partial class RoomControl : MonoBehaviour
         Bubble.transform.position = Vector3.Lerp(contactPoint, Camera.main.transform.position, .5f);
         Bubble.transform.rotation = Quaternion.LookRotation(contactPoint - Camera.main.transform.position, Vector3.up);
         StartCoroutine(SmashAnimation(lamp));
+        SmashAudio.Play();
     }
 
     private IEnumerator SmashAnimation(GameObject lamp)
