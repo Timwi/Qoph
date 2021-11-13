@@ -125,7 +125,7 @@ namespace Qoph
             "a worm",
             "a doormat",
             "a copy of the album \"So Much Fun\"",
-            "a painting of Queen Victoria",
+            "a painting of water lilies",
             "a beaker of alkaline solution",
             "a body spray",
             "a nail",
@@ -141,7 +141,7 @@ namespace Qoph
             "a toy railway car",
             "a frozen cube",
             "a rat",
-            "a book of jokes",
+            "a skull",
             "a bottle of spirits");
 
         public static void DownloadFiles()
