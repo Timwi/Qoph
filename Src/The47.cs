@@ -26,7 +26,6 @@ namespace Qoph
                 .ToArray();
 
             var mod47Inverses = new int[47];
-            var tt = new TextTable { ColumnSpacing = 1 };
             for (var row = 0; row < 47; row++)
                 for (var col = 0; col < 47; col++)
                     if ((row * col) % 47 == 1)

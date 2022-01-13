@@ -69,7 +69,6 @@
     <Compile Include="Modeling\Normal.cs" />
     <Compile Include="Modeling\Pt.cs" />
     <Compile Include="Modeling\VertexInfo.cs" />
-    <Compile Include="OneCanHope.cs" />
     <Compile Include="PngMetadataExperiment.cs" />
     <Compile Include="Postcards.cs" />
     <Compile Include="PowerOfSudoku.cs" />
