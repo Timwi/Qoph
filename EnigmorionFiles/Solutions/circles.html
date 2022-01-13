@@ -36,9 +36,13 @@ makeSolutionPage('circles', `
 {-l
 <ul>
 	<li>We can open the SVG in InkScape and attempt to draw circles there. The spiro mode of the draw tool (B) can easily create circles from points, especially if you enable snapping to centers of objects, so you can snap to the existing dots.</li>
-	<li>We can take the SVG and use some search/replace to extract the coordinates. Then we can put them in a Python script and use pyplot to draw some circles on them.</li>
-	<li>We can use an online tool such as <a href='http://www.ambrsoft.com/trigocalc/circle3d.htm'>Circle defined by 3 points</a> to calculate midpoints and radii of circles.</li>
-	<li>We can also put them all in a spreadsheet and author some formulas there, or use a scatter plot.</li>
+	<li>We can take the SVG’s source and use some search/replace to extract the coordinates. Then:
+		<ul>
+			<li>We can put them in a Python script and use pyplot to draw some circles on them.</li>
+			<li>We can use an online tool such as <a href='http://www.ambrsoft.com/trigocalc/circle3d.htm'>Circle defined by 3 points</a> to calculate midpoints and radii of circles.</li>
+			<li>We can also put them all in a spreadsheet and author some formulas there, or use a scatter plot.</li>
+		</ul>
+	</li>
 </ul>
 <p>Since there are [o 63 dots, we may be looking at [sg 7 circles with 9 dots each or 9 circles with 7 dots each.]]</p>
 }
