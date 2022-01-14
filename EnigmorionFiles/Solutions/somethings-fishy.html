@@ -1,0 +1,134 @@
+<style>
+	table.main {
+		border-spacing: .2cm;
+		margin: 1cm auto;
+		background: hsl(220, 30%, 30%);
+		box-shadow: 0 0 .3cm rgba(0, 0, 0, .3);
+	}
+    table.main td {
+		text-align: center;
+		vertical-align: center;
+		padding: 0;
+		background: hsl(220, 43%, 77%);
+		border: 5px solid transparent;
+		font-size: 18pt;
+		width: 4.5cm;
+		height: 2cm;
+		font-family: 'Montserrat';
+	}
+	table.main td.border {
+		border: 5px solid hsl(220, 100%, 63%);
+	}
+	table.main td.red-herring {
+		font-size: 10pt;
+		font-style: italic;
+		font-family: 'Presquire';
+	}
+	table.main td.hl {
+		background: hsl(213, 20%, 20%);
+		color: white;
+	}
+	table.list {
+		border-spacing: .1cm;
+		border-collapse: separate;
+		float: right;
+		width: 5cm;
+	}
+	table.list td {
+		background: hsl(220, 50%, 80%);
+		padding: .1cm .5cm;
+		white-space: nowrap;
+	}
+	table.list svg {
+		width: 1cm;
+	}
+</style>
+<script src='../../files/solutions.js'></script>
+<h1>Something’s Fishy</h1>
+<script>
+makeSolutionPage('somethings-fishy', `
+
+<p>Let’s begin by using Google Image Search to find what kinds of fish these are. [ra]</p>
+
+{-a
+<table class='main'>
+	<tr>
+		<td class='red-herring'>(red herring)</td>
+		<td class='hl-f'>FROGFISH</td>
+		<td class='border hl-b'>BASS</td>
+		<td class='red-herring'>(red herring)</td>
+		<td class='hl-d'>DAMSELFISH</td>
+		<td class='red-herring'>(red herring)</td>
+	</tr>
+	<tr>
+		<td class='hl-g'>GOLDFISH</td>
+		<td class='hl-h'>HALIBUT</td>
+		<td class='hl-c'>CARP</td>
+		<td class='border hl-h'>HALIBUT</td>
+		<td class='hl-c'>CARP</td>
+		<td class='hl-h'>HALIBUT</td>
+	</tr>
+	<tr>
+		<td class='hl-b'>BASS</td>
+		<td class='red-herring'>(red herring)</td>
+		<td class='border hl-d'>DAMSELFISH</td>
+		<td class='border hl-f'>FROGFISH</td>
+		<td class='hl-b'>BASS</td>
+		<td class='border hl-a'>ANGELFISH</td>
+	</tr>
+	<tr>
+		<td class='hl-g'>GOLDFISH</td>
+		<td class='hl-e'>EEL</td>
+		<td class='border hl-g'>GOLDFISH</td>
+		<td class='border hl-e'>EEL</td>
+		<td class='border hl-c'>CARP</td>
+		<td class='hl-e'>EEL</td>
+	</tr>
+	<tr>
+		<td class='red-herring'>(red herring)</td>
+		<td class='hl-f'>FROGFISH</td>
+		<td class='hl-d'>DAMSELFISH</td>
+		<td class='hl-a'>ANGELFISH</td>
+		<td class='red-herring'>(red herring)</td>
+		<td class='hl-a'>ANGELFISH</td>
+	</tr>
+</table>
+{-e
+	<table class='list'>
+		<tr><td data-h='a'>ANGELFISH</td>	<td class='ih r-g'><svg viewBox="0 0 600 500"><path id="guy" d="M 299.83203 185 A 25 25 0 0 0 275 210 A 25 25 0 0 0 300 235 A 25 25 0 0 0 325 210 A 25 25 0 0 0 300 185 A 25 25 0 0 0 299.83203 185 z M 285 240 C 273.92 240 265 249.51532 265 261.33398 L 265 378.66602 C 265 390.48468 273.92 400 285 400 L 315 400 C 326.08 400 335 390.48468 335 378.66602 L 335 261.33398 C 335 249.51532 326.08 240 315 240 L 285 240 z "></path><g transform="translate(250, 250) rotate(45) scale(-1, 1)"><g id="flag"><path d="M0-10c-5.54 0-10 4.46-10 10v50a9.97 9.97 0 0 0 5 8.66V250H5V58.66A9.97 9.97 0 0 0 10 50V0c0-5.54-4.46-10-10-10Z"></path><path fill="#ff0" d="M-95 160h90v90h-90z"></path><path fill="red" d="M-5 160v90h-90z"></path><path fill="none" stroke="#000" d="M-95 160h90v90h-90z"></path></g></g><use href="#flag" transform="translate(350, 250) rotate(0)"></use></svg> = «A»</td></tr>
+		<tr><td data-h='b'>BASS</td>	<td class='ih r-g'><svg viewBox="0 0 600 500"><use href="#guy"></use><use href="#flag" transform="translate(250, 250) rotate(45) scale(-1, 1)"></use><use href="#flag" transform="translate(350, 250) rotate(315)"></use></svg> = «N»</td></tr>
+		<tr><td data-h='c'>CARP</td>	<td class='ih r-g'><svg viewBox="0 0 600 500"><use href="#guy"></use><use href="#flag" transform="translate(250, 250) rotate(135) scale(-1, 1)"></use><use href="#flag" transform="translate(350, 250) rotate(180)"></use></svg> = «T»</td></tr>
+		<tr><td data-h='d'>DAMSELFISH</td>	<td class='ih r-g'><svg viewBox="0 0 600 500"><use href="#guy"></use><use href="#flag" transform="translate(250, 250) rotate(0) scale(-1, 1)"></use><use href="#flag" transform="translate(350, 250) rotate(225)"></use></svg> = «E»</td></tr>
+		<tr><td data-h='e'>EEL</td>	<td class='ih r-g'><svg viewBox="0 0 600 500"><use href="#guy"></use><use href="#flag" transform="translate(250, 250) rotate(90) scale(-1, 1)"></use><use href="#flag" transform="translate(350, 250) rotate(270)"></use></svg> = «R»</td></tr>
+		<tr><td data-h='f'>FROGFISH</td>	<td class='ih r-g'><svg viewBox="0 0 600 500"><use href="#guy"></use><use href="#flag" transform="translate(250, 250) rotate(45) scale(-1, 1)"></use><use href="#flag" transform="translate(350, 250) rotate(135) scale(-1, 1)"></use></svg> = «I»</td></tr>
+		<tr><td data-h='g'>GOLDFISH</td>	<td class='ih r-g'><svg viewBox="0 0 600 500"><use href="#guy"></use><use href="#flag" transform="translate(250, 250) rotate(90) scale(-1, 1)"></use><use href="#flag" transform="translate(350, 250) rotate(135) scale(-1, 1)"></use></svg> = «O»</td></tr>
+		<tr><td data-h='h'>HALIBUT</td>	<td class='ih r-g'><svg viewBox="0 0 600 500"><use href="#guy"></use><use href="#flag" transform="translate(250, 250) rotate(90) scale(-1, 1)"></use><use href="#flag" transform="translate(350, 250) rotate(270)"></use></svg> = «R»</td></tr>
+	</table>
+}
+<p>We notice a few things:</p>
+<ul>
+	<li>[o Some of the fish are red herrings, which [cb we ignore.]]</li>
+	<li class='ih r-b'>[oe There are 8 types of fish that start with the letters A–H, which means [cc we need to consider them in that order.]]</li>
+	<li class='ih r-c'>[od Each type of fish occurs 3 times, and exactly one has a blue border around it.]</li>
+	<li class='ih r-d'>[of Each unbordered fish is exactly 2 steps away from the bordered one, in some direction. Hover over the list on the right to see them highlighted.]</li>
+</ul>
+}
+{-f <p>This looks a lot like [d <a href='https://en.wikipedia.org/wiki/Flag_semaphore'>flag semaphore</a>, which spells out the answer. [rg]]}
+{-g <div class='answer' style='clear: none; margin: 2cm auto 1cm 5.5cm;'>ANTERIOR</div>}
+`, {
+	e: function() {
+		Array.from(document.querySelectorAll('table.list td')).forEach(td => {
+			td.onmouseover = function() {
+				Array.from(document.querySelectorAll(`table.main td.hl-${td.dataset.h}`)).forEach(td2 => {
+					td2.classList.add('hl');
+				});
+			};
+			td.onmouseout = function() {
+				Array.from(document.querySelectorAll(`table.main td.hl-${td.dataset.h}`)).forEach(td2 => {
+					td2.classList.remove('hl');
+				});
+			};
+		});
+	}
+});
+</script>
