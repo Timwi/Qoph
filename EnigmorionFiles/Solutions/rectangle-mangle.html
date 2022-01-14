@@ -1,0 +1,59 @@
+<style>
+	table.rmgrid td {
+		text-align: center;
+		background: hsl(220, 50%, 85%);
+	}
+	div.item {
+		font-size: 14pt;
+		font-weight: bold;
+	}
+	div.group {
+		font-size: 8pt;
+		font-style: italic;
+	}
+</style>
+<script src='../../files/solutions.js'></script>
+<h1>Rectangle Mangle</h1>
+<script>
+let groupnames = {
+	'uk': 'Countries of the United Kingdom',
+	'be': 'Members of The Beatles',
+	'ip': 'Inner planets of the solar system',
+	'mf': 'Mahjong flower tiles',
+	'fs': 'Four-stroke engine',
+	'gg': 'Gas giants of the solar system',
+	'sf': 'Seinfeld main characters',
+	'ha': 'Horsemen of the Apocalypse',
+	'sp': 'South Park main characters',
+	'cd': 'Cardinal directions',
+	'pm': 'Pac-Man ghosts',
+	'ce': 'Classical elements',
+	'hh': 'Houses of Hogwarts (Harry Potter)',
+	'cm': 'CMYK color system in printers',
+	'at': 'The A-Team main characters',
+	'ff': 'Fundamental forces of the universe',
+	'bp': 'Bases in DNA',
+	'tc': 'Triwizard champions (Harry Potter)',
+	'f4': 'Fantastic Four main characters',
+	'fc': 'Four-corner states (USA)',
+	'ba': 'Basic arithmetic operations',
+	'sm': 'States of matter',
+	'nt': 'Teenage Mutant Ninja Turtles',
+	'cv': 'Cardinal virtues',
+	'ms': 'Mahjong season tiles',
+	'tt': 'Teletubbies',
+	'gb': 'Ghostbusters main characters',
+	'bg': 'Bible gospel authors'
+};
+makeSolutionPage('rectangle-mangle', `
+
+<p>The key insight here is that [o these images represent things or items from groups of four, but only three items from each group are present. Furthermore, the three items present form the corners of a rectangle. This suggests to [s find the fourth item from each group and place it in the remaining corner to complete the rectangle. [ra]]]</p>
+{-a
+<table class='rmgrid'>
+    <tr><td>◁England|uk▷</td><td>◁Scotland|uk▷</td><td>◁John Lennon|be▷</td><td>◁Venus|ip▷</td><td>◁Earth|ip▷</td><td>◁Plum|mf▷</td><td>◁Intake|fs▷</td><td>◁Orchid|mf▷</td><td>◁Compression|fs▷</td><td>◁Paul McCartney|be▷</td></tr><tr><td>◁Jupiter|gg▷</td><td>◁George Costanza|sf▷</td><td>◁Kyle Broflovski|sp▷</td><td>◁Mars|ip▷</td><td>??</td><td>◁Death|ha▷</td><td>?</td><td>◁Kenny McCormick|sp▷</td><td>◁War|ha▷</td><td>◁South|cd▷</td></tr><tr><td>◁Inky|pm▷</td><td>◁Fire|ce▷</td><td>◁Gryffindor|hh▷</td><td>◁Water|ce▷</td><td>◁Hufflepuff|hh▷</td><td>?</td><td>?</td><td>◁Chrysan&shy;themum|mf▷</td><td>◁Exhaust|fs▷</td><td>◁Cyan|cm▷</td></tr><tr><td>◁Northern Ireland|uk▷</td><td>?</td><td>◁B. A. Baracus|at▷</td><td>◁Air|ce▷</td><td></td><td>◁Gravity|ff▷</td><td>◁West|cd▷</td><td>◁John “Hannibal” Smith|at▷</td><td>◁Electro&shy;magnetism|ff▷</td><td>◁East|cd▷</td></tr><tr><td>◁Adenine|bp▷</td><td>◁Harry Potter|tc▷</td><td>??</td><td>◁Mister Fantastic|f4▷</td><td>◁Invisible Woman|f4▷</td><td>?</td><td>◁Colorado|fc▷</td><td>◁Utah|fc▷</td><td>◁Famine|ha▷</td><td>◁George Harrison|be▷</td></tr><tr><td>◁Thymine|bp▷</td><td>◁Fortitude|cv▷</td><td>◁Eric Cartman|sp▷</td><td>◁Subtraction|ba▷</td><td>◁Prudence|cv▷</td><td>◁Guanine|bp▷</td><td>◁Peter Venkman|gb▷</td><td>?</td><td></td><td>◁Multiplication|ba▷</td></tr><tr><td>◁Solid|sm▷</td><td>◁Elaine Benes|sf▷</td><td>?</td><td>?</td><td>◁Slytherin|hh▷</td><td>◁Michel&shy;angelo|nt▷</td><td>◁Cosmo Cramer|sf▷</td><td>◁Winter|ms▷</td><td>◁Spring|ms▷</td><td>◁Tinky-Winky|tt▷</td></tr><tr><td>◁Blinky|pm▷</td><td>◁Fleur Delacour|tc▷</td><td>◁Cedric Diggory|tc▷</td><td>?</td><td>◁The Human Torch|f4▷</td><td>◁Weak interaction|ff▷</td><td>◁Clyde|pm▷</td><td>◁Autumn|ms▷</td><td>?</td><td>◁Division|ba▷</td></tr><tr><td>◁Gas|sm▷</td><td>?</td><td>◁Templeton Peck|at▷</td><td>◁Plasma|sm▷</td><td>◁Temperance|cv▷</td><td>◁Magenta|cm▷</td><td>◁New Mexico|fc▷</td><td>?</td><td>◁Mark|bg▷</td><td>◁Key|cm▷</td></tr><tr><td>◁Saturn|gg▷</td><td>◁Luke|bg▷</td><td>◁Raphael|nt▷</td><td>◁Dipsy|tt▷</td><td>◁Uranus|gg▷</td><td>◁Leonardo|nt▷</td><td>◁Egon Spengler|gb▷</td><td>◁Winston Zeddemore|gb▷</td><td>◁John|bg▷</td><td>◁Po|tt▷</td></tr>
+</table>
+}
+{-g <div class='answer' style='clear: none; margin: 2cm auto 1cm 5.5cm;'>ANTERIOR</div>}
+`
+	.replace(/◁([^\|]+)\|([a-z0-9]+)▷/g, (_, it, gr) => `<div class='item'>${it}</div><div class='group'>${groupnames[gr]}</div>`));
+</script>
