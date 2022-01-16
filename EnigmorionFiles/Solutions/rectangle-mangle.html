@@ -3,6 +3,32 @@
 		text-align: center;
 		background: hsl(220, 50%, 85%);
 	}
+	table.rmgrid td.hl {
+		background: hsl(220, 50%, 30%);
+		color: white;
+	}
+	table.rmgrid td.q {
+		border: 2px solid hsl(220, 50%, 30%);
+	}
+		table.rmgrid td.q > span {
+			display: block;
+			width: 0;
+			margin: 0 auto;
+		}
+		table.rmgrid td.q > span > span {
+			transform: translate(-50%, 0);
+			width: min-content;
+			display: block;
+			white-space: nowrap;
+		}
+		table.rmgrid td.q > span > span.w {
+			font-family: 'Consolas', monospace;
+			transform: translate(-50%, 0) scale(.85, 1);
+		}
+	table.rmgrid.re-d td.q .h {
+		font-weight: bold;
+		text-decoration: underline;
+	}
 	div.item {
 		font-size: 14pt;
 		font-weight: bold;
@@ -47,13 +73,36 @@ let groupnames = {
 };
 makeSolutionPage('rectangle-mangle', `
 
-<p>The key insight here is that [o these images represent things or items from groups of four, but only three items from each group are present. Furthermore, the three items present form the corners of a rectangle. This suggests to [s find the fourth item from each group and place it in the remaining corner to complete the rectangle. [ra]]]</p>
-{-a
-<table class='rmgrid'>
-    <tr><td>◁England|uk▷</td><td>◁Scotland|uk▷</td><td>◁John Lennon|be▷</td><td>◁Venus|ip▷</td><td>◁Earth|ip▷</td><td>◁Plum|mf▷</td><td>◁Intake|fs▷</td><td>◁Orchid|mf▷</td><td>◁Compression|fs▷</td><td>◁Paul McCartney|be▷</td></tr><tr><td>◁Jupiter|gg▷</td><td>◁George Costanza|sf▷</td><td>◁Kyle Broflovski|sp▷</td><td>◁Mars|ip▷</td><td>??</td><td>◁Death|ha▷</td><td>?</td><td>◁Kenny McCormick|sp▷</td><td>◁War|ha▷</td><td>◁South|cd▷</td></tr><tr><td>◁Inky|pm▷</td><td>◁Fire|ce▷</td><td>◁Gryffindor|hh▷</td><td>◁Water|ce▷</td><td>◁Hufflepuff|hh▷</td><td>?</td><td>?</td><td>◁Chrysan&shy;themum|mf▷</td><td>◁Exhaust|fs▷</td><td>◁Cyan|cm▷</td></tr><tr><td>◁Northern Ireland|uk▷</td><td>?</td><td>◁B. A. Baracus|at▷</td><td>◁Air|ce▷</td><td></td><td>◁Gravity|ff▷</td><td>◁West|cd▷</td><td>◁John “Hannibal” Smith|at▷</td><td>◁Electro&shy;magnetism|ff▷</td><td>◁East|cd▷</td></tr><tr><td>◁Adenine|bp▷</td><td>◁Harry Potter|tc▷</td><td>??</td><td>◁Mister Fantastic|f4▷</td><td>◁Invisible Woman|f4▷</td><td>?</td><td>◁Colorado|fc▷</td><td>◁Utah|fc▷</td><td>◁Famine|ha▷</td><td>◁George Harrison|be▷</td></tr><tr><td>◁Thymine|bp▷</td><td>◁Fortitude|cv▷</td><td>◁Eric Cartman|sp▷</td><td>◁Subtraction|ba▷</td><td>◁Prudence|cv▷</td><td>◁Guanine|bp▷</td><td>◁Peter Venkman|gb▷</td><td>?</td><td></td><td>◁Multiplication|ba▷</td></tr><tr><td>◁Solid|sm▷</td><td>◁Elaine Benes|sf▷</td><td>?</td><td>?</td><td>◁Slytherin|hh▷</td><td>◁Michel&shy;angelo|nt▷</td><td>◁Cosmo Cramer|sf▷</td><td>◁Winter|ms▷</td><td>◁Spring|ms▷</td><td>◁Tinky-Winky|tt▷</td></tr><tr><td>◁Blinky|pm▷</td><td>◁Fleur Delacour|tc▷</td><td>◁Cedric Diggory|tc▷</td><td>?</td><td>◁The Human Torch|f4▷</td><td>◁Weak interaction|ff▷</td><td>◁Clyde|pm▷</td><td>◁Autumn|ms▷</td><td>?</td><td>◁Division|ba▷</td></tr><tr><td>◁Gas|sm▷</td><td>?</td><td>◁Templeton Peck|at▷</td><td>◁Plasma|sm▷</td><td>◁Temperance|cv▷</td><td>◁Magenta|cm▷</td><td>◁New Mexico|fc▷</td><td>?</td><td>◁Mark|bg▷</td><td>◁Key|cm▷</td></tr><tr><td>◁Saturn|gg▷</td><td>◁Luke|bg▷</td><td>◁Raphael|nt▷</td><td>◁Dipsy|tt▷</td><td>◁Uranus|gg▷</td><td>◁Leonardo|nt▷</td><td>◁Egon Spengler|gb▷</td><td>◁Winston Zeddemore|gb▷</td><td>◁John|bg▷</td><td>◁Po|tt▷</td></tr>
+<p>The key insight here is that [o these images represent things or items from groups of four, but only three items from each group are present. Furthermore, the three items present form the corners of a rectangle. This suggests to [sa find the fourth item from each group and place it in the remaining corner to complete the rectangle.]]</p>
+{-a <p>The groups are [rb shown below, and the missing items [rc land exactly where the question marks are.]]</p>}
+{-b
+{-c <p>Finally, we notice that [o the answers that land on the same squares all have the same length, and [o the number of letters they have in common matches the number of question marks. [sd Let’s extract those letters.]]]</p>}
+<table class='rmgrid r-d'>
+<tr>◁England|uk▷◁Scotland|uk▷◁John Lennon|be▷◁Venus|ip▷◁Earth|ip▷◁Plum|mf▷◁Intake|fs▷◁Orchid|mf▷◁Compression|fs▷◁Paul McCartney|be▷</tr>
+<tr>◁Jupiter|gg▷◁George Costanza|sf▷◁Kyle Broflovski|sp▷◁Mars|ip▷<td class='q'>{c «M‹E›RC‹U›RY»«N‹E›PT‹U›NE»}<span>{/d ??}{d «EU»}</span></td>◁Death|ha▷<td class='q'>{c «JE‹R›RY»«NO‹R›TH»}<span>{/d ?}{d «R»}</span></td>◁Kenny McCormick|sp▷◁War|ha▷◁South|cd▷</tr>
+<tr>◁Inky|pm▷◁Fire|ce▷◁Gryffindor|hh▷◁Water|ce▷◁Hufflepuff|hh▷<td class='q'>{c «BAMB‹O›O»«YELL‹O›W»}<span>{/d ?}{d «O»}</span></td><td class='q'>{c «‹P›OWER»«‹P›INKY»}<span>{/d ?}{d «P»}</span></td>◁Chrysan&shy;themum|mf▷◁Exhaust|fs▷◁Cyan|cm▷</tr>
+<tr>◁Northern Ireland|uk▷<td class='q'>{c «W‹A›LES»«E‹A›RTH»}<span>{/d ?}{d «A»}</span></td>◁B. A. Baracus|at▷◁Air|ce▷<td></td>◁Gravity|ff▷◁West|cd▷◁Hannibal Smith|at▷◁Electro&shy;magnetism|ff▷◁East|cd▷</tr>
+<tr>◁Adenine|bp▷◁Harry Potter|tc▷<td class='q'>{c «R‹I›NG‹O›STARR»«V‹I›KT‹O›RKRUM»}<span>{/d ??}{d «IO»}</span></td>◁Mister Fantastic|f4▷◁Invisible Woman|f4▷<td class='q'>{c «‹C›ONQUEST»«‹C›YTOSINE»}<span>{/d ?}{d «C»}</span></td>◁Colorado|fc▷◁Utah|fc▷◁Famine|ha▷◁George Harrison|be▷</tr>
+<tr>◁Thymine|bp▷◁Fortitude|cv▷◁Eric Cartman|sp▷◁Subtraction|ba▷◁Prudence|cv▷◁Guanine|bp▷◁Peter Venkman|gb▷<td class='q'>{c «STANM‹A›RSH»«RAYST‹A›NTZ»}<span>{/d ?}{d «A»}</span></td><td></td>◁Multiplication|ba▷</tr>
+<tr>◁Solid|sm▷◁Elaine Benes|sf▷<td class='q'>{c «RAVENC‹L›AW»«DONATE‹L›LO»}<span>{/d ?}{d «L»}</span></td><td class='q'>{c «‹L›IQUID»«‹L›AALAA»}<span>{/d ?}{d «L»}</span></td>◁Slytherin|hh▷◁Michel&shy;angelo|nt▷◁Cosmo Cramer|sf▷◁Winter|ms▷◁Spring|ms▷◁Tinky-Winky|tt▷</tr>
+<tr>◁Blinky|pm▷◁Fleur Delacour|tc▷◁Cedric Diggory|tc▷<td class='q'>{c «THETH‹I›NG»«ADDIT‹I›ON»}<span>{/d ?}{d «I»}</span></td>◁The Human Torch|f4▷◁Weak interaction|ff▷◁Clyde|pm▷◁Autumn|ms▷<td class='q'>{c «‹S›TRONG»«‹S›UMMER»}<span>{/d ?}{d «S»}</span></td>◁Division|ba▷</tr>
+<tr>◁Gas|sm▷<td class='q'>{c «JUS‹T›ICE»«MAT‹T›HEW»}<span>{/d ?}{d «T»}</span></td>◁Templeton Peck|at▷◁Plasma|sm▷◁Temperance|cv▷◁Magenta|cm▷◁New Mexico|fc▷<td class='q'>{c «MURD‹O›CK»«ARIZ‹O›NA»}<span>{/d ?}{d «O»}</span></td>◁Mark|bg▷◁Key|cm▷</tr>
+<tr>◁Saturn|gg▷◁Luke|bg▷◁Raphael|nt▷◁Dipsy|tt▷◁Uranus|gg▷◁Leonardo|nt▷◁Egon Spengler|gb▷◁Winston Zeddemore|gb▷◁John|bg▷◁Po|tt▷</tr>
 </table>
 }
-{-g <div class='answer' style='clear: none; margin: 2cm auto 1cm 5.5cm;'>ANTERIOR</div>}
+{-d <p>The extracted letters spell out «EUROPA, IO, CALLISTO» — [d another set of three items from a group of four, in this case the Galilean moons. [sg We find the fourth item to obtain the answer.]]</p>}
+{-g <div class='answer'>GANYMEDE</div>}
 `
-	.replace(/◁([^\|]+)\|([a-z0-9]+)▷/g, (_, it, gr) => `<div class='item'>${it}</div><div class='group'>${groupnames[gr]}</div>`));
+	.replace(/◁([^\|]+)\|([a-z0-9]+)▷/g, (_, it, gr) => `<td class='g ${gr}' data-gr='${gr}'><div class='item'>${it}</div><div class='group'>${groupnames[gr]}</div></td>`),
+	{
+		b: function()
+		{
+			Array.from(document.querySelectorAll('table.rmgrid td.g')).forEach(td =>
+			{
+				let tds = Array.from(document.querySelectorAll(`table.rmgrid td.${td.dataset.gr}`));
+				td.onmouseover	= function() { tds.forEach(t => { t.classList.add('hl'); }); };
+				td.onmouseout	= function() { tds.forEach(t => { t.classList.remove('hl'); }); };
+			});
+		}
+	});
 </script>

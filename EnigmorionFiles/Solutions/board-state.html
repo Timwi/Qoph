@@ -1,0 +1,151 @@
+<style>
+	.hlb {
+		opacity: .2;
+	}
+	.re-h .h {
+		text-decoration: underline;
+		font-weight: bold;
+	}
+	table.bordered td, table.bordered th {
+		text-align: center;
+	}
+</style>
+<script src='../../files/solutions.js'></script>
+<h1>Board State</h1>
+<script>
+let ds = [
+	{ clue: 'Moronic without#first letter (6)',	ans: 'SININE',	r: 'b' },
+	{ clue: 'Eco-friendly (5)',	ans: 'GREEN',	r: 'a' },
+	{ clue: 'Remove coating#of (4)',	ans: 'PARE',	r: 'c' },
+	{ clue: 'Month 9 (abbr.) (3)',	ans: 'SEP',	r: 'a' },
+	{ clue: 'Kiev’s country#without 36,#periodically (5)',	ans: 'UAINE',	r: 'a' },
+	{ clue: 'Forbid (3)',	ans: 'BAN',	r: 'a' },
+	{ clue: '8, 88, 53, 16, 52,#periodically (7)',	ans: 'ORAISTE',	r: 'a' },
+	{ clue: 'Default golf score (3)',	ans: 'PAR',	r: 'a' },
+	{ clue: 'Has to (4)',	ans: 'MUST',	r: 'a' },
+	{ clue: 'Caucasian (5)',	ans: 'WHITE',	r: 'a' },
+	{ clue: 'Exists (2)',	ans: 'IS',	r: 'a' },
+	{ clue: 'Unchained (4)',	ans: 'FREE',	r: 'c' },
+	{ clue: 'Village (4)',	ans: 'TOWN',	r: 'a' },
+	{ clue: 'Type of moment (4)',	ans: 'BRUH',	r: 'c' },
+	{ clue: 'Skyscraping (4)',	ans: 'TALL',	r: 'a' },
+	{ clue: 'Hostel (3)',	ans: 'INN',	r: 'a' },
+	{ clue: 'Esteem but#uniform is golf (5)',	ans: 'VALGE',	r: 'b' },
+	{ clue: 'Dispirited (4)',	ans: 'BLUE',	r: 'b' },
+	{ clue: 'Beam of light (3)',	ans: 'RAY',	r: 'a' },
+	{ clue: 'Tumyy (5)',	ans: 'BELYY',	r: 'b' },
+	{ clue: 'Shy away from (4)',	ans: 'SHUN',	r: 'a' },
+	{ clue: 'Vends (5)',	ans: 'SELLS',	r: 'a' },
+	{ clue: 'How far towards the#batsman the ball#bounces (6)',	ans: 'LENGTH',	r: 'a' },
+	{ clue: 'Romeo not in (4)',	ans: 'ROUT',	r: 'b' },
+	{ clue: 'Fortune (4)',	ans: 'LUCK',	r: 'a' },
+	{ clue: 'Total (3)',	ans: 'SUM',	r: 'a' },
+	{ clue: 'Singer Chris De (5)',	ans: 'BURGH',	r: 'a' },
+	{ clue: 'Opposite over hypo-#tenuse of imaginary#vertical axis (5)',	ans: 'SINIY',	r: 'b' },
+	{ clue: 'Have allegiance#without chess#rating (4)',	ans: 'BYAL',	r: 'b' },
+	{ clue: 'Rolling stone#non-growth (4)',	ans: 'MOSS',	r: 'a' },
+	{ clue: 'Beefy female (3)',	ans: 'COW',	r: 'a' },
+	{ clue: 'Exists within#existed (5)',	ans: 'WAISS',	r: 'b' },
+	{ clue: 'Stitch (3)',	ans: 'SEW',	r: 'a' },
+	{ clue: 'Payment (3)',	ans: 'FEE',	r: 'a' },
+	{ clue: 'Dialectal second#person (2)',	ans: 'YA',	r: 'c' },
+	{ clue: '19, 88, 50, 39, 39,#periodically (7)',	ans: 'KRASNYY',	r: 'a' },
+	{ clue: 'French “the” within#Buddhist cult (5)',	ans: 'ZELEN',	r: 'b' },
+	{ clue: 'Endow with#audio (3)',	ans: 'DUB',	r: 'c' },
+	{ clue: '15, 77, 76,#periodically (5)',	ans: 'PIROS',	r: 'a' },
+	{ clue: 'Voting group minus#6, periodically (3)',	ans: 'BLO',	r: 'a' },
+	{ clue: 'Loong poole (4)',	ans: 'ROOD',	r: 'b' },
+	{ clue: 'Sulley’s baby#friend (3)',	ans: 'BOO',	r: 'a' },
+	{ clue: 'Obvious! (3)',	ans: 'DUH',	r: 'c' },
+	{ clue: 'Annoying person (4)',	ans: 'PEST',	r: 'c' },
+	{ clue: 'French “dear”;#blood vessel#without me (7)',	ans: 'CHERVEN',	r: 'b' },
+	{ clue: 'WV 26384 (4)',	ans: 'LINN',	r: 'a' },
+	{ clue: '@less plume (5)',	ans: 'FEHER',	r: 'b' },
+	{ clue: '___schild radius (7)',	ans: 'SCHWARZ',	r: 'a' },
+	{ clue: 'Mental acuity (3)',	ans: 'WIT',	r: 'a' },
+	{ clue: 'Hamilton rival (4)',	ans: 'BURR',	r: 'a' },
+	{ clue: '___-Manuel#Miranda (3)',	ans: 'LIN',	r: 'a' },
+	{ clue: 'Think conclusion (2)',	ans: 'AM',	r: 'c' },
+	{ clue: 'Commotion (4)',	ans: 'STIR',	r: 'c' },
+	{ clue: 'Beaver#contraption (3)',	ans: 'DAM',	r: 'a' },
+	{ clue: 'Last letter;#not new (4)',	ans: 'ZOLD',	r: 'b' },
+	{ clue: 'Guvf, ohg jvgubhg#gur ahzore (3)',	ans: 'ROT',	r: 'b' },
+	{ clue: '5, 57, 92, 74,#periodically (5)',	ans: 'BLAUW',	r: 'a' },
+	{ clue: 'Cheese-meat#cordon (4)',	ans: 'BLEU',	r: 'a' },
+	{ clue: 'Alps apex Mont (5)',	ans: 'BLANC',	r: 'a' },
+	{ clue: 'Canadian football#single (5)',	ans: 'ROUGE',	r: 'a' },
+	{ clue: 'Last letter;#blemish (5)',	ans: 'ZWART',	r: 'b' },
+	{ clue: 'First letter within#6th month (5)',	ans: 'JAUNE',	r: 'b' },
+	{ clue: 'Decay (3)',	ans: 'ROT',	r: 'a' },
+	{ clue: 'Medal metal (4)',	ans: 'GOLD',	r: 'a' }
+];
+let cs = [
+	{ h: 0,	name: 'Estonia',	x: 0,	y: 0,	v: true,	s: 1	},
+	{ h: 30,	name: 'Sierra Leone',	x: 1,	y: 0,	v: true,	s: .64	},
+	{ h: 60,	name: 'Ireland',	x: 4,	y: 0,	v: false,	s: 1	},
+	{ h: 80,	name: 'Russia',	x: 3,	y: 2,	v: true,	s: 1	},
+	{ h: 120,	name: 'Luxembourg',	x: 7,	y: 2,	v: true,	s: .64	},
+	{ h: 180,	name: 'Bulgaria',	x: 4,	y: 3,	v: true,	s: 1	},
+	{ h: 200,	name: 'Hungary',	x: 6,	y: 4,	v: true,	s: .95	},
+	{ h: 230,	name: 'Netherlands',	x: 0,	y: 5,	v: true,	s: .64	},
+	{ h: 260,	name: 'Germany',	x: 7,	y: 5,	v: true,	s: .85	},
+	{ h: 290,	name: 'France',	x: 1,	y: 7,	v: false,	s: 1	},
+	{ h: 330,	name: 'Belgium',	x: 4,	y: 7,	v: false,	s: 1	},
+];
+let ps = [
+	{ h: 0,	name: 'Tallinn',	x: 6,	y: 1,	w: 2,	v: false,	s: .8	},
+	{ h: 30,	name: 'Freetown',	x: 3,	y: 1,	w: 2,	v: false,	s: .5	},
+	{ h: 60,	name: 'Dublin',	x: 5,	y: 4,	w: 2,	v: true,	s: .8	},
+	{ h: 80,	name: 'Moscow',	x: 5,	y: 3,	w: 2,	v: false,	s: .6	},
+	{ h: 120,	name: 'Luxembourg',	x: 0,	y: 3,	w: 3,	v: false,	s: .64	},
+	{ h: 180,	name: 'Sofia',	x: 0,	y: 4,	w: 3,	v: false,	s: 1	},
+	{ h: 200,	name: 'Budapest',	x: 1,	y: 5,	w: 3,	v: false,	s: .8	},
+	{ h: 230,	name: 'Amsterdam',	x: 3,	y: 6,	w: 3,	v: false,	s: .64	},
+	{ h: 260,	name: 'Berlin',	x: 1,	y: 6,	w: 2,	v: false,	s: .9	},
+	{ h: 290,	name: 'Paris',	x: 2,	y: 0,	w: 2,	v: true,	s: 1	},
+	{ h: 330,	name: 'Brussels',	x: 5,	y: 1,	w: 2,	v: true,	s: .64	},
+];
+makeSolutionPage('board-state', `
+<p>Let’s start by solving some of the reasonably guessable or googlable clues. [ra]</p>
+{-a <p>Many of these answers can be [s researched (e.g. Wiktionary, Google Translate) to discover they are [d colors in foreign languages, e.g. «SCHWARZ» = <cite>black</cite> in German, «ROUGE» = <cite>red</cite> in French, etc. One might especially notice that the French and Irish ones are exactly [o the colors of the French and Irish national flags. We should [s see if we can complete more national flags in the same way. [rb]]]]]</p>}
+{-b <p>Some of the remaining clues may now sound relevant... if you [s read them out loud. They are homophones of [dc the countries’ capital cities.]]</p>}
+<svg id='board-svg' viewBox='-.1 -.1 8.2 8.2' text-anchor='middle'></svg>
+{-c
+<table class='bordered' style='margin: .1cm auto'>
+	<tr><th>#	</th><th class='ih r-d'>Symbol	</th><th class='ih r-e r-h'>Country	</th><th class='ih r-g'>Sep. len.	</th><th class='ih r-h'>Letter	</th></tr>
+	<tr><td>14	</td><td class='ih r-d'>«Si»	</td><td class='ih r-e r-h'>«‹S›IERRA LEONE»	</td><td class='ih r-g'>1	</td><td class='ih r-h'>«S»	</td></tr>
+	<tr><td>1	</td><td class='ih r-d'>«H»	</td><td class='ih r-e r-h'>«H‹U›NGARY»	</td><td class='ih r-g'>2	</td><td class='ih r-h'>«U»	</td></tr>
+	<tr><td>5	</td><td class='ih r-d'>«B»	</td><td class='ih r-e r-h'>«‹B›ULGARIA»	</td><td class='ih r-g'>1	</td><td class='ih r-h'>«B»	</td></tr>
+	<tr><td>32	</td><td class='ih r-d'>«Ge»	</td><td class='ih r-e r-h'>«GER‹M›ANY»	</td><td class='ih r-g'>4	</td><td class='ih r-h'>«M»	</td></tr>
+	<tr><td>77	</td><td class='ih r-d'>«Ir»	</td><td class='ih r-e r-h'>«IR‹E›LAND»	</td><td class='ih r-g'>3	</td><td class='ih r-h'>«E»	</td></tr>
+	<tr><td>44	</td><td class='ih r-d'>«Ru»	</td><td class='ih r-e r-h'>«‹R›USSIA»	</td><td class='ih r-g'>1	</td><td class='ih r-h'>«R»	</td></tr>
+	<tr><td>4	</td><td class='ih r-d'>«Be»	</td><td class='ih r-e r-h'>«BEL‹G›IUM»	</td><td class='ih r-g'>4	</td><td class='ih r-h'>«G»	</td></tr>
+	<tr><td>71	</td><td class='ih r-d'>«Lu»	</td><td class='ih r-e r-h'>«LUX‹E›MBOURG»	</td><td class='ih r-g'>4	</td><td class='ih r-h'>«E»	</td></tr>
+	<tr><td>99	</td><td class='ih r-d'>«Es»	</td><td class='ih r-e r-h'>«ESTO‹N›IA»	</td><td class='ih r-g'>5	</td><td class='ih r-h'>«N»	</td></tr>
+	<tr><td>87	</td><td class='ih r-d'>«Fr»	</td><td class='ih r-e r-h'>«FRAN‹C›E»	</td><td class='ih r-g'>5	</td><td class='ih r-h'>«C»	</td></tr>
+	<tr><td>10	</td><td class='ih r-d'>«Ne»	</td><td class='ih r-e r-h'>«N‹E›THERLANDS»	</td><td class='ih r-g'>2	</td><td class='ih r-h'>«E»	</td></tr>
+</table>
+<p>It stands to reason that the list of numbers at the top [dd is a list of chemical elements from the periodic table because many clues use chemical element symbols as well. Turns out [oe their chemical symbols can be uniquely associated with the country names, which suggests that [df we need to use the country names, and we need to use them in this order.]]]</p>
+}
+{-f <p>The unused squares spell out a cluephrase, «SEPARATION LENGTH». Indeed every capital city is [og perpendicular to the country flag with a specific number of squares of separation between them. Let’s [sh use those to index into the country names.]]</p>}
+{-h <div class='answer'>SUBMERGENCE</div>}
+`, {
+	'reset': function() {
+		let svg = document.getElementById('board-svg');
+		let g = '', h = '', k = '';
+		for (let i = 0; i < 64; i++) {
+			g += `<rect x='${i%8}' y='${(i/8)|0}' width='1' height='1' />`;
+			let s = ds[i].clue.split('#');
+			for (let j = 0; j < s.length; j++)
+				h += `<text x='${i%8+.5}' y='${((i/8)|0)+j*.12+.24}'>${s[j]}</text>`;
+			k += `<text class='ihs r-${ds[i].r}' x='${i%8+.5}' y='${((i/8)|0)+.75}'>${ds[i].ans}</text>`;
+		}
+		svg.innerHTML = `<g stroke='black' stroke-width='.01' fill='#fff'>${g}</g><g font-size='.1'>${h}</g><g font-size='.17' font-family='Montserrat'>${k}</g><g font-size='.7' font-family='Montserrat'>${cs.map(inf => `<g class='hlb ih r-b h-${inf.h}' data-h='${inf.h}'><rect x='${inf.x+.05}' y='${inf.y+.05}' width='${inf.v?.9:2.9}' height='${inf.v?2.9:.9}' fill='hsl(${inf.h}, 100%, 30%)' /><text x='0' y='0' transform='${inf.v ? `translate(${inf.x+.75}, ${inf.y+1.5}) rotate(-90)` : `translate(${inf.x+1.5}, ${inf.y+.75})`} scale(${inf.s}, 1)' fill='white'>${inf.name}</text></g>`).join('')}${ps.map(inf => `<g class='hlb ih r-c h-${inf.h}' data-h='${inf.h}'><rect x='${inf.x+.05}' y='${inf.y+.05}' width='${inf.v?.9:inf.w-.1}' height='${inf.v?inf.w-.1:.9}' fill='hsl(${inf.h}, 100%, 30%)' /><text x='0' y='0' transform='${inf.v ? `translate(${inf.x+.75}, ${inf.y+inf.w/2}) rotate(-90)` : `translate(${inf.x+inf.w/2}, ${inf.y+.75})`} scale(${inf.s}, 1)' fill='white'>${inf.name}</text></g>`).join('')}</g>`;
+		Array.from(svg.querySelectorAll('g.hlb')).forEach(rect => {
+			let both = Array.from(svg.querySelectorAll(`g.h-${rect.dataset.h}`));
+			rect.onmouseover	= function() { console.log(both.length); both.forEach(r => { r.style.opacity = 1; }); };
+			rect.onmouseout	= function() { console.log(both.length); both.forEach(r => { r.style.opacity = .2; }); };
+		});
+	}
+});
+</script>

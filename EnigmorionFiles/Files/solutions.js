@@ -196,8 +196,6 @@ function makeSolutionPage(pageId, hpsml, triggers)
 	function initialSetup()
 	{
 		alloc = {};
-		if (triggers && triggers.reset)
-			triggers.reset();
 
 		idAlloc = 1;
 		let result = makeSolutionPageImpl(hpsml);
@@ -249,6 +247,9 @@ function makeSolutionPage(pageId, hpsml, triggers)
 			}
 			return false;
 		};
+
+		if (triggers && triggers.reset)
+			triggers.reset();
 
 		let revealedRaw, revealedTemp;
 		if (localStorage && (revealedRaw = localStorage.getItem(`sol-${pageId}`)) && (revealedTemp = JSON.parse(revealedRaw)))
