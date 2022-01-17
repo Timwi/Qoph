@@ -1,0 +1,194 @@
+<style>
+</style>
+<script src='../../files/solutions.js'></script>
+<h1>Objectionable Ranking</h1>
+<script>
+makeSolutionPage('objectionable-ranking', `
+<p>The shapes outside the grid [oa are country borders. It may be helpful to identify some or all of them, but if you know country names pretty well, you don’t have to — it’s enough to get the hint that we’re dealing with countries.]</p>
+{-a <p>The grid contains [o the names of those countries. The easiest to notice is probably [rb «NETHERLANDS», because it’s written backwards along the bottom of the grid. All the other countries [rc are written in some winding fashion.]]]</p>}
+{-c <p>The unused letters [o spell out «TWO STAR BATTLE». If that doesn’t mean anything to you, [s you can google for it. This reveals that [dd “Star Battle” is a logic puzzle genre. We need to place 20 stars in the grid so that each row, each column, and each region has <em>two</em> stars and they don’t touch (not even diagonally).]]]</p>}
+{-d <div id='borders-deductions'></div>}
+<svg viewBox="-10 -.3 30 13.2" class="grid" font-family='Work Sans' font-size=".6" text-anchor="middle">
+	<g class='grid'>
+		<rect class="r-c c3" x="0" y="0" width="1" height="1" /><rect class="r-c c3" x="1" y="0" width="1" height="1" /><rect class="r-c c3" x="2" y="0" width="1" height="1" /><rect class="r-c c3" x="3" y="0" width="1" height="1" /><rect class="r-c c3" x="4" y="0" width="1" height="1" /><rect class="r-c c3" x="5" y="0" width="1" height="1" /><rect class="r-c c3" x="6" y="0" width="1" height="1" /><rect class="r-c c8" x="7" y="0" width="1" height="1" /><rect class="r-c c8" x="8" y="0" width="1" height="1" /><rect class="r-c c8" x="9" y="0" width="1" height="1" /><rect class="r-c c3" x="0" y="1" width="1" height="1" /><rect class="r-c c3" x="1" y="1" width="1" height="1" /><rect class="r-c c3" x="2" y="1" width="1" height="1" /><rect class="r-c" x="3" y="1" width="1" height="1" /><rect class="r-c c5" x="4" y="1" width="1" height="1" /><rect class="r-c c5" x="5" y="1" width="1" height="1" /><rect class="r-c c3" x="6" y="1" width="1" height="1" /><rect class="r-c c3" x="7" y="1" width="1" height="1" /><rect class="r-c c8" x="8" y="1" width="1" height="1" /><rect class="r-c c8" x="9" y="1" width="1" height="1" /><rect class="r-c c2" x="0" y="2" width="1" height="1" /><rect class="r-c" x="1" y="2" width="1" height="1" /><rect class="r-c" x="2" y="2" width="1" height="1" /><rect class="r-c" x="3" y="2" width="1" height="1" /><rect class="r-c c5" x="4" y="2" width="1" height="1" /><rect class="r-c c5" x="5" y="2" width="1" height="1" /><rect class="r-c c5" x="6" y="2" width="1" height="1" /><rect class="r-c c3" x="7" y="2" width="1" height="1" /><rect class="r-c c8" x="8" y="2" width="1" height="1" /><rect class="r-c c8" x="9" y="2" width="1" height="1" /><rect class="r-c c2" x="0" y="3" width="1" height="1" /><rect class="r-c" x="1" y="3" width="1" height="1" /><rect class="r-c" x="2" y="3" width="1" height="1" /><rect class="r-c c4" x="3" y="3" width="1" height="1" /><rect class="r-c c3" x="4" y="3" width="1" height="1" /><rect class="r-c c3" x="5" y="3" width="1" height="1" /><rect class="r-c c5" x="6" y="3" width="1" height="1" /><rect class="r-c c3" x="7" y="3" width="1" height="1" /><rect class="r-c c3" x="8" y="3" width="1" height="1" /><rect class="r-c" x="9" y="3" width="1" height="1" /><rect class="r-c c2" x="0" y="4" width="1" height="1" /><rect class="r-c c4" x="1" y="4" width="1" height="1" /><rect class="r-c c4" x="2" y="4" width="1" height="1" /><rect class="r-c c4" x="3" y="4" width="1" height="1" /><rect class="r-c c3" x="4" y="4" width="1" height="1" /><rect class="r-c c3" x="5" y="4" width="1" height="1" /><rect class="r-c c3" x="6" y="4" width="1" height="1" /><rect class="r-c c3" x="7" y="4" width="1" height="1" /><rect class="r-c c3" x="8" y="4" width="1" height="1" /><rect class="r-c" x="9" y="4" width="1" height="1" /><rect class="r-c c2" x="0" y="5" width="1" height="1" /><rect class="r-c c2" x="1" y="5" width="1" height="1" /><rect class="r-c c2" x="2" y="5" width="1" height="1" /><rect class="r-c c2" x="3" y="5" width="1" height="1" /><rect class="r-c c2" x="4" y="5" width="1" height="1" /><rect class="r-c c2" x="5" y="5" width="1" height="1" /><rect class="r-c c2" x="6" y="5" width="1" height="1" /><rect class="r-c c2" x="7" y="5" width="1" height="1" /><rect class="r-c c2" x="8" y="5" width="1" height="1" /><rect class="r-c" x="9" y="5" width="1" height="1" /><rect class="r-c c2" x="0" y="6" width="1" height="1" /><rect class="r-c c2" x="1" y="6" width="1" height="1" /><rect class="r-c c7" x="2" y="6" width="1" height="1" /><rect class="r-c c7" x="3" y="6" width="1" height="1" /><rect class="r-c c7" x="4" y="6" width="1" height="1" /><rect class="r-c c7" x="5" y="6" width="1" height="1" /><rect class="r-c c7" x="6" y="6" width="1" height="1" /><rect class="r-c c7" x="7" y="6" width="1" height="1" /><rect class="r-c c6" x="8" y="6" width="1" height="1" /><rect class="r-c" x="9" y="6" width="1" height="1" /><rect class="r-b c1" x="0" y="7" width="1" height="1" /><rect class="r-c c7" x="1" y="7" width="1" height="1" /><rect class="r-c c7" x="2" y="7" width="1" height="1" /><rect class="r-c c6" x="3" y="7" width="1" height="1" /><rect class="r-c c6" x="4" y="7" width="1" height="1" /><rect class="r-c c7" x="5" y="7" width="1" height="1" /><rect class="r-c c7" x="6" y="7" width="1" height="1" /><rect class="r-c c7" x="7" y="7" width="1" height="1" /><rect class="r-c c6" x="8" y="7" width="1" height="1" /><rect class="r-c" x="9" y="7" width="1" height="1" /><rect class="r-b c1" x="0" y="8" width="1" height="1" /><rect class="r-c c7" x="1" y="8" width="1" height="1" /><rect class="r-c c7" x="2" y="8" width="1" height="1" /><rect class="r-c c6" x="3" y="8" width="1" height="1" /><rect class="r-c c6" x="4" y="8" width="1" height="1" /><rect class="r-c c6" x="5" y="8" width="1" height="1" /><rect class="r-c c6" x="6" y="8" width="1" height="1" /><rect class="r-c c6" x="7" y="8" width="1" height="1" /><rect class="r-c c6" x="8" y="8" width="1" height="1" /><rect class="r-c" x="9" y="8" width="1" height="1" /><rect class="r-b c1" x="0" y="9" width="1" height="1" /><rect class="r-b c1" x="1" y="9" width="1" height="1" /><rect class="r-b c1" x="2" y="9" width="1" height="1" /><rect class="r-b c1" x="3" y="9" width="1" height="1" /><rect class="r-b c1" x="4" y="9" width="1" height="1" /><rect class="r-b c1" x="5" y="9" width="1" height="1" /><rect class="r-b c1" x="6" y="9" width="1" height="1" /><rect class="r-b c1" x="7" y="9" width="1" height="1" /><rect class="r-b c1" x="8" y="9" width="1" height="1" /><rect class="r-c" x="9" y="9" width="1" height="1" />
+	</g>
+
+	<g stroke="black" fill="none">
+		<path d="M0 0h10v10H0z" stroke-width=".05" />
+		<path d='M7 0v1h1v2h2M0 2h3V1h3v1h1v2H6V3H3v1H1M1 2v3h8M4 1v4M9 3v7M0 7h2V6H9M1 7v2H9M3 9V7h2v1h3V6' stroke-width='.05' class='ihs r-c' />
+		<path d="M0 1h10M0 2h10M0 3h10M0 4h10M0 5h10M0 6h10M0 7h10M0 8h10M0 9h10M1 0v10M2 0v10M3 0v10M4 0v10M5 0v10M6 0v10M7 0v10M8 0v10M9 0v10" stroke-width=".02" />
+	</g>
+
+	<g id='deductions'></g>
+	<g transform='translate(1, 2)'>
+		<g class='star' data-star='1' id='star-1'>
+			<path d='M0.5 0.85 0.91 1.07 0.83 0.61 1.17 0.28 0.71 0.22 0.5 -0.2 0.29 0.22 -0.17 0.28 0.17 0.61 0.09 1.07z' fill='#f5df16' stroke='black' stroke-width='.05' /><g stroke='none'><path d='M0.5 0.78 0.5 0.85 0.91 1.07 0.83 0.95z' fill='#dfca0a' /><path d='M0.83 0.95 0.91 1.07 0.83 0.61 0.77 0.59z' fill='#cfbc09' /><path d='M0.77 0.59 0.83 0.61 1.17 0.28 1.03 0.33z' fill='#afa008' /><path d='M1.03 0.33 1.17 0.28 0.71 0.22 0.66 0.27z' fill='#faee81' /><path d='M0.66 0.27 0.71 0.22 0.5 -0.2 0.5 -0.06z' fill='#dfca0a' /><path d='M0.5 -0.06 0.5 -0.2 0.29 0.22 0.34 0.27z' fill='#fdf9d1' /><path d='M0.34 0.27 0.29 0.22 -0.17 0.28 -0.03 0.33z' fill='#fcf3a7' /><path d='M-0.03 0.33 -0.17 0.28 0.17 0.61 0.23 0.59z' fill='#dcc70a' /><path d='M0.23 0.59 0.17 0.61 0.09 1.07 0.17 0.95z' fill='#faec7b' /><path d='M0.17 0.95 0.09 1.07 0.5 0.85 0.5 0.78z' fill='#a49407' /></g>
+		</g>
+	</g>
+	<use class='star' data-star='2' href='#star-1' transform='translate(5, 1)' />
+	<use class='star' data-star='3' href='#star-1' transform='translate(1, 4)' />
+	<use class='star' data-star='4' href='#star-1' transform='translate(6, 3)' />
+	<use class='star' data-star='5' href='#star-1' transform='translate(8, 2)' />
+	<use class='star' data-star='6' href='#star-1' transform='translate(3, 1)' />
+	<use class='star' data-star='7' href='#star-1' transform='translate(3, 3)' />
+	<use class='star' data-star='8' href='#star-1' transform='translate(0, 0)' />
+	<use class='star' data-star='9' href='#star-1' transform='translate(8, 4)' />
+	<use class='star' data-star='10' href='#star-1' transform='translate(7, 0)' />
+	<use class='star' data-star='11' href='#star-1' transform='translate(4, 5)' />
+	<use class='star' data-star='12' href='#star-1' transform='translate(6, 5)' />
+	<use class='star' data-star='13' href='#star-1' transform='translate(2, 6)' />
+	<use class='star' data-star='14' href='#star-1' transform='translate(9, 6)' />
+	<use class='star' data-star='15' href='#star-1' transform='translate(7, 8)' />
+	<use class='star' data-star='16' href='#star-1' transform='translate(0, 7)' />
+	<use class='star' data-star='17' href='#star-1' transform='translate(4, 7)' />
+	<use class='star' data-star='18' href='#star-1' transform='translate(2, 8)' />
+	<use class='star' data-star='19' href='#star-1' transform='translate(5, 9)' />
+	<use class='star' data-star='20' href='#star-1' transform='translate(9, 9)' />
+
+	<text x="0.5" y="0.7">I</text><text x="1.5" y="0.7">C</text><text x="2.5" y="0.7">P</text><text x="3.5" y="0.7">E</text><text x="4.5" y="0.7">R</text><text x="5.5" y="0.7">N</text><text x="6.5" y="0.7">A</text><text x="7.5" y="0.7">D</text><text x="8.5" y="0.7">N</text><text x="9.5" y="0.7">A</text><text x="0.5" y="1.7">L</text><text x="1.5" y="1.7">B</text><text x="2.5" y="1.7">U</text><text x="3.5" y="1.7">E</text><text x="4.5" y="1.7">O</text><text x="5.5" y="1.7">N</text><text x="6.5" y="1.7">C</text><text x="7.5" y="1.7">I</text><text x="8.5" y="1.7">N</text><text x="9.5" y="1.7">L</text><text x="0.5" y="2.7">S</text><text x="1.5" y="2.7">T</text><text x="2.5" y="2.7">T</text><text x="3.5" y="2.7">L</text><text x="4.5" y="2.7">R</text><text x="5.5" y="2.7">W</text><text x="6.5" y="2.7">A</text><text x="7.5" y="2.7">R</text><text x="8.5" y="2.7">I</text><text x="9.5" y="2.7">F</text><text x="0.5" y="3.7">O</text><text x="1.5" y="3.7">A</text><text x="2.5" y="3.7">B</text><text x="3.5" y="3.7">F</text><text x="4.5" y="3.7">E</text><text x="5.5" y="3.7">C</text><text x="6.5" y="3.7">Y</text><text x="7.5" y="3.7">F</text><text x="8.5" y="3.7">A</text><text x="9.5" y="3.7">R</text><text x="0.5" y="4.7">L</text><text x="1.5" y="4.7">I</text><text x="2.5" y="4.7">J</text><text x="3.5" y="4.7">I</text><text x="4.5" y="4.7">N</text><text x="5.5" y="4.7">T</text><text x="6.5" y="4.7">R</text><text x="7.5" y="4.7">A</text><text x="8.5" y="4.7">L</text><text x="9.5" y="4.7">A</text><text x="0.5" y="5.7">O</text><text x="1.5" y="5.7">N</text><text x="2.5" y="5.7">I</text><text x="3.5" y="5.7">S</text><text x="4.5" y="5.7">L</text><text x="5.5" y="5.7">A</text><text x="6.5" y="5.7">N</text><text x="7.5" y="5.7">D</text><text x="8.5" y="5.7">S</text><text x="9.5" y="5.7">T</text><text x="0.5" y="6.7">M</text><text x="1.5" y="6.7">O</text><text x="2.5" y="6.7">E</text><text x="3.5" y="6.7">D</text><text x="4.5" y="6.7">K</text><text x="5.5" y="6.7">I</text><text x="6.5" y="6.7">N</text><text x="7.5" y="6.7">G</text><text x="8.5" y="6.7">B</text><text x="9.5" y="6.7">S</text><text x="0.5" y="7.7">S</text><text x="1.5" y="7.7">U</text><text x="2.5" y="7.7">T</text><text x="3.5" y="7.7">S</text><text x="4.5" y="7.7">E</text><text x="5.5" y="7.7">M</text><text x="6.5" y="7.7">O</text><text x="7.5" y="7.7">D</text><text x="8.5" y="7.7">A</text><text x="9.5" y="7.7">O</text><text x="0.5" y="8.7">D</text><text x="1.5" y="8.7">N</text><text x="2.5" y="8.7">I</text><text x="3.5" y="8.7">H</text><text x="4.5" y="8.7">D</text><text x="5.5" y="8.7">A</text><text x="6.5" y="8.7">L</text><text x="7.5" y="8.7">G</text><text x="8.5" y="8.7">N</text><text x="9.5" y="8.7">W</text><text x="0.5" y="9.7">N</text><text x="1.5" y="9.7">A</text><text x="2.5" y="9.7">L</text><text x="3.5" y="9.7">R</text><text x="4.5" y="9.7">E</text><text x="5.5" y="9.7">H</text><text x="6.5" y="9.7">T</text><text x="7.5" y="9.7">E</text><text x="8.5" y="9.7">N</text><text x="9.5" y="9.7">T</text>
+	<g stroke='black' stroke-width='.03' class='ihs r-c' data-rem_c='d'>
+		<rect x='10.5' y='0.0' width='9.2' height='1' fill='hsl( 90, 90%, 80%)' />
+		<rect x='10.5' y='1.2' width='9.2' height='1' fill='hsl( 45, 90%, 80%)' />
+		<rect x='10.5' y='2.4' width='9.2' height='1' fill='hsl(225, 90%, 80%)' />
+		<rect x='10.5' y='3.6' width='9.2' height='1' fill='hsl(270, 90%, 80%)' />
+		<rect x='10.5' y='4.8' width='9.2' height='1' fill='hsl(  0, 90%, 80%)' />
+		<rect x='10.5' y='6.0' width='9.2' height='1' fill='hsl(135, 90%, 80%)' />
+		<rect x='10.5' y='7.2' width='9.2' height='1' fill='hsl(315, 90%, 80%)' />
+		<rect x='10.5' y='8.4' width='9.2' height='1' fill='hsl(180, 90%, 80%)' />
+	</g>
+	<g text-anchor='start' class='ihs r-c' data-rem_c='d'>
+		<text x='10.8' y='0.7'>BANGLADESH</text>
+		<text x='10.8' y='1.9'>CENTRAL AFRICAN REPUBLIC</text>
+		<text x='10.8' y='3.1'>FIJI</text>
+		<text x='10.8' y='4.3'>FINLAND</text>
+		<text x='10.8' y='5.5'>NETHERLANDS</text>
+		<text x='10.8' y='6.7'>NORWAY</text>
+		<text x='10.8' y='7.9'>SOLOMON ISLANDS</text>
+		<text x='10.8' y='9.1'>UNITED KINGDOM</text>
+	</g>
+	<g id='ded-arrows'></g>
+</svg>
+{-d Once you have the solution to the Star Battle puzzle, [s read the letters on the stars in reading order. We get [r «IDENTIFY ILLNESS EIGHT». The “eight” means [c the answer is eight letters in length. [re]]]]}
+{-e <div class='answer'>DIAGNOSE</div>}
+`, {
+	'd': createDeductionTracker('borders-deductions',
+		[
+			{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+			{ label: 'Each of these rectangles must contain exactly one star.<br>(Otherwise you couldn’t fit two stars into these regions without them touching.)',
+				r: [ /* Fiji */ '1,4,2,1,yellow', '3,3,1,2,yellow', /* Norway */ '4,1,2,2,yellow', '6,2,1,2,yellow', /* Battle */ '1,2,2,2,yellow', '3,1,1,2,yellow' ] },
+			{ label: 'When a domino (such as this one) must contain a star, the cells on either side of the domino cannot contain a star, as they would touch the star in the domino.',
+				r: [ '1,4,2,1,red', '3,3,1,2,yellow', '4,1,2,2,yellow', '6,2,1,2,yellow', '1,2,2,2,yellow', '3,1,1,2,yellow' ],
+				a: [ '1,4,270' ],
+				c: [ 31, 32, 51, 52 ] },
+			{ label: 'We can apply the same deduction to all the other dominos.',
+				r: [ '1,4,2,1,yellow', '3,3,1,2,red', '4,1,2,2,yellow', '6,2,1,2,red', '1,2,2,2,yellow', '3,1,1,2,red' ],
+				e: [ 31, 32, 51, 52 ] },
+			{ label: 'In each marked rectangle that has only one place for a star, the star can now be placed.',
+				r: [ '1,4,2,1,red', '3,3,1,2,yellow', '4,1,2,2,red', '6,2,1,2,yellow', '1,2,2,2,red', '3,1,1,2,yellow' ],
+				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12 ] },
+			{ label: 'Stars cannot touch, so we can also rule out every square that touches a star we already found.',
+				s: 3,
+				r: [ '3,3,1,2,yellow', '6,2,1,2,yellow', '3,1,1,2,yellow' ],
+				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12 ] },
+			{ label: 'That resolves one more domino.',
+				s: 3,
+				r: [ '3,3,1,2,yellow', '6,2,1,2,red', '3,1,1,2,yellow' ],
+				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50 ] },
+			{ label: 'The TWO STAR region must contain two stars, and it’s entirely in column 10.<br>Therefore, the rest of that column contains no further stars.',
+				s: 4,
+				r: [ '3,3,1,2,yellow', '3,1,1,2,yellow' ],
+				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47 ],
+				a: [ '9,9,180' ] },
+			{ label: 'This implies two more dominoes in the FINLAND region, and because the top domino rules out the cells below it, we can place a star in the bottom one.',
+				s: 4,
+				r: [ '3,3,1,2,yellow', '3,1,1,2,yellow', '8,1,1,2,red', '7,0,2,1,red' ],
+				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 9, 19, 29 ] },
+			{ label: 'Row 2 and Row 4 each have only one place left to put their second star.',
+				s: 5,
+				r: [ '3,3,1,2,yellow', '3,1,1,2,yellow', '7,0,2,1,yellow' ],
+				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39 ],
+				a: [ '0,1,270', '0,3,270' ] },
+			{ label: 'Columns 2 and 4 have their two stars, so we can rule out the rest of those columns.',
+				s: 7,
+				r: [ '7,0,2,1,yellow' ],
+				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43 ],
+				a: [ '3,9,180', '1,9,180' ] },
+			{ label: 'The CENTRAL AFRICAN REPUBLIC region has only two places left for its two stars.',
+				s: 7,
+				r: [ '7,0,2,1,yellow' ],
+				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91 ],
+				x: 'M.1 .1 H6.9 v1 h1 v2 h1 V4.9 H4.1 V3.1 H5.9 v1 H7.1 V1.9 h-1 v-1 H2.9 v1 H.1z' },
+			{ label: 'Column 9 has its two stars, so we can rule out the rest of that column.',
+				s: 9,
+				r: [ '7,0,2,1,yellow' ],
+				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57 ],
+				a: [ '8,9,180' ] },
+			{ label: 'There is only one way to fit two stars into row 6 now without them touching.',
+				s: 10,
+				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
+				a: [ '0,5,270' ] },
+			{ label: 'Column 7 has its two stars, so we can rule out the rest of that column.',
+				s: 12,
+				e: [ 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
+				a: [ '6,9,180' ] },
+			{ label: 'The SOLOMON ISLANDS region has its two stars, so we can rule out the rest of that region.',
+				e: [ 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
+				x: 'M.1 2.1 H.9 v3 h8 V5.9 H1.9 v1 H.1z',
+				s: 12 },
+			{ label: 'Row 7 has only two places left for its two stars.',
+				e: [ 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
+				a: [ '0,6,270' ],
+				s: 12 },
+			{ label: 'The BANGLADESH region doesn’t have any stars yet. We can only put one star in this red L-shape, so the other star must go in the remaining available space.',
+				x: 'M4.1 7.1 H4.9 v1 h1 V8.9 H4.1z',
+				c: [ 87 ],
+				e: [ 72, 79, 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
+				s: 14 },
+			{ label: 'We can’t place a star here because it would touch the star in the L-shape.',
+				x: 'M4.1 7.1 H4.9 v1 h1 V8.9 H4.1z,yellow',
+				c: [ 75 ],
+				a: [ '5,7,75,red' ],
+				e: [ 77, 97, 72, 79, 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
+				s: 15 },
+			{ label: 'That leaves only two places for the two stars in Row 8.',
+				a: [ '0,7,270' ],
+				e: [ 75, 77, 97, 72, 79, 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
+				s: 15 },
+			{ label: 'Columns 1 and 5 have their two stars now.',
+				a: [ '0,9,180', '4,9,180' ],
+				e: [ 80, 84, 85, 75, 77, 97, 72, 79, 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
+				s: 17 },
+			{ label: 'We must finish Column 6 and the UNITED KINGDOM region with their last missing stars.',
+				a: [ '5,9,180' ],
+				x: 'M1.1 7.1 h1 v-1 H7.9 V7.9 H5.1 v-1 H2.9 v2 H1.1z',
+				e: [ 90, 94, 80, 84, 85, 75, 77, 97, 72, 79, 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
+				s: 17 },
+			{ label: 'Row 8 has its two stars. The last star must go in the final available space.',
+				a: [ '9,8,90' ],
+				e: [ 92, 90, 94, 80, 84, 85, 75, 77, 97, 72, 79, 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
+				s: 19 },
+			{ label: 'Solution',
+				e: [ 89, 92, 90, 94, 80, 84, 85, 75, 77, 97, 72, 79, 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
+				s: 20 }
+		],
+		(page, ix, pages) =>
+		{
+			let svg = '';
+			if (page.r)
+				svg += page.r.map(str => str.split(',')).map(c => `<rect class='dr' x='${+c[0]+.1}' y='${+c[1]+.1}' width='${c[2]-.2}' height='${c[3]-.2}' stroke='${c[4]}' />`).join('');
+			if (page.c)
+				svg += page.c.map(c => `<circle cx='${c % 10 + .5}' cy='${((c / 10) | 0)+.5}' r='.4' class='dr' stroke='red' />`).join('');
+			if (page.x)
+			{
+				var x = page.x.split(',');
+				svg += `<path d='${x[0]}' class='dr' stroke='${x[1] || 'red'}' />`;
+			}
+			document.getElementById('deductions').innerHTML = svg;
+			document.getElementById('ded-arrows').innerHTML = page.a ? page.a.map(str => str.split(',')).map(c => `<path d='M0 -.8 -.6 -1.8 H-.25 V-3.3 H.25 V-1.8 H.6z' transform='translate(${+c[0]+.5} ${+c[1]+.5}) rotate(${c[2]})' fill='${c[3] || 'black'}' />`).join('') : '';
+			function set(elem, css, cond) { if (cond) elem.classList.add(css); else elem.classList.remove(css); }
+
+			Array.from(document.querySelectorAll('svg.grid g.grid > rect')).forEach((sq, ix) => { set(sq, 'ruled-out', page.e && page.e.includes(ix)); });
+			Array.from(document.querySelectorAll('svg.grid .star')).forEach((star, ix) => { set(star, 'shown', page.s && page.s >= (star.dataset.star | 0)); });
+		})
+});
+</script>
