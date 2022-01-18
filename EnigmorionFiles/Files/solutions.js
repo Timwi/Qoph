@@ -271,7 +271,7 @@ function makeSolutionPage(pageId, hpsml, triggers)
 	initialSetup();
 }
 
-function createDeductionTracker(id, pages, fnc)
+function createDeductionTracker(id, pages, fnc, extraHtmlBefore, extraHtmlAfter)
 {
 	let lsid = `sol-${id}-deduction`;
 	deductionTrackers.push(lsid);
@@ -285,7 +285,9 @@ function createDeductionTracker(id, pages, fnc)
 			<button type='button' class='left' accesskey=','></button>
 			<button type='button' class='right' accesskey='/'></button>
 			<button type='button' class='far-right'></button>
+			${extraHtmlBefore ?? ''}
 			<div class='info'></div>
+			${extraHtmlAfter ?? ''}
 			<div class='progressbg'></div>
 			<div class='progress'></div>
 		`;

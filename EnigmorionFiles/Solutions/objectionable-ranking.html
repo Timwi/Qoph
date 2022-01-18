@@ -1,194 +1,816 @@
 <style>
+	h2 {
+		position: relative;
+		background: hsl(100, 40%, 90%);
+		border: 3px solid hsl(100, 50%, 40%);
+		border-radius: 100vw;
+		margin: 2cm 0 1cm;
+		padding: .3cm 0;
+		font-size: 28pt;
+		font-weight: normal;
+		text-align: center;
+		box-shadow: 0 0 .2cm rgba(0, 0, 0, .2);
+		clear: both;
+	}
+
+	body.solution div.subanswer {
+		margin: 1.5cm auto 1cm;
+		padding: .4cm 1.2cm;
+		font-family: 'Lato';
+		font-size: 32pt;
+		font-weight: bold;
+		text-align: center;
+		background: hsl(40, 65%, 50%);
+		box-shadow: 0 0 .3cm rgba(0, 0, 0, .3);
+		border: 5px solid hsl(40, 60%, 20%);
+		border-radius: 100vw;
+		clear: both;
+		white-space: nowrap;
+		width: min-content;
+		position: relative;
+		color: white;
+		letter-spacing: 0.05em;
+	}
+
+		body.solution div.subanswer::after {
+			content: 'SUB-ANSWER';
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			bottom: calc(100% + 4px);
+			border-top-left-radius: .6cm;
+			border-top-right-radius: .6cm;
+			padding: .1cm .5cm;
+			font-size: 12pt;
+			font-weight: normal;
+			box-shadow: 0 -.1cm .1cm rgba(0, 0, 0, .2);
+			background: hsl(40, 60%, 20%);
+		}
+
+	#skyscraper-deductions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+		#skyscraper-deductions > div {
+			width: 6.9cm;
+		}
+		#skyscraper-deductions .deduction-tracker {
+			display: block;
+		}
+		#skyscraper-deductions .deduction-tracker button {
+			top: .75cm;
+		}
+		#skyscraper-deductions .deduction-tracker > div.titlenum {
+			margin: .4cm 0 0;
+		}
+		#skyscraper-deductions .deduction-tracker > div.wrap {
+			margin: .2cm 0 0;
+			display: flex;
+			width: 100%;
+			height: 2cm;
+			justify-content: space-around;
+			align-items: center;
+		}
+		#skyscraper-deductions .deduction-tracker > div.wrap > .info {
+			margin: 0;
+		}
+		#skyscraper-deductions .small .info {
+			font-size: 12pt;
+		}
+		.skyscraper-thick {
+			 stroke-width: .025;
+		}
+		#skyscraper-svg.thick .skyscraper-thick {
+			 stroke-width: .075;
+		}
+
+	.power-of-achievement {
+		display: flex;
+		justify-content: space-between;
+	}
+		.power-of-achievement > div {
+			width: 13.8cm;
+		}
 </style>
 <script src='../../files/solutions.js'></script>
 <h1>Objectionable Ranking</h1>
 <script>
 makeSolutionPage('objectionable-ranking', `
-<p>The shapes outside the grid [oa are country borders. It may be helpful to identify some or all of them, but if you know country names pretty well, you don’t have to — it’s enough to get the hint that we’re dealing with countries.]</p>
-{-a <p>The grid contains [o the names of those countries. The easiest to notice is probably [rb «NETHERLANDS», because it’s written backwards along the bottom of the grid. All the other countries [rc are written in some winding fashion.]]]</p>}
-{-c <p>The unused letters [o spell out «TWO STAR BATTLE». If that doesn’t mean anything to you, [s you can google for it. This reveals that [dd “Star Battle” is a logic puzzle genre. We need to place 20 stars in the grid so that each row, each column, and each region has <em>two</em> stars and they don’t touch (not even diagonally).]]]</p>}
-{-d <div id='borders-deductions'></div>}
-<svg viewBox="-10 -.3 30 13.2" class="grid" font-family='Work Sans' font-size=".6" text-anchor="middle">
-	<g class='grid'>
-		<rect class="r-c c3" x="0" y="0" width="1" height="1" /><rect class="r-c c3" x="1" y="0" width="1" height="1" /><rect class="r-c c3" x="2" y="0" width="1" height="1" /><rect class="r-c c3" x="3" y="0" width="1" height="1" /><rect class="r-c c3" x="4" y="0" width="1" height="1" /><rect class="r-c c3" x="5" y="0" width="1" height="1" /><rect class="r-c c3" x="6" y="0" width="1" height="1" /><rect class="r-c c8" x="7" y="0" width="1" height="1" /><rect class="r-c c8" x="8" y="0" width="1" height="1" /><rect class="r-c c8" x="9" y="0" width="1" height="1" /><rect class="r-c c3" x="0" y="1" width="1" height="1" /><rect class="r-c c3" x="1" y="1" width="1" height="1" /><rect class="r-c c3" x="2" y="1" width="1" height="1" /><rect class="r-c" x="3" y="1" width="1" height="1" /><rect class="r-c c5" x="4" y="1" width="1" height="1" /><rect class="r-c c5" x="5" y="1" width="1" height="1" /><rect class="r-c c3" x="6" y="1" width="1" height="1" /><rect class="r-c c3" x="7" y="1" width="1" height="1" /><rect class="r-c c8" x="8" y="1" width="1" height="1" /><rect class="r-c c8" x="9" y="1" width="1" height="1" /><rect class="r-c c2" x="0" y="2" width="1" height="1" /><rect class="r-c" x="1" y="2" width="1" height="1" /><rect class="r-c" x="2" y="2" width="1" height="1" /><rect class="r-c" x="3" y="2" width="1" height="1" /><rect class="r-c c5" x="4" y="2" width="1" height="1" /><rect class="r-c c5" x="5" y="2" width="1" height="1" /><rect class="r-c c5" x="6" y="2" width="1" height="1" /><rect class="r-c c3" x="7" y="2" width="1" height="1" /><rect class="r-c c8" x="8" y="2" width="1" height="1" /><rect class="r-c c8" x="9" y="2" width="1" height="1" /><rect class="r-c c2" x="0" y="3" width="1" height="1" /><rect class="r-c" x="1" y="3" width="1" height="1" /><rect class="r-c" x="2" y="3" width="1" height="1" /><rect class="r-c c4" x="3" y="3" width="1" height="1" /><rect class="r-c c3" x="4" y="3" width="1" height="1" /><rect class="r-c c3" x="5" y="3" width="1" height="1" /><rect class="r-c c5" x="6" y="3" width="1" height="1" /><rect class="r-c c3" x="7" y="3" width="1" height="1" /><rect class="r-c c3" x="8" y="3" width="1" height="1" /><rect class="r-c" x="9" y="3" width="1" height="1" /><rect class="r-c c2" x="0" y="4" width="1" height="1" /><rect class="r-c c4" x="1" y="4" width="1" height="1" /><rect class="r-c c4" x="2" y="4" width="1" height="1" /><rect class="r-c c4" x="3" y="4" width="1" height="1" /><rect class="r-c c3" x="4" y="4" width="1" height="1" /><rect class="r-c c3" x="5" y="4" width="1" height="1" /><rect class="r-c c3" x="6" y="4" width="1" height="1" /><rect class="r-c c3" x="7" y="4" width="1" height="1" /><rect class="r-c c3" x="8" y="4" width="1" height="1" /><rect class="r-c" x="9" y="4" width="1" height="1" /><rect class="r-c c2" x="0" y="5" width="1" height="1" /><rect class="r-c c2" x="1" y="5" width="1" height="1" /><rect class="r-c c2" x="2" y="5" width="1" height="1" /><rect class="r-c c2" x="3" y="5" width="1" height="1" /><rect class="r-c c2" x="4" y="5" width="1" height="1" /><rect class="r-c c2" x="5" y="5" width="1" height="1" /><rect class="r-c c2" x="6" y="5" width="1" height="1" /><rect class="r-c c2" x="7" y="5" width="1" height="1" /><rect class="r-c c2" x="8" y="5" width="1" height="1" /><rect class="r-c" x="9" y="5" width="1" height="1" /><rect class="r-c c2" x="0" y="6" width="1" height="1" /><rect class="r-c c2" x="1" y="6" width="1" height="1" /><rect class="r-c c7" x="2" y="6" width="1" height="1" /><rect class="r-c c7" x="3" y="6" width="1" height="1" /><rect class="r-c c7" x="4" y="6" width="1" height="1" /><rect class="r-c c7" x="5" y="6" width="1" height="1" /><rect class="r-c c7" x="6" y="6" width="1" height="1" /><rect class="r-c c7" x="7" y="6" width="1" height="1" /><rect class="r-c c6" x="8" y="6" width="1" height="1" /><rect class="r-c" x="9" y="6" width="1" height="1" /><rect class="r-b c1" x="0" y="7" width="1" height="1" /><rect class="r-c c7" x="1" y="7" width="1" height="1" /><rect class="r-c c7" x="2" y="7" width="1" height="1" /><rect class="r-c c6" x="3" y="7" width="1" height="1" /><rect class="r-c c6" x="4" y="7" width="1" height="1" /><rect class="r-c c7" x="5" y="7" width="1" height="1" /><rect class="r-c c7" x="6" y="7" width="1" height="1" /><rect class="r-c c7" x="7" y="7" width="1" height="1" /><rect class="r-c c6" x="8" y="7" width="1" height="1" /><rect class="r-c" x="9" y="7" width="1" height="1" /><rect class="r-b c1" x="0" y="8" width="1" height="1" /><rect class="r-c c7" x="1" y="8" width="1" height="1" /><rect class="r-c c7" x="2" y="8" width="1" height="1" /><rect class="r-c c6" x="3" y="8" width="1" height="1" /><rect class="r-c c6" x="4" y="8" width="1" height="1" /><rect class="r-c c6" x="5" y="8" width="1" height="1" /><rect class="r-c c6" x="6" y="8" width="1" height="1" /><rect class="r-c c6" x="7" y="8" width="1" height="1" /><rect class="r-c c6" x="8" y="8" width="1" height="1" /><rect class="r-c" x="9" y="8" width="1" height="1" /><rect class="r-b c1" x="0" y="9" width="1" height="1" /><rect class="r-b c1" x="1" y="9" width="1" height="1" /><rect class="r-b c1" x="2" y="9" width="1" height="1" /><rect class="r-b c1" x="3" y="9" width="1" height="1" /><rect class="r-b c1" x="4" y="9" width="1" height="1" /><rect class="r-b c1" x="5" y="9" width="1" height="1" /><rect class="r-b c1" x="6" y="9" width="1" height="1" /><rect class="r-b c1" x="7" y="9" width="1" height="1" /><rect class="r-b c1" x="8" y="9" width="1" height="1" /><rect class="r-c" x="9" y="9" width="1" height="1" />
+<h2>Are you Taller than a Skyscraper?</h2>
+<p>We begin by solving all of the 4×4 Skyscraper puzzles.</p>
+<div id='skyscraper-deductions'>
+	<div id='skyscraper-0' ><div id='skytracker-0' ></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><text x="-0.5" y="3.8">2</text><text x="4.5" y="1.8">2</text><text x="2.5" y="-0.2">4</text><text x="-0.5" y="2.8">2</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-1' ><div id='skytracker-1' ></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><path fill="none" stroke="black" stroke-width=".05" d="M4 0l.2 -.2M4.05 -.5a.45 .45 0 1 0 .9 0a.45 .45 0 1 0 -.9 0"/><text x="-0.5" y="2.8">3</text><text x="0.5" y="4.8">3</text><text x="4.5" y="0.8">2</text><text x="1.5" y="-0.2">2</text><text x="4.5" y="2.8">2</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-2' ><div id='skytracker-2' ></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><path d="M0 0l-.2 -.2M-.05 -.5a.45 .45 0 1 0 -.9 0a.45 .45 0 1 0 .9 0" fill="none" stroke="black" stroke-width=".05"/><text x="4.5" y="3.8">3</text><text x="3.5" y="-0.2">3</text><text x="2.5" y="4.8">3</text><text x="-0.5" y="3.8">2</text><text x="4.5" y="0.8">2</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-3' ><div id='skytracker-3' ></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><text x="0.5" y="-0.2">2</text><text x="2.5" y="-0.2">3</text><text x="3.5" y="4.8">3</text><text x="4.5" y="0.8">2</text><text x="-0.5" y="2.8">1</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-4' ><div id='skytracker-4' ></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><text x="2.5" y="4.8">2</text><text x="-0.5" y="0.8">2</text><text x="4.5" y="2.8">3</text><text x="3.5" y="-0.2">1</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-5' ><div id='skytracker-5' ></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><path fill="none" stroke="black" stroke-width=".05" d="M4 0l.2 -.2M4.05 -.5a.45 .45 0 1 0 .9 0a.45 .45 0 1 0 -.9 0"/><text x="3.5" y="4.8">1</text><text x="-0.5" y="0.8">3</text><text x="0.5" y="-0.2">2</text><text x="0.5" y="4.8">2</text><text x="3.5" y="-0.2">2</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-6' ><div id='skytracker-6' ></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><path d="M0 0l-.2 -.2M-.05 -.5a.45 .45 0 1 0 -.9 0a.45 .45 0 1 0 .9 0" fill="none" stroke="black" stroke-width=".05"/><text x="3.5" y="4.8">3</text><text x="4.5" y="1.8">4</text><text x="0.5" y="4.8">3</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-7' ><div id='skytracker-7' ></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><text x="-0.5" y="0.8">2</text><text x="4.5" y="0.8">2</text><text x="1.5" y="-0.2">2</text><text x="3.5" y="4.8">3</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-8' ><div id='skytracker-8' ></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><text x="3.5" y="4.8">4</text><text x="4.5" y="3.8">4</text><text x="-0.5" y="0.8">3</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-9' ><div id='skytracker-9' ></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><path fill="none" stroke="black" stroke-width=".05" d="M4 0l.2 -.2M4.05 -.5a.45 .45 0 1 0 .9 0a.45 .45 0 1 0 -.9 0"/><text x="4.5" y="0.8">4</text><text x="1.5" y="4.8">1</text><text x="3.5" y="4.8">3</text><text x="-0.5" y="2.8">2</text><text x="4.5" y="3.8">2</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-10'><div id='skytracker-10'></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><path d="M0 0l-.2 -.2M-.05 -.5a.45 .45 0 1 0 -.9 0a.45 .45 0 1 0 .9 0" fill="none" stroke="black" stroke-width=".05"/><text x="-0.5" y="0.8">1</text><text x="3.5" y="-0.2">3</text><text x="4.5" y="2.8">3</text><text x="1.5" y="-0.2">3</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-11'><div id='skytracker-11'></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><text x="3.5" y="-0.2">4</text><text x="-0.5" y="1.8">1</text><text x="2.5" y="4.8">3</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-12'><div id='skytracker-12'></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><text x="2.5" y="4.8">2</text><text x="4.5" y="1.8">3</text><text x="1.5" y="4.8">1</text><text x="4.5" y="2.8">1</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-13'><div id='skytracker-13'></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><path fill="none" stroke="black" stroke-width=".05" d="M4 0l.2 -.2M4.05 -.5a.45 .45 0 1 0 .9 0a.45 .45 0 1 0 -.9 0"/><text x="4.5" y="2.8">1</text><text x="1.5" y="-0.2">2</text><text x="0.5" y="4.8">3</text><text x="2.5" y="-0.2">2</text><text x="1.5" y="4.8">3</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-14'><div id='skytracker-14'></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><path d="M0 0l-.2 -.2M-.05 -.5a.45 .45 0 1 0 -.9 0a.45 .45 0 1 0 .9 0" fill="none" stroke="black" stroke-width=".05"/><text x="-0.5" y="0.8">2</text><text x="4.5" y="1.8">3</text><text x="3.5" y="4.8">3</text><text x="-0.5" y="2.8">3</text><text x="1.5" y="-0.2">3</text><g class='ded'></g></svg></div>
+	<div id='skyscraper-15'><div id='skytracker-15'></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><text x="2.5" y="-0.2">3</text><text x="2.5" y="4.8">2</text><text x="4.5" y="0.8">3</text><text x="-0.5" y="3.8">2</text><text x="3.5" y="4.8">2</text><g class='ded'></g></svg></div>
+</div><p>Now we turn our attention to the bigger grid. It’s pretty clear that it’s not going to be unique on it own as a standalone Skyscraper puzzle. However, [o the size of the grid is 16×16, and we’ve already solved 16 4×4 grids. We should therefore [d arrange the small grids to form a solution to the big grid. But for that we need digits 1–16 instead of just 1–4. Looks like [o the numbers on the left [dska aren’t just to number the grids — they are telling us what digits to use in those grids.]]]]</p>
+{-ska
+<div id='skyscraper-big'></div>
+<svg id='skyscraper-svg' font-family='Presquire' text-anchor="middle" font-size=".7">
+	<g transform="translate(11, 1.5)">
+		<path d="M0 0h16v16h-16z" fill="white" stroke="none"/>
+		<g id='skyscraper-extra'></g>
+		<path d="M0 0h16v16h-16z" fill="none" stroke="black" stroke-width=".075"/>
+		<path d="M1 0v16M2 0v16M3 0v16M5 0v16M6 0v16M7 0v16M9 0v16M10 0v16M11 0v16M13 0v16M14 0v16M15 0v16M0 1h16M0 2h16M0 3h16M0 5h16M0 6h16M0 7h16M0 9h16M0 10h16M0 11h16M0 13h16M0 14h16M0 15h16" fill="none" stroke="black" stroke-width=".025"/>
+		<path class='skyscraper-thick' d="M4 0v16M8 0v16M12 0v16M0 4h16M0 8h16M0 12h16" fill="none" stroke="black"/>
+		<text x="5.5" y="-0.2">4</text><text x="14.5" y="-0.2">5</text><text x="16.5" y="6.8">2</text><text x="16.5" y="8.8">6</text><text x="5.5" y="16.8">4</text><text x="11.5" y="16.8">11</text><text x="-0.5" y="4.8">8</text><text x="-0.5" y="9.8">4</text><text x="-0.5" y="13.8">3</text>
+		<g id='skyscraper-subgrids'></g>
 	</g>
-
-	<g stroke="black" fill="none">
-		<path d="M0 0h10v10H0z" stroke-width=".05" />
-		<path d='M7 0v1h1v2h2M0 2h3V1h3v1h1v2H6V3H3v1H1M1 2v3h8M4 1v4M9 3v7M0 7h2V6H9M1 7v2H9M3 9V7h2v1h3V6' stroke-width='.05' class='ihs r-c' />
-		<path d="M0 1h10M0 2h10M0 3h10M0 4h10M0 5h10M0 6h10M0 7h10M0 8h10M0 9h10M1 0v10M2 0v10M3 0v10M4 0v10M5 0v10M6 0v10M7 0v10M8 0v10M9 0v10" stroke-width=".02" />
-	</g>
-
-	<g id='deductions'></g>
-	<g transform='translate(1, 2)'>
-		<g class='star' data-star='1' id='star-1'>
-			<path d='M0.5 0.85 0.91 1.07 0.83 0.61 1.17 0.28 0.71 0.22 0.5 -0.2 0.29 0.22 -0.17 0.28 0.17 0.61 0.09 1.07z' fill='#f5df16' stroke='black' stroke-width='.05' /><g stroke='none'><path d='M0.5 0.78 0.5 0.85 0.91 1.07 0.83 0.95z' fill='#dfca0a' /><path d='M0.83 0.95 0.91 1.07 0.83 0.61 0.77 0.59z' fill='#cfbc09' /><path d='M0.77 0.59 0.83 0.61 1.17 0.28 1.03 0.33z' fill='#afa008' /><path d='M1.03 0.33 1.17 0.28 0.71 0.22 0.66 0.27z' fill='#faee81' /><path d='M0.66 0.27 0.71 0.22 0.5 -0.2 0.5 -0.06z' fill='#dfca0a' /><path d='M0.5 -0.06 0.5 -0.2 0.29 0.22 0.34 0.27z' fill='#fdf9d1' /><path d='M0.34 0.27 0.29 0.22 -0.17 0.28 -0.03 0.33z' fill='#fcf3a7' /><path d='M-0.03 0.33 -0.17 0.28 0.17 0.61 0.23 0.59z' fill='#dcc70a' /><path d='M0.23 0.59 0.17 0.61 0.09 1.07 0.17 0.95z' fill='#faec7b' /><path d='M0.17 0.95 0.09 1.07 0.5 0.85 0.5 0.78z' fill='#a49407' /></g>
-		</g>
-	</g>
-	<use class='star' data-star='2' href='#star-1' transform='translate(5, 1)' />
-	<use class='star' data-star='3' href='#star-1' transform='translate(1, 4)' />
-	<use class='star' data-star='4' href='#star-1' transform='translate(6, 3)' />
-	<use class='star' data-star='5' href='#star-1' transform='translate(8, 2)' />
-	<use class='star' data-star='6' href='#star-1' transform='translate(3, 1)' />
-	<use class='star' data-star='7' href='#star-1' transform='translate(3, 3)' />
-	<use class='star' data-star='8' href='#star-1' transform='translate(0, 0)' />
-	<use class='star' data-star='9' href='#star-1' transform='translate(8, 4)' />
-	<use class='star' data-star='10' href='#star-1' transform='translate(7, 0)' />
-	<use class='star' data-star='11' href='#star-1' transform='translate(4, 5)' />
-	<use class='star' data-star='12' href='#star-1' transform='translate(6, 5)' />
-	<use class='star' data-star='13' href='#star-1' transform='translate(2, 6)' />
-	<use class='star' data-star='14' href='#star-1' transform='translate(9, 6)' />
-	<use class='star' data-star='15' href='#star-1' transform='translate(7, 8)' />
-	<use class='star' data-star='16' href='#star-1' transform='translate(0, 7)' />
-	<use class='star' data-star='17' href='#star-1' transform='translate(4, 7)' />
-	<use class='star' data-star='18' href='#star-1' transform='translate(2, 8)' />
-	<use class='star' data-star='19' href='#star-1' transform='translate(5, 9)' />
-	<use class='star' data-star='20' href='#star-1' transform='translate(9, 9)' />
-
-	<text x="0.5" y="0.7">I</text><text x="1.5" y="0.7">C</text><text x="2.5" y="0.7">P</text><text x="3.5" y="0.7">E</text><text x="4.5" y="0.7">R</text><text x="5.5" y="0.7">N</text><text x="6.5" y="0.7">A</text><text x="7.5" y="0.7">D</text><text x="8.5" y="0.7">N</text><text x="9.5" y="0.7">A</text><text x="0.5" y="1.7">L</text><text x="1.5" y="1.7">B</text><text x="2.5" y="1.7">U</text><text x="3.5" y="1.7">E</text><text x="4.5" y="1.7">O</text><text x="5.5" y="1.7">N</text><text x="6.5" y="1.7">C</text><text x="7.5" y="1.7">I</text><text x="8.5" y="1.7">N</text><text x="9.5" y="1.7">L</text><text x="0.5" y="2.7">S</text><text x="1.5" y="2.7">T</text><text x="2.5" y="2.7">T</text><text x="3.5" y="2.7">L</text><text x="4.5" y="2.7">R</text><text x="5.5" y="2.7">W</text><text x="6.5" y="2.7">A</text><text x="7.5" y="2.7">R</text><text x="8.5" y="2.7">I</text><text x="9.5" y="2.7">F</text><text x="0.5" y="3.7">O</text><text x="1.5" y="3.7">A</text><text x="2.5" y="3.7">B</text><text x="3.5" y="3.7">F</text><text x="4.5" y="3.7">E</text><text x="5.5" y="3.7">C</text><text x="6.5" y="3.7">Y</text><text x="7.5" y="3.7">F</text><text x="8.5" y="3.7">A</text><text x="9.5" y="3.7">R</text><text x="0.5" y="4.7">L</text><text x="1.5" y="4.7">I</text><text x="2.5" y="4.7">J</text><text x="3.5" y="4.7">I</text><text x="4.5" y="4.7">N</text><text x="5.5" y="4.7">T</text><text x="6.5" y="4.7">R</text><text x="7.5" y="4.7">A</text><text x="8.5" y="4.7">L</text><text x="9.5" y="4.7">A</text><text x="0.5" y="5.7">O</text><text x="1.5" y="5.7">N</text><text x="2.5" y="5.7">I</text><text x="3.5" y="5.7">S</text><text x="4.5" y="5.7">L</text><text x="5.5" y="5.7">A</text><text x="6.5" y="5.7">N</text><text x="7.5" y="5.7">D</text><text x="8.5" y="5.7">S</text><text x="9.5" y="5.7">T</text><text x="0.5" y="6.7">M</text><text x="1.5" y="6.7">O</text><text x="2.5" y="6.7">E</text><text x="3.5" y="6.7">D</text><text x="4.5" y="6.7">K</text><text x="5.5" y="6.7">I</text><text x="6.5" y="6.7">N</text><text x="7.5" y="6.7">G</text><text x="8.5" y="6.7">B</text><text x="9.5" y="6.7">S</text><text x="0.5" y="7.7">S</text><text x="1.5" y="7.7">U</text><text x="2.5" y="7.7">T</text><text x="3.5" y="7.7">S</text><text x="4.5" y="7.7">E</text><text x="5.5" y="7.7">M</text><text x="6.5" y="7.7">O</text><text x="7.5" y="7.7">D</text><text x="8.5" y="7.7">A</text><text x="9.5" y="7.7">O</text><text x="0.5" y="8.7">D</text><text x="1.5" y="8.7">N</text><text x="2.5" y="8.7">I</text><text x="3.5" y="8.7">H</text><text x="4.5" y="8.7">D</text><text x="5.5" y="8.7">A</text><text x="6.5" y="8.7">L</text><text x="7.5" y="8.7">G</text><text x="8.5" y="8.7">N</text><text x="9.5" y="8.7">W</text><text x="0.5" y="9.7">N</text><text x="1.5" y="9.7">A</text><text x="2.5" y="9.7">L</text><text x="3.5" y="9.7">R</text><text x="4.5" y="9.7">E</text><text x="5.5" y="9.7">H</text><text x="6.5" y="9.7">T</text><text x="7.5" y="9.7">E</text><text x="8.5" y="9.7">N</text><text x="9.5" y="9.7">T</text>
-	<g stroke='black' stroke-width='.03' class='ihs r-c' data-rem_c='d'>
-		<rect x='10.5' y='0.0' width='9.2' height='1' fill='hsl( 90, 90%, 80%)' />
-		<rect x='10.5' y='1.2' width='9.2' height='1' fill='hsl( 45, 90%, 80%)' />
-		<rect x='10.5' y='2.4' width='9.2' height='1' fill='hsl(225, 90%, 80%)' />
-		<rect x='10.5' y='3.6' width='9.2' height='1' fill='hsl(270, 90%, 80%)' />
-		<rect x='10.5' y='4.8' width='9.2' height='1' fill='hsl(  0, 90%, 80%)' />
-		<rect x='10.5' y='6.0' width='9.2' height='1' fill='hsl(135, 90%, 80%)' />
-		<rect x='10.5' y='7.2' width='9.2' height='1' fill='hsl(315, 90%, 80%)' />
-		<rect x='10.5' y='8.4' width='9.2' height='1' fill='hsl(180, 90%, 80%)' />
-	</g>
-	<g text-anchor='start' class='ihs r-c' data-rem_c='d'>
-		<text x='10.8' y='0.7'>BANGLADESH</text>
-		<text x='10.8' y='1.9'>CENTRAL AFRICAN REPUBLIC</text>
-		<text x='10.8' y='3.1'>FIJI</text>
-		<text x='10.8' y='4.3'>FINLAND</text>
-		<text x='10.8' y='5.5'>NETHERLANDS</text>
-		<text x='10.8' y='6.7'>NORWAY</text>
-		<text x='10.8' y='7.9'>SOLOMON ISLANDS</text>
-		<text x='10.8' y='9.1'>UNITED KINGDOM</text>
-	</g>
-	<g id='ded-arrows'></g>
 </svg>
-{-d Once you have the solution to the Star Battle puzzle, [s read the letters on the stars in reading order. We get [r «IDENTIFY ILLNESS EIGHT». The “eight” means [c the answer is eight letters in length. [re]]]]}
-{-e <div class='answer'>DIAGNOSE</div>}
+<p>Once we’ve solved the big grid, we can [s obtain the numbers in the circles, add up the pairs as instructed in the original graphics, and read them in the order originally given. We get [rskb «3 = C», «15 = O», «8 + 1 = 9 = I», «5 + 9 = 14 = N», «12 + 13 = 25 = Y».]]</p>}
+{-skb <div class='subanswer'>COINY</div>}
+<h2>Power of Achievement</h2>
+<p>This looks awfully much like [d a Sudoku. However, what’s with the extra symbols? Well, [o there are exactly 9 different types of symbol, so it looks like we’re dealing with [dpoa two separate Sudokus — one with digits and one with symbols.]]]</p>
+{-poa
+<div class='power-of-achievement'>
+	<div>
+		<div id='poa-digits'></div>
+		<svg id='poa-digits-svg' viewBox='-.1 -.1 9.2 9.2' font-size='.6' text-anchor='middle'>
+			<path fill='white' stroke='black' stroke-width='.06' d='M0 0h9v9H0z' />
+			<path fill='none' stroke='black' stroke-width='.05' d='M3 0v9M6 0v9M0 3h9M0 6h9' />
+			<path fill='none' stroke='black' stroke-width='.02' d='M1 0v9M2 0v9M4 0v9M5 0v9M7 0v9M8 0v9M0 1h9M0 2h9M0 4h9M0 5h9M0 7h9M0 8h9' />
+			<g class='n'></g>
+		</svg>
+	</div>
+	<div>
+		<div id='poa-symbols'></div>
+		<svg id='poa-symbols-svg' viewBox='-.1 -.1 9.2 9.2'>
+			<path fill='white' stroke='black' stroke-width='.06' d='M0 0h9v9H0z' />
+			<path fill='none' stroke='black' stroke-width='.05' d='M3 0v9M6 0v9M0 3h9M0 6h9' />
+			<path fill='none' stroke='black' stroke-width='.02' d='M1 0v9M2 0v9M4 0v9M5 0v9M7 0v9M8 0v9M0 1h9M0 2h9M0 4h9M0 5h9M0 7h9M0 8h9' />
+			<g class='n'></g>
+		</svg>
+	</div>
+</div>
+}
+{-e <div class='answer'>???????????????</div>}
 `, {
-	'd': createDeductionTracker('borders-deductions',
-		[
-			{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
-			{ label: 'Each of these rectangles must contain exactly one star.<br>(Otherwise you couldn’t fit two stars into these regions without them touching.)',
-				r: [ /* Fiji */ '1,4,2,1,yellow', '3,3,1,2,yellow', /* Norway */ '4,1,2,2,yellow', '6,2,1,2,yellow', /* Battle */ '1,2,2,2,yellow', '3,1,1,2,yellow' ] },
-			{ label: 'When a domino (such as this one) must contain a star, the cells on either side of the domino cannot contain a star, as they would touch the star in the domino.',
-				r: [ '1,4,2,1,red', '3,3,1,2,yellow', '4,1,2,2,yellow', '6,2,1,2,yellow', '1,2,2,2,yellow', '3,1,1,2,yellow' ],
-				a: [ '1,4,270' ],
-				c: [ 31, 32, 51, 52 ] },
-			{ label: 'We can apply the same deduction to all the other dominos.',
-				r: [ '1,4,2,1,yellow', '3,3,1,2,red', '4,1,2,2,yellow', '6,2,1,2,red', '1,2,2,2,yellow', '3,1,1,2,red' ],
-				e: [ 31, 32, 51, 52 ] },
-			{ label: 'In each marked rectangle that has only one place for a star, the star can now be placed.',
-				r: [ '1,4,2,1,red', '3,3,1,2,yellow', '4,1,2,2,red', '6,2,1,2,yellow', '1,2,2,2,red', '3,1,1,2,yellow' ],
-				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12 ] },
-			{ label: 'Stars cannot touch, so we can also rule out every square that touches a star we already found.',
-				s: 3,
-				r: [ '3,3,1,2,yellow', '6,2,1,2,yellow', '3,1,1,2,yellow' ],
-				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12 ] },
-			{ label: 'That resolves one more domino.',
-				s: 3,
-				r: [ '3,3,1,2,yellow', '6,2,1,2,red', '3,1,1,2,yellow' ],
-				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50 ] },
-			{ label: 'The TWO STAR region must contain two stars, and it’s entirely in column 10.<br>Therefore, the rest of that column contains no further stars.',
-				s: 4,
-				r: [ '3,3,1,2,yellow', '3,1,1,2,yellow' ],
-				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47 ],
-				a: [ '9,9,180' ] },
-			{ label: 'This implies two more dominoes in the FINLAND region, and because the top domino rules out the cells below it, we can place a star in the bottom one.',
-				s: 4,
-				r: [ '3,3,1,2,yellow', '3,1,1,2,yellow', '8,1,1,2,red', '7,0,2,1,red' ],
-				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 9, 19, 29 ] },
-			{ label: 'Row 2 and Row 4 each have only one place left to put their second star.',
-				s: 5,
-				r: [ '3,3,1,2,yellow', '3,1,1,2,yellow', '7,0,2,1,yellow' ],
-				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39 ],
-				a: [ '0,1,270', '0,3,270' ] },
-			{ label: 'Columns 2 and 4 have their two stars, so we can rule out the rest of those columns.',
-				s: 7,
-				r: [ '7,0,2,1,yellow' ],
-				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43 ],
-				a: [ '3,9,180', '1,9,180' ] },
-			{ label: 'The CENTRAL AFRICAN REPUBLIC region has only two places left for its two stars.',
-				s: 7,
-				r: [ '7,0,2,1,yellow' ],
-				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91 ],
-				x: 'M.1 .1 H6.9 v1 h1 v2 h1 V4.9 H4.1 V3.1 H5.9 v1 H7.1 V1.9 h-1 v-1 H2.9 v1 H.1z' },
-			{ label: 'Column 9 has its two stars, so we can rule out the rest of that column.',
-				s: 9,
-				r: [ '7,0,2,1,yellow' ],
-				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57 ],
-				a: [ '8,9,180' ] },
-			{ label: 'There is only one way to fit two stars into row 6 now without them touching.',
-				s: 10,
-				e: [ 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
-				a: [ '0,5,270' ] },
-			{ label: 'Column 7 has its two stars, so we can rule out the rest of that column.',
-				s: 12,
-				e: [ 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
-				a: [ '6,9,180' ] },
-			{ label: 'The SOLOMON ISLANDS region has its two stars, so we can rule out the rest of that region.',
-				e: [ 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
-				x: 'M.1 2.1 H.9 v3 h8 V5.9 H1.9 v1 H.1z',
-				s: 12 },
-			{ label: 'Row 7 has only two places left for its two stars.',
-				e: [ 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
-				a: [ '0,6,270' ],
-				s: 12 },
-			{ label: 'The BANGLADESH region doesn’t have any stars yet. We can only put one star in this red L-shape, so the other star must go in the remaining available space.',
-				x: 'M4.1 7.1 H4.9 v1 h1 V8.9 H4.1z',
-				c: [ 87 ],
-				e: [ 72, 79, 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
-				s: 14 },
-			{ label: 'We can’t place a star here because it would touch the star in the L-shape.',
-				x: 'M4.1 7.1 H4.9 v1 h1 V8.9 H4.1z,yellow',
-				c: [ 75 ],
-				a: [ '5,7,75,red' ],
-				e: [ 77, 97, 72, 79, 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
-				s: 15 },
-			{ label: 'That leaves only two places for the two stars in Row 8.',
-				a: [ '0,7,270' ],
-				e: [ 75, 77, 97, 72, 79, 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
-				s: 15 },
-			{ label: 'Columns 1 and 5 have their two stars now.',
-				a: [ '0,9,180', '4,9,180' ],
-				e: [ 80, 84, 85, 75, 77, 97, 72, 79, 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
-				s: 17 },
-			{ label: 'We must finish Column 6 and the UNITED KINGDOM region with their last missing stars.',
-				a: [ '5,9,180' ],
-				x: 'M1.1 7.1 h1 v-1 H7.9 V7.9 H5.1 v-1 H2.9 v2 H1.1z',
-				e: [ 90, 94, 80, 84, 85, 75, 77, 97, 72, 79, 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
-				s: 17 },
-			{ label: 'Row 8 has its two stars. The last star must go in the final available space.',
-				a: [ '9,8,90' ],
-				e: [ 92, 90, 94, 80, 84, 85, 75, 77, 97, 72, 79, 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
-				s: 19 },
-			{ label: 'Solution',
-				e: [ 89, 92, 90, 94, 80, 84, 85, 75, 77, 97, 72, 79, 60, 76, 86, 96, 64, 65, 66, 67, 55, 31, 32, 51, 52, 22, 24, 14, 24, 34, 44, 25, 35, 27, 37, 42, 12, 10, 11, 20, 30, 4, 5, 6, 16, 26, 40, 50, 45, 46, 47, 17, 18, 9, 19, 29, 38, 39, 2, 3, 23, 43, 53, 63, 73, 83, 93, 1, 61, 71, 81, 91, 49, 59, 58, 57, 68, 78, 88, 98, 8 ],
-				s: 20 }
-		],
-		(page, ix, pages) =>
+	reset: function()
+	{
+		let skydata = [
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'The “4” clue implies that the whole column is in order.', h: ['2,-1'] },
+				{ label: 'There is only one place to put a 4 in row 3 without violating the “2” clue.', g: '..1...2...3...4.', r: [2], h: ['-1,2'] },
+				{ label: 'Now there’s only one place to put a 4 in row 2.', g: '..1...2..43...4.', r: [1], h: ['4,1'] },
+				{ label: 'The remaining digits in that row are also forced by the “2” clue.', g: '..144.2..43...4.', r: [1], h: ['4,1'] },
+				{ label: 'Putting the 3 at the bottom of column 2 would violate the “2” clue in the bottom row.', g: '..144123.43...4.', c: [1], h: ['-1,3'] },
+				{ label: 'The rest falls into place.', g: '.3144123.43.324.' },
+				{ label: 'Solved!', g: '2314412314323241' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'In row 3 there is only one place to put a 4.', r: [2], h: ['-1,2', '4,2'] },
+				{ label: 'Now there’s only one place to put a 4 in row 1 because of the “2” clues.', g: '..........4.....', r: [0], h: ['1,-1', '4,0'] },
+				{ label: 'Now there’s only one place to put a 3 in column 1, and the rest follows from the “3” clue as well.', g: '4.........4.....', c: [0], s: true, h: ['0,4'] },
+				{ label: 'Row 1 must have its 3 on the far right, otherwise its “2” clue would be violated.', g: '4...3...1.4.2...', r: [0], h: ['4,0'] },
+				{ label: 'That settles row 3.', g: '4..33...1.4.2...', r: [2], h: ['3,0'] },
+				{ label: 'Now putting a 4 on the bottom of column 2 would violate its “2” clue.', g: '4..33...13422...', c: [1], h: ['1,-1'] },
+				{ label: 'The rest falls into place.', g: '4..334..13422..4' },
+				{ label: 'Solved!', g: '4213342113422134' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'Column 4 and row 4 both have only one place for a 4.', r: [3], c: [3], h: ['-1,3', '4,3', '3,-1'] },
+				{ label: 'Now, column 4 and row 4 both have only one place for a 3.', g: '...........4.4..', r: [3], c: [3], h: ['2,4', '4,3', '3,-1'] },
+				{ label: 'Row 4’s “3” clue disambiguates that row entirely now.', g: '.......3...434..', r: [3], h: ['4,3'] },
+				{ label: 'Putting a 4 on the far left of row 1 would violate its “2” clue.', g: '...2...3...43421', r: [0], h: ['4,0'] },
+				{ label: 'Column 1 has only one place for a 2. The rest falls into place.', g: '..424..3...43421', c: [0], h: ['3,0'] },
+				{ label: 'Solved!', g: '1342421321343421' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'A “1” clue means there must be a 4 at the edge.', h: ['-1,2'] },
+				{ label: 'There’s only one place for a 4 in row 1.', g: '........4.......', h: ['0,-1', '2,-1', '4,0'], r: [0] },
+				{ label: 'Now there’s only one place for a 4 in column 4.', g: '.4......4.......', h: ['3,4'], c: [3] },
+				{ label: 'The 1 in row 1 cannot go on the far left or right without violating one of these “2” clues.', g: '.4.....44.....4.', h: ['0,-1', '4,0'], r: [0], s: true },
+				{ label: 'The “3” clue disambiguates column 3.', g: '.41....44.....4.', c: [2], h: ['2,-1'] },
+				{ label: 'The 1 in column 4 cannot go in position 3 because that would violate the “3” clue.', g: '.41...344.2...4.', c: [3], h: ['3,4'] },
+				{ label: 'The rest falls into place.', g: '.412..344.23..41' },
+				{ label: 'Solved!', g: '3412123441232341' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'A “1” clue means there must be a 4 at the edge.', h: ['3,-1'] },
+				{ label: 'The “2” clue now requires that the 3 in row 1 is at the far left.', g: '...4............', h: ['-1,0'], r: [0] },
+				{ label: 'There’s only one place for a 4 in column 3 because of these clues.', g: '3..4............', h: ['2,4', '4,2', '3,0'], c: [2] },
+				{ label: 'There’s only one place for a 3 in that column now.', g: '3..4..4.........', h: ['2,4'], c: [2] },
+				{ label: 'That leaves only one place for a 3 in row 3.', g: '3..4..4.......3.', r: [2], h: ['4,2'] },
+				{ label: 'That “3” clue now disambiguates the rest of row 3.', g: '3..4..4343...43.', r: [2], h: ['4,2'] },
+				{ label: 'The rest falls into place.', g: '3..4..434312.43.' },
+				{ label: 'Solved!', g: '3124124343122431' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'A “1” clue means there must be a 4 at the edge.', h: ['3,4'] },
+				{ label: 'There is only one place for a 4 in row 1.', g: '...............4', h: ['-1,0', '3,-1'], r: [0] },
+				{ label: 'The “2” clue requires that the 3 in column 4 is at the top.', g: '..4............4', h: ['3,-1'], c: [3] },
+				{ label: 'The “3” clue then disambiguates the rest of row 1.', g: '..43...........4', h: ['-1,0'], r: [0] },
+				{ label: 'The “2” clue now requires that the 4 in column 1 is at position 2.', g: '1243...........4', c: [0], h: ['0,-1'] },
+				{ label: 'The bottom “2” clue disambiguates column 1 now.', g: '12434....4.....4', c: [0], h: ['0,4'] },
+				{ label: 'Row 3 can now be filled in.', g: '12434...24..3..4', r: [2], h: ['3,0'] },
+				{ label: 'The rest falls into place.', g: '12434...24313..4' },
+				{ label: 'Solved!', g: '1243431224313124' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'The “4” clue requires row 2 to be in order.', r: [1], h: ['4,1'] },
+				{ label: 'The “3” clue now forces the order of the remaining digits in column 4.', g: '....4321........', c: [3], h: ['3,4'] },
+				{ label: 'The 3 in column 1 can only be at the top, and the “3” clue forces the rest of the column.', s: true, g: '...44321...3...2', c: [0], h: ['0,4'] },
+				{ label: 'There is only one place for the 2 in row 1.', g: '3..443212..31..2', r: [0], h: ['2,1'] },
+				{ label: 'The rest falls into place.', g: '32.443212..31..2' },
+				{ label: 'Solved!', g: '3214432121431432' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'There is only one place for the 4 in row 1.', r: [0], h: ['-1,0', '1,-1', '4,0'] },
+				{ label: 'Now there’s only one place for the 4 in column 4.', g: '..4.............', c: [3], h: ['2,0', '3,4'] },
+				{ label: 'If the 4 in column 2 were at the bottom, the 3 would have to be at the top, but that violates the “2” clue in row 1.', s: true, g: '..4....4........', c: [1], h: ['-1,0'] },
+				{ label: 'Since having the 3 at the top of column 2 would violate the “2” clue in row 1, it can only be at the bottom.', s: true, g: '..4....4.4..4...', c: [1], h: ['1,-1', '-1,0'] },
+				{ label: 'The “2” clue now disambiguates the rest of column 2.', g: '..4....4.4..43..', c: [1], h: ['1,-1'] },
+				{ label: 'The other “2” clue now disambiguates row 1.', g: '.24..1.4.4..43..', r: [0], h: ['-1,0'] },
+				{ label: 'The “3” clue disambiguates column 4.', g: '3241.1.4.4..43..', c: [3], h: ['3,4'] },
+				{ label: 'The rest falls into place.', g: '3241.1.4.4.343.2' },
+				{ label: 'Solved!', g: '3241213414234312' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'A “4” clue implies the whole row/column is in order.', h: ['4,3','3,4'], r: [3], c: [3] },
+				{ label: 'There is only one place for a 3 in row 1. The “3” clue then forces the rest of the row.', g: '...4...3...24321', r: [0], h: ['1,3','-1,0'] },
+				{ label: 'There is only one place for a 2 in column 2.', g: '2134...3...24321', c: [1], h: ['3,2'] },
+				{ label: 'There is only one place for a 3 in row 3.', g: '2134.2.3.4.24321', r: [2], h: ['2,0'] },
+				{ label: 'The rest falls into place.', g: '2134.2.334124321' },
+				{ label: 'Solved!', g: '2134124334124321' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'A “4” clue forces the whole row to be in order.', h: ['4,0'], r: [0] },
+				{ label: 'The “1” clue requires a 4 to be at the edge.', g: '4321............', h: ['1,4'] },
+				{ label: 'The “3” clue requires the rest of column 4 to be in order now.', g: '4321.........4..', h: ['3,4'], c: [3] },
+				{ label: 'We cannot place a 3 in row 4 position 3 without violating this “2” clue.', g: '4321...4...3.4.2', h: ['4,3'], r: [3] },
+				{ label: 'There is only one place for a 4 in row 3, and the “2” clue disambiguates the rest of the row.', g: '4321...4...33412', r: [2], h: ['-1,2'], s: true },
+				{ label: 'The rest falls into place.', g: '4321...421433412' },
+				{ label: 'Solved!', g: '4321123421433412' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'A “1” clue requires a 4 to be at the edge.', g: '................', h: ['-1,0'] },
+				{ label: 'There is only one place for a 3 in row 1.', g: '4...............', h: ['1,-1','3,-1'], r: [0] },
+				{ label: 'There is only one place for a 4 in column 4.', g: '4.3.............', h: ['4,2','3,-1'], c: [3] },
+				{ label: 'There is only one place for a 4 in column 2.', g: '4.3............4', h: ['1,-1','3,3'], c: [1] },
+				{ label: 'There is only one place for a 3 in column 4.', g: '4.3...4..4.....4', h: ['2,0','4,2'], c: [3] },
+				{ label: 'The “3” clues now imply the rest of their row/column.', g: '4.3...4334...3.4', h: ['1,-1','4,2'], c: [1], r: [2] },
+				{ label: 'The rest falls into place.', g: '413..2433421.3.4' },
+				{ label: 'Solved!', g: '4132124334212314' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'A “4” clue requires the column to be in order.', h: ['3,-1'], c: [3] },
+				{ label: 'A “1” clue requires a 4 to be at the edge.', g: '...1...2...3...4', h: ['-1,1'], r: [1] },
+				{ label: 'There is only one place for a 4 in column 3 now.', g: '...14..2...3...4', h: ['2,4'], c: [2] },
+				{ label: 'There is only one place for a 3 in column 3 now.', g: '..414..2.4.3...4', h: ['2,4'], c: [2] },
+				{ label: 'The “3” clue disambiguates the rest of the column.', g: '..414.32.4.3...4', h: ['2,4'], c: [2] },
+				{ label: 'The rest falls into place.', g: '..414.32.413..24' },
+				{ label: 'Solved!', g: '3241413224131324' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'A “1” clue requires a 4 to be at the edge.', h: ['1,4', '4,2'] },
+				{ label: 'There is only one place for a 4 in row 2.', g: '...........4.4..', h: ['4,1', '1,3'], r: [1] },
+				{ label: 'The “2” clue in column 3 requires the 3 to be at the bottom.', g: '..4.4......4.4..', h: ['2,4'], c: [2] },
+				{ label: 'There is only one place for a 3 in row 2 now.', g: '..4.4......4.43.', r: [1], h: ['4,1'] },
+				{ label: 'There is only one place for a 3 in row 3 now.', g: '..4.43.....4.43.', r: [2], h: ['1,1', '2,3'] },
+				{ label: 'The “3” clue disambiguates row 2 now.', g: '..4343..3..4.43.', r: [1], h: ['4,1'] },
+				{ label: 'The rest falls into place.', g: '..4343123..4.43.' },
+				{ label: 'Solved!', g: '1243431231242431' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'A “1” clue requires a 4 to be at the edge.', h: ['4,2'] },
+				{ label: 'There is only one place for a 4 in column 2.', g: '...........4....', h: ['1,-1', '1,4'], c: [1] },
+				{ label: 'There is only one place for a 4 in column 1.', g: '.....4.....4....', h: ['0,4'], c: [0] },
+				{ label: 'The “2” clue in column 3 requires the 3 to be at the top.', g: '4....4.....4..4.', h: ['2,-1'], c: [2] },
+				{ label: 'There is only one place for a 3 in column 2 now.', g: '4.3..4.....4..4.', h: ['2,0', '1,4'], c: [1] },
+				{ label: 'There is only one place for a 3 in column 1 now.', g: '4.3..4...3.4..4.', h: ['0,4', '1,2'], c: [0] },
+				{ label: 'The “3” clue disambiguates the rest of column 1.', g: '4.3.34...3.4..43', h: ['0,4'], c: [0] },
+				{ label: 'The rest falls into place.', g: '4.3.34..13.42.43' },
+				{ label: 'Solved!', g: '4231341213242143' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'There is only one place for a 4 in column 2.', h: ['1,-1', '-1,2'], c: [1] },
+				{ label: 'There is only one place for a 4 in row 2.', g: '.............4..', r: [1], h: ['4,1', '1,3'] },
+				{ label: 'There is only one place for a 4 in column 4.', g: '....4........4..', c: [3], h: ['0,1', '3,4'] },
+				{ label: 'And then there is only one place for a 3 in column 4.', g: '...44.....4..4..', c: [3], h: ['4,1', '3,4'] },
+				{ label: 'Now there is only one place for a 3 in column 2.', g: '...44.....43.4..', c: [1], h: ['1,-1', '3,2'] },
+				{ label: 'The “2” clue in row 1 requires the 3 to be on the far left.', g: '...443....43.4..', r: [0], h: ['-1,0'] },
+				{ label: 'The “3” clues now disambiguate rows 2 and 3.', g: '3..443....43.43.', r: [1,2], h: ['-1,2', '4,1'] },
+				{ label: 'The rest falls into place.', g: '3..443121243.43.' },
+				{ label: 'Solved!', g: '3124431212432431' },
+			],
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{ label: 'There is only one place for a 4 in column 3.', h: ['2,-1', '2,4'], c: [2] },
+				{ label: 'There is only one place for a 4 in row 4.', g: '..........4.....', r: [3], h: ['-1,3', '2,4', '3,4'] },
+				{ label: 'There is only one place for a 4 in row 1 now.', g: '..........4..4..', r: [0], h: ['4,0'] },
+				{ label: 'There is only one place for a 3 in row 1 now.', g: '4......4..4..4..', r: [0], h: ['4,0', '2,-1'] },
+				{ label: 'The “3” clue disambiguates the rest of row 1.', g: '43.....4..4..4..', r: [0], h: ['4,0'] },
+				{ label: 'The “2” clue disambiguates column 4 now.', g: '4312...4..4..4..', c: [3], h: ['3,4'] },
+				{ label: 'The rest falls into place.', g: '4312...4..41.4.3' },
+				{ label: 'Solved!', g: '4312213432411423' },
+			]
+		];
+		for (let i of Array(16).fill(null).map((_, index) => index))
 		{
-			let svg = '';
-			if (page.r)
-				svg += page.r.map(str => str.split(',')).map(c => `<rect class='dr' x='${+c[0]+.1}' y='${+c[1]+.1}' width='${c[2]-.2}' height='${c[3]-.2}' stroke='${c[4]}' />`).join('');
-			if (page.c)
-				svg += page.c.map(c => `<circle cx='${c % 10 + .5}' cy='${((c / 10) | 0)+.5}' r='.4' class='dr' stroke='red' />`).join('');
-			if (page.x)
+			createDeductionTracker(`skytracker-${i}`, skydata[i],
+				(page, ix, pages) =>
+				{
+					let svg = '';
+					if (page.g)
+						for (let c = 0; c < 16; c++)
+							if (c < page.g.length && page.g[c] !== '.')
+								svg += `<text x='${c%4+.5}' y='${((c/4)|0)+.75}'>${page.g[c]}</text>`;
+					for (let inf of (page.h ?? []).map(o => o.split(',')))
+						svg += `<circle r='.4' cx='${+inf[0]+.5}' cy='${+inf[1]+.5}' fill='none' stroke-width='.1' stroke='${inf.length > 2 ? inf[2] : 'red'}' />`;
+					for (let r of page.r ?? [])
+						svg += `<rect x='.1' y='${r+.1}' width='3.8' height='.8' fill='none' stroke-width='.1' stroke='red' />`;
+					for (let c of page.c ?? [])
+						svg += `<rect x='${c+.1}' y='.1' width='.8' height='3.8' fill='none' stroke-width='.1' stroke='red' />`;
+					document.querySelector(`#skyscraper-${i}>svg>g.ded`).innerHTML = svg;
+					if (page.s)
+						document.getElementById(`skytracker-${i}`).classList.add('small');
+					else
+						document.getElementById(`skytracker-${i}`).classList.remove('small');
+				},
+				`<div class='titlenum'>#${i+1}</div><div class='wrap'>`, '</div>')();
+		}
+	},
+	ska: function()
+	{
+		let grids = ['2314412314323241', '4213342113422134', '1342421321343421', '3412123441232341', '3124124343122431', '1243431224313124', '3214432121431432', '3241213414234312', '2134124334124321', '4321123421433412', '4132124334212314', '3241413224131324', '1243431231242431', '4231341213242143', '3124431212432431', '4312213432411423'];
+		let hues = [0, 60, 120, 240];
+		createDeductionTracker('skyscraper-big',
+			[
+				{	label: 'Use the left/right arrows to scroll through the logic deductions.',
+					thin: true, big: true,
+					coords: [	[-11,	-1.5],	[-6,	-1.5],	[18,	-1.5],	[23,	-1.5],
+						[-11,	3.5],	[-6,	3.5],	[18,	3.5],	[23,	3.5],
+						[-11,	8.5],	[-6,	8.5],	[18,	8.5],	[23,	8.5],
+						[-11,	13.5],	[-6,	13.5],	[18,	13.5],	[23,	13.5]] },
+				{	label: 'First off: we cannot place a grid just anywhere. This positioning, for example, leaves no room for other grids above it or to its left. The grids must stack neatly into a 4×4 supergrid.',
+					thin: true, big: true,
+					coords: [	[3, 2],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
+						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
+						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
+						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
+				{	label: 'We also cannot place two grids of the same size category in the same superrow or supercolumn, as that would result in numbers that repeat within a row or column.',
+					big: true,
+					h: ['0;4;4;1', '8;4;4;1'],
+					coords: [	[0, 4],	[-6, -1.5],	[18, -1.5],	[8, 4],
+						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
+						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
+						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
+				{	label: 'For ease of reference, we are going to refer to the size categories as “tinies” (red; 1–4), “smallies” (yellow; 5–8), “largies” (green; 9–12) and “hugies” (blue; 13–16).',
+					big: true,
+					coords: [	[-11,	-1.5],	[-6,	-1.5],	[18,	-1.5],	[23,	-1.5],
+						[-11,	3.5],	[-6,	3.5],	[18,	3.5],	[23,	3.5],
+						[-11,	8.5],	[-6,	8.5],	[18,	8.5],	[23,	8.5],
+						[-11,	13.5],	[-6,	13.5],	[18,	13.5],	[23,	13.5]] },
+				{	label: 'Let’s start by asking whether superrow 2 supercolumn 3 can be a hugie.',
+					big: true,
+					s: `<path d='M8 4h4v4H8z' fill='hsl(${hues[3]}, 100%, 93%)' /><text x='10' y='7.5' font-size='4' opacity='.3'>?</text>`,
+					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
+						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
+						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
+						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
+				{	label: 'Since the supercell to the right will necessarily be smaller, the “2” clue necessarily sees at least the circled two cells. To ensure that the “2” clue doesn’t see any further cells, the blue one would need to be a 16.',
+					big: true,
+					s: `<path d='M8 4h4v4H8z' fill='hsl(${hues[3]}, 100%, 93%)' /><text x='10' y='7.5' font-size='4' opacity='.3'>?</text>`,
+					h: ['11;6;blue', '15;6;#0a0', '16;6'],
+					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
+						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
+						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
+						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
+				{	label: 'But if that cell is a 16, then the 11 clue is violated because it can only see at most 10 cells.<br>Therefore, the hugie in that supercolumn must be at the top.',
+					big: true,
+					s: `<path d='M8 4h4v4H8z' fill='hsl(${hues[3]}, 100%, 93%)' /><text x='10' y='7.5' font-size='4' opacity='.3'>?</text><text transform='translate(11.5, 6.7) scale(.8, 1)'>16</text>`,
+					h: ['11;16', '11;6;1;10'],
+					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
+						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
+						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
+						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
+				{	label: 'Now let’s ask whether superrow 2 supercolumn 2 can be a hugie.',
+					big: true,
+					s: `<path d='M8 0h4v4H8z M4 4h4v4H4z' fill='hsl(${hues[3]}, 100%, 93%)' /><text x='6' y='7.5' font-size='4' opacity='.3'>?</text>`,
+					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
+						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
+						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
+						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
+				{	label: 'Well, the “8” clue would only be able to see 8 cells, so they would all have to be in order. However, none of the hugies have their top row in order. Therefore, the hugie in superrow 2 must be on the far right.',
+					big: true,
+					s: `<path d='M8 0h4v4H8z M4 4h4v4H4z' fill='hsl(${hues[3]}, 100%, 93%)' /><text x='6' y='7.5' font-size='4' opacity='.3'>?</text>`,
+					h: ['0;4;8;1', '0;0;4;1;12', '0;0;4;1;13', '0;0;4;1;14', '0;0;4;1;15'],
+					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
+						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
+						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
+						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
+				{	label: 'We can apply the same argument in superrow 3 supercolumn 1. For this to be a hugie, the second row would have to be in order because of the “4” clue, but none of them are.',
+					big: true,
+					s: `<path d='M8 0h4v4H8z M12 4h4v4H12z M0 8h4v4H0z' fill='hsl(${hues[3]}, 100%, 93%)' /><text x='2' y='11.5' font-size='4' opacity='.3'>?</text>`,
+					h: ['0;9;4;1', '0;1;4;1;12', '0;1;4;1;13', '0;1;4;1;14', '0;1;4;1;15'],
+					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
+						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
+						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
+						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
+				{	label: 'Now we know that superrow 4 supercolumn 1 is a hugie, and only one of the hugies can satisfy the “3” clue, so we can place our first grid.',
+					big: true,
+					s: `<path d='M8 0h4v4H8z M12 4h4v4H12z M4 8h4v4H4z M0 12h4v4H0z' fill='hsl(${hues[3]}, 100%, 93%)' />`,
+					h: ['0;13;4;1', '0;1;4;1;12', '0;1;4;1;13', '0;1;4;1;14', '0;1;4;1;15;#0a0', '-1;13'],
+					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
+						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
+						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
+						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
+				{	label: 'With that grid placed, there is now only one hugie left that could satisfy the “2” clue in superrow 2.',
+					big: true,
+					s: `<path d='M8 0h4v4H8z M12 4h4v4H12z M4 8h4v4H4z' fill='hsl(${hues[3]}, 100%, 93%)' />`,
+					h: ['16;6', '0;2;4;1;12', '0;2;4;1;13', '0;2;4;1;14;#0a0', '12;6;4;1'],
+					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
+						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
+						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
+						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[0, 12]] },
+				{	label: 'Now let’s ask if the first hugie would fit in superrow 3 supercolumn 2.',
+					big: true,
+					s: `<path d='M8 0h4v4H8z M4 8h4v4H4z' fill='hsl(${hues[3]}, 100%, 93%)' /><path d='M-11.1 13.4h4.2v4.2h-4.2z' fill='none' stroke='red' stroke-width='.1' /><text x='6' y='11.5' font-size='4' opacity='.3'>?</text>`,
+					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
+						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
+						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
+						[-11, 13.5],	[-6, 13.5],	[12, 4],	[0, 12]] },
+				{	label: 'The “4” clue definitely sees three of the numbers we just placed, so it can only see one more, and that must be the one at the top of the column (green). Therefore, that green must hide (be bigger than) the seven cells below it (blue).',
+					big: true,
+					s: `<path d='M8 0h4v4H8z M4 8h4v4H4z' fill='hsl(${hues[3]}, 100%, 93%)' />`,
+					q: [12],
+					h: ['5;-1', '5;8', '5;9', '5;11', '5;0;#0a0', '5;1;1;7;;hsl(220,50%,50%)'],
+					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
+						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
+						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
+						[4, 8],	[-6, 13.5],	[12, 4],	[0, 12]] },
+				{	label: 'However, none of smallies and largies have a second column starting with the largest digit. One of the tinies does, but if we place a tinie at the top, the “4” clue would see another cell between this tinie and the hugie.',
+					big: true,
+					s: `<path d='M8 0h4v4H8z M4 8h4v4H4z' fill='hsl(${hues[3]}, 100%, 93%)' />`,
+					q: [12],
+					h: ['5;-1', '5;8', '5;9', '5;11', '5;0;#0a0', '5;1;1;7;;hsl(220,50%,50%)', '1;0;1;4;4', '1;0;1;4;5', '1;0;1;4;6', '1;0;1;4;7', '1;0;1;4;8', '1;0;1;4;9', '1;0;1;4;10', '1;0;1;4;11'],
+					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
+						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
+						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
+						[4, 8],	[-6, 13.5],	[12, 4],	[0, 12]] },
+				{	label: 'That allows us to place the remaining hugie.<br>Now let’s take another look at this “11” clue.',
+					h: ['11;16'],
+					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
+						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
+						[-11, 11],	[-6, 11],	[18, 11],	[23, 11],
+						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
+				{	label: 'If any subgrid in supercolumn 3 were hidden — for example, by placing a largie in superrow 3 supercolumn 3 as shown — then the “11” clue could definitely only see a maximum of 10 cells. Therefore, the sizes in supercolumn 3 must be in order.',
+					s: `<path d='M8 8h4v4H8z' fill='hsl(${hues[2]}, 100%, 93%)' /><text x='10' y='11.5' font-size='4' opacity='.3'>?</text>`,
+					h: ['11;16', '11;8;1;8', '11;2;1;2'],
+					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
+						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
+						[-11, 11],	[-6, 11],	[18, 11],	[23, 11],
+						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
+				{	label: 'Let’s examine whether superrow 3 supercolumn 1 can be largie.',
+					s: `<path d='M8 12h4v4H8z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M0 8h4v4H0z M8 4h4v4H8z' fill='hsl(${hues[2]}, 100%, 93%)' /><text x='2' y='11.5' font-size='4' opacity='.3'>?</text>`,
+					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
+						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
+						[-11, 11],	[-6, 11],	[18, 11],	[23, 11],
+						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
+				{	label: 'The “4” clue in row 10 already sees two cells, so it must see exactly two cells in the largie. However, none of the largies fit that description. Therefore, superrow 3 supercolumn 1 is not a largie.',
+					s: `<path d='M8 12h4v4H8z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M0 8h4v4H0z M8 4h4v4H8z' fill='hsl(${hues[2]}, 100%, 93%)' /><text x='2' y='11.5' font-size='4' opacity='.3'>?</text>`,
+					h: ['4;9', '5;9', '0;9;4;1', '0;1;4;1;8', '0;1;4;1;9', '0;1;4;1;10', '0;1;4;1;11'],
+					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
+						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
+						[-11, 11],	[-6, 11],	[18, 11],	[23, 11],
+						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
+				{	label: 'The rest of the sizes now fall into place.',
+					s: `<path d='M8 12h4v4H8z M0 8h4v4H0z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M8 4h4v4H8z M12 8h4v4H12z' fill='hsl(${hues[2]}, 100%, 93%)' />`,
+					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
+						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
+						[-11, 11],	[-6, 11],	[18, 11],	[23, 11],
+						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
+				{	label: 'The “6” clue in row 9 already sees three cells, so it must see exactly three cells in the largie (as the smallie is blocked from view). Only one of the largies fits that description.',
+					s: `<path d='M8 12h4v4H8z M0 8h4v4H0z M4 4h4v4H4z M12 0h4v4H12z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z M0 4h4v4H0z M4 0h4v4H4z M12 12h4v4H12z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M8 4h4v4H8z M12 8h4v4H12z M0 0h4v4H0z M4 12h4v4H4z' fill='hsl(${hues[2]}, 100%, 93%)' />`,
+					h: ['4;8', '6;8', '7;8', '12;8;4;1', '0;0;4;1;8', '0;0;4;1;9', '0;0;4;1;10;#0a0', '0;0;4;1;11', '16;8'],
+					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
+						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
+						[-11, 11],	[-6, 11],	[18, 11],	[23, 11],
+						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
+				{	label: 'The “4” clue in column 6 already sees three cells, so it must see exactly one cell in the largie. Only one of the largies fits that description.',
+					s: `<path d='M8 12h4v4H8z M0 8h4v4H0z M4 4h4v4H4z M12 0h4v4H12z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z M0 4h4v4H0z M4 0h4v4H4z M12 12h4v4H12z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M8 4h4v4H8z M0 0h4v4H0z M4 12h4v4H4z' fill='hsl(${hues[2]}, 100%, 93%)' />`,
+					h: ['1;0;1;4;8', '1;0;1;4;9;#0a0', '1;0;1;4;11', '5;12;1;4', '5;9', '5;10', '5;11', '5;16'],
+					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
+						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
+						[-11, 11],	[-6, 11],	[12, 8],	[23, 11],
+						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
+				{	label: 'The “4” clue in row 10 already sees two cells, so it must see exactly two cells in the tinie. Only one of the tinies fits that description.',
+					h: ['-1;9', '4;9', '5;9', '0;1;4;1;0', '0;1;4;1;1;#0a0', '0;1;4;1;2', '0;1;4;1;3', '0;9;4;1'],
+					s: `<path d='M8 12h4v4H8z M0 8h4v4H0z M4 4h4v4H4z M12 0h4v4H12z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z M0 4h4v4H0z M4 0h4v4H4z M12 12h4v4H12z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M8 4h4v4H8z M0 0h4v4H0z' fill='hsl(${hues[2]}, 100%, 93%)' />`,
+					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
+						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
+						[-11, 11],	[4, 12],	[12, 8],	[23, 11],
+						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
+				{	label: 'The “4” clue in column 6 already sees two cells, so it must see exactly two cells in the smallie (as the tinie is blocked from view). Only one of the smallies fits that description.',
+					h: ['1;0;1;4;4', '1;0;1;4;5', '1;0;1;4;6', '1;0;1;4;7;#0a0', '5;-1', '5;8', '5;9', '5;0;1;4'],
+					s: `<path d='M8 12h4v4H8z M4 4h4v4H4z M12 0h4v4H12z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z M0 4h4v4H0z M4 0h4v4H4z M12 12h4v4H12z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M8 4h4v4H8z M0 0h4v4H0z' fill='hsl(${hues[2]}, 100%, 93%)' />`,
+					coords: [	[-11, 1],	[0, 8],	[18, 1],	[23, 1],
+						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
+						[-11, 11],	[4, 12],	[12, 8],	[23, 11],
+						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
+				{	label: 'The “5” clue in column 15 already sees two cells, so it must see exactly three cells in the tinie. Only one of the tinies fits that description.',
+					s: `<path d='M8 12h4v4H8z M4 4h4v4H4z M12 0h4v4H12z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z M0 4h4v4H0z M12 12h4v4H12z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M8 4h4v4H8z M0 0h4v4H0z' fill='hsl(${hues[2]}, 100%, 93%)' />`,
+					h: ['14;-1', '14;0;1;4', '14;4', '14;6', '2;0;1;4;0', '2;0;1;4;2', '2;0;1;4;3;#0a0'],
+					coords: [	[-11, 1],	[0, 8],	[18, 1],	[23, 1],
+						[-11, 6],	[-6, 6],	[18, 6],	[4, 0],
+						[-11, 11],	[4, 12],	[12, 8],	[23, 11],
+						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
+				{	label: 'The “8” clue in row 5 already sees two cells, so it must see exactly six more. The tinie is blocked from view, and none of the smallies and largies have a top row with the digits in order, so it must see three cells from each. There is only one smallie and one largie that fit this description.',
+					h: ['-1;4', '0;4;4;1', '8;4;4;1', '12;4', '15;4', '0;0;4;1;4', '0;0;4;1;5;#0a0', '0;0;4;1;6', '0;0;4;1;8;#0a0', '0;0;4;1;11'],
+					s: `<path d='M8 12h4v4H8z M4 4h4v4H4z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z M0 4h4v4H0z M12 12h4v4H12z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M8 4h4v4H8z M0 0h4v4H0z' fill='hsl(${hues[2]}, 100%, 93%)' />`,
+					coords: [	[-11, 1],	[0, 8],	[18, 1],	[12, 0],
+						[-11, 6],	[-6, 6],	[18, 6],	[4, 0],
+						[-11, 11],	[4, 12],	[12, 8],	[23, 11],
+						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
+				{	label: 'The “11” clue in column 12 now sees six cells, so it must see exactly five more. There is only one combination of a tinie and a smallie that makes that work.',
+					h: ['11;16', '11;2', '11;3', '11;4', '11;5', '11;6', '11;7', '3;0;1;4;0', '3;0;1;4;2;#0a0', '3;0;1;4;4', '3;0;1;4;6;#0a0'],
+					s: `<path d='M8 12h4v4H8z M4 4h4v4H4z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z M12 12h4v4H12z' fill='hsl(${hues[1]}, 100%, 93%)' />`,
+					coords: [	[-11, 1],	[0, 8],	[18, 1],	[12, 0],
+						[-11, 6],	[0, 4],	[18, 6],	[4, 0],
+						[8, 4],	[4, 12],	[12, 8],	[0, 0],
+						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
+				{	label: 'Solved!',
+					coords: [	[4, 4],	[0, 8],	[8, 12],	[12, 0],
+						[12, 12],	[0, 4],	[8, 8],	[4, 0],
+						[8, 4],	[4, 12],	[12, 8],	[0, 0],
+						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
+			],
+			(page, ix, pages) =>
 			{
-				var x = page.x.split(',');
-				svg += `<path d='${x[0]}' class='dr' stroke='${x[1] || 'red'}' />`;
-			}
-			document.getElementById('deductions').innerHTML = svg;
-			document.getElementById('ded-arrows').innerHTML = page.a ? page.a.map(str => str.split(',')).map(c => `<path d='M0 -.8 -.6 -1.8 H-.25 V-3.3 H.25 V-1.8 H.6z' transform='translate(${+c[0]+.5} ${+c[1]+.5}) rotate(${c[2]})' fill='${c[3] || 'black'}' />`).join('') : '';
-			function set(elem, css, cond) { if (cond) elem.classList.add(css); else elem.classList.remove(css); }
-
-			Array.from(document.querySelectorAll('svg.grid g.grid > rect')).forEach((sq, ix) => { set(sq, 'ruled-out', page.e && page.e.includes(ix)); });
-			Array.from(document.querySelectorAll('svg.grid .star')).forEach((star, ix) => { set(star, 'shown', page.s && page.s >= (star.dataset.star | 0)); });
-		})
+				let sg = '';
+				for (let i of [0, 3, 4, 7, 8, 11, 12, 15, 1, 5, 6, 9, 10, 13, 14, 2])
+				{
+					let ns = '';
+					for (let c = 0; c < 16; c++)
+					{
+						let n = +grids[i][c] + 4*(i>>2);
+						ns += `<text x='0' y='0' transform='translate(${c%4+.5},${((c/4)|0)+.75})${n >= 10 ? ` scale(.8, 1)` : ''}'>${n}</text>`;
+					}
+					sg += `<g transform='translate(${page.coords[i][0]}, ${page.coords[i][1]})'${page.q && page.q.includes(i) ? " opacity='.5'" : ''}><path d="M0 0h4v4h-4z" fill="hsl(${hues[i>>2]}, 100%, 93%)" stroke="black" stroke-width=".075"/>${['','<path fill="none" stroke="black" stroke-width=".05" d="M4 0l.2 -.2M4.05 -.5a.45 .45 0 1 0 .9 0a.45 .45 0 1 0 -.9 0"/>','<path fill="none" stroke="black" stroke-width=".05" d="M0 0l-.2 -.2M-.05 -.5a.45 .45 0 1 0 -.9 0a.45 .45 0 1 0 .9 0"/>',''][i%4]}<path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/>${ns}${page.q && page.q.includes(i) ? `<text x='2' y='3.5' font-size='4' opacity='.3'>?</text>` : ''}</g>`;
+				}
+				for (let inf of page.h ?? [])
+				{
+					let [x, y, w, h, g, c] = inf.split(';');
+					let ox = g ? page.coords[g][0] : 0;
+					let oy = g ? page.coords[g][1] : 0;
+					sg += h	? `<rect x='${+x+ox+.1}' y='${+y+oy+.1}' width='${+w-.2}' height='${+h-.2}' stroke-width='.1' stroke='${c ?? 'red'}' fill='none' />`
+						: `<circle cx='${+x+ox+.5}' cy='${+y+oy+.5}' r='.4' stroke-width='.1' stroke='${w??'red'}' fill='none' />`;
+				}
+				document.getElementById('skyscraper-subgrids').innerHTML = sg;
+				document.getElementById('skyscraper-extra').innerHTML = page.s ?? '';
+				if (page.thin)
+					document.getElementById('skyscraper-svg').classList.remove('thick');
+				else
+					document.getElementById('skyscraper-svg').classList.add('thick');
+				document.getElementById('skyscraper-svg').setAttribute('viewBox', page.big ? '-.2 -1.1 38.4 20.2' : '-.2 .4 38.4 18.2');
+			})();
+	},
+	poa: function()
+	{
+		createDeductionTracker('poa-digits',
+			[
+				{	label: 'Use the left/right arrows to scroll through the logic deductions.',
+					g: '4....2..6986.3...4......1..72..5.3................8.6.6...8...5.41..9..35..2.3.7.',
+				},
+				{	label: 'There is only one place for the 1 in the top-left box.',
+					a: 'g3←,c8↑', h: 'b1g', b: '0',
+					g: '4....2..6986.3...4......1..72..5.3................8.6.6...8...5.41..9..35..2.3.7.',
+				},
+				{
+					label: 'There is only one place for the 6 in the middle-left box.',
+					a: 'c2↓,a7↑,h6←', h: 'b5g', b: '3',
+					g: '41...2..6986.3...4......1..72..5.3................8.6.6...8...5.41..9..35..2.3.7.',
+				},
+				{
+					label: 'There is only one place for the 5 in the bottom-middle box.',
+					a: 'a9→,i7←,e4↓', h: 'd8g', b: '7',
+					g: '41...2..6986.3...4......1..72..5.3...6............8.6.6...8...5.41..9..35..2.3.7.',
+				},
+				{
+					label: 'Row 9 column 2 can only be a 9.',
+					h: 'b1,b2,b4,b5,b8,a9,f9,h9,b9g',
+					g: '41...2..6986.3...4......1..72..5.3...6............8.6.6...8...5.415.9..35..2.3.7.',
+				},
+				{
+					label: 'Row 9 column 3 can only be an 8.',
+					h: 'c9g,c8,d9,f9,b8,a9,a7,h9,b9',
+					g: '41...2..6986.3...4......1..72..5.3...6............8.6.6...8...5.415.9..359.2.3.7.',
+				},
+				{
+					label: 'Row 8 column 1 can only be a 2.',
+					h: 'a8g,c8,i8,b8,a9,a7,a4,c9,b9',
+					g: '41...2..6986.3...4......1..72..5.3...6............8.6.6...8...5.415.9..35982.3.7.',
+				},
+				{
+					label: 'Row 9 column 9 can only be a 1.',
+					h: 'i9g,d9,f9,i2,a9,i1,h9,c9,b9',
+					g: '41...2..6986.3...4......1..72..5.3...6............8.6.6...8...52415.9..35982.3.7.',
+				},
+				{
+					label: 'There is only one place for the 7 in row 8.',
+					h: 'e8g,h9', r: '7',
+					g: '41...2..6986.3...4......1..72..5.3...6............8.6.6...8...52415.9..35982.3.71',
+				},
+				{
+					label: 'There is only one place for the 6 in row 8. The remaining digit to complete the row is an 8.',
+					h: 'g8g', a: 'h6↓', r: '7',
+					g: '41...2..6986.3...4......1..72..5.3...6............8.6.6...8...5241579..35982.3.71',
+				},
+				{
+					label: 'There is only one place in row 9 to place a 6. The remaining digit to complete the row is a 4.',
+					h: 'e9g', a: 'g8↓', r: '8',
+					g: '41...2..6986.3...4......1..72..5.3...6............8.6.6...8...52415796835982.3.71',
+				},
+				{
+					label: 'Row 3 column 1 can only be a 3.',
+					h: 'a3g,b1,a8,a1,a9,a7,a4,b2,a2',
+					g: '41...2..6986.3...4......1..72..5.3...6............8.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for the 8 in column 1. The remaining digit to complete the column is a 1.',
+					c: '0', h: 'a5g', a: 'f6←',
+					g: '41...2..6986.3...43.....1..72..5.3...6............8.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 2 in the top-left box.',
+					a: 'f1←,b4↑', h: 'c3g', b: '0',
+					g: '41...2..6986.3...43.....1..72..5.3..86.......1....8.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 1 in column 5.',
+					c: '4', a: 'b1→,g3←,a6→', h: 'e5g',
+					g: '41...2..6986.3...43.2...1..72..5.3..86.......1....8.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 2 in column 5.',
+					c: '4', h: 'f1,e6g',
+					g: '41...2..6986.3...43.2...1..72..5.3..86..1....1....8.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 4 in column 5. The remaining digit to complete the column is a 9.',
+					c: '4', a: 'a1→', h: 'e3g',
+					g: '41...2..6986.3...43.2...1..72..5.3..86..1....1...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 1 in the middle-right box.',
+					a: 'e5→,g3↓,i9↑', h: 'h4g', b: '5',
+					g: '41..92..6986.3...43.2.4.1..72..5.3..86..1....1...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 4 in the middle-right box.',
+					a: 'i2↓,g9↑', h: 'h5g', b: '5',
+					g: '41..92..6986.3...43.2.4.1..72..5.31.86..1....1...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 2 in column 9.',
+					h: 'i5g', c: '8', a: 'c3→,b4→,e6→',
+					g: '41..92..6986.3...43.2.4.1..72..5.31.86..1..4.1...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for an 8 in the middle-right box.',
+					h: 'i4g', a: 'a5→,f6→', b: '5',
+					g: '41..92..6986.3...43.2.4.1..72..5.31.86..1..421...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for an 8 in the top-right box.',
+					b: '2', a: 'b2→,h8↑,i4↑', h: 'g1g',
+					g: '41..92..6986.3...43.2.4.1..72..5.31886..1..421...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for an 8 in the top-middle box.',
+					b: '1', a: 'b2→,g1←,f6↑', h: 'd3g',
+					g: '41..928.6986.3...43.2.4.1..72..5.31886..1..421...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'Row 1 column 4 can only be a 7.',
+					h: 'b1,f1,e2,e3,d8,i1,d1g,g1,e1',
+					g: '41..928.6986.3...43.284.1..72..5.31886..1..421...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 3 in row 1. The remaining digit to complete the row is a 5.',
+					h: 'a3,h1g', r: '0',
+					g: '41.7928.6986.3...43.284.1..72..5.31886..1..421...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 6 in the top-middle box.',
+					h: 'f3g', a: 'c2→', b: '1',
+					g: '415792836986.3...43.284.1..72..5.31886..1..421...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 5 in the top-middle box. The remaining digit to complete the box is a 1.',
+					b: '1', h: 'f2g', a: 'd8↑',
+					g: '415792836986.3...43.28461..72..5.31886..1..421...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 7 in row 2. The remaining digit to complete the row is a 2.',
+					h: 'g2g', r: '1', a: 'h9↑',
+					g: '415792836986135..43.28461..72..5.31886..1..421...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 5 in the top-right box. The remaining digit to complete the box is a 9.',
+					b: '2', h: 'h3g', a: 'i7↑',
+					g: '4157928369861357243.28461..72..5.31886..1..421...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'Row 5 column 6 can only be a 7.',
+					h: 'f5g,e5,f1,f9,h5,f2,f3,f6,f8',
+					g: '4157928369861357243.284615972..5.31886..1..421...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 1 in column 6. The remaining digit to complete the column is a 4.',
+					h: 'f7g', a: 'h4←', c: '5',
+					g: '4157928369861357243.284615972..5.31886..17.421...28.6.6...8...5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 6 in row 4. The remaining digit to complete the row is a 9.',
+					r: '3', h: 'd4g,b5',
+					g: '4157928369861357243.284615972..5431886..17.421...28.6.6...81..5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 5 in the middle-left box.',
+					b: '3', h: 'b6g', a: 'c1↓',
+					g: '4157928369861357243.284615972965431886..17.421...28.6.6...81..5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 4 in the middle-left box. The remaining digit to complete the box is a 3.',
+					b: '3', h: 'c6g', a: 'h5←',
+					g: '4157928369861357243.284615972965431886..17.4215..28.6.6...81..5241579683598263471',
+				},
+				{
+					label: 'There is only one place for a 5 in row  5. The remaining digit to complete the row is a 9.',
+					h: 'g5g', r: '4', a: 'd8↑',
+					g: '4157928369861357243.2846159729654318863.17.42154.28.6.6...81..5241579683598263471',
+				},
+				{
+					label: 'The remaining digits can be filled in simply by completing rows, columns and boxes with their missing digits.',
+					g: '4157928369861357243.2846159729654318863917542154.28.6.6...81..5241579683598263471',
+				},
+				{
+					label: 'Solved!',
+					g: '415792836986135724372846159729654318863917542154328967637481295241579683598263471',
+				},
+			],
+			(page, ix, pages) =>
+			{
+				let s = '';
+				let colors = {
+					'': 'red',
+					'g': '#0a0',
+				};
+				for (let i = 0; i < 81; i++)
+					if (page.g[i] !== '.')
+						s += `<text x='${i%9+.5}' y='${((i/9)|0)+.72}'>${page.g[i]}</text>`;
+				for (let a of page.a ? page.a.split(',') : [])
+				{
+					let x = a.charCodeAt(0)-97;
+					let y = a.charCodeAt(1)-49;
+					s += `<g fill='none' stroke='red' stroke-width='.1' transform='translate(${x+.5}, ${y+.5})'><circle r='.4' /><path d='M.4 0h${(a[2]==='←'?x:a[2]==='→'?8-x:a[2]==='↑'?y:8-y)+.1}' transform='rotate(${a[2]==='←'?180:a[2]==='→'?0:a[2]==='↑'?270:90})' /></g>`;
+				}
+				for (let h of page.h ? page.h.split(',') : [])
+					s += `<circle cx='${h.charCodeAt(0)-96.5}' cy='${h.charCodeAt(1)-48.5}' r='.4' fill='none' stroke='${colors[h.substr(2)]}' stroke-width='.1' />`;
+				for (let r of page.r ? page.r.split(',') : [])
+					s += `<path fill='none' stroke='${colors[r.substr(1)]}' stroke-width='.1' d='M0 ${r.charCodeAt(0)-48}h9v1H0z' />`;
+				for (let c of page.c ? page.c.split(',') : [])
+					s += `<path fill='none' stroke='${colors[c.substr(1)]}' stroke-width='.1' d='M${c.charCodeAt(0)-48} 0v9h1V0z' />`;
+				for (let b of page.b ? page.b.split(',') : [])
+					s += `<path fill='none' stroke='${colors[b.substr(1)]}' stroke-width='.1' d='M${(b.charCodeAt(0)-48)%3*3} ${(((b.charCodeAt(0)-48)/3)|0)*3}h3v3h-3z' />`;
+				document.querySelector('#poa-digits-svg>.n').innerHTML = s;
+			})();
+		createDeductionTracker('poa-symbols',
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+			],
+			(page, ix, pages) =>
+			{
+			})();
+	}
 });
 </script>
