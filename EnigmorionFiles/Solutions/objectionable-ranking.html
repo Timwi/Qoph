@@ -105,10 +105,45 @@
 	table.r-poad td:not(.r-poac) {
 		text-align: center;
 	}
+
+	#take-the-light-svg {
+		display: block;
+		margin: .1cm auto;
+		width: 19cm;
+	}
+		#take-the-light-svg g.circle-group > g > g > circle {
+			transition: transform .2s;
+		}
+		#take-the-light-svg g.circle-group.hoverable:hover > g > g > circle {
+			transform: scale(2);
+		}
+		#take-the-light-svg.no-circles .circle-group, #take-the-light-svg:not(.no-circles) #kakuro-clues {
+			visibility: hidden;
+		}
+		#take-the-light-svg rect.i {
+			fill: white;
+		}
+		#take-the-light-svg rect.i.on {
+			fill: #ff8;
+		}
+		#take-the-light-svg text {
+			pointer-events: none;
+		}
+	#take-the-light {
+		width: 19cm;
+	}
+
 </style>
 <script src='../../files/solutions.js'></script>
 <h1>Objectionable Ranking</h1>
 <script>
+function setClass(elem, className, setOrNoSet)
+{
+	if (setOrNoSet)
+		elem.classList.add(className);
+	else
+		elem.classList.remove(className);
+}
 let poaIcons = [
 	'data:image/png;base64,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',
 	'data:image/png;base64,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',
@@ -121,6 +156,7 @@ let poaIcons = [
 	'data:image/png;base64,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',
 ];
 makeSolutionPage('objectionable-ranking', `
+
 <h2>Are you Taller than a Skyscraper?</h2>
 <p>We begin by solving all of the 4×4 Skyscraper puzzles.</p>
 <div id='skyscraper-deductions'>
@@ -140,7 +176,7 @@ makeSolutionPage('objectionable-ranking', `
 	<div id='skyscraper-13'><div id='skytracker-13'></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><path fill="none" stroke="black" stroke-width=".05" d="M4 0l.2 -.2M4.05 -.5a.45 .45 0 1 0 .9 0a.45 .45 0 1 0 -.9 0"/><text x="4.5" y="2.8">1</text><text x="1.5" y="-0.2">2</text><text x="0.5" y="4.8">3</text><text x="2.5" y="-0.2">2</text><text x="1.5" y="4.8">3</text><g class='ded'></g></svg></div>
 	<div id='skyscraper-14'><div id='skytracker-14'></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><path d="M0 0l-.2 -.2M-.05 -.5a.45 .45 0 1 0 -.9 0a.45 .45 0 1 0 .9 0" fill="none" stroke="black" stroke-width=".05"/><text x="-0.5" y="0.8">2</text><text x="4.5" y="1.8">3</text><text x="3.5" y="4.8">3</text><text x="-0.5" y="2.8">3</text><text x="1.5" y="-0.2">3</text><g class='ded'></g></svg></div>
 	<div id='skyscraper-15'><div id='skytracker-15'></div><svg font-family='Presquire' viewBox="-1.1 -1.1 6.2 6.2" text-anchor="middle" font-size=".7"><path d="M0 0h4v4h-4z" fill="white" stroke="black" stroke-width=".075"/><path d="M1 0v4M2 0v4M3 0v4M0 1h4M0 2h4M0 3h4" fill="none" stroke="black" stroke-width=".025"/><text x="2.5" y="-0.2">3</text><text x="2.5" y="4.8">2</text><text x="4.5" y="0.8">3</text><text x="-0.5" y="3.8">2</text><text x="3.5" y="4.8">2</text><g class='ded'></g></svg></div>
-</div><p>Now we turn our attention to the bigger grid. It’s pretty clear that it’s not going to be unique on it own as a standalone Skyscraper puzzle. However, [o the size of the grid is 16×16, and we’ve already solved 16 4×4 grids. We should therefore [d arrange the small grids to form a solution to the big grid. But for that we need digits 1–16 instead of just 1–4. Looks like [o the numbers on the left [dska aren’t just to number the grids — they are telling us what digits to use in those grids.]]]]</p>
+</div><p>Now we turn our attention to the bigger grid. It’s pretty clear that it’s not going to be unique on its own as a standalone Skyscraper puzzle. However, [o the size of the grid is 16×16, and we’ve already solved 16 4×4 grids. We should therefore [d arrange the small grids to form a solution to the big grid. But for that we need digits 1–16 instead of just 1–4. Looks like [o the numbers on the left [dska aren’t just to number the grids — they are telling us what digits to use in those grids.]]]]</p>
 {-ska
 <div id='skyscraper-big'></div>
 <svg id='skyscraper-svg' font-family='Presquire' text-anchor="middle" font-size=".7">
@@ -156,6 +192,7 @@ makeSolutionPage('objectionable-ranking', `
 </svg>
 <p>Once we’ve solved the big grid, we can [s obtain the numbers in the circles, add up the pairs as instructed in the original graphics, and read them in the order originally given. We get [rskb «3 = C», «15 = O», «8 + 1 = 9 = I», «5 + 9 = 14 = N», «12 + 13 = 25 = Y».]]</p>}
 {-skb <div class='subanswer'>COINY</div>}
+
 <h2>Power of Achievement</h2>
 <p>This looks awfully much like [d a Sudoku. However, what’s with the extra symbols? Well, [o there are exactly 9 different types of symbol, so it looks like we’re dealing with [dpoa two separate Sudokus — one with digits and one with symbols.]]]</p>
 {-poa
@@ -183,27 +220,184 @@ makeSolutionPage('objectionable-ranking', `
 }
 {-poab
 <table class='bordered r-poad' id='poa-results' style='margin: .1cm auto'>
-	<tr><th>#	</th><th>Icon	</th><th class='ih r-poac'>Achievement name	</th><th class='ih r-poad'>Letter	</th></tr>
-	<tr><td>5	</td><td class='icon'>3	</td><td class='ih r-poac w'>MONS‹T›ER HUNTER	</td><td class='w ih r-poad'>T	</td></tr>
-	<tr><td>9	</td><td class='icon'>5	</td><td class='ih r-poac w'>SLEEP WIT‹H› THE FISHES	</td><td class='w ih r-poad'>H	</td></tr>
-	<tr><td>8	</td><td class='icon'>7	</td><td class='ih r-poac w'>RABBIT S‹E›ASON	</td><td class='w ih r-poad'>E	</td></tr>
-	<tr><td>7	</td><td class='icon'>8	</td><td class='ih r-poac w'>WHERE H‹A›VE YOU BEEN?	</td><td class='w ih r-poad'>A	</td></tr>
-	<tr><td>8	</td><td class='icon'>1	</td><td class='ih r-poac w'>TAKING I‹N›VENTORY	</td><td class='w ih r-poad'>N	</td></tr>
-	<tr><td>6	</td><td class='icon'>9	</td><td class='ih r-poac w'>SUPER ‹S›ONIC	</td><td class='w ih r-poad'>S	</td></tr>
-	<tr><td>5	</td><td class='icon'>4	</td><td class='ih r-poac w'>RENE‹W›ABLE ENERGY	</td><td class='w ih r-poad'>W	</td></tr>
-	<tr><td>3	</td><td class='icon'>8	</td><td class='ih r-poac w'>WH‹E›RE HAVE YOU BEEN?	</td><td class='w ih r-poad'>E	</td></tr>
-	<tr><td>1	</td><td class='icon'>7	</td><td class='ih r-poac w'>‹R›ABBIT SEASON	</td><td class='w ih r-poad'>R	</td></tr>
-	<tr><td>5	</td><td class='icon'>6	</td><td class='ih r-poac w'>PASS‹I›NG THE TIME	</td><td class='w ih r-poad'>I	</td></tr>
-	<tr><td>3	</td><td class='icon'>6	</td><td class='ih r-poac w'>PA‹S›SING THE TIME	</td><td class='w ih r-poad'>S	</td></tr>
-	<tr><td>4	</td><td class='icon'>9	</td><td class='ih r-poac w'>SUP‹E›R SONIC	</td><td class='w ih r-poad'>E	</td></tr>
-	<tr><td>1	</td><td class='icon'>4	</td><td class='ih r-poac w'>‹R›ENEWABLE ENERGY	</td><td class='w ih r-poad'>R	</td></tr>
-	<tr><td>9	</td><td class='icon'>7	</td><td class='ih r-poac w'>RABBIT SE‹A›SON	</td><td class='w ih r-poad'>A	</td></tr>
-	<tr><td>8	</td><td class='icon'>2	</td><td class='ih r-poac w'>FREIGHT ‹S›TATION	</td><td class='w ih r-poad'>S	</td></tr>
-	<tr><td>6	</td><td class='icon'>3	</td><td class='ih r-poac w'>MONST‹E›R HUNTER	</td><td class='w ih r-poad'>E	</td></tr>
-	<tr><td>4	</td><td class='icon'>8	</td><td class='ih r-poac w'>WHE‹R›E HAVE YOU BEEN?	</td><td class='w ih r-poad'>R	</td></tr>
+	<tr><th># </th><th>Icon           </th><th class='ih r-poac'>Achievement name          </th><th class='ih r-poad'>Letter </th></tr>
+	<tr><td>5 </td><td class='icon'>3 </td><td class='ih r-poac w'>MONS‹T›ER HUNTER        </td><td class='w ih r-poad'>T    </td></tr>
+	<tr><td>9 </td><td class='icon'>5 </td><td class='ih r-poac w'>SLEEP WIT‹H› THE FISHES </td><td class='w ih r-poad'>H    </td></tr>
+	<tr><td>8 </td><td class='icon'>7 </td><td class='ih r-poac w'>RABBIT S‹E›ASON         </td><td class='w ih r-poad'>E    </td></tr>
+	<tr><td>7 </td><td class='icon'>8 </td><td class='ih r-poac w'>WHERE H‹A›VE YOU BEEN?  </td><td class='w ih r-poad'>A    </td></tr>
+	<tr><td>8 </td><td class='icon'>1 </td><td class='ih r-poac w'>TAKING I‹N›VENTORY      </td><td class='w ih r-poad'>N    </td></tr>
+	<tr><td>6 </td><td class='icon'>9 </td><td class='ih r-poac w'>SUPER ‹S›ONIC           </td><td class='w ih r-poad'>S    </td></tr>
+	<tr><td>5 </td><td class='icon'>4 </td><td class='ih r-poac w'>RENE‹W›ABLE ENERGY      </td><td class='w ih r-poad'>W    </td></tr>
+	<tr><td>3 </td><td class='icon'>8 </td><td class='ih r-poac w'>WH‹E›RE HAVE YOU BEEN?  </td><td class='w ih r-poad'>E    </td></tr>
+	<tr><td>1 </td><td class='icon'>7 </td><td class='ih r-poac w'>‹R›ABBIT SEASON         </td><td class='w ih r-poad'>R    </td></tr>
+	<tr><td>5 </td><td class='icon'>6 </td><td class='ih r-poac w'>PASS‹I›NG THE TIME      </td><td class='w ih r-poad'>I    </td></tr>
+	<tr><td>3 </td><td class='icon'>6 </td><td class='ih r-poac w'>PA‹S›SING THE TIME      </td><td class='w ih r-poad'>S    </td></tr>
+	<tr><td>4 </td><td class='icon'>9 </td><td class='ih r-poac w'>SUP‹E›R SONIC           </td><td class='w ih r-poad'>E    </td></tr>
+	<tr><td>1 </td><td class='icon'>4 </td><td class='ih r-poac w'>‹R›ENEWABLE ENERGY      </td><td class='w ih r-poad'>R    </td></tr>
+	<tr><td>9 </td><td class='icon'>7 </td><td class='ih r-poac w'>RABBIT SE‹A›SON         </td><td class='w ih r-poad'>A    </td></tr>
+	<tr><td>8 </td><td class='icon'>2 </td><td class='ih r-poac w'>FREIGHT ‹S›TATION       </td><td class='w ih r-poad'>S    </td></tr>
+	<tr><td>6 </td><td class='icon'>3 </td><td class='ih r-poac w'>MONST‹E›R HUNTER        </td><td class='w ih r-poad'>E    </td></tr>
+	<tr><td>4 </td><td class='icon'>8 </td><td class='ih r-poac w'>WHE‹R›E HAVE YOU BEEN?  </td><td class='w ih r-poad'>R    </td></tr>
 </table>
 }
 {-poad <div class='subanswer'>ERASER</div>}
+
+<h2>Take the Light</h2>
+<div id='take-the-light'></div>
+<svg viewBox="-1.35 -1.35 13.7 15.5" id="take-the-light-svg" font-size=".35" text-anchor="middle" stroke-linecap='round'>
+	<defs>
+		<marker id="take-the-light-start-marker" orient="auto" overflow="visible" refX="0" refY="0">
+			<path transform='scale(2) rotate(180)' fill='red' stroke="none" d="m-1.93-1.21 3.28 1.2-3.28 1.21c.53-.71.53-1.68 0-2.41z" />
+		</marker>
+		<marker id="take-the-light-end-marker" orient="auto" overflow="visible" refX="0" refY="0">
+			<path transform='scale(2)' fill='red' stroke="none" d="m-1.93-1.21 3.28 1.2-3.28 1.21c.53-.71.53-1.68 0-2.41z" />
+		</marker>
+	</defs>
+	<rect x="-1" y="-1" width="13" height="13" stroke="none" fill="hsl(220, 10%, 50%)" />
+	<rect class='i' x="0" y="0" width="1" height="1" />
+	<rect class='i' x="1" y="0" width="1" height="1" />
+	<rect class='i' x="2" y="0" width="1" height="1" />
+	<rect class='i' x="4" y="0" width="1" height="1" />
+	<rect class='i' x="5" y="0" width="1" height="1" />
+	<rect class='i' x="6" y="0" width="1" height="1" />
+	<rect class='i' x="8" y="0" width="1" height="1" />
+	<rect class='i' x="9" y="0" width="1" height="1" />
+	<rect class='i' x="10" y="0" width="1" height="1" />
+	<rect class='i' x="0" y="1" width="1" height="1" />
+	<rect class='i' x="1" y="1" width="1" height="1" />
+	<rect class='i' x="2" y="1" width="1" height="1" />
+	<rect class='i' x="4" y="1" width="1" height="1" />
+	<rect class='i' x="5" y="1" width="1" height="1" />
+	<rect class='i' x="6" y="1" width="1" height="1" />
+	<rect class='i' x="8" y="1" width="1" height="1" />
+	<rect class='i' x="9" y="1" width="1" height="1" />
+	<rect class='i' x="10" y="1" width="1" height="1" />
+	<rect class='i' x="0" y="2" width="1" height="1" />
+	<rect class='i' x="1" y="2" width="1" height="1" />
+	<rect class='i' x="2" y="2" width="1" height="1" />
+	<rect class='i' x="3" y="2" width="1" height="1" />
+	<rect class='i' x="5" y="2" width="1" height="1" />
+	<rect class='i' x="6" y="2" width="1" height="1" />
+	<rect class='i' x="7" y="2" width="1" height="1" />
+	<rect class='i' x="8" y="2" width="1" height="1" />
+	<rect class='i' x="9" y="2" width="1" height="1" />
+	<rect class='i' x="10" y="2" width="1" height="1" />
+	<rect class='i' x="2" y="3" width="1" height="1" />
+	<rect class='i' x="3" y="3" width="1" height="1" />
+	<rect class='i' x="4" y="3" width="1" height="1" />
+	<rect class='i' x="6" y="3" width="1" height="1" />
+	<rect class='i' x="7" y="3" width="1" height="1" />
+	<rect class='i' x="8" y="3" width="1" height="1" />
+	<rect class='i' x="0" y="4" width="1" height="1" />
+	<rect class='i' x="1" y="4" width="1" height="1" />
+	<rect class='i' x="2" y="4" width="1" height="1" />
+	<rect class='i' x="3" y="4" width="1" height="1" />
+	<rect class='i' x="4" y="4" width="1" height="1" />
+	<rect class='i' x="5" y="4" width="1" height="1" />
+	<rect class='i' x="6" y="4" width="1" height="1" />
+	<rect class='i' x="7" y="4" width="1" height="1" />
+	<rect class='i' x="9" y="4" width="1" height="1" />
+	<rect class='i' x="10" y="4" width="1" height="1" />
+	<rect class='i' x="0" y="5" width="1" height="1" />
+	<rect class='i' x="1" y="5" width="1" height="1" />
+	<rect class='i' x="2" y="5" width="1" height="1" />
+	<rect class='i' x="4" y="5" width="1" height="1" />
+	<rect class='i' x="5" y="5" width="1" height="1" />
+	<rect class='i' x="6" y="5" width="1" height="1" />
+	<rect class='i' x="8" y="5" width="1" height="1" />
+	<rect class='i' x="9" y="5" width="1" height="1" />
+	<rect class='i' x="10" y="5" width="1" height="1" />
+	<rect class='i' x="0" y="6" width="1" height="1" />
+	<rect class='i' x="1" y="6" width="1" height="1" />
+	<rect class='i' x="3" y="6" width="1" height="1" />
+	<rect class='i' x="4" y="6" width="1" height="1" />
+	<rect class='i' x="5" y="6" width="1" height="1" />
+	<rect class='i' x="6" y="6" width="1" height="1" />
+	<rect class='i' x="7" y="6" width="1" height="1" />
+	<rect class='i' x="8" y="6" width="1" height="1" />
+	<rect class='i' x="9" y="6" width="1" height="1" />
+	<rect class='i' x="10" y="6" width="1" height="1" />
+	<rect class='i' x="2" y="7" width="1" height="1" />
+	<rect class='i' x="3" y="7" width="1" height="1" />
+	<rect class='i' x="4" y="7" width="1" height="1" />
+	<rect class='i' x="6" y="7" width="1" height="1" />
+	<rect class='i' x="7" y="7" width="1" height="1" />
+	<rect class='i' x="8" y="7" width="1" height="1" />
+	<rect class='i' x="0" y="8" width="1" height="1" />
+	<rect class='i' x="1" y="8" width="1" height="1" />
+	<rect class='i' x="2" y="8" width="1" height="1" />
+	<rect class='i' x="3" y="8" width="1" height="1" />
+	<rect class='i' x="4" y="8" width="1" height="1" />
+	<rect class='i' x="5" y="8" width="1" height="1" />
+	<rect class='i' x="7" y="8" width="1" height="1" />
+	<rect class='i' x="8" y="8" width="1" height="1" />
+	<rect class='i' x="9" y="8" width="1" height="1" />
+	<rect class='i' x="10" y="8" width="1" height="1" />
+	<rect class='i' x="0" y="9" width="1" height="1" />
+	<rect class='i' x="1" y="9" width="1" height="1" />
+	<rect class='i' x="2" y="9" width="1" height="1" />
+	<rect class='i' x="4" y="9" width="1" height="1" />
+	<rect class='i' x="5" y="9" width="1" height="1" />
+	<rect class='i' x="6" y="9" width="1" height="1" />
+	<rect class='i' x="8" y="9" width="1" height="1" />
+	<rect class='i' x="9" y="9" width="1" height="1" />
+	<rect class='i' x="10" y="9" width="1" height="1" />
+	<rect class='i' x="0" y="10" width="1" height="1" />
+	<rect class='i' x="1" y="10" width="1" height="1" />
+	<rect class='i' x="2" y="10" width="1" height="1" />
+	<rect class='i' x="4" y="10" width="1" height="1" />
+	<rect class='i' x="5" y="10" width="1" height="1" />
+	<rect class='i' x="6" y="10" width="1" height="1" />
+	<rect class='i' x="8" y="10" width="1" height="1" />
+	<rect class='i' x="9" y="10" width="1" height="1" />
+	<rect class='i' x="10" y="10" width="1" height="1" />
+	<path fill="none" stroke="hsl(220, 10%, 75%)" stroke-width=".025" d="M -1 0 12 0M -1 1 12 1M -1 2 12 2M -1 3 12 3M -1 4 12 4M -1 5 12 5M -1 6 12 6M -1 7 12 7M -1 8 12 8M -1 9 12 9M -1 10 12 10M -1 11 12 11M 0 -1 0 12M 1 -1 1 12M 2 -1 2 12M 3 -1 3 12M 4 -1 4 12M 5 -1 5 12M 6 -1 6 12M 7 -1 7 12M 8 -1 8 12M 9 -1 9 12M 10 -1 10 12M 11 -1 11 12M-1 0 l 1 1M3 0 l 1 1M7 0 l 1 1M-1 1 l 1 1M3 1 l 1 1M7 1 l 1 1M-1 2 l 1 1M4 2 l 1 1M1 3 l 1 1M5 3 l 1 1M-1 4 l 1 1M8 4 l 1 1M-1 5 l 1 1M3 5 l 1 1M7 5 l 1 1M-1 6 l 1 1M2 6 l 1 1M1 7 l 1 1M5 7 l 1 1M-1 8 l 1 1M6 8 l 1 1M-1 9 l 1 1M3 9 l 1 1M7 9 l 1 1M-1 10 l 1 1M3 10 l 1 1M7 10 l 1 1M0 -1 l 1 1M0 3 l 1 1M0 7 l 1 1M1 -1 l 1 1M2 -1 l 1 1M4 -1 l 1 1M5 -1 l 1 1M6 -1 l 1 1M8 -1 l 1 1M9 -1 l 1 1M9 3 l 1 1M9 7 l 1 1M10 -1 l 1 1M10 3 l 1 1M10 7 l 1 1" />
+	<rect x="-1.0125" y="-1.0125" width="13.025" height="13.025" stroke="black" stroke-width=".05" fill="none" />
+	<g stroke="black" stroke-width=".05">
+		<g class="hoverable circle-group" fill="hsl(0, 70%, 50%)">
+			<g transform="translate(3.5 -.5)" class='p'><g><circle r=".4" /></g></g>
+			<g transform="translate(3.5 11.5)" class='p'><g><circle r=".4" /></g></g>
+			<g transform="translate(1.75 13)"><g><circle r=".4" /></g></g>
+		</g>
+		<g class="hoverable circle-group" fill="hsl(60, 70%, 50%)">
+			<g transform="translate(-.5 3.5)" class='p'><g><circle r=".4" /></g></g>
+			<g transform="translate(7.5 11.5)" class='p'><g><circle r=".4" /></g></g>
+			<g transform="translate(3.25 13)"><g><circle r=".4" /></g></g>
+		</g>
+		<g class="hoverable circle-group" fill="hsl(120, 70%, 50%)">
+			<g transform="translate(7.5 -.5)" class='p'><g><circle r=".4" /></g></g>
+			<g transform="translate(-.5 9.5)" class='p'><g><circle r=".4" /></g></g>
+			<g transform="translate(4.75 13)"><g><circle r=".4" /></g></g>
+		</g>
+		<g class="hoverable circle-group" fill="hsl(180, 70%, 50%)">
+			<g transform="translate(7.5 1.5)" class='p'><g><circle r=".4" /></g></g>
+			<g transform="translate(-.5 7.5)" class='p'><g><circle r=".4" /></g></g>
+			<g transform="translate(6.25 13)"><g><circle r=".4" /></g></g>
+		</g>
+		<g class="hoverable circle-group" fill="hsl(240, 70%, 50%)">
+			<g transform="translate(2.5 6.5)" class='p'><g><circle r=".4" /></g></g>
+			<g transform="translate(9.5 7.5)" class='p'><g><circle r=".4" /></g></g>
+			<g transform="translate(7.75 13)"><g><circle r=".4" /></g></g>
+		</g>
+		<g class="hoverable circle-group" fill="hsl(300, 70%, 50%)">
+			<g transform="translate(5.5 3.5)" class='p'><g><circle r=".4" /></g></g>
+			<g transform="translate(11.5 7.5)" class='p'><g><circle r=".4" /></g></g>
+			<g transform="translate(9.25 13)"><g><circle r=".4" /></g></g>
+		</g>
+		<g class="circle-group" fill='#aaa'>
+			<g transform="translate(11.5 3.5)" class='p'><g data-r='.3'><circle r=".4" /></g></g>
+			<g transform="translate(5.6 7.6)" class='p' data-r='.3'><g><circle r=".3" /></g></g>
+			<g transform="translate(5.4 7.4)" class='p' data-r='.3'><g><circle r=".3" /></g></g>
+		</g>
+	</g>
+	<g id='kakuro-clues'><text x="-0.3" y="0.4" fill="white">19</text><text x="3.7" y="0.4" fill="white">21</text><text x="7.7" y="0.4" fill="white">12</text><text x="-0.3" y="1.4" fill="white">8</text><text x="3.7" y="1.4" fill="white">8</text><text x="7.7" y="1.4" fill="white">8</text><text x="-0.3" y="2.4" fill="white">12</text><text x="4.7" y="2.4" fill="white">29</text><text x="1.7" y="3.4" fill="white">14</text><text x="5.7" y="3.4" fill="white">21</text><text x="-0.3" y="4.4" fill="white">38</text><text x="8.7" y="4.4" fill="white">12</text><text x="-0.3" y="5.4" fill="white">17</text><text x="3.7" y="5.4" fill="white">17</text><text x="7.7" y="5.4" fill="white">18</text><text x="-0.3" y="6.4" fill="white">8</text><text x="2.7" y="6.4" fill="white">41</text><text x="1.7" y="7.4" fill="white">17</text><text x="5.7" y="7.4" fill="white">19</text><text x="-0.3" y="8.4" fill="white">26</text><text x="6.7" y="8.4" fill="white">14</text><text x="-0.3" y="9.4" fill="white">8</text><text x="3.7" y="9.4" fill="white">17</text><text x="7.7" y="9.4" fill="white">9</text><text x="-0.3" y="10.4" fill="white">22</text><text x="3.7" y="10.4" fill="white">6</text><text x="7.7" y="10.4" fill="white">14</text><text x="0.3" y="-0.15" fill="white">8</text><text x="0.3" y="3.85" fill="white">10</text><text x="0.3" y="7.85" fill="white">15</text><text x="1.3" y="-0.15" fill="white">20</text><text x="1.3" y="3.85" fill="white">23</text><text x="1.3" y="7.85" fill="white">22</text><text x="2.3" y="-0.15" fill="white">31</text><text x="2.3" y="6.85" fill="white">14</text><text x="3.3" y="1.85" fill="white">13</text><text x="3.3" y="5.85" fill="white">7</text><text x="4.3" y="-0.15" fill="white">14</text><text x="4.3" y="2.85" fill="white">36</text><text x="5.3" y="-0.15" fill="white">10</text><text x="5.3" y="3.85" fill="white">19</text><text x="5.3" y="7.85" fill="white">7</text><text x="6.3" y="-0.15" fill="white">37</text><text x="6.3" y="8.85" fill="white">9</text><text x="7.3" y="1.85" fill="white">13</text><text x="7.3" y="5.85" fill="white">10</text><text x="8.3" y="-0.15" fill="white">21</text><text x="8.3" y="4.85" fill="white">30</text><text x="9.3" y="-0.15" fill="white">22</text><text x="9.3" y="3.85" fill="white">18</text><text x="9.3" y="7.85" fill="white">22</text><text x="10.3" y="-0.15" fill="white">9</text><text x="10.3" y="3.85" fill="white">7</text><text x="10.3" y="7.85" fill="white">8</text></g>
+	<g id='take-the-light-digits'></g>
+</svg>
+<p>Once both the Kakuro and the Akari-Tents hybrid are solved, [s we can look at the digits that the lamps are on. [o There is a row of circles below the puzzle, which has only one circle of each color, so [d it tells us which order to process the colors and to add the lamps of the same color. [rttl]]]]</p>
+{-ttl
+<p>Red: «9+5 = 14 = N», yellow: «3+2 = 5 = E», green: «3+2 = 5 = E», cyan: «2+2 = 4 = D», blue: «5+7 = 12 = L», purple: «2+3 = 5 = E».</p>
+<div class='subanswer'>NEEDLE</div>
+}
 {-e <div class='answer'>???????????????</div>}
 `, {
 	reset: function()
@@ -398,13 +592,371 @@ makeSolutionPage('objectionable-ranking', `
 					for (let c of page.c ?? [])
 						svg += `<rect x='${c+.1}' y='.1' width='.8' height='3.8' fill='none' stroke-width='.1' stroke='red' />`;
 					document.querySelector(`#skyscraper-${i}>svg>g.ded`).innerHTML = svg;
-					if (page.s)
-						document.getElementById(`skytracker-${i}`).classList.add('small');
-					else
-						document.getElementById(`skytracker-${i}`).classList.remove('small');
+					setClass(document.getElementById(`skytracker-${i}`), 'small', page.s);
 				},
 				`<div class='titlenum'>#${i+1}</div><div class='wrap'>`, '</div>')();
 		}
+
+		createDeductionTracker('take-the-light',
+			[
+				{
+					label: 'Use the left/right arrows to scroll through the logic deductions.',
+					g: '.........................................................................................................................',
+				},
+				{
+					label: 'A “6” with three cells must consist of the digits 1, 2, 3 in some order.',
+					h: 'e12h3',
+					g: '.........................................................................................................................',
+				},
+				{
+					label: 'A “7” with three cells must consist of the digits 1, 2, 4 in some order.',
+					h: 'e7v3,g9v3,l5v3',
+					g: '..................................................................................................................[123][123][123]....',
+				},
+				{
+					label: 'There’s only one way to fill in this 12 clue, as there are no digits larger than 9.',
+					h: 'j6h2',
+					g: '......................................................[124]..........[124]...[124]......[124]...[124]..........[124].[124]..........[124].........[123][12][123]....',
+				},
+				{
+					label: 'Since the rightmost cell in this “18” clue is at most 2, the other cells must add up to at least 16, so they must be 7+9 or 8+9.',
+					h: 'i7h3',
+					g: '.....................................................84..........[12]...[124]......[12]...[124]..........[124].[124]..........[124].........[123][12][123]....',
+				},
+				{
+					label: 'Since the top two cells in this “18” clue add up to either 15 or 17, the remaining cell must be 1 or 3.',
+					h: 'k5v3',
+					g: '.....................................................84........[789][79][12]...[124]......[12]...[124]..........[124].[124]..........[124].........[123][12][123]....',
+				},
+				{
+					label: 'Remember that the numbers from 1 to 9 add up to 45. This clue says “41” and it has 8 cells, so it must be missing the 4.',
+					h: 'd8h8',
+					g: '.....................................................84........[789][79][12]...[124].....[13][12]...[124]..........[124].[124]..........[124].........[123][12][123]....',
+				},
+				{
+					label: 'This creates a 1-2 pair in this run (green), so the 1/3 cell (blue) cannot be a 1. It must be a 3.',
+					h: 'd8h8,e8=#0a0,l8=#0a0,k8=#27f',
+					g: '.....................................................84........[789][79][12]...[12].....[13][12]...[124]..........[124].[124]..........[124].........[123][12][123]....',
+				},
+				{
+					label: 'This “18” clue is now forced because the maximum sum we can make is 9+7+2 = 18, so the numbers can’t go lower than the maximum.',
+					h: 'i7h3',
+					g: '.....................................................84........[789]7[12]...[12].....3[12]...[124]..........[124].[124]..........[124].........[123][12][123]....',
+				},
+				{
+					label: 'That 2 (green) now settles the 1-2 pair in this run.',
+					h: 'd8h8,l7=#0a0',
+					g: '.....................................................84........972...[12].....3[12]...[124]..........[124].[124]..........[124].........[123][12][123]....',
+				},
+				{
+					label: 'Since any two cells can only add up to a maximum of 8+9 = 17, these cells must all be at least 5 to get to 22.',
+					h: 'k1v3,c9v3',
+					g: '.....................................................84........972...2.....31...[14]..........[14].[124]..........[124].........[123][12][123]....',
+				},
+				{
+					label: 'But now the smallest values that can be entered in these “8” clues are 1+5+2 = 8, so they can’t go any higher.',
+					h: 'i3h3,a11h3',
+					g: '.........[56789]..........[56789]..........[56789].....................84........972...2.....31...[14]........[56789].[14].[124]......[56789]...[124]......[56789]..[123][12][123]....',
+				},
+				{
+					label: 'Since the middle cell in this “12” clue is 8 or 9, the other cells must be 1+2 = 3 or 1+3 = 4.',
+					h: 'i2h3',
+					g: '.........[89].........[12]5[12].........[89].....................84........972...2.....31...[14]........[89].[14].[124].....[12]5[12]..[124]......[89]..[123][12][123]....',
+				},
+				{
+					label: 'Notice that the two cells under the “21” clue (blue) cannot be a 3 and 2, because that would make the cells on the right (green) both 1s. Therefore, those blue cells are at most 3+1 = 4.',
+					h: 'j2=#27f,j3=#27f,l2=#0a0,l3=#0a0',
+					g: '........[123][89][123]........[12]5[12].........[89].....................84........972...2.....31...[14]........[89].[14].[124].....[12]5[12]..[124]......[89]..[123][12][123]....',
+				},
+				{
+					label: 'But then the other two cells in this “21” clue (orange) must be at least 17, which is also the most they can be (8+9). Therefore, that is what they are.',
+					h: 'j2=#27f,j3=#27f,j4=#fa0,j5=#fa0,j1v4',
+					g: '........[123][89][123]........[12]5[12].........[89].....................84........972...2.....31...[14]........[89].[14].[124].....[12]5[12]..[124]......[89]..[123][12][123]....',
+				},
+				{
+					label: 'This “29” clue now already has 8+9+6 = 23. The remaining cells must therefore be 1+2+3 = 6.',
+					h: 'f4h6',
+					g: '........381........152........896........9...........84........972...2.....31...[14]........[89].[14].[124].....[12]5[12]..[124]......[89]..[123][12][123]....',
+				},
+				{
+					label: 'This “14” clue can only be 5+9 or 6+8.',
+					h: 'f1v2',
+					g: '........381........152.....[123][123][123]896........9...........84........972...2.....31...[14]........[89].[14].[124].....[12]5[12]..[124]......[89]..[123][12][123]....',
+				},
+				{
+					label: 'But now the smallest values that can be entered in this “8” clue are 5+1+2 = 8, so they can’t go any higher.',
+					h: 'e3h3',
+					g: '....[5689]...381....[5689]...152.....[123][123][123]896........9...........84........972...2.....31...[14]........[89].[14].[124].....[12]5[12]..[124]......[89]..[123][12][123]....',
+				},
+				{
+					label: 'A “23” with three cells must consist of the digits 6, 8, 9 in some order.',
+					h: 'c5v3',
+					g: '....9...381....5[12][12].152.....[123][123][123]896........9...........84........972...2.....31...[14]........[89].[14].[124].....[12]5[12]..[124]......[89]..[123][12][123]....',
+				},
+				{
+					label: 'Now this “8” clue can only filled in as 2+6.',
+					h: 'a8h2',
+					g: '....9...381....5[12][12].152.....[123][123][123]896........9...[689].......84.[689]......972.[689].2.....31...[14]........[89].[14].[124].....[12]5[12]..[124]......[89]..[123][12][123]....',
+				},
+				{
+					label: 'Remember that the numbers from 1 to 9 add up to 45. This clue says “36” and it has 8 cells, so it must be missing the 9.',
+					h: 'f4v8',
+					g: '....9...381....5[12][12].152.....[123][123][123]896........9...[89].......84.[89]......97226.2.....31...[14]........[89].[14].[124].....[12]5[12]..[124]......[89]..[123][12][123]....',
+				},
+				{
+					label: 'This run can also not contain a 9 because then the minimum possible sum would already be 1+2+3+9 = 15.',
+					h: 'd8v4',
+					g: '....9...381....5[12][12].152.....[123][123][123]896........9...[89].......84.[89]......97226.2.....31...[14][not 9].......[89].[14].[124].....[12]5[12]..[124]......[89]..[123][12][123]....',
+				},
+				{
+					label: 'We can now see that this “17” clue cannot have a 1 in the middle. If it did, the other two digits would have to be 7 and 9. Therefore it’s a 4 and the rest is 5+8 or 6+7.',
+					h: 'c9h3',
+					g: '....9...381....5[12][12].152.....[123][123][123]896........9...[89].......84.[89]......97226.2.....31..[not 9][14][not 9].......[89].[14].[124].....[12]5[12]..[124]......[89]..[123][12][123]....',
+				},
+				{
+					label: 'As before, a “22” clue with three cells requires all digits to be at least 5.',
+					h: 'a12h3',
+					g: '....9...381....5[12][12].152.....[123][123][123]896........9...[89].......84.[89]......97226.2.....31..[5678]4[5678].......[89].1.[24].....[12]5[12]..[124]......[89]..[123][12][123]....',
+				},
+				{
+					label: 'We can now see that the cells in the “14” clue add up to at least 5+1+2+6 = 14, so they cannot be any higher.',
+					h: 'd8v4',
+					g: '....9...381....5[12][12].152.....[123][123][123]896........9...[89].......84.[89]......97226.2.....31..[5678]4[5678].......[89].1.[24].....[12]5[12]..[124].....[56789][89][5678].[123][12][123]....',
+				},
+				{
+					label: 'Let’s write down the remaining possibilities for this “15” clue. In particular, note that the top cell can’t be 4 and therefore the bottom cell can’t be 9.',
+					h: 'b9v3',
+					g: '....9...381....5[12][12].152.....[123][123][123]896........9...[89].......84.[89]......97226.2.....31..[56]4[78].......[89]21.4.....251..[12].....[56789][89][56].[123][12][123]....',
+				},
+				{
+					label: 'We can now see that the middle cell of this “22” clue can’t be an 8. There is simply no way for the remaining digits to add up to 14 without re-using the 8.',
+					h: 'a12h3',
+					g: '....9...381....5[12][12].152.....[123][123][123]896........9...[89].......84.[89]......97226.2.....31..[56]4[78]......[5678][89]21.4.....251..[12].....[5678][89][56].[123][12][123]....',
+				},
+				{
+					label: 'This “17” clue can no longer have a 1 in the middle. With no 9 possible on either side, the only possible combination is 7+2+8.',
+					h: 'e11h3',
+					g: '....9...381....5[12][12].152.....[123][123][123]896........9...[89].......84.[89]......97226.2.....31..[56]4[78]......[56]821[56]4.....251.[not 9][12][not 9]....[78]9[56].[123][12][123]....',
+				},
+				{
+					label: 'The “9” can now be decided, because its minimum possible values already add up to 7+2 = 9. Note that this disambiguates the entire chain marked here in blue.',
+					h: 'h10v2,f11=#27f,f9=#27f,d9=#27f,d12=#27f,b12=#27f,b10=#27f,f10=#27f,f12=#27f',
+					g: '....9...381....5[12][12].152.....[123][123][123]896........9...[89].......84.[89]......97226.2.....31..[56]4[78]......[56]821[56]4.....251.[78]2[78]....[78]9[56].[23]1[23]....',
+				},
+				{
+					label: 'This cell now has only one possible value.',
+					h: 'f8=#0a0',
+					g: '....9...381....5[12][12].152.....[123][123][123]896........9...[89].......84.[89]......97226.2[not 4\nnot 9]....31..647......582164.....251.827....895.312....',
+				},
+				{
+					label: 'With the top cell in this run pretty high now, the only combinations for this “10” clue are 6+1+3 and 7+1+2.',
+					h: 'i7v3',
+					g: '....9...381....5[12][12].152.....[123][123][123]896....[124]...9...[89]..[124]....84.[89]..[124]...97226.25[6789][6789][6789][678]31..647......582164.....251.827....895.312....',
+				},
+				{
+					label: 'The “19” clue, however, cannot have a 1 in the middle. The only possible combinations are now 9+2+8 or 9+3+7.',
+					h: 'g9h3',
+					g: '....9...381....5[12][12].152.....[123][123][123]896....[124]...9...[89]..[124]....84.[89]..[124]...97226.25[6789][6789][67][678]31..647..[123]...582164.[123]...251.827....895.312....',
+				},
+				{
+					label: 'Remember that the numbers from 1 to 9 add up to 45. This clue says “37” and it has 8 cells, so it must be missing the 8.',
+					h: 'h1v8',
+					g: '....9...381....5[12][12].152.....[123][123][123]896....[124]...9...[89]..[124]....84.[89]..[124]...97226.25[6789][678][67][678]31..647.9[23][78]..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'Now there’s only one place for the 8 and 9 in the “41” clue. This also disambiguates a small chain.',
+					h: 'd8h8',
+					g: '....9...381....5[12][12].152.....[123][123][123]896....[124]...9...[89]..[124]....84.[89]..[124]...97226.25[6789][67][67][678]31..647.9[23][78]..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'That 7 we just placed in the “37” clue will now help us fill in this “21” clue.',
+					h: 'e2h3',
+					g: '....9.[not 8].381....5[12][12].152.....[123][123][123]896....[124]...9...[89]..[124]....84.[89]..[124]...97226.25976831..647.937..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'This “17” clue can no longer contain a 9. The only combinations left for it are 2+7+8, 4+5+8 and 4+7+6.',
+					h: 'e7h3',
+					g: '....975.381....5[12][12].152.....[12][123][123]896....[124]...9...[89]..[124]....84.[89]..[124]...97226.25976831..647.937..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'But the “19” clue doesn’t like that 5 because it would repeat, and the “37” clue doesn’t like 8s.',
+					h: 'g5v3,h1v8',
+					g: '....975.381....5[12][12].152.....[12][123][123]896....[124]...9...[89]..[124]....84.[89]..[24][57][68].97226.25976831..647.937..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'The “21” clue can be narrowed down. The only combination that is still possible is 4+8+9.',
+					h: 'g5h3',
+					g: '....975.381....5[12][12].152.....[12][123][123]896....[12].[1234].9...[89]..[12]3[124]..84.[89]..476.97226.25976831..647.937..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'That leaves only one place for the 3 in the “37” clue.',
+					h: 'h1v8,h4=#0a0',
+					g: '....975.381....5[12][12].152.....[12][123][123]896....[12].489...[89]..[12]3[12]..84.[89]..476.97226.25976831..647.937..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'The “13” clue can now be filled in because the bottom cell can no longer be a 3. This disambiguates all of the 1-2 pairs.',
+					h: 'i3v3',
+					g: '....975.381....5[12][12].152.....[12]3[12]896....[12].489...[89]..[12]3[12][not 3].84.[89]..476.97226.25976831..647.937..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'The “10” clue has only one combination left: 5+3+2.',
+					h: 'b5v3',
+					g: '....975.381....512.152.....231896....1.489..[5689][89][5689][5689]2314.84.[89]..476.97226.25976831..647.937..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'Digits in this “12” can only go up to 6. With a 7 you’d get a minimum of 7+1+2+3 = 13, which is too much.',
+					h: 'a4h4',
+					g: '....975.381....512.152.....231896....1.489..5[89][689][689]2314.843[89][56].476.97226.25976831..647.937..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'Digits in this “8” can only go up to 5. With a 6 you’d get a minimum of 6+1+2 = 9, which is too much.',
+					h: 'a3h3',
+					g: '....975.381....512.152[≤ 6][≤ 6][≤ 6][≤ 6].231896....1.489..5[89][689][689]2314.843[89][56].476.97226.25976831..647.937..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'The maximum possible sum for this “20” clue is now 9+5+6 = 20, so it can’t be any lower.',
+					h: 'c1v3',
+					g: '....975.381[≤ 5][≤ 5][≤ 5].512.152[≤ 6][≤ 6][≤ 6][≤ 6].231896....1.489..5[89][689][689]2314.843[89][56].476.97226.25976831..647.937..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'The “19” clue could be filled in many ways, but it certainly can’t contain 5s (they would repeat).',
+					h: 'a2h3',
+					g: '.9..975.381[12]5[12].512.152[123]6[123][123].231896....1.489..5[89][689][689]2314.843[89][56].476.97226.25976831..647.937..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'That leaves this “8” clue with only one combination: it must be 4+1+3. This disambiguates the entire top-left quadrant.',
+					h: 'b1v3',
+					g: '[not 5]9[not 5].975.381[12]5[12].512.152[123]6[123][123].231896....1.489..5[89][689][689]2314.843[89][56].476.97226.25976831..647.937..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'This “30” clue already has 9+8+7 = 24. The remaining 6 can only be 1+2+3.',
+					h: 'j6v6',
+					g: '496.975.381152.512.1523612.231896..851.489..58962314.84395.476.97226.25976831..647.937..582164.1...251.827....895.312....',
+				},
+				{
+					label: 'The “14” clue cannot contain a 9. If it did, the minimum sum would be 9+1+2+3 = 15, which is too much already.',
+					h: 'h10h4',
+					g: '496.975.381152.512.1523612.231896..851.489..58962314.84395.476.97226.25976831..647.937..582164.1[23]..251.827.[123]..895.312.[123]..',
+				},
+				{
+					label: 'The “9” clue obviously cannot contain a 9 either.',
+					h: 'i11h3',
+					g: '496.975.381152.512.1523612.231896..851.489..58962314.84395.476.97226.25976831..647.937..582164.1[23][not 9].251.827.[123]..895.312.[123]..',
+				},
+				{
+					label: 'However, the “22” clue requires a 9. Without it, it could only reach a maximum sum of 8+7+6 = 21.',
+					h: 'k9v3',
+					g: '496.975.381152.512.1523612.231896..851.489..58962314.84395.476.97226.25976831..647.937..582164.1[23][not 9].251.827.[123][not 9].895.312.[123]..',
+				},
+				{
+					label: 'Similarly, the “8” clue requires a 1. Without it, it would have a minimum sum of 2+3+4 = 9, which is already too much.',
+					h: 'l9v3',
+					g: '496.975.381152.512.1523612.231896..851.489..58962314.84395.476.97226.25976831..647.937..582164.1[23][5678][not 1]251.827.[123][5678].895.312.[123]9[234]',
+				},
+				{
+					label: 'The “30” clue now has a 2-3 pair (blue), so the last cell must be a 1. This disambiguates the rest of the Kakuro.',
+					h: 'j6v6,j10=#27f,j11=#27f',
+					g: '496.975.381152.512.1523612.231896..851.489..58962314.84395.476.97226.25976831..647.937..582164.1[23][5678].251.827.[23][5678]1895.312.[123]9[234]',
+				},
+				{
+					label: 'Now we turn our attention to the lights.',
+					g: '496.975.381152.512.1523612.231896..851.489..58962314.84395.476.97226.25976831..647.937..582164.1283251.827.351895.312.194',
+					circlesStart: true
+				},
+				{
+					label: 'Begin by noticing that there are several outlets around the perimeter that have only two valid places for a lamp.',
+					h: 'e1!,e13!,i1!,i13!,a5!,a9!,m5!,m9!',
+				},
+				{
+					label: 'Furthermore, those possible lamp positions all see each other in pairs.',
+					h: 'e1!,e13!,i1!,i13!,a5!,a9!,m5!,m9!,d2,b4,f2,h2,j2,l4,l6,l8,l10,j12,h12,f12,d12,b6,b8,b10',
+					s: 'M1 2 2 1,M5 .5h1,M9 1 10 2,M10.5 5v1,M10 9 9 10,M5 10.5h1,M2 10 1 9,M.5 5v1'
+						.split(',')
+						.map(d => `<path d='${d}' stroke='red' stroke-width='.1' marker-start='url(#take-the-light-start-marker)' marker-end='url(#take-the-light-end-marker)' />`),
+				},
+				{
+					label: 'This means only two configurations are possible: this one...',
+					h: 'e1!,e13!,i1!,i13!,a5!,a9!,m5!,m9!,b4,f2,j2,l6,l10,h12,d12,b8',
+				},
+				{
+					label: '... and this one.',
+					h: 'e1!,e13!,i1!,i13!,a5!,a9!,m5!,m9!,d2,h2,l4,l8,j12,f12,b6,b10',
+				},
+				{
+					label: 'We can therefore place this green lamp. Two of its possibilities would invalidate both of those configurations, so it must be the remaining one.',
+					h: 'a11!',
+				},
+				{
+					label: 'This invalides one of the possible perimeter configurations, so it must be the other one.',
+					l: [null, null, null, null, null, '1 0'],
+					i: '.......#.......#........#......#.......#.......#.......#.......#.....##........###......##.......',
+				},
+				{
+					label: 'The upper cyan and leftmost blue lamps now have only one place to go.',
+					h: 'd8!,i3!',
+					l: ['1 1', '-1 -1', '1 -1', '-1 -1', '1 1', '1 0', null, '1 -1', null, null, null, '-1 1', '-1 1'],
+					i: '#.#########.##.##.####.###.#.#.####.#..#..####.#...#####....#.###..#.###.#.#######.##.#########.#',
+				},
+				{
+					label: 'Now the other magenta lamp has only one place to go.',
+					h: 'g5!',
+					l: ['1 1', '-1 -1', '1 -1', '-1 -1', '1 1', '1 0', '-1 0', '1 -1', '0 -1', null, null, '-1 1', '-1 1'],
+					i: '#.###############.########.###########.##.######.#.#####..#.#.###.##.###.#.#######.##.#########.#',
+				},
+				{
+					label: 'We can now unambiguously place the two gray lamps in the middle.',
+					h: 'g9!',
+					l: ['1 1', '-1 -1', '1 -1', '-1 -1', '1 1', '1 0', '-1 0', '1 -1', '0 -1', null, '-1 1', '-1 1', '-1 1'],
+					i: '#.###############.########.#######################.######.#.#.######.###.#.##########.#########.#',
+				},
+				{
+					label: 'Finally, the last blue lamp can be placed.',
+					h: 'k9!',
+					l: ['1 1', '-1 -1', '1 -1', '-1 -1', '1 1', '1 0', '-1 0', '1 -1', '0 -1', null, '-1 1', '-1 1', '-1 1', '-.1 .9', '.1 -.9'],
+					i: '#.################################################.#################.############################',
+				},
+				{
+					label: 'Solved!',
+					l: ['1 1', '-1 -1', '1 -1', '-1 -1', '1 1', '1 0', '-1 0', '1 -1', '0 -1', '-1 0', '-1 1', '-1 1', '-1 1', '-.1 .9', '.1 -.9'],
+					i: '#################################################################################################',
+				},
+			],
+			(page, ix, pages) =>
+			{
+				let isPastKakuro = ix >= pages.findIndex(obj => obj.circlesStart);
+				setClass(document.getElementById('take-the-light-svg'), 'no-circles', !isPastKakuro);
+				let s = '', m;
+				for (let inf of page.h ? page.h.split(',') : [])
+				{
+					if (m = /^([a-z])(\d+)([hv])(\d+)$/.exec(inf))
+					{
+						let x = m[1].charCodeAt(0) - 97, y = (m[2]|0)-1, h = m[3] === 'h', n = m[4]|0;
+						s += `<g fill='none' stroke='red' stroke-width='.1'><circle cx='${x-(h?.3:.7)}' cy='${y-(h?.7:.3)}' r='.3' /><path d='M${x} ${y} ${h?`h${n}v-1H${x}`:`v${n}h-1V${y}`}z' /></g>`;
+					}
+					else if (m = /^([a-z])(\d+)(?:=(.*))?(!)?$/.exec(inf))
+					{
+						let x = m[1].charCodeAt(0) - 97, y = (m[2]|0)-1, c = m[3] || 'red';
+						s += `<circle cx='${x-.5}' cy='${y-.5}' r='${m[4] ? .54 : .4}' fill='none' stroke='${c}' stroke-width='.1' />`;
+					}
+				}
+				let g = page.g || '496.975.381152.512.1523612.231896..851.489..58962314.84395.476.97226.25976831..647.937..582164.1283251.827.351895.312.194';
+				let inf = Array.from(g.matchAll(/(\d|\[[^\]]+\]|\.|#)/g)).map(m => m[1]);
+				for (let i = 0; i < inf.length; i++)
+					if (inf[i] !== '.' && inf[i] !== '#')
+					{
+						let p = inf[i].replace(/^\[|\]$/g, '').split('\n');
+						for (let line = 0; line < p.length; line++)
+							s += `<text x='${i%11+.5}' y='${((i/11)|0)+(inf[i].length > 1 ? .625 : .75)-(p.length-1)*.15+line*.3}' font-size='${inf[i].length > 1 ? .3 : .65}' fill='${inf[i].length > 1 ? '#1d6ae5' : 'black'}'>${p[line]}</text>`;
+					}
+				s += page.s ?? '';
+				let lamps = Array.from(document.querySelectorAll('#take-the-light-svg .circle-group g.p'));
+				for (let i = 0; i < lamps.length; i++)
+					lamps[i].innerHTML = page.l && page.l[i] ? `<circle r=".2" /><path d='M0 0 ${page.l[i]}' /><g transform='translate(${page.l[i]})'><circle r=".4" /></g>` : `<g><circle r="${lamps[i].dataset.r || '.4'}" /></g>`;
+				let rects = Array.from(document.querySelectorAll('#take-the-light-svg rect.i'));
+				for (let i = 0; i < rects.length; i++)
+					setClass(rects[i], 'on', page.i && page.i[i] === '#');
+				document.getElementById('take-the-light-digits').innerHTML = s;
+			})();
 	},
 	ska: function()
 	{
@@ -412,204 +964,204 @@ makeSolutionPage('objectionable-ranking', `
 		let hues = [0, 60, 120, 240];
 		createDeductionTracker('skyscraper-big',
 			[
-				{	label: 'Use the left/right arrows to scroll through the logic deductions.',
+				{   label: 'Use the left/right arrows to scroll through the logic deductions.',
 					thin: true, big: true,
-					coords: [	[-11,	-1.5],	[-6,	-1.5],	[18,	-1.5],	[23,	-1.5],
-						[-11,	3.5],	[-6,	3.5],	[18,	3.5],	[23,	3.5],
-						[-11,	8.5],	[-6,	8.5],	[18,	8.5],	[23,	8.5],
-						[-11,	13.5],	[-6,	13.5],	[18,	13.5],	[23,	13.5]] },
-				{	label: 'First off: we cannot place a grid just anywhere. This positioning, for example, leaves no room for other grids above it or to its left. The grids must stack neatly into a 4×4 supergrid.',
+					coords: [ [-11, -1.5], [-6, -1.5], [18, -1.5], [23, -1.5],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [-11, 13.5], [-6, 13.5], [18, 13.5], [23, 13.5]] },
+				{   label: 'First off: we cannot place a grid just anywhere. This positioning, for example, leaves no room for other grids above it or to its left. The grids must stack neatly into a 4×4 supergrid.',
 					thin: true, big: true,
-					coords: [	[3, 2],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
-						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
-						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
-						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
-				{	label: 'We also cannot place two grids of the same size category in the same superrow or supercolumn, as that would result in numbers that repeat within a row or column.',
+					coords: [ [3, 2],      [-6, -1.5], [18, -1.5], [23, -1.5],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [-11, 13.5], [-6, 13.5], [18, 13.5], [23, 13.5]] },
+				{   label: 'We also cannot place two grids of the same size category in the same superrow or supercolumn, as that would result in numbers that repeat within a row or column.',
 					big: true,
 					h: ['0;4;4;1', '8;4;4;1'],
-					coords: [	[0, 4],	[-6, -1.5],	[18, -1.5],	[8, 4],
-						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
-						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
-						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
-				{	label: 'For ease of reference, we are going to refer to the size categories as “tinies” (red; 1–4), “smallies” (yellow; 5–8), “largies” (green; 9–12) and “hugies” (blue; 13–16).',
+					coords: [ [0, 4],      [-6, -1.5], [18, -1.5], [8, 4],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [-11, 13.5], [-6, 13.5], [18, 13.5], [23, 13.5]] },
+				{   label: 'For ease of reference, we are going to refer to the size categories as “tinies” (red; 1–4), “smallies” (yellow; 5–8), “largies” (green; 9–12) and “hugies” (blue; 13–16).',
 					big: true,
-					coords: [	[-11,	-1.5],	[-6,	-1.5],	[18,	-1.5],	[23,	-1.5],
-						[-11,	3.5],	[-6,	3.5],	[18,	3.5],	[23,	3.5],
-						[-11,	8.5],	[-6,	8.5],	[18,	8.5],	[23,	8.5],
-						[-11,	13.5],	[-6,	13.5],	[18,	13.5],	[23,	13.5]] },
-				{	label: 'Let’s start by asking whether superrow 2 supercolumn 3 can be a hugie.',
+					coords: [ [-11, -1.5], [-6, -1.5], [18, -1.5], [23, -1.5],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [-11, 13.5], [-6, 13.5], [18, 13.5], [23, 13.5]] },
+				{   label: 'Let’s start by asking whether superrow 2 supercolumn 3 can be a hugie.',
 					big: true,
 					s: `<path d='M8 4h4v4H8z' fill='hsl(${hues[3]}, 100%, 93%)' /><text x='10' y='7.5' font-size='4' opacity='.3'>?</text>`,
-					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
-						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
-						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
-						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
-				{	label: 'Since the supercell to the right will necessarily be smaller, the “2” clue necessarily sees at least the circled two cells. To ensure that the “2” clue doesn’t see any further cells, the blue one would need to be a 16.',
+					coords: [ [-11, -1.5], [-6, -1.5], [18, -1.5], [23, -1.5],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [-11, 13.5], [-6, 13.5], [18, 13.5], [23, 13.5]] },
+				{   label: 'Since the supercell to the right will necessarily be smaller, the “2” clue necessarily sees at least the circled two cells. To ensure that the “2” clue doesn’t see any further cells, the blue one would need to be a 16.',
 					big: true,
 					s: `<path d='M8 4h4v4H8z' fill='hsl(${hues[3]}, 100%, 93%)' /><text x='10' y='7.5' font-size='4' opacity='.3'>?</text>`,
 					h: ['11;6;blue', '15;6;#0a0', '16;6'],
-					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
-						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
-						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
-						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
-				{	label: 'But if that cell is a 16, then the 11 clue is violated because it can only see at most 10 cells.<br>Therefore, the hugie in that supercolumn must be at the top.',
+					coords: [ [-11, -1.5], [-6, -1.5], [18, -1.5], [23, -1.5],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [-11, 13.5], [-6, 13.5], [18, 13.5], [23, 13.5]] },
+				{   label: 'But if that cell is a 16, then the 11 clue is violated because it can only see at most 10 cells.<br>Therefore, the hugie in that supercolumn must be at the top.',
 					big: true,
 					s: `<path d='M8 4h4v4H8z' fill='hsl(${hues[3]}, 100%, 93%)' /><text x='10' y='7.5' font-size='4' opacity='.3'>?</text><text transform='translate(11.5, 6.7) scale(.8, 1)'>16</text>`,
 					h: ['11;16', '11;6;1;10'],
-					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
-						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
-						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
-						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
-				{	label: 'Now let’s ask whether superrow 2 supercolumn 2 can be a hugie.',
+					coords: [ [-11, -1.5], [-6, -1.5], [18, -1.5], [23, -1.5],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [-11, 13.5], [-6, 13.5], [18, 13.5], [23, 13.5]] },
+				{   label: 'Now let’s ask whether superrow 2 supercolumn 2 can be a hugie.',
 					big: true,
 					s: `<path d='M8 0h4v4H8z M4 4h4v4H4z' fill='hsl(${hues[3]}, 100%, 93%)' /><text x='6' y='7.5' font-size='4' opacity='.3'>?</text>`,
-					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
-						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
-						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
-						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
-				{	label: 'Well, the “8” clue would only be able to see 8 cells, so they would all have to be in order. However, none of the hugies have their top row in order. Therefore, the hugie in superrow 2 must be on the far right.',
+					coords: [ [-11, -1.5], [-6, -1.5], [18, -1.5], [23, -1.5],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [-11, 13.5], [-6, 13.5], [18, 13.5], [23, 13.5]] },
+				{   label: 'Well, the “8” clue would only be able to see 8 cells, so they would all have to be in order. However, none of the hugies have their top row in order. Therefore, the hugie in superrow 2 must be on the far right.',
 					big: true,
 					s: `<path d='M8 0h4v4H8z M4 4h4v4H4z' fill='hsl(${hues[3]}, 100%, 93%)' /><text x='6' y='7.5' font-size='4' opacity='.3'>?</text>`,
 					h: ['0;4;8;1', '0;0;4;1;12', '0;0;4;1;13', '0;0;4;1;14', '0;0;4;1;15'],
-					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
-						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
-						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
-						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
-				{	label: 'We can apply the same argument in superrow 3 supercolumn 1. For this to be a hugie, the second row would have to be in order because of the “4” clue, but none of them are.',
+					coords: [ [-11, -1.5], [-6, -1.5], [18, -1.5], [23, -1.5],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [-11, 13.5], [-6, 13.5], [18, 13.5], [23, 13.5]] },
+				{   label: 'We can apply the same argument in superrow 3 supercolumn 1. For this to be a hugie, the second row would have to be in order because of the “4” clue, but none of them are.',
 					big: true,
 					s: `<path d='M8 0h4v4H8z M12 4h4v4H12z M0 8h4v4H0z' fill='hsl(${hues[3]}, 100%, 93%)' /><text x='2' y='11.5' font-size='4' opacity='.3'>?</text>`,
 					h: ['0;9;4;1', '0;1;4;1;12', '0;1;4;1;13', '0;1;4;1;14', '0;1;4;1;15'],
-					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
-						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
-						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
-						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
-				{	label: 'Now we know that superrow 4 supercolumn 1 is a hugie, and only one of the hugies can satisfy the “3” clue, so we can place our first grid.',
+					coords: [ [-11, -1.5], [-6, -1.5], [18, -1.5], [23, -1.5],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [-11, 13.5], [-6, 13.5], [18, 13.5], [23, 13.5]] },
+				{   label: 'Now we know that superrow 4 supercolumn 1 is a hugie, and only one of the hugies can satisfy the “3” clue, so we can place our first grid.',
 					big: true,
 					s: `<path d='M8 0h4v4H8z M12 4h4v4H12z M4 8h4v4H4z M0 12h4v4H0z' fill='hsl(${hues[3]}, 100%, 93%)' />`,
 					h: ['0;13;4;1', '0;1;4;1;12', '0;1;4;1;13', '0;1;4;1;14', '0;1;4;1;15;#0a0', '-1;13'],
-					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
-						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
-						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
-						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[23, 13.5]] },
-				{	label: 'With that grid placed, there is now only one hugie left that could satisfy the “2” clue in superrow 2.',
+					coords: [ [-11, -1.5], [-6, -1.5], [18, -1.5], [23, -1.5],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [-11, 13.5], [-6, 13.5], [18, 13.5], [23, 13.5]] },
+				{   label: 'With that grid placed, there is now only one hugie left that could satisfy the “2” clue in superrow 2.',
 					big: true,
 					s: `<path d='M8 0h4v4H8z M12 4h4v4H12z M4 8h4v4H4z' fill='hsl(${hues[3]}, 100%, 93%)' />`,
 					h: ['16;6', '0;2;4;1;12', '0;2;4;1;13', '0;2;4;1;14;#0a0', '12;6;4;1'],
-					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
-						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
-						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
-						[-11, 13.5],	[-6, 13.5],	[18, 13.5],	[0, 12]] },
-				{	label: 'Now let’s ask if the first hugie would fit in superrow 3 supercolumn 2.',
+					coords: [ [-11, -1.5], [-6, -1.5], [18, -1.5], [23, -1.5],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [-11, 13.5], [-6, 13.5], [18, 13.5], [0, 12]] },
+				{   label: 'Now let’s ask if the first hugie would fit in superrow 3 supercolumn 2.',
 					big: true,
 					s: `<path d='M8 0h4v4H8z M4 8h4v4H4z' fill='hsl(${hues[3]}, 100%, 93%)' /><path d='M-11.1 13.4h4.2v4.2h-4.2z' fill='none' stroke='red' stroke-width='.1' /><text x='6' y='11.5' font-size='4' opacity='.3'>?</text>`,
-					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
-						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
-						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
-						[-11, 13.5],	[-6, 13.5],	[12, 4],	[0, 12]] },
-				{	label: 'The “4” clue definitely sees three of the numbers we just placed, so it can only see one more, and that must be the one at the top of the column (green). Therefore, that green must hide (be bigger than) the seven cells below it (blue).',
+					coords: [ [-11, -1.5], [-6, -1.5], [18, -1.5], [23, -1.5],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [-11, 13.5], [-6, 13.5], [12, 4],    [0, 12]] },
+				{   label: 'The “4” clue definitely sees three of the numbers we just placed, so it can only see one more, and that must be the one at the top of the column (green). Therefore, that green must hide (be bigger than) the seven cells below it (blue).',
 					big: true,
 					s: `<path d='M8 0h4v4H8z M4 8h4v4H4z' fill='hsl(${hues[3]}, 100%, 93%)' />`,
 					q: [12],
 					h: ['5;-1', '5;8', '5;9', '5;11', '5;0;#0a0', '5;1;1;7;;hsl(220,50%,50%)'],
-					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
-						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
-						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
-						[4, 8],	[-6, 13.5],	[12, 4],	[0, 12]] },
-				{	label: 'However, none of smallies and largies have a second column starting with the largest digit. One of the tinies does, but if we place a tinie at the top, the “4” clue would see another cell between this tinie and the hugie.',
+					coords: [ [-11, -1.5], [-6, -1.5], [18, -1.5], [23, -1.5],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [4, 8],      [-6, 13.5], [12, 4],    [0, 12]] },
+				{   label: 'However, none of smallies and largies have a second column starting with the largest digit. One of the tinies does, but if we place a tinie at the top, the “4” clue would see another cell between this tinie and the hugie.',
 					big: true,
 					s: `<path d='M8 0h4v4H8z M4 8h4v4H4z' fill='hsl(${hues[3]}, 100%, 93%)' />`,
 					q: [12],
 					h: ['5;-1', '5;8', '5;9', '5;11', '5;0;#0a0', '5;1;1;7;;hsl(220,50%,50%)', '1;0;1;4;4', '1;0;1;4;5', '1;0;1;4;6', '1;0;1;4;7', '1;0;1;4;8', '1;0;1;4;9', '1;0;1;4;10', '1;0;1;4;11'],
-					coords: [	[-11, -1.5],	[-6, -1.5],	[18, -1.5],	[23, -1.5],
-						[-11, 3.5],	[-6, 3.5],	[18, 3.5],	[23, 3.5],
-						[-11, 8.5],	[-6, 8.5],	[18, 8.5],	[23, 8.5],
-						[4, 8],	[-6, 13.5],	[12, 4],	[0, 12]] },
-				{	label: 'That allows us to place the remaining hugie.<br>Now let’s take another look at this “11” clue.',
+					coords: [ [-11, -1.5], [-6, -1.5], [18, -1.5], [23, -1.5],
+							  [-11, 3.5],  [-6, 3.5],  [18, 3.5],  [23, 3.5],
+							  [-11, 8.5],  [-6, 8.5],  [18, 8.5],  [23, 8.5],
+							  [4, 8],      [-6, 13.5], [12, 4],    [0, 12]] },
+				{   label: 'That allows us to place the remaining hugie.<br>Now let’s take another look at this “11” clue.',
 					h: ['11;16'],
-					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
-						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
-						[-11, 11],	[-6, 11],	[18, 11],	[23, 11],
-						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
-				{	label: 'If any subgrid in supercolumn 3 were hidden — for example, by placing a largie in superrow 3 supercolumn 3 as shown — then the “11” clue could definitely only see a maximum of 10 cells. Therefore, the sizes in supercolumn 3 must be in order.',
+					coords: [ [-11, 1],  [-6, 1],  [18, 1],  [23, 1],
+							  [-11, 6],  [-6, 6],  [18, 6],  [23, 6],
+							  [-11, 11], [-6, 11], [18, 11], [23, 11],
+							  [8, 0],    [4, 8],   [12, 4],  [0, 12]] },
+				{   label: 'If any subgrid in supercolumn 3 were hidden — for example, by placing a largie in superrow 3 supercolumn 3 as shown — then the “11” clue could definitely only see a maximum of 10 cells. Therefore, the sizes in supercolumn 3 must be in order.',
 					s: `<path d='M8 8h4v4H8z' fill='hsl(${hues[2]}, 100%, 93%)' /><text x='10' y='11.5' font-size='4' opacity='.3'>?</text>`,
 					h: ['11;16', '11;8;1;8', '11;2;1;2'],
-					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
-						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
-						[-11, 11],	[-6, 11],	[18, 11],	[23, 11],
-						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
-				{	label: 'Let’s examine whether superrow 3 supercolumn 1 can be largie.',
+					coords: [ [-11, 1],  [-6, 1],  [18, 1],  [23, 1],
+							  [-11, 6],  [-6, 6],  [18, 6],  [23, 6],
+							  [-11, 11], [-6, 11], [18, 11], [23, 11],
+							  [8, 0],    [4, 8],   [12, 4],  [0, 12]] },
+				{   label: 'Let’s examine whether superrow 3 supercolumn 1 can be largie.',
 					s: `<path d='M8 12h4v4H8z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M0 8h4v4H0z M8 4h4v4H8z' fill='hsl(${hues[2]}, 100%, 93%)' /><text x='2' y='11.5' font-size='4' opacity='.3'>?</text>`,
-					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
-						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
-						[-11, 11],	[-6, 11],	[18, 11],	[23, 11],
-						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
-				{	label: 'The “4” clue in row 10 already sees two cells, so it must see exactly two cells in the largie. However, none of the largies fit that description. Therefore, superrow 3 supercolumn 1 is not a largie.',
+					coords: [ [-11, 1],  [-6, 1],  [18, 1],  [23, 1],
+							  [-11, 6],  [-6, 6],  [18, 6],  [23, 6],
+							  [-11, 11], [-6, 11], [18, 11], [23, 11],
+							  [8, 0],    [4, 8],   [12, 4],  [0, 12]] },
+				{   label: 'The “4” clue in row 10 already sees two cells, so it must see exactly two cells in the largie. However, none of the largies fit that description. Therefore, superrow 3 supercolumn 1 is not a largie.',
 					s: `<path d='M8 12h4v4H8z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M0 8h4v4H0z M8 4h4v4H8z' fill='hsl(${hues[2]}, 100%, 93%)' /><text x='2' y='11.5' font-size='4' opacity='.3'>?</text>`,
 					h: ['4;9', '5;9', '0;9;4;1', '0;1;4;1;8', '0;1;4;1;9', '0;1;4;1;10', '0;1;4;1;11'],
-					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
-						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
-						[-11, 11],	[-6, 11],	[18, 11],	[23, 11],
-						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
-				{	label: 'The rest of the sizes now fall into place.',
+					coords: [ [-11, 1],  [-6, 1],  [18, 1],  [23, 1],
+							  [-11, 6],  [-6, 6],  [18, 6],  [23, 6],
+							  [-11, 11], [-6, 11], [18, 11], [23, 11],
+							  [8, 0],    [4, 8],   [12, 4],  [0, 12]] },
+				{   label: 'The rest of the sizes now fall into place.',
 					s: `<path d='M8 12h4v4H8z M0 8h4v4H0z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M8 4h4v4H8z M12 8h4v4H12z' fill='hsl(${hues[2]}, 100%, 93%)' />`,
-					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
-						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
-						[-11, 11],	[-6, 11],	[18, 11],	[23, 11],
-						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
-				{	label: 'The “6” clue in row 9 already sees three cells, so it must see exactly three cells in the largie (as the smallie is blocked from view). Only one of the largies fits that description.',
+					coords: [ [-11, 1],  [-6, 1],  [18, 1],  [23, 1],
+							  [-11, 6],  [-6, 6],  [18, 6],  [23, 6],
+							  [-11, 11], [-6, 11], [18, 11], [23, 11],
+							  [8, 0],    [4, 8],   [12, 4],  [0, 12]] },
+				{   label: 'The “6” clue in row 9 already sees three cells, so it must see exactly three cells in the largie (as the smallie is blocked from view). Only one of the largies fits that description.',
 					s: `<path d='M8 12h4v4H8z M0 8h4v4H0z M4 4h4v4H4z M12 0h4v4H12z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z M0 4h4v4H0z M4 0h4v4H4z M12 12h4v4H12z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M8 4h4v4H8z M12 8h4v4H12z M0 0h4v4H0z M4 12h4v4H4z' fill='hsl(${hues[2]}, 100%, 93%)' />`,
 					h: ['4;8', '6;8', '7;8', '12;8;4;1', '0;0;4;1;8', '0;0;4;1;9', '0;0;4;1;10;#0a0', '0;0;4;1;11', '16;8'],
-					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
-						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
-						[-11, 11],	[-6, 11],	[18, 11],	[23, 11],
-						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
-				{	label: 'The “4” clue in column 6 already sees three cells, so it must see exactly one cell in the largie. Only one of the largies fits that description.',
+					coords: [ [-11, 1],  [-6, 1],  [18, 1],  [23, 1],
+							  [-11, 6],  [-6, 6],  [18, 6],  [23, 6],
+							  [-11, 11], [-6, 11], [18, 11], [23, 11],
+							  [8, 0],    [4, 8],   [12, 4],  [0, 12]] },
+				{   label: 'The “4” clue in column 6 already sees three cells, so it must see exactly one cell in the largie. Only one of the largies fits that description.',
 					s: `<path d='M8 12h4v4H8z M0 8h4v4H0z M4 4h4v4H4z M12 0h4v4H12z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z M0 4h4v4H0z M4 0h4v4H4z M12 12h4v4H12z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M8 4h4v4H8z M0 0h4v4H0z M4 12h4v4H4z' fill='hsl(${hues[2]}, 100%, 93%)' />`,
 					h: ['1;0;1;4;8', '1;0;1;4;9;#0a0', '1;0;1;4;11', '5;12;1;4', '5;9', '5;10', '5;11', '5;16'],
-					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
-						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
-						[-11, 11],	[-6, 11],	[12, 8],	[23, 11],
-						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
-				{	label: 'The “4” clue in row 10 already sees two cells, so it must see exactly two cells in the tinie. Only one of the tinies fits that description.',
+					coords: [ [-11, 1],  [-6, 1],  [18, 1], [23, 1],
+							  [-11, 6],  [-6, 6],  [18, 6], [23, 6],
+							  [-11, 11], [-6, 11], [12, 8], [23, 11],
+							  [8, 0],    [4, 8],   [12, 4], [0, 12]] },
+				{   label: 'The “4” clue in row 10 already sees two cells, so it must see exactly two cells in the tinie. Only one of the tinies fits that description.',
 					h: ['-1;9', '4;9', '5;9', '0;1;4;1;0', '0;1;4;1;1;#0a0', '0;1;4;1;2', '0;1;4;1;3', '0;9;4;1'],
 					s: `<path d='M8 12h4v4H8z M0 8h4v4H0z M4 4h4v4H4z M12 0h4v4H12z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z M0 4h4v4H0z M4 0h4v4H4z M12 12h4v4H12z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M8 4h4v4H8z M0 0h4v4H0z' fill='hsl(${hues[2]}, 100%, 93%)' />`,
-					coords: [	[-11, 1],	[-6, 1],	[18, 1],	[23, 1],
-						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
-						[-11, 11],	[4, 12],	[12, 8],	[23, 11],
-						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
-				{	label: 'The “4” clue in column 6 already sees two cells, so it must see exactly two cells in the smallie (as the tinie is blocked from view). Only one of the smallies fits that description.',
+					coords: [ [-11, 1],  [-6, 1], [18, 1], [23, 1],
+							  [-11, 6],  [-6, 6], [18, 6], [23, 6],
+							  [-11, 11], [4, 12], [12, 8], [23, 11],
+							  [8, 0],    [4, 8],  [12, 4], [0, 12]] },
+				{   label: 'The “4” clue in column 6 already sees two cells, so it must see exactly two cells in the smallie (as the tinie is blocked from view). Only one of the smallies fits that description.',
 					h: ['1;0;1;4;4', '1;0;1;4;5', '1;0;1;4;6', '1;0;1;4;7;#0a0', '5;-1', '5;8', '5;9', '5;0;1;4'],
 					s: `<path d='M8 12h4v4H8z M4 4h4v4H4z M12 0h4v4H12z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z M0 4h4v4H0z M4 0h4v4H4z M12 12h4v4H12z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M8 4h4v4H8z M0 0h4v4H0z' fill='hsl(${hues[2]}, 100%, 93%)' />`,
-					coords: [	[-11, 1],	[0, 8],	[18, 1],	[23, 1],
-						[-11, 6],	[-6, 6],	[18, 6],	[23, 6],
-						[-11, 11],	[4, 12],	[12, 8],	[23, 11],
-						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
-				{	label: 'The “5” clue in column 15 already sees two cells, so it must see exactly three cells in the tinie. Only one of the tinies fits that description.',
+					coords: [ [-11, 1],  [0, 8],  [18, 1], [23, 1],
+							  [-11, 6],  [-6, 6], [18, 6], [23, 6],
+							  [-11, 11], [4, 12], [12, 8], [23, 11],
+							  [8, 0],    [4, 8],  [12, 4], [0, 12]] },
+				{   label: 'The “5” clue in column 15 already sees two cells, so it must see exactly three cells in the tinie. Only one of the tinies fits that description.',
 					s: `<path d='M8 12h4v4H8z M4 4h4v4H4z M12 0h4v4H12z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z M0 4h4v4H0z M12 12h4v4H12z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M8 4h4v4H8z M0 0h4v4H0z' fill='hsl(${hues[2]}, 100%, 93%)' />`,
 					h: ['14;-1', '14;0;1;4', '14;4', '14;6', '2;0;1;4;0', '2;0;1;4;2', '2;0;1;4;3;#0a0'],
-					coords: [	[-11, 1],	[0, 8],	[18, 1],	[23, 1],
-						[-11, 6],	[-6, 6],	[18, 6],	[4, 0],
-						[-11, 11],	[4, 12],	[12, 8],	[23, 11],
-						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
-				{	label: 'The “8” clue in row 5 already sees two cells, so it must see exactly six more. The tinie is blocked from view, and none of the smallies and largies have a top row with the digits in order, so it must see three cells from each. There is only one smallie and one largie that fit this description.',
+					coords: [ [-11, 1],  [0, 8],  [18, 1], [23, 1],
+							  [-11, 6],  [-6, 6], [18, 6], [4, 0],
+							  [-11, 11], [4, 12], [12, 8], [23, 11],
+							  [8, 0],    [4, 8],  [12, 4], [0, 12]] },
+				{   label: 'The “8” clue in row 5 already sees two cells, so it must see exactly six more. The tinie is blocked from view, and none of the smallies and largies have a top row with the digits in order, so it must see three cells from each. There is only one smallie and one largie that fit this description.',
 					h: ['-1;4', '0;4;4;1', '8;4;4;1', '12;4', '15;4', '0;0;4;1;4', '0;0;4;1;5;#0a0', '0;0;4;1;6', '0;0;4;1;8;#0a0', '0;0;4;1;11'],
 					s: `<path d='M8 12h4v4H8z M4 4h4v4H4z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z M0 4h4v4H0z M12 12h4v4H12z' fill='hsl(${hues[1]}, 100%, 93%)' /><path d='M8 4h4v4H8z M0 0h4v4H0z' fill='hsl(${hues[2]}, 100%, 93%)' />`,
-					coords: [	[-11, 1],	[0, 8],	[18, 1],	[12, 0],
-						[-11, 6],	[-6, 6],	[18, 6],	[4, 0],
-						[-11, 11],	[4, 12],	[12, 8],	[23, 11],
-						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
-				{	label: 'The “11” clue in column 12 now sees six cells, so it must see exactly five more. There is only one combination of a tinie and a smallie that makes that work.',
+					coords: [ [-11, 1],  [0, 8],  [18, 1], [12, 0],
+							  [-11, 6],  [-6, 6], [18, 6], [4, 0],
+							  [-11, 11], [4, 12], [12, 8], [23, 11],
+							  [8, 0],    [4, 8],  [12, 4], [0, 12]] },
+				{   label: 'The “11” clue in column 12 now sees six cells, so it must see exactly five more. There is only one combination of a tinie and a smallie that makes that work.',
 					h: ['11;16', '11;2', '11;3', '11;4', '11;5', '11;6', '11;7', '3;0;1;4;0', '3;0;1;4;2;#0a0', '3;0;1;4;4', '3;0;1;4;6;#0a0'],
 					s: `<path d='M8 12h4v4H8z M4 4h4v4H4z' fill='hsl(${hues[0]}, 100%, 93%)' /><path d='M8 8h4v4H8z M12 12h4v4H12z' fill='hsl(${hues[1]}, 100%, 93%)' />`,
-					coords: [	[-11, 1],	[0, 8],	[18, 1],	[12, 0],
-						[-11, 6],	[0, 4],	[18, 6],	[4, 0],
-						[8, 4],	[4, 12],	[12, 8],	[0, 0],
-						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
-				{	label: 'Solved!',
-					coords: [	[4, 4],	[0, 8],	[8, 12],	[12, 0],
-						[12, 12],	[0, 4],	[8, 8],	[4, 0],
-						[8, 4],	[4, 12],	[12, 8],	[0, 0],
-						[8, 0],	[4, 8],	[12, 4],	[0, 12]] },
+					coords: [ [-11, 1], [0, 8],  [18, 1], [12, 0],
+							  [-11, 6], [0, 4],  [18, 6], [4, 0],
+							  [8, 4],   [4, 12], [12, 8], [0, 0],
+							  [8, 0],   [4, 8],  [12, 4], [0, 12]] },
+				{   label: 'Solved!',
+					coords: [ [4, 4],   [0, 8],  [8, 12], [12, 0],
+							  [12, 12], [0, 4],  [8, 8],  [4, 0],
+							  [8, 4],   [4, 12], [12, 8], [0, 0],
+							  [8, 0],   [4, 8],  [12, 4], [0, 12]] },
 			],
 			(page, ix, pages) =>
 			{
@@ -629,15 +1181,12 @@ makeSolutionPage('objectionable-ranking', `
 					let [x, y, w, h, g, c] = inf.split(';');
 					let ox = g ? page.coords[g][0] : 0;
 					let oy = g ? page.coords[g][1] : 0;
-					sg += h	? `<rect x='${+x+ox+.1}' y='${+y+oy+.1}' width='${+w-.2}' height='${+h-.2}' stroke-width='.1' stroke='${c ?? 'red'}' fill='none' />`
-						: `<circle cx='${+x+ox+.5}' cy='${+y+oy+.5}' r='.4' stroke-width='.1' stroke='${w??'red'}' fill='none' />`;
+					sg += h ? `<rect x='${+x+ox+.1}' y='${+y+oy+.1}' width='${+w-.2}' height='${+h-.2}' stroke-width='.1' stroke='${c ?? 'red'}' fill='none' />`
+							: `<circle cx='${+x+ox+.5}' cy='${+y+oy+.5}' r='.4' stroke-width='.1' stroke='${w??'red'}' fill='none' />`;
 				}
 				document.getElementById('skyscraper-subgrids').innerHTML = sg;
 				document.getElementById('skyscraper-extra').innerHTML = page.s ?? '';
-				if (page.thin)
-					document.getElementById('skyscraper-svg').classList.remove('thick');
-				else
-					document.getElementById('skyscraper-svg').classList.add('thick');
+				setClass(document.getElementById('skyscraper-svg'), 'thick', !page.thin);
 				document.getElementById('skyscraper-svg').setAttribute('viewBox', page.big ? '-.2 -1.1 38.4 20.2' : '-.2 .4 38.4 18.2');
 			})();
 	},
@@ -1061,7 +1610,9 @@ makeSolutionPage('objectionable-ranking', `
 	},
 	poab: function()
 	{
-		Array.from(document.querySelectorAll('#poa-results td.icon')).forEach(td => { td.innerHTML = `<span style='background: url(${poaIcons[td.innerText-1]}); background-size: contain; display: inline-block; width: .65cm; height: .65cm; vertical-align: bottom;'></span>`; });
+		Array.from(document.querySelectorAll('#poa-results td.icon')).forEach(td => {
+			td.innerHTML = `<span style='background: url(${poaIcons[td.innerText-1]}); background-size: contain; display: inline-block; width: .65cm; height: .65cm; vertical-align: bottom;'></span>`;
+		});
 	}
 });
 </script>
