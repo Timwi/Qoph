@@ -259,6 +259,12 @@
 		font-weight: bold;
 		text-decoration: underline;
 	}
+
+	#battleships-and-pitfalls-svg {
+		display: block;
+		width: 18cm;
+		margin: 0 auto .5cm;
+	}
 </style>
 <script src='../../files/solutions.js'></script>
 <h1>Objectionable Ranking</h1>
@@ -598,10 +604,42 @@ makeSolutionPage('objectionable-ranking', `
 <div class='subanswer'>ATM CODE</div>
 }
 
+<h2>Battleships and Pitfalls</h2>
+<div id='battleships-and-pitfalls'></div>
+<svg id='battleships-and-pitfalls-svg' viewBox='-1.1 -1.2 15.2 8.3' text-anchor='middle' font-size='.7'>
+	<path stroke='black' fill='white' stroke-width='.05' d='M0 0h7v7H0z' />
+	<g id='battleships-and-pitfalls-cells'></g>
+	<path stroke='black' fill='none' stroke-width='.02' d='M1 0v7M2 0v7M3 0v7M4 0v7M5 0v7M6 0v7M0 1h7M0 2h7M0 3h7M0 4h7M0 5h7M0 6h7' />
+	<g transform='translate(9, 0)'><path id='battleship-1' d='M.9.1v.8h-.4a.4.4 0 0 1 0 -.8zM1.1.1h.8v.8h-.8zM2.1.1h.8v.8h-.8zM3.1.1h.4a.4.4 0 0 1 0 .8h-.4z' /></g>
+	<g transform='translate(9, 1.2)'><path id='battleship-2' d='M.9.1v.8h-.4a.4.4 0 0 1 0 -.8zM1.1.1h.8v.8h-.8zM2.1.1h.4a.4.4 0 0 1 0 .8h-.4z' /></g>
+	<g transform='translate(9, 2.4)'><path id='battleship-3' d='M.9.1v.8h-.4a.4.4 0 0 1 0 -.8zM1.1.1h.8v.8h-.8zM2.1.1h.8v.8h-.8zM3.1.1h.4a.4.4 0 0 1 0 .8h-.4z' /></g>
+	<g transform='translate(9, 3.6)'><path id='battleship-4' d='M.9.1v.8h-.4a.4.4 0 0 1 0 -.8zM1.1.1h.8v.8h-.8zM2.1.1h.4a.4.4 0 0 1 0 .8h-.4z' /></g>
+	<g transform='translate(9, 4.8)'><path id='battleship-5' d='M.9.1v.8h-.4a.4.4 0 0 1 0 -.8zM1.1.1h.8v.8h-.8zM2.1.1h.4a.4.4 0 0 1 0 .8h-.4z' /></g>
+	<g transform='translate(9, 6)'><path id='battleship-6' d='M.9.1v.8h-.4a.4.4 0 0 1 0 -.8zM1.1.1h.8v.8h-.8zM2.1.1h.8v.8h-.8zM3.1.1h.8v.8h-.8zM4.1.1h.4a.4.4 0 0 1 0 .8h-.4z' /></g>
+	<text x='0.5' y='-.4'>6</text>
+	<text x='1.5' y='-.4'>1</text>
+	<text x='2.5' y='-.4'>2</text>
+	<text x='3.5' y='-.4'>3</text>
+	<text x='4.5' y='-.4'>3</text>
+	<text x='5.5' y='-.4'>2</text>
+	<text x='6.5' y='-.4'>5</text>
+	<text x='-.6' y='0.77'>5</text>
+	<text x='-.6' y='1.77'>1</text>
+	<text x='-.6' y='2.77'>4</text>
+	<text x='-.6' y='3.77'>1</text>
+	<text x='-.6' y='4.77'>5</text>
+	<text x='-.6' y='5.77'>1</text>
+	<text x='-.6' y='6.77'>5</text>
+	<g id='battleships-and-pitfalls-digits'></g>
+</svg>
+<p>Once both the Battleships and Fillomino parts are solved, [o we may notice that the battleships are not given in order of size, which implies [c that the given order is important. If we [s add up the values in each battleship and convert the result to letters, we get [rbapa <span style='white-space: nowrap'>«19 = S», «16 = P», «15 = O», «14 = N», «7 = G», «25 = Y»</span>.]]]]</p>
+{-bapa <div class='subanswer'>SPONGY</div>}
+
 {-e <div class='answer'>???????????????</div>}
 `, {
 	reset: function()
 	{
+		// ARE YOU TALLER THAN A SKYSCRAPER?
 		let skydata = [
 			[
 				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
@@ -797,6 +835,7 @@ makeSolutionPage('objectionable-ranking', `
 				`<div class='titlenum'>#${i+1}</div><div class='wrap'>`, '</div>')();
 		}
 
+		// TAKE THE LIGHT
 		createDeductionTracker('take-the-light',
 			[
 				{
@@ -894,7 +933,7 @@ makeSolutionPage('objectionable-ranking', `
 					g: '....9...381....5[12][12].152.....[123][123][123]896........9...........84........972...2.....31...[14]........[89].[14].[124].....[12]5[12]..[124]......[89]..[123][12][123]....',
 				},
 				{
-					label: 'Now this “8” clue can only filled in as 2+6.',
+					label: 'Now this “8” clue can only be filled in as 2+6.',
 					h: 'a8h2',
 					g: '....9...381....5[12][12].152.....[123][123][123]896........9...[689].......84.[689]......972.[689].2.....31...[14]........[89].[14].[124].....[12]5[12]..[124]......[89]..[123][12][123]....',
 				},
@@ -964,8 +1003,8 @@ makeSolutionPage('objectionable-ranking', `
 					g: '....9...381....5[12][12].152.....[123][123][123]896....[124]...9...[89]..[124]....84.[89]..[124]...97226.25[6789][678][67][678]31..647.9[23][78]..582164.1...251.827....895.312....',
 				},
 				{
-					label: 'Now there’s only one place for the 8 and 9 in the “41” clue. This also disambiguates a small chain.',
-					h: 'd8h8',
+					label: 'Now there’s only one place for the 8 and 9 in the “41” clue (green). This also disambiguates the blue cells.',
+					h: 'd8h8,g8=#0a0,j8=#0a0,i9=#00a,j9=#00a',
 					g: '....9...381....5[12][12].152.....[123][123][123]896....[124]...9...[89]..[124]....84.[89]..[124]...97226.25[6789][67][67][678]31..647.9[23][78]..582164.1...251.827....895.312....',
 				},
 				{
@@ -1158,6 +1197,7 @@ makeSolutionPage('objectionable-ranking', `
 				document.getElementById('take-the-light-digits').innerHTML = s;
 			})();
 
+		// SWEET NONOGRAM
 		let movables = [];
 		function setMovables()
 		{
@@ -1520,9 +1560,372 @@ makeSolutionPage('objectionable-ranking', `
 					topRowCells[c].innerHTML = nonoColumnClues[c].map(str => ct[str] ?? `<span class='sweet sweet-${str}'></span>`).join('<br>');
 			})();
 		window.addEventListener('resize', setMovables);
+
+		// BATTLESHIPS AND PITFALLS
+		createDeductionTracker('battleships-and-pitfalls',
+			[
+				{ label: 'Use the left/right arrows to scroll through the logic deductions.' },
+				{
+					label: 'We start with the Battleship part. Let’s take a look at the first column. The grid is 7 cells tall and we need 6 ship pieces in this column, so there’s only one water in this column.',
+					h: 'C1',
+				},
+				{
+					label: 'If the water is at the top, the rest of the column would be all ship pieces. But that would make a 6-long ship, which doesn’t exist. So the top cell is ship.',
+					h: 'a1',
+				},
+				{
+					label: 'The same argument applies to the bottom cell.',
+					h: 'a7',
+					s: 'a1c',
+				},
+				{
+					label: 'Now imagine the water is in the third position. Then the column would have to have a 2-ship at the top and a 4-ship at the bottom. Since no ships are allowed to touch, even diagonally, this would leave no room for any ship pieces in column 2. Therefore, the water is not here either.',
+					h: 'a3,C2',
+					s: 'a1c,a7c',
+				},
+				{
+					label: 'The same argument applies to these cells.',
+					h: 'a4,a5',
+					s: 'a1c,a3c,a7c',
+				},
+				{
+					label: 'Since ships are always horizontal or vertical, but cannot touch diagonally, we can always mark every cell that is diagonally adjacent to a ship piece as water.',
+					h: 'b2-b6',
+					s: 'a1c,a3c,a4s,a5c,a7c',
+				},
+				{
+					label: 'Also, row 4 is satisfied.',
+					h: 'R4,a4-g4',
+					s: 'a1c,a3c,a4s,a5c,a7c,b2-b6',
+				},
+				{
+					label: 'Consider the cell marked in red. If it were a ship piece, it would make both of the blue cells water. But that removes too many cells to satisfy the “5” clue in row 5. Therefore, this cell must be water.',
+					h: 'd6,e5=240,c5=240,R5',
+					s: 'a1c,a3c,a4s,a5c,a7c,b2-b6,c4-g4',
+				},
+				{
+					label: 'The same applies to the next two cells to the right.',
+					h: 'e6,f6',
+					s: 'a1c,a3c,a4s,a5c,a7c,b2-b6,c4-g4,d6',
+				},
+				{
+					label: 'Now consider what would happen if this cell were a ship piece. Since this cell is in a “1” row, and there are no 1-ships, it would have to be part of a vertical ship. But it’s in a “2” column, and there are also no 2-ships either, so this cell must be water.',
+					h: 'c2',
+					s: 'a1c,a3c,a4s,a5c,a7c,b2-b6,c4-g4,d6-f6',
+				},
+				{
+					label: 'The same argument applies here.',
+					h: 'c6,f2',
+					s: 'a1c,a3c,a4s,a5c,a7c,b2-b6,c2,c4-g4,d6-f6',
+				},
+				{
+					label: 'If this cell were a ship piece, it would have to be part of a vertical 3-ship. However, that would take a lot of space away which would make column 5 unsatisfiable. Therefore, this is water as well.',
+					h: 'd2,C5',
+					s: 'a1c,a3c,a4s,a5c,a7c,b2-c2,f2,b3,b4-g4,b5,b6-f6',
+				},
+				{
+					label: 'The same applies in reverse. This cell being a ship piece would make column 4 unsatisfiable. Therefore, this is water as well.',
+					h: 'e2,C4',
+					s: 'a1c,a3c,a4s,a5c,a7c,b2-d2,f2,b3,b4-g4,b5,b6-f6',
+				},
+				{
+					label: 'If this cell (red) were a ship piece, it would have to be part of a vertical 3-ship. Then the cell marked in blue would have to be water. But then we have two ship pieces in row 3 already. We cannot satisfy the “4” clue, because there are no 1-ships or 2-ships. Therefore, this cell is water as well.',
+					h: 'g2,f3=240,R3',
+					s: 'a1c,a3c,a4s,a5c,a7c,b2-f2,b3,b4-g4,b5,b6-f6',
+				},
+				{
+					label: 'Column 7 and row 2 are now forced.',
+					h: 'C7,R2',
+					s: 'a1c,a3c,a4s,a5c,a7c,b2-g2,b3,b4-g4,b5,b6-f6',
+				},
+				{
+					label: 'Since we don’t have any 1-ships or 2-ships, these ship pieces must extend at least three cells to the left.',
+					h: 'g1,g3',
+					s: 'a1-a5s,a7c,g1c,g3c,g5-g7s,b1,b2-g2,b3,b4-g4,b5,f5,a6-f6,f7',
+				},
+				{
+					label: 'Row 3 is satisfied. Row 5 is forced.',
+					h: 'R3,R5',
+					s: 'a1-a5s,a7c,e1c,f1s,g1r,e3c,f3s,g3r,g5-g7s,b1,b2-g2,b3,b4-g4,b5,f5,a6-f6,f7',
+				},
+				{
+					label: 'Column 4 is now forced. Column 5 is satisfied.',
+					h: 'C4,C5',
+					s: 'a1-a5s,a7c,d1c,e1s,f1s,g1r,e3-g3s,c5-e5s,g5-g7s,b1,b2-g2,b3-d3,b4-g4,b5,f5,a6-f6,f7',
+				},
+				{
+					label: 'Row 1 is now satisfied, and row 7 is forced.',
+					h: 'R1,R7',
+					s: 'a1-a5s,a7c,d1c,e1s,f1s,g1r,e3-g3s,c5-e5s,g5-g7s,d7c,b1,b2-g2,b3-d3,b4-g4,b5,f5,a6-f6,e7-f7',
+				},
+				{
+					label: 'Solved! Now we move on to the Fillomino part.',
+					s: 'a1-a5s,d1-g1s,e3-g3s,c5-e5s,g5-g7s,a7-d7s,b1-c1,b2-g2,b3-d3,b4-g4,b5,f5,a6-f6,e7-f7'
+				},
+				{
+					startOfFillomino: true,
+					label: 'The bottom-left corner cell cannot be a 1 because it would be adjacent to another 1-group, and any number other than 6 would be trapped. It has to be a 6.',
+					h: 'a7',
+					s: 'a1-a5s,d1-g1s,e3-g3s,c5-e5s,g5-g7s,a7-d7s',
+					g: '..2......3.143...4......2.66.6.....1..126..6...5.',
+					sn: ['6...', '5..', '....', '26.', '2.3', '.....'],
+				},
+				{
+					label: 'This “2” has to extend either upwards or downwards. Let’s see what happens if it extends downwards.',
+					h: 'e6=60',
+					s: 'a1-a5s,d1-g1s,e3-g3s,c5-e5s,g5-g7s,a7-d7s',
+					g: '..2......3.143...4......2.66.6.....1..126.66...5.',
+					sn: ['6...', '5..', '....', '26.', '2.3', '.....'],
+				},
+				{
+					label: 'The “5” now has to wrap around the bottom-right corner, but that would isolate the “6”. Therefore, the “2” cannot extend downwards.',
+					h: 'e6-e7=60,f7=240,g7=240,g6=240,g5=240,f5=240,f6=300',
+					s: 'a1-a5s,d1-g1s,e3-g3s,c5-e5s,g5-g7s,a7-d7s',
+					g: '..2......3.143...4......2.66.6.....1..126.66...5.',
+					sn: ['6...', '5..', '....', '26.', '2.3', '.....'],
+				},
+				{
+					label: 'The highlighted cells (red) can no longer be 2s, because they would be adjacent to an already completed 2-group. Therefore, the other “2” clue (yellow) must extend leftwards.',
+					h: 'e4,d5,d4=60',
+					s: 'a1-a5s,d1-g1s,e3-g3s,c5-e5s,g5-g7s,a7-d7s',
+					g: '..2......3.143...4......2.66.6..2..1..126.66...5.',
+					sn: ['6...', '5..', '....', '26.', '2.3', '.....'],
+				},
+				{
+					label: 'Now let’s see which of the battleships in the grid is the fourth given one.',
+					h: 'S4',
+					s: 'a1-a5s,d1-g1s,e3-g3s,c5-e5s,g5-g7s,a7-d7s',
+					g: '..2......3.143...4.....22.66.6..2..1..126.66...5.',
+					sn: ['6...', '5..', '....', '26.', '2.3', '.....'],
+				},
+				{
+					label: 'It can’t be this one. If we put the “2” on the left, it would have to extend downwards and touch the existing completed 2-groups. If we put it on the right, it would be trapped.',
+					h: 'S4,e3-g3',
+					s: 'a1-a5s,d1-g1s,e3-g3s,c5-e5s,g5-g7s,a7-d7s',
+					g: '..2......3.143...4.....22.66.6..2..1..126.66...5.',
+					sn: ['6...', '5..', '....', '26.', '2.3', '.....'],
+				},
+				{
+					label: 'It can’t be this one either. If we put the “2” on the top, it would have to extend leftwards and touch the existing completed 2-group. If we put it on the bottom, it would be trapped.',
+					h: 'S4,g5-g7',
+					s: 'a1-a5s,d1-g1s,e3-g3s,c5-e5s,g5-g7s,a7-d7s',
+					g: '..2......3.143...4.....22.66.6..2..1..126.66...5.',
+					sn: ['6...', '5..', '....', '26.', '2.3', '.....'],
+				},
+				{
+					label: 'Therefore, it has to be this one. Furthermore, the “6” we place this way must extend leftwards.',
+					h: 'S4,c5-e5',
+					s: 'a1-a5s,d1-g1s,e3-g3s,c5-e5s,g5-g7s,a7-d7s',
+					g: '..2......3.143...4.....22.66.6..2..1..126.66...5.',
+					sn: ['6...', '5..', '....', '26.', '2.3', '.....'],
+				},
+				{
+					label: 'The 3-ship that has a “5” on it cannot be the top one because there’s not enough space to fit a 5-group in there. We now know which of the 3-ships is which.',
+					h: 'S2,e3-g3',
+					s: 'a1-a5s,d1-g1s,e3-g3s,c5-e5s!,g5-g7s,a7-d7s',
+					g: '..2......3.143...4.....22.66.6662..1..126.66...5.',
+					sn: ['6...', '5..', '....', '266', '2.3', '.....'],
+				},
+				{
+					label: 'Can the “5” on the beige ship be at the top? It can’t, because that would take too much space away from the 6’s. Remember that the dark-blue ship must have a 2 and a 3 on it, which take away space as well.',
+					h: 'g5',
+					s: 'a1-a5s,g5-g7s!,d1-g1s,c5-e5s!,e3-g3s!,a7-d7s',
+					g: '..2......3.143...4.....22.66.6662..1..126.66...5.',
+					sn: ['6...', '5..', '....', '266', '2.3', '.....'],
+				},
+				{
+					label: 'Now let’s see if the dark-blue ship can have the “2” on the right and the “3” on the left. The “2” would immediately have to extend leftwards (beige). Then the “3” above the ship (green) has to extend around the corner. This traps the “4” (cyan). Therefore, the ship is oriented the other way.',
+					h: 'f3-g3=60,g2=120,f1-g1=120,f2=180',
+					s: 'a1-a5s,g5-g7s!,d1-g1s,c5-e5s!,e3-g3s!,a7-d7s',
+					g: '..2......3.143...4.....22.66.6662..1..126.66...55',
+					sn: ['6...', '5..', '....', '266', '2.3', '.....'],
+				},
+				{
+					label: 'The “2” has to extend rightwards to avoid touching the completed 2-groups, and after that, the “3” has to extend upwards.',
+					h: 'e3-f3=60,g1-g3=120',
+					s: 'a1-a5s,g5-g7s!,d1-g1s,c5-e5s!,e3-g3s!,a7-d7s',
+					g: '..2......3.143...42.3..22.66.6662..1..126.66...55',
+					sn: ['6...', '5..', '....', '266', '2.3', '.....'],
+				},
+				{
+					label: 'This “4” must now extend the only way it can.',
+					h: 'f2=180,d1-f1=180',
+					s: 'a1-a5s,g5-g7s!,d1-g1s,c5-e5s!,e3-g3s!,a7-d7s',
+					g: '..2...3..3.143...4223..22.66.6662..1..126.66...55',
+					sn: ['6...', '5..', '....', '266', '223', '.....'],
+				},
+				{
+					label: 'It is now clear which 4-ship is which, as the one at the top can no longer contain a 6.',
+					h: 'd1-g1,a7-d7,S1,S3',
+					s: 'a1-a5s,g5-g7s!,d1-g1s,c5-e5s!,e3-g3s!,a7-d7s',
+					g: '..24443..3.143...4223..22.66.6662..1..126.66...55',
+					sn: ['6...', '5..', '....', '266', '223', '.....'],
+				},
+				{
+					label: 'This “4” must avoid touching the completed 4-group above it, so it must extend at least two additional cells towards the left.',
+					h: 'b3-d3=180',
+					s: 'a7-d7s!,g5-g7s!,d1-g1s!,c5-e5s!,e3-g3s!,a1-a5s',
+					g: '..24443..3.143...4223..22.66.6662..1..126.66...55',
+					sn: ['66..', '5..', '4443', '266', '223', '.....'],
+				},
+				{
+					label: 'This cell cannot be a “1” (there’s already a “1” adjacent to it). It must be a 3, as any other digit would be trapped there.',
+					h: 'd2',
+					s: 'a7-d7s!,g5-g7s!,d1-g1s!,c5-e5s!,e3-g3s!,a1-a5s',
+					g: '..24443..3.143.444223..22.66.6662..1..126.66...55',
+					sn: ['66..', '5..', '4443', '266', '223', '.....'],
+				},
+				{
+					label: 'The “3” must extend leftward as there is no other place for it to go.',
+					h: 'b2-d2=120',
+					s: 'a7-d7s!,g5-g7s!,d1-g1s!,c5-e5s!,e3-g3s!,a1-a5s',
+					g: '..24443..33143.444223..22.66.6662..1..126.66...55',
+					sn: ['66..', '5..', '4443', '266', '223', '.....'],
+				},
+				{
+					label: 'The “2” at the top must extend leftward as there is no other place for it to go.',
+					h: 'b1-c1=60',
+					s: 'a7-d7s!,g5-g7s!,d1-g1s!,c5-e5s!,e3-g3s!,a1-a5s',
+					g: '..24443.333143.444223..22.66.6662..1..126.66...55',
+					sn: ['66..', '5..', '4443', '266', '223', '.....'],
+				},
+				{
+					label: 'These 6-groups can no longer be separate. There is not enough space at the bottom for 6 cells without connecting to the upper one. Therefore, they must connect, and there’s only one cell where that is possible (blue).',
+					h: 'b5-d5,a7-b7,b6=240',
+					s: 'a7-d7s!,g5-g7s!,d1-g1s!,c5-e5s!,e3-g3s!,a1-a5s',
+					g: '.224443.333143.444223..22.66.6662..1..126.66...55',
+					sn: ['66..', '5..', '4443', '266', '223', '.....'],
+				},
+				{
+					label: 'The “5” group cannot extend this far left because then the cell above it (green) cannot be filled in as it’s adjacent to a 1. Therefore, the 5-group has to extend upwards on the right (blue).',
+					h: 'c7-g7,c6=120,g6=240',
+					s: 'a7-d7s!,g5-g7s!,d1-g1s!,c5-e5s!,e3-g3s!,a1-a5s',
+					g: '.224443.333143.444223..22.66.6662..16.126.66...55',
+					sn: ['66..', '5..', '4443', '266', '223', '.....'],
+				},
+				{
+					label: 'This “6” group is now entirely forced as there are only just enough cells available to make it that size.',
+					h: 'f4-g4,f6-f6',
+					s: 'a7-d7s!,g5-g7s!,d1-g1s!,c5-e5s!,e3-g3s!,a1-a5s',
+					g: '.224443.333143.444223..22.66.6662..16.126566...55',
+					sn: ['66..', '55.', '4443', '266', '223', '.....'],
+				},
+				{
+					label: 'The “5” group must extend leftwards.',
+					h: 'd7-g7=240',
+					s: 'a7-d7s!,g5-g7s!,d1-g1s!,c5-e5s!,e3-g3s!,a1-a5s',
+					g: '.224443.333143.444223..22666.66626616.126566...55',
+					sn: ['66..', '556', '4443', '266', '223', '.....'],
+				},
+				{
+					label: 'This space is entirely surrounded by completed groups, so it must be a 2-group.',
+					h: 'c6-c7',
+					s: 'a7-d7s!,g5-g7s!,d1-g1s!,c5-e5s!,e3-g3s!,a1-a5s',
+					g: '.224443.333143.444223..22666.66626616.126566.5555',
+					sn: ['66.5', '556', '4443', '266', '223', '.....'],
+				},
+				{
+					label: 'This 4-group can no longer extend to the left without cutting off the top-left corner. That corner cannot contain a 2-group (it’s adjacent to a completed 2-group) and it cannot contain two 1-groups as they would be adjacent to each other. Therefore, the 4 extends downwards.',
+					h: 'a3-d3=180',
+					s: 'a7-d7s!,g5-g7s!,d1-g1s!,c5-e5s!,e3-g3s!,a1-a5s',
+					g: '.224443.333143.444223..22666.66626616212656625555',
+					sn: ['6625', '556', '4443', '266', '223', '.....'],
+				},
+				{
+					label: 'Now we need to divvy up the remaining 5-cell space. It cannot be divided into 2+1+2 without touching the 2-group at the top; it cannot be 2+3 without touching the 2- or 3-group at the top; and it cannot be 1+4 without touching the 4-group. The only possibility is for it to be a single 5-group.',
+					h: 'a1-a5',
+					s: 'a7-d7s!,g5-g7s!,d1-g1s!,c5-e5s!,e3-g3s!,a1-a5s',
+					g: '.224443.333143.444223.422666.66626616212656625555',
+					sn: ['6625', '556', '4443', '266', '223', '.....'],
+				},
+				{
+					label: 'Solved!',
+					s: 'a7-d7s!,g5-g7s!,d1-g1s!,c5-e5s!,e3-g3s!,a1-a5s!',
+					g: '5224443533314354442235422666566626616212656625555',
+					sn: ['6625', '556', '4443', '266', '223', '55555'],
+				},
+			],
+			(page, ix, pages) =>
+			{
+				let startOfFillomino = pages.findIndex(p => p.startOfFillomino);
+				let s = '', m;
+				let cellColors = Array(49).fill('#ccc');
+				let ds = [];
+				let defaultColor = ix >= startOfFillomino ? '#ccc' : '#468';
+				let shipColors = Array(6).fill(defaultColor);
+				let digitColors = Array(49).fill('black');
+				let shipIx = 0;
+				for (let sp of page.s ? page.s.split(',') : [])
+				{
+					if (m = /^([a-z])(\d+)([cslrtb]?)$/.exec(sp))
+						ds.push({ x: m[1].charCodeAt(0)-97, y: m[2]-1, s: m[3], c: defaultColor });
+					else if (m = /^([a-z])(\d+)-([a-z])(\d+)(s?)(!?)$/.exec(sp))
+					{
+						let x1 = m[1].charCodeAt(0)-97, x2 = m[3].charCodeAt(0)-97;
+						let y1 = m[2]-1, y2 = m[4]-1;
+						shipColors[shipIx] = m[6] ? `hsl(${shipIx*360/6}, 100%, 25%)` : defaultColor;
+						for (let x = x1; x <= x2; x++)
+							for (let y = y1; y <= y2; y++)
+							{
+								ds.push({ x: x, y: y, s: m[5] ? x1===x2 ? y===y1 ? 't' : y===y2 ? 'b' : 's' : y1===y2 ? x===x1 ? 'l' : x===x2 ? 'r' : 's' : 's' : '', c: shipColors[shipIx] });
+								digitColors[x+7*y] = m[6] ? 'white' : 'black';
+							}
+						shipIx++;
+					}
+					else
+						console.error(`Unknown ship piece: ${sp}`);
+				}
+				for (let d of ds)
+				{
+					cellColors[d.x + 7*d.y] = 'white';
+					if (d.s === 'c')
+						s += `<circle cx='${d.x+.5}' cy='${d.y+.5}' r='.4' fill='${d.c}' stroke='none' />`;
+					else if (d.s === 't')
+						s += `<path d='M${d.x+.1} ${d.y+.5}a.4.4 0 0 1 .8 0v.4h-.8z' fill='${d.c}' stroke='none' />`;
+					else if (d.s === 'b')
+						s += `<path d='M${d.x+.1} ${d.y+.1}h.8v.4a.4.4 0 0 1-.8 0z' fill='${d.c}' stroke='none' />`;
+					else if (d.s === 'l')
+						s += `<path d='M${d.x+.5} ${d.y+.9}a.4.4 0 0 1 0-.8h.4v.8z' fill='${d.c}' stroke='none' />`;
+					else if (d.s === 'r')
+						s += `<path d='M${d.x+.1} ${d.y+.1}h.4a.4.4 0 0 1 0 .8h-.4z' fill='${d.c}' stroke='none' />`;
+					else if (d.s === 's')
+						s += `<path d='M${d.x+.1} ${d.y+.1}h.8v.8h-.8z' fill='${d.c}' stroke='none' />`;
+				}
+				for (let h of page.h ? page.h.split(',') : [])
+				{
+					if (m = /^([a-z])(\d+)(?:=(.*))?$/.exec(h))
+						s += `<circle cx='${m[1].charCodeAt(0)-96.5}' cy='${m[2]-.5}' r='.4' stroke='${m[3]?`hsl(${m[3]},100%,25%)`:'red'}' stroke-width='.1' fill='none' />`;
+					else if (m = /^([a-z])(\d+)-([a-z])(\d+)(?:=(.*))?$/.exec(h))
+						s += `<path d='M${m[3].charCodeAt(0)-96.1} ${m[2]-.9}V${m[4]-.1}H${m[1].charCodeAt(0)-96.9}V${m[2]-.9}z' stroke='${m[5]?`hsl(${m[5]},100%,25%)`:'red'}' stroke-width='.1' fill='none' />`;
+					else if (m = /^C(\d+)$/.exec(h))
+						s += `<circle cx='${m[1]-.5}' cy='-.65' r='.4' stroke='red' stroke-width='.1' fill='none' />`;
+					else if (m = /^R(\d+)$/.exec(h))
+						s += `<circle cx='-.6' cy='${m[1]-.5}' r='.4' stroke='red' stroke-width='.1' fill='none' />`;
+					else if (m = /^S(\d+)$/.exec(h))
+						s += `<path d='M8.9 ${(m[1]-1)*1.2-.1}h${page.sn[m[1]-1].length+.2}v1.2H8.9z' stroke='red' stroke-width='.1' fill='none' />`;
+					else
+						console.error(`Unknown highlight: ${h}`);
+				}
+				for (let i = 0; i < 6; i++)
+				{
+					if (page.sn)
+						for (let j = 0; j < page.sn[i].length; j++)
+							if (page.sn[i][j] !== '.')
+								s += `<text x='${9.5+j}' y='${i*1.2+.77}' fill='white'>${page.sn[i][j]}</text>`;
+					document.getElementById(`battleship-${i+1}`).style.fill = shipColors[i];
+				}
+				if (ix >= startOfFillomino && page.g)
+					for (let i = 0; i < 49; i++)
+						cellColors[i] = page.g[i] === '.' ? 'white' : `hsl(${(page.g[i]-1)*360/6}, 100%, 92%)`;
+				document.getElementById('battleships-and-pitfalls-cells').innerHTML =
+					cellColors.map((color, ix) => `<path d='M${ix%7} ${(ix/7)|0}h1v1h-1z' fill='${color}' />`).join('');
+				document.getElementById('battleships-and-pitfalls-digits').innerHTML = s +
+					Array(49).fill(null).map((_, ix) => page.g && page.g[ix] !== '.' ? `<text x='${ix%7+.5}' y='${((ix/7)|0)+.77}' fill='${digitColors[ix]}'>${page.g[ix]}</text>` : '').join('');
+			})();
 	},
 	ska: function()
 	{
+		// ARE YOU TALLER THAN A SKYSCRAPER? (big grid)
 		let grids = ['2314412314323241', '4213342113422134', '1342421321343421', '3412123441232341', '3124124343122431', '1243431224313124', '3214432121431432', '3241213414234312', '2134124334124321', '4321123421433412', '4132124334212314', '3241413224131324', '1243431231242431', '4231341213242143', '3124431212432431', '4312213432411423'];
 		let hues = [0, 60, 120, 240];
 		createDeductionTracker('skyscraper-big',
@@ -1744,17 +2147,18 @@ makeSolutionPage('objectionable-ranking', `
 					let [x, y, w, h, g, c] = inf.split(';');
 					let ox = g ? page.coords[g][0] : 0;
 					let oy = g ? page.coords[g][1] : 0;
-					sg += h ? `<rect x='${+x+ox+.1}' y='${+y+oy+.1}' width='${+w-.2}' height='${+h-.2}' stroke-width='.1' stroke='${c ?? 'red'}' fill='none' />`
-							: `<circle cx='${+x+ox+.5}' cy='${+y+oy+.5}' r='.4' stroke-width='.1' stroke='${w??'red'}' fill='none' />`;
+					sg += h	? `<rect x='${+x+ox+.1}' y='${+y+oy+.1}' width='${+w-.2}' height='${+h-.2}' stroke-width='.1' stroke='${c ?? 'red'}' fill='none' />`
+						: `<circle cx='${+x+ox+.5}' cy='${+y+oy+.5}' r='.4' stroke-width='.1' stroke='${w??'red'}' fill='none' />`;
 				}
 				document.getElementById('skyscraper-subgrids').innerHTML = sg;
 				document.getElementById('skyscraper-extra').innerHTML = page.s ?? '';
 				setClass(document.getElementById('skyscraper-svg'), 'thick', !page.thin);
-				document.getElementById('skyscraper-svg').setAttribute('viewBox', page.big ? '-.2 -1.1 38.4 20.2' : '-.2 .4 38.4 18.2');
+				document.getElementById('skyscraper-svg').setAttribute('viewBox', page.big ? '-.2 -1.1 38.4 20.4' : '-.2 .4 38.4 18.2');
 			})();
 	},
 	poa: function()
 	{
+		// POWER OF ACHIEVEMENT (Sudokus)
 		let colors = {
 			'': 'red',
 			'g': '#0a0',
@@ -2061,7 +2465,7 @@ makeSolutionPage('objectionable-ranking', `
 					g: '.2.4.6789.....71..6.712.543......91791...3654754691238..5...3..3...6.4.5.9....8.1',
 				},
 				{
-					label: 'Row 3 column 8 can only be !7.',
+					label: 'Row 8 column 2 can only be !7.',
 					h: 'b8g,b5,b1,a8,g8,b6,e8,b3,b9',
 					g: '.2.4.6789.....71..687129543......91791...3654754691238..5...3..3...6.4.5.9....8.1',
 				},
@@ -2173,6 +2577,7 @@ makeSolutionPage('objectionable-ranking', `
 	},
 	poab: function()
 	{
+		// POWER OF ACHIEVEMENT (icons in final table)
 		Array.from(document.querySelectorAll('#poa-results td.icon')).forEach(td => {
 			td.innerHTML = `<span style='background: url(${poaIcons[td.innerText-1]}); background-size: contain; display: inline-block; width: .65cm; height: .65cm; vertical-align: bottom;'></span>`;
 		});
