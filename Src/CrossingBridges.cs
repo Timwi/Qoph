@@ -146,6 +146,7 @@ namespace Qoph
                     svgExtra: $"<path d='{topLeft}{topRight}{bottomLeft}{bottomRight}{bottomBottom}' fill='none' stroke='green' stroke-width='.1' />");
                 Console.WriteLine(deductions.JoinString("\n"));
                 Console.WriteLine();
+                Clipboard.SetText(deductions.JoinString("\n"));
             }
             ConsoleUtil.WriteLine($"{count} solutions found.".Color(count == 1 ? ConsoleColor.White : ConsoleColor.Yellow, count == 1 ? ConsoleColor.DarkGreen : ConsoleColor.DarkRed));
         }
@@ -199,6 +200,7 @@ namespace Qoph
                         dec(fromCell, 2);
                         dec(toCell, 2);
                         bridgesAvailable.RemoveAll(br => wouldCross(w, br.fromCell, br.toCell, fromCell, toCell));
+                        deductions.Add($"{cell} ⇒ {(cell == fromCell ? toCell : fromCell)} is forced");
                     }
                     if (remainingIslands.ContainsKey(cell))
                         Debugger.Break();
@@ -208,7 +210,7 @@ namespace Qoph
                 if (av.Count == 1 && count == 1)
                 {
                     var (fromCell, toCell) = av[0];
-                    deductions.Add($"{fromCell}→{toCell} is forced");
+                    deductions.Add($"{cell} → {(cell == fromCell ? toCell : fromCell)} is forced");
                     bridgesSoFar.Add((fromCell, toCell, 1));
                     dec(fromCell, 1);
                     dec(toCell, 1);
@@ -234,12 +236,15 @@ namespace Qoph
             }
 
             var bridge = fewestPossibilities[0];
-            deductions.Add($"Examining: {bridge.fromCell}→{bridge.toCell}");
+            deductions.Add($"Examining: {bridge.fromCell} ∤ {bridge.toCell}");
             bridgesAvailable.Remove(bridge);
 
             // Try without this bridge
             foreach (var result in SolveHashiwokakero(w, bridgesSoFar.ToList(), bridgesAvailable.ToList(), remainingIslands.ToDictionary(), deductions.ToList()))
                 yield return result;
+
+            deductions.RemoveAt(deductions.Count - 1);
+            deductions.Add($"Examining: {bridge.fromCell} → {bridge.toCell}");
 
             // Try with a single bridge
             dec(bridge.fromCell, 1);
@@ -248,6 +253,9 @@ namespace Qoph
             bridgesAvailable.RemoveAll(br => wouldCross(w, br.fromCell, br.toCell, bridge.fromCell, bridge.toCell));
             foreach (var result in SolveHashiwokakero(w, bridgesSoFar.ToList(), bridgesAvailable.ToList(), remainingIslands.ToDictionary(), deductions.ToList()))
                 yield return result;
+
+            deductions.RemoveAt(deductions.Count - 1);
+            deductions.Add($"Examining: {bridge.fromCell} ⇒ {bridge.toCell}");
 
             // Try with a double bridge
             if (remainingIslands.ContainsKey(bridge.fromCell) && remainingIslands.ContainsKey(bridge.toCell))

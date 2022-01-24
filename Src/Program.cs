@@ -35,9 +35,7 @@ namespace Qoph
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            FaceToFace.Planning();
-            FaceToFace.GatherAllData();
-            //FaceToFace.GenerateModels();
+            CrossingBridges.RunHashiwokakeroSolver();
 
 
             Console.WriteLine("Done.");
