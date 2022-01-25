@@ -1,0 +1,22 @@
+<style>
+</style>
+<script src='../../files/solutions.js'></script>
+<h1>Inside Out</h1>
+<script>
+makeSolutionPage('inside-out', `
+<p>The circles-in-circles graphics suggest [d that we are looking for words that contain other words. The words on the outside are clues towards the inner words. [ra]]</p>
+{-a
+<table class='bordered'>
+<tr><th>Clue	</th><th>Puzzle	</th><th>Feeder	</th><th>Inner word	</th><th class='ih r-b'>Center letters	</th></tr>
+<tr><td class='clue'>sign	</td><td>Swerve	</td><td class='w'>«DODGE MINIVAN»	</td><td>«GEMINI»	</td><td class='ih r-b'>«MI»	</td></tr>
+<tr><td class='clue'>one	</td><td>Hazing	</td><td class='w'>«AMMUNITION»	</td><td>«UNIT»	</td><td class='ih r-b'>«NI»	</td></tr>
+<tr><td class='clue'>ruler	</td><td>Home Depot	</td><td class='w'>«SIDE MIRROR»	</td><td>«EMIR»	</td><td class='ih r-b'>«MI»	</td></tr>
+<tr><td class='clue'>month	</td><td>Sapphic Synonyms	</td><td class='w'>«HAZARD»	</td><td>«AZAR»	</td><td class='ih r-b'>«ZA»	</td></tr>
+<tr><td class='clue'>positive	</td><td>Drumheads	</td><td class='w'>«VOCATIONAL»	</td><td>«CATION»	</td><td class='ih r-b'>«TI»	</td></tr>
+<tr><td class='clue'>animal	</td><td>Throw	</td><td class='w'>«EPONYM»	</td><td>«PONY»	</td><td class='ih r-b'>«ON»	</td></tr>
+</table>
+<p>The next insight is that [o there is actually a third circle inside each circle. The lines from the clues connect with the middle circles, while the innermost circles are the ones connected together. [d We should therefore extract the centers of the words. Since they all have even numbers of letters, [sb we extract the central two letters.]]]</p>
+}
+{-b <div class='answer'>MINIMIZATION</div>}
+`);
+</script>
