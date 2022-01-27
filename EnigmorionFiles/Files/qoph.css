@@ -543,6 +543,11 @@ body.solution h1 {
 		box-shadow: 0 .1cm .1cm rgba(0, 0, 0, .2);
 	}
 
+	body.solution h1 .author {
+		font-weight: normal;
+		font-size: 12pt;
+	}
+
 button.reveal {
 	padding: 0 .2cm 0 .8cm;
 	margin: 0 .2cm;
@@ -595,7 +600,11 @@ button.reveal {
 	position: sticky;
 	top: 0;
 	z-index: 1;
+	pointer-events: none;
 }
+	#sol-controls > button {
+		pointer-events: all;
+	}
 
 body.solution div.answer {
 	margin: 2cm auto 1cm;
