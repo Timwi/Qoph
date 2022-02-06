@@ -1,15 +1,15 @@
 <div id='top'>
-    <a href='/qoph'><img src='/qoph/files/logo.svg' class='logo' alt='Quantum Online Puzzle Hunt' /></a>
+    <a href='/{{urlname}}'><img src='/{{urlname}}/files/logo.svg' class='logo' alt='Quantum Online Puzzle Hunt' /></a>
     <div class='links'>
-        <a id='user' href='/qoph/auth'>{{username}}</a>
-        <a id='team' href='/qoph/auth/team/{{teamid}}'>{{teamname}}</a>
+        <a id='user' href='/{{urlname}}/auth'>{{username}}</a>
+        <a id='team' href='/{{urlname}}/auth/team/{{teamid}}'>{{teamname}}</a>
     </div>
     <menu>
-        <li><a href='/qoph'>Home</a></li>
-        {{if-on|<li><a href='/qoph/puzzles'>Puzzles</a></li>}}
-        <li><a href='/qoph/info'>Info</a></li>
-        <li><a href='/qoph/teams'>{{if-done|Leaderboard|Teams}}</a></li>
-        {{if-done|<li><a href='/qoph/stats'>Stats</a>}}</li>
-		{{if-staff|<li class='staff'><a href='/qoph/staff'>For Staff</a></li>}}
+        <li><a href='/{{urlname}}'>Home</a></li>
+        {{if-on|<li><a href='/{{urlname}}/puzzles'>Puzzles</a></li>}}
+        <li><a href='/{{urlname}}/info'>Info</a></li>
+        <li><a href='/{{urlname}}/teams'>{{if-done|Leaderboard|Teams}}</a></li>
+        {{if-done|<li><a href='/{{urlname}}/stats'>Stats</a>}}</li>
+		{{if-staff|<li class='staff'><a href='/{{urlname}}/staff'>For Staff</a></li>}}
     </menu>
 </div>

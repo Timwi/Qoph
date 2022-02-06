@@ -1,13 +1,13 @@
 <div id='top'>
-    <a href='/qoph'><img src='/qoph/files/logo.svg' class='logo' alt='Quantum Online Puzzle Hunt' /></a>
+    <a href='/{{urlname}}'><img src='/{{urlname}}/files/logo.svg' class='logo' alt='Quantum Online Puzzle Hunt' /></a>
     <div class='links'>
-        <a href='/qoph/auth' id='login'>Join the hunt!</a>
+        <a href='/{{urlname}}/auth' id='login'>Join the hunt!</a>
     </div>
     <menu>
-        <li><a href='/qoph'>Home</a></li>
-        {{if-on|<li><a href='/qoph/puzzles'>Puzzles</a></li>}}
-        <li><a href='/qoph/info'>Info</a></li>
-        <li><a href='/qoph/teams'>{{if-done|Leaderboard|Teams}}</a></li>
-        {{if-done|<li><a href='/qoph/stats'>Stats</a>}}</li>
+        <li><a href='/{{urlname}}'>Home</a></li>
+        {{if-on|<li><a href='/{{urlname}}/puzzles'>Puzzles</a></li>}}
+        <li><a href='/{{urlname}}/info'>Info</a></li>
+        <li><a href='/{{urlname}}/teams'>{{if-done|Leaderboard|Teams}}</a></li>
+        {{if-done|<li><a href='/{{urlname}}/stats'>Stats</a>}}</li>
     </menu>
 </div>
