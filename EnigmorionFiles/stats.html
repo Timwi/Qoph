@@ -1,0 +1,149 @@
+<style>
+	.section {
+		display: none;
+	}
+		.section.shown {
+			display: block;
+		}
+
+	menu.stats {/*
+		background: hsl(220, 60%, 60%);
+		border-radius: 1cm;
+		box-shadow: 0 0 .2cm rgba(0, 0, 0, .2);*/
+
+		font-size: 18pt;
+		font-weight: bold;
+		font-family: 'Montserrat';
+
+		margin: 2cm 0 1cm;
+		list-style-type: none;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+		menu.stats li {
+			margin: .1cm .3cm;
+		}
+			menu.stats li a {
+				color: black;
+				padding: .2cm .5cm;
+				border-radius: 100vw;
+			}
+			menu.stats li a.selected {
+				background: hsl(220, 80%, 95%);
+				box-shadow: 0 0 .2cm rgba(0, 0, 0, .5);
+			}
+
+	svg.diagram {
+		display: block;
+		width: 20cm;
+		margin: 0 auto;
+	}
+		svg.diagram path.axis {
+			marker-end: url(#arrow);
+			fill: none;
+			stroke: black;
+			stroke-width: .1;
+		}
+		svg.diagram path.hrule {
+			fill: none;
+			stroke-width: .01;
+			stroke: hsl(220, 20%, 20%);
+		}
+		svg.diagram path.line {
+			fill: none;
+			stroke-width: .2;
+			filter: url(#drop-shadow);
+		}
+
+	div.legend {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin: .5cm auto .1cm;
+	}
+		div.legend .team {
+			white-space: nowrap;
+			width: min-content;
+			margin: .1cm .5cm;
+		}
+		div.legend .team .color {
+			display: inline-block;
+			width: 1cm;
+			height: .1cm;
+			vertical-align: middle;
+			margin-right: .25cm;
+			margin-bottom: .1cm;
+		}
+
+	table.wrong-answers {
+		margin: .1cm auto;
+	}
+		table.wrong-answers ul {
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+		}
+			table.wrong-answers ul .w {
+				font-family: 'Montserrat';
+			}
+		table.wrong-answers th, table.wrong-answers td {
+			vertical-align: top;
+		}
+</style>
+<svg id='defs' width='0' height='0'>
+	<defs>
+		<marker id='arrow' orient='auto' overflow='visible'><path d='M -4,0 l -3,3 9,-3 -9,-3z'/></marker>
+		<filter id='drop-shadow' x='-1000%' y='-1000%' width='2100%' height='2100%'>
+			<feGaussianBlur in='SourceAlpha' stdDeviation='.1' />
+			<feOffset dx='.125' dy='.125' result='b' />
+			<feFlood flood-color='rgba(0,0,0,.5)' />
+			<feComposite in2='b' operator='in' />
+			<feMerge><feMergeNode /><feMergeNode in='SourceGraphic' /></feMerge>
+		</filter>
+	</defs>
+</svg>
+<h1>Quantum Online Puzzle Hunt</h1>
+<menu class='stats'>
+	<li><a href='#' class='show' data-show='team-progression'>Team Progression</a></li>
+	<li><a href='#' class='show' data-show='common-wrong-answers'>Common Wrong Answers</a></li>
+</menu>
+<script>
+	let selection = localStorage.getItem('qoph-stats');
+	let validSelections = Array.from(document.querySelectorAll('menu>li>a.show')).map(a => a.dataset.show);
+	if (!validSelections.includes(selection))
+		selection = validSelections[0];
+	function show() {
+		Array.from(document.querySelectorAll('div.section')).forEach(section => {
+			if (section.id === selection)
+				section.classList.add('shown');
+			else
+				section.classList.remove('shown');
+		});
+		Array.from(document.querySelectorAll('menu>li>a.show')).forEach(a => {
+			if (a.dataset.show === selection)
+				a.classList.add('selected');
+			else
+				a.classList.remove('selected');
+		});
+	}
+	Array.from(document.querySelectorAll('menu a.show')).forEach(a => {
+		a.onclick = function() {
+			selection = a.dataset.show;
+			localStorage.setItem('qoph-stats', selection);
+			show();
+			return false;
+		};
+	});
+</script>
+<div id='team-progression' class='section'>
+	<h2>Team Progression</h2>
+	{{team-progression}}
+</div>
+<div id='common-wrong-answers' class='section'>
+	<h2>Common Wrong Answers</h2>
+	{{common-wrong-answers}}
+</div>
+<script>
+	show();
+</script>

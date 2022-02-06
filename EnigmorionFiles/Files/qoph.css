@@ -99,11 +99,12 @@ div#top {
 	box-shadow: 0 0 .2cm rgba(0, 0, 0, .3);
 }
 
-	div#top > img.logo {
+	div#top img.logo {
 		height: 1.8cm;
 		position: absolute;
 		left: 1cm;
 		top: .1cm;
+		border: none;
 	}
 
 	div#top > div.links {
@@ -203,6 +204,18 @@ h1 {
 			font-size: 18pt;
 			box-shadow: 0 -.1cm .1cm rgba(0, 0, 0, .2);
 		}
+
+h2 {
+	background: hsl(220, 70%, 97%);
+	border-radius: 100vw;
+	margin: 2cm 0 1cm;
+	padding: .3cm 0;
+	font-size: 28pt;
+	font-weight: normal;
+	text-align: center;
+	box-shadow: 0 0 .2cm rgba(0, 0, 0, .2);
+	clear: both;
+}
 
 kbd {
 	text-decoration: underline;
@@ -517,6 +530,17 @@ form td.explain {
 
 	.hints .solution-link {
 		font-size: 12pt;
+	}
+
+table.teams {
+	width: 90%;
+	margin: .25cm auto;
+}
+	table.teams td, table.teams th {
+		padding: .25cm .5cm;
+	}
+	table.teams th {
+		font-size: 18pt;
 	}
 
 /* Solution pages */

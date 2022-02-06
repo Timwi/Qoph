@@ -7,7 +7,7 @@
 	}
     table.main td {
 		text-align: center;
-		vertical-align: center;
+		vertical-align: middle;
 		padding: 0;
 		background: hsl(220, 43%, 77%);
 		border: 5px solid transparent;
@@ -33,6 +33,7 @@
 		border-collapse: separate;
 		float: right;
 		width: 5cm;
+		margin-bottom: 1.5cm;
 	}
 	table.list td {
 		background: hsl(220, 50%, 80%);
@@ -41,6 +42,10 @@
 	}
 	table.list svg {
 		width: 1cm;
+	}
+	#image-credit {
+		font-size: 10pt;
+		margin-top: 2cm;
 	}
 </style>
 <script src='../../files/solutions.js'></script>
@@ -115,6 +120,60 @@ makeSolutionPage('somethings-fishy', `
 }
 {-f <p>This looks a lot like [d <a href='https://en.wikipedia.org/wiki/Flag_semaphore'>flag semaphore</a>, which spells out the answer. [rg]]}
 {-g <div class='answer' style='clear: none; margin: 2cm auto 1cm 5.5cm;'>ANTERIOR</div>}
+
+<h2>Image credit</h2>
+[rimcr]
+{-imcr <div id='image-credit'>
+<pre>
+ANGELFISH:
+	A1: Aquinas Silva, Creative Commons Attribution-Share Alike 4.0 International, Wikimedia Commons
+	A2: Alexander Oehrle, Cloudtail the Snow Leopard, non-commercial/no-derivs, https://www.flickr.com/photos/blacktigersdream/
+	A3: Brian Gratwicke, Creative Commons Attribution 2.0 Generic, https://www.flickr.com/photos/19731486@N07/3783085004
+
+BASS:
+	B1: public domain
+	B2: public domain
+	B3: Virgil Beck, courtesy Wisconsin Department of Natural Resources
+
+CARP:
+	C1: Free, no attribution
+	C2: The Natural History of British Fishes (1802) by Edward Donovan (1768-1837), rawpixel.com
+	C3: public domain
+
+DAMSELFISH:
+	D1: Brian Gratwicke, https://www.flickr.com/photos/briangratwicke/
+	D2: public domain
+	D3: Rickard Zerpe, https://www.flickr.com/people/125265709@N08
+
+EEL:
+	E1: Clinton & Charles Robertson, flickr.com
+	E2: Brevoort, James Carson, 1818-1887
+	E3: public domain
+
+FROGFISH:
+	F1: public domain
+	F2: Bernard DUPONT, https://www.flickr.com/people/65695019@N07
+	F3: Tom Weilenmann, https://www.flickr.com/photos/tom_weilenmann/
+
+GOLDFISH:
+	G1: public domain
+	G2: Bjwebb, English Wikipedia
+	G3: public domain
+
+HALIBUT:
+	H1: Edward Donovan (1768-1837), The Natural History of British Fishes (1802), rawpixel.com
+	H2: Elieser Bloch, Ichtyologie ou Histoire naturelle, rawpixel.com
+	H3: public domain
+
+Red herrings:
+	R1: 'No Matter' Project, flickr, CC license 2.0 Generic
+	R2: 'No Matter' Project, flickr, CC license 2.0 Generic
+	R3: public domain
+	R4: public domain
+	R5: public domain
+	R6: public domain
+</pre>
+</div>}
 `, {
 	e: function() {
 		Array.from(document.querySelectorAll('table.list td')).forEach(td => {

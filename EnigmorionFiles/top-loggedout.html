@@ -1,5 +1,5 @@
 <div id='top'>
-    <img src='/qoph/files/logo.svg' class='logo' />
+    <a href='/qoph'><img src='/qoph/files/logo.svg' class='logo' alt='Quantum Online Puzzle Hunt' /></a>
     <div class='links'>
         <a href='/qoph/auth' id='login'>Join the hunt!</a>
     </div>
@@ -7,6 +7,7 @@
         <li><a href='/qoph'>Home</a></li>
         {{if-on|<li><a href='/qoph/puzzles'>Puzzles</a></li>}}
         <li><a href='/qoph/info'>Info</a></li>
-        <li><a href='/qoph/teams'>Teams</a></li>
+        <li><a href='/qoph/teams'>{{if-done|Leaderboard|Teams}}</a></li>
+        {{if-done|<li><a href='/qoph/stats'>Stats</a>}}</li>
     </menu>
 </div>

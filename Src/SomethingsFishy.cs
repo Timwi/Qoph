@@ -40,7 +40,7 @@ namespace Qoph
             ConsoleUtil.WriteLine(result.Split(w).Select(row => row.Select(v => (v ?? "").PadLeft(3).Color(ConsoleColor.White, (ConsoleColor) " ABCDEFGH".IndexOf((v ?? " ")[0]))).JoinColoredString(" ")).JoinColoredString("\n"));
             Console.WriteLine($"Red herrings needed: {w * h - 3 * solution.Length}");
             var redHerring = 1;
-            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\somethings-fishy.html", "<!--%%-->", "<!--%%%-->", result.Select(name => (name ?? $"R{redHerring++}").Apply(filename =>
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\puzzles\somethings-fishy.html", "<!--%%-->", "<!--%%%-->", result.Select(name => (name ?? $"R{redHerring++}").Apply(filename =>
             {
                 var path = $@"D:\c\Qoph\DataFiles\Something’s Fishy\{filename}.jpg";
                 var byteData = File.ReadAllBytes(path);

@@ -1,49 +1,49 @@
 Fish image credits:
 
 ANGELFISH:
-    A1: “angel”                         PD
-    A2: “freshwater angelfish”          Cloudtail the Snow Leopard (https://www.flickr.com/photos/blacktigersdream/), non-commercial, no-derivs
-    A3: “angel fish”                    PD
+	A1: “angel”                         Aquinas Silva, Creative Commons Attribution-Share Alike 4.0 International
+	A2: “freshwater angelfish”          Alexander Oehrle, Cloudtail the Snow Leopard, non-commercial/no-derivs, https://www.flickr.com/photos/blacktigersdream/
+	A3: “angel fish”                    Brian Gratwicke, Creative Commons Attribution 2.0 Generic, https://www.flickr.com/photos/19731486@N07/3783085004
 
 BASS:
-    B1: “smallmouth bass”               PD
-    B2: “largemouth bass”               PD
-    B3: “largemouth bass”               Virgil Beck, courtesy Wisconsin Department of Natural Resources
+	B1: “smallmouth bass”               PD
+	B2: “largemouth bass”               PD
+	B3: “largemouth bass”               Virgil Beck, courtesy Wisconsin Department of Natural Resources
 
 CARP:
-!   C1: “carpa pez”/>“common carp”      Free, no attribution
-    C2: “golden carp fish”              The Natural History of British Fishes (1802) by Edward Donovan (1768-1837), rawpixel.com
-    C3: “cyprinus mirror carp”          PD
+	C1: “carpa pez”/>“common carp”      Free, no attribution
+	C2: “golden carp fish”              The Natural History of British Fishes (1802) by Edward Donovan (1768-1837), rawpixel.com
+	C3: “cyprinus mirror carp”          PD
 
 DAMSELFISH:
-!   D1: “pomacentridae”/>“golden df.”   Brian Gratwicke, https://www.flickr.com/photos/briangratwicke/
-    D2: “damsel fish”                   PD
-    D3: “neon damselfish”               Rickard Zerpe, https://www.flickr.com/people/125265709@N08
+	D1: “pomacentridae”/>“golden df.”   Brian Gratwicke, https://www.flickr.com/photos/briangratwicke/
+	D2: “damsel fish”                   PD
+	D3: “neon damselfish”               Rickard Zerpe, https://www.flickr.com/people/125265709@N08
 
 EEL:
-!   E1: “endangered”/>“American eel”    Clinton & Charles Robertson, flickr.com
-    E2: “Japanese eel”                  Brevoort, James Carson, 1818-1887
-    E3: “American eel”                  PD
+	E1: “endangered”/>“American eel”    Clinton & Charles Robertson, flickr.com
+	E2: “Japanese eel”                  Brevoort, James Carson, 1818-1887
+	E3: “American eel”                  PD
 
-FROGFISH (can’t have flounder or flatfish)
-    F1: “does a frogfish look like”     PD
-    F2: “painted frogfish”              Bernard DUPONT, https://www.flickr.com/people/65695019@N07
-    F3: “frog fish with mouth open”     Tom Weilenmann, https://www.flickr.com/photos/tom_weilenmann/
+FROGFISH
+	F1: “does a frogfish look like”     PD
+	F2: “painted frogfish”              Bernard DUPONT, https://www.flickr.com/people/65695019@N07
+	F3: “frog fish with mouth open”     Tom Weilenmann, https://www.flickr.com/photos/tom_weilenmann/
 
 GOLDFISH:
-    G1: “goldfish”                      PD
-    G2: “goldfish”                      Bjwebb, English Wikipedia
-    G3: “goldfish”                      PD
+	G1: “goldfish”                      PD
+	G2: “goldfish”                      Bjwebb, English Wikipedia
+	G3: “goldfish”                      PD
 
 HALIBUT:
-    H1: “halibut”                       Edward Donovan (1768-1837), The Natural History of British Fishes (1802), rawpixel.com
-    H2: “halibut”                       ep793 (pixabay.com)
-    H3: “halibut”                       PD
+	H1: “halibut”                       Edward Donovan (1768-1837), The Natural History of British Fishes (1802), rawpixel.com
+	H2: “halibut”                       Elieser Bloch, Ichtyologie ou Histoire naturelle, rawpixel.com
+	H3: “halibut”                       PD
 
 Red herrings:
-    R1: 'No Matter' Project, flickr, CC license 2.0 Generic
-    R2: 'No Matter' Project, flickr, CC license 2.0 Generic
-    R3: PD
-    R4: PD
-    R5: PD
-    R6: PD
+	R1: 'No Matter' Project, flickr, CC license 2.0 Generic
+	R2: 'No Matter' Project, flickr, CC license 2.0 Generic
+	R3: PD
+	R4: PD
+	R5: PD
+	R6: PD
