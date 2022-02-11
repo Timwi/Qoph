@@ -26,7 +26,7 @@ namespace Qoph
 
         public static void ReplaceInFile(this string path, string startMarkerRegex, string endMarkerRegex, string newText)
         {
-            File.WriteAllText(path, Regex.Replace(File.ReadAllText(path), $@"(?<={startMarkerRegex})(\r?\n)*( *).*?(\r?\n *)?(?={endMarkerRegex})", m => m.Groups[1].Value + newText.Unindent().Indent(m.Groups[2].Length) + m.Groups[3].Value, RegexOptions.Singleline));
+            File.WriteAllText(path, Regex.Replace(File.ReadAllText(path), $@"(?<={Regex.Escape(startMarkerRegex)})(\r?\n)*( *).*?(\r?\n *)?(?={Regex.Escape(endMarkerRegex)})", m => m.Groups[1].Value + newText.Unindent().Indent(m.Groups[2].Length) + m.Groups[3].Value, RegexOptions.Singleline));
         }
 
         public static bool ContainsAll(this string str, string characters) => ContainsAll(str, out _, characters.ToCharArray());

@@ -551,6 +551,29 @@ table.teams {
 		font-size: 18pt;
 	}
 
+svg.diagram {
+	display: block;
+	width: 20cm;
+	margin: 0 auto;
+}
+	svg.diagram path.axis {
+		marker-end: url(#arrow);
+		fill: none;
+		stroke: black;
+		stroke-width: .1;
+	}
+	svg.diagram path.hrule {
+		fill: none;
+		stroke-width: .01;
+		stroke: hsl(220, 20%, 20%);
+	}
+	svg.diagram path.line {
+		fill: none;
+		stroke-width: .2;
+		filter: url(#drop-shadow);
+	}
+
+
 /* Solution pages */
 .w {
 	font-family: 'Montserrat';

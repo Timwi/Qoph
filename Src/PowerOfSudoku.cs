@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -13,9 +14,13 @@ namespace Qoph
     {
         public static void FindIndexingSudokus()
         {
-            var words = @"acquireha,adventuri,ahoy,alternati,archer,artificia,atlantis,bakebread,beammeup,beeourgue,benchmaki,bodyguard,bullseye,buylowsel,camouflag,castaway,cheatingd,chestfulo,covermein,cowtipper,delicious,diamondst,diamonds,disenchan,dispensew,doabarrel,dryspell,echolocat,enchanter,feelingil,freediver,freetheen,freightst,fruitonth,gettingan,gettingwo,greatview,haveashea,hottopic,hottouris,iamamarin,ivegotaba,inception,intofire,ironbelly,ironman,itsasign,killthebe,leaderoft,letitgo,librarian,lionhunte,localbrew,maproom,mastertra,megold,moartools,monsterhu,moskstrau,onarail,onepickle,ooohshiny,organizat,overkill,overpower,passingth,plethorao,porkchop,potplante,rabbitsea,rainbowco,renewable,repopulat,returntos,saddleup,sailthe,sleepwith,smeltever,sniperdue,soigottha,soundthea,stayinfro,stickysit,superfuel,supersoni,takinginv,tasteofyo,thebeacon,thebeginn,thebeginn,thedeepen,theendaga,theend,thehaggle,thelie,tiedyeout,timeforst,timetofar,timetomin,timetostr,topofthew,totalbeel,trampolin,treasureh,weneedtog,werebeing,whenpigsf,wherehave,youneedam,zombiedoc,zoologist".Split(',');
+            var words = @"minecraft,stoneage,gettinganupgrade,acquirehardware,suitup,hotstuff,isntitironpick,nottodaythankyou,icebucketchallenge,diamonds,weneedtogodeeper,covermewithdiamonds,enchanter,eyespy,theend,nether,thosewerethedays,hiddeninthedepths,aterriblefortress,whoiscuttingonions,ohshiny,thisboathaslegs,warpigs,countrylodetakemehome,spookyscaryskeleton,intofire,notquiteninelives,feelslikehome,witheringheights,localbrewery,bringhomethebeacon,theend,freetheend,remotegetaway,thecityattheendofthegame,adventure,voluntaryexile,isitabird,monsterhunter,whatadeal,stickysituation,olbetsy,surgeprotector,cavescliffs,sweetdreams,isitaballoon,athrowawayjoke,takeaim,startrader,whosthepillagernow,soundofmusic,lightasarabbit,isitaplane,veryveryfrightening,husbandry,beeourguest,theparrotsandthebats,whateverfloatsyourgoat,bestfriendsforever,glowandbehold,fishybusiness,totalbeelocation,aseedyplace,waxon,tacticalfishing,waxoff,thecutestpredator,thehealingpoweroffriendship".Split(',')
+                // Remove advancements that look identical
+                .Except(@"icebucketchallenge,nether,thosewerethedays,aterriblefortress,whoiscuttingonions,spookyscaryskeleton,notquiteninelives,olbetsy,whosthepillagernow".Split(',')).ToArray();
             var cluephrase = @"theansweriseraser";
             var clueCells = "..t.h.e............a.n.s.w............e.r.i............s.e.r.a............s.e.r..".SelectIndexWhere(ch => ch != '.').ToArray();
+
+            var tooConfusing = @"".Split(',');
 
             if (clueCells.Length != cluephrase.Length)
                 Debugger.Break();
@@ -83,9 +88,10 @@ namespace Qoph
             }));
 
             var lockObject = new object();
-            Enumerable.Range(0, 1).ParallelForEach(pr =>
+            Enumerable.Range(4, 1).ParallelForEach(Environment.ProcessorCount, pr =>
             {
-                foreach (var solution in doubleSudoku.Solve(new SolverInstructions { Randomizer = new Random((1 + pr) * 100 + 47), ShowContinuousProgress = 40, ShowContinuousProgressShortened = true }))
+                var rnd = new Random(pr);
+                foreach (var solution in doubleSudoku.Solve(new SolverInstructions { Randomizer = rnd/*, ShowContinuousProgress = 40, ShowContinuousProgressShortened = true */}))
                 {
                     lock (lockObject)
                     {
@@ -110,41 +116,99 @@ namespace Qoph
                             .Select(row => row.JoinColoredString(" "))
                             .JoinColoredString("\n"));
                         Console.WriteLine();
-                        File.AppendAllLines(@"D:\temp\temp.txt", new[] { solution.JoinString(",") });
+
+                        var indexSudokuSolution = solution.Take(81).JoinString();
+                        var achievementsSolution = solution.Subarray(81, 81).Select(i => wordIxs.IndexOf(i) + 1).JoinString();
+
+                        int[] indexGivens = null;
+                        int[] achGivens = null;
+
+                        /*
+                        var numAttempts = 0;
+                        tryOnceMore:
+                        numAttempts++;
+                        if (numAttempts > 3)
+                            return;
+
+                        try
+                        {
+                            indexGivens = Ut.ReduceRequiredSet(Enumerable.Range(0, 81).Except(clueCells).ToArray().Shuffle(rnd), test: set =>
+                            {
+                                var sudoku = new Sudoku();
+                                sudoku.AddGivens(set.SetToTest.Select(ix => (ix, indexSudokuSolution[ix] - '0')).ToArray());
+                                return !sudoku.Solve().Skip(1).Any();
+                            }).ToArray();
+                        }
+                        catch (Exception e)
+                        {
+                            if (e.Message != "The function does not return true for the original set.")
+                                throw;
+                        }
+
+                        if (indexGivens == null)
+                            return;
+
+                        try
+                        {
+                            achGivens = Ut.ReduceRequiredSet(Enumerable.Range(0, 81).Except(clueCells).Except(indexGivens).ToArray().Shuffle(rnd), test: set =>
+                            {
+                                var sudoku = new Sudoku();
+                                sudoku.AddGivens(set.SetToTest.Select(ix => (ix, achievementsSolution[ix] - '0')).ToArray());
+                                return !sudoku.Solve().Skip(1).Any();
+                            }).ToArray();
+                        }
+                        catch (Exception e)
+                        {
+                            if (e.Message != "The function does not return true for the original set.")
+                                throw;
+                        }
+
+                        if (achGivens == null)
+                            goto tryOnceMore;
+                        /*/
+                        indexGivens = new[] { 50, 64, 77, 70, 49, 52, 69, 73, 20, 54, 34, 41, 79, 15, 68, 10, 3, 72, 27, 44, 7, 29, 26, 9 };
+                        achGivens = new[] { 28, 80, 60, 33, 5, 1, 13, 63, 53, 71, 43, 24, 0, 36, 35, 45, 18, 75, 8, 58, 67, 66, 39, 65, 31 };
+                        /**/
+
+                        Console.WriteLine(indexGivens.JoinString(", "));
+                        Console.WriteLine(achGivens.JoinString(", "));
+
+                        ConsoleUtil.WriteLine(new Sudoku()
+                            .AddGivens(indexGivens.Select(g => (g, indexSudokuSolution[g] - '0')).ToArray(), ConsoleColor.White, ConsoleColor.DarkBlue)
+                            .SolutionToConsole(indexSudokuSolution.Select(ch => ch - '0').ToArray()));
+                        Console.WriteLine();
+                        ConsoleUtil.WriteLine(new Sudoku()
+                            .AddGivens(achGivens.Select(g => (g, indexSudokuSolution[g] - '0')).ToArray(), ConsoleColor.White, ConsoleColor.DarkBlue)
+                            .SolutionToConsole(achievementsSolution.Select(ch => ch - '0').ToArray()));
+
+                        File.WriteAllText(@"D:\temp\temp.txt", $"index: {solution.Subarray(0, 81).JoinString()}\ngivens: {indexGivens.JoinString(", ")}\nnames: {solution.Subarray(81, 81).Select(i => wordIxs.IndexOf(i) + 1).JoinString()}\ngivens: {achGivens.JoinString(", ")}\nwords:\n    {wordIxs.Select((w, ix) => $"{ix + 1} = {words[w - 1]}").JoinString("\n    ")}");
+
+                        General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Puzzles\objectionable-ranking.html", "<!--&&-->", "<!--&&&-->",
+                            Enumerable.Range(0, 9).Select(row => $@"{"\t<tr>\n"}{
+                                Enumerable.Range(0, 9).Select(col =>
+                                {
+                                    var classes = new List<string>();
+                                    if (row % 3 == 2) classes.Add("bottom");
+                                    if (col % 3 == 2) classes.Add("right");
+                                    if (clueCells.Contains(col + 9 * row)) classes.Add("circle");
+                                    if (achGivens.Contains(col + 9 * row)) classes.Add($"icon icon-{achievementsSolution[col + 9 * row]}");
+                                    return $"\t\t<td{(classes.Count > 0 ? $" class='{classes.JoinString(" ")}'" : "")}>{(indexGivens.Contains(col + 9 * row) ? indexSudokuSolution[col + 9 * row].ToString() : "")}</td>\n";
+                                }).JoinString()
+                            }{"\t</tr>\n"}").JoinString());
+                        Console.WriteLine();
+                        Console.WriteLine($"Seed: {pr}");
                         Debugger.Break();
                     }
                 }
             });
         }
 
-        public static void GenerateGivens()
+        public static void GenerateIcons()
         {
-            var indexSudokuSolution = @"415792836986135724372846159729654318863917542154328967637481295241579683598263471";
-            var achievementsSolution = @"123456789549387126687129543236548917918273654754691238865914372371862495492735861";
-            var clueCells = "..t.h.e............a.n.s.w............e.r.i............s.e.r.a............s.e.r..".SelectIndexWhere(ch => ch != '.').ToArray();
-
-            var indexGivens = Ut.ReduceRequiredSet(Enumerable.Range(0, 81).Except(clueCells).ToArray().Shuffle(), test: set =>
-            {
-                var sudoku = new Sudoku();
-                sudoku.AddGivens(set.SetToTest.Select(ix => (ix, indexSudokuSolution[ix] - '0')).ToArray());
-                return !sudoku.Solve().Skip(1).Any();
-            });
-            Console.WriteLine(indexGivens.JoinString(", "));
-
-            var achGivens = Ut.ReduceRequiredSet(Enumerable.Range(0, 81).Except(clueCells).Except(indexGivens).ToArray().Shuffle(), test: set =>
-            {
-                var sudoku = new Sudoku();
-                sudoku.AddGivens(set.SetToTest.Select(ix => (ix, achievementsSolution[ix] - '0')).ToArray());
-                return !sudoku.Solve().Skip(1).Any();
-            });
-
-            ConsoleUtil.WriteLine(new Sudoku()
-                .AddGivens(indexGivens.Select(g => (g, indexSudokuSolution[g] - '0')).ToArray(), ConsoleColor.White, ConsoleColor.DarkBlue)
-                .SolutionToConsole(indexSudokuSolution.Select(ch => ch - '0').ToArray()));
-            Console.WriteLine();
-            ConsoleUtil.WriteLine(new Sudoku()
-                .AddGivens(achGivens.Select(g => (g, indexSudokuSolution[g] - '0')).ToArray(), ConsoleColor.White, ConsoleColor.DarkBlue)
-                .SolutionToConsole(achievementsSolution.Select(ch => ch - '0').ToArray()));
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Puzzles\objectionable-ranking.html", "/*start-power-icons*/", "/*end-power-icons*/",
+                Enumerable.Range(1, 9).Select(digit => $@"		table.power td.icon-{digit} {{
+			background-image: url('data:image/png;base64,{Convert.ToBase64String(File.ReadAllBytes($@"D:\c\Qoph\DataFiles\Objectionable Ranking\Power of Advancement\icon-{digit}.png"))}');
+		}}").JoinString("\n") + "\n");
         }
     }
 }
