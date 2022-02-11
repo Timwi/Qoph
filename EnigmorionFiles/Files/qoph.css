@@ -540,6 +540,35 @@ form td.explain {
 		font-size: 12pt;
 	}
 
+div.erratum {
+	background: hsl(0, 100%, 70%);
+	max-width: 25cm;
+	margin: .25cm auto;
+	border: 2px solid hsl(0, 100%, 30%);
+	padding: .25cm .5cm .25cm 2cm;
+	text-align: left;
+	position: relative;
+	box-shadow: 0 0 .25cm red;
+}
+	div.erratum::before {
+		content: 'ERRATUM';
+		position: absolute;
+		font-size: 24pt;
+		transform: translate(-3.25cm, -.5cm) rotate(-60deg) scale(.5, 1);
+		top: 50%;
+		font-weight: bold;
+		font-family: 'Montserrat';
+	}
+	div.erratum .datetime {
+		font-size: 10pt;
+	}
+		div.erratum .datetime::after {
+			content: ' (UTC)';
+		}
+	div.erratum .text {
+		font-size: 14pt;
+	}
+
 table.teams {
 	width: 90%;
 	margin: .25cm auto;
