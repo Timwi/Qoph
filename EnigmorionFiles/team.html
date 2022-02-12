@@ -1,2 +1,16 @@
-<h1>Quantum Online Puzzle Hunt</h1>
-<h2>{{teamname}}</h2>
+<h1>Team: {{teamname}}</h1>
+<svg id='defs' width='0' height='0'>
+	<defs>
+		<marker id='arrow' orient='auto' overflow='visible'><path d='M -4,0 l -3,3 9,-3 -9,-3z'/></marker>
+		<filter id='drop-shadow' x='-1000%' y='-1000%' width='2100%' height='2100%'>
+			<feGaussianBlur in='SourceAlpha' stdDeviation='.1' />
+			<feOffset dx='.125' dy='.125' result='b' />
+			<feFlood flood-color='rgba(0,0,0,.5)' />
+			<feComposite in2='b' operator='in' />
+			<feMerge><feMergeNode /><feMergeNode in='SourceGraphic' /></feMerge>
+		</filter>
+	</defs>
+</svg>
+{{memberlist}}
+<h2>Team Progression</h2>
+{{teamprogression}}
