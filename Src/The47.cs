@@ -243,9 +243,9 @@ namespace Qoph
             Console.WriteLine(grid.Distinct().Order().JoinString(", "));
             Console.WriteLine(grid.Distinct().Count());
             var prefs = File.ReadAllLines(@"D:\c\Qoph\DataFiles\The 47\Prefectures.txt");
-            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\the-47.html", "<!--%%-->", "<!--%%%-->",
-                Enumerable.Range(0, 8).Select(row => $@"<div class='section'>{Enumerable.Range(0, 8).Select(col =>
-                    $"<img class='flag' src='data:image/png;base64,{Convert.ToBase64String(File.ReadAllBytes($@"D:\c\Qoph\DataFiles\The 47\Flags\{prefs[(grid[col + 8 * row] + 46) % 47]} prefecture.png"))}'/>").JoinString()}</div>").JoinString("\n"));
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Puzzles\the-47.html", "<!--%%-->", "<!--%%%-->",
+                Enumerable.Range(0, 8).Select((row, rowIx) => $@"<tr>{(rowIx==0?"<td rowspan='8' class='left bracket'></td>":"")}{Enumerable.Range(0, 8).Select(col =>
+                    $"<td><img class='flag' src='data:image/png;base64,{Convert.ToBase64String(File.ReadAllBytes($@"D:\c\Qoph\DataFiles\The 47\Flags\{prefs[(grid[col + 8 * row] + 46) % 47]} prefecture.png"))}'/></td>").JoinString()}{(rowIx == 0 ? "<td rowspan='8' class='right bracket'></td>" : "")}</tr>").JoinString("\n"));
         }
     }
 }
