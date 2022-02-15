@@ -66,7 +66,7 @@ namespace Qoph
                 (word: "LYRICS", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: 1),
                 (word: "NEXT", faces: new[] { 14, 13, 5, 4 }, color: 2),
                 (word: "WOD", faces: new[] { 9, 10, 3 }, color: 3),
-                (word: "JGHFKMPVUZ", faces: new[] { 2, 6, 7, 16, 17, 18, 19, 20, 21, 23 }, color: null));
+                (word: "JGHFPMKVUZ", faces: new[] { 2, 6, 7, 16, 17, 18, 19, 20, 21, 23 }, color: null));
         private static readonly DistrInfo _musicSnippets = new DistrInfo("Lyrics", "GASHLYCRUMB TINS",
                 (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "GASHLYCRUMB", faces: new[] { 8, 11, 0, 1, 15, 12, 16, 19, 9, 4, 5 }, color: 1),
@@ -526,6 +526,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                 Console.WriteLine($"{solution.Length}: {solution.JoinString(" // ")}");
         }
 
+        /// <summary>Generates the Template.svg file for manual editing.</summary>
         public static void GenerateTemplate()
         {
             var polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\LpentagonalIcositetrahedron.txt");
@@ -742,7 +743,7 @@ h3 {{ font-size: 14pt; }}
             //Debugger.Break();
 
             // C# declaration for Unity project
-            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
+            General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/*Faces-start*/", @"/*Faces-end*/",
                 $@"new[] {{ {faceInfos.Select(fi => $@"new FaceData {{ " +
                     $@"CarpetColor = ""{fi.CarpetColor.ToLowerInvariant().CLiteralEscape()}"", " +
                     $@"CarpetLength = {fi.CarpetColorIndex}, " +
@@ -754,7 +755,7 @@ h3 {{ font-size: 14pt; }}
                         e.Locked ? null : $"Face = {e.AdjacentFace}").Where(str => str != null).JoinString(", ")} }}").JoinString(", ")} }} }}").JoinString(", ")} }}");
 
             // JS declaration for solution page
-            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"/\*Faces-start\*/", @"/\*Faces-end\*/",
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"/*Faces-start*/", @"/*Faces-end*/",
                 $@"[{"\n\t"}{faceInfos.Select((fi, fIx) => $@"{{ " +
                     $@"c: [ {_distributions.Select(dist => dist.Distribution.First(d => d.faces.Contains(fIx)).Apply(tup => tup.color == null ? "null" : tup.color.ToString())).JoinString(", ")} ], " +
                     $@"v: [ {_distributions.Select(dist => getFaceValue(fIx, dist)).JoinString(", ")} ], " +
@@ -778,7 +779,7 @@ h3 {{ font-size: 14pt; }}
                     .Select(inf => (p: inf.p + .1 * inf.vector.Unit(), angle: inf.vector.Theta() * 180 / Math.PI))
                     .Select(inf => $"<text transform='translate({inf.p.X:.00} {inf.p.Y:.00}) rotate({inf.angle - 90:.00})' y='.06'>{corner.cyanNumber}</text>")).JoinString());
 
-            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"/\*DoorInfo-start\*/", @"/\*DoorInfo-end\*/",
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"/*DoorInfo-start*/", @"/*DoorInfo-end*/",
                 $@"[ {_crosswordLights.Select(cl => $@"{{ w: ""{cl.word}"", l: ""{cl.clue.Replace("\n", " ").CLiteralEscape()}"", c: [ {cl.cells.JoinString(", ")} ], e: {faceInfos[cl.cells[0]].Edges.IndexOf(e => e.CrosswordInfo == cl.clue)} }}").JoinString(", ")} ]");
 
             // Song files in Unity project
@@ -790,33 +791,31 @@ h3 {{ font-size: 14pt; }}
         }
 
         // Cached here because generating this takes several seconds. Generated from random seed 47, git commit 4ebc757c65e5165e2dac6ba5440ed8d24f98fa3f
-        private static readonly int?[][] _cyanNumbers = new int?[][]
-        {
-            new int?[] { 41, 40, null, null, 47 },
-            new int?[] { 41, 22, null, 33, 40 },
-            new int?[] { 41, 36, 46, null, 22 },
-            new int?[] { 41, 47, null, null, 36 },
-            new int?[] { 59, null, 49, 55, null },
-            new int?[] { 59, 36, 50, null, null },
-            new int?[] { 59, 21, 32, 31, 36 },
-            new int?[] { 59, null, null, 30, 21 },
+        private static readonly int?[][] _cyanNumbers = Ut.NewArray(
+            new int?[] { 41, 40, null, 58, 47 },
+            new int?[] { 41, 22, null, 38, 40 },
+            new int?[] { 41, null, 46, 27, 22 },
+            new int?[] { 41, 47, null, 52, null },
+            new int?[] { 59, 61, 49, 55, null },
+            new int?[] { 59, 36, null, 62, 61 },
+            new int?[] { 59, 21, 32, null, 36 },
+            new int?[] { 59, null, null, null, 21 },
             new int?[] { null, 55, 49, 55, null },
-            new int?[] { null, null, null, null, 55 },
-            new int?[] { null, null, null, 44, null },
-            new int?[] { null, null, null, 47, null },
-            new int?[] { 41, 31, 32, 36, null },
-            new int?[] { 41, 40, 50, 36, 31 },
-            new int?[] { 41, null, 46, 57, 40 },
-            new int?[] { 41, null, null, 22, null },
-            new int?[] { 46, 36, 32, 21, 30 },
-            new int?[] { 46, 33, null, null, 36 },
-            new int?[] { 46, 44, null, 40, 33 },
-            new int?[] { 46, 30, null, null, 44 },
-            new int?[] { 86, 57, 46, 36, null },
-            new int?[] { 86, null, 50, 40, 57 },
-            new int?[] { 86, 55, 49, null, null },
-            new int?[] { 86, null, null, null, 55 }
-        };
+            new int?[] { null, 49, null, null, 55 },
+            new int?[] { null, 58, null, null, 49 },
+            new int?[] { null, null, null, 47, 58 },
+            new int?[] { 41, null, 32, 41, 38 },
+            new int?[] { 41, 40, null, 36, null },
+            new int?[] { 41, 27, 46, null, 40 },
+            new int?[] { 41, 38, null, 22, 27 },
+            new int?[] { 46, 41, 32, 21, null },
+            new int?[] { 46, 38, null, 38, 41 },
+            new int?[] { 46, null, null, 40, 38 },
+            new int?[] { 46, null, null, 49, null },
+            new int?[] { null, null, 46, null, 52 },
+            new int?[] { null, 62, null, 40, null },
+            new int?[] { null, 55, 49, 61, 62 },
+            new int?[] { null, 52, null, null, 55 });
 
         public static FaceInfo[] GetFaceData()
         {
@@ -933,6 +932,9 @@ h3 {{ font-size: 14pt; }}
                     for (var eIx = 0; eIx < faceInfos[fIx].Edges.Length; eIx++)
                         faceInfos[fIx].Edges[eIx].CyanNumber = _cyanNumbers[fIx][eIx];
 
+            // C# declaration for caching
+            Clipboard.SetText($@"private static readonly int?[][] _cyanNumbers = Ut.NewArray(
+            {faceInfos.Select((face, faceIx, first, last) => $@"new int?[] {{ {face.Edges.Select(e => e.CyanNumber == null ? "null" : e.CyanNumber.ToString()).JoinString(", ")} }}{(last ? "" : ",")}").JoinString("\r\n\t")});");
             return faceInfos.ToArray();
         }
 
