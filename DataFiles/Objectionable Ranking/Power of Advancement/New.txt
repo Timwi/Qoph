@@ -3,15 +3,15 @@ givens: 50, 64, 77, 70, 49, 52, 69, 73, 20, 54, 34, 41, 79, 15, 68, 10, 3, 72, 2
 names: 123456789486791253597832461719683524238549617645217938352174896964328175871965342
 givens: 28, 80, 60, 33, 5, 1, 13, 63, 53, 71, 43, 24, 0, 36, 35, 45, 18, 75, 8, 58, 67, 66, 39, 65, 31
 words:
-    1 = sweetdreams
-    2 = eyespy
-    3 = intofire
-    4 = bringhomethebeacon
-    5 = hotstuff
-    6 = covermewithdiamonds
-    7 = gettinganupgrade
-    8 = enchanter
-    9 = acquirehardware
+    1 = SWEET DREAMS
+    2 = EYE SPY
+    3 = INTO FIRE
+    4 = BRING HOME THE BEACON
+    5 = HOT STUFF
+    6 = COVER ME WITH DIAMONDS
+    7 = GETTING AN UPGRADE
+    8 = ENCHANTER
+    9 = ACQUIRE HARDWARE
 
 names givens: 31 added to avoid requiring advanced strategies
 

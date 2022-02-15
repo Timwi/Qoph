@@ -10,7 +10,7 @@ using RT.Util.ExtensionMethods;
 
 namespace Qoph
 {
-    static class PowerOfSudoku
+    static class PowerOfAdvancement
     {
         public static void FindIndexingSudokus()
         {
@@ -209,6 +209,8 @@ namespace Qoph
                 Enumerable.Range(1, 9).Select(digit => $@"		table.power td.icon-{digit} {{
 			background-image: url('data:image/png;base64,{Convert.ToBase64String(File.ReadAllBytes($@"D:\c\Qoph\DataFiles\Objectionable Ranking\Power of Advancement\icon-{digit}.png"))}');
 		}}").JoinString("\n") + "\n");
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\objectionable-ranking.html", "/*start-power-icons*/", "/*end-power-icons*/",
+                Enumerable.Range(1, 9).Select(digit => $"\t'data:image/png;base64,{Convert.ToBase64String(File.ReadAllBytes($@"D:\c\Qoph\DataFiles\Objectionable Ranking\Power of Advancement\icon-{digit}.png"))}'").JoinString(",\n"));
         }
     }
 }

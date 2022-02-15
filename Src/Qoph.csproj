@@ -71,7 +71,7 @@
     <Compile Include="Modeling\VertexInfo.cs" />
     <Compile Include="PngMetadataExperiment.cs" />
     <Compile Include="Postcards.cs" />
-    <Compile Include="PowerOfSudoku.cs" />
+    <Compile Include="PowerOfAdvancement.cs" />
     <Compile Include="SapphicSynonyms.cs" />
     <Compile Include="SpaceRace.cs" />
     <Compile Include="HomeDepot.cs" />
