@@ -35,7 +35,7 @@ namespace Qoph
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            PowerOfAdvancement.GenerateIcons();
+            The47.GenerateHtml();
 
 
             Console.WriteLine("Done.");

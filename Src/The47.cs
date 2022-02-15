@@ -212,31 +212,6 @@ namespace Qoph
             Clipboard.SetText(bestResults.Select(row => row.output.JoinString("\t")).JoinString("\n"));
         }
 
-        public static void FindHillCipher()
-        {
-            // This code requires a list of A/E combinations from The47.Do
-
-            //var list = File.ReadAllLines(@"D:\temp\temp.txt");
-            //foreach (var line in list)
-            //{
-            //    var str = line + "BUSINESS CAREBEAR DIAGNOSE FRONTIER GANYMEDE HIROLLER";
-
-            //    var chs = "HILLCIPHER";
-            //    for (var i = 0; i < chs.Length; i++)
-            //    {
-            //        var p = str.IndexOf(chs[i]);
-            //        if (p == -1)
-            //            goto busted;
-            //        str = str.Substring(0, p) + str.Substring(p + 1);
-            //    }
-
-            //    if (SomethingsFishy.CanFit(line.Substring(11, 8)))
-            //        Console.WriteLine(line);
-
-            //    busted:;
-            //}
-        }
-
         public static void GenerateHtml()
         {
             var grid = new[] { 5, 36, 13, 19, 14, 42, 37, 15, 10, 29, 6, 20, 43, 44, 27, 25, 12, 7, 46, 17, 31, 20, 45, 15, 34, 30, 20, 24, 21, 7, 43, 42, 28, 11, 22, 1, 22, 33, 36, 9, 27, 37, 2, 28, 23, 12, 29, 18, 22, 41, 45, 40, 34, 8, 3, 26, 32, 9, 43, 39, 1, 6, 16, 22 };
@@ -244,8 +219,10 @@ namespace Qoph
             Console.WriteLine(grid.Distinct().Count());
             var prefs = File.ReadAllLines(@"D:\c\Qoph\DataFiles\The 47\Prefectures.txt");
             General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Puzzles\the-47.html", "<!--%%-->", "<!--%%%-->",
-                Enumerable.Range(0, 8).Select((row, rowIx) => $@"<tr>{(rowIx==0?"<td rowspan='8' class='left bracket'></td>":"")}{Enumerable.Range(0, 8).Select(col =>
+                Enumerable.Range(0, 8).Select((row, rowIx) => $@"<tr>{(rowIx == 0 ? "<td rowspan='8' class='left bracket'></td>" : "")}{Enumerable.Range(0, 8).Select(col =>
                     $"<td><img class='flag' src='data:image/png;base64,{Convert.ToBase64String(File.ReadAllBytes($@"D:\c\Qoph\DataFiles\The 47\Flags\{prefs[(grid[col + 8 * row] + 46) % 47]} prefecture.png"))}'/></td>").JoinString()}{(rowIx == 0 ? "<td rowspan='8' class='right bracket'></td>" : "")}</tr>").JoinString("\n"));
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\the-47.html", "<!--%%-->", "<!--%%%-->",
+                Enumerable.Range(0, 64).Select(ix => $"<image x='{(ix % 8) * 12}' y='{(ix / 8) * 10}' width='10' height='10' href='data:image/png;base64,{Convert.ToBase64String(File.ReadAllBytes($@"D:\c\Qoph\DataFiles\The 47\Flags\{prefs[(grid[ix] + 46) % 47]} prefecture.png"))}'/>").JoinString("\n"));
         }
     }
 }
