@@ -320,8 +320,6 @@ div#countdown {
 		vertical-align: top;
 		color: white;
 		position: relative;
-		/*box-shadow: 0 0 .3cm rgba(0, 0, 0, .3);*/
-		/*filter: drop-shadow(0 0 .3cm rgba(0, 0, 0, .3));*/
 		height: 150px;
 	}
 
@@ -634,6 +632,11 @@ table.solve-table {
 		background-size: contain;
 		background-position: 50% 50%;
 	}
+
+.show-all {
+	text-align: right;
+	margin-top: 1cm;
+}
 
 /* Solution pages */
 .w {
