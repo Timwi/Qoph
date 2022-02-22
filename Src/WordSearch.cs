@@ -21,7 +21,7 @@ namespace Qoph
 
             foreach (var w in words)
             {
-                var numMatches = 0;
+                var coords = new List<(int x, int y, int dx, int dy)>();
                 for (int y = 0; y < height; y++)
                     for (int x = 0; x < width; x++)
                         foreach (var (dx, dy) in directions)
@@ -29,14 +29,14 @@ namespace Qoph
                             if (x + dx * w.Length >= -1 && x + dx * w.Length <= width && y + dy * w.Length >= -1 && y + dy * w.Length <= height
                                 && Enumerable.Range(0, w.Length).All(i => grid[(x + dx * i) + width * (y + dy * i)] == w[i]))
                             {
-                                numMatches++;
+                                coords.Add((x, y, dx, dy));
                                 for (int i = 0; i < w.Length; i++)
                                     used[(x + dx * i) + width * (y + dy * i)]++;
                             }
                         }
 
-                output.Add($"{w} found {numMatches} times".Color(numMatches == 0 ? ConsoleColor.Magenta : numMatches == 1 ? ConsoleColor.Green : ConsoleColor.Yellow));
-                if (numMatches == 0)
+                output.Add($"{w} found {coords.Count} times: {coords.Select(c => $"[{c.x}, {c.y}, {c.dx}, {c.dy}]").JoinString(", ")}".Color(coords.Count == 0 ? ConsoleColor.Magenta : coords.Count == 1 ? ConsoleColor.Green : ConsoleColor.Yellow));
+                if (coords.Count == 0)
                     allFound = false;
             }
 

@@ -77,6 +77,7 @@
     <Compile Include="HomeDepot.cs" />
     <Compile Include="InsideOut.cs" />
     <Compile Include="SignalLink.cs" />
+    <Compile Include="SpecialNames.cs" />
     <Compile Include="SweetNonogram.cs" />
     <Compile Include="BigBangTheoryEpisodes.cs" />
     <Compile Include="BoardState.cs" />
