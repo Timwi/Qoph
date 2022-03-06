@@ -154,6 +154,7 @@ div#top {
 		display: flex;
 		flex-wrap: wrap;
 		list-style-type: none;
+		justify-content: center;
 	}
 
 		div#top menu li {
