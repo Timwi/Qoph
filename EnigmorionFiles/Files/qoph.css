@@ -93,9 +93,8 @@ body {
 
 div#top {
 	background: hsl(210, 40%, 50%);
-	height: 2cm;
 	position: relative;
-	padding-top: .6cm;
+	padding: .6cm 0;
 	box-shadow: 0 0 .2cm rgba(0, 0, 0, .3);
 }
 
@@ -151,11 +150,13 @@ div#top {
 	div#top menu {
 		text-align: center;
 		font-size: 18pt;
-		margin: 0;
+		margin: 0 3cm 0 6cm;
+		display: flex;
+		flex-wrap: wrap;
+		list-style-type: none;
 	}
 
 		div#top menu li {
-			display: inline;
 			padding: 0 .3cm;
 		}
 
@@ -298,6 +299,13 @@ div.error {
 	margin-bottom: .5cm;
 }
 
+.main-logosvg {
+	width: 13cm;
+	margin-left: -3cm;
+	float: left;
+	shape-outside: linear-gradient(102.9deg, black, transparent 80%, transparent);
+}
+
 div#countdown {
 	clear: both;
 	margin: 2cm auto;
@@ -356,33 +364,33 @@ div#countdown {
 		}
 
 		div#countdown > .box.days {
-			background: hsl(10, 70%, 40%);
+			background: hsl(280, 70%, 32%);
 			border-top-left-radius: 2cm;
 			border-bottom-left-radius: 2cm;
 			padding-left: 1.2cm;
 		}
 
 		div#countdown > .box.hours {
-			background: hsl(90, 70%, 30%);
-		}
-
-		div#countdown > .box.mins {
 			background: hsl(210, 70%, 40%);
 		}
 
+		div#countdown > .box.mins {
+			background: hsl(90, 70%, 30%);
+		}
+
 		div#countdown > .box.secs {
-			background: hsl(280, 70%, 32%);
+			background: hsl(10, 70%, 40%);
 			border-top-right-radius: 2cm;
 			border-bottom-right-radius: 2cm;
 			padding-right: 1.2cm;
 		}
 
-			div#countdown > .box.days::after { border-top-color: hsl(10, 70%, 40%); }
-			div#countdown > .box.hours::after { border-top-color: hsl(90, 70%, 30%); }
-			div#countdown > .box.mins::after { border-top-color: hsl(210, 70%, 40%); }
-			div#countdown > .box.hours::before { border-bottom-color: hsl(90, 70%, 30%); }
-			div#countdown > .box.mins::before { border-bottom-color: hsl(210, 70%, 40%); }
-			div#countdown > .box.secs::before { border-bottom-color: hsl(280, 70%, 32%); }
+			div#countdown > .box.days::after	{ border-top-color: hsl(280, 70%, 32%);	}
+			div#countdown > .box.hours::after	{ border-top-color: hsl(210, 70%, 40%);	}
+			div#countdown > .box.mins::after	{ border-top-color: hsl(90, 70%, 30%);	}
+			div#countdown > .box.hours::before	{ border-bottom-color: hsl(210, 70%, 40%);	}
+			div#countdown > .box.mins::before	{ border-bottom-color: hsl(90, 70%, 30%);	}
+			div#countdown > .box.secs::before	{ border-bottom-color: hsl(10, 70%, 40%);	}
 
 a#puzzles-link {
 	clear: both;
@@ -871,3 +879,21 @@ body.solution #main {
 
 body.solution .ih:not(.re) { display: none; }
 body.solution .ihs:not(.re) { visibility: hidden; }
+
+
+
+/* Small screens */
+@media screen and (max-width: 1300px) {
+	h1 {
+		font-size: 32pt;
+		margin: 1cm -1cm;
+		padding: .5cm;
+		border-radius: 0;
+		clear: both;
+	}
+
+	.main-logosvg {
+		width: 10cm;
+		margin-left: 0;
+	}
+}
