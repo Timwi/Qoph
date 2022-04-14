@@ -50,7 +50,7 @@
 			margin-bottom: .1cm;
 		}
 
-	table.wrong-answers {
+	table.wrong-answers, table.ratings {
 		margin: .1cm auto;
 	}
 		table.wrong-answers ul {
@@ -81,6 +81,7 @@
 <menu class='stats'>
 	<li><a href='#' class='show' data-show='team-progression'>Team Progression</a></li>
 	<li><a href='#' class='show' data-show='common-wrong-answers'>Common Wrong Answers</a></li>
+	<li><a href='#' class='show' data-show='puzzle-ratings'>Puzzle Ratings</a></li>
 </menu>
 <script>
 	let selection = localStorage.getItem('qoph-stats');
@@ -118,6 +119,10 @@
 <div id='common-wrong-answers' class='section'>
 	<h2>Common Wrong Answers</h2>
 	{{common-wrong-answers}}
+</div>
+<div id='puzzle-ratings' class='section'>
+	<h2>Puzzle Ratings</h2>
+	{{puzzle-ratings}}
 </div>
 <script>
 	show();
