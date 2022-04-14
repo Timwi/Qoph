@@ -435,6 +435,10 @@ a#puzzles-link {
 	justify-content: space-between;
 }
 
+	#answer-box #answers {
+		flex: 1;
+		margin-right: .5cm;
+	}
 	#answer-box .checker {
 		text-align: right;
 	}
@@ -646,6 +650,63 @@ table.solve-table {
 	text-align: right;
 	margin-top: 1cm;
 }
+
+/* Feedback box */
+
+form.feedback {
+	background: hsl(221, 75%, 75%);
+	width: 100%;
+	padding: .2cm .5cm;
+	margin-top: .2cm;
+	border-radius: .5cm;
+}
+	form.feedback p.title {
+		margin: .1cm 0;
+		background: hsl(221, 50%, 95%);
+		font-weight: bold;
+		font-size: 16pt;
+		text-align: center;
+		padding: .05cm 0;
+		border-radius: .2cm;
+	}
+	form.feedback div.stars {
+		margin: .1cm 0;
+	}
+		form.feedback div.stars span.star {
+			display: inline-block;
+			width: 1cm;
+			height: 1cm;
+			background-image: url('FeedbackStarOff.svg');
+			background-size: contain;
+			background-repeat: no-repeat;
+			vertical-align: middle;
+			margin-right: .2cm;
+			transition: transform .2s;
+		}
+			form.feedback div.stars span.star.on {
+				background-image: url('FeedbackStarOn.svg');
+			}
+			form.feedback div.stars span.star.sel {
+				transform: scale(1.2);
+			}
+		form.feedback div.stars span.rating {
+			margin-left: .5cm;
+		}
+		form.feedback.set div.stars span.rating {
+			font-weight: bold;
+		}
+	form.feedback textarea {
+		width: 100%;
+		resize: vertical;
+		height: 5cm;
+		border-radius: .2cm;
+	}
+	form.feedback.set textarea,
+		form.feedback.set button.btn-submit-feedback,
+		form.feedback:not(.set) button.btn-change-feedback,
+		form.feedback:not(.set) div.submitted {
+		display: none;
+	}
 
 /* Solution pages */
 .w {
