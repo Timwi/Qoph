@@ -1,0 +1,16 @@
+• Bug in Team Progression (CSS formatting missing)
+• Introduced Erratum box
+• Replaced second section in Objectionable Ranking with “Power of Advancement”
+• Cookies behaved inconsistently in some cases (SameSite=strict changed to SameSite=lax)
+• Totally Ordinary Crossword: erratum (Tel Aviv is not the most populous)
+• Swerve: erratum (indulge was typoed as endulge)
+• ExtraReplacers in HTML templates; migrate Team page to a template; move SVG defs from code to template
+• The 47 redesigned
+• Totally Ordinary Crossword: erratum (clue for “STRAW” changed)
+• Totally Ordinary Crossword: erratum (clue for “GRAPEFRUIT” changed)
+• Face to Face/Cyan numbers: swapped P & K to avoid “SKIMP” and “DROP” red herrings
+• Ajax handler exception malarkey
+• Rate limit introduced
+• Postcards: text in hint table (bottom of puzzle page) was center-aligned
+• Postcards: “copy clues to clipboard” button
+• Postcards: change one clue phrase from ALL THIRTY TOWNS to ALL TOWNS LON LAT to clarify that you need longitude/latitude
