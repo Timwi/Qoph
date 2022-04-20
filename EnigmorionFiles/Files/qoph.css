@@ -512,7 +512,7 @@ form td.explain {
 
 	.hints textarea {
 		width: 100%;
-		height: 8em;
+		height: 15em;
 		resize: vertical;
 	}
 
