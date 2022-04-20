@@ -471,19 +471,20 @@ a#puzzles-link {
 		max-width: 12cm;
 		padding: .3cm .5cm;
 	}
-	#answer-box .correct {
-		color: hsl(120, 50%, 47%);
-	}
-	#answer-box .wrong {
-		color: hsl(0, 50%, 47%);
-	}
-	#answer-box .almost {
-		color: hsl(60, 50%, 35%);
-	}
-	#answer-box .message {
-		font-size: 24pt;
-		font-weight: bold;
-	}
+
+.guess-log .correct {
+	color: hsl(120, 50%, 47%);
+}
+.guess-log .wrong {
+	color: hsl(0, 50%, 47%);
+}
+.guess-log .almost {
+	color: hsl(60, 50%, 35%);
+}
+.guess-log .message {
+	font-size: 24pt;
+	font-weight: bold;
+}
 
 .ajax-message {
 	max-width: 11cm;
@@ -559,6 +560,16 @@ form td.explain {
 		font-size: 12pt;
 	}
 
+.hints .team-link, .hints .guess-log {
+	margin-top: .5cm;
+}
+
+	.hints .guess-log ul {
+		margin: 0;
+		padding-left: .3cm;
+		font-size: 10pt;
+	}
+
 div.erratum {
 	background: hsl(0, 100%, 70%);
 	max-width: 25cm;
@@ -597,6 +608,19 @@ table.teams {
 	}
 	table.teams th {
 		font-size: 18pt;
+	}
+	table.teams .solve-time {
+		white-space: nowrap;
+	}
+
+table.team-guesses {
+	margin-top: 1cm;
+}
+	table.team-guesses th, table.team-guesses td {
+		vertical-align: top;
+	}
+	table.team-guesses ul {
+		margin: 0;
 	}
 
 svg.diagram {

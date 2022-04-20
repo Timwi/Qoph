@@ -15,7 +15,6 @@ using RT.Util;
 using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
 using RT.Util.Geometry;
-using RT.Util.Text;
 
 namespace Qoph
 {
