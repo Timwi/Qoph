@@ -560,13 +560,18 @@ form td.explain {
 		font-size: 12pt;
 	}
 
-.hints .team-link, .hints .guess-log {
-	margin-top: .5cm;
-}
+	.hints .team-link, .hints .guess-log {
+		margin-top: .5cm;
+	}
 
-	.hints .guess-log ul {
-		margin: 0;
-		padding-left: .4cm;
+		.hints .guess-log ul {
+			margin: 0;
+			padding-left: .4cm;
+			font-size: 10pt;
+		}
+
+	.hints .team-prior {
+		margin-top: .3cm;
 		font-size: 10pt;
 	}
 
