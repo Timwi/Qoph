@@ -10,6 +10,7 @@
 		font-size: 18pt;
 		font-weight: bold;
 		font-family: 'Montserrat';
+		line-height: 2;
 
 		margin: 2cm 0 1cm;
 		list-style-type: none;
@@ -80,8 +81,9 @@
 <h1>Quantum Online Puzzle Hunt</h1>
 <menu class='stats'>
 	<li><a href='#' class='show' data-show='team-solves'>Team Solves</a></li>
-	<li><a href='#' class='show' data-show='common-wrong-answers'>Common Wrong Answers</a></li>
+	<li><a href='#' class='show' data-show='completionists'>Completionists</a></li>
 	<li><a href='#' class='show' data-show='puzzle-averages'>Puzzle Averages</a></li>
+	<li><a href='#' class='show' data-show='common-wrong-answers'>Common Wrong Answers (spoilers!)</a></li>
 </menu>
 <script>
 	let selection = localStorage.getItem('qoph-stats');
@@ -114,6 +116,10 @@
 <div id='team-solves' class='section'>
 	<h2>Team Solves</h2>
 	{{team-solve-table}}
+</div>
+<div id='completionists' class='section'>
+	<h2>Completionists</h2>
+	{{completionists}}
 </div>
 <div id='common-wrong-answers' class='section'>
 	<h2>Common Wrong Answers</h2>
