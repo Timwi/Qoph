@@ -86,6 +86,13 @@ makeSolutionPage('eternal-namesake', `
 {-e <p>The flavor text, “I didn’t see that coming”, [c hints at blindness, and therefore Braille. [rf]]</p>
 {-f <p>The clue phrase «LUV VS THE WORLD TRACK TWO» appears, which can be [sz <a href='https://en.wikipedia.org/wiki/Lil_Uzi_Vert_vs._the_World#Track_listing'>found on Wikipedia</a> to reveal the answer.]</p>}
 {-z <div class='answer'>HI ROLLER</div>}
+<h2>Notes [rna]</h2>
+{-na
+<p>This puzzle went through three major revisions but the basic building blocks have stayed the same: identify the album and then extract using Braille.</p>
+<p>We expected that solvers would take a stab at the (strange-looking) clues and then know to search their answers on the web to find out what they are. Judging by the hint requests, this did not occur to many teams. Despite this, I consider this a valid hunt strategy and would not shy away from making future puzzles that require this type of web searching.</p>
+<p>Some also got hung up on the idea that the provided letters should be the first letters of the answers. It is unfortunate that this was true for some of them (esp. «U» = «URGENCY»), but the letters were assigned to make the Braille work and happened to land this way.</p>
+<p>I was surprised how many teams struggled with the clue for «SAUCY». I’m not really sure why this is. A web search will quickly reveal that Béarnaise is a sauce, and the clue is phrased to require an adjective.</p>
+}
 `.replace(/◁([A-Z]*)▷/g, (_, ltrs) => {
 	function row(l) { return `<tr>${l.split('').map(ch => `<td${ltrs.includes(ch) ? ` class='hl'` : ''}>«${ch}»</td>`).join('')}</tr>`; }
 	return `<table class='bordered grid'>${row("EMRNOF")}${row("SDIHAL")}${row("UGCYTW")}</table>`;

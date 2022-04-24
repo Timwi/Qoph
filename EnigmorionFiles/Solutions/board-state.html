@@ -129,6 +129,14 @@ makeSolutionPage('board-state', `
 }
 {-f <p>The unused squares spell out a cluephrase, «SEPARATION LENGTH». Indeed every capital city is [og perpendicular to the country flag with a specific number of squares of separation between them. Let’s [sh use those to index into the country names.]]</p>}
 {-h <div class='answer'>SUBMERGENCE</div>}
+<h2>Notes [rna]</h2>
+{-na
+<p>Beside the final meta-meta, this was the first puzzle written and it turned out surprisingly good considering I was still very inexperienced then. We had only barely just discovered the concept of <i>cryptic clues</i>, which still shows in some of them, although we reworked many of the clues before the hunt went live.</p>
+<p>I enjoyed writing <a href='https://github.com/Timwi/Qoph/blob/main/Src/BoardState.cs'>the algorithm</a> that would try all placements of the flag/city combos and find one that would fit. Initially, <cite>Board State</cite> was going to be in a different slot in the meta-meta and have a different answer, and there was no way to fit it into 8×8, so it was initially 8×9. As we created more of the other puzzles, it was moved to where it is now and I found an arrangement that fit into 8×8 squares. I also made sure that the unused squares (which would contain the «SEPARATION LENGTH» clue) would not be adjacent.</p>
+<p>I think the most egregious show of inexperience was how this puzzle fit into the meta-meta. Spoilers ahead. [rnb]</p>
+{-nb
+<p>We assumed that after solving this puzzle, solvers would realize that it didn’t need to be presented as a chessboard and had no reason to have “Board” in the title, and would conclude that this must be relevant for the meta. Although nobody openly complained about the chessboard graphics being a red herring, teams seem to have forgotten about it by the time they got to the meta-meta, or they thought the connection to board games was still too flimsy. It’s hard to strike the balance between what is too flimsy to some and what is too on the nose for others.</p>
+}}
 `, {
 	'reset': function() {
 		let svg = document.getElementById('board-svg');

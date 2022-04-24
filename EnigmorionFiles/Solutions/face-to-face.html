@@ -272,7 +272,17 @@ makeSolutionPage('face-to-face', `
 {-b <p>To bring it all together, we note that [o each subpuzzle solution has 24 different letters of the alphabet. The missing letters are [r «CW»&nbsp;(carpets), «EI»&nbsp;(lamps), «AB»&nbsp;(cyan numbers), «EF»&nbsp;(radio), «DT»&nbsp;(boxes) and «BO»&nbsp;(door signs). [o These pairs contain the letters «A», «B», «C», «D», «E», «F», which means [s we can reorder them and extract the other letter. [rc]]]]]</p>}
 {-c <div class='answer'>BOW TIE</div>}
 }
+<h2>Notes [rna]</h2>
+{-na
+<p>Oooh boy. This was a lot of fun to make, but it did not turn into a nice puzzle. We crammed too much into it and a lot of it wasn’t clued well. Lessons learnt for the next 3D adventure puzzle: don’t cobble together quite so many (nearly unrelated) subpuzzles.</p>
+<p>The way the puzzle hinted at the subpuzzles was also subpar because I tried to use unique letters to spell something (which already led to very unrevealing clues), and it ended up buried in a sea of random letters so you couldn’t even tell where they start and end. I should have recognized these problems from the test solving, but I was blinded by the idea that at least two of the subpuzzles are perfectly solvable without such a clue, and once you find one of the hidden clues, the others are all in the same first few rooms. Turns out this was not enough to find them, and also not enough to even establish the “six subpuzzles” structure itself.</p>
+<p>I think my favorite subpuzzle was the crossword (without the Caesar shifts). If I had to remake this puzzle, I would probably have it be just a gimmicked crossword on a polyhedron. It should also use a polyhedron that has mostly square faces.</p>
+<p>Most of the Smash Bros 3D models were taken from <a href='https://www.models-resource.com/'>The Models Resource</a>. Interestingly, it had a model for all but one of the characters we needed: it didn’t have Pichu. So we used a model of a Pichu trophy instead.</p>
+<p>In an earlier version of the puzzle, we were going to use a 28-face polyhedron and have the required letter pairs be duplicated. We changed this because we suspected solvers would just find the duplicates and not map out the rest of the letters, thus never seeing the hidden hints. Ironic.</p>
+<p>The items in the boxes were originally going to be items from Weird Al Yankovic’s song <cite>Hardware Store</cite>, but then EpicToast submitted the puzzle <a href='../home-depot'><cite>Home Depot</cite></a> where it was a more thematic fit, so we changed this one.</p>
+<p>There’s a <em>lot</em> of <a href='https://github.com/Timwi/Qoph/blob/main/Src/FaceToFace.cs'>code</a> I wrote for this puzzle besides <a href='https://github.com/Timwi/Qoph/tree/main/DataFiles/Face%20To%20Face/Unity/Face%20To%20Face'>the Unity project itself</a>. Buried right in the middle of that is <a href='https://github.com/Timwi/Qoph/blob/main/Src/FaceToFace.cs#L498'>the algorithm that found a minimal set of color names that would span the alphabet.</a></p>
 <p style='font-size: 11pt'>Smash sound credit: <a href='https://freesound.org/people/InspectorJ/sounds/344265/'>InspectorJ</a></p>
+}
 `, {
 	subpuzzles	: setupSvg,
 	carpetR	: function() { reveals.carpet	= true;	setupSvg(curTab); },

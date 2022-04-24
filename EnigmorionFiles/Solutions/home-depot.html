@@ -91,6 +91,12 @@ makeSolutionPage('home-depot', `
 </div>
 {-p15 <p>The path ends up forming a perfect 4×4 square, just like the one given in the puzzle. The one in the puzzle has [o numbers in it, which indicates [c that we should count that many letters into each word and take the letter at that position. [rf]]]</p>}
 {-f <div class='answer'>SIDE MIRROR</div>}
+<h2>Notes [rna]</h2>
+{-na
+<p>The author of this puzzle (EpicToast) (also the artist behind the drawing of Puzzleton) submitted this puzzle quite out of the blue. <a href='../face-to-face'><cite>Face to Face</cite></a> was originally going to have references to <cite>Hardware Store</cite> items in it, but we decided to change that one since it’s very much thematically fitting for the answer to this puzzle.</p>
+<p>We expected that solvers would take a stab at the (strange-looking) clues and then know to search their answers on the web to find out what they are. Judging by the hint requests, this did not occur to many teams. Despite this, I consider this a valid hunt strategy and would not shy away from making future puzzles that require this type of web searching.</p>
+<p>Apart from teams not googling for the answers, the next most common hint requests came from teams who couldn’t reconstruct the route using the clue in the flavor text. Apparently there’s something unintuitive about starting somewhere at random and seeing the 4×4 structure when you’re done; a lot of solvers expected to know where in the 4×4 to start.</p>
+}
 `
 	.replace(/@([A-Z])(\d+)([^△▷▽◁]*)([△▷▽◁])/g, (_, r, c, o, t) => `{-p${c} <div class='lw'>${o}</div><div class='dir'>${t} [rp${(c|0)+1}]</div>}{-f «${r}»}`)
 	.replace(/△/g, "<span class='arrow u'><span class='unicode'>↑</span></span>")
