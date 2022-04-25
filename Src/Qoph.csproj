@@ -58,7 +58,6 @@
     <Compile Include="BattleshipsAndPitfalls.cs" />
     <Compile Include="CrossingBridges.cs" />
     <Compile Include="Comebacks.cs" />
-    <Compile Include="Drumheads.cs" />
     <Compile Include="Eternal.cs" />
     <Compile Include="Modeling\AutoNormal.cs" />
     <Compile Include="Modeling\BevelPoint.cs" />
@@ -69,6 +68,7 @@
     <Compile Include="Modeling\Normal.cs" />
     <Compile Include="Modeling\Pt.cs" />
     <Compile Include="Modeling\VertexInfo.cs" />
+    <Compile Include="StarsAlign.cs" />
     <Compile Include="PngMetadataExperiment.cs" />
     <Compile Include="Postcards.cs" />
     <Compile Include="PowerOfAdvancement.cs" />

@@ -680,6 +680,11 @@ table.solve-table {
 	margin-top: 1cm;
 }
 
+.footnote {
+	margin: .2cm 0;
+	font-size: 12pt;
+}
+
 /* Feedback box */
 
 form.feedback {
