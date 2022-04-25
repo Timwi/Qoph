@@ -65,6 +65,12 @@
 		table.wrong-answers th, table.wrong-answers td {
 			vertical-align: top;
 		}
+
+	#puzzle-stats table ul {
+		margin: 0;
+		padding-left: 1em;
+		font-size: 10pt;
+	}
 </style>
 <svg id='defs' width='0' height='0'>
 	<defs>
@@ -89,7 +95,7 @@
 <menu class='stats'>
 	<li><a href='#' class='show' data-show='team-solves'>Team Solves</a></li>
 	<li><a href='#' class='show' data-show='completionists'>Completionists</a></li>
-	<li><a href='#' class='show' data-show='puzzle-averages'>Puzzle Averages</a></li>
+	<li><a href='#' class='show' data-show='puzzle-stats'>Puzzle Stats</a></li>
 	<li><a href='#' class='show' data-show='common-wrong-answers'>Common Wrong Answers (spoilers!)</a></li>
 </menu>
 <script>
@@ -141,12 +147,12 @@
 	<h2>Common Wrong Answers</h2>
 	{{common-wrong-answers}}
 </div>
-<div id='puzzle-averages' class='section'>
-	<h2>Puzzle Averages</h2>
-	{{puzzle-averages}}
+<div id='puzzle-stats' class='section'>
+	<h2>Puzzle Stats</h2>
+	{{puzzle-stats}}
 	<script>
-		let puzzles = Array.from(document.querySelectorAll('#puzzle-averages .legend > .item'));
-		let puzzleLines = Array.from(document.querySelectorAll('#puzzle-averages svg.ratings > path.line'));
+		let puzzles = Array.from(document.querySelectorAll('#puzzle-stats .legend > .item'));
+		let puzzleLines = Array.from(document.querySelectorAll('#puzzle-stats svg.ratings > path.line'));
 		puzzles.forEach(item => {
 			let ix = item.dataset.item | 0;
 			item.onmouseover	= function() { puzzleLines.forEach(line => { line.setAttribute('opacity', ((line.dataset.item) | 0) === ix ? 1 : .05); }); };
