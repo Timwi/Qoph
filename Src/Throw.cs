@@ -58,6 +58,17 @@ ARKFROST
 7. S: 19/SingleOuter; 19/SingleInner
 8. T: 20/SingleInner; 20/SingleOuter; 10/Double
 #
+RICKEVANS
+1. R: 9/Double; 18/SingleInner; 18/SingleOuter; 6/Treble
+2. I: 3/Treble; 9/SingleInner; 9/SingleOuter
+3. C: 1/Treble; 3/SingleInner; 3/SingleOuter
+4. K: 11/SingleOuter; 11/SingleInner
+5. E: 5/SingleOuter; 5/SingleInner
+6. V: 11/Double
+7. A: 1/SingleOuter; 1/SingleInner
+8. N: 7/Double
+9. S: 19/SingleInner; 19/SingleOuter
+#
 RBCROSS
 1. R: 6/Treble; 9/Double; 18/SingleInner; 18/SingleOuter
 2. B: 2/SingleInner; 2/SingleOuter; 1/Double
@@ -81,17 +92,6 @@ STEHENBUNTING
 11. I: 3/Treble; 9/SingleInner; 9/SingleOuter
 12. N: 14/SingleInner
 13. G: 7/SingleInner; 7/SingleOuter
-#
-TONECCLES
-1. T: 10/Double; 20/SingleOuter; 20/SingleInner
-2. O: 15/SingleInner; 15/SingleOuter; 5/Treble
-3. N: 14/SingleOuter; 14/SingleInner; 7/Double
-4. E: 5/SingleOuter
-5. C: 1/Treble; 3/SingleInner; 3/SingleOuter
-6. C: 3/SingleOuter; 1/Treble
-7. L: 4/Treble; 12/SingleInner; 12/SingleOuter; 6/Double
-8. E: 5/SingleInner
-9. S: 19/SingleInner; 19/SingleOuter
 "
                 .Replace("'\r", "")
                 .Split('#')
@@ -128,9 +128,9 @@ TONECCLES
                     solutionTexts.Append($"<text class='ltr r-b' x='{x}' y='{y}'>{player.Name[ix]}</text>");
                 }
                 puzzleSvgs.AppendLine($@"<svg viewBox='-68 -68 136 136'>{puzzleSvg}</svg>");
-                solutionSvgs.AppendLine($@"<svg text-anchor='middle' font-size='10' font-family='Montserrat' viewBox='-68 -68 136 136'>{puzzleSvg}{solutionTexts}</svg>");
+                solutionSvgs.AppendLine($@"<svg text-anchor='middle' font-size='10' font-family='Montserrat' viewBox='-72 -72 144 144'>{puzzleSvg}{solutionTexts}</svg>");
             }
-            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\throw.html", "<!--%%-->", "<!--%%%-->", puzzleSvgs.ToString());
+            General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Puzzles\throw.html", "<!--%%-->", "<!--%%%-->", puzzleSvgs.ToString());
             General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\throw.html", "<!--%%-->", "<!--%%%-->", solutionSvgs.ToString());
         }
     }

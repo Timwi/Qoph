@@ -11,6 +11,17 @@
 	#white-background { fill: #fff; }
 	#graphics.symbol-shown #white-background { fill: #ccc; }
 	#graphics.symbol-shown .s:not(.shown) { opacity: .2; }
+
+	.gallery {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+		.gallery > a > img {
+			height: 5cm;
+			margin: .2cm;
+			box-shadow: 0 0 .2cm rgba(0, 0, 0, .3);
+		}
 </style>
 <script src='../../files/solutions.js'></script>
 <h1>Signal Link<div class='author'>by Timwi, based on an idea by KingBranBran</div></h1>
@@ -172,6 +183,32 @@ makeSolutionPage('signal-link', `
 <p>In the same folder you’ll find more SVGs that reveal that I originally intended to tack on another step where you first had to solve a Slitherlink-like logic puzzle to get the boundaries of the nets. This is actually the reason why I didn’t want to cut off the symbols. I scrapped this mainly because this is already a very laborious puzzle without it, but in hindsight I’m glad I did because {/nb (meta-meta spoiler)} [rnb “pen-and-paper logic puzzle” was one of the connections in the meta-meta for two other puzzles].</p>
 
 <p>This puzzle did not fare well in the ratings. A lot of teams backsolved it. I wonder how much better it would have fared if I had just presented the net of the assembled cube without requiring solvers to assemble it themselves. I guess we’ll never know.</p>
+}
+<h2>Gallery [rga]</h2>
+{-ga
+<p>Some solvers spared no time and effort making unfolded maps of the whole maze! Here is only a selection. We were most impressed by the one solver who tought to unfold the maze itself, rather than the cube it’s on!</p>
+<p>Click any image to enlarge it.</p>
+<div class='gallery'>
+<a href='../../files/gallery/signal-link/11aba8bd2bf0fc320f4963e8cd63a0fe.jpg'><img src='../../files/gallery/signal-link/11aba8bd2bf0fc320f4963e8cd63a0fe.jpg' alt='image' /></a>
+<a href='../../files/gallery/signal-link/64f5de8d655044445c196dd63a9ef26a.png'><img src='../../files/gallery/signal-link/64f5de8d655044445c196dd63a9ef26a.png' alt='image' /></a>
+<a href='../../files/gallery/signal-link/755d12e62cdb884c114b5146a7bb6390.png'><img src='../../files/gallery/signal-link/755d12e62cdb884c114b5146a7bb6390.png' alt='image' /></a>
+<a href='../../files/gallery/signal-link/75855d5d85d8d9afb8b7ed74e5aeb412.jpg'><img src='../../files/gallery/signal-link/75855d5d85d8d9afb8b7ed74e5aeb412.jpg' alt='image' /></a>
+<a href='../../files/gallery/signal-link/b73cfcc95d336645503f2e8b882e2e1e.png'><img src='../../files/gallery/signal-link/b73cfcc95d336645503f2e8b882e2e1e.png' alt='image' /></a>
+<a href='../../files/gallery/signal-link/be77ced361f468a8a8208701d8ae1961.png'><img src='../../files/gallery/signal-link/be77ced361f468a8a8208701d8ae1961.png' alt='image' /></a>
+<a href='../../files/gallery/signal-link/c631e0b5801ee2b05a4698a020c4d672.png'><img src='../../files/gallery/signal-link/c631e0b5801ee2b05a4698a020c4d672.png' alt='image' /></a>
+<a href='../../files/gallery/signal-link/e69d98c084c3292fe126992312cf16e5.png'><img src='../../files/gallery/signal-link/e69d98c084c3292fe126992312cf16e5.png' alt='image' /></a>
+</div>
+<p>One solver’s progress of building the cube physically:</p>
+<div class='gallery'>
+<a href='../../files/gallery/signal-link/sub1/1.jpg'><img src='../../files/gallery/signal-link/sub1/1.jpg' alt='image' /></a>
+<a href='../../files/gallery/signal-link/sub1/2.jpg'><img src='../../files/gallery/signal-link/sub1/2.jpg' alt='image' /></a>
+<a href='../../files/gallery/signal-link/sub1/3.jpg'><img src='../../files/gallery/signal-link/sub1/3.jpg' alt='image' /></a>
+<a href='../../files/gallery/signal-link/sub1/4.jpg'><img src='../../files/gallery/signal-link/sub1/4.jpg' alt='image' /></a>
+<a href='../../files/gallery/signal-link/sub1/5.jpg'><img src='../../files/gallery/signal-link/sub1/5.jpg' alt='image' /></a>
+<a href='../../files/gallery/signal-link/sub1/6.jpg'><img src='../../files/gallery/signal-link/sub1/6.jpg' alt='image' /></a>
+<a href='../../files/gallery/signal-link/sub1/7.jpg'><img src='../../files/gallery/signal-link/sub1/7.jpg' alt='image' /></a>
+<a href='../../files/gallery/signal-link/sub1/8.jpg'><img src='../../files/gallery/signal-link/sub1/8.jpg' alt='image' /></a>
+</div>
 }
 `.replace(/@([-.]+)([A-Z])/g, (_, m, l) => `<div class='morse ih r-j'>${m.replace(/-/g, `<svg class='dash' viewBox='-1 -1 4 2'><path d='M0 0h2' stroke-width='1' stroke='black' fill='none' stroke-linecap='round' /></svg>`).replace(/\./g, `<svg class='dot' viewBox='-1 -1 2 2'><circle cx='0' cy='0' r='.5' /></svg>`)}</div><div class='letter ih r-j'>${l}</div>`), {
 	g: function()

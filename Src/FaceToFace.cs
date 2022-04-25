@@ -722,6 +722,35 @@ h3 {{ font-size: 14pt; }}
 
             var maplePieces = new List<string>();
             var cyanCorners = new List<((int faceIx, int vertexIx)[] adj, int cyanNumber)>();
+
+            var faceNameTranslate = new Dictionary<string, string>
+            {
+                ["Bowser"] = "S",
+                ["Dr. Mario"] = "Q",
+                ["Fox"] = "F",
+                ["Ness"] = "R",
+                ["Captain Falcon"] = "V",
+                ["Donkey Kong"] = "C",
+                ["Falco"] = "T",
+                ["Ganondorf"] = "O",
+                ["Ice Climbers"] = "L",
+                ["Jigglypuff"] = "P",
+                ["Kirby"] = "B",
+                ["Link"] = "H",
+                ["Mario"] = "X",
+                ["Marth"] = "K",
+                ["Mewtwo"] = "N",
+                ["Mr. Game & Watch"] = "U",
+                ["Peach"] = "J",
+                ["Pichu"] = "M",
+                ["Pikachu"] = "D",
+                ["Roy Fire Emblem"] = "W",
+                ["Samus"] = "A",
+                ["Sheik"] = "I",
+                ["Young Link"] = "G",
+                ["Zelda"] = "E"
+            };
+
             for (var faceIx = 0; faceIx < faceInfos.Length; faceIx++)
             {
                 var face = faceInfos[faceIx];
@@ -734,12 +763,13 @@ h3 {{ font-size: 14pt; }}
                     var adjoiningFaces = _polyhedron.Faces.SelectIndexWhere(f => f.Contains(vertex)).ToArray();
                     if (faceIx != adjoiningFaces.Min())
                         continue;
-                    maplePieces.Add($"{adjoiningFaces.Select(ix => $"f{ix}").JoinString("+")}={edge.CyanNumber.Value}");
+                    maplePieces.Add($"{adjoiningFaces.Select(ix => $"{faceNameTranslate[faceInfos[ix].LampBroName]}").Order().JoinString("+")}={edge.CyanNumber.Value}");
                     cyanCorners.Add((adjoiningFaces.Select(f => (f, _polyhedron.Faces[f].IndexOf(vertex))).ToArray(), edge.CyanNumber.Value));
                 }
             }
-            //Clipboard.SetText($"solve({{{maplePieces.JoinString(", ")}}}, {{{Enumerable.Range(0, 24).Select(i => $"f{i}").JoinString(", ")}}});");
-            //Debugger.Break();
+            //Clipboard.SetText($"solve({{{maplePieces.JoinString(", ")}}}, {{{Enumerable.Range(0, 24).Select(i => $"{faceNameTranslate[faceInfos[i].LampBroName]}").JoinString(", ")}}});");
+            Clipboard.SetText(maplePieces.JoinString("\n"));
+            Debugger.Break();
 
             // C# declaration for Unity project
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/*Faces-start*/", @"/*Faces-end*/",

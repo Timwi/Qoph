@@ -639,6 +639,9 @@ svg.diagram {
 		stroke: black;
 		stroke-width: .1;
 	}
+		svg.diagram.ratings path.axis {
+			stroke-width: .05;
+		}
 	svg.diagram path.hrule {
 		fill: none;
 		stroke-width: .01;
@@ -649,6 +652,10 @@ svg.diagram {
 		stroke-width: .2;
 		filter: url(#drop-shadow);
 	}
+		svg.diagram.ratings path.line {
+			stroke-width: .05;
+			filter: url(#drop-shadow-ratings);
+		}
 
 table.solve-table {
 	width: 100%;

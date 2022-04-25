@@ -23,7 +23,6 @@
         display: block;
         border: 1px solid black;
         width: 100%;
-        margin-bottom: .7cm;
     }
     .stripes > .stripe {
         display: block;
@@ -32,6 +31,9 @@
 		font-size: 16pt;
 		padding-top: .04cm;
     }
+	.extra {
+		margin-top: .7cm;
+	}
     .extra > .stripe {
         display: inline-block;
         width: 1cm;
@@ -68,16 +70,22 @@ makeSolutionPage('sapphic-synonyms', `
 <p>We can now decode the words represented by the colored stripes. [rb For the squares underneath, letters make no sense; they represent instead the position on the flag.]</p>
 }
 {-b
-<p>Each word has a fairly easy to find synonym whose length matches the number(s) after the slash. [rc]</p>
+<p>Each word has a fairly easy to find synonym whose length matches the number(s) in parentheses. [rc]</p>
 {-c <p>The other number [dd can be used to index into those words.]</p>}
-<div class='r-d'><div class='box'><div class='stripes'><div class='stripe c-4'>B</div><div class='stripe c-5'>I</div><div class='stripe c-4'>B</div><div class='stripe c-1'>L</div><div class='stripe c-2'>E</div></div><div class='extra'><div class='stripe c-1'>1</div> / <div class='stripe c-4'>4</div> <div class='stripe c-4'>4</div></div>{-c «‹H›OLY BOOK»}</div><div class='box'><div class='stripes'><div class='stripe c-4'>B</div><div class='stripe c-6'>A</div><div class='stripe c-4'>B</div><div class='stripe c-5'>I</div><div class='stripe c-2'>E</div><div class='stripe c-3'>S</div></div><div class='extra'><div class='stripe c-4'>4</div> / <div class='stripe c-7'>7</div></div>{-c «INF‹A›NTS»}</div><div class='box'><div class='stripes'><div class='stripe c-5'>I</div><div class='stripe c-7'>N</div><div class='stripe c-3'>S</div><div class='stripe c-6'>A</div><div class='stripe c-7'>N</div><div class='stripe c-2'>E</div></div><div class='extra'><div class='stripe c-4'>4</div> / <div class='stripe c-5'>5</div></div>{-c «CRA‹Z›Y»}</div><div class='box'><div class='stripes'><div class='stripe c-3'>S</div><div class='stripe c-2'>E</div><div class='stripe c-6'>A</div></div><div class='extra'><div class='stripe c-4'>4</div> / <div class='stripe c-5'>5</div></div>{-c «OCE‹A›N»}</div><div class='box'><div class='stripes'><div class='stripe c-4'>B</div><div class='stripe c-6'>A</div><div class='stripe c-1'>L</div><div class='stripe c-1'>L</div></div><div class='extra'><div class='stripe c-5'>5</div> / <div class='stripe c-6'>6</div></div>{-c «SPHE‹R›E»}</div><div class='box'><div class='stripes'><div class='stripe c-6'>A</div><div class='stripe c-1'>L</div><div class='stripe c-1'>L</div><div class='stripe c-5'>I</div><div class='stripe c-2'>E</div><div class='stripe c-3'>S</div></div><div class='extra'><div class='stripe c-6'>6</div> / <div class='stripe c-7'>7</div></div>{-c «FRIEN‹D›S»}</div></div>
+<div class='r-d'>
+	<div class='box'><div class='stripes'><div class='stripe c-4'>B</div><div class='stripe c-5'>I</div><div class='stripe c-4'>B</div><div class='stripe c-1'>L</div><div class='stripe c-2'>E</div></div>	<div class='extra'>( <div class='stripe c-4'>4</div>, <div class='stripe c-4'>4</div> )</div>	<div class='extra'><div class='stripe c-1'>1</div></div>{-c «‹H›OLY BOOK»}</div>
+	<div class='box'><div class='stripes'><div class='stripe c-4'>B</div><div class='stripe c-6'>A</div><div class='stripe c-4'>B</div><div class='stripe c-5'>I</div><div class='stripe c-2'>E</div><div class='stripe c-3'>S</div></div>	<div class='extra'>( <div class='stripe c-7'>7</div> )</div>	<div class='extra'><div class='stripe c-4'>4</div></div>{-c «INF‹A›NTS»}</div>
+	<div class='box'><div class='stripes'><div class='stripe c-5'>I</div><div class='stripe c-7'>N</div><div class='stripe c-3'>S</div><div class='stripe c-6'>A</div><div class='stripe c-7'>N</div><div class='stripe c-2'>E</div></div>	<div class='extra'>( <div class='stripe c-5'>5</div> )</div>	<div class='extra'><div class='stripe c-4'>4</div></div>{-c «CRA‹Z›Y»}</div>
+	<div class='box'><div class='stripes'><div class='stripe c-3'>S</div><div class='stripe c-2'>E</div><div class='stripe c-6'>A</div></div>	<div class='extra'>( <div class='stripe c-5'>5</div> )</div>	<div class='extra'><div class='stripe c-4'>4</div></div>{-c «OCE‹A›N»}</div>
+	<div class='box'><div class='stripes'><div class='stripe c-4'>B</div><div class='stripe c-6'>A</div><div class='stripe c-1'>L</div><div class='stripe c-1'>L</div></div>	<div class='extra'>( <div class='stripe c-6'>6</div> )</div>	<div class='extra'><div class='stripe c-5'>5</div></div>{-c «SPHE‹R›E»}</div>
+	<div class='box'><div class='stripes'><div class='stripe c-6'>A</div><div class='stripe c-1'>L</div><div class='stripe c-1'>L</div><div class='stripe c-5'>I</div><div class='stripe c-2'>E</div><div class='stripe c-3'>S</div></div>	<div class='extra'>( <div class='stripe c-7'>7</div> )</div>	<div class='extra'><div class='stripe c-6'>6</div></div>{-c «FRIEN‹D›S»}</div></div>
 }
 
 {-d <div class='answer'>HAZARD</div>}
 <h2>Notes [rna (Timwi)]</h2>
 {-na
 <p>This puzzle is based on <a href='https://i.pinimg.com/736x/62/8a/b3/628ab3734cdabd072bffa105077a41c7.jpg'>a meme</a>.</p>
-<p>Most teams who submitted hint requests struggled to realize that the stripes can also be used as numbers 1–7 and that this would give enumerations and indexes. The intention behind using the slash between numbers was that you can read it as “x of y”, like some documents have a footer on the bottom of each page saying “Page 1/5”. In hindsight, it was much too ambiguous, as the slash can also mean fractions, and is not commonly used to denote enumerations in hunt puzzles.</p>
+<p>During the hunt, the numbers under the puzzle were written as (for example) “4/7” (for BABIES). Most teams who submitted hint requests struggled to realize that the stripes can also be used as numbers 1–7 and that this would give enumerations and indexes. The intention behind using the slash between numbers was that you can read it as “x of y”, like some documents have a footer on the bottom of each page saying “Page 1/5”. In hindsight, it was much too ambiguous, as the slash can also mean fractions, and is not commonly used to denote enumerations in hunt puzzles. We changed this after the hunt concluded.</p>
 }
 `);
 </script>

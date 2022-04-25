@@ -37,12 +37,12 @@
 		justify-content: center;
 		margin: .5cm auto .1cm;
 	}
-		div.legend .team {
+		div.legend .item {
 			white-space: nowrap;
 			width: min-content;
 			margin: .1cm .5cm;
 		}
-		div.legend .team .color {
+		div.legend .item .color {
 			display: inline-block;
 			width: 1cm;
 			height: .1cm;
@@ -72,6 +72,13 @@
 		<filter id='drop-shadow' x='-1000%' y='-1000%' width='2100%' height='2100%'>
 			<feGaussianBlur in='SourceAlpha' stdDeviation='.1' />
 			<feOffset dx='.125' dy='.125' result='b' />
+			<feFlood flood-color='rgba(0,0,0,.5)' />
+			<feComposite in2='b' operator='in' />
+			<feMerge><feMergeNode /><feMergeNode in='SourceGraphic' /></feMerge>
+		</filter>
+		<filter id='drop-shadow-ratings' x='-1000%' y='-1000%' width='2100%' height='2100%'>
+			<feGaussianBlur in='SourceAlpha' stdDeviation='.05' />
+			<feOffset dx='.07' dy='.07' result='b' />
 			<feFlood flood-color='rgba(0,0,0,.5)' />
 			<feComposite in2='b' operator='in' />
 			<feMerge><feMergeNode /><feMergeNode in='SourceGraphic' /></feMerge>
@@ -120,6 +127,15 @@
 <div id='completionists' class='section'>
 	<h2>Completionists</h2>
 	{{completionists}}
+	<script>
+		let teams = Array.from(document.querySelectorAll('#completionists .legend > .item'));
+		let teamLines = Array.from(document.querySelectorAll('#completionists svg.diagram > path.line'));
+		teams.forEach(item => {
+			let ix = item.dataset.item | 0;
+			item.onmouseover	= function() { console.log(`ov ${ix}`); teamLines.forEach(line => { line.setAttribute('opacity', ((line.dataset.item) | 0) === ix ? 1 : .05); }); };
+			item.onmouseout	= function() { console.log(`ou ${ix}`); teamLines.forEach(line => { line.setAttribute('opacity', 1); }); };
+		});
+	</script>
 </div>
 <div id='common-wrong-answers' class='section'>
 	<h2>Common Wrong Answers</h2>
@@ -128,6 +144,15 @@
 <div id='puzzle-averages' class='section'>
 	<h2>Puzzle Averages</h2>
 	{{puzzle-averages}}
+	<script>
+		let puzzles = Array.from(document.querySelectorAll('#puzzle-averages .legend > .item'));
+		let puzzleLines = Array.from(document.querySelectorAll('#puzzle-averages svg.ratings > path.line'));
+		puzzles.forEach(item => {
+			let ix = item.dataset.item | 0;
+			item.onmouseover	= function() { puzzleLines.forEach(line => { line.setAttribute('opacity', ((line.dataset.item) | 0) === ix ? 1 : .05); }); };
+			item.onmouseout	= function() { puzzleLines.forEach(line => { line.setAttribute('opacity', 1); }); };
+		});
+	</script>
 </div>
 <script>
 	show();

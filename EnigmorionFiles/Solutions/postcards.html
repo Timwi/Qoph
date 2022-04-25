@@ -88,6 +88,17 @@
 		.layout > .right {
 			width: 15cm;
 		}
+
+	.gallery {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+		.gallery > a > img {
+			height: 5cm;
+			margin: .2cm;
+			box-shadow: 0 0 .2cm rgba(0, 0, 0, .3);
+		}
 </style>
 <script src='../../files/solutions.js'></script>
 <h1>Postcards<div class='author'>by Roger Wrightshoe, edited by Timwi</div></h1>
@@ -347,6 +358,23 @@ makeSolutionPage('postcards', `
 <p>The clue from the first Slitherlink was initially «MAKE VORONOI DIAGRAM OF ALL THIRTY TOWNS». We changed this to make absolutely sure that people actually use the GPS coordinates and not just a visual inspection of a map. This definitely helped with the brittleness. Apologies to anyone who, due to the removal of “thirty”, wasn’t sure whether to include all thirty towns or only the last twenty, but if you correctly see through the mechanics and you know you need to make a Slitherlink puzzle, it’s fairly clear that you need the givens.</p>
 <p>Writing the postcards by hand was fun, although I haven’t had practice with calligraphy for a long time and I think it shows.</p>
 <p>Fun fact: the rotation angles of the postcards spell out a message. I don’t think anyone noticed it during the hunt.</p>
+}
+<h2>Gallery [rga]</h2>
+{-ga
+<p>Here are some of the Voronoi diagrams created by our solvers.</p>
+<p>Click any image to enlarge it.</p>
+<div class='gallery'>
+<a href='../../files/gallery/postcards/08c002a34be6af3c3f0115a763994d80.png'><img src='../../files/gallery/postcards/08c002a34be6af3c3f0115a763994d80.png' alt='image' /></a>
+<a href='../../files/gallery/postcards/2076a15c472be7676ec9ff58bd139416.png'><img src='../../files/gallery/postcards/2076a15c472be7676ec9ff58bd139416.png' alt='image' /></a>
+<a href='../../files/gallery/postcards/32dcc55a18c4d910a8055304ce471d51.png'><img src='../../files/gallery/postcards/32dcc55a18c4d910a8055304ce471d51.png' alt='image' /></a>
+<a href='../../files/gallery/postcards/4cdcc037b790c22a080e2ea9caf5d4ed.png'><img src='../../files/gallery/postcards/4cdcc037b790c22a080e2ea9caf5d4ed.png' alt='image' /></a>
+<a href='../../files/gallery/postcards/6496510a5d275b6935488060a7700aea.png'><img src='../../files/gallery/postcards/6496510a5d275b6935488060a7700aea.png' alt='image' /></a>
+<a href='../../files/gallery/postcards/99db6b9f98f6f0ebe9987ffd5c77db7a.png'><img src='../../files/gallery/postcards/99db6b9f98f6f0ebe9987ffd5c77db7a.png' alt='image' /></a>
+<a href='../../files/gallery/postcards/c491a78672aff842899bb1f5188913a2.jpg'><img src='../../files/gallery/postcards/c491a78672aff842899bb1f5188913a2.jpg' alt='image' /></a>
+<a href='../../files/gallery/postcards/db129f5df1b72506798253329f674ced.jpg'><img src='../../files/gallery/postcards/db129f5df1b72506798253329f674ced.jpg' alt='image' /></a>
+<a href='../../files/gallery/postcards/db8966ffccfbd866fb3665aad5e3be3f.jpg'><img src='../../files/gallery/postcards/db8966ffccfbd866fb3665aad5e3be3f.jpg' alt='image' /></a>
+<a href='../../files/gallery/postcards/f127209cdd0b2b4ea2c395eb87e7b1d0.jpg'><img src='../../files/gallery/postcards/f127209cdd0b2b4ea2c395eb87e7b1d0.jpg' alt='image' /></a>
+</div>
 }
 `.replace(/@([^@«]*?)«([^»]*?)»/g, (_, tt, m) => `<span class='w'><span class='tt'>${tt}</span>${m}</span>`), {
 	a: createDeductionTracker('deductions-1',
