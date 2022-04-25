@@ -70,10 +70,10 @@ namespace Qoph
             var results = new List<Row>();
             foreach (var pair in "PA,NI,CA,VE,RT,ED".Split(','))
             {
-                var leftCandidates = episodes.Where(e => e.first.StartsWith(pair[0]) && !e.second.StartsWith(pair[1]) && episodes.Count(e2 => e2.second.EqualsNoCase(e.second)) == 1).ToArray();
+                var leftCandidates = episodes.Where(e => e.first.StartsWith(pair[0]) && !e.second.StartsWith(pair[1]) && episodes.Count(e2 => e2.second.EqualsIgnoreCase(e.second)) == 1).ToArray();
                 if (leftCandidates.Length == 0)
                     Debugger.Break();
-                var rightCandidates = episodes.Where(e => e.second.StartsWith(pair[1]) && !e.first.StartsWith(pair[0]) && episodes.Count(e2 => e2.first.EqualsNoCase(e.first)) == 1).ToArray();
+                var rightCandidates = episodes.Where(e => e.second.StartsWith(pair[1]) && !e.first.StartsWith(pair[0]) && episodes.Count(e2 => e2.first.EqualsIgnoreCase(e.first)) == 1).ToArray();
                 if (rightCandidates.Length == 0)
                     Debugger.Break();
 
