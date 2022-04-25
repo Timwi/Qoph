@@ -12,6 +12,9 @@
 	.re-e.h-e {
 		visibility: hidden;
 	}
+	li {
+		margin: .25cm 0;
+	}
 </style>
 <script src='../../files/solutions.js'></script>
 <h1>The 47<div class='author'>by Timwi</div></h1>
@@ -229,5 +232,17 @@ makeSolutionPage('the-47', `
 <p>The cluephrase «SATOSHI NAKAMOTO CURRENCY» appears, which [sz can be googled to reveal the answer.]</p>
 }
 {-z <div class='answer'>BITCOIN</div>}
+<h2>Notes [rna (Timwi)]</h2>
+{-na
+<p>I’m very fond of this puzzle for many reasons:</p>
+<ul>
+	<li>I really like the designs of the Japanese prefecture flags. I wanted to use them in a puzzle no matter what.</li>
+	<li>I like modulo, and <a href='https://en.wikipedia.org/wiki/47_(number)#In_popular_culture'>47 is my favorite number</a>, and there just so happen to be 47 Japanese prefectures!</li>
+	<li>In order to write <a href='https://github.com/Timwi/Qoph/blob/main/Src/The47.cs'>the algorithm to find a set of feeder words</a> that make the multiplication work required me to understand how to invert a matrix, and write it in code. I was surprised to find out that the echelon process — which can be used to solve large systems of linear equations — is also applicable here! The more you know.</li>
+</ul>
+<p>For a long time, this puzzle was telling solvers to use <a href='https://en.wikipedia.org/wiki/Hill_cipher'>Hill cipher</a>. I had a diagram showing that the feeders should be written horizontally, but the messages to be encrypted with the cipher are the columns. You would multiply 8 column vectors, which is mathematically equivalent to matrix multiplication.</p>
+<p>The biggest problem we ran into during test solving with that, was that Hill cipher is <em>explicitly</em> modulo 26 (the size of the alphabet), which meant that even with the title of the puzzle, solvers were adamant that 26 was the only sensible modulus to use.</p>
+<p>In hindsight, after removing the reference to Hill cipher perhaps I should have added a flavor text to clue modulo. However, the volume of hint requests on that wasn’t overwhelming, so I assume a fair share of teams thought of it on their own. For those who submitted a hint request on it, I gave a hint similar to this: “You’ve modeled and multiplied the matrices correctly. This modus operandi yields moderately large numbers. You may need to modify them (perhaps with a modern calculator) to reduce them to more modest sizes. — The Moderators”. If I had thought of this sooner, I would have written a flavor text in this style.</p>
+}
 `);
 </script>

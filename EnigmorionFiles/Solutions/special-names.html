@@ -361,6 +361,18 @@ makeSolutionPage('special-names', `
 {-j <p>Finally, we need to realize that [o we haven’t used the X’s in the names yet. We can use [sg their positions to index into the associated clue answers to extract a letter.]]</p>}
 {-g <p>The clue phrase «THEY BOTH GOT HIT BY A BLANK STARE» appears. [c “Blank” in a clue phrase means to find the word or phrase that goes there. [dh The line in the lyrics of the song goes, “they both got hit by a Care Bear stare.”]]</p>}
 {-h <div class='answer'>CARE BEAR</div>}
+<h2>Notes [rna (Timwi)]</h2>
+{-na
+<p>In an earlier version of this puzzle, the leftover letters in the grid spelled out «USE XS AS INDICES». During test solving, this version showed two issues. One was that it didn’t occur to solvers to google for the names they found in the word search. We even renamed the puzzle to slightly hint at this, but that didn’t seem to help. We stuck to our guns on this at first because googling for items you find in a hunt puzzle should be standard strategy; many hunt puzzles require it.</p>
+
+<p>The second problem was that the «X» in the cluephrase gave solvers an incorrect assumption that there must be a name going through it, since every name has an «X» in it. Together with the earlier problem, this finally convinced us to change the grid and hint at the song more directly.</p>
+
+<p>Unfortunately, that means that there is no longer anything cluing to use the Xs as indices. I want to argue that this shouldn’t matter, after all the clue answers must come into play somehow, but judging by the hint requests this was not readily apparent to a number of teams.</p>
+
+<p>I was amused every time a hint request pointed out the characters in the song that are not in the puzzle, which included the final answer.</p>
+
+<p><a href='https://github.com/Timwi/Qoph/blob/main/Src/SpecialNames.cs'>The algorithm</a> used a general-purpose word search generator that I had written for another purpose before.</p>
+}
 `.replace(/‚([^„]*)„/g, (_, m) => `<div class='sub'>${m}</div>`), {
 	reset: function() {
 		let s = '';

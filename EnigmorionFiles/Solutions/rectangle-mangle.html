@@ -92,6 +92,12 @@ makeSolutionPage('rectangle-mangle', `
 }
 {-d <p>The extracted letters spell out «EUROPA, IO, CALLISTO» — [d another set of three items from a group of four, in this case the Galilean moons. [sg We find the fourth item to obtain the answer.]]</p>}
 {-g <div class='answer'>GANYMEDE</div>}
+<h2>Notes [rna (Timwi)]</h2>
+{-na
+<p>I’ve always wanted to make a puzzle relating to completing sets of X items. And if X = 4, what better way to arrange them than in rectangles? {/nb (meta spoiler) }[rnb (The meta was flexible enough to accommodate pretty much any eight-letter answer starting with A–H, so in a parallel universe this puzzle’s answer could have been «CYTOSINE» or «DIAMONDS».)]</p>
+
+<p>I’m a little gutted that the only way I could fit the cluephrase was to have «IO» be on a square by itself. I would have preferred for it to be split up. But <a href='https://github.com/Timwi/Qoph/blob/main/Src/RectangleMangle.cs'>my algorithm</a> didn’t find any other combination that would work.</p>
+}
 `
 	.replace(/◁([^\|]+)\|([a-z0-9]+)▷/g, (_, it, gr) => `<td class='g ${gr}' data-gr='${gr}'><div class='item'>${it}</div><div class='group'>${groupnames[gr]}</div></td>`),
 	{

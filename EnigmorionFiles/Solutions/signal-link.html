@@ -132,7 +132,7 @@ makeSolutionPage('signal-link', `
 	<li class='ih r-d'>The diagonal lines [of form a maze in which there is exactly one possible path from every position to any other (in technical terms: it’s a spanning tree).]</li>
 </ul>
 }
-{-f <p>These observations, together with the word “Link” in the puzzle title, suggest that we should [d link each uninverted symbol to its inverted version by drawing out the only possible path that would connect them. [rg]]</p>}
+{-f <p>These observations, together with the word “Link” in the puzzle title, suggest that we should [d link each uninverted symbol to its inverted version by drawing out the only possible path that would connect them. [rg Hover the mouse over the squares in the table.]]</p>}
 {-g
 <table class='bordered answers'>
 	<tr><td style='background: none; border: none'></td>
@@ -159,6 +159,20 @@ makeSolutionPage('signal-link', `
 {-k <div style='display: inline-block; width: 14cm'><div class='answer' style='margin-top: 1cm'>CORRELATION</div></div>}
 
 <div style='clear: both'></div>
+<h2>Notes [rna (Timwi)]</h2>
+{-na
+<p>Of all the puzzles, this is the one I had the most fun constructing — and this despite the fact that I love algorithms but I did not use an algorithm to generate the maze or place the symbols in it. It’s constructed entirely by hand. (I only wrote <a href='https://github.com/Timwi/Qoph/blob/main/Src/SignalLink.cs'>an algorithm</a> to make sure that the diagonal patterns on the interior of the cube result in a unique arrangement. In hindsight that was unnecessary as I could have just made the patterns themselves unique.)</p>
+
+<p>Initially, the maze was going to align with the edges of the cube, but when I thought about how I should cut this up into smaller cubes and still have the walls be clearly visible/reconstructible by the solver, it was clear that this wasn’t going to work. I also thought about shifting it by half the size of a cubelet (so the walls are still parallel to the cubelets, but go through the middle rather than along the edges).</p>
+
+<p>The Morse message was initially going to just spell out the solution word. I quickly found that there’s way enough space for a longer cluephrase. With one symbol per cubelet face, I had 9×6 = 54 spaces to play with. However, when I came up with the idea to make the maze <em>diagonal</em>, I realized that this would provide 12×3 + 6×12 = <strong>108</strong> spaces for symbols and thus give me more freedom to write out a cluephrase <em>and</em> make the maze walls much clearer. I ended up deciding on the stars+colors scheme, which meant the length of the cluephrase had to be a square number, and I settled on 6×6 = 36, requiring 72 symbols, which should comfortably fit into 108 spaces... right?</p>
+
+<p>Well, I arbitrarily set myself another restriction: I didn’t want the symbols to be cut off (halved) in the final puzzle. This meant that I couldn’t have three symbols all adjacent to a cubelet corner! It was a great challenge to place everything so that it fits, but after a lot of trial and error, I eventually managed it. I made one mistake, caught during test solving, which meant there was a loop in the maze (so the paths would no longer be unique), but fortunately there was a way to fix it without having to re-do everything from scratch. Here’s the <a href='https://github.com/Timwi/Qoph/blob/main/DataFiles/Signal%20Link/Maze%20(v5%2C%203%20renetting).svg'>final version of my construction</a> (there’s more in the SVG than what GitHub shows — open it in Inkscape).</p>
+
+<p>In the same folder you’ll find more SVGs that reveal that I originally intended to tack on another step where you first had to solve a Slitherlink-like logic puzzle to get the boundaries of the nets. This is actually the reason why I didn’t want to cut off the symbols. I scrapped this mainly because this is already a very laborious puzzle without it, but in hindsight I’m glad I did because {/nb (meta-meta spoiler)} [rnb “pen-and-paper logic puzzle” was one of the connections in the meta-meta for two other puzzles].</p>
+
+<p>This puzzle did not fare well in the ratings. A lot of teams backsolved it. I wonder how much better it would have fared if I had just presented the net of the assembled cube without requiring solvers to assemble it themselves. I guess we’ll never know.</p>
+}
 `.replace(/@([-.]+)([A-Z])/g, (_, m, l) => `<div class='morse ih r-j'>${m.replace(/-/g, `<svg class='dash' viewBox='-1 -1 4 2'><path d='M0 0h2' stroke-width='1' stroke='black' fill='none' stroke-linecap='round' /></svg>`).replace(/\./g, `<svg class='dot' viewBox='-1 -1 2 2'><circle cx='0' cy='0' r='.5' /></svg>`)}</div><div class='letter ih r-j'>${l}</div>`), {
 	g: function()
 	{
@@ -181,31 +195,3 @@ makeSolutionPage('signal-link', `
 	}
 });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

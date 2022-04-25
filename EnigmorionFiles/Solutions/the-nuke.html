@@ -62,5 +62,21 @@ makeSolutionPage('the-nuke', `
 }
 {-s <p>Finally, [sz reading the first letters in the appropriate order reveals the answer.]</p>}
 {-z <div class='answer'>PANIC AVERTED</div>}
+<h2>Notes [rna (Timwi)]</h2>
+{-na
+<p>Since this is the meta-meta that the whole rest of the hunt depends on, it is also the first puzzle written for this hunt and therefore the one that shows our lack of experience the most. We were initially not even going to have the icons at all and expected solvers to notice the commonalities between puzzles on their own. Yikes!</p>
+
+<p>This puzzle was fiercely contending with <a href='../face-to-face'><cite>Face to Face</cite></a> for the bottom place in the ratings.</p>
+
+<p>I assume that most of the ire is a result of the vagueness of the icons. The paper with the question mark was the least intuitive of them all, by far. I also expected more people to notice that only one pair of feeder puzzles was in the same building in Puzzleton, but this was not easily intuited by teams either. At least we changed the icon for “Germany” to the Bundesadler (previously it was a beer mug) and “Meta” to the logo of the Meta company (previously it was some abstract meaningless symbol and I assumed it would fall into place by process of elimination since the fact that two puzzles are metas is super obvious). The company only renamed itself to “Meta” (and created the logo) over two years after the puzzle structure was first conceived.</p>
+
+<p>I am surprised, however, how many teams struggled to make the leap from “12 feeders and 11 icons” to “the icons must be the glue to make a chain”. I’m sure I’ve seen that before somewhere.</p>
+
+<p>I am genuinely annoyed that I included Germany as one of the flags in <a href='../board-state'><cite>Board State</cite></a>. Back then I wrote it off as “in the two other puzzles, Germany is much more centrally relevant” but it’s clear to me now that this shouldn’t fly.</p>
+
+<p>Despite all these setbacks, I’m still pleased with the overall structure. We had two metas with feeders under them, but the rest of the feeders were directly under the meta-meta. I don’t think I’ve seen such a meta structure in a hunt before. Hunts seem to all balance their tree structures — each level is either entirely metas or entirely leaf puzzles. Nothing wrong with a lopsided tree structure! I also don’t think I’ve seen another hunt where the puzzles themselves (their topics, mechanics or presentation) are relevant in the meta, but it feels like such a thing <em>should</em> exist, I probably just haven’t seen it.</p>
+
+<p>The ambiguity with ◁The Raiders Minimization▷ vs. ◁The Re-Entry Minimization▷ is unfortunate, and we got massively lucky that they happen to start with the same letter. My <a href='https://github.com/Timwi/Qoph/blob/main/Src/BigBangTheoryEpisodes.cs'>algorithm</a> to find the possible episode names only included episodes that consisted of letters and spaces, so the episode title with a hyphen was skipped, and then it thought that ◁The Raiders Minimization▷ was the only episode ending in ◁Minimization▷. It’s remarkable that this didn’t crop up in test solving.</p>
+}
 `.replace(/◁([^▷]*)▷/g, (_, m) => `<span class='episode'>${m}</span>`));
 </script>
