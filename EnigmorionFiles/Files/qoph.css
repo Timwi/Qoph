@@ -652,6 +652,9 @@ svg.diagram {
 		stroke-width: .2;
 		filter: url(#drop-shadow);
 	}
+		svg.diagram circle {
+			filter: url(#drop-shadow);
+		}
 		svg.diagram.ratings path.line {
 			stroke-width: .05;
 			filter: url(#drop-shadow-ratings);
