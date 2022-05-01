@@ -150,7 +150,8 @@ div#top {
 	div#top menu {
 		text-align: center;
 		font-size: 18pt;
-		margin: 0 3cm 0 6cm;
+		margin: 0 6cm 0 6cm;
+		padding: 0;
 		display: flex;
 		flex-wrap: wrap;
 		list-style-type: none;
