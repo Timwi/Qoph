@@ -78,6 +78,14 @@
 		table.bordered th.sorted::after {
 			content: ' ▼';
 		}
+
+	#completionists svg.diagram {
+		width: 25cm;
+	}
+
+	#completionists .puzzle-names {
+		visibility: hidden;
+	}
 </style>
 <svg id='defs' width='0' height='0'>
 	<defs>
@@ -143,10 +151,17 @@
 	<script>
 		let teams = Array.from(document.querySelectorAll('#completionists .legend > .item'));
 		let teamLines = Array.from(document.querySelectorAll('#completionists svg.diagram > path.line'));
+		let teamGroups = Array.from(document.querySelectorAll('#completionists svg.diagram > g.puzzle-names'));
 		teams.forEach(item => {
 			let ix = item.dataset.item | 0;
-			item.onmouseover	= function() { console.log(`ov ${ix}`); teamLines.forEach(line => { line.setAttribute('opacity', ((line.dataset.item) | 0) === ix ? 1 : .05); }); };
-			item.onmouseout	= function() { console.log(`ou ${ix}`); teamLines.forEach(line => { line.setAttribute('opacity', 1); }); };
+			item.onmouseover = function() {
+				teamLines.forEach(line => { line.setAttribute('opacity', (line.dataset.item | 0) === ix ? 1 : .05); });
+				teamGroups.forEach(g => { g.style.visibility = (g.dataset.item | 0) === ix ? 'visible' : 'hidden'; });
+			};
+			item.onmouseout = function() {
+				teamLines.forEach(line => { line.setAttribute('opacity', 1); });
+				teamGroups.forEach(g => { g.style.visibility = 'hidden'; });
+			};
 		});
 	</script>
 </div>
