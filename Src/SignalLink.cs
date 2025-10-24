@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Xml.Linq;
-using RT.KitchenSink;
+using RT.Geometry;
 using RT.Util;
 using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
@@ -242,10 +238,10 @@ namespace Qoph
             {
                 if (path.Name.LocalName != "path")
                     continue;
-                var d = DecodeSvgPath.DecodePieces(path.AttributeI("d").Value).ToArray();
-                if (d.Count(piece => piece.Type == DecodeSvgPath.PathPieceType.End) < 2)
+                var d = SvgPath.Decode(path.AttributeI("d").Value).ToArray();
+                if (d.Count(piece => piece.Type == SvgPieceType.End) < 2)
                     continue;
-                var ix = d.IndexOf(piece => piece.Type == DecodeSvgPath.PathPieceType.End);
+                var ix = d.IndexOf(piece => piece.Type == SvgPieceType.End);
                 path.AttributeI("d").Value = d.Subarray(0, ix + 1).JoinString(" ");
                 newPaths.Add(new XElement(path.Name, new XAttribute("fill", "#fff"), new XAttribute("d", d.Subarray(ix + 1).JoinString(" "))));
             }

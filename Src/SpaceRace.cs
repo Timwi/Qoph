@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using RT.Geometry;
 using RT.Util;
 using RT.Util.ExtensionMethods;
-using RT.Util.Geometry;
 
 namespace Qoph
 {
@@ -83,8 +80,8 @@ namespace Qoph
                     $@"<g>{(Enumerable.Range(0, pairs.Length).Zip(cluephrase.Split(2), (ix, b) => (names: pairs[ix], decoy: pairs[ix].Select(name => decoys.Get(name, null)).ToArray(), clueLetters: b)).SelectMany(tup =>
                     {
                         var lineSegment = new EdgeD(f * getX(tup.clueLetters[0]), f * getY(tup.clueLetters[0]), f * getX(tup.clueLetters[1]), f * getY(tup.clueLetters[1]));
-                        var loc1 = tup.decoy[0] == null ? lineSegment.Start * 2 / 3 + lineSegment.End * 1 / 3 : Intersect.LineWithLine(new EdgeD(f * getX(tup.decoy[0][0]), f * getY(tup.decoy[0][0]), f * getX(tup.decoy[0][1]), f * getY(tup.decoy[0][1])), lineSegment);
-                        var loc2 = tup.decoy[1] == null ? lineSegment.Start * 1 / 3 + lineSegment.End * 2 / 3 : Intersect.LineWithLine(new EdgeD(f * getX(tup.decoy[1][0]), f * getY(tup.decoy[1][0]), f * getX(tup.decoy[1][1]), f * getY(tup.decoy[1][1])), lineSegment);
+                        var loc1 = tup.decoy[0] == null ? lineSegment.Start * 2 / 3 + lineSegment.End * 1 / 3 : Intersect.LineWithLine(new EdgeD(f * getX(tup.decoy[0][0]), f * getY(tup.decoy[0][0]), f * getX(tup.decoy[0][1]), f * getY(tup.decoy[0][1])), lineSegment).point.Value;
+                        var loc2 = tup.decoy[1] == null ? lineSegment.Start * 1 / 3 + lineSegment.End * 2 / 3 : Intersect.LineWithLine(new EdgeD(f * getX(tup.decoy[1][0]), f * getY(tup.decoy[1][0]), f * getX(tup.decoy[1][1]), f * getY(tup.decoy[1][1])), lineSegment).point.Value;
 
                         return Ut.NewArray<(double y, string svg)>(
                             //$"<line x1='{lineSegment.Start.X}' y1='{lineSegment.Start.Y}' x2='{lineSegment.End.X}' y2='{lineSegment.End.Y}' stroke-width='.5' stroke='cornflowerblue' opacity='.25' />" +

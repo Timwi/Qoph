@@ -15,7 +15,7 @@ namespace Qoph
     static class SomethingsFishy
     {
         // 0 = up; going clockwise
-        private static readonly (int left, int right)[] _semaphoreOrientations = new[] { (5, 4), (6, 4), (7, 4), (0, 4), (4, 1), (4, 2), (4, 3), (6, 5), (5, 7), (0, 2), (5, 0), (5, 1), (5, 2), (5, 3), (6, 7), (6, 0), (6, 1), (6, 2), (6, 3), (7, 0), (7, 1), (0, 3), (1, 2), (1, 3), (7, 2), (3, 2) };
+        private static readonly (int left, int right)[] _semaphoreOrientations = [(5, 4), (6, 4), (7, 4), (0, 4), (4, 1), (4, 2), (4, 3), (6, 5), (5, 7), (0, 2), (5, 0), (5, 1), (5, 2), (5, 3), (6, 7), (6, 0), (6, 1), (6, 2), (6, 3), (7, 0), (7, 1), (0, 3), (1, 2), (1, 3), (7, 2), (3, 2)];
         private const int w = 6;
         private const int h = 5;
         private static readonly (int dx, int dy)[] directions = new (int dx, int dy)[] { (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1) }.Select(d => (dx: 2 * d.dx, dy: 2 * d.dy)).ToArray();

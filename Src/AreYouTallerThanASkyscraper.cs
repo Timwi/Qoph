@@ -56,7 +56,7 @@ namespace Qoph
 ####////....::::
 ####////....::::".Trim().Replace("\r", "").Replace("\n", "");
 
-            var sums = new[] { 'I', 'N', 'Y' }.Select(ch => ch - 'A' + 1).ToArray();
+            var sums = "INY".Select(ch => ch - 'A' + 1).ToArray();
 
             var valid4x4s = getValid4x4SkyscraperPuzzles().ToArray();
 
@@ -68,7 +68,7 @@ namespace Qoph
                 var pos = chs.IndexOf(structure[ix]);
                 if (pos != -1)
                     puzzle.AddConstraint(new OneCellLambdaConstraint(ix, val => val > 4 * pos && val <= 4 * (pos + 1)));
-                else if (structure[ix] >= 'A' && structure[ix] <= 'Z')
+                else if (structure[ix] is >= 'A' and <= 'Z')
                     puzzle.AddConstraint(new OneCellLambdaConstraint(ix, val => val == structure[ix] - 'A' + 1));
             }
             // Cells that must sum
@@ -234,7 +234,7 @@ namespace Qoph
             });
         }
 
-        private static Puzzle makeSkyscraperPuzzle(IEnumerable<(Side side, int where, int clue)> clues)
+        private static LatinSquare makeSkyscraperPuzzle(IEnumerable<(Side side, int where, int clue)> clues)
         {
             var puzzle = new LatinSquare(4, 1);
             foreach (var (side, i, clue) in clues)

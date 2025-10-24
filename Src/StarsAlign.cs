@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using PuzzleSolvers;
+using RT.Geometry;
 using RT.Util;
 using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
-using RT.Util.Geometry;
 
 namespace Qoph
 {

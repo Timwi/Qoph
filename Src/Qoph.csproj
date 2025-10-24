@@ -1,172 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5BE560A8-9B71-441A-BCAC-FC55E8DA2864}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Qoph</RootNamespace>
-    <AssemblyName>Qoph</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>..\Builds\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>..\Builds\$(Configuration)\obj-$(AssemblyName)\</IntermediateOutputPath>
-    <BaseIntermediateOutputPath>..\Builds\$(Configuration)\obj-$(AssemblyName)\</BaseIntermediateOutputPath>
-    <TargetFrameworkProfile />
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Title>Qoph</Title>
+    <Authors>Timwi</Authors>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <Description>Contains code used in the creation of the Quantum Obfuscation Puzzle Hunt (QOPH).</Description>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>8.0</LangVersion>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>TRACE</DefineConstants>
-    <Prefer32Bit>false</Prefer32Bit>
-    <LangVersion>8.0</LangVersion>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="CsQuery, Version=1.3.3.249, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="CsQuery" Version="1.3.4" />
+    <PackageReference Include="PuzzleSolvers" Version="1.0.0" />
+    <PackageReference Include="RT.Geometry" Version="2.0.1813" />
+    <PackageReference Include="RT.Keyboard" Version="1.26.6" />
+    <PackageReference Include="RT.Modeling" Version="1.7.0" />
+    <PackageReference Include="RT.Serialization" Version="2.0.1813" />
+    <PackageReference Include="RT.Serialization.Xml" Version="2.0.1813" />
+    <PackageReference Include="RT.TagSoup" Version="1.1.52" />
+    <PackageReference Include="RT.Util" Version="2.0.1813" />
+    <PackageReference Include="RT.Util.Core" Version="2.0.1813" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AreYouTallerThanASkyscraper.cs" />
-    <Compile Include="BattleshipsAndPitfalls.cs" />
-    <Compile Include="CrossingBridges.cs" />
-    <Compile Include="Comebacks.cs" />
-    <Compile Include="Eternal.cs" />
-    <Compile Include="Modeling\AutoNormal.cs" />
-    <Compile Include="Modeling\BevelPoint.cs" />
-    <Compile Include="Modeling\GaussianBlur.cs" />
-    <Compile Include="Modeling\LooseModels.cs" />
-    <Compile Include="Modeling\Md.cs" />
-    <Compile Include="Modeling\MeshVertexInfo.cs" />
-    <Compile Include="Modeling\Normal.cs" />
-    <Compile Include="Modeling\Pt.cs" />
-    <Compile Include="Modeling\VertexInfo.cs" />
-    <Compile Include="StarsAlign.cs" />
-    <Compile Include="PngMetadataExperiment.cs" />
-    <Compile Include="Postcards.cs" />
-    <Compile Include="PowerOfAdvancement.cs" />
-    <Compile Include="SapphicSynonyms.cs" />
-    <Compile Include="SpaceRace.cs" />
-    <Compile Include="HomeDepot.cs" />
-    <Compile Include="InsideOut.cs" />
-    <Compile Include="SignalLink.cs" />
-    <Compile Include="SpecialNames.cs" />
-    <Compile Include="SweetNonogram.cs" />
-    <Compile Include="BigBangTheoryEpisodes.cs" />
-    <Compile Include="BoardState.cs" />
-    <Compile Include="Circles.cs" />
-    <Compile Include="The47.cs" />
-    <Compile Include="Segmented.cs" />
-    <Compile Include="NoU.cs" />
-    <Compile Include="RectangleMangle.cs" />
-    <Compile Include="SomethingsFishy.cs" />
-    <Compile Include="FaceToFace.cs" />
-    <Compile Include="MonoRandom.cs" />
-    <Compile Include="General.cs" />
-    <Compile Include="StatueParkSolver.cs" />
-    <Compile Include="MorseCode.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="TakeTheLight.cs" />
-    <Compile Include="TheNuke.cs" />
-    <Compile Include="Throw.cs" />
-    <Compile Include="WordSearch.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Generex\Src\Generex.csproj">
-      <Project>{ad37f193-49a3-4a3d-8bf1-122d5457c7a6}</Project>
-      <Name>Generex</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\PuzzleSolvers\Src\PuzzleSolvers.csproj">
-      <Project>{989f0797-10aa-4ba3-819a-e53a371074a1}</Project>
-      <Name>PuzzleSolvers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\QRCoder\QRCoder\QRCoder.csproj">
-      <Project>{aece5df3-c379-46ca-bb7d-7bdbe59011fd}</Project>
-      <Name>QRCoder</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\RT.Dijkstra\Src\RT.Dijkstra.csproj">
-      <Project>{1e53ea37-7c37-4185-82fd-d3bf9e4c878e}</Project>
-      <Name>RT.Dijkstra</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\RT.Servers\Src\RT.Servers.csproj">
-      <Project>{a7333c19-56a9-4a8e-a196-7648666ef26a}</Project>
-      <Name>RT.Servers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\RT.TagSoup\Src\RT.TagSoup.csproj">
-      <Project>{8f80d916-8999-45d8-acb2-ffa7e2698fd6}</Project>
-      <Name>RT.TagSoup</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\RT.Util\RT.Json\RT.Json.csproj">
-      <Project>{b5d4fb48-7ba6-4f43-a320-a05dff164b30}</Project>
-      <Name>RT.Json</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\RT.Util\RT.PostBuild\RT.PostBuild.csproj">
-      <Project>{39f12570-5bf5-4aec-81db-dddfd213dbff}</Project>
-      <Name>RT.PostBuild</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\RT.Util\RT.Serialization.Json\RT.Serialization.Json.csproj">
-      <Project>{efd268db-7d47-4368-935d-2df8e5031646}</Project>
-      <Name>RT.Serialization.Json</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\RT.Util\RT.Serialization\RT.Serialization.csproj">
-      <Project>{cc0e6169-e965-482c-a8e0-afb341ccf305}</Project>
-      <Name>RT.Serialization</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\RT.Util\RT.Util.Core\RT.Util.Core.csproj">
-      <Project>{e02fa510-96d9-4d44-aa45-419efe8a8f5a}</Project>
-      <Name>RT.Util.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\RT.Util\RT.Util.Legacy\RT.Util.Legacy.csproj">
-      <Project>{a644b6ce-a7d1-4055-ae1a-a6d6018905dd}</Project>
-      <Name>RT.Util.Legacy</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\RT.Util\RT.Util\RT.Util.csproj">
-      <Project>{74af0ea9-db95-4504-b191-3d7be766a4b3}</Project>
-      <Name>RT.Util</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>"$(TargetPath)" --post-build-check "$(SolutionDir)."</PostBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

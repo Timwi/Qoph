@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using RT.TagSoup;
+﻿using System.Diagnostics;
 using RT.Util;
 using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
@@ -20,7 +15,7 @@ namespace Qoph
 
             var count = 0;
             bool?[][] commonalities = null;
-            foreach (var solution in StatueParkSolver.Solve(grid, new[] { "#.#/###", "####/.#", "###/.#", "####/#", "..#/###", "#/##" }, allowFlip: false))
+            foreach (var solution in StatueParkSolver.Solve(grid, ["#.#/###", "####/.#", "###/.#", "####/#", "..#/###", "#/##"], allowFlip: false))
             {
                 Console.WriteLine(solution.Select(row => row.Select(cell => cell ? "██" : "··").JoinString()).JoinString("\n"));
                 Console.WriteLine();
@@ -88,7 +83,7 @@ namespace Qoph
 
             int[] findPolyomino(int?[] grid, int startCell)
             {
-                if (grid[startCell] == null || grid[startCell] == 0)
+                if (grid[startCell] is null or 0)
                     Debugger.Break();
                 var poly = new List<int> { startCell };
                 while (true)
@@ -145,7 +140,7 @@ namespace Qoph
                         {
                             var newGrid = grid.ToArray();
                             newGrid[firstEmptyCell] = size;
-                            foreach (var solution in recurseFillomino(newGrid, polysSoFar, new List<(int[] cells, int desiredSize)> { (new[] { firstEmptyCell }, size) }))
+                            foreach (var solution in recurseFillomino(newGrid, polysSoFar, [(new[] { firstEmptyCell }, size)]))
                                 yield return solution;
                         }
                     }
@@ -155,12 +150,12 @@ namespace Qoph
                 int[] bestPolyomino = null;
                 var bestPolySize = 0;
                 int[][] bestPossibleCompletions = null;
-                int bestIx = -1;
+                var bestIx = -1;
 
                 for (var polyIx = 0; polyIx < allPolys.Count; polyIx++)
                 {
                     var (polyomino, polySize) = allPolys[polyIx];
-                    var poss = enumeratePolyominos(grid, polyomino, polySize, new int[0]).ToArray();
+                    var poss = enumeratePolyominos(grid, polyomino, polySize, []).ToArray();
                     if (poss.Length == 0)
                         yield break;
                     if (poss.Length == 1)
@@ -201,20 +196,20 @@ namespace Qoph
                     var polyomino = findPolyomino(grid, cell);
                     allPolys.Add((polyomino, grid[cell].Value));
                 }
-                return recurseFillomino(grid, new int[0][], allPolys);
+                return recurseFillomino(grid, [], allPolys);
             }
 
             var possibleSwaps = Ut.NewArray(
                 // There two 4-length ships that could be rotated or swapped
-                (orig: new[] { 3, 4, 5, 6, 42, 43, 44, 45 }, rearrangements: Ut.NewArray(
-                    new[] { 3, 4, 5, 6, 42, 43, 44, 45 },
-                    new[] { 3, 4, 5, 6, 45, 44, 43, 42 },
-                    new[] { 6, 5, 4, 3, 42, 43, 44, 45 },
-                    new[] { 6, 5, 4, 3, 45, 44, 43, 42 },
-                    new[] { 42, 43, 44, 45, 3, 4, 5, 6 },
-                    new[] { 45, 44, 43, 42, 3, 4, 5, 6 },
-                    new[] { 42, 43, 44, 45, 6, 5, 4, 3 },
-                    new[] { 45, 44, 43, 42, 6, 5, 4, 3 }
+                (orig: new[] { 3, 4, 5, 6, 42, 43, 44, 45 }, rearrangements: Ut.NewArray<int[]>(
+                    [3, 4, 5, 6, 42, 43, 44, 45],
+                    [3, 4, 5, 6, 45, 44, 43, 42],
+                    [6, 5, 4, 3, 42, 43, 44, 45],
+                    [6, 5, 4, 3, 45, 44, 43, 42],
+                    [42, 43, 44, 45, 3, 4, 5, 6],
+                    [45, 44, 43, 42, 3, 4, 5, 6],
+                    [42, 43, 44, 45, 6, 5, 4, 3],
+                    [45, 44, 43, 42, 6, 5, 4, 3]
                 )),
                 // There are three 3-length ships
                 (orig: new[] { 18, 19, 20, 30, 31, 32, 34, 41, 48 }, rearrangements: Ut.NewArray(

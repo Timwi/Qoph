@@ -1,6 +1,8 @@
 .vs
-Builds
+bin
 obj
+Src/bin
+Src/obj
 *.suo
 *.csproj.user
 *.sln.cache

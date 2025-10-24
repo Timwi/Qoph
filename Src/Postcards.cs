@@ -1,10 +1,7 @@
-﻿using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Text.RegularExpressions;
-using RT.KitchenSink.Geometry;
+using RT.Geometry;
 using RT.Util.ExtensionMethods;
-using RT.Util.Geometry;
 
 namespace Qoph
 {

@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Qoph.Modeling;
-using RT.Util.ExtensionMethods;
+﻿using RT.Util.ExtensionMethods;
 
 namespace Qoph
 {

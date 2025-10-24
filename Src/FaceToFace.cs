@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using CsQuery;
 using PuzzleSolvers;
-using Qoph.Modeling;
-using RT.KitchenSink;
+using RT.Geometry;
+using RT.Modeling;
 using RT.TagSoup;
 using RT.Util;
 using RT.Util.Consoles;
 using RT.Util.ExtensionMethods;
-using RT.Util.Geometry;
+using static RT.Modeling.Md;
+using Path = System.IO.Path;
 
 namespace Qoph
 {
-    using static Md;
-
     static class FaceToFace
     {
         private static readonly Polyhedron _polyhedron = parse(@"D:\c\Qoph\DataFiles\Face To Face\Txt\LpentagonalIcositetrahedron.txt");
@@ -37,53 +31,47 @@ namespace Qoph
             ("ALONG", 11, "For the length\nof (5)", new[] { 11, 10, 18, 17, 12 }),
             ("GOING", 11, "Leaving or\nfunctioning (5)", new[] { 19, 18, 1, 15, 12 }));
 
-        private struct DistrInfo
+        private struct DistrInfo(string puzzle, string clue, params (string word, int[] faces, int? color)[] distribution)
         {
-            public string Puzzle;
-            public string Clue;
-            public (string word, int[] faces, int? color)[] Distribution;
-            public DistrInfo(string puzzle, string clue, params (string word, int[] faces, int? color)[] distribution)
-            {
-                Puzzle = puzzle;
-                Clue = clue;
-                Distribution = distribution;
-            }
+            public string Puzzle = puzzle;
+            public string Clue = clue;
+            public (string word, int[] faces, int? color)[] Distribution = distribution;
         }
 
-        private static readonly DistrInfo _carpetColors = new DistrInfo("Carpet colors", "LAMP BROS",
+        private static readonly DistrInfo _carpetColors = new("Carpet colors", "LAMP BROS",
                 (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "LAMP", faces: new[] { 8, 11, 0, 1 }, color: 1),
                 (word: "BROS", faces: new[] { 15, 12, 16, 19 }, color: 2),
                 (word: "EDFGHJKNIYTVUXZ", faces: new[] { 2, 3, 4, 5, 7, 9, 10, 13, 14, 17, 18, 6, 20, 21, 23 }, color: null));
-        private static readonly DistrInfo _smashChars = new DistrInfo("Smash Bros characters", "CYAN SUM",
+        private static readonly DistrInfo _smashChars = new("Smash Bros characters", "CYAN SUM",
                 (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "CYAN", faces: new[] { 8, 11, 0, 1 }, color: 1),
                 (word: "SUM", faces: new[] { 15, 12, 16 }, color: 2),
                 (word: "TKHDLVOBRJZGXWPF", faces: new[] { 2, 3, 5, 7, 10, 13, 14, 6, 17, 18, 20, 21, 23, 19, 9, 4 }, color: null));
-        private static readonly DistrInfo _cyanSums = new DistrInfo("Vertex sums (cyan numbers)", "LYRICS NEXT WORD",
+        private static readonly DistrInfo _cyanSums = new("Vertex sums (cyan numbers)", "LYRICS NEXT WORD",
                 (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "LYRICS", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: 1),
                 (word: "NEXT", faces: new[] { 14, 13, 5, 4 }, color: 2),
                 (word: "WOD", faces: new[] { 9, 10, 3 }, color: 3),
                 (word: "JGHFPMKVUZ", faces: new[] { 2, 6, 7, 16, 17, 18, 19, 20, 21, 23 }, color: null));
-        private static readonly DistrInfo _musicSnippets = new DistrInfo("Lyrics", "GASHLYCRUMB TINS",
+        private static readonly DistrInfo _musicSnippets = new("Lyrics", "GASHLYCRUMB TINS",
                 (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "GASHLYCRUMB", faces: new[] { 8, 11, 0, 1, 15, 12, 16, 19, 9, 4, 5 }, color: 1),
                 (word: "TIN", faces: new[] { 21, 20, 3 }, color: 2),
                 (word: "DJKOPVWXZ", faces: new[] { 6, 7, 10, 13, 14, 17, 18, 2, 23 }, color: null));
-        private static readonly DistrInfo _gashlycrumbTinies = new DistrInfo("Gashlycrumb Tinies", "LOCK IS BAR",
+        private static readonly DistrInfo _gashlycrumbTinies = new("Gashlycrumb Tinies", "LOCK IS BAR",
                 (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "LOCK", faces: new[] { 8, 11, 0, 1 }, color: 1),
                 (word: "IS", faces: new[] { 15, 12 }, color: 2),
                 (word: "BAR", faces: new[] { 16, 19, 9 }, color: 3),
                 (word: "EFGHJMNPUVWXYZ", faces: new[] { 2, 3, 4, 5, 6, 7, 10, 13, 14, 17, 18, 20, 21, 23 }, color: null));
-        private static readonly DistrInfo _crosswordAfterOffset = new DistrInfo("Crossword", "CARPET INDEX",
+        private static readonly DistrInfo _crosswordAfterOffset = new("Crossword", "CARPET INDEX",
                 (word: "Q", faces: new[] { 22 }, color: 0),
                 (word: "CARPET", faces: new[] { 8, 11, 0, 1, 15, 12 }, color: 1),
                 (word: "INDX", faces: new[] { 23, 3, 2, 17 }, color: 2),
                 (word: "FGHKJLMSUVWYZ", faces: new[] { 4, 5, 6, 7, 9, 10, 13, 14, 16, 18, 19, 20, 21 }, color: null));
 
-        private static readonly DistrInfo[] _distributions = new[] { _carpetColors, _smashChars, _cyanSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset };
+        private static readonly DistrInfo[] _distributions = [_carpetColors, _smashChars, _cyanSums, _musicSnippets, _gashlycrumbTinies, _crosswordAfterOffset];
 
         private static readonly string[] _carpetColorNames = "WHITE,AQUA,AZURE,FUCHSIA,JADE,VIOLET,ONYX,PINK,GAMBOGE".Split(',');
 
@@ -184,9 +172,9 @@ http://dmccooey.com/polyhedra/ToroidalRegularTriangular.html
 http://dmccooey.com/polyhedra/ToroidalRegularTetragonal.html
 http://dmccooey.com/polyhedra/ToroidalNonRegular.html
 http://dmccooey.com/polyhedra/HigherGenus.html
-http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(url => !string.IsNullOrWhiteSpace(url) && !url.StartsWith("#")))
+http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(url => !string.IsNullOrWhiteSpace(url) && !url.StartsWith('#')))
             {
-                var response = new HClient().Get(htmlFile);
+                var response = new HttpClient().GetAsync(htmlFile).Result;
                 if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 {
                     ConsoleUtil.WriteLine("{0/Red} ({1/DarkRed} {2/DarkRed})".Color(ConsoleColor.DarkRed).Fmt(htmlFile, (int) response.StatusCode, response.StatusCode));
@@ -194,7 +182,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                 }
                 ConsoleUtil.WriteLine(htmlFile.Color(ConsoleColor.Green));
 
-                var doc = CQ.CreateDocument(response.DataString);
+                var doc = CQ.CreateDocument(response.Content.ReadAsStringAsync().Result);
                 var lockObj = new object();
                 doc["a"].ParallelForEach(elem =>
                 {
@@ -205,7 +193,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                     var targetPath = $@"D:\c\Qoph\DataFiles\Face To Face\Txt\{filename}";
                     if (File.Exists(targetPath))
                         return;
-                    var resp = new HClient().Get($"http://dmccooey.com/polyhedra/{filename}");
+                    var resp = new HttpClient().GetAsync($"http://dmccooey.com/polyhedra/{filename}").Result;
                     if (resp.StatusCode != System.Net.HttpStatusCode.OK)
                     {
                         lock (lockObj)
@@ -214,7 +202,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                     }
                     lock (lockObj)
                     {
-                        File.WriteAllText(targetPath, resp.DataString);
+                        File.WriteAllText(targetPath, resp.Content.ReadAsStringAsync().Result);
                         ConsoleUtil.WriteLine(" • {0/DarkGreen}".Color(ConsoleColor.DarkGray).Fmt(href));
                     }
                 });
@@ -332,7 +320,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
             }}
         </style>
     </head>
-    <body>{polyhedra.Where(p => p.Faces.Length == 24 || p.Faces.Length == 28).OrderBy(p => p.Faces.Length).ThenBy(p => p.Name).Select(p =>
+    <body>{polyhedra.Where(p => p.Faces.Length is 24 or 28).OrderBy(p => p.Faces.Length).ThenBy(p => p.Name).Select(p =>
                 {
                     try { return $"<div class='poly-wrap'>{generateNet(p).svg}<div class='filename'>{p.Filename}</div><div class='name'><a href='http://dmccooey.com/polyhedra/{Path.GetFileNameWithoutExtension(p.Filename)}.html'>{p.Name}</a> ({p.Faces.Length} faces)</div></div>"; }
                     catch (Exception e) { return $"<div>Error - {p.Filename} - <a href='http://dmccooey.com/polyhedra/{Path.GetFileNameWithoutExtension(p.Filename)}.html'>{p.Name}</a> - {e.Message} - {e.GetType().FullName}</div>"; }
@@ -370,8 +358,8 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
             {
                 var vx = faces[0][0];
                 // Put first vertex at origin
-                for (int i = 0; i < faces.Length; i++)
-                    for (int j = 0; j < faces[i].Length; j++)
+                for (var i = 0; i < faces.Length; i++)
+                    for (var j = 0; j < faces[i].Length; j++)
                         faces[i][j] = faces[i][j] - vx;
 
                 // Rotate so that first face is on the X/Y plane
@@ -394,8 +382,8 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
 
                 // Finally, apply rotation and offset
                 var offsetPt = new Pt(polyhedron.XOffset, polyhedron.YOffset, 0);
-                for (int i = 0; i < faces.Length; i++)
-                    for (int j = 0; j < faces[i].Length; j++)
+                for (var i = 0; i < faces.Length; i++)
+                    for (var j = 0; j < faces[i].Length; j++)
                         faces[i][j] = faces[i][j].RotateZ(polyhedron.Rotation) + offsetPt;
             }
 
@@ -418,9 +406,9 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                 if (faceSvg != null)
                     svgExtras.Append((polygons[fromFaceIx].Aggregate(new PointD(), (p, n) => p + n) / polygons[fromFaceIx].Length).Apply(mid => faceSvg(fromFaceIx, mid.X, mid.Y)));
 
-                for (int fromEdgeIx = 0; fromEdgeIx < rotatedPolyhedron[fromFaceIx].Length; fromEdgeIx++)
+                for (var fromEdgeIx = 0; fromEdgeIx < rotatedPolyhedron[fromFaceIx].Length; fromEdgeIx++)
                 {
-                    int toEdgeIx = -1;
+                    var toEdgeIx = -1;
                     // Find another face that has the same edge
                     var toFaceIx = rotatedPolyhedron.IndexOf(fc =>
                     {
@@ -472,7 +460,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                             var intersect = edge1.Start + l1 * (edge1.End - edge1.Start);
 
                             svg.Append($@"<path stroke='cornflowerblue' fill='none' id='curve-{fromFaceIx}-{fromEdgeIx}' d='{(
-                                (p2m - p1m).Distance() < .5 ? $"M {p1m.X},{p1m.Y} L {p2m.X},{p2m.Y}" :
+                                p1m.Distance(p2m) < .5 ? $"M {p1m.X},{p1m.Y} L {p2m.X},{p2m.Y}" :
                                 l1 >= 0 && l1 <= 1 && l2 >= 0 && l2 <= 1 ? $"M {p1m.X},{p1m.Y} C {intersect.X},{intersect.Y} {intersect.X},{intersect.Y} {p2m.X},{p2m.Y}" :
                                 $"M {p1m.X},{p1m.Y} C {p1c.X},{p1c.Y} {p2c.X},{p2c.Y} {p2m.X},{p2m.Y}")}' />");
                         }
@@ -498,7 +486,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
         public static void FindColors()
         {
             var colors = File.ReadLines(@"D:\c\Qoph\DataFiles\Face To Face\Color names.txt")
-                .Select(col => col.ToUpperInvariant().Where(c => c >= 'A' && c <= 'Z').JoinString())
+                .Select(col => col.ToUpperInvariant().Where(c => c is >= 'A' and <= 'Z').JoinString())
                 .Where(col => col.Length < 8)
                 .ToArray();
             var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".OrderBy(ch => colors.Sum(str => str.Count(c => c == ch))).JoinString();
@@ -521,7 +509,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
                             yield return solution;
             }
 
-            foreach (var solution in recurse(new string[0], letters))
+            foreach (var solution in recurse([], letters))
                 Console.WriteLine($"{solution.Length}: {solution.JoinString(" // ")}");
         }
 
@@ -540,7 +528,7 @@ http://dmccooey.com/polyhedra/Other.html".Replace("\r", "").Split('\n').Where(ur
 
             Func<int, double, double, string> textTagger((string word, int[] faces, int? color)[] data) => (face, x, y) =>
             {
-                var (word, faces, color) = data.Where(tup => tup.faces.Contains(face)).FirstOrDefault(("?", new[] { face }, null));
+                var (word, faces, color) = data.Where(tup => tup.faces.Contains(face)).FirstOrDefault(("?", [face], null));
                 return $"<text x='{x}' y='{y + .06}' fill='black' font-size='.2' text-anchor='middle'>{word[faces.IndexOf(face)]}</text>";
             };
             var markingColors = new[] { "#faa", "#afa", "#ffa", "#adf" };
@@ -605,18 +593,18 @@ h3 {{ font-size: 14pt; }}
 
         public static (string letters, (int[] cells, string word)[] lights) GenerateCrossword()
         {
-            var lights = Ut.NewArray(
-                new[] { 5, 13, 14, 2 },
-                new[] { 5, 4, 9, 10 },
-                new[] { 3, 23, 22, 4, 7 },
-                new[] { 22, 8, 11, 0, 1, 17, 16 },
-                new[] { 23, 20, 2 },
-                new[] { 21, 14, 15 },
-                new[] { 13, 21, 20, 3, 0 },
-                new[] { 6, 7, 9, 8 },
-                new[] { 6, 16, 19 },
-                new[] { 12, 17, 18, 10, 11 },
-                new[] { 12, 15, 1, 18, 19 });
+            var lights = Ut.NewArray<int[]>(
+                [5, 13, 14, 2],
+                [5, 4, 9, 10],
+                [3, 23, 22, 4, 7],
+                [22, 8, 11, 0, 1, 17, 16],
+                [23, 20, 2],
+                [21, 14, 15],
+                [13, 21, 20, 3, 0],
+                [6, 7, 9, 8],
+                [6, 16, 19],
+                [12, 17, 18, 10, 11],
+                [12, 15, 1, 18, 19]);
 
             var words = File.ReadAllLines(@"D:\Daten\Wordlists\VeryCommonWords.txt")
                 .Except("DIE,LAD,YER,THE,THEN,SLAVE,HIM,EGO,RAPE,DROWN,TOMB,SATIN,ETC,HMM,EERIE,WARFARE,IDIOT,ARSON,HER,RNA,SHH,LOO,ARSE,ASS,HELL,WHALING".Split(','))
@@ -635,7 +623,7 @@ h3 {{ font-size: 14pt; }}
 
             foreach (var solution in puzzle.Solve())
             {
-                if (lights.Select(light => words.Contains(light.Select(cell => (char) (solution[cell] + 'A' - 1)).JoinString()) ? light[0] : light.Last()).Distinct().Count() < lights.Count())
+                if (lights.Select(light => words.Contains(light.Select(cell => (char) (solution[cell] + 'A' - 1)).JoinString()) ? light[0] : light.Last()).Distinct().Count() < lights.Length)
                     continue;
 
                 var rating = Enumerable.Range(0, 24).Sum(face => Math.Abs(solution[face] - getFaceValue(face, _crosswordAfterOffset)));
@@ -710,7 +698,7 @@ h3 {{ font-size: 14pt; }}
             public string SongNextWord;
             public int LampBro;
 
-            public static readonly string[] LampBroNames = { "Mario", "Donkey Kong", "Link", "Samus", "Yoshi", "Kirby", "Fox", "Pikachu", "Luigi", "Ness", "Captain Falcon", "Jigglypuff", "Peach", "Bowser", "Ice Climbers", "Sheik", "Zelda", "Dr. Mario", "Pichu", "Falco", "Marth", "Young Link", "Ganondorf", "Mewtwo", "Roy Fire Emblem", "Mr. Game & Watch" };
+            public static readonly string[] LampBroNames = ["Mario", "Donkey Kong", "Link", "Samus", "Yoshi", "Kirby", "Fox", "Pikachu", "Luigi", "Ness", "Captain Falcon", "Jigglypuff", "Peach", "Bowser", "Ice Climbers", "Sheik", "Zelda", "Dr. Mario", "Pichu", "Falco", "Marth", "Young Link", "Ganondorf", "Mewtwo", "Roy Fire Emblem", "Mr. Game & Watch"];
             public string LampBroName => LampBroNames[LampBro - 1];
         }
 
@@ -774,8 +762,8 @@ h3 {{ font-size: 14pt; }}
             General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"<!--CyanCorners-start-->", @"<!--CyanCorners-end-->",
                 cyanCorners.SelectMany(corner => corner.adj
                     .Select(inf => (p: faceInfos[inf.faceIx].Edges[inf.vertexIx].Edge.Start, prevP: faceInfos[inf.faceIx].Edges[(inf.vertexIx + 4) % 5].Edge.Start, nextP: faceInfos[inf.faceIx].Edges[inf.vertexIx].Edge.End))
-                    .Select(inf => (inf.p, vector: (inf.prevP - inf.p).Unit() + (inf.nextP - inf.p).Unit()))
-                    .Select(inf => (p: inf.p + .1 * inf.vector.Unit(), angle: inf.vector.Theta() * 180 / Math.PI))
+                    .Select(inf => (inf.p, vector: (inf.prevP - inf.p).Normalized + (inf.nextP - inf.p).Normalized))
+                    .Select(inf => (p: inf.p + .1 * inf.vector.Normalized, angle: inf.vector.Angle * 180 / Math.PI))
                     .Select(inf => $"<text transform='translate({inf.p.X:.00} {inf.p.Y:.00}) rotate({inf.angle - 90:.00})' y='.06'>{corner.cyanNumber}</text>")).JoinString());
 
             General.ReplaceInFile(@"D:\c\Qoph\EnigmorionFiles\Solutions\face-to-face.html", @"/*DoorInfo-start*/", @"/*DoorInfo-end*/",
@@ -790,31 +778,31 @@ h3 {{ font-size: 14pt; }}
         }
 
         // Cached here because generating this takes several seconds. Generated from random seed 47, git commit 4ebc757c65e5165e2dac6ba5440ed8d24f98fa3f
-        private static readonly int?[][] _cyanNumbers = Ut.NewArray(
-            new int?[] { 41, 40, null, 58, 47 },
-            new int?[] { 41, 22, null, 38, 40 },
-            new int?[] { 41, null, 46, 27, 22 },
-            new int?[] { 41, 47, null, 52, null },
-            new int?[] { 59, 61, 49, 55, null },
-            new int?[] { 59, 36, null, 62, 61 },
-            new int?[] { 59, 21, 32, null, 36 },
-            new int?[] { 59, null, null, null, 21 },
-            new int?[] { null, 55, 49, 55, null },
-            new int?[] { null, 49, null, null, 55 },
-            new int?[] { null, 58, null, null, 49 },
-            new int?[] { null, null, null, 47, 58 },
-            new int?[] { 41, null, 32, 41, 38 },
-            new int?[] { 41, 40, null, 36, null },
-            new int?[] { 41, 27, 46, null, 40 },
-            new int?[] { 41, 38, null, 22, 27 },
-            new int?[] { 46, 41, 32, 21, null },
-            new int?[] { 46, 38, null, 38, 41 },
-            new int?[] { 46, null, null, 40, 38 },
-            new int?[] { 46, null, null, 49, null },
-            new int?[] { null, null, 46, null, 52 },
-            new int?[] { null, 62, null, 40, null },
-            new int?[] { null, 55, 49, 61, 62 },
-            new int?[] { null, 52, null, null, 55 });
+        private static readonly int?[][] _cyanNumbers = Ut.NewArray<int?[]>(
+            [41, 40, null, 58, 47],
+            [41, 22, null, 38, 40],
+            [41, null, 46, 27, 22],
+            [41, 47, null, 52, null],
+            [59, 61, 49, 55, null],
+            [59, 36, null, 62, 61],
+            [59, 21, 32, null, 36],
+            [59, null, null, null, 21],
+            [null, 55, 49, 55, null],
+            [null, 49, null, null, 55],
+            [null, 58, null, null, 49],
+            [null, null, null, 47, 58],
+            [41, null, 32, 41, 38],
+            [41, 40, null, 36, null],
+            [41, 27, 46, null, 40],
+            [41, 38, null, 22, 27],
+            [46, 41, 32, 21, null],
+            [46, 38, null, 38, 41],
+            [46, null, null, 40, 38],
+            [46, null, null, 49, null],
+            [null, null, 46, null, 52],
+            [null, 62, null, 40, null],
+            [null, 55, 49, 61, 62],
+            [null, 52, null, null, 55]);
 
         public static FaceInfo[] GetFaceData()
         {
@@ -947,7 +935,7 @@ h3 {{ font-size: 14pt; }}
             const double frameDepth = .015;
             const double cameraDistance = .28;
             const double inCameraDistance = .5;
-            double[] cameraPos = { .38, .5, .5, .5, .62 };
+            double[] cameraPos = [.38, .5, .5, .5, .62];
             const double cameraHeight = .22;
             const double cameraHeightLook = .2;
             const double inCameraHeight = .275;
@@ -967,54 +955,54 @@ h3 {{ font-size: 14pt; }}
             {
                 //var mid = (p1 + p2) / 2;
                 var mid = p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]);
-                var right = mid - (p2 - p1).Unit() * doorWidth;
-                var left = mid + (p2 - p1).Unit() * doorWidth;
+                var right = mid - (p2 - p1).Normalized * doorWidth;
+                var left = mid + (p2 - p1).Normalized * doorWidth;
 
                 File.WriteAllText($@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Wall{ix}.obj",
-                    GenerateObjFile(Ut.NewArray(
-                        new[] { pt(p2.X, 0, p2.Y), pt(left.X, 0, left.Y), pt(left.X, ceilingHeight, left.Y), pt(p2.X, ceilingHeight, p2.Y) },
-                        new[] { pt(left.X, doorHeight, left.Y), pt(right.X, doorHeight, right.Y), pt(right.X, ceilingHeight, right.Y), pt(left.X, ceilingHeight, left.Y) },
-                        new[] { pt(right.X, 0, right.Y), pt(p1.X, 0, p1.Y), pt(p1.X, ceilingHeight, p1.Y), pt(right.X, ceilingHeight, right.Y) }
+                    GenerateObjFile(Ut.NewArray<Pt[]>(
+                        [pt(p2.X, 0, p2.Y), pt(left.X, 0, left.Y), pt(left.X, ceilingHeight, left.Y), pt(p2.X, ceilingHeight, p2.Y)],
+                        [pt(left.X, doorHeight, left.Y), pt(right.X, doorHeight, right.Y), pt(right.X, ceilingHeight, right.Y), pt(left.X, ceilingHeight, left.Y)],
+                        [pt(right.X, 0, right.Y), pt(p1.X, 0, p1.Y), pt(p1.X, ceilingHeight, p1.Y), pt(right.X, ceilingHeight, right.Y)]
                     )
-                        .Select(face => face.Select(p => p.WithTexture((p.X - p1.X) / (p2.X - p1.X), p.Y / ceilingHeight)).ToArray()).ToArray(), $"Wall{ix}", AutoNormal.Flat));
+                        .Select(face => face.Select(p => p.WithTexture((p.X - p1.X) / (p2.X - p1.X), p.Y / ceilingHeight)).ToArray()).ToArray(), $"Wall{ix}", AutoNormal.FlatOverride));
 
-                var nx = (p2 - p1).Unit() * frameWidth / 2;
-                var ny = (p2 - p1).Normal().Unit() * frameDepth / 2;
+                var nx = (p2 - p1).Normalized * frameWidth / 2;
+                var ny = (p2 - p1).Rotate90().Normalized * frameDepth / 2;
                 var lfm = right - nx;
                 var rfm = left + nx;
 
                 File.WriteAllText($@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Frame{ix}.obj",
-                    GenerateObjFile(Ut.NewArray(
+                    GenerateObjFile(Ut.NewArray<Pt[]>(
                         // Right
-                        new[] { (lfm + ny - nx).h(doorHeight + frameWidth), (lfm + ny + nx).h(doorHeight), (lfm + ny + nx).h(0), (lfm + ny - nx).h(0) },    // front
-                        new[] { (lfm - ny - nx).h(doorHeight + frameWidth), (lfm + ny - nx).h(doorHeight + frameWidth), (lfm + ny - nx).h(0), (lfm - ny - nx).h(0) },   // right
-                        new[] { (lfm + ny + nx).h(doorHeight), (lfm - ny + nx).h(doorHeight), (lfm - ny + nx).h(0), (lfm + ny + nx).h(0) }, // left
+                        [(lfm + ny - nx).h(doorHeight + frameWidth), (lfm + ny + nx).h(doorHeight), (lfm + ny + nx).h(0), (lfm + ny - nx).h(0)],    // front
+                        [(lfm - ny - nx).h(doorHeight + frameWidth), (lfm + ny - nx).h(doorHeight + frameWidth), (lfm + ny - nx).h(0), (lfm - ny - nx).h(0)],   // right
+                        [(lfm + ny + nx).h(doorHeight), (lfm - ny + nx).h(doorHeight), (lfm - ny + nx).h(0), (lfm + ny + nx).h(0)], // left
 
                         // Left
-                        new[] { (rfm + ny - nx).h(doorHeight), (rfm + ny + nx).h(doorHeight + frameWidth), (rfm + ny + nx).h(0), (rfm + ny - nx).h(0) },    // front
-                        new[] { (rfm - ny - nx).h(doorHeight), (rfm + ny - nx).h(doorHeight), (rfm + ny - nx).h(0), (rfm - ny - nx).h(0) }, // right
-                        new[] { (rfm + ny + nx).h(doorHeight + frameWidth), (rfm - ny + nx).h(doorHeight + frameWidth), (rfm - ny + nx).h(0), (rfm + ny + nx).h(0) },   // left
+                        [(rfm + ny - nx).h(doorHeight), (rfm + ny + nx).h(doorHeight + frameWidth), (rfm + ny + nx).h(0), (rfm + ny - nx).h(0)],    // front
+                        [(rfm - ny - nx).h(doorHeight), (rfm + ny - nx).h(doorHeight), (rfm + ny - nx).h(0), (rfm - ny - nx).h(0)], // right
+                        [(rfm + ny + nx).h(doorHeight + frameWidth), (rfm - ny + nx).h(doorHeight + frameWidth), (rfm - ny + nx).h(0), (rfm + ny + nx).h(0)],   // left
 
                         // Top
-                        new[] { (rfm + ny + nx).h(doorHeight + frameWidth), (rfm + ny - nx).h(doorHeight), (lfm + ny + nx).h(doorHeight), (lfm + ny - nx).h(doorHeight + frameWidth) }, // front
-                        new[] { (rfm + ny + nx).h(doorHeight + frameWidth), (lfm + ny - nx).h(doorHeight + frameWidth), (lfm - ny - nx).h(doorHeight + frameWidth), (rfm - ny + nx).h(doorHeight + frameWidth) },   // top
-                        new[] { (rfm - ny - nx).h(doorHeight), (lfm - ny + nx).h(doorHeight), (lfm + ny + nx).h(doorHeight), (rfm + ny - nx).h(doorHeight) }    // bottom
-                    ), $"Frame{ix}", AutoNormal.Flat));
+                        [(rfm + ny + nx).h(doorHeight + frameWidth), (rfm + ny - nx).h(doorHeight), (lfm + ny + nx).h(doorHeight), (lfm + ny - nx).h(doorHeight + frameWidth)], // front
+                        [(rfm + ny + nx).h(doorHeight + frameWidth), (lfm + ny - nx).h(doorHeight + frameWidth), (lfm - ny - nx).h(doorHeight + frameWidth), (rfm - ny + nx).h(doorHeight + frameWidth)],   // top
+                        [(rfm - ny - nx).h(doorHeight), (lfm - ny + nx).h(doorHeight), (lfm + ny + nx).h(doorHeight), (rfm + ny - nx).h(doorHeight)]    // bottom
+                    ), $"Frame{ix}", AutoNormal.FlatOverride));
 
                 outCameras.Add((
-                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * cameraDistance).h(cameraHeight),
-                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) + (p2 - p1).Normal().Unit() * cameraDistance).h(cameraHeightLook)));
+                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Rotate90().Normalized * cameraDistance).h(cameraHeight),
+                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) + (p2 - p1).Rotate90().Normalized * cameraDistance).h(cameraHeightLook)));
                 inCameras.Add((
-                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) + (p2 - p1).Normal().Unit() * inCameraDistance).h(inCameraHeight),
-                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Normal().Unit() * inCameraDistance).h(inCameraHeightLook)));
+                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) + (p2 - p1).Rotate90().Normalized * inCameraDistance).h(inCameraHeight),
+                    (p1 * cameraPos[ix] + p2 * (1 - cameraPos[ix]) - (p2 - p1).Rotate90().Normalized * inCameraDistance).h(inCameraHeightLook)));
                 var cyanMid = .49 * p2 + .51 * p1;
 
                 // cyan number on the right side of the wall
-                cyanNumbers1.Add(((p1 + (p2 - p1).Normal().Unit() * .0001).h(cyanNumberHeight), (p1 - (p2 - p1).Normal().Unit() * .1).h(cyanNumberHeight)));
+                cyanNumbers1.Add(((p1 + (p2 - p1).Rotate90().Normalized * .0001).h(cyanNumberHeight), (p1 - (p2 - p1).Rotate90().Normalized * .1).h(cyanNumberHeight)));
                 // cyan number on the left side of the wall
-                cyanNumbers2.Add(((p2 + (p2 - p1).Normal().Unit() * .0001).h(cyanNumberHeight), (p2 - (p2 - p1).Normal().Unit() * .1).h(cyanNumberHeight)));
+                cyanNumbers2.Add(((p2 + (p2 - p1).Rotate90().Normalized * .0001).h(cyanNumberHeight), (p2 - (p2 - p1).Rotate90().Normalized * .1).h(cyanNumberHeight)));
 
-                doors.Add((left.h(doorHeight / 2), (left - (p2 - p1).Normal().Unit()).h(doorHeight / 2)));
+                doors.Add((left.h(doorHeight / 2), (left - (p2 - p1).Rotate90().Normalized).h(doorHeight / 2)));
                 wallPositions.Add(pt(-mid.X, 0, mid.Y));
                 ix++;
             }
@@ -1024,9 +1012,9 @@ h3 {{ font-size: 14pt; }}
             cyanNumbers2.RemoveAt(cyanNumbers2.Count - 1);
 
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Floor.obj",
-                GenerateObjFile(new[] { poly.Select(p => pt(p.X, 0, p.Y).WithTexture(p.X, p.Y)).ToArray() }, "Floor", AutoNormal.Flat));
+                GenerateObjFile([poly.Select(p => pt(p.X, 0, p.Y).WithTexture(p.X, p.Y)).ToArray()], "Floor", AutoNormal.FlatOverride));
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Ceiling.obj",
-                GenerateObjFile(new[] { poly.Select(p => pt(p.X, ceilingHeight, p.Y).WithTexture(p.X, p.Y)).Reverse().ToArray() }, "Ceiling", AutoNormal.Flat));
+                GenerateObjFile([poly.Select(p => pt(p.X, ceilingHeight, p.Y).WithTexture(p.X, p.Y)).Reverse().ToArray()], "Ceiling", AutoNormal.FlatOverride));
 
             static Pt invX(Pt p) => pt(-p.X, p.Y, p.Z);
             static string makeArray(List<(Pt from, Pt to)> list) => $@"new[] {{ {list.Select(tup => $@"new PosAndDir {{ From = vec{invX(tup.from)}, To = vec{invX(tup.to)} }}").JoinString(", ")} }}";
@@ -1038,7 +1026,7 @@ h3 {{ font-size: 14pt; }}
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*DoorPositions-start\*/", @"/\*DoorPositions-end\*/", makeArray(doors));
             General.ReplaceInFile(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Data.cs", @"/\*WallPositions-start\*/", @"/\*WallPositions-end\*/", wallPositions.Select(p => $"vec{p}").JoinString(", "));
 
-            var doorKnobCurve = DecodeSvgPath.Do(@"M 100,-35 H 80 v 25 C 60,-10 60,-35 35,-35 15.670034,-35 0,-25 0,0", .1).Select(p => p.ToArray()).First();
+            var doorKnobCurve = SvgPath.Smooth(@"M 100,-35 H 80 v 25 C 60,-10 60,-35 35,-35 15.670034,-35 0,-25 0,0", .1).Select(p => p.ToArray()).First();
             const int revSteps = 36;
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Doorknob.obj",
                 GenerateObjFile(CreateMesh(true, false, Enumerable.Range(0, revSteps)
@@ -1058,7 +1046,7 @@ h3 {{ font-size: 14pt; }}
             const double x2 = .4;
             var ropeCurve = new[] { pt(x1, 0, x1 + r * Math.Sqrt(2)) }
                 .Concat(Enumerable.Range(0, revStepsRope).Select(a => 135 - 90d * a / (revStepsRope - 1)).Select(angle => pt(r * cos(angle), 0, r * sin(angle))))
-                .Concat(new[] { pt(x2, 0, -x2 + r * Math.Sqrt(2)) });
+                .Concat([pt(x2, 0, -x2 + r * Math.Sqrt(2))]);
             File.WriteAllText(@"D:\c\Qoph\DataFiles\Face To Face\Unity\Face To Face\Assets\Objects\Signrope.obj",
                 GenerateObjFile(TubeFromCurve(ropeCurve, .005, revSteps), "Signrope"));
 
