@@ -3651,16 +3651,16 @@ makeSolutionPage('objectionable-ranking', `
 				{
 					let x = a.charCodeAt(i)-97;
 					let y = a.charCodeAt(i+1)-49;
-					let g = `<circle r='.4' />`;
+					let g = `<circle r='.4' stroke-width='.1' />`;
 					if (i+2 < a.length)
 					{
 						let dir = '↑→↓←'.indexOf(a[i+2]);
 						let tx = i+3 < a.length ? a.charCodeAt(i+3)-97 : [x, 8.9, x, -.9][dir];
 						let ty = i+4 < a.length ? a.charCodeAt(i+4)-49 : [-.9, y, 8.9, y][dir];
 						i++;
-						g += `<path d='M.4 0h${[y-ty-1, tx-x-1, ty-y-1, x-tx-1][dir]+.2}' transform='rotate(${(dir-1)*90})' />`;
+						g += `<path stroke-width='.8' stroke-opacity='.2' d='M.4 0h${[y-ty-1, tx-x-1, ty-y-1, x-tx-1][dir]+.2}' transform='rotate(${(dir-1)*90})' />`;
 					}
-					s += `<g fill='none' stroke='red' stroke-width='.1' transform='translate(${x+.5}, ${y+.5})'>${g}</g>`;
+					s += `<g fill='none' stroke='red' transform='translate(${x+.5}, ${y+.5})'>${g}</g>`;
 					i += 2;
 				}
 			}
@@ -3721,7 +3721,7 @@ makeSolutionPage('objectionable-ranking', `
 				},
 				{
 					label: 'There is only one place for the 4 in the top-right box.',
-					b: '2', h: 'i1g', a: 'g4↑,h7↑',
+					b: '2', h: 'i1g', a: 'g8↑,h6↑',
 					g: '5..91..7.21....3.9..6.....14.9...12......19.3....79.4.8......1..6...743.32...5.9.',
 				},
 				{
