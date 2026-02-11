@@ -341,46 +341,43 @@ B	COLORADO	UTAH	NEWMEXICO
             var counts = new Dictionary<string, int>();
             const int targetWidth = 105;
             const int targetHeight = 105;
-            File.WriteAllText(@"D:\c\Qoph\DataFiles\Rectangle Mangle\Rectangle Mangle.html", $@"<!DOCTYPE html>
-<html>
-    <head>
-        <style>
-            .image {{
-                width: {targetWidth}px;
-                display: block;
-            }}
-            td {{
-                text-align: center;
-                vertical-align: middle;
-                font-size: 48pt;
-                padding: .1cm;
-            }}
-        </style>
-    </head>
-    <body>
-        <table class='puzzle'>
-            {Enumerable.Range(0, 10).Select(row => $@"<tr>{Enumerable.Range(0, 10).Select(col =>
-            {
-                if (grid[col + 10 * row] == null)
-                    return "<td></td>";
-                var (valStr, val, grp1) = grid[col + 10 * row].Value;
-                if (valStr == null)
-                    return $"<td>{new string('?', val)}</td>";
-                var names = values.First(vd => vd.valStr == valStr).names;
-                var count = counts.Get(valStr, 0);
-                var name = names[count];
-                var filename = "png,jpg,jpeg,bmp".Split(',').Select(ext => $@"D:\c\Qoph\DataFiles\Rectangle Mangle\{name}.{ext}").First(f => File.Exists(f));
-                counts.IncSafe(valStr);
-                using var bmp = new Bitmap(filename);
-                using var mem = new MemoryStream();
-                GraphicsUtil.DrawBitmap(targetWidth, targetHeight,
-                    g => { g.DrawImage(bmp, GraphicsUtil.FitIntoMaintainAspectRatio(bmp.Size, new Rectangle(0, 0, targetWidth, targetHeight))); })
-                    .Save(mem, ImageFormat.Png);
-                return $@"<td><img src='data:image/png;base64,{Convert.ToBase64String(mem.ToArray())}' class='image' /></td>";
-            }).JoinString()}</tr>").JoinString()}
-        </table>
-    </body>
-</html>
+            File.WriteAllText(@"D:\c\Qoph\EnigmorionFiles\Puzzles\rectangle-mangle.html", $@"<style>
+    table.rmgrid {{
+        margin: 1cm auto;
+    }}
+    table.rmgrid .image {{
+        width: 95px;
+        display: block;
+    }}
+    table.rmgrid td {{
+        text-align: center;
+        vertical-align: middle;
+        font-size: 48pt;
+        padding: .1cm;
+    }}
+</style>
+<h1>Rectangle Mangle</h1>
+<table class='rmgrid'>
+    {Enumerable.Range(0, 10).Select(row => $@"<tr>{Enumerable.Range(0, 10).Select(col =>
+    {
+        if (grid[col + 10 * row] == null)
+            return "<td></td>";
+        var (valStr, val, grp1) = grid[col + 10 * row].Value;
+        if (valStr == null)
+            return $"<td>{new string('?', val)}</td>";
+        var names = values.First(vd => vd.valStr == valStr).names;
+        var count = counts.Get(valStr, 0);
+        var name = names[count];
+        var filename = "png,jpg,jpeg,bmp".Split(',').Select(ext => $@"D:\c\Qoph\DataFiles\Rectangle Mangle\{name}.{ext}").First(f => File.Exists(f));
+        counts.IncSafe(valStr);
+        using var bmp = new Bitmap(filename);
+        using var mem = new MemoryStream();
+        GraphicsUtil.DrawBitmap(targetWidth, targetHeight,
+            g => { g.DrawImage(bmp, GraphicsUtil.FitIntoMaintainAspectRatio(bmp.Size, new Rectangle(0, 0, targetWidth, targetHeight))); })
+            .Save(mem, ImageFormat.Png);
+        return $@"<td><img src='data:image/png;base64,{Convert.ToBase64String(mem.ToArray())}' class='image' /></td>";
+    }).JoinString()}</tr>").JoinString()}
+</table>
 ");
         }
     }

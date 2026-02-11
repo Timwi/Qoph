@@ -22,7 +22,7 @@ namespace Qoph
                 return PostBuildChecker.RunPostBuildChecks(args[1], Assembly.GetExecutingAssembly());
 
 
-            FaceToFace.GatherAllData();
+            RectangleMangle.RectangleMangle_GeneratePuzzle();
 
 
             Console.WriteLine("Done.");
